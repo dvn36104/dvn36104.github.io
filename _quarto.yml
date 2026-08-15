@@ -3,6 +3,9 @@ project:
   output-dir: _site
   resources:
     - data/
+  render:
+    - "*.qmd"
+    - "session1/*.qmd"
 
 website:
   title: "36104 · Data Visualisation and Narratives"
@@ -11,8 +14,16 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: week2-choosing-visual-forms.qmd
-        text: "Week 2 · Choosing Visual Forms"
+      - text: "Session 1"
+        menu:
+          - href: session1/part-a.qmd
+            text: "Part A"
+          - href: session1/part-b.qmd
+            text: "Part B"
+          - href: session1/part-c.qmd
+            text: "Part C"
+          - href: session1/part-d.qmd
+            text: "Part D"
 
 format:
   live-html:

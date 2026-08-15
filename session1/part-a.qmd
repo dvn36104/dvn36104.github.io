@@ -1,0 +1,16 @@
+---
+title: "Session 1 · Part A"
+subtitle: "Placeholder — content coming soon"
+engine: markdown
+---
+
+This page will hold Part A of the first asynchronous session. The material
+is being prepared; check back once it is announced on Canvas.
+
+In the meantime, here is a live code cell to confirm everything works in
+your browser — edit it and press **Run Code**:
+
+```{pyodide}
+message = "Part A is under construction"
+print(message.upper())
+```

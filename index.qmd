@@ -1,23 +1,28 @@
 ---
 title: "36104 · Data Visualisation and Narratives"
-subtitle: "Interactive class exercises"
+subtitle: "Asynchronous sessions"
 ---
 
-Welcome. The pages on this site are **live**: every code cell runs Python in
-your browser — nothing to install, nothing to set up. Edit the code, press
-**Run Code**, and the chart updates.
+Welcome. This site hosts the **asynchronous sessions** for 36104. The pages
+are live: every code cell runs Python in your browser — nothing to install.
+Edit the code, press **Run Code**, and the output updates.
 
 ## How to use these pages
 
-1. Read the section, then run the reconstruction cell as given.
-2. Run the verification cell and check every assertion passes.
-3. Attempt the **intervention exercise**. Use the hints if you're stuck;
-   compare with the solution only after you've made your own attempt.
+1. Work through the parts of each session in order.
+2. Run each code cell as you reach it; edit and re-run to experiment.
+3. Where a page has an exercise, attempt it before using the hints, and
+   check the solution only after making your own attempt.
 
 Your work here is **not saved** when you close the tab. These pages are for
-practice in class and revision afterwards. Assessed work (A1, A2) is still
-submitted as notebooks through Canvas as described in each brief.
+working through the sessions; anything you need to submit goes through
+Canvas as described in the relevant brief.
 
-## Weeks
+## Session 1
 
-- [Week 2 · Choosing Visual Forms](week2-choosing-visual-forms.qmd)
+- [Part A](session1/part-a.qmd)
+- [Part B](session1/part-b.qmd)
+- [Part C](session1/part-c.qmd)
+- [Part D](session1/part-d.qmd)
+
+Sessions 2 and 3 will appear here when they are released.
