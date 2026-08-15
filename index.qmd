@@ -1,0 +1,23 @@
+---
+title: "36104 · Data Visualisation and Narratives"
+subtitle: "Interactive class exercises"
+---
+
+Welcome. The pages on this site are **live**: every code cell runs Python in
+your browser — nothing to install, nothing to set up. Edit the code, press
+**Run Code**, and the chart updates.
+
+## How to use these pages
+
+1. Read the section, then run the reconstruction cell as given.
+2. Run the verification cell and check every assertion passes.
+3. Attempt the **intervention exercise**. Use the hints if you're stuck;
+   compare with the solution only after you've made your own attempt.
+
+Your work here is **not saved** when you close the tab. These pages are for
+practice in class and revision afterwards. Assessed work (A1, A2) is still
+submitted as notebooks through Canvas as described in each brief.
+
+## Weeks
+
+- [Week 2 · Choosing Visual Forms](week2-choosing-visual-forms.qmd)

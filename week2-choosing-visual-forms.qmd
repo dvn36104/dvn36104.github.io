@@ -1,0 +1,357 @@
+---
+title: "Choosing Visual Forms"
+subtitle: "Week 2 · Run, verify, intervene — live in your browser"
+engine: markdown
+pyodide:
+  packages:
+    - numpy
+    - pandas
+    - matplotlib
+---
+
+This page reconstructs three canonical charts, one per Visual Vocabulary task
+family. For each chart: **run** the reconstruction, **verify** it with the
+assertion cell, then make the **intervention** in the exercise block.
+
+All code runs in your browser. The first cell may take a few seconds while
+Python loads.
+
+```{pyodide}
+#| autorun: true
+#| edit: false
+import js
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pyodide.http import open_url
+
+# Data files live beside this page; the Python worker runs from site_libs/.
+DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
+
+plt.rcParams.update({
+    "figure.figsize": (9, 5),
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.grid": True,
+    "grid.alpha": 0.22,
+    "font.size": 11,
+})
+print("Environment ready.")
+```
+
+## 1 · The yield-curve inversion: deviation
+
+The 10-year minus 2-year Treasury spread is a signed difference read against a
+meaningful zero: positive is the normal upward slope, negative is an
+inversion — the classic recession signal. The visual task is **deviation**:
+variation above and below a fixed reference. The data is a FRED snapshot
+(12 August 2026); the values are real observations.
+
+Run the reconstruction:
+
+```{pyodide}
+spread = pd.read_csv(open_url(DATA_URL + "t10y2y.csv"), parse_dates=["observation_date"])
+spread = spread.rename(columns={"observation_date": "date", "T10Y2Y": "spread_pct"}).dropna()
+
+fig, ax = plt.subplots(figsize=(10, 4.6))
+ax.plot(spread["date"], spread["spread_pct"], color="#171717", lw=0.6)
+ax.fill_between(spread["date"], spread["spread_pct"], 0,
+                where=spread["spread_pct"] >= 0, color="#4269d0", alpha=0.35,
+                label="normal: long above short")
+ax.fill_between(spread["date"], spread["spread_pct"], 0,
+                where=spread["spread_pct"] < 0, color="#b2182b", alpha=0.5,
+                label="inverted")
+ax.axhline(0, color="#333333", lw=1)
+ax.set_xlabel("year")
+ax.set_ylabel("10-year − 2-year spread (pp)")
+ax.set_title("Deviation from zero: the surplus/deficit view of the yield curve")
+ax.legend(frameon=False, fontsize=9)
+plt.show()
+```
+
+Verify before you trust it:
+
+```{pyodide}
+assert spread["date"].is_monotonic_increasing
+assert spread["spread_pct"].min() < 0 < spread["spread_pct"].max()
+assert (spread.loc[spread["date"].dt.year == 2023, "spread_pct"] < 0).mean() > 0.9
+print(f"✓ {len(spread):,} daily observations; the spread crosses its zero reference in both directions")
+```
+
+### Your intervention {#sec-ex-yield}
+
+Remove the zero line and both fills, leaving a plain line. What can a reader
+no longer do at a glance? Then recompute the chart with **monthly means**
+instead of daily values. Which features survive the smoothing, and does the
+deviation reading change?
+
+```{pyodide}
+#| setup: true
+#| exercise: ex_yield
+import js
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pyodide.http import open_url
+
+DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
+spread = pd.read_csv(open_url(DATA_URL + "t10y2y.csv"), parse_dates=["observation_date"])
+spread = spread.rename(columns={"observation_date": "date", "T10Y2Y": "spread_pct"}).dropna()
+```
+
+```{pyodide}
+#| exercise: ex_yield
+# `spread` is already loaded with columns "date" and "spread_pct".
+# 1. Plot the spread as a plain line: no zero line, no fills.
+# 2. Then aggregate to monthly means and plot that instead.
+
+monthly = ______
+
+fig, ax = plt.subplots(figsize=(10, 4.6))
+______
+plt.show()
+```
+
+::: {.hint exercise="ex_yield"}
+**Hint 1** — For monthly means, resample on the date column:
+`spread.set_index("date")["spread_pct"].resample("MS").mean()`.
+:::
+
+::: {.hint exercise="ex_yield"}
+**Hint 2** — A plain line is just `ax.plot(monthly.index, monthly.values)`.
+The point of the exercise is what you *leave out*: no `axhline`, no
+`fill_between`. Compare: can you still spot the inversions instantly?
+:::
+
+::: {.solution exercise="ex_yield"}
+**Fully worked solution:**
+
+```python
+monthly = spread.set_index("date")["spread_pct"].resample("MS").mean()
+
+fig, ax = plt.subplots(figsize=(10, 4.6))
+ax.plot(monthly.index, monthly.values, color="#171717", lw=1)
+ax.set_xlabel("year")
+ax.set_ylabel("10-year − 2-year spread (pp)")
+ax.set_title("Plain monthly line: the zero reference is now in your head, not on the page")
+plt.show()
+```
+
+Without the zero line and fills, the reader must locate zero on the axis and
+judge sign themselves — the at-a-glance "inverted or not" reading is gone.
+Monthly smoothing preserves the broad inversion episodes but erases brief
+crossings; the deviation *reading* survives only if the zero reference is
+drawn.
+:::
+
+## 3 · The Mohs hardness scale: ranking
+
+Friedrich Mohs published his ten-mineral scratch scale in 1812 as a ranked
+list, not a chart: each mineral scratches every mineral below it. Rank is an
+**ordinal** reading — the order is real, the spacing is not. The absolute
+values below are Tabor's measured Vickers indentation hardness numbers for the
+Mohs minerals (Tabor 1954), so both columns are real.
+
+```{pyodide}
+mohs = pd.DataFrame({
+    "mineral": ["talc", "gypsum", "calcite", "fluorite", "apatite",
+                "orthoclase", "quartz", "topaz", "corundum", "diamond"],
+    "mohs_rank": np.arange(1, 11),
+    "vickers": [2.4, 36, 109, 189, 536, 714, 1120, 1427, 2060, 10060],
+})
+
+fig, ax = plt.subplots(figsize=(8.5, 5))
+ax.barh(mohs["mineral"], mohs["mohs_rank"], color="#5b8a72")
+ax.set_xlim(left=0)
+ax.set_xlabel("Mohs rank (ordinal)")
+ax.set_title("Ranked by scratch order: every step looks equal")
+plt.show()
+```
+
+```{pyodide}
+assert mohs["mohs_rank"].tolist() == list(range(1, 11))
+assert mohs["vickers"].is_monotonic_increasing
+assert mohs["vickers"].iloc[-1] / mohs["vickers"].iloc[-2] > 4
+print("✓ complete ordinal scale; Tabor's measured hardness monotone but with wildly unequal steps")
+```
+
+### Your intervention {#sec-ex-mohs}
+
+Plot Tabor's Vickers hardness for the same ten minerals on a common **linear**
+scale, then on a **log** scale. What does the equal-step Mohs presentation
+conceal? Sort the minerals alphabetically and state which reading survives
+that order.
+
+```{pyodide}
+#| setup: true
+#| exercise: ex_mohs
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+mohs = pd.DataFrame({
+    "mineral": ["talc", "gypsum", "calcite", "fluorite", "apatite",
+                "orthoclase", "quartz", "topaz", "corundum", "diamond"],
+    "mohs_rank": np.arange(1, 11),
+    "vickers": [2.4, 36, 109, 189, 536, 714, 1120, 1427, 2060, 10060],
+})
+```
+
+```{pyodide}
+#| exercise: ex_mohs
+# `mohs` is already defined with columns "mineral", "mohs_rank", "vickers".
+# Draw two horizontal bar charts of Vickers hardness:
+# one on a linear scale, one on a log scale.
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5))
+______
+plt.show()
+```
+
+::: {.hint exercise="ex_mohs"}
+**Hint 1** — `ax.barh(mohs["mineral"], mohs["vickers"])` gives the linear
+version; `ax.set_xscale("log")` turns the second panel logarithmic.
+:::
+
+::: {.hint exercise="ex_mohs"}
+**Hint 2** — Look at diamond on the linear panel. Its Vickers value is nearly
+five times corundum's — a fact the equal steps of the Mohs scale (9 → 10)
+completely hide.
+:::
+
+::: {.solution exercise="ex_mohs"}
+**Fully worked solution:**
+
+```python
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5), sharey=True)
+ax1.barh(mohs["mineral"], mohs["vickers"], color="#5b8a72")
+ax1.set_xlabel("Vickers hardness (linear)")
+ax1.set_title("Linear: diamond dwarfs everything")
+ax2.barh(mohs["mineral"], mohs["vickers"], color="#5b8a72")
+ax2.set_xscale("log")
+ax2.set_xlabel("Vickers hardness (log)")
+ax2.set_title("Log: the ratios between steps")
+plt.show()
+```
+
+The Mohs presentation conceals **magnitude**: the step from corundum to
+diamond is nearly a factor of five, yet it looks identical to every other
+step. Alphabetical order destroys the ranking reading entirely — only the
+magnitude reading (bar length) survives a meaningless sort order.
+:::
+
+## 7 · Document-topic mixtures: part-to-whole
+
+A topic model represents each document as a mixture of topics. Every row below
+is one complete document and its topic proportions sum to 100%. The values are
+illustrative model output. The **part-to-whole** task is direct: compare
+composition within documents and compare those compositions across documents.
+
+```{pyodide}
+topic_mix = pd.DataFrame({
+    "document": ["d1", "d2", "d3", "d4", "d5", "d6"],
+    "climate":  [0.62, 0.10, 0.08, 0.18, 0.45, 0.12],
+    "finance":  [0.12, 0.68, 0.10, 0.22, 0.30, 0.18],
+    "biology":  [0.18, 0.08, 0.72, 0.10, 0.15, 0.25],
+    "politics": [0.08, 0.14, 0.10, 0.50, 0.10, 0.45],
+})
+topics = ["climate", "finance", "biology", "politics"]
+topic_colours = ["#4269d0", "#efb118", "#ff725c", "#6cc5b0"]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+bottom = np.zeros(len(topic_mix))
+for topic, colour in zip(topics, topic_colours):
+    ax.bar(topic_mix["document"], topic_mix[topic], bottom=bottom,
+           label=topic, color=colour)
+    bottom += topic_mix[topic].to_numpy()
+ax.set_ylim(0, 1)
+ax.set_ylabel("topic proportion")
+ax.set_title("Each document is a complete mixture of topics")
+ax.legend(frameon=False, ncol=4)
+plt.show()
+```
+
+```{pyodide}
+assert np.allclose(topic_mix[topics].sum(axis=1), 1)
+assert topic_mix[topics].ge(0).all().all()
+assert np.allclose(bottom, 1)
+print("✓ every document is a complete non-negative composition")
+```
+
+### Your intervention {#sec-ex-topics}
+
+Redraw `d1` as a **pie chart**. Which form makes the composition of that one
+document easier to see? Which form makes comparison across all six documents
+easier? Then sort the documents by climate share and state which comparison
+the new order supports.
+
+```{pyodide}
+#| setup: true
+#| exercise: ex_topics
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+topic_mix = pd.DataFrame({
+    "document": ["d1", "d2", "d3", "d4", "d5", "d6"],
+    "climate":  [0.62, 0.10, 0.08, 0.18, 0.45, 0.12],
+    "finance":  [0.12, 0.68, 0.10, 0.22, 0.30, 0.18],
+    "biology":  [0.18, 0.08, 0.72, 0.10, 0.15, 0.25],
+    "politics": [0.08, 0.14, 0.10, 0.50, 0.10, 0.45],
+})
+topics = ["climate", "finance", "biology", "politics"]
+topic_colours = ["#4269d0", "#efb118", "#ff725c", "#6cc5b0"]
+```
+
+```{pyodide}
+#| exercise: ex_topics
+# 1. Draw d1's four topic proportions as a pie chart.
+# 2. Then re-draw the stacked bars with documents sorted by climate share.
+
+d1 = topic_mix.loc[topic_mix["document"] == "d1", topics].iloc[0]
+
+fig, ax = plt.subplots(figsize=(6, 6))
+______
+plt.show()
+```
+
+::: {.hint exercise="ex_topics"}
+**Hint 1** — `ax.pie(d1, labels=topics, colors=topic_colours, autopct="%.0f%%")`
+draws the pie. For the sorted bars, use
+`topic_mix.sort_values("climate", ascending=False)` and rebuild the stack.
+:::
+
+::: {.solution exercise="ex_topics"}
+**Fully worked solution:**
+
+```python
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+ax1.pie(d1, labels=topics, colors=topic_colours, autopct="%.0f%%")
+ax1.set_title("d1 alone: the pie reads fine")
+
+ordered = topic_mix.sort_values("climate", ascending=False)
+bottom = np.zeros(len(ordered))
+for topic, colour in zip(topics, topic_colours):
+    ax2.bar(ordered["document"], ordered[topic], bottom=bottom,
+            label=topic, color=colour)
+    bottom += ordered[topic].to_numpy()
+ax2.set_ylim(0, 1)
+ax2.set_title("Sorted by climate share")
+ax2.legend(frameon=False, ncol=2, fontsize=8)
+plt.show()
+```
+
+For **one** document the pie is serviceable — a single composition, few
+slices. For comparison **across** documents the stacked bars win: six pies
+would force angle-to-angle comparison, the weakest visual judgement. Sorting
+by climate share supports exactly one comparison — ranking documents by
+climate content — and the anchored bottom segment (climate) is the only one
+that stays easy to read.
+:::
+
+## What to bring to studio
+
+Complete all three interventions, then fill in one **Chart Choice Decision
+Record** (the nine-field record from the activity sheet) for the yield-curve
+chart, as rehearsal for A1 Part B.

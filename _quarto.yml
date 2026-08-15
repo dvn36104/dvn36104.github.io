@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - data/
+
+website:
+  title: "36104 · Data Visualisation and Narratives"
+  navbar:
+    background: "#0f4beb"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: week2-choosing-visual-forms.qmd
+        text: "Week 2 · Choosing Visual Forms"
+
+format:
+  live-html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-tools: false
+    grid:
+      body-width: 900px
