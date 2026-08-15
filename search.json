@@ -1,58 +1,51 @@
 [
   {
-    "objectID": "week2-choosing-visual-forms.html",
-    "href": "week2-choosing-visual-forms.html",
-    "title": "Choosing Visual Forms",
+    "objectID": "session1/part-d.html",
+    "href": "session1/part-d.html",
+    "title": "Session 1 · Part D",
     "section": "",
-    "text": "This page reconstructs three canonical charts, one per Visual Vocabulary task family. For each chart: run the reconstruction, verify it with the assertion cell, then make the intervention in the exercise block.\nAll code runs in your browser. The first cell may take a few seconds while Python loads."
+    "text": "This page will hold Part D of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.\nIn the meantime, here is a live code cell to confirm everything works in your browser — edit it and press Run Code:"
   },
   {
-    "objectID": "week2-choosing-visual-forms.html#the-yield-curve-inversion-deviation",
-    "href": "week2-choosing-visual-forms.html#the-yield-curve-inversion-deviation",
-    "title": "Choosing Visual Forms",
-    "section": "1 · The yield-curve inversion: deviation",
-    "text": "1 · The yield-curve inversion: deviation\nThe 10-year minus 2-year Treasury spread is a signed difference read against a meaningful zero: positive is the normal upward slope, negative is an inversion — the classic recession signal. The visual task is deviation: variation above and below a fixed reference. The data is a FRED snapshot (12 August 2026); the values are real observations.\nRun the reconstruction:\n\n\n\n\n\n\nVerify before you trust it:\n\n\n\n\n\n\n\nYour intervention\nRemove the zero line and both fills, leaving a plain line. What can a reader no longer do at a glance? Then recompute the chart with monthly means instead of daily values. Which features survive the smoothing, and does the deviation reading change?\n\n\n\n\n\n\n\n\nHint 1 — For monthly means, resample on the date column: spread.set_index(\"date\")[\"spread_pct\"].resample(\"MS\").mean().\n\n\nHint 2 — A plain line is just ax.plot(monthly.index, monthly.values). The point of the exercise is what you leave out: no axhline, no fill_between. Compare: can you still spot the inversions instantly?\n\n\nFully worked solution:\nmonthly = spread.set_index(\"date\")[\"spread_pct\"].resample(\"MS\").mean()\n\nfig, ax = plt.subplots(figsize=(10, 4.6))\nax.plot(monthly.index, monthly.values, color=\"#171717\", lw=1)\nax.set_xlabel(\"year\")\nax.set_ylabel(\"10-year − 2-year spread (pp)\")\nax.set_title(\"Plain monthly line: the zero reference is now in your head, not on the page\")\nplt.show()\nWithout the zero line and fills, the reader must locate zero on the axis and judge sign themselves — the at-a-glance “inverted or not” reading is gone. Monthly smoothing preserves the broad inversion episodes but erases brief crossings; the deviation reading survives only if the zero reference is drawn."
-  },
-  {
-    "objectID": "week2-choosing-visual-forms.html#the-mohs-hardness-scale-ranking",
-    "href": "week2-choosing-visual-forms.html#the-mohs-hardness-scale-ranking",
-    "title": "Choosing Visual Forms",
-    "section": "3 · The Mohs hardness scale: ranking",
-    "text": "3 · The Mohs hardness scale: ranking\nFriedrich Mohs published his ten-mineral scratch scale in 1812 as a ranked list, not a chart: each mineral scratches every mineral below it. Rank is an ordinal reading — the order is real, the spacing is not. The absolute values below are Tabor’s measured Vickers indentation hardness numbers for the Mohs minerals (Tabor 1954), so both columns are real.\n\n\n\n\n\n\n\n\n\n\n\n\n\nYour intervention\nPlot Tabor’s Vickers hardness for the same ten minerals on a common linear scale, then on a log scale. What does the equal-step Mohs presentation conceal? Sort the minerals alphabetically and state which reading survives that order.\n\n\n\n\n\n\n\n\nHint 1 — ax.barh(mohs[\"mineral\"], mohs[\"vickers\"]) gives the linear version; ax.set_xscale(\"log\") turns the second panel logarithmic.\n\n\nHint 2 — Look at diamond on the linear panel. Its Vickers value is nearly five times corundum’s — a fact the equal steps of the Mohs scale (9 → 10) completely hide.\n\n\nFully worked solution:\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5), sharey=True)\nax1.barh(mohs[\"mineral\"], mohs[\"vickers\"], color=\"#5b8a72\")\nax1.set_xlabel(\"Vickers hardness (linear)\")\nax1.set_title(\"Linear: diamond dwarfs everything\")\nax2.barh(mohs[\"mineral\"], mohs[\"vickers\"], color=\"#5b8a72\")\nax2.set_xscale(\"log\")\nax2.set_xlabel(\"Vickers hardness (log)\")\nax2.set_title(\"Log: the ratios between steps\")\nplt.show()\nThe Mohs presentation conceals magnitude: the step from corundum to diamond is nearly a factor of five, yet it looks identical to every other step. Alphabetical order destroys the ranking reading entirely — only the magnitude reading (bar length) survives a meaningless sort order."
-  },
-  {
-    "objectID": "week2-choosing-visual-forms.html#document-topic-mixtures-part-to-whole",
-    "href": "week2-choosing-visual-forms.html#document-topic-mixtures-part-to-whole",
-    "title": "Choosing Visual Forms",
-    "section": "7 · Document-topic mixtures: part-to-whole",
-    "text": "7 · Document-topic mixtures: part-to-whole\nA topic model represents each document as a mixture of topics. Every row below is one complete document and its topic proportions sum to 100%. The values are illustrative model output. The part-to-whole task is direct: compare composition within documents and compare those compositions across documents.\n\n\n\n\n\n\n\n\n\n\n\n\n\nYour intervention\nRedraw d1 as a pie chart. Which form makes the composition of that one document easier to see? Which form makes comparison across all six documents easier? Then sort the documents by climate share and state which comparison the new order supports.\n\n\n\n\n\n\n\n\nHint 1 — ax.pie(d1, labels=topics, colors=topic_colours, autopct=\"%.0f%%\") draws the pie. For the sorted bars, use topic_mix.sort_values(\"climate\", ascending=False) and rebuild the stack.\n\n\nFully worked solution:\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\nax1.pie(d1, labels=topics, colors=topic_colours, autopct=\"%.0f%%\")\nax1.set_title(\"d1 alone: the pie reads fine\")\n\nordered = topic_mix.sort_values(\"climate\", ascending=False)\nbottom = np.zeros(len(ordered))\nfor topic, colour in zip(topics, topic_colours):\n    ax2.bar(ordered[\"document\"], ordered[topic], bottom=bottom,\n            label=topic, color=colour)\n    bottom += ordered[topic].to_numpy()\nax2.set_ylim(0, 1)\nax2.set_title(\"Sorted by climate share\")\nax2.legend(frameon=False, ncol=2, fontsize=8)\nplt.show()\nFor one document the pie is serviceable — a single composition, few slices. For comparison across documents the stacked bars win: six pies would force angle-to-angle comparison, the weakest visual judgement. Sorting by climate share supports exactly one comparison — ranking documents by climate content — and the anchored bottom segment (climate) is the only one that stays easy to read."
-  },
-  {
-    "objectID": "week2-choosing-visual-forms.html#what-to-bring-to-studio",
-    "href": "week2-choosing-visual-forms.html#what-to-bring-to-studio",
-    "title": "Choosing Visual Forms",
-    "section": "What to bring to studio",
-    "text": "What to bring to studio\nComplete all three interventions, then fill in one Chart Choice Decision Record (the nine-field record from the activity sheet) for the yield-curve chart, as rehearsal for A1 Part B."
+    "objectID": "session1/part-b.html",
+    "href": "session1/part-b.html",
+    "title": "Session 1 · Part B",
+    "section": "",
+    "text": "This page will hold Part B of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.\nIn the meantime, here is a live code cell to confirm everything works in your browser — edit it and press Run Code:"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "36104 · Data Visualisation and Narratives",
     "section": "",
-    "text": "Welcome. The pages on this site are live: every code cell runs Python in your browser — nothing to install, nothing to set up. Edit the code, press Run Code, and the chart updates."
+    "text": "Welcome. This site hosts the asynchronous sessions for 36104. The pages are live: every code cell runs Python in your browser — nothing to install. Edit the code, press Run Code, and the output updates."
   },
   {
     "objectID": "index.html#how-to-use-these-pages",
     "href": "index.html#how-to-use-these-pages",
     "title": "36104 · Data Visualisation and Narratives",
     "section": "How to use these pages",
-    "text": "How to use these pages\n\nRead the section, then run the reconstruction cell as given.\nRun the verification cell and check every assertion passes.\nAttempt the intervention exercise. Use the hints if you’re stuck; compare with the solution only after you’ve made your own attempt.\n\nYour work here is not saved when you close the tab. These pages are for practice in class and revision afterwards. Assessed work (A1, A2) is still submitted as notebooks through Canvas as described in each brief."
+    "text": "How to use these pages\n\nWork through the parts of each session in order.\nRun each code cell as you reach it; edit and re-run to experiment.\nWhere a page has an exercise, attempt it before using the hints, and check the solution only after making your own attempt.\n\nYour work here is not saved when you close the tab. These pages are for working through the sessions; anything you need to submit goes through Canvas as described in the relevant brief."
   },
   {
-    "objectID": "index.html#weeks",
-    "href": "index.html#weeks",
+    "objectID": "index.html#session-1",
+    "href": "index.html#session-1",
     "title": "36104 · Data Visualisation and Narratives",
-    "section": "Weeks",
-    "text": "Weeks\n\nWeek 2 · Choosing Visual Forms"
+    "section": "Session 1",
+    "text": "Session 1\n\nPart A\nPart B\nPart C\nPart D\n\nSessions 2 and 3 will appear here when they are released."
+  },
+  {
+    "objectID": "session1/part-a.html",
+    "href": "session1/part-a.html",
+    "title": "Session 1 · Part A",
+    "section": "",
+    "text": "This page will hold Part A of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.\nIn the meantime, here is a live code cell to confirm everything works in your browser — edit it and press Run Code:"
+  },
+  {
+    "objectID": "session1/part-c.html",
+    "href": "session1/part-c.html",
+    "title": "Session 1 · Part C",
+    "section": "",
+    "text": "This page will hold Part C of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.\nIn the meantime, here is a live code cell to confirm everything works in your browser — edit it and press Run Code:"
   }
 ]
