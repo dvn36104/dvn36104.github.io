@@ -32,14 +32,63 @@
     "href": "index.html#session-1",
     "title": "36104 · Data Visualisation and Narratives",
     "section": "Session 1",
-    "text": "Session 1\n\nPart A\nPart B\nPart C\nPart D\n\nSessions 2 and 3 will appear here when they are released."
+    "text": "Session 1\n\nPart A · Allometry\nPart B\nPart C\nPart D\n\nSessions 2 and 3 will appear here when they are released."
   },
   {
     "objectID": "session1/part-a.html",
     "href": "session1/part-a.html",
-    "title": "Session 1 · Part A",
+    "title": "Allometry",
     "section": "",
-    "text": "This page will hold Part A of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.\nIn the meantime, here is a live code cell to confirm everything works in your browser — edit it and press Run Code:"
+    "text": "Allometry is the study of how traits scale with size. Across birds, mammals and reptiles, most size-related traits follow power laws — straight lines once both axes are logged. In this part you will draw the same allometric relationship at three levels of aggregation — individual specimens, species, and families — and watch what aggregation does to the picture.\nTwo real datasets, served with this page:\nAll code runs in your browser. The first cell may take a few seconds while Python loads."
+  },
+  {
+    "objectID": "session1/part-a.html#avonet-one-row-per-bird",
+    "href": "session1/part-a.html#avonet-one-row-per-bird",
+    "title": "Allometry",
+    "section": "1 · AVONET: one row per bird",
+    "text": "1 · AVONET: one row per bird\nAVONET publishes the raw measurements behind its species table: museum specimens and field captures, measured to a common protocol. We serve four of the original 26 columns — species (BirdLife taxonomy), beak length along the culmen, tarsus length, and wing length, all in millimetres."
+  },
+  {
+    "objectID": "session1/part-a.html#cleaning-where-do-the-rows-go",
+    "href": "session1/part-a.html#cleaning-where-do-the-rows-go",
+    "title": "Allometry",
+    "section": "2 · Cleaning: where do the rows go?",
+    "text": "2 · Cleaning: where do the rows go?\nWe want to plot beak length against tarsus length, which means every row we use needs both measurements (and a species name). Museum specimens are imperfect: a damaged bill or a folded skin means one trait was measured and the other was not. Count the gaps before touching anything:\n\n\n\n\n\n\nEvery column has holes, and they are not the same holes. Keep only the rows that can support the comparison we actually want to make:\n\n\n\n\n\n\n\n\n\n\n\n\nWe just discarded a fifth of the dataset. That is a legitimate cleaning step — but it is a decision, it changes what “n” means in every caption downstream, and it must be disclosed. Any figure built from this table should say 69,509 individuals, not 90,020."
+  },
+  {
+    "objectID": "session1/part-a.html#the-individual-level",
+    "href": "session1/part-a.html#the-individual-level",
+    "title": "Allometry",
+    "section": "3 · The individual level",
+    "text": "3 · The individual level\nEach point is one bird. Both axes are logged: allometry is about ratios, and a hummingbird and an ostrich need to share a readable axis."
+  },
+  {
+    "objectID": "session1/part-a.html#the-groupby-from-individuals-to-species",
+    "href": "session1/part-a.html#the-groupby-from-individuals-to-species",
+    "title": "Allometry",
+    "section": "4 · The groupby: from individuals to species",
+    "text": "4 · The groupby: from individuals to species\nOne line of code changes what a point means. groupby(\"species\").mean() collapses every bird of a species into a single average bird:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAveraging removed 59,000 points but the cloud barely tightened (r ≈ 0.61 → 0.62). Within-species measurement scatter is small compared to the real, ecological differences in beak shape between species — hummingbirds, finches and curlews genuinely sit in different places. Aggregation is not a magic de-noiser: it removes exactly the variation that happens within groups, no more.\n\nYour turn: a different trait pair\nRepeat the whole pipeline — cleaning included — for wing length vs tarsus length. Wing length has its own, different pattern of missing values, so start from birds, not from clean. Plot the species-level relationship and print n at each step.\n\n\n\n\n\n\n\n\nHint 1 — The subset to require is [\"species\", \"wing_length_mm\", \"tarsus_length_mm\"]. Beak gaps are irrelevant to this comparison — don’t drop rows for a column you aren’t using.\n\n\nHint 2 — birds.dropna(subset=...) then .groupby(\"species\")[[\"wing_length_mm\", \"tarsus_length_mm\"]].mean(), then ax.scatter(np.log10(...), np.log10(...), s=4, alpha=0.25).\n\n\nFully worked solution:\nclean_w = birds.dropna(subset=[\"species\", \"wing_length_mm\", \"tarsus_length_mm\"])\nprint(f\"{len(birds):,} rows → {len(clean_w):,} rows\")\n\nspecies_w = (clean_w\n             .groupby(\"species\")[[\"wing_length_mm\", \"tarsus_length_mm\"]]\n             .mean())\n\nfig, ax = plt.subplots(figsize=(8, 6))\nax.scatter(np.log10(species_w[\"tarsus_length_mm\"]),\n           np.log10(species_w[\"wing_length_mm\"]),\n           s=4, alpha=0.25, color=\"#e66852\")\nax.set_xlabel(\"log10 tarsus length (mm)\")\nax.set_ylabel(\"log10 wing length (mm)\")\nax.set_title(f\"Species means (n = {len(species_w):,})\")\nplt.show()\nWing length is missing in only ~1,100 rows, so this cleaning keeps far more data than the beak comparison did — the n you report depends on the comparison you chose. The wing–tarsus cloud is also tighter than beak–tarsus: both are limb-skeleton traits that track overall body size, while beaks track feeding ecology."
+  },
+  {
+    "objectID": "session1/part-a.html#amniote-a-table-where-the-groupby-already-happened",
+    "href": "session1/part-a.html#amniote-a-table-where-the-groupby-already-happened",
+    "title": "Allometry",
+    "section": "5 · Amniote: a table where the groupby already happened",
+    "text": "5 · Amniote: a table where the groupby already happened\nThe Amniote life-history database is one row per species — 21,322 of them across birds, mammals and reptiles. Somebody else already did the aggregation; what you download is the equivalent of species_means above. (In the published archive, missing values are coded -999; the copy served here has them recoded as proper missing values.)\n\n\n\n\n\n\n\n\n\n\n\n\nBroad allometry: how does maximum longevity scale with adult body mass, from a 2-gram shrew to a multi-tonne crocodile? Note the cleaning step is the same decision as before — and it costs far more rows here:\n\n\n\n\n\n\n\n\n\n\n\n\nOnly 5,122 of 21,322 species — 24% — have both traits recorded. Missingness is not decoration in comparative databases; it is most of the table.\n\nYour turn: one rank up\nRepeat the aggregation one taxonomic rank up: collapse species into family means and redraw the mass–longevity plot. Average the logged values (a family containing a 3 kg and a 3,000 kg species should average in ratio space, not gram space).\n\n\n\n\n\n\n\n\nHint 1 — Group by two keys so each family keeps its class: pair.groupby([\"class\", \"family\"])[[\"log_mass\", \"log_longevity\"]].mean(), then .reset_index() so class is an ordinary column again.\n\n\nHint 2 — Reuse the plotting pattern from the species-level chart: for cls, grp in families.groupby(\"class\"): then ax.scatter(grp[\"log_mass\"], grp[\"log_longevity\"], color=class_colours[cls], label=cls). You should end up with 327 points.\n\n\nFully worked solution:\nfamilies = (pair\n            .groupby([\"class\", \"family\"])[[\"log_mass\", \"log_longevity\"]]\n            .mean()\n            .reset_index())\n\nfig, ax = plt.subplots(figsize=(9, 6))\nfor cls, grp in families.groupby(\"class\"):\n    ax.scatter(grp[\"log_mass\"], grp[\"log_longevity\"],\n               s=18, alpha=0.7, color=class_colours[cls], label=cls)\nax.set_xlabel(\"family mean log10 adult body mass (g)\")\nax.set_ylabel(\"family mean log10 maximum longevity (years)\")\nr_fam = np.corrcoef(families[\"log_mass\"], families[\"log_longevity\"])[0, 1]\nax.set_title(f\"One rank up: {len(families)} families, r = {r_fam:.3f}\")\nax.legend(frameon=False)\nplt.show()\nHere aggregation does tighten the cloud: r ≈ 0.52 at species level, r ≈ 0.65 at family level, from 5,122 points down to 327. Families average away the species-level eccentrics (naked mole-rats, bats and seabirds that live far longer than their mass suggests), so the broad scaling law stands out — at the price of no longer being able to see the eccentrics, which may be exactly the species a reader cares about. Note also what carried the whole exercise: we averaged logged values. The mean of logs is the log of the geometric mean — the right average for ratio-scale traits; averaging raw grams first would let one elephant drag its whole family across the plot."
+  },
+  {
+    "objectID": "session1/part-a.html#what-aggregation-did-and-did-not-do",
+    "href": "session1/part-a.html#what-aggregation-did-and-did-not-do",
+    "title": "Allometry",
+    "section": "What aggregation did, and did not, do",
+    "text": "What aggregation did, and did not, do\nThe relationship was “the same” at every level — log-linear, positive — but every property a reader can quote changed with the level: n went from 90,371 measurements to 69,509 usable ones, to 10,601 species, to 327 families; the correlation moved; outliers appeared and vanished. A claim made from one level does not automatically hold at another. When you caption a chart, the level of aggregation is part of the claim — say what one point is, say what n is, and say where the dropped rows went."
+  },
+  {
+    "objectID": "session1/part-a.html#sources-and-serving-notes",
+    "href": "session1/part-a.html#sources-and-serving-notes",
+    "title": "Allometry",
+    "section": "Sources and serving notes",
+    "text": "Sources and serving notes\n\nTobias et al. (2022) AVONET: morphological, ecological and geographical data for all birds, Ecology Letters 25:581–597. Raw individual measurements from the supplementary dataset; served here with four of 26 columns, all rows, values unmodified.\nMyhrvold et al. (2015) An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles, Ecology 96:3109. Served with 10 of 36 columns, all 21,322 rows; the archive’s -999 missing-value code recoded to NA. All other values unmodified."
   },
   {
     "objectID": "session1/part-c.html",
