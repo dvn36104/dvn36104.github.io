@@ -571,43 +571,24 @@ print(f"ratio r_s / r_H = {r_s / r_H:.3f}")
 ```
 
 ::: {.hint exercise="ex_hubble"}
-**Hint 1** — `r_H = c / H0`, `rho_c = 3 * H0**2 / (8 * np.pi * G)`, and
-the mass is density × volume of a sphere of radius `r_H`.
+**Hint 1** — All three formulas are written in the task text above; your
+job is to translate them into code, in order, using the constants
+provided. Watch the parentheses in the critical-density formula.
 :::
 
 ::: {.hint exercise="ex_hubble"}
-**Hint 2** — `m_U = 4/3 * np.pi * r_H**3 * rho_c`. If your ratio is not
-extremely close to 1, check your powers and parentheses.
+**Hint 2** — If your ratio comes out wildly far from 1 (say $10^{-57}$),
+you almost certainly forgot to cube $r_H$ in the volume of the sphere.
 :::
 
-::: {.solution exercise="ex_hubble"}
-**Fully worked solution:**
-
-```python
-r_H   = c / H0
-rho_c = 3 * H0**2 / (8 * np.pi * G)
-m_U   = 4/3 * np.pi * r_H**3 * rho_c
-
-r_s = 2 * G * m_U / c**2
-print(f"r_H = {r_H:.2e} cm   m_U = {m_U:.2e} g")
-print(f"Schwarzschild radius of the Universe's mass: {r_s:.2e} cm")
-print(f"ratio r_s / r_H = {r_s / r_H:.3f}")
-```
-
-The ratio is **exactly 1** — and not by coincidence. Substitute the
-formulas into each other:
-
-$$r_s = \frac{2G}{c^2}\cdot\frac{4}{3}\pi r_H^3 \cdot \frac{3H_0^2}{8\pi G}
-     = \frac{r_H^3 H_0^2}{c^2}
-     = r_H \left(\frac{r_H H_0}{c}\right)^2 = r_H.$$
-
-Every constant cancels. A Universe at critical density *must* sit on the
-black-hole line, whatever the value of $H_0$ — the "coincidence" in the
-chart is algebra wearing a costume. This is a lesson about reading
-charts, not just making them: when a data point lands suspiciously
-exactly on a theory line, check whether the two were secretly computed
-from the same ingredients.
-:::
+**How to know you got it.** No solution button — the derivation is
+yours. Done right, the ratio comes out **suspiciously exact**. That
+exactness is itself the final puzzle: take the three formulas you just
+coded, substitute them into each other on paper, and watch what happens
+to the constants. What you find is a lesson about reading charts, not
+just making them — when a data point lands perfectly on a theory line,
+always ask whether the two were secretly computed from the same
+ingredients.
 
 ## What went into the chart
 

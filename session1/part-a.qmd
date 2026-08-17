@@ -362,50 +362,25 @@ plt.show()
 ```
 
 ::: {.hint exercise="ex_family"}
-**Hint 1** — Group by *two* keys so each family keeps its class:
-`pair.groupby(["class", "family"])[["log_mass", "log_longevity"]].mean()`,
-then `.reset_index()` so `class` is an ordinary column again.
+**Hint 1** — Group by *two* keys — class and family — so each family
+keeps its class for colouring, and remember `.reset_index()` afterwards
+so `class` becomes an ordinary column again.
 :::
 
 ::: {.hint exercise="ex_family"}
-**Hint 2** — Reuse the plotting pattern from the species-level chart:
-`for cls, grp in families.groupby("class"):` then
-`ax.scatter(grp["log_mass"], grp["log_longevity"], color=class_colours[cls],
-label=cls)`. You should end up with 327 points.
+**Hint 2** — Average the two *logged* columns in the groupby, then reuse
+the plotting pattern from the species-level chart. You should end up with
+327 points.
 :::
 
-::: {.solution exercise="ex_family"}
-**Fully worked solution:**
-
-```python
-families = (pair
-            .groupby(["class", "family"])[["log_mass", "log_longevity"]]
-            .mean()
-            .reset_index())
-
-fig, ax = plt.subplots(figsize=(9, 6))
-for cls, grp in families.groupby("class"):
-    ax.scatter(grp["log_mass"], grp["log_longevity"],
-               s=18, alpha=0.7, color=class_colours[cls], label=cls)
-ax.set_xlabel("family mean log10 adult body mass (g)")
-ax.set_ylabel("family mean log10 maximum longevity (years)")
-r_fam = np.corrcoef(families["log_mass"], families["log_longevity"])[0, 1]
-ax.set_title(f"One rank up: {len(families)} families, r = {r_fam:.3f}")
-ax.legend(frameon=False)
-plt.show()
-```
-
-Here aggregation *does* tighten the cloud: r ≈ 0.52 at species level,
-r ≈ 0.65 at family level, from 5,122 points down to 327. Families average
-away the species-level eccentrics (naked mole-rats, bats and seabirds that
-live far longer than their mass suggests), so the broad scaling law stands
-out — at the price of no longer being able to see the eccentrics, which
-may be exactly the species a reader cares about. Note also what carried the
-whole exercise: we averaged *logged* values. The mean of logs is the log of
-the geometric mean — the right average for ratio-scale traits; averaging
-raw grams first would let one elephant drag its whole family across the
-plot.
-:::
+**How to know you got it.** This exercise has no solution button — the
+chart is yours. Check yourself against three facts: you should have
+**327 families**; the correlation should come out around **0.65**, up
+from 0.52 at species level; and the long-lived eccentrics (naked
+mole-rats, bats, seabirds) should have vanished into their families'
+averages. Then ask yourself why the instructions insisted on averaging
+the *logged* values — what would one elephant have done to its family in
+raw grams?
 
 ## What aggregation did, and did not, do
 

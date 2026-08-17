@@ -952,40 +952,24 @@ print(f"Amniote root in the family-level file:           319.0 Mya")
 
 ::: {.hint exercise="ex_split"}
 **Hint 1** — The split date of `a` and `b` is the age of their MRCA:
-find it with `clade(root, [a, b])`, whose `.depth` is Myr *since the
-root*. Convert to "Myr ago" using the root's age.
+find the node with `clade(root, [a, b])`. Its `.depth` is Myr *since the
+root*, and you want Myr *before today* — you need to convert one into
+the other.
 :::
 
 ::: {.hint exercise="ex_split"}
-**Hint 2** — The root's age is the depth of any tip in a dated tree:
-`root_age = max(l.depth for l in root.leaves())`. Then
-`return root_age - clade(root, [a, b]).depth`.
+**Hint 2** — In a dated tree, every living tip is the same total
+distance from the root, so the root's age is the depth of any tip
+(safest: the maximum leaf depth). Age and depth run in opposite
+directions.
 :::
 
-::: {.solution exercise="ex_split"}
-**Fully worked solution:**
-
-```python
-def divergence(root, a, b):
-    set_depths(root)
-    root_age = max(l.depth for l in root.leaves())
-    return root_age - clade(root, [a, b]).depth
-
-split = divergence(euk, "Mammalia", "Aves")
-print(f"Mammalia-Aves split in the eukaryote class tree: {split:.1f} Mya")
-print(f"Amniote root in the family-level file:           319.0 Mya")
-```
-
-Both files say **319 Myr** — because the mammal–bird split *is* the
-amniote root: mammals sit on one side of the very first amniote fork and
-birds on the other, so "when did mammals and birds split" and "how old is
-the amniote common ancestor" are the same question. Two files, downloaded
-separately at different taxonomic ranks, agree to the decimal because
-TimeTree computes both from the same underlying consensus of published
-studies. Agreement between two views of one database is *consistency*;
-it is not independent confirmation — a distinction that matters every
-time two charts seem to corroborate each other.
-:::
+**How to know you got it.** No solution button here — this function is
+yours. If it works, the two printed dates agree *exactly*. Before you
+celebrate independent confirmation, ask two questions. First, why is the
+mammal–bird split the very same event as the amniote root? Second, both
+numbers ultimately came from the same database — what would it actually
+take for two dates like these to count as independent evidence?
 
 ## What a tree does, and does not, say
 
