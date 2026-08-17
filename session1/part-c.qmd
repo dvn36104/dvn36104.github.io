@@ -1,16 +1,649 @@
 ---
-title: "Session 1 · Part C"
-subtitle: "Placeholder — content coming soon"
+title: "The Triangle of Everything"
+subtitle: "Session 1 · Part C — rebuilding the chart of all objects in the Universe"
 engine: markdown
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
 ---
 
-This page will hold Part C of the first asynchronous session. The material
-is being prepared; check back once it is announced on Canvas.
+In 2023, two astrophysicists published a chart that went viral: **every
+object in the Universe on one pair of axes** — quarks, viruses, fleas,
+whales, planets, stars, black holes, galaxies, and the observable Universe
+itself (Lineweaver & Patel, *All objects and some questions*, American
+Journal of Physics 91:819). Plot mass against radius on log scales and
+everything that exists falls inside a **triangle**: one wall drawn by
+gravity, one wall drawn by quantum mechanics, and an apex where the two
+meet at the smallest possible object.
 
-In the meantime, here is a live code cell to confirm everything works in
-your browser — edit it and press **Run Code**:
+In this part you rebuild that chart step by step. Every ingredient is
+something you can compute: two axes, one curated table, one fact about
+spheres, and two famous formulas. By the end you will have drawn the
+figure — and you will know why it has the shape it has.
+
+The rebuild happens in five steps:
+
+| Step | What you add | What it teaches |
+|---|---|---|
+| 1 | axes + five familiar objects | log scales across ~100 decades |
+| 2 | the full table, coloured by kind | curating and encoding a dataset |
+| 3 | lines of constant density | why spheres make slope-3 lines |
+| 4 | the black-hole and quantum walls | physical limits as plotted lines |
+| 5 | the apex | where the walls meet: the Planck scale |
+
+All code runs in your browser. The first cell may take a few seconds while
+Python loads.
 
 ```{pyodide}
-message = "Part C is under construction"
-print(message.upper())
+#| autorun: true
+#| edit: false
+import js
+import numpy as np
+import matplotlib.pyplot as plt
+from pyodide.http import open_url
+
+# Data files live beside this page; the Python worker runs from site_libs/.
+DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
+
+plt.rcParams.update({
+    "figure.figsize": (9, 5),
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.grid": True,
+    "grid.alpha": 0.22,
+    "font.size": 11,
+})
+
+# Physical constants, cgs units (grams, centimetres, seconds)
+G    = 6.674e-8       # gravitational constant [cm^3 g^-1 s^-2]
+c    = 2.998e10       # speed of light [cm/s]
+hbar = 1.055e-27      # reduced Planck constant [erg s]
+H0   = 70 / 3.086e19  # Hubble constant: 70 km/s/Mpc, converted to [1/s]
+
+print("Environment ready.")
 ```
+
+```{pyodide}
+#| autorun: true
+#| include: false
+# Pre-build every name the page uses, so each cell works no matter which
+# cells were run before it. The visible cells re-derive all of this.
+text = open_url(DATA_URL + "objects_universe.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+names  = [r[0] for r in rows]
+groups = [r[1] for r in rows]
+mass   = np.array([float(r[2]) for r in rows])
+radius = np.array([float(r[3]) for r in rows])
+
+group_colours = {
+    "particles":         "#666666",
+    "life":              "#30a8b1",
+    "worlds":            "#4269d0",
+    "stars":             "#c98a00",
+    "black holes":       "#171717",
+    "cosmic structures": "#9475cd",
+}
+
+LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
+LABEL_BELOW = {"neutron star", "Ceres"}
+
+def draw_objects(ax, fontsize=7.5):
+    for i, nm in enumerate(names):
+        col = group_colours[groups[i]]
+        ax.scatter(radius[i], mass[i], s=18, color=col, zorder=3)
+        if nm in LABEL_LEFT:
+            ax.annotate(nm + " ", (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3, ha="right")
+        elif nm in LABEL_BELOW:
+            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3, va="top")
+        else:
+            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3)
+
+def cosmos_axes(figsize=(10, 10)):
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_xlim(1e-35, 1e30); ax.set_ylim(1e-40, 1e60)
+    ax.set_xticks([10.0**k for k in range(-35, 31, 5)])
+    ax.set_yticks([10.0**k for k in range(-40, 61, 10)])
+    ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
+    return fig, ax
+
+r_line = np.logspace(-35, 30, 200)
+
+def mass_at_density(rho, r):
+    return 4/3 * np.pi * rho * r**3
+
+def schwarzschild_mass(r):
+    return r * c**2 / (2 * G)
+
+def compton_mass(r):
+    return hbar / (r * c)
+
+rho_all = mass / (4/3 * np.pi * radius**3)
+l_p = np.sqrt(hbar * G / c**3)
+m_p = np.sqrt(hbar * c / G)
+r_x = np.sqrt(2 * G * hbar / c**3)
+m_x = np.sqrt(hbar * c / (2 * G))
+rho_human = rho_all[names.index("human")]
+iU = names.index("observable Universe")
+ratio = 2 * G * mass[iU] / c**2 / radius[iU]
+```
+
+## 1 · One pair of axes for everything
+
+Why mass and radius? Because they are the two properties **every physical
+object has**. A virus has no temperature you can easily assign, a galaxy
+has no chemistry — but both have a mass and a size. If you want a chart of
+*everything*, you need axes everything can land on.
+
+The catch is range. From a neutrino to the observable Universe, mass spans
+about **90 orders of magnitude** and radius about **44**. On linear axes,
+one pixel that shows the Universe would hide the entire Sun inside a
+region a trillion-trillion times smaller than the pixel. So both axes are
+logarithmic — the same move you made for allometry in Part A, stretched to
+its absolute limit. (We work in grams and centimetres, following the
+paper; on axes this wide the choice of unit just slides everything by a
+constant, and changes nothing about the shape.)
+
+The chart's raw material is a curated table — one row per object, a name,
+a group, a mass and a radius:
+
+```{pyodide}
+text = open_url(DATA_URL + "objects_universe.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+names  = [r[0] for r in rows]
+groups = [r[1] for r in rows]
+mass   = np.array([float(r[2]) for r in rows])
+radius = np.array([float(r[3]) for r in rows])
+
+for r in rows[:6]:
+    print(f"{r[0]:<14} {r[1]:<12} {float(r[2]):>10.2e} g {float(r[3]):>10.2e} cm")
+print(f"... {len(names)} objects in total")
+```
+
+```{pyodide}
+assert len(names) == 29
+assert mass.max() / mass.min() > 1e89
+assert radius.max() / radius.min() > 1e43
+print("✓ 29 objects; mass spans 90 orders of magnitude, radius spans 44")
+```
+
+Start with five things you have an intuition for:
+
+```{pyodide}
+FAMILIAR = ["flea", "human", "blue whale", "Earth", "Sun"]
+
+fig, ax = plt.subplots(figsize=(8, 5.5))
+for nm in FAMILIAR:
+    i = names.index(nm)
+    ax.scatter(radius[i], mass[i], s=30, color="#4269d0", zorder=3)
+    ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=10)
+ax.set_xscale("log"); ax.set_yscale("log")
+ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
+ax.set_title("Five familiar objects — already 29 orders of magnitude in mass")
+plt.show()
+```
+
+Notice they fall roughly on a straight line. Hold that thought — it is the
+key to Step 3.
+
+First, a confession about the data. What is "the radius of a human"? The
+paper treats you as a **sphere of radius 50 cm** with mass 70 kg. Check
+what that implies:
+
+```{pyodide}
+i = names.index("human")
+rho_human = mass[i] / (4/3 * np.pi * radius[i]**3)
+print(f"implied human density: {rho_human:.2f} g/cm³")
+```
+
+```{pyodide}
+assert 0.1 < rho_human < 0.2
+print("✓ the spherical human is ~0.13 g/cm³ — seven times fluffier than water")
+```
+
+Real humans are almost exactly water density; the 50-cm sphere
+overestimates your volume about sevenfold. On an ordinary chart that would
+be a scandal. Here, one decade of error is **one percent of the axis** —
+invisible. That is the quiet trade this figure makes everywhere: every
+value is an order-of-magnitude sketch, and at this scale that is exactly
+good enough. Say so in the caption, and it is honest; hide it, and it
+is not.
+
+## 2 · The full bestiary
+
+Now all 29 objects, coloured by kind. Six groups: particles (grey), life,
+worlds, stars, black holes (black, naturally), and cosmic structures. The
+palette is colour-blind-checked, and every point carries its own label —
+colour alone is never the only way to tell things apart:
+
+```{pyodide}
+group_colours = {
+    "particles":         "#666666",
+    "life":              "#30a8b1",
+    "worlds":            "#4269d0",
+    "stars":             "#c98a00",
+    "black holes":       "#171717",
+    "cosmic structures": "#9475cd",
+}
+
+LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
+LABEL_BELOW = {"neutron star", "Ceres"}
+
+def draw_objects(ax, fontsize=7.5):
+    for i, nm in enumerate(names):
+        col = group_colours[groups[i]]
+        ax.scatter(radius[i], mass[i], s=18, color=col, zorder=3)
+        if nm in LABEL_LEFT:      # nudge a few labels out of collisions
+            ax.annotate(nm + " ", (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3, ha="right")
+        elif nm in LABEL_BELOW:
+            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3, va="top")
+        else:
+            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
+                        color=col, zorder=3)
+
+def cosmos_axes(figsize=(10, 10)):
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_xlim(1e-35, 1e30); ax.set_ylim(1e-40, 1e60)
+    ax.set_xticks([10.0**k for k in range(-35, 31, 5)])
+    ax.set_yticks([10.0**k for k in range(-40, 61, 10)])
+    ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
+    return fig, ax
+
+fig, ax = cosmos_axes()
+draw_objects(ax)
+ax.set_title("All 29 objects — note the two great empty corners")
+plt.show()
+```
+
+The interesting thing is not where the points are — it is where they
+**aren't**. Nothing in the top-left (small but monstrously heavy), nothing
+in the bottom-right (huge but almost massless). Two whole corners of
+possibility, empty. The rest of this page explains why they *must* be.
+
+## 3 · Density is a straight line here
+
+Any object of roughly uniform density $\rho$ obeys
+$m = \frac{4}{3}\pi \rho\, r^3$. Take logs and this becomes
+$\log m = 3\log r + \text{const}$ — on our axes, **a straight line of
+slope 3**, one line per density. Chemistry pins atomic matter near
+$\rho \approx 1\ \text{g/cm}^3$; nuclear matter sits fourteen decades
+higher:
+
+```{pyodide}
+r_line = np.logspace(-35, 30, 200)
+
+def mass_at_density(rho, r):
+    return 4/3 * np.pi * rho * r**3
+
+fig, ax = cosmos_axes()
+draw_objects(ax)
+for rho in (1.0, 2.3e14):
+    ax.plot(r_line, mass_at_density(rho, r_line), ls="--", lw=1, color="#888888")
+ax.text(2e14, mass_at_density(1, 1e14), "atomic density", rotation=64,
+        fontsize=9, color="#888888")
+ax.text(2e2, mass_at_density(2.3e14, 1e2), "nuclear density", rotation=64,
+        fontsize=9, color="#888888")
+ax.set_title("Two densities organise almost everything")
+plt.show()
+```
+
+Suddenly the scatter has a skeleton. Everything made of atoms — viruses,
+fleas, whales, asteroids, planets, the Sun — strings out along the atomic
+line: that *was* the straight line hiding in the five familiar objects.
+The proton and the neutron star, fourteen decades apart in size, share the
+nuclear line: **a neutron star really is matter at the density of an
+atomic nucleus, the size of a city**.
+
+```{pyodide}
+rho_all = mass / (4/3 * np.pi * radius**3)
+
+i_ns, i_p = names.index("neutron star"), names.index("proton")
+assert 1e14 < rho_all[i_ns] < 1e15 and 1e14 < rho_all[i_p] < 1e15
+assert rho_all[names.index("red giant")] < 1e-5
+print("✓ proton and neutron star both sit at nuclear density, ~10¹⁴ g/cm³")
+print(f"densest object:  {names[int(np.argmax(rho_all))]}")
+print(f"fluffiest object: {names[int(np.argmin(rho_all))]}")
+```
+
+Read that last line again: the least dense thing in the Universe **is the
+Universe** — about $10^{-29}\ \text{g/cm}^3$, six protons per cubic metre.
+
+### Your turn: interrogate the densities {#sec-ex-density}
+
+You have `rho_all` for all 29 objects. Rank everything by density and
+print a table from densest to fluffiest, with the group and the density of
+each object. Then answer from your output: which **group** owns the top of
+the table, and how many decades of density separate a red giant from a
+white dwarf — two objects of nearly the same *mass*?
+
+```{pyodide}
+#| setup: true
+#| exercise: ex_density
+import js
+import numpy as np
+from pyodide.http import open_url
+DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
+text = open_url(DATA_URL + "objects_universe.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+names  = [r[0] for r in rows]
+groups = [r[1] for r in rows]
+mass   = np.array([float(r[2]) for r in rows])
+radius = np.array([float(r[3]) for r in rows])
+rho_all = mass / (4/3 * np.pi * radius**3)
+```
+
+```{pyodide}
+#| exercise: ex_density
+# `names`, `groups`, `mass`, `radius` and `rho_all` are all loaded.
+# 1. Get the object order sorted by density, densest first.
+# 2. Print rank, name, group, density for every object.
+# 3. Compute the red giant / white dwarf density gap in decades.
+
+order = ______
+
+for rank, i in enumerate(order, 1):
+    print(f"{rank:>2}. {names[i]:<20} {groups[i]:<18} {rho_all[i]:>9.1e} g/cm³")
+
+gap = ______
+print(f"\nred giant vs white dwarf: {gap:.0f} decades of density")
+```
+
+::: {.hint exercise="ex_density"}
+**Hint 1** — `np.argsort(rho_all)` gives indices from *smallest* to
+largest; reverse it with `[::-1]` to get densest first.
+:::
+
+::: {.hint exercise="ex_density"}
+**Hint 2** — A "decade" is a factor of ten, so the gap in decades is
+`np.log10(rho_wd / rho_rg)`. Get each with
+`rho_all[names.index("white dwarf")]`.
+:::
+
+::: {.solution exercise="ex_density"}
+**Fully worked solution:**
+
+```python
+order = np.argsort(rho_all)[::-1]
+
+for rank, i in enumerate(order, 1):
+    print(f"{rank:>2}. {names[i]:<20} {groups[i]:<18} {rho_all[i]:>9.1e} g/cm³")
+
+gap = np.log10(rho_all[names.index("white dwarf")]
+               / rho_all[names.index("red giant")])
+print(f"\nred giant vs white dwarf: {gap:.0f} decades of density")
+```
+
+The top of the table belongs entirely to **particles** — the top quark
+and Higgs boson are the densest "objects" plotted, though for them
+density is a strange notion (their radius is a quantum limit, not a
+surface). The red giant and white dwarf differ by roughly **12 decades**
+of density despite nearly identical masses — they are the same kind of
+star at two different moments of its life, which is why mass alone tells
+you so little and the mass–radius *pair* tells you so much.
+:::
+
+## 4 · The two walls
+
+Now the physics that gives the chart its shape. Both walls are one-line
+formulas.
+
+**The gravity wall.** Squeeze a mass $m$ into a small enough radius and
+it becomes a black hole. That radius is the Schwarzschild radius
+$r_s = 2Gm/c^2$ — for a given radius, the heaviest possible object is
+$m = rc^2/2G$: **slope +1** on our axes. Nothing can sit above this line:
+an object of that mass would already have collapsed. Black holes sit
+exactly *on* it — that is what a black hole is.
+
+**The quantum wall.** Quantum mechanics denies small masses a definite
+tiny size: a particle of mass $m$ cannot be localised below its Compton
+wavelength $\lambda_c = \hbar / mc$, so the lightest possible object of
+radius $r$ is $m = \hbar/rc$: **slope −1**. Below this line, "object"
+stops meaning anything — try to confine a particle tighter and you create
+new particles instead. Fundamental particles (top quark, Higgs, electron,
+neutrino) are plotted *on* their Compton wavelengths; the composite proton
+gets its measured charge radius.
+
+```{pyodide}
+def schwarzschild_mass(r):   # heaviest object of radius r (it's a black hole)
+    return r * c**2 / (2 * G)
+
+def compton_mass(r):         # lightest object of radius r (quantum limit)
+    return hbar / (r * c)
+
+fig, ax = cosmos_axes()
+ax.fill_between(r_line, schwarzschild_mass(r_line), 1e60,
+                color="#e66852", alpha=0.15, zorder=0)
+ax.fill_between(r_line, 1e-40, compton_mass(r_line),
+                color="#4269d0", alpha=0.15, zorder=0)
+ax.plot(r_line, schwarzschild_mass(r_line), color="#171717", lw=1.4)
+ax.plot(r_line, compton_mass(r_line), color="#171717", lw=1.4)
+draw_objects(ax)
+ax.text(3e-14, 1e45, "forbidden by gravity", rotation=38, fontsize=13, color="#8a3324")
+ax.text(3e-5, 1e-24, "quantum uncertainty", rotation=-38, fontsize=13, color="#1d3f8f")
+ax.set_title("The two walls: nothing above the black-hole line, nothing below Compton")
+plt.show()
+```
+
+The empty corners of Step 2 are now explained — and shaded. They are not
+unexplored; they are **impossible**. This is the deepest trick in the
+figure: the *absence* of data is carrying the physics, and the shading
+turns absence into a statement.
+
+One object deserves a second look. Check the top-right corner:
+
+```{pyodide}
+iU = names.index("observable Universe")
+ratio = 2 * G * mass[iU] / c**2 / radius[iU]
+print(f"Universe: Schwarzschild radius / actual radius = {ratio:.2f}")
+```
+
+```{pyodide}
+assert 0.8 < ratio < 1.2
+print("✓ the observable Universe sits ON the black-hole line")
+```
+
+The Universe's mass and radius satisfy the black-hole relation almost
+exactly. Does that mean we live inside a black hole? The paper's answer
+is careful: the Schwarzschild formula assumes empty space *outside* the
+object, and outside our Hubble volume the density carries on much the
+same — so no. But *why* the numbers land on the line so precisely is the
+second exercise.
+
+## 5 · The apex, and the finished chart
+
+Walls of slope +1 and −1 must meet. Set them equal:
+
+$$\frac{rc^2}{2G} = \frac{\hbar}{rc}
+\;\;\Rightarrow\;\;
+r = \sqrt{\frac{2G\hbar}{c^3}},\qquad
+m = \sqrt{\frac{\hbar c}{2G}}.$$
+
+```{pyodide}
+r_x = np.sqrt(2 * G * hbar / c**3)
+m_x = np.sqrt(hbar * c / (2 * G))
+l_p = np.sqrt(hbar * G / c**3)    # Planck length
+m_p = np.sqrt(hbar * c / G)       # Planck mass
+
+print(f"walls cross at    r = {r_x:.2e} cm,  m = {m_x:.2e} g")
+print(f"Planck scale:   l_p = {l_p:.2e} cm, m_p = {m_p:.2e} g")
+```
+
+```{pyodide}
+assert abs(r_x / (np.sqrt(2) * l_p) - 1) < 1e-6
+assert abs(m_x / (m_p / np.sqrt(2)) - 1) < 1e-6
+print("✓ the walls cross at the Planck scale (times a factor of √2)")
+```
+
+The crossing point is the **Planck scale** — about $10^{-33}$ cm and
+$2\times10^{-5}$ g, the mass of a flea's egg compressed to a point
+$10^{20}$ times smaller than a proton. The smallest possible object is a
+Planck-mass black hole, which the paper calls an **instanton**: the only
+thing that is simultaneously as small as gravity allows and as small as
+quantum mechanics allows. Left of the Planck length, physics has no
+tested theory at all — the paper shades it "sub-Planckian unknown", and
+so will we.
+
+Now assemble everything — regions, walls, density skeleton, objects,
+apex:
+
+```{pyodide}
+fig, ax = cosmos_axes(figsize=(10.5, 10.5))
+
+# forbidden regions
+ax.fill_between(r_line, schwarzschild_mass(r_line), 1e60,
+                color="#e66852", alpha=0.15, zorder=0)
+ax.fill_between(r_line, 1e-40, compton_mass(r_line),
+                color="#4269d0", alpha=0.15, zorder=0)
+ax.axvspan(1e-35, l_p, color="#555555", alpha=0.25, zorder=0)
+
+# the two walls
+ax.plot(r_line, schwarzschild_mass(r_line), color="#171717", lw=1.4)
+ax.plot(r_line, compton_mass(r_line), color="#171717", lw=1.4)
+
+# density skeleton
+for rho in (1.0, 2.3e14):
+    ax.plot(r_line, mass_at_density(rho, r_line), ls="--", lw=0.9,
+            color="#999999", zorder=1)
+
+# every object, plus the apex
+draw_objects(ax)
+ax.scatter([l_p], [m_p], marker="D", s=45, color="#171717", zorder=4)
+ax.annotate("  instanton\n  (Planck scale)", (l_p, m_p), fontsize=8.5)
+
+# annotations
+ax.text(3e-14, 1e45, "forbidden by gravity", rotation=38, fontsize=13, color="#8a3324")
+ax.text(3e-5, 1e-24, "quantum uncertainty", rotation=-38, fontsize=13, color="#1d3f8f")
+ax.text(1.7e-35, 1e10, "sub-Planckian unknown", rotation=90, fontsize=9, color="#444444")
+ax.text(1e-24, 3e6, "black holes", rotation=38, fontsize=9, color="#171717")
+ax.text(2.5e-10, 3e-21, "Compton limit", rotation=-38, fontsize=9, color="#171717")
+ax.text(2e14, mass_at_density(1, 1e14), "atomic density", rotation=64,
+        fontsize=9, color="#888888")
+ax.text(2e2, mass_at_density(2.3e14, 1e2), "nuclear density", rotation=64,
+        fontsize=9, color="#888888")
+ax.set_title("Everything in the Universe, one chart — after Lineweaver & Patel (2023)")
+plt.show()
+```
+
+That is the triangle of everything: gravity above, quantum uncertainty
+below, the unknown to the left, the Universe pinned to the top of the
+gravity wall, and every known thing strung out on density lines in
+between.
+
+### Your turn: put the Universe on the wall {#sec-ex-hubble}
+
+The Universe's point was given to you in the table. Derive it. All you
+need is the Hubble constant. The radius of the observable Universe is the
+Hubble radius $r_H = c/H_0$; its average density is the critical density
+$\rho_c = 3H_0^2 / 8\pi G$; and its mass is that density times the volume
+of the Hubble sphere. Then test whether your derived Universe lands on
+the black-hole line.
+
+```{pyodide}
+#| setup: true
+#| exercise: ex_hubble
+import numpy as np
+G    = 6.674e-8       # [cm^3 g^-1 s^-2]
+c    = 2.998e10       # [cm/s]
+H0   = 70 / 3.086e19  # [1/s]
+```
+
+```{pyodide}
+#| exercise: ex_hubble
+# Constants G, c and H0 are loaded (cgs units).
+# 1. Hubble radius, critical density, and the mass of the Hubble sphere.
+# 2. Schwarzschild radius of that mass — how does it compare to r_H?
+
+r_H   = ______
+rho_c = ______
+m_U   = ______
+
+r_s = 2 * G * m_U / c**2
+print(f"r_H = {r_H:.2e} cm   m_U = {m_U:.2e} g")
+print(f"Schwarzschild radius of the Universe's mass: {r_s:.2e} cm")
+print(f"ratio r_s / r_H = {r_s / r_H:.3f}")
+```
+
+::: {.hint exercise="ex_hubble"}
+**Hint 1** — `r_H = c / H0`, `rho_c = 3 * H0**2 / (8 * np.pi * G)`, and
+the mass is density × volume of a sphere of radius `r_H`.
+:::
+
+::: {.hint exercise="ex_hubble"}
+**Hint 2** — `m_U = 4/3 * np.pi * r_H**3 * rho_c`. If your ratio is not
+extremely close to 1, check your powers and parentheses.
+:::
+
+::: {.solution exercise="ex_hubble"}
+**Fully worked solution:**
+
+```python
+r_H   = c / H0
+rho_c = 3 * H0**2 / (8 * np.pi * G)
+m_U   = 4/3 * np.pi * r_H**3 * rho_c
+
+r_s = 2 * G * m_U / c**2
+print(f"r_H = {r_H:.2e} cm   m_U = {m_U:.2e} g")
+print(f"Schwarzschild radius of the Universe's mass: {r_s:.2e} cm")
+print(f"ratio r_s / r_H = {r_s / r_H:.3f}")
+```
+
+The ratio is **exactly 1** — and not by coincidence. Substitute the
+formulas into each other:
+
+$$r_s = \frac{2G}{c^2}\cdot\frac{4}{3}\pi r_H^3 \cdot \frac{3H_0^2}{8\pi G}
+     = \frac{r_H^3 H_0^2}{c^2}
+     = r_H \left(\frac{r_H H_0}{c}\right)^2 = r_H.$$
+
+Every constant cancels. A Universe at critical density *must* sit on the
+black-hole line, whatever the value of $H_0$ — the "coincidence" in the
+chart is algebra wearing a costume. This is a lesson about reading
+charts, not just making them: when a data point lands suspiciously
+exactly on a theory line, check whether the two were secretly computed
+from the same ingredients.
+:::
+
+## What went into the chart
+
+Count the ingredients you actually used:
+
+- **one curated table** — 29 rows, every value an order-of-magnitude
+  sketch, sources mixed from measurement (Earth), convention (the 50-cm
+  spherical human), and definition (black-hole radii);
+- **two log axes** — doing more work than everything else combined,
+  turning 90 orders of magnitude into a readable square and power laws
+  into straight lines;
+- **one fact about spheres** — $m \propto \rho r^3$, which organises all
+  atomic matter onto one line and all nuclear matter onto another;
+- **two formulas** — $r_s = 2Gm/c^2$ and $\lambda_c = \hbar/mc$, drawn
+  not as data but as *walls*, turning empty space into a claim;
+- **annotation** — region labels, line labels, direct point labels: the
+  difference between a scatter plot and an explanation.
+
+That is the whole machine. The famous figure is not famous for its data —
+half its rows you could have written down yourself — but for its
+*framing*: pick axes everything shares, let physics draw the boundaries,
+and the emptiness becomes the story.
+
+## Sources and serving notes
+
+- Lineweaver, C. H. & Patel, V. M. (2023) *All objects and some
+  questions*, American Journal of Physics 91:819–825
+  ([doi:10.1119/5.0150209](https://doi.org/10.1119/5.0150209)) — the
+  original Figure 2, which this page rebuilds in simplified form (we omit
+  the cosmological-epoch background shading and plot a smaller object
+  sample).
+- `objects_universe.csv` is curated for this course: masses and radii are
+  order-of-magnitude values assembled from standard references; the
+  human and whale entries deliberately reproduce the paper's values,
+  sphericity and all. Fundamental particles are plotted at their Compton
+  wavelengths (the proton at its measured charge radius); black holes at
+  their Schwarzschild radii.
+- Constants: CODATA values rounded to 4 significant figures;
+  $H_0 = 70$ km/s/Mpc.
