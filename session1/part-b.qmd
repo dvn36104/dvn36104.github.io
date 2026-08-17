@@ -971,6 +971,8 @@ mammal–bird split the very same event as the amniote root? Second, both
 numbers ultimately came from the same database — what would it actually
 take for two dates like these to count as independent evidence?
 
+{{< include _instructor-b.qmd >}}
+
 ## What a tree does, and does not, say
 
 Reading a phylogeny is a visual skill worth being pedantic about:

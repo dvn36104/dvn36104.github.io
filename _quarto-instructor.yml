@@ -1,0 +1,7 @@
+project:
+  output-dir: _site-instructor
+
+website:
+  title: "36104 · Data Visualisation and Narratives — INSTRUCTOR BUILD"
+  navbar:
+    background: "#8a2432"

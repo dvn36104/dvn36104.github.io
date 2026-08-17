@@ -382,6 +382,8 @@ averages. Then ask yourself why the instructions insisted on averaging
 the *logged* values — what would one elephant have done to its family in
 raw grams?
 
+{{< include _instructor-a.qmd >}}
+
 ## What aggregation did, and did not, do
 
 The relationship was "the same" at every level — log-linear, positive —

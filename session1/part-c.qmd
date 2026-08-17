@@ -590,6 +590,8 @@ just making them — when a data point lands perfectly on a theory line,
 always ask whether the two were secretly computed from the same
 ingredients.
 
+{{< include _instructor-c.qmd >}}
+
 ## What went into the chart
 
 Count the ingredients you actually used:
