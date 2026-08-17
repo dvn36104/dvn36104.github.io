@@ -499,27 +499,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfaHViYmxlIn0sImNv
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_hubble">
-<p><strong>Hint 1</strong> — <code>r_H = c / H0</code>, <code>rho_c = 3 * H0**2 / (8 * np.pi * G)</code>, and the mass is density × volume of a sphere of radius <code>r_H</code>.</p>
+<p><strong>Hint 1</strong> — All three formulas are written in the task text above; your job is to translate them into code, in order, using the constants provided. Watch the parentheses in the critical-density formula.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_hubble">
-<p><strong>Hint 2</strong> — <code>m_U = 4/3 * np.pi * r_H**3 * rho_c</code>. If your ratio is not extremely close to 1, check your powers and parentheses.</p>
+<p><strong>Hint 2</strong> — If your ratio comes out wildly far from 1 (say <span class="math inline">\(10^{-57}\)</span>), you almost certainly forgot to cube <span class="math inline">\(r_H\)</span> in the volume of the sphere.</p>
 </div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_hubble">
-<p><strong>Fully worked solution:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>r_H   <span class="op">=</span> c <span class="op">/</span> H0</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rho_c <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> H0<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">8</span> <span class="op">*</span> np.pi <span class="op">*</span> G)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m_U   <span class="op">=</span> <span class="dv">4</span><span class="op">/</span><span class="dv">3</span> <span class="op">*</span> np.pi <span class="op">*</span> r_H<span class="op">**</span><span class="dv">3</span> <span class="op">*</span> rho_c</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>r_s <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> G <span class="op">*</span> m_U <span class="op">/</span> c<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"r_H = </span><span class="sc">{</span>r_H<span class="sc">:.2e}</span><span class="ss"> cm   m_U = </span><span class="sc">{</span>m_U<span class="sc">:.2e}</span><span class="ss"> g"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Schwarzschild radius of the Universe's mass: </span><span class="sc">{</span>r_s<span class="sc">:.2e}</span><span class="ss"> cm"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ratio r_s / r_H = </span><span class="sc">{</span>r_s <span class="op">/</span> r_H<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The ratio is <strong>exactly 1</strong> — and not by coincidence. Substitute the formulas into each other:</p>
-<p><span class="math display">\[r_s = \frac{2G}{c^2}\cdot\frac{4}{3}\pi r_H^3 \cdot \frac{3H_0^2}{8\pi G}
-     = \frac{r_H^3 H_0^2}{c^2}
-     = r_H \left(\frac{r_H H_0}{c}\right)^2 = r_H.\]</span></p>
-<p>Every constant cancels. A Universe at critical density <em>must</em> sit on the black-hole line, whatever the value of <span class="math inline">\(H_0\)</span> — the “coincidence” in the chart is algebra wearing a costume. This is a lesson about reading charts, not just making them: when a data point lands suspiciously exactly on a theory line, check whether the two were secretly computed from the same ingredients.</p>
-</div>
+<p><strong>How to know you got it.</strong> No solution button — the derivation is yours. Done right, the ratio comes out <strong>suspiciously exact</strong>. That exactness is itself the final puzzle: take the three formulas you just coded, substitute them into each other on paper, and watch what happens to the constants. What you find is a lesson about reading charts, not just making them — when a data point lands perfectly on a theory line, always ask whether the two were secretly computed from the same ingredients.</p>
 </section>
 </section>
 <section id="what-went-into-the-chart" class="level2">

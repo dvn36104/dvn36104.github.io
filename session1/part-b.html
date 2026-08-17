@@ -484,23 +484,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQifSwiY29k
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_split">
-<p><strong>Hint 1</strong> — The split date of <code>a</code> and <code>b</code> is the age of their MRCA: find it with <code>clade(root, [a, b])</code>, whose <code>.depth</code> is Myr <em>since the root</em>. Convert to “Myr ago” using the root’s age.</p>
+<p><strong>Hint 1</strong> — The split date of <code>a</code> and <code>b</code> is the age of their MRCA: find the node with <code>clade(root, [a, b])</code>. Its <code>.depth</code> is Myr <em>since the root</em>, and you want Myr <em>before today</em> — you need to convert one into the other.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_split">
-<p><strong>Hint 2</strong> — The root’s age is the depth of any tip in a dated tree: <code>root_age = max(l.depth for l in root.leaves())</code>. Then <code>return root_age - clade(root, [a, b]).depth</code>.</p>
+<p><strong>Hint 2</strong> — In a dated tree, every living tip is the same total distance from the root, so the root’s age is the depth of any tip (safest: the maximum leaf depth). Age and depth run in opposite directions.</p>
 </div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_split">
-<p><strong>Fully worked solution:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divergence(root, a, b):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    set_depths(root)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    root_age <span class="op">=</span> <span class="bu">max</span>(l.depth <span class="cf">for</span> l <span class="kw">in</span> root.leaves())</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> root_age <span class="op">-</span> clade(root, [a, b]).depth</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>split <span class="op">=</span> divergence(euk, <span class="st">"Mammalia"</span>, <span class="st">"Aves"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mammalia-Aves split in the eukaryote class tree: </span><span class="sc">{</span>split<span class="sc">:.1f}</span><span class="ss"> Mya"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Amniote root in the family-level file:           319.0 Mya"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Both files say <strong>319 Myr</strong> — because the mammal–bird split <em>is</em> the amniote root: mammals sit on one side of the very first amniote fork and birds on the other, so “when did mammals and birds split” and “how old is the amniote common ancestor” are the same question. Two files, downloaded separately at different taxonomic ranks, agree to the decimal because TimeTree computes both from the same underlying consensus of published studies. Agreement between two views of one database is <em>consistency</em>; it is not independent confirmation — a distinction that matters every time two charts seem to corroborate each other.</p>
-</div>
+<p><strong>How to know you got it.</strong> No solution button here — this function is yours. If it works, the two printed dates agree <em>exactly</em>. Before you celebrate independent confirmation, ask two questions. First, why is the mammal–bird split the very same event as the amniote root? Second, both numbers ultimately came from the same database — what would it actually take for two dates like these to count as independent evidence?</p>
 </section>
 </section>
 <section id="what-a-tree-does-and-does-not-say" class="level2">

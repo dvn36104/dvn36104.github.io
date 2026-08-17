@@ -445,30 +445,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZmFtaWx5In0sImNv
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_family">
-<p><strong>Hint 1</strong> — Group by <em>two</em> keys so each family keeps its class: <code>pair.groupby(["class", "family"])[["log_mass", "log_longevity"]].mean()</code>, then <code>.reset_index()</code> so <code>class</code> is an ordinary column again.</p>
+<p><strong>Hint 1</strong> — Group by <em>two</em> keys — class and family — so each family keeps its class for colouring, and remember <code>.reset_index()</code> afterwards so <code>class</code> becomes an ordinary column again.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_family">
-<p><strong>Hint 2</strong> — Reuse the plotting pattern from the species-level chart: <code>for cls, grp in families.groupby("class"):</code> then <code>ax.scatter(grp["log_mass"], grp["log_longevity"], color=class_colours[cls], label=cls)</code>. You should end up with 327 points.</p>
+<p><strong>Hint 2</strong> — Average the two <em>logged</em> columns in the groupby, then reuse the plotting pattern from the species-level chart. You should end up with 327 points.</p>
 </div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_family">
-<p><strong>Fully worked solution:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>families <span class="op">=</span> (pair</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            .groupby([<span class="st">"class"</span>, <span class="st">"family"</span>])[[<span class="st">"log_mass"</span>, <span class="st">"log_longevity"</span>]]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            .mean()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            .reset_index())</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">6</span>))</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cls, grp <span class="kw">in</span> families.groupby(<span class="st">"class"</span>):</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(grp[<span class="st">"log_mass"</span>], grp[<span class="st">"log_longevity"</span>],</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               s<span class="op">=</span><span class="dv">18</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=</span>class_colours[cls], label<span class="op">=</span>cls)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"family mean log10 adult body mass (g)"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"family mean log10 maximum longevity (years)"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>r_fam <span class="op">=</span> np.corrcoef(families[<span class="st">"log_mass"</span>], families[<span class="st">"log_longevity"</span>])[<span class="dv">0</span>, <span class="dv">1</span>]</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"One rank up: </span><span class="sc">{</span><span class="bu">len</span>(families)<span class="sc">}</span><span class="ss"> families, r = </span><span class="sc">{</span>r_fam<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Here aggregation <em>does</em> tighten the cloud: r ≈ 0.52 at species level, r ≈ 0.65 at family level, from 5,122 points down to 327. Families average away the species-level eccentrics (naked mole-rats, bats and seabirds that live far longer than their mass suggests), so the broad scaling law stands out — at the price of no longer being able to see the eccentrics, which may be exactly the species a reader cares about. Note also what carried the whole exercise: we averaged <em>logged</em> values. The mean of logs is the log of the geometric mean — the right average for ratio-scale traits; averaging raw grams first would let one elephant drag its whole family across the plot.</p>
-</div>
+<p><strong>How to know you got it.</strong> This exercise has no solution button — the chart is yours. Check yourself against three facts: you should have <strong>327 families</strong>; the correlation should come out around <strong>0.65</strong>, up from 0.52 at species level; and the long-lived eccentrics (naked mole-rats, bats, seabirds) should have vanished into their families’ averages. Then ask yourself why the instructions insisted on averaging the <em>logged</em> values — what would one elephant have done to its family in raw grams?</p>
 </section>
 </section>
 <section id="what-aggregation-did-and-did-not-do" class="level2">
