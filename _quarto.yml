@@ -17,7 +17,7 @@ website:
       - text: "Session 1"
         menu:
           - href: session1/part-a.qmd
-            text: "Part A"
+            text: "Part A · Allometry"
           - href: session1/part-b.qmd
             text: "Part B"
           - href: session1/part-c.qmd
