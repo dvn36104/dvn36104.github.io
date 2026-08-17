@@ -21,7 +21,7 @@ Canvas as described in the relevant brief.
 ## Session 1
 
 - [Part A · Allometry](session1/part-a.qmd)
-- [Part B](session1/part-b.qmd)
+- [Part B · Tree of Life](session1/part-b.qmd)
 - [Part C](session1/part-c.qmd)
 - [Part D](session1/part-d.qmd)
 

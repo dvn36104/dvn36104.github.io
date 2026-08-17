@@ -49,6 +49,23 @@ plt.rcParams.update({
 print("Environment ready.")
 ```
 
+```{pyodide}
+#| autorun: true
+#| include: false
+# Pre-build every name the page uses, so each cell works no matter which
+# cells were run before it. The visible cells re-derive all of this.
+birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"))
+clean = birds.dropna(subset=["species", "beak_length_culmen_mm", "tarsus_length_mm"])
+species_means = (clean
+                 .groupby("species")[["beak_length_culmen_mm", "tarsus_length_mm"]]
+                 .mean())
+r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
+                    np.log10(clean["beak_length_culmen_mm"]))[0, 1]
+amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
+pair = amniote.dropna(subset=["adult_body_mass_g", "maximum_longevity_y"])
+class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"}
+```
+
 ## 1 · AVONET: one row per bird
 
 AVONET publishes the raw measurements behind its species table: museum
