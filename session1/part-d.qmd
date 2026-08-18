@@ -96,19 +96,6 @@ def spiral_coords(i):
     frac = (Z[i] - start) / PERIOD_LEN[p]
     return 2 * np.pi * frac, (p - 1) + frac
 
-cat_colours = {
-    "Alkali metals": "#ff6666", "Alkaline earth metals": "#ffdead",
-    "Transition metals": "#ffc0c0", "Post-transition metals": "#cccccc",
-    "Metalloids": "#cccc99", "Nonmetals": "#a0ffa0", "Halogens": "#ffff99",
-    "Noble gases": "#c0ffff", "Lanthanides": "#ffbfff", "Actinides": "#ff99cc",
-}
-
-def cell_position(i):
-    if group[i] is not None:
-        return group[i], period[i]
-    if 57 <= Z[i] <= 71:
-        return 3 + (Z[i] - 57), 9
-    return 3 + (Z[i] - 89), 10
 ```
 
 ## 1 · An atom, in three sentences
@@ -210,9 +197,9 @@ ax.set_title("Sodium: 2, 8, 1")
 plt.show()
 ```
 
-That lone outer electron is why sodium explodes in water — and why it
-sits in the same column as lithium and potassium, which have the same
-lonely arrangement.
+That lone outer electron is why sodium reacts so violently — sometimes
+explosively — with water, and why it sits in the same column as lithium
+and potassium, which have the same lonely arrangement.
 
 ## 2 · Periodicity: the pattern in the list
 
@@ -332,8 +319,9 @@ Across each period atoms *shrink* (the growing nuclear charge pulls the
 same shell tighter), then at each new shell the size *jumps*: argon is
 96 pm, and one proton later potassium is 196 pm. The sawtooth in size
 mirrors the sawtooth in valence — same cycle, different property. This
-is the pattern Mendeleev could see in 1869 from valences and atomic
-weights alone, decades before anyone knew electrons existed.
+is the same cycle Lothar Meyer plotted as atomic volume in 1870, and
+that Mendeleev could read in 1869 from valences and atomic weights
+alone — decades before anyone knew electrons existed.
 :::
 
 ## 3 · The zoo: one list, many tables
@@ -423,7 +411,9 @@ print("✓ every noble gas sits at the end of its turn — shell closures aligne
 
 Study what your spiral wins and loses. **Wins:** the sequence is
 unbroken (no gap between Ba and La — the f-block is just part of the
-winding); the blocks appear as coloured arcs; every shell closure lands
+winding); the blocks appear as coloured arcs (the lone gold dot opening
+each purple arc is real chemistry showing through: lanthanum and
+actinium actually take a d electron before the f shell starts filling); every shell closure lands
 at the same angle, so the noble gases form a perfect ray. **Loses:**
 almost every *other* group is misaligned — lithium and potassium sit at
 different angles because their periods have different lengths, so
@@ -587,7 +577,7 @@ about what matters; the one on the wall is just the argument that won.
   rows carry no group number, following the common 18-column convention.
 - The `configuration()` function implements the idealised Madelung
   (aufbau) rule and ignores the ~20 real-world exceptions (Cr, Cu, Nb,
-  ...); none of them change any element's period or group.
+  ...); none of them change where any element sits in the table.
 - Images, all from Wikimedia Commons: Mendeleev's 1869 table (redrawn by
   NikNaks, public domain); Benfey-style element spiral by DePiep
   (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular

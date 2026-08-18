@@ -113,10 +113,10 @@ assert clean["tarsus_length_mm"].min() > 0
 print("✓ 69,509 individuals keep both measurements; all values positive, so logs are safe")
 ```
 
-We just discarded **a fifth of the dataset**. That is a legitimate cleaning
+We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
 step — but it is a decision, it changes what "n" means in every caption
 downstream, and it must be disclosed. Any figure built from this table
-should say 69,509 individuals, not 90,020.
+should say 69,509 individuals, not 90,371.
 
 ## 3 · The individual level
 
@@ -191,8 +191,8 @@ happens within groups, no more.
 
 Repeat the whole pipeline — **cleaning included** — for **wing length vs
 tarsus length**. Wing length has its own, different pattern of missing
-values, so start from `birds`, not from `clean`. Plot the species-level
-relationship and print n at each step.
+values, so start from `birds`, not from `clean`. Print n after cleaning,
+and show the species-level n in the plot title.
 
 ```{pyodide}
 #| setup: true
@@ -265,6 +265,14 @@ data than the beak comparison did — the n you report depends on the
 comparison you chose. The wing–tarsus cloud is also tighter than
 beak–tarsus: both are limb-skeleton traits that track overall body size,
 while beaks track feeding ecology.
+
+And look at the bottom of your chart: five points stranded far below the
+cloud, at log10(wing) ≈ −1. Those are the five kiwi species — flightless
+birds whose wing length is coded as **0.1 mm**, a placeholder, not a
+measurement. `dropna` cannot catch missingness that has been written down
+as a fake number. Remember the Amniote database recoding its `-999`s?
+Same disease, different symptom — and the only cure is looking at the
+chart.
 :::
 
 ## 5 · Amniote: a table where the groupby already happened
@@ -347,8 +355,8 @@ class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"
 
 ```{pyodide}
 #| exercise: ex_family
-# `pair` has columns class, order, family, genus, species,
-# log_mass, log_longevity (5,122 species). `class_colours` is defined.
+# `pair` (5,122 species) includes the columns you need: class, family,
+# log_mass, log_longevity. `class_colours` is defined.
 # 1. Aggregate to one row per family (keep class for colouring).
 # 2. Scatter family-mean log longevity against family-mean log mass, by class.
 

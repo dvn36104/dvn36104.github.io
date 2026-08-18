@@ -141,8 +141,8 @@ has no chemistry — but both have a mass and a size. If you want a chart of
 
 The catch is range. From a neutrino to the observable Universe, mass spans
 about **90 orders of magnitude** and radius about **44**. On linear axes,
-one pixel that shows the Universe would hide the entire Sun inside a
-region a trillion-trillion times smaller than the pixel. So both axes are
+a wall chart wide enough to show the Universe would have to draw the Sun
+hundreds of times smaller than a single proton. So both axes are
 logarithmic — the same move you made for allometry in Part A, stretched to
 its absolute limit. (We work in grams and centimetres, following the
 paper; on axes this wide the choice of unit just slides everything by a
@@ -297,7 +297,7 @@ plt.show()
 Suddenly the scatter has a skeleton. Everything made of atoms — viruses,
 fleas, whales, asteroids, planets, the Sun — strings out along the atomic
 line: that *was* the straight line hiding in the five familiar objects.
-The proton and the neutron star, fourteen decades apart in size, share the
+The proton and the neutron star, nineteen decades apart in size, share the
 nuclear line: **a neutron star really is matter at the density of an
 atomic nucleus, the size of a city**.
 
@@ -512,7 +512,8 @@ for rho in (1.0, 2.3e14):
     ax.plot(r_line, mass_at_density(rho, r_line), ls="--", lw=0.9,
             color="#999999", zorder=1)
 
-# every object, plus the apex
+# every object, plus the apex (marked at the Planck point, following the
+# paper — the drawn walls cross a factor of √2 away, invisible at this scale)
 draw_objects(ax)
 ax.scatter([l_p], [m_p], marker="D", s=45, color="#171717", zorder=4)
 ax.annotate("  instanton\n  (Planck scale)", (l_p, m_p), fontsize=8.5)

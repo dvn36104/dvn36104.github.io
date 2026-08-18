@@ -204,11 +204,6 @@ def paint(groups):
             colors[id(node)] = col
     return colors
 
-def divergence(root, a, b):
-    set_depths(root)
-    root_age = max(l.depth for l in root.leaves())
-    return root_age - clade(root, [a, b]).depth
-
 mini = parse_newick("((Homo:6.7, Pan:6.7):2.2, Gorilla:8.9);")
 set_depths(mini)
 
@@ -489,9 +484,10 @@ print("✓ 19 primate families from one ancestor ~74 Myr ago")
 
 Look at the tips before moving on: `Hominidae` — all great apes,
 including you — is one twig among nineteen. And `Paleopropithecidae`, the
-sloth lemurs, are **extinct**: humans arrived in Madagascar ~2,000 years
-ago and they were gone within a few centuries. A dated tree can carry
-recently-lost lineages alongside living ones.
+sloth lemurs, are **extinct**: humans reached Madagascar roughly two
+thousand years ago, and the last sloth lemurs disappeared around 500
+years ago. A dated tree can carry recently-lost lineages alongside
+living ones — though nothing in the drawing itself marks them as gone.
 
 ### Your turn: the carnivore clade {#sec-ex-carnivora}
 
@@ -625,7 +621,7 @@ root_age = max(l.depth for l in amniotes.leaves())
 
 ```{pyodide}
 #| exercise: ex_carnivora
-# `amniotes` is loaded (956 families) and `root_age` is 319.0.
+# `amniotes` is loaded (956 families) and `root_age` is ~319.
 # parse_newick, clade and draw_tree are all defined.
 
 carnivora = ______
@@ -666,8 +662,8 @@ plt.show()
 ```
 
 16 families from one ancestor ~55 Myr ago — and the tree answers
-questions the table never could. Cats' closest relatives here are
-hyaenas and mongooses, not dogs; dogs sit on the other side of the very
+questions the table never could. Cats' closest relatives here are the
+civets, hyaenas and mongooses, not dogs; dogs sit on the other side of the very
 first split, nearer to bears and seals. "Cats and dogs" feel like a
 natural pair to us, but the clade says they have been separate lineages
 almost since the dinosaurs left.
@@ -798,7 +794,7 @@ mya = np.array([1500, 1250, 1000, 750, 500, 250, 0])
 ax.set_xticks(phyla_age - mya)
 ax.set_xticklabels(mya)
 ax.set_xlabel("millions of years ago")
-for edge, lab in [(541, "Cambrian begins"), (252, "end-Permian extinction"),
+for edge, lab in [(539, "Cambrian begins"), (252, "end-Permian extinction"),
                   (66, "end-Cretaceous extinction")]:
     ax.axvline(phyla_age - edge, color="#bbbbbb", lw=0.7, zorder=0)
     ax.text(phyla_age - edge, n - 0.5, " " + lab, fontsize=7, color="#777777",
@@ -807,37 +803,39 @@ ax.set_xlim(0, phyla_age * 1.30)
 plt.show()
 ```
 
-Every animal phylum was already a separate lineage before the Cambrian
-began — the famous "explosion" shows up here as a dense burst of splits
-just *before* 541 Mya, not after. And no branch ends at either extinction
+Almost every animal phylum was already a separate lineage before the
+Cambrian began — the famous "explosion" shows up here as a dense burst
+of splits just *before* the boundary. (The one split you can see on the
+Cambrian side of the line involves `Brachiopoda-3` — an artifact of
+TimeTree splitting a group it cannot recover as one clade; see the
+serving notes.) And no branch ends at either extinction
 line: at phylum level, every lineage on this chart survived both of the
 worst catastrophes in the fossil record.
 
 Because branch lengths are time, "when did X and Y split?" is one
-subtraction — the age of their MRCA:
+subtraction — the root's age minus the depth of the two tips' MRCA:
 
 ```{pyodide}
-def divergence(root, a, b):
-    """How many Myr ago the lineages of tips a and b split."""
-    set_depths(root)
-    root_age = max(l.depth for l in root.leaves())
-    return root_age - clade(root, [a, b]).depth
-
-
 print(f"chordates vs arthropods (us vs insects): "
-      f"{divergence(phyla, 'Chordata', 'Arthropoda'):.0f} Mya")
-print(f"animals vs fungi:  {divergence(euk, 'Mammalia', 'Agaricomycetes'):.0f} Mya")
-print(f"animals vs plants: {divergence(euk, 'Mammalia', 'Magnoliopsida'):.0f} Mya")
+      f"{phyla_age - clade(phyla, ['Chordata', 'Arthropoda']).depth:.0f} Mya")
+print(f"animals vs fungi:  "
+      f"{euk_age - clade(euk, ['Mammalia', 'Agaricomycetes']).depth:.0f} Mya")
+print(f"animals vs plants: "
+      f"{euk_age - clade(euk, ['Mammalia', 'Magnoliopsida']).depth:.0f} Mya")
 print(f"animals vs choanoflagellates: "
-      f"{divergence(euk, 'Mammalia', 'Choanoflagellata'):.0f} Mya")
+      f"{euk_age - clade(euk, ['Mammalia', 'Choanoflagellata']).depth:.0f} Mya")
 ```
 
 ```{pyodide}
-assert round(divergence(euk, "Mammalia", "Agaricomycetes")) == 1275
-assert round(divergence(euk, "Mammalia", "Magnoliopsida")) == 1598
+assert round(euk_age - clade(euk, ["Mammalia", "Agaricomycetes"]).depth) == 1275
+assert round(euk_age - clade(euk, ["Mammalia", "Magnoliopsida"]).depth) == 1598
 print("✓ the animal–fungus split (1,275 Mya) is younger than the animal–plant "
       "split (1,598 Mya) — fungi really are our closer cousins")
 ```
+
+Notice we just wrote the same subtraction four times, each time reaching
+for the right root age by hand. That kind of repetition is code begging
+to be packaged into a function — which is exactly the exercise.
 
 The last line above is worth a pause: **choanoflagellates**, single-celled
 flagellates that strain bacteria out of water, split from us ~894 Mya —
@@ -849,8 +847,8 @@ remarkably like the feeding cells of a sponge.
 In Section 3 the amniote family tree put the amniote root at **319 Myr**.
 The eukaryote class tree is a completely different file, built from a
 different set of studies at a different taxonomic rank — but it contains
-`Mammalia` and `Aves` as tips. Use `divergence` to find when mammals and
-birds split according to *this* tree, and compare.
+`Mammalia` and `Aves` as tips. Write a `divergence(root, a, b)` helper
+and use it to date the mammal–bird split in *this* tree, then compare.
 
 ```{pyodide}
 #| setup: true
@@ -951,10 +949,10 @@ print(f"Amniote root in the family-level file:           319.0 Mya")
 ```
 
 ::: {.hint exercise="ex_split"}
-**Hint 1** — The split date of `a` and `b` is the age of their MRCA:
-find the node with `clade(root, [a, b])`. Its `.depth` is Myr *since the
-root*, and you want Myr *before today* — you need to convert one into
-the other.
+**Hint 1** — The split date of two tips is the age of their most recent
+common ancestor — and you already have a helper on this page that finds
+that node from two names. What it stores is measured *from the root*,
+and you want years *before today*.
 :::
 
 ::: {.hint exercise="ex_split"}
@@ -984,8 +982,8 @@ Reading a phylogeny is a visual skill worth being pedantic about:
   the root.
 - **The level of aggregation is part of the claim** — the Part A lesson
   again. At phylum level no lineage dies in the great extinctions; at
-  family level (sloth lemurs) extinction is visible everywhere. Same
-  history, different rank, different story.
+  family level, recently lost lineages like the sloth lemurs sit in the
+  tree beside the living. Same history, different rank, different story.
 - **Every internal node is an inference**, and some are genuinely
   contested — whether sponges or comb jellies split from the rest of the
   animals first is a live argument in the literature, and this page's
