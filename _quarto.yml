@@ -23,7 +23,7 @@ website:
           - href: session1/part-c.qmd
             text: "Part C · The Triangle of Everything"
           - href: session1/part-d.qmd
-            text: "Part D"
+            text: "Part D · The Periodic Spiral"
 
 format:
   live-html:

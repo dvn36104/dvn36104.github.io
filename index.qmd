@@ -25,6 +25,6 @@ Canvas as described in the relevant brief.
 - [Part A · Allometry](session1/part-a.qmd)
 - [Part B · Tree of Life](session1/part-b.qmd)
 - [Part C · The Triangle of Everything](session1/part-c.qmd)
-- [Part D](session1/part-d.qmd)
+- [Part D · The Periodic Spiral](session1/part-d.qmd)
 
-Sessions 2 and 3 will appear here when they are released.
+Session 1 is complete. Sessions 2 and 3 will appear here when they are released.
