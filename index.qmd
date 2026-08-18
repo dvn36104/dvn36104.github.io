@@ -23,7 +23,7 @@ Canvas as described in the relevant brief.
 ## Session 1
 
 - [Part A · Allometry](session1/part-a.qmd)
-- [Part B · Tree of Life](session1/part-b.qmd)
+- [Part B · The Tree of Life](session1/part-b.qmd)
 - [Part C · The Triangle of Everything](session1/part-c.qmd)
 - [Part D · The Periodic Spiral](session1/part-d.qmd)
 
