@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Session 1 · Part D – 36104 · Data Visualisation and Narratives</title>
+<title>The Periodic Spiral – 36104 · Data Visualisation and Narratives</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -78,6 +113,35 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -121,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../session1/part-d.html">
- <span class="dropdown-text">Part D</span></a>
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
   </li>  
     </ul>
   </li>
@@ -136,16 +200,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#an-atom-in-three-sentences" id="toc-an-atom-in-three-sentences" class="nav-link active" data-scroll-target="#an-atom-in-three-sentences">1 · An atom, in three sentences</a></li>
+  <li><a href="#periodicity-the-pattern-in-the-list" id="toc-periodicity-the-pattern-in-the-list" class="nav-link" data-scroll-target="#periodicity-the-pattern-in-the-list">2 · Periodicity: the pattern in the list</a></li>
+  <li><a href="#the-zoo-one-list-many-tables" id="toc-the-zoo-one-list-many-tables" class="nav-link" data-scroll-target="#the-zoo-one-list-many-tables">3 · The zoo: one list, many tables</a></li>
+  <li><a href="#build-the-spiral" id="toc-build-the-spiral" class="nav-link" data-scroll-target="#build-the-spiral">4 · Build the spiral</a></li>
+  <li><a href="#build-the-canonical-table" id="toc-build-the-canonical-table" class="nav-link" data-scroll-target="#build-the-canonical-table">5 · Build the canonical table</a></li>
+  <li><a href="#why-this-one-won" id="toc-why-this-one-won" class="nav-link" data-scroll-target="#why-this-one-won">6 · Why this one won</a></li>
+  <li><a href="#sources-and-serving-notes" id="toc-sources-and-serving-notes" class="nav-link" data-scroll-target="#sources-and-serving-notes">Sources and serving notes</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Session 1 · Part D</h1>
-<p class="subtitle lead">Placeholder — content coming soon</p>
+<h1 class="title">The Periodic Spiral</h1>
+<p class="subtitle lead">Session 1 · Part D — the periodic table as a design problem</p>
 </div>
 
 
@@ -162,23 +238,265 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page will hold Part D of the first asynchronous session. The material is being prepared; check back once it is announced on Canvas.</p>
-<p>In the meantime, here is a live code cell to confirm everything works in your browser — edit it and press <strong>Run Code</strong>:</p>
+<p>The periodic table might be the most successful data visualisation ever made: one diagram, on the wall of every chemistry room on Earth, encoding the structure of all matter. But here is the thing it is easy to forget — underneath it, the data is just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118. Every “table” you have ever seen is a <em>layout choice</em> for that list, and for 150 years chemists have argued about the right one. Spirals, circles, staircases — and the familiar castle-with-two-basements that won.</p>
+<p>In this part you will: build the physics that makes the list periodic, look at real alternative designs (and pick a favourite), construct a <strong>periodic spiral</strong> yourself, and then construct the canonical table — and ask, as designers, why it became <em>the</em> one.</p>
+<p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWVzc2FnZSA9IFwiUGFydCBEIGlzIHVuZGVyIGNvbnN0cnVjdGlvblwiXG5wcmludChtZXNzYWdlLnVwcGVyKCkpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHB5b2RpZGUuaHR0cCBpbXBvcnQgb3Blbl91cmxcblxuIyBEYXRhIGZpbGVzIGxpdmUgYmVzaWRlIHRoaXMgcGFnZTsgdGhlIFB5dGhvbiB3b3JrZXIgcnVucyBmcm9tIHNpdGVfbGlicy8uXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG5cbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgIFwiZmlndXJlLmZpZ3NpemVcIjogKDksIDUpLFxuICAgIFwiYXhlcy5zcGluZXMudG9wXCI6IEZhbHNlLFxuICAgIFwiYXhlcy5zcGluZXMucmlnaHRcIjogRmFsc2UsXG4gICAgXCJheGVzLmdyaWRcIjogVHJ1ZSxcbiAgICBcImdyaWQuYWxwaGFcIjogMC4yMixcbiAgICBcImZvbnQuc2l6ZVwiOiAxMSxcbn0pXG5wcmludChcIkVudmlyb25tZW50IHJlYWR5LlwiKSJ9
 </script>
 </div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiIyBQcmUtYnVpbGQgZXZlcnkgbmFtZSB0aGUgcGFnZSB1c2VzLCBzbyBlYWNoIGNlbGwgd29ya3Mgbm8gbWF0dGVyIHdoaWNoXG4jIGNlbGxzIHdlcmUgcnVuIGJlZm9yZSBpdC4gVGhlIHZpc2libGUgY2VsbHMgcmUtZGVyaXZlIGFsbCBvZiB0aGlzLlxudGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgICA9IFtpbnQoclswXSkgZm9yIHIgaW4gcm93c11cbnN5bWJvbCAgID0gW3JbMV0gZm9yIHIgaW4gcm93c11cbm5hbWUgICAgID0gW3JbMl0gZm9yIHIgaW4gcm93c11cbnBlcmlvZCAgID0gW2ludChyWzNdKSBmb3IgciBpbiByb3dzXVxuZ3JvdXAgICAgPSBbaW50KGZsb2F0KHJbNF0pKSBpZiByWzRdIGVsc2UgTm9uZSBmb3IgciBpbiByb3dzXVxuYmxvY2sgICAgPSBbcls1XSBmb3IgciBpbiByb3dzXVxuY2F0ZWdvcnkgPSBbcls2XSBmb3IgciBpbiByb3dzXVxucmFkaXVzICAgPSBbZmxvYXQocls3XSkgaWYgcls3XSBlbHNlIE5vbmUgZm9yIHIgaW4gcm93c11cblxuc3Vic2hlbGxzID0gc29ydGVkKCgobiwgbCkgZm9yIG4gaW4gcmFuZ2UoMSwgOCkgZm9yIGwgaW4gcmFuZ2UobikpLFxuICAgICAgICAgICAgICAgICAgIGtleT1sYW1iZGEgdDogKHRbMF0gKyB0WzFdLCB0WzBdKSlcbkxfTkFNRVMgPSBcInNwZGZcIlxuXG5kZWYgY29uZmlndXJhdGlvbih6KTpcbiAgICBjb25mLCBsZWZ0ID0gW10sIHpcbiAgICBmb3IgbiwgbCBpbiBzdWJzaGVsbHM6XG4gICAgICAgIGlmIGxlZnQgPT0gMDpcbiAgICAgICAgICAgIGJyZWFrXG4gICAgICAgIHRha2UgPSBtaW4obGVmdCwgMiAqICgyICogbCArIDEpKVxuICAgICAgICBjb25mLmFwcGVuZCgobiwgbCwgdGFrZSkpXG4gICAgICAgIGxlZnQgLT0gdGFrZVxuICAgIHJldHVybiBjb25mXG5cbmRlZiBzaGVsbHMoeik6XG4gICAgb3V0ID0ge31cbiAgICBmb3IgbiwgbCwgZSBpbiBjb25maWd1cmF0aW9uKHopOlxuICAgICAgICBvdXRbbl0gPSBvdXQuZ2V0KG4sIDApICsgZVxuICAgIHJldHVybiBvdXRcblxuZGVmIHZhbGVuY2Uoeik6XG4gICAgc2ggPSBzaGVsbHMoeilcbiAgICByZXR1cm4gc2hbbWF4KHNoKV1cblxuUEVSSU9EX0xFTiA9IHsxOiAyLCAyOiA4LCAzOiA4LCA0OiAxOCwgNTogMTgsIDY6IDMyLCA3OiAzMn1cbmJsb2NrX2NvbG91cnMgPSB7XCJzXCI6IFwiIzQyNjlkMFwiLCBcInBcIjogXCIjMzBhOGIxXCIsIFwiZFwiOiBcIiNjOThhMDBcIiwgXCJmXCI6IFwiIzk0NzVjZFwifVxuXG5kZWYgc3BpcmFsX2Nvb3JkcyhpKTpcbiAgICBwID0gcGVyaW9kW2ldXG4gICAgc3RhcnQgPSBzdW0oUEVSSU9EX0xFTltxXSBmb3IgcSBpbiByYW5nZSgxLCBwKSlcbiAgICBmcmFjID0gKFpbaV0gLSBzdGFydCkgLyBQRVJJT0RfTEVOW3BdXG4gICAgcmV0dXJuIDIgKiBucC5waSAqIGZyYWMsIChwIC0gMSkgKyBmcmFjXG5cbmNhdF9jb2xvdXJzID0ge1xuICAgIFwiQWxrYWxpIG1ldGFsc1wiOiBcIiNmZjY2NjZcIiwgXCJBbGthbGluZSBlYXJ0aCBtZXRhbHNcIjogXCIjZmZkZWFkXCIsXG4gICAgXCJUcmFuc2l0aW9uIG1ldGFsc1wiOiBcIiNmZmMwYzBcIiwgXCJQb3N0LXRyYW5zaXRpb24gbWV0YWxzXCI6IFwiI2NjY2NjY1wiLFxuICAgIFwiTWV0YWxsb2lkc1wiOiBcIiNjY2NjOTlcIiwgXCJOb25tZXRhbHNcIjogXCIjYTBmZmEwXCIsIFwiSGFsb2dlbnNcIjogXCIjZmZmZjk5XCIsXG4gICAgXCJOb2JsZSBnYXNlc1wiOiBcIiNjMGZmZmZcIiwgXCJMYW50aGFuaWRlc1wiOiBcIiNmZmJmZmZcIiwgXCJBY3RpbmlkZXNcIjogXCIjZmY5OWNjXCIsXG59XG5cbmRlZiBjZWxsX3Bvc2l0aW9uKGkpOlxuICAgIGlmIGdyb3VwW2ldIGlzIG5vdCBOb25lOlxuICAgICAgICByZXR1cm4gZ3JvdXBbaV0sIHBlcmlvZFtpXVxuICAgIGlmIDU3IDw9IFpbaV0gPD0gNzE6XG4gICAgICAgIHJldHVybiAzICsgKFpbaV0gLSA1NyksIDlcbiAgICByZXR1cm4gMyArIChaW2ldIC0gODkpLCAxMCJ9
+</script>
+</div>
+<section id="an-atom-in-three-sentences" class="level2">
+<h2 class="anchored" data-anchor-id="an-atom-in-three-sentences">1 · An atom, in three sentences</h2>
+<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus — carbon <em>is</em> “element six”. A neutral atom carries Z electrons, and they do not sit anywhere they like: they stack into <strong>shells</strong> around the nucleus, and shell <em>n</em> holds at most <span class="math inline">\(2n^2\)</span> electrons — 2, 8, 18, 32. Almost everything in chemistry follows from the third sentence: <strong>only the outermost shell touches the world</strong>, so atoms with the same outer arrangement behave alike.</p>
+<p>The data for this page is one row per element — number, symbol, name, and a few properties we will meet as we need them:</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgICA9IFtpbnQoclswXSkgZm9yIHIgaW4gcm93c11cbnN5bWJvbCAgID0gW3JbMV0gZm9yIHIgaW4gcm93c11cbm5hbWUgICAgID0gW3JbMl0gZm9yIHIgaW4gcm93c11cbnBlcmlvZCAgID0gW2ludChyWzNdKSBmb3IgciBpbiByb3dzXVxuZ3JvdXAgICAgPSBbaW50KGZsb2F0KHJbNF0pKSBpZiByWzRdIGVsc2UgTm9uZSBmb3IgciBpbiByb3dzXVxuYmxvY2sgICAgPSBbcls1XSBmb3IgciBpbiByb3dzXVxuY2F0ZWdvcnkgPSBbcls2XSBmb3IgciBpbiByb3dzXVxucmFkaXVzICAgPSBbZmxvYXQocls3XSkgaWYgcls3XSBlbHNlIE5vbmUgZm9yIHIgaW4gcm93c11cblxucHJpbnQoZlwie2xlbihaKX0gZWxlbWVudHMsIHtuYW1lWzBdfSB0byB7bmFtZVstMV19XCIpIn0=
+</script>
+</div>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihaKSA9PSAxMTggYW5kIFogPT0gbGlzdChyYW5nZSgxLCAxMTkpKVxucHJpbnQoXCLinJMgMTE4IGVsZW1lbnRzIOKAlCB0aGUgZGF0YSBpcyBsaXRlcmFsbHkganVzdCBhIHNvcnRlZCBsaXN0XCIpIn0=
+</script>
+</div>
+<p>Shells fill in a fixed order (the <em>aufbau</em> order — sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Ten lines of code capture it well enough to rebuild the entire table:</p>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3Vic2hlbGxzID0gc29ydGVkKCgobiwgbCkgZm9yIG4gaW4gcmFuZ2UoMSwgOCkgZm9yIGwgaW4gcmFuZ2UobikpLFxuICAgICAgICAgICAgICAgICAgIGtleT1sYW1iZGEgdDogKHRbMF0gKyB0WzFdLCB0WzBdKSlcbkxfTkFNRVMgPSBcInNwZGZcIlxuXG5kZWYgY29uZmlndXJhdGlvbih6KTpcbiAgICBcIlwiXCJJZGVhbGlzZWQgc2hlbGwgZmlsbGluZzogbGlzdCBvZiAobiwgbCwgZWxlY3Ryb25zKS5cIlwiXCJcbiAgICBjb25mLCBsZWZ0ID0gW10sIHpcbiAgICBmb3IgbiwgbCBpbiBzdWJzaGVsbHM6XG4gICAgICAgIGlmIGxlZnQgPT0gMDpcbiAgICAgICAgICAgIGJyZWFrXG4gICAgICAgIHRha2UgPSBtaW4obGVmdCwgMiAqICgyICogbCArIDEpKSAgICMgc3ViLXNoZWxsIGNhcGFjaXR5IDIoMmwrMSlcbiAgICAgICAgY29uZi5hcHBlbmQoKG4sIGwsIHRha2UpKVxuICAgICAgICBsZWZ0IC09IHRha2VcbiAgICByZXR1cm4gY29uZlxuXG5kZWYgc2hlbGxzKHopOlxuICAgIFwiXCJcIkVsZWN0cm9ucyBwZXIgc2hlbGwgbnVtYmVyIG4uXCJcIlwiXG4gICAgb3V0ID0ge31cbiAgICBmb3IgbiwgbCwgZSBpbiBjb25maWd1cmF0aW9uKHopOlxuICAgICAgICBvdXRbbl0gPSBvdXQuZ2V0KG4sIDApICsgZVxuICAgIHJldHVybiBvdXRcblxuZGVmIHZhbGVuY2Uoeik6XG4gICAgXCJcIlwiRWxlY3Ryb25zIGluIHRoZSBvdXRlcm1vc3Qgc2hlbGwuXCJcIlwiXG4gICAgc2ggPSBzaGVsbHMoeilcbiAgICByZXR1cm4gc2hbbWF4KHNoKV1cblxucHJpbnQoXCJzb2RpdW06XCIsIFwiIFwiLmpvaW4oZlwie259e0xfTkFNRVNbbF19e2V9XCIgZm9yIG4sIGwsIGUgaW4gY29uZmlndXJhdGlvbigxMSkpKVxucHJpbnQoXCJzb2RpdW0gYnkgc2hlbGw6XCIsIHNoZWxscygxMSkpIn0=
+</script>
+</div>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkgPT0gezE6IDIsIDI6IDgsIDM6IDF9XG5hc3NlcnQgc3VtKGUgZm9yIF8sIF8sIGUgaW4gY29uZmlndXJhdGlvbigyNikpID09IDI2XG5hc3NlcnQgWzIgKiBuKioyIGZvciBuIGluICgxLCAyLCAzLCA0KV0gPT0gWzIsIDgsIDE4LCAzMl1cbnByaW50KFwi4pyTIHNvZGl1bSBpcyAyLCA4LCAxIOKAlCBhbmQgc2hlbGwgY2FwYWNpdGllcyBhcmUgMm7CslwiKSJ9
+</script>
+</div>
+<p>(Real atoms have about twenty famous exceptions — chromium and copper borrow an electron between sub-shells — which we cheerfully ignore: the idealised rule is what the table’s <em>shape</em> encodes.)</p>
+<p>Here is sodium drawn the way every textbook draws it — and note that this picture is a <em>diagram</em>, not a photograph of anything:</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg1LCA1KSlcbmF4LnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXguYXhpcyhcIm9mZlwiKVxuYXguc2NhdHRlcihbMF0sIFswXSwgcz0yMDAsIGNvbG9yPVwiIzE3MTcxN1wiLCB6b3JkZXI9MylcbmF4LmFubm90YXRlKFwiTmFcIiwgKDAsIDApLCBjb2xvcj1cIndoaXRlXCIsIGhhPVwiY2VudGVyXCIsIHZhPVwiY2VudGVyXCIsXG4gICAgICAgICAgICBmb250c2l6ZT04LCB6b3JkZXI9NClcbmZvciBuLCBjb3VudCBpbiBzaGVsbHMoMTEpLml0ZW1zKCk6XG4gICAgYXguYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCBuLCBmaWxsPUZhbHNlLCBjb2xvcj1cIiNiYmJiYmJcIiwgbHc9MSkpXG4gICAgYW5nID0gbnAubGluc3BhY2UoMCwgMiAqIG5wLnBpLCBjb3VudCwgZW5kcG9pbnQ9RmFsc2UpICsgbnAucGkgLyAyXG4gICAgYXguc2NhdHRlcihuICogbnAuY29zKGFuZyksIG4gKiBucC5zaW4oYW5nKSwgcz00NSwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxubGltID0gbWF4KHNoZWxscygxMSkpICsgMC42XG5heC5zZXRfeGxpbSgtbGltLCBsaW0pOyBheC5zZXRfeWxpbSgtbGltLCBsaW0pXG5heC5zZXRfdGl0bGUoXCJTb2RpdW06IDIsIDgsIDFcIilcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>That lone outer electron is why sodium explodes in water — and why it sits in the same column as lithium and potassium, which have the same lonely arrangement.</p>
+</section>
+<section id="periodicity-the-pattern-in-the-list" class="level2">
+<h2 class="anchored" data-anchor-id="periodicity-the-pattern-in-the-list">2 · Periodicity: the pattern in the list</h2>
+<p>Walk the list from Z = 1 upward and watch only the outer shell. It fills… closes… and starts again:</p>
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoienogPSBsaXN0KHJhbmdlKDEsIDM5KSlcbnZ2ID0gW3ZhbGVuY2UoeikgZm9yIHogaW4genpdXG5cbmZpZywgYXggPSBwbHQuc3VicGxvdHMoZmlnc2l6ZT0oOSwgNC4yKSlcbmF4LnBsb3QoenosIHZ2LCBcIi1cIiwgY29sb3I9XCIjYmJiYmJiXCIsIGx3PTEpXG5heC5zY2F0dGVyKHp6LCB2diwgcz0yOCwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxuZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYpOiAgICAgICAgICAgICAgICAgICAgICAgIyBzaGVsbCBjbG9zdXJlczogbm9ibGUgZ2FzZXNcbiAgICBheC5zY2F0dGVyKFt6XSwgW3ZhbGVuY2UoeildLCBzPTYwLCBjb2xvcj1cIiNlNjY4NTJcIiwgem9yZGVyPTQpXG4gICAgYXguYW5ub3RhdGUoXCIgXCIgKyBzeW1ib2xbeiAtIDFdLCAoeiwgdmFsZW5jZSh6KSksIGZvbnRzaXplPTksIGNvbG9yPVwiI2U2Njg1MlwiKVxuYXguc2V0X3hsYWJlbChcImF0b21pYyBudW1iZXIgWlwiKVxuYXguc2V0X3lsYWJlbChcImVsZWN0cm9ucyBpbiBvdXRlcm1vc3Qgc2hlbGxcIilcbmF4LnNldF90aXRsZShcIlRoZSBvdXRlciBzaGVsbCBmaWxscywgY2xvc2VzLCBhbmQgc3RhcnRzIGFnYWluXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICBhc3NlcnQgdmFsZW5jZSh6KSA9PSAoMiBpZiB6ID09IDIgZWxzZSA4KSAgICMgY2xvc2VkIHNoZWxsczogbm9ibGUgZ2FzZXNcbmZvciB6IGluICgzLCAxMSwgMTksIDM3LCA1NSwgODcpOlxuICAgIGFzc2VydCB2YWxlbmNlKHopID09IDEgICAgICAgICAgICAgICAgICAgICAgIyBmcmVzaCBzaGVsbHM6IGFsa2FsaSBtZXRhbHNcbnByaW50KFwi4pyTIHNoZWxsIGNsb3N1cmVzIGFuZCBmcmVzaCBzdGFydHMgcmVjdXIgYWxsIHRoZSB3YXkgdG8gWiA9IDExOFwiKSJ9
+</script>
+</div>
+<p>This sawtooth <strong>is</strong> the periodic law. Every row of any periodic table is one tooth; every column collects atoms caught at the same point of the cycle — the <strong>groups</strong>. Group 1 (one outer electron) are the violent alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing; group 17, one electron short of closing, are the halogens that grab one from anything nearby.</p>
+<p>And periodicity is not just electron bookkeeping — it shows up in every measurable property. Prove it to yourself:</p>
+<section id="sec-ex-radius" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ex-radius">Your turn: the size of atoms</h3>
+<p>The data column <code>radius</code> holds each element’s covalent radius in picometres. Plot radius against Z for all 118 elements, joined by a faint line, and highlight the <strong>alkali metals</strong> (Z = 3, 11, 19, 37, 55, 87) in one colour and the <strong>noble gases</strong> (Z = 2, 10, 18, 36, 54, 86) in another. What does the pattern do at each shell closure?</p>
+<script type="exercise-setup-ex_radius-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIiwic2V0dXAiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGpzXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gcHlvZGlkZS5odHRwIGltcG9ydCBvcGVuX3VybFxuREFUQV9VUkwgPSBqcy5sb2NhdGlvbi5ocmVmLnNwbGl0KFwic2l0ZV9saWJzL1wiKVswXSArIFwiZGF0YS9cIlxudGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgPSBbaW50KHJbMF0pIGZvciByIGluIHJvd3NdXG5zeW1ib2wgPSBbclsxXSBmb3IgciBpbiByb3dzXVxucmFkaXVzID0gW2Zsb2F0KHJbN10pIGlmIHJbN10gZWxzZSBOb25lIGZvciByIGluIHJvd3NdXG5wbHQucmNQYXJhbXMudXBkYXRlKHtcbiAgICBcImF4ZXMuc3BpbmVzLnRvcFwiOiBGYWxzZSwgXCJheGVzLnNwaW5lcy5yaWdodFwiOiBGYWxzZSxcbiAgICBcImF4ZXMuZ3JpZFwiOiBUcnVlLCBcImdyaWQuYWxwaGFcIjogMC4yMiwgXCJmb250LnNpemVcIjogMTEsXG59KSJ9
+</script>
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNvZGUiOiIjIGBaYCwgYHN5bWJvbGAgYW5kIGByYWRpdXNgIGFyZSBsb2FkZWQgZm9yIGFsbCAxMTggZWxlbWVudHMuXG5BTEtBTEkgPSAoMywgMTEsIDE5LCAzNywgNTUsIDg3KVxuTk9CTEUgID0gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NilcblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDQuNikpXG5fX19fX19cblxuYXguc2V0X3hsYWJlbChcImF0b21pYyBudW1iZXIgWlwiKVxuYXguc2V0X3lsYWJlbChcImNvdmFsZW50IHJhZGl1cyAocG0pXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
+<p><strong>Hint 1</strong> — Three layers: a faint <code>ax.plot(Z, radius, ...)</code> line, an <code>ax.scatter</code> of all the points, then two more scatters for the highlighted sets. <code>radius[z - 1]</code> is the radius of element <code>z</code>.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
+<p><strong>Hint 2</strong> — For the highlights, loop <code>for z in ALKALI: ax.scatter([z], [radius[z - 1]], ...)</code>, and add <code>ax.annotate(symbol[z - 1], ...)</code> if you want labels.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_radius">
+<p><strong>Fully worked solution:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ALKALI <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">19</span>, <span class="dv">37</span>, <span class="dv">55</span>, <span class="dv">87</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>NOBLE  <span class="op">=</span> (<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">18</span>, <span class="dv">36</span>, <span class="dv">54</span>, <span class="dv">86</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">9.5</span>, <span class="fl">4.6</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ax.plot(Z, radius, <span class="st">"-"</span>, color<span class="op">=</span><span class="st">"#cccccc"</span>, lw<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(Z, radius, s<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">"#666666"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> ALKALI:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter([z], [radius[z <span class="op">-</span> <span class="dv">1</span>]], s<span class="op">=</span><span class="dv">55</span>, color<span class="op">=</span><span class="st">"#4269d0"</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">" "</span> <span class="op">+</span> symbol[z <span class="op">-</span> <span class="dv">1</span>], (z, radius[z <span class="op">-</span> <span class="dv">1</span>]), fontsize<span class="op">=</span><span class="dv">9</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">"#4269d0"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> NOBLE:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ax.scatter([z], [radius[z <span class="op">-</span> <span class="dv">1</span>]], s<span class="op">=</span><span class="dv">55</span>, color<span class="op">=</span><span class="st">"#e66852"</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"atomic number Z"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"covalent radius (pm)"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Atomic size is periodic: peaks at the alkali metals"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter), then at each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth in size mirrors the sawtooth in valence — same cycle, different property. This is the pattern Mendeleev could see in 1869 from valences and atomic weights alone, decades before anyone knew electrons existed.</p>
+</div>
+</section>
+</section>
+<section id="the-zoo-one-list-many-tables" class="level2">
+<h2 class="anchored" data-anchor-id="the-zoo-one-list-many-tables">3 · The zoo: one list, many tables</h2>
+<p>If the data is a cycle, should its picture be a <em>grid</em> — or should it wind? Chemists have proposed hundreds of layouts. Here are four real ones. Look at each and ask the same two questions: <em>what does this design make easy to see?</em> and <em>what does it hide?</em></p>
+<p><strong>Mendeleev’s own table (1869).</strong> The original. Periods run <em>down</em> the columns and groups run across the rows — transposed from the modern convention — with gaps deliberately left for elements he predicted must exist (they did: gallium, scandium, germanium).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/mendeleev-1869.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+<p><strong>Benfey’s spiral (1964).</strong> The list winds continuously outward from hydrogen; the transition metals and the f-block bulge out as peninsulas. Nothing is ever cut: element 56 is <em>next to</em> element 57.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/benfey-spiral.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+<p><strong>Janet’s left-step table (1928).</strong> Rows end where shells <em>actually</em> close in the aufbau order, so the blocks form perfect staircase steps — physicists tend to love it; chemists complain that helium ends up above beryllium.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/janet-left-step.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+<p><strong>A circular table.</strong> Periods as concentric rings — the cycle is explicit, at the price of the outer rings stretching and the inner ones cramping.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/circular-table.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Pause: your preference">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Pause: your preference
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before reading on, decide — seriously, pick one — which of the four you would hang in a classroom, and write down (a note on paper is fine) your one-sentence reason. Then note one thing your favourite makes <em>harder</em> to see than the standard table does. You will need both notes at the end of the page.</p>
+</div>
+</div>
+</section>
+<section id="build-the-spiral" class="level2">
+<h2 class="anchored" data-anchor-id="build-the-spiral">4 · Build the spiral</h2>
+<p>The spiral’s claim is that the element list is a <strong>cycle with no breaks</strong> — so draw it as one. Give every period one full turn: an element’s angle is its <em>fraction of the way through its period</em>, and its radius grows steadily outward. Colour by <strong>block</strong> (which kind of sub-shell is filling — the four “districts” of the table):</p>
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiUEVSSU9EX0xFTiA9IHsxOiAyLCAyOiA4LCAzOiA4LCA0OiAxOCwgNTogMTgsIDY6IDMyLCA3OiAzMn1cbmJsb2NrX2NvbG91cnMgPSB7XCJzXCI6IFwiIzQyNjlkMFwiLCBcInBcIjogXCIjMzBhOGIxXCIsIFwiZFwiOiBcIiNjOThhMDBcIiwgXCJmXCI6IFwiIzk0NzVjZFwifVxuXG5kZWYgc3BpcmFsX2Nvb3JkcyhpKTpcbiAgICBcIlwiXCJBbmdsZSBhbmQgcmFkaXVzIGZvciBlbGVtZW50IGluZGV4IGkuIE9uZSBmdWxsIHR1cm4gcGVyIHBlcmlvZC5cIlwiXCJcbiAgICBwID0gcGVyaW9kW2ldXG4gICAgc3RhcnQgPSBzdW0oUEVSSU9EX0xFTltxXSBmb3IgcSBpbiByYW5nZSgxLCBwKSkgICAjIGxhc3QgWiBiZWZvcmUgcGVyaW9kIHBcbiAgICBmcmFjID0gKFpbaV0gLSBzdGFydCkgLyBQRVJJT0RfTEVOW3BdICAgICAgICAgICAgICMgMCDihpIgMSBhY3Jvc3MgdGhlIHBlcmlvZFxuICAgIHJldHVybiAyICogbnAucGkgKiBmcmFjLCAocCAtIDEpICsgZnJhY1xuXG5maWcgPSBwbHQuZmlndXJlKGZpZ3NpemU9KDkuNSwgOS41KSlcbmF4ID0gZmlnLmFkZF9zdWJwbG90KHByb2plY3Rpb249XCJwb2xhclwiKVxudGhldGFzLCBycyA9IHppcCgqKHNwaXJhbF9jb29yZHMoaSkgZm9yIGkgaW4gcmFuZ2UoMTE4KSkpXG5heC5wbG90KHRoZXRhcywgcnMsIGNvbG9yPVwiI2RkZGRkZFwiLCBsdz0wLjcsIHpvcmRlcj0xKVxuZm9yIGkgaW4gcmFuZ2UoMTE4KTpcbiAgICBheC5zY2F0dGVyKHRoZXRhc1tpXSwgcnNbaV0sIHM9NDAsIGNvbG9yPWJsb2NrX2NvbG91cnNbYmxvY2tbaV1dLCB6b3JkZXI9MylcbiAgICBheC5hbm5vdGF0ZShzeW1ib2xbaV0sICh0aGV0YXNbaV0sIHJzW2ldKSwgZm9udHNpemU9NC41LCBoYT1cImNlbnRlclwiLFxuICAgICAgICAgICAgICAgIHZhPVwiY2VudGVyXCIsIGNvbG9yPVwid2hpdGVcIiwgem9yZGVyPTQpXG5heC5zZXRfeHRpY2tzKFtdKTsgYXguc2V0X3l0aWNrcyhbXSlcbmF4LnNwaW5lc1tcInBvbGFyXCJdLnNldF92aXNpYmxlKEZhbHNlKVxuZnJvbSBtYXRwbG90bGliLmxpbmVzIGltcG9ydCBMaW5lMkRcbmF4LmxlZ2VuZChoYW5kbGVzPVtMaW5lMkQoW10sIFtdLCBtYXJrZXI9XCJvXCIsIGxzPVwiXCIsIGNvbG9yPWMsIGxhYmVsPWZcIntifS1ibG9ja1wiKVxuICAgICAgICAgICAgICAgICAgIGZvciBiLCBjIGluIGJsb2NrX2NvbG91cnMuaXRlbXMoKV0sXG4gICAgICAgICAgbG9jPVwidXBwZXIgbGVmdFwiLCBiYm94X3RvX2FuY2hvcj0oLTAuMSwgMS4wNSksIGZyYW1lb249RmFsc2UsIGZvbnRzaXplPTkpXG5heC5zZXRfdGl0bGUoXCJPbmUgdHVybiBwZXIgcGVyaW9kOiB0aGUgc2VxdWVuY2UgbmV2ZXIgYnJlYWtzXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICB0aCwgXyA9IHNwaXJhbF9jb29yZHMoeiAtIDEpXG4gICAgYXNzZXJ0IGFicyh0aCAtIDIgKiBucC5waSkgPCAxZS05XG5wcmludChcIuKckyBldmVyeSBub2JsZSBnYXMgc2l0cyBhdCB0aGUgZW5kIG9mIGl0cyB0dXJuIOKAlCBzaGVsbCBjbG9zdXJlcyBhbGlnbmVkXCIpIn0=
+</script>
+</div>
+<p>Study what your spiral wins and loses. <strong>Wins:</strong> the sequence is unbroken (no gap between Ba and La — the f-block is just part of the winding); the blocks appear as coloured arcs; every shell closure lands at the same angle, so the noble gases form a perfect ray. <strong>Loses:</strong> almost every <em>other</em> group is misaligned — lithium and potassium sit at different angles because their periods have different lengths, so “reading down a group”, the single most useful act chemists perform, no longer works. Benfey’s design (above) fixes this by distorting the spiral into bulges — buying back group alignment by spending the clean geometry. Every design pays for what it shows.</p>
+</section>
+<section id="build-the-canonical-table" class="level2">
+<h2 class="anchored" data-anchor-id="build-the-canonical-table">5 · Build the canonical table</h2>
+<p>Now the winner. Its layout rule is: <strong>new row at every shell closure, and columns collect equal outer-shell counts</strong> — rows are periods, columns are groups. Watch what happens with just the first 18 elements:</p>
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDIuNikpXG5mb3IgaSBpbiByYW5nZSgxOCk6XG4gICAgeCwgeSA9IGdyb3VwW2ldLCAtcGVyaW9kW2ldXG4gICAgYXguYWRkX3BhdGNoKHBsdC5SZWN0YW5nbGUoKHggLSAwLjQ1LCB5IC0gMC40NSksIDAuOSwgMC45LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhY2Vjb2xvcj1cIiNlZWYxZjZcIiwgZWRnZWNvbG9yPVwiIzg4ODg4OFwiKSlcbiAgICBheC50ZXh0KHgsIHksIHN5bWJvbFtpXSwgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9MTEpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0zLjgsIC0wLjIpXG5heC5zZXRfYXNwZWN0KFwiZXF1YWxcIik7IGF4LmF4aXMoXCJvZmZcIilcbmF4LnNldF90aXRsZShcIlBlcmlvZHMgYXMgcm93cywgZ3JvdXBzIGFzIGNvbHVtbnMg4oCUIGFuZCBhIGdhcCBhcHBlYXJzXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>There it is: the strange moat between beryllium and boron. The gap exists because period 4 will need eighteen columns while periods 2 and 3 only have eight members — the layout reserves space for columns that do not exist <em>yet</em>. That emptiness is the design’s masterstroke: gaps in a grid are <strong>predictions</strong>. Mendeleev’s version of this move — holes left under aluminium and silicon — told the world exactly what to look for, and gallium (1875) and germanium (1886) walked into them with almost exactly the predicted properties. Few charts in history have predicted anything; this one predicted <em>matter</em>.</p>
+<section id="sec-ex-table" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ex-table">Your turn: the whole thing</h3>
+<p>Build the full canonical table, all 118 elements. You have <code>Z</code>, <code>symbol</code>, <code>period</code>, <code>group</code> and <code>category</code> (plus <code>cat_colours</code>, the conventional colour for each category). Two things need decisions:</p>
+<ol type="1">
+<li><strong>Main grid:</strong> elements with a <code>group</code> go at column <code>group</code>, row <code>period</code> — exactly like the 18-element version.</li>
+<li><strong>The f-block:</strong> the lanthanides (Z 57–71) and actinides (Z 89–103) have <code>group = None</code>. The canonical design exiles them to two <strong>footnote rows</strong> below the table. Place them there — 15 per row — and choose the rows’ vertical position yourself.</li>
+</ol>
+<p>Colour every cell by its category, put the symbol (and, if you like, Z) in each cell, and add a legend.</p>
+<script type="exercise-setup-ex_table-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUiLCJzZXR1cCI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQganNcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG50ZXh0ID0gb3Blbl91cmwoREFUQV9VUkwgKyBcImVsZW1lbnRzLmNzdlwiKS5yZWFkKClcbnJvd3MgPSBbbGluZS5zcGxpdChcIixcIikgZm9yIGxpbmUgaW4gdGV4dC5zdHJpcCgpLnNwbGl0KFwiXFxuXCIpWzE6XV1cblogICAgICAgID0gW2ludChyWzBdKSBmb3IgciBpbiByb3dzXVxuc3ltYm9sICAgPSBbclsxXSBmb3IgciBpbiByb3dzXVxucGVyaW9kICAgPSBbaW50KHJbM10pIGZvciByIGluIHJvd3NdXG5ncm91cCAgICA9IFtpbnQoZmxvYXQocls0XSkpIGlmIHJbNF0gZWxzZSBOb25lIGZvciByIGluIHJvd3NdXG5jYXRlZ29yeSA9IFtyWzZdIGZvciByIGluIHJvd3NdXG5jYXRfY29sb3VycyA9IHtcbiAgICBcIkFsa2FsaSBtZXRhbHNcIjogXCIjZmY2NjY2XCIsIFwiQWxrYWxpbmUgZWFydGggbWV0YWxzXCI6IFwiI2ZmZGVhZFwiLFxuICAgIFwiVHJhbnNpdGlvbiBtZXRhbHNcIjogXCIjZmZjMGMwXCIsIFwiUG9zdC10cmFuc2l0aW9uIG1ldGFsc1wiOiBcIiNjY2NjY2NcIixcbiAgICBcIk1ldGFsbG9pZHNcIjogXCIjY2NjYzk5XCIsIFwiTm9ubWV0YWxzXCI6IFwiI2EwZmZhMFwiLCBcIkhhbG9nZW5zXCI6IFwiI2ZmZmY5OVwiLFxuICAgIFwiTm9ibGUgZ2FzZXNcIjogXCIjYzBmZmZmXCIsIFwiTGFudGhhbmlkZXNcIjogXCIjZmZiZmZmXCIsIFwiQWN0aW5pZGVzXCI6IFwiI2ZmOTljY1wiLFxufVxucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XCJmb250LnNpemVcIjogMTF9KSJ9
+</script>
+<div>
+<div id="pyodide-16" class="exercise-cell">
+
+</div>
+<script type="pyodide-16-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUifSwiY29kZSI6IiMgWiwgc3ltYm9sLCBwZXJpb2QsIGdyb3VwLCBjYXRlZ29yeSBhbmQgY2F0X2NvbG91cnMgYXJlIGxvYWRlZC5cbiMgV3JpdGUgY2VsbF9wb3NpdGlvbihpKSAtPiAoeCwgeSksIHRoZW4gZHJhdyBhbGwgMTE4IGNlbGxzLlxuXG5kZWYgY2VsbF9wb3NpdGlvbihpKTpcbiAgICBfX19fX19cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSgxMiwgNy4yKSlcbmZvciBpIGluIHJhbmdlKDExOCk6XG4gICAgeCwgeSA9IGNlbGxfcG9zaXRpb24oaSlcbiAgICBheC5hZGRfcGF0Y2gocGx0LlJlY3RhbmdsZSgoeCAtIDAuNDcsIC15IC0gMC40NyksIDAuOTQsIDAuOTQsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFjZWNvbG9yPWNhdF9jb2xvdXJzW2NhdGVnb3J5W2ldXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlZGdlY29sb3I9XCIjNzc3Nzc3XCIsIGx3PTAuNikpXG4gICAgYXgudGV4dCh4LCAteSwgc3ltYm9sW2ldLCBoYT1cImNlbnRlclwiLCB2YT1cImNlbnRlclwiLCBmb250c2l6ZT04LjUpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0xMSwgMClcbmF4LnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXguYXhpcyhcIm9mZlwiKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
+<p><strong>Hint 1</strong> — <code>cell_position</code> has three cases: a real <code>group</code> (use it with <code>period</code> directly), a lanthanide (57 ≤ Z ≤ 71), and an actinide. The footnote rows need y values <em>below</em> row 7 — leave a blank row as a visual separator.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
+<p><strong>Hint 2</strong> — Within a footnote row the column should step with Z: something of the shape <code>constant + (Z[i] - 57)</code> spreads the fifteen lanthanides across fifteen consecutive columns. Pick the constant so they sit roughly under the middle of the table.</p>
+</div>
+<p><strong>How to know you got it.</strong> No solution button — this table is yours. Hold your result next to any printed periodic table: you should count <strong>18 columns</strong>, <strong>7 main rows</strong>, and <strong>two footnote rows of 15</strong>; hydrogen alone at top-left, helium at top-right above the noble-gas column, and the colour regions forming solid blocks, not confetti. Two things are worth noticing about what you just built. First, you never told it any chemistry — <code>group</code> and <code>period</code> came from shell-counting, yet sodium landed under lithium. Second, look at the two rows you exiled: the footnote is a <em>lie of layout</em> (element 57 is not really “below” the table — it belongs between 56 and 72), told to keep the table printable. The spiral you built in Section 4 tells the truth about continuity and lies about groups; the grid does the opposite. Which lie you prefer is a design decision — now check the notes you made in Section 3 and see whether you still agree with yourself.</p>
+</section>
+</section>
+<section id="why-this-one-won" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-one-won">6 · Why this one won</h2>
+<p>The canonical table beat the spirals for reasons worth naming, because they are the same reasons any visualisation wins:</p>
+<ul>
+<li><strong>It aligns the most-used comparison.</strong> Chemists constantly reason “down a group” — same outer shell, same reactions. The grid makes that a straight vertical scan; the spiral makes it a hunt.</li>
+<li><strong>It is rectangular.</strong> It fits pages, posters, screens and blackboards; every cell has room for symbol, number, and mass. Most spiral designs waste half their canvas and cramp their inner turns.</li>
+<li><strong>Its gaps did work.</strong> Empty grid cells are legible predictions; a spiral closes seamlessly over its own ignorance.</li>
+<li><strong>And then it won for winning.</strong> After a century on every classroom wall, familiarity itself became the strongest argument — a standard everyone can read beats a design a few prefer (ask the QWERTY keyboard).</li>
+</ul>
+<p>But “won” does not mean “true”. The grid’s clean rows are punctured by a gap that means nothing physical, its f-block sits in exile, and the cycle at the heart of the periodic law — the thing your sawtooth plots showed most clearly — is invisible unless you already know to see it. The spiral shows the cycle and hides the groups. Janet’s steps show the physics and misplace helium. Every layout of this list is an argument about what matters; the one on the wall is just the argument that won.</p>
+</section>
+<section id="sources-and-serving-notes" class="level2">
+<h2 class="anchored" data-anchor-id="sources-and-serving-notes">Sources and serving notes</h2>
+<ul>
+<li><code>elements.csv</code> is generated from the <a href="https://mendeleev.readthedocs.io/">mendeleev</a> Python package (v1.2): IUPAC groups and periods, Pyykkö covalent radii (all 118 elements, one consistent convention), Pauling electronegativities. The f-block rows carry no group number, following the common 18-column convention.</li>
+<li>The <code>configuration()</code> function implements the idealised Madelung (aufbau) rule and ignores the ~20 real-world exceptions (Cr, Cu, Nb, …); none of them change any element’s period or group.</li>
+<li>Images, all from Wikimedia Commons: Mendeleev’s 1869 table (redrawn by NikNaks, public domain); Benfey-style element spiral by DePiep (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular table by Cbuckley (CC BY 3.0).</li>
+<li>Category colours follow the long-standing Wikipedia convention — used here deliberately: this page is about <em>the</em> canonical design, and its colours are part of the canon. Note they are not a colour-blind-safe palette; the table survives that because position and text labels, not colour, carry the structure — worth noticing as a design lesson in itself.</li>
+</ul>
 
 
 <script type="pyodide-data">
-eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJtYXRwbG90bGliIl19fQ==
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTE2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTYtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTYsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzE2ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xNi5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE0ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xNC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTE0LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE0LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEzID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEzLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEzLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEyID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEyLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTExLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS05LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTgtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS04LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS01LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJfcHlvZGlkZV92YWx1ZV8yID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0yLWNvbnRlbnRzXCIsXG4gICAgZWNobzogdHJ1ZSxcbiAgICBvdXRwdXQ6IHRydWVcbiAgfSwgYmxvY2suYXR0cik7XG5cbiAgLy8gRXZhbHVhdGUgdGhlIHByb3ZpZGVkIFB5dGhvbiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHB5b2RpZGVPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMlwiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjJcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il9weW9kaWRlX3ZhbHVlXzEgPSB7XG4gIGNvbnN0IHsgaGlnaGxpZ2h0UHl0aG9uLCBiNjREZWNvZGV9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXZhbHVhdGlvbiBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHtcbiAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUHl0aG9uIGNvZGVcbiAgY29uc3QgcmVzdWx0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKHtjb2RlOiBibG9jay5jb2RlLCBvcHRpb25zfSwge30pO1xuXG4gIC8vIEVhcmx5IHlpZWxkIHdoaWxlIHdlIHdhaXQgZm9yIHRoZSBmaXJzdCBldmFsdWF0aW9uIGFuZCByZW5kZXJcbiAgaWYgKG9wdGlvbnMub3V0cHV0ICYmICEoXCIxXCIgaW4gcHlvZGlkZU9qcy5yZW5kZXJlZE9qcykpIHtcbiAgICBjb25zdCBjb250YWluZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuICAgIGNvbnN0IHNwaW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuXG4gICAgaWYgKG9wdGlvbnMuZWNobykge1xuICAgICAgLy8gU2hvdyBvdXRwdXQgYXMgaGlnaGxpZ2h0ZWQgc291cmNlXG4gICAgICBjb25zdCBwcmVFbGVtID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInByZVwiKTtcbiAgICAgIGNvbnRhaW5lci5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGVcIjtcbiAgICAgIHByZUVsZW0uY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlIHB5dGhvblwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChoaWdobGlnaHRQeXRob24oYmxvY2suY29kZSkpO1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItZ3JvdyBzcGlubmVyLWdyb3ctc20gbS0yIHBvc2l0aW9uLWFic29sdXRlIHRvcC0wIGVuZC0wXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHByZUVsZW0pO1xuICAgIH0gZWxzZSB7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ib3JkZXIgc3Bpbm5lci1ib3JkZXItc21cIjtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICB9XG5cbiAgICB5aWVsZCBjb250YWluZXI7XG4gIH1cblxuICBweW9kaWRlT2pzLnJlbmRlcmVkT2pzW1wiMVwiXSA9IHRydWU7XG4gIHlpZWxkIGF3YWl0IHJlc3VsdDtcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -191,6 +509,7 @@ eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2RO
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
