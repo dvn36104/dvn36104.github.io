@@ -302,7 +302,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2xlYW4gPSBiaXJkcy5kcm9w
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihjbGVhbikgPT0gNjk1MDlcbmFzc2VydCBjbGVhbltcInNwZWNpZXNcIl0ubnVuaXF1ZSgpID09IDEwNjAxXG5hc3NlcnQgY2xlYW5bXCJiZWFrX2xlbmd0aF9jdWxtZW5fbW1cIl0ubWluKCkgPiAwXG5hc3NlcnQgY2xlYW5bXCJ0YXJzdXNfbGVuZ3RoX21tXCJdLm1pbigpID4gMFxucHJpbnQoXCLinJMgNjksNTA5IGluZGl2aWR1YWxzIGtlZXAgYm90aCBtZWFzdXJlbWVudHM7IGFsbCB2YWx1ZXMgcG9zaXRpdmUsIHNvIGxvZ3MgYXJlIHNhZmVcIikifQ==
 </script>
 </div>
-<p>We just discarded <strong>a fifth of the dataset</strong>. That is a legitimate cleaning step — but it is a decision, it changes what “n” means in every caption downstream, and it must be disclosed. Any figure built from this table should say 69,509 individuals, not 90,020.</p>
+<p>We just discarded <strong>nearly a quarter of the dataset</strong>. That is a legitimate cleaning step — but it is a decision, it changes what “n” means in every caption downstream, and it must be disclosed. Any figure built from this table should say 69,509 individuals, not 90,371.</p>
 </section>
 <section id="the-individual-level" class="level2">
 <h2 class="anchored" data-anchor-id="the-individual-level">3 · The individual level</h2>
@@ -354,7 +354,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheGVzID0gcGx0LnN1
 <p>Averaging removed 59,000 points but the cloud barely tightened (r ≈ 0.61 → 0.62). Within-species measurement scatter is small compared to the real, ecological differences in beak shape <em>between</em> species — hummingbirds, finches and curlews genuinely sit in different places. Aggregation is not a magic de-noiser: it removes exactly the variation that happens within groups, no more.</p>
 <section id="sec-ex-wing" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ex-wing">Your turn: a different trait pair</h3>
-<p>Repeat the whole pipeline — <strong>cleaning included</strong> — for <strong>wing length vs tarsus length</strong>. Wing length has its own, different pattern of missing values, so start from <code>birds</code>, not from <code>clean</code>. Plot the species-level relationship and print n at each step.</p>
+<p>Repeat the whole pipeline — <strong>cleaning included</strong> — for <strong>wing length vs tarsus length</strong>. Wing length has its own, different pattern of missing values, so start from <code>birds</code>, not from <code>clean</code>. Print n after cleaning, and show the species-level n in the plot title.</p>
 <script type="exercise-setup-ex_wing-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfd2luZyIsInNldHVwIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgcGFuZGFzIGFzIHBkXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHB5b2RpZGUuaHR0cCBpbXBvcnQgb3Blbl91cmxcblxuREFUQV9VUkwgPSBqcy5sb2NhdGlvbi5ocmVmLnNwbGl0KFwic2l0ZV9saWJzL1wiKVswXSArIFwiZGF0YS9cIlxuYmlyZHMgPSBwZC5yZWFkX2NzdihvcGVuX3VybChEQVRBX1VSTCArIFwiYXZvbmV0X2luZGl2aWR1YWxzLmNzdlwiKSkifQ==
 </script>
@@ -390,6 +390,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfd2luZyJ9LCJjb2Rl
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Species means (n = </span><span class="sc">{</span><span class="bu">len</span>(species_w)<span class="sc">:,}</span><span class="ss">)"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Wing length is missing in only ~1,100 rows, so this cleaning keeps far more data than the beak comparison did — the n you report depends on the comparison you chose. The wing–tarsus cloud is also tighter than beak–tarsus: both are limb-skeleton traits that track overall body size, while beaks track feeding ecology.</p>
+<p>And look at the bottom of your chart: five points stranded far below the cloud, at log10(wing) ≈ −1. Those are the five kiwi species — flightless birds whose wing length is coded as <strong>0.1 mm</strong>, a placeholder, not a measurement. <code>dropna</code> cannot catch missingness that has been written down as a fake number. Remember the Amniote database recoding its <code>-999</code>s? Same disease, different symptom — and the only cure is looking at the chart.</p>
 </div>
 </section>
 </section>
@@ -441,7 +442,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZmFtaWx5Iiwic2V0
 
 </div>
 <script type="pyodide-20-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZmFtaWx5In0sImNvZGUiOiIjIGBwYWlyYCBoYXMgY29sdW1ucyBjbGFzcywgb3JkZXIsIGZhbWlseSwgZ2VudXMsIHNwZWNpZXMsXG4jIGxvZ19tYXNzLCBsb2dfbG9uZ2V2aXR5ICg1LDEyMiBzcGVjaWVzKS4gYGNsYXNzX2NvbG91cnNgIGlzIGRlZmluZWQuXG4jIDEuIEFnZ3JlZ2F0ZSB0byBvbmUgcm93IHBlciBmYW1pbHkgKGtlZXAgY2xhc3MgZm9yIGNvbG91cmluZykuXG4jIDIuIFNjYXR0ZXIgZmFtaWx5LW1lYW4gbG9nIGxvbmdldml0eSBhZ2FpbnN0IGZhbWlseS1tZWFuIGxvZyBtYXNzLCBieSBjbGFzcy5cblxuZmFtaWxpZXMgPSBfX19fX19cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LCA2KSlcbl9fX19fX1xuYXguc2V0X3hsYWJlbChcImZhbWlseSBtZWFuIGxvZzEwIGFkdWx0IGJvZHkgbWFzcyAoZylcIilcbmF4LnNldF95bGFiZWwoXCJmYW1pbHkgbWVhbiBsb2cxMCBtYXhpbXVtIGxvbmdldml0eSAoeWVhcnMpXCIpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZmFtaWx5In0sImNvZGUiOiIjIGBwYWlyYCAoNSwxMjIgc3BlY2llcykgaW5jbHVkZXMgdGhlIGNvbHVtbnMgeW91IG5lZWQ6IGNsYXNzLCBmYW1pbHksXG4jIGxvZ19tYXNzLCBsb2dfbG9uZ2V2aXR5LiBgY2xhc3NfY29sb3Vyc2AgaXMgZGVmaW5lZC5cbiMgMS4gQWdncmVnYXRlIHRvIG9uZSByb3cgcGVyIGZhbWlseSAoa2VlcCBjbGFzcyBmb3IgY29sb3VyaW5nKS5cbiMgMi4gU2NhdHRlciBmYW1pbHktbWVhbiBsb2cgbG9uZ2V2aXR5IGFnYWluc3QgZmFtaWx5LW1lYW4gbG9nIG1hc3MsIGJ5IGNsYXNzLlxuXG5mYW1pbGllcyA9IF9fX19fX1xuXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDksIDYpKVxuX19fX19fXG5heC5zZXRfeGxhYmVsKFwiZmFtaWx5IG1lYW4gbG9nMTAgYWR1bHQgYm9keSBtYXNzIChnKVwiKVxuYXguc2V0X3lsYWJlbChcImZhbWlseSBtZWFuIGxvZzEwIG1heGltdW0gbG9uZ2V2aXR5ICh5ZWFycylcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_family">
