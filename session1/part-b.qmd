@@ -15,8 +15,14 @@ it is stored as data, how to draw it three ways (rectangular, round, and
 against a time axis), and what the words biologists use for it (*clade*,
 *ancestor*, *divergence*) mean on the screen.
 
-Three real trees, served with this page, all from
-[TimeTree](https://timetree.org) (Kumar et al. 2022):
+Note what changed and why. Part A's amniote table (Myhrvold et al. 2015)
+stores **traits**: one row per species, no information about which species
+are related. A tree stores the opposite: **relationships and dates**, and
+not a single measurement. Same animals, different questions, so a
+different data structure from a different source. All three trees on this
+page come from [TimeTree](https://timetree.org) (Kumar et al. 2022), and
+one of them is the family tree of exactly the amniotes whose traits you
+analysed in Part A:
 
 | File | Tips | What one tip is |
 |---|---|---|
