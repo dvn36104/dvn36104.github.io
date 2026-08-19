@@ -25,7 +25,7 @@ website:
 
 format:
   live-html:
-    theme: [cosmo, theme.scss]
+    theme: cosmo
     toc: true
     toc-depth: 2
     code-tools: false
