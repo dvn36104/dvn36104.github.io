@@ -1,6 +1,5 @@
 ---
 title: "Allometry"
-subtitle: "Session 1 · Part A: scaling relationships across levels of aggregation"
 engine: markdown
 pyodide:
   packages:

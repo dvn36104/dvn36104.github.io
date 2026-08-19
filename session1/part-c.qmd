@@ -1,6 +1,5 @@
 ---
 title: "The Triangle of Everything"
-subtitle: "Session 1 · Part C: rebuilding the chart of all objects in the Universe"
 engine: markdown
 pyodide:
   packages:

@@ -1,6 +1,5 @@
 ---
 title: "The Tree of Life"
-subtitle: "Session 1 · Part B: drawing evolutionary trees"
 engine: markdown
 pyodide:
   packages:

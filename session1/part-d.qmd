@@ -1,6 +1,5 @@
 ---
 title: "The Periodic Spiral"
-subtitle: "Session 1 · Part D: the periodic table as a design problem"
 engine: markdown
 pyodide:
   packages:
