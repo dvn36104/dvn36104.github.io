@@ -11,7 +11,7 @@ $link-color: #38618c;
 
 // code editors and outputs as soft cards on the cream page
 div.sourceCode, pre.sourceCode {
-  background-color: #fffdf8;
+  background-color: #fff;
   border: 1px solid #e7dfd0;
   border-radius: 6px;
 }
@@ -38,15 +38,20 @@ div.sourceCode pre.sourceCode > code.sourceCode {
 }
 
 .card.exercise-editor {
-  --exercise-font-size: #{$cell-code-font-size};
-  font-size: var(--exercise-font-size) !important;
+  // live-runtime.css loads after the theme and resets this custom property
+  --exercise-font-size: #{$cell-code-font-size} !important;
+  font-size: $cell-code-font-size !important;
 }
 
+.card.exercise-editor .exercise-editor-body,
 .card.exercise-editor .cm-editor,
 .card.exercise-editor .cm-scroller,
 .card.exercise-editor .cm-content,
+.card.exercise-editor .cm-line,
+.card.exercise-editor .cm-gutters,
 .card.exercise-editor .cm-gutter {
-  font-size: var(--exercise-font-size) !important;
+  background-color: #fff !important;
+  font-size: $cell-code-font-size !important;
 }
 
 .cell-output pre,
