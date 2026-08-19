@@ -1,28 +1,37 @@
 /*-- scss:defaults --*/
 
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bitter:wght@600;700&family=Source+Code+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Code+Pro:wght@400;600&display=swap');
 
-// warm cream background instead of white
+// warm cream background
 $body-bg: #faf5ec;
 $body-color: #2b2a26;
 
-$font-family-sans-serif: "Atkinson Hyperlegible", -apple-system, "Segoe UI",
-  Helvetica, Arial, sans-serif;
+// LaTeX-flavoured serif for everything, code in a quiet mono
+$font-family-sans-serif: "STIX Two Text", "Times New Roman", Georgia, serif;
 $font-family-monospace: "Source Code Pro", ui-monospace, SFMono-Regular,
   Menlo, monospace;
 
-$headings-font-family: "Bitter", Georgia, serif;
+$headings-font-family: "STIX Two Text", "Times New Roman", Georgia, serif;
 $headings-font-weight: 700;
 $headings-color: #232028;
 
-$font-size-root: 17px;
-$line-height-base: 1.65;
+$font-size-root: 17.5px;
+$line-height-base: 1.6;
 
-$link-color: #0f4beb;
+// muted ink blue that sits comfortably on cream
+$link-color: #38618c;
 
 /*-- scss:rules --*/
 
-// let code editors and outputs sit as soft cards on the cream page
+// navbar typography matches the rest of the site
+.navbar, .navbar-brand, .navbar .nav-link {
+  font-family: "STIX Two Text", "Times New Roman", Georgia, serif;
+}
+.navbar-brand {
+  font-weight: 700;
+}
+
+// code editors and outputs as soft cards on the cream page
 div.sourceCode, pre.sourceCode {
   background-color: #fffdf8;
   border: 1px solid #e7dfd0;
@@ -36,10 +45,6 @@ div.sourceCode, pre.sourceCode {
 
 .callout {
   background-color: #fffdf8;
-}
-
-.table thead th {
-  font-family: "Atkinson Hyperlegible", sans-serif;
 }
 
 .sidebar nav[role="doc-toc"] a {

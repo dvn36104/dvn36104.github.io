@@ -3,7 +3,7 @@ title: "36104 · Data Visualisation and Narratives"
 subtitle: "Asynchronous sessions"
 ---
 
-This site hosts the **asynchronous sessions** for 36104 — nothing to
+This site hosts the **asynchronous sessions** for 36104. Nothing to
 install.
 
 Every code cell runs Python in your browser. Edit the code and press
@@ -15,7 +15,7 @@ Every code cell runs Python in your browser. Edit the code and press
 2. Run each code cell as you reach it; edit and re-run to experiment.
 3. Where a page has an exercise, attempt it before using the hints, and
    check the solution only after making your own attempt. The **final
-   exercise of each part has no solution button** — it is yours to
+   exercise of each part has no solution button**: it is yours to
    build, with "how to know you got it" checks in place of an answer.
 
 Your work here is **not saved** when you close the tab. These pages are for

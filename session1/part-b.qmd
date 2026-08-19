@@ -1,6 +1,6 @@
 ---
 title: "The Tree of Life"
-subtitle: "Session 1 · Part B — drawing evolutionary trees"
+subtitle: "Session 1 · Part B: drawing evolutionary trees"
 engine: markdown
 pyodide:
   packages:
@@ -9,12 +9,12 @@ pyodide:
 ---
 
 In Part A you worked with a **table** of amniotes: one row per species, no
-structure between the rows. But those species are not an unordered bag —
+structure between the rows. But those species are not an unordered bag:
 every one of them sits on a family tree that connects it, through shared
 ancestors, to every other living thing. This part is about that tree: how
 it is stored as data, how to draw it three ways (rectangular, round, and
-against a time axis), and what the words biologists use for it — *clade*,
-*ancestor*, *divergence* — mean on the screen.
+against a time axis), and what the words biologists use for it (*clade*,
+*ancestor*, *divergence*) mean on the screen.
 
 Three real trees, served with this page, all from
 [TimeTree](https://timetree.org) (Kumar et al. 2022):
@@ -22,7 +22,7 @@ Three real trees, served with this page, all from
 | File | Tips | What one tip is |
 |---|---|---|
 | `amniotes_family.nwk` | 956 | one family of amniotes (mammals, birds, reptiles) |
-| `eukaryotes_class.nwk` | 235 | one class of eukaryotes — animals, fungi, plants, protists |
+| `eukaryotes_class.nwk` | 235 | one class of eukaryotes: animals, fungi, plants, protists |
 | `eukaryotes_phylum.nwk` | 66 | one phylum of eukaryotes |
 
 All code runs in your browser. The first cell may take a few seconds while
@@ -230,7 +230,7 @@ phyla_age = max(l.depth for l in phyla.leaves())
 A phylogenetic tree has three kinds of parts, and each one asserts
 something:
 
-- **Tips** (leaves) are observed things — living species, families,
+- **Tips** (leaves) are observed things: living species, families,
   classes. They are the only part anyone has ever seen.
 - **Internal nodes** are inferred ancestors: "these two lineages were once
   one population." Nobody has seen one; each is a hypothesis.
@@ -244,14 +244,14 @@ since two lineages separated. That gives the *shape* and *relative* ages.
 To turn relative ages into millions of years, the tree is calibrated
 against fossils whose age and position are known. TimeTree, the source of
 our files, aggregates thousands of such published studies into consensus
-dated trees — which is why every tree here comes with real ages attached.
+dated trees, which is why every tree here comes with real ages attached.
 
 ## 2 · A tree as text: the Newick format
 
 Before we can draw a tree we need it as data. The standard format,
 **Newick**, writes a tree as nested parentheses: each pair of parentheses
 is one internal node (one ancestor), and `:number` after a name is the
-branch length. Here is one you can read by eye — humans, chimps and
+branch length. Here is one you can read by eye: humans, chimps and
 gorillas, with TimeTree's ages in millions of years (Myr):
 
 ```
@@ -261,12 +261,12 @@ gorillas, with TimeTree's ages in millions of years (Myr):
 Read from the inside out: `Homo` and `Pan` each sit at the end of a
 6.7-Myr branch from their shared ancestor, so the human–chimp split was
 6.7 million years ago. That ancestor connects, 2.2 Myr further back, to
-the ancestor it shares with `Gorilla` — 6.7 + 2.2 = 8.9 Myr, exactly
+the ancestor it shares with `Gorilla`: 6.7 + 2.2 = 8.9 Myr, exactly
 `Gorilla`'s own branch length. In a dated tree every tip is the same total
 distance from the root, because every living lineage has had the same
 amount of time.
 
-The format is recursive — a tree is a node whose children are trees — so
+The format is recursive (a tree is a node whose children are trees), so
 the parser is recursive too. This is the only genuinely fiddly code on the
 page; read it, run it, and then it is just a function we call:
 
@@ -350,7 +350,7 @@ print("✓ parser reads tips, structure and branch lengths correctly")
 ## 3 · From text to picture
 
 To draw a tree we give every node two coordinates. **x** is its total
-distance from the root — add branch lengths from the root down, which for
+distance from the root: add branch lengths from the root down, which for
 a dated tree means x *is* time. **y** spreads the tips out one per row,
 and each ancestor sits at the mean of its children:
 
@@ -404,12 +404,12 @@ ax.set_xlabel("Myr since the root")
 plt.show()
 ```
 
-(One drawing trick worth stealing: instead of one `ax.plot` per branch —
-thousands of tiny artists — we collect all segments of a colour into a
+(One drawing trick worth stealing: instead of one `ax.plot` per branch,
+thousands of tiny artists, we collect all segments of a colour into a
 single line broken by `None` gaps and draw it in one call. Same picture,
 orders of magnitude faster.)
 
-Now a real tree. This is every family of **amniotes** — the same group
+Now a real tree. This is every family of **amniotes**, the same group
 whose species table you cleaned in Part A, one level of aggregation up:
 
 ```{pyodide}
@@ -433,7 +433,7 @@ ax.set_title(f"All amniotes at family level: {len(amniotes.leaves())} tips, one 
 plt.show()
 ```
 
-No labels — at 956 tips they would be soup. What the shape alone shows:
+No labels: at 956 tips they would be soup. What the shape alone shows:
 every mammal, bird and reptile family traces back to **one node** ~319 Myr
 ago, and the big early fork you can see near the root is mammals splitting
 from the reptile-plus-bird lineage. That number is not decoration; you
@@ -441,11 +441,11 @@ will meet it again below, coming from a completely different file.
 
 ## 4 · Clades: subtrees you can point at
 
-A **clade** is an ancestor plus *all* of its descendants — a complete
+A **clade** is an ancestor plus *all* of its descendants: a complete
 subtree, snapped off at one internal node. "Mammals" is a clade;
 "cold-blooded animals" is not, because their common ancestor also has
 warm-blooded descendants. Clades are the only groups a tree can actually
-point at, and the way to find one is through the **MRCA** — the most
+point at, and the way to find one is through the **MRCA**, the most
 recent common ancestor of some tips you name:
 
 ```{pyodide}
@@ -465,7 +465,7 @@ print(f"{len(primates.leaves())} families, crown age "
       f"{root_age - primates.depth:.1f} Myr")
 ```
 
-Name two primate families and you get all of Primates — every family
+Name two primate families and you get all of Primates, every family
 descended from the same ancestor, ~74 Myr ago:
 
 ```{pyodide}
@@ -482,12 +482,12 @@ assert round(root_age - primates.depth) == 74
 print("✓ 19 primate families from one ancestor ~74 Myr ago")
 ```
 
-Look at the tips before moving on: `Hominidae` — all great apes,
-including you — is one twig among nineteen. And `Paleopropithecidae`, the
+Look at the tips before moving on: `Hominidae` (all great apes,
+including you) is one twig among nineteen. And `Paleopropithecidae`, the
 sloth lemurs, are **extinct**: humans reached Madagascar roughly two
 thousand years ago, and the last sloth lemurs disappeared around 500
 years ago. A dated tree can carry recently-lost lineages alongside
-living ones — though nothing in the drawing itself marks them as gone.
+living ones, though nothing in the drawing itself marks them as gone.
 
 ### Your turn: the carnivore clade {#sec-ex-carnivora}
 
@@ -636,12 +636,12 @@ plt.show()
 ```
 
 ::: {.hint exercise="ex_carnivora"}
-**Hint 1** — This is the primate example with two different anchor names:
+**Hint 1**: This is the primate example with two different anchor names:
 `clade(amniotes, ["Canidae", "Felidae"])`.
 :::
 
 ::: {.hint exercise="ex_carnivora"}
-**Hint 2** — Draw with
+**Hint 2**: Draw with
 `draw_tree(carnivora, ax, labels=True, fontsize=9)`. You should see 16
 families and an ancestor ~55 Myr back.
 :::
@@ -661,7 +661,7 @@ ax.set_xlabel("Myr since the amniote root")
 plt.show()
 ```
 
-16 families from one ancestor ~55 Myr ago — and the tree answers
+16 families from one ancestor ~55 Myr ago, and the tree answers
 questions the table never could. Cats' closest relatives here are the
 civets, hyaenas and mongooses, not dogs; dogs sit on the other side of the very
 first split, nearer to bears and seals. "Cats and dogs" feel like a
@@ -673,7 +673,7 @@ almost since the dinosaurs left.
 
 Rectangular layout runs out of room fast: tips need vertical space, and
 at hundreds of tips the picture becomes a wall. The classic fix is to
-bend the y-axis into a **circle** — angle becomes tip position, radius
+bend the y-axis into a **circle**: angle becomes tip position, radius
 becomes time. Same coordinates, different projection:
 
 ```{pyodide}
@@ -731,10 +731,10 @@ print(f"{len(euk.leaves())} classes of eukaryotes, root {euk_age:.0f} Myr ago")
 ```{pyodide}
 assert len(euk.leaves()) == 235
 assert round(euk_age) == 1598
-print("✓ 235 classes; the eukaryote root here is ~1,598 Myr — about 1.6 billion years")
+print("✓ 235 classes; the eukaryote root here is ~1,598 Myr, about 1.6 billion years")
 ```
 
-We colour three clades — animals, fungi, green plants — by naming two
+We colour three clades (animals, fungi, green plants) by naming two
 anchor tips for each, exactly as we did for primates. Everything not in a
 painted clade stays grey:
 
@@ -761,19 +761,19 @@ plt.show()
 
 ```{pyodide}
 assert (len(animals.leaves()), len(fungi.leaves()), len(plants.leaves())) == (80, 44, 32)
-print("✓ animals: 80 classes, fungi: 44, green plants: 32 — and 79 classes in grey")
+print("✓ animals: 80 classes, fungi: 44, green plants: 32; and 79 classes in grey")
 ```
 
 Three things this picture says that a list of species cannot:
 
-- **Everything familiar is a wedge.** All animals — sponges to humans —
+- **Everything familiar is a wedge.** All animals (sponges to humans)
   are one blue sector. All of `Mammalia` is a single tick mark.
-- **The grey is not filler.** A third of the disc is protists — algae,
+- **The grey is not filler.** A third of the disc is protists: algae,
   amoebae, ciliates, parasites. "Protist" is not a clade; it is the word
   for *every eukaryote outside the three painted wedges*, and the tree
   shows they do not form one group.
 - **Fungi sit next to animals, not plants.** The red and blue wedges
-  share an ancestor long after either shared one with plants —
+  share an ancestor long after either shared one with plants:
   mushrooms are, genealogically, closer to you than to anything green.
 
 ## 6 · The timetree of life
@@ -804,16 +804,16 @@ plt.show()
 ```
 
 Almost every animal phylum was already a separate lineage before the
-Cambrian began — the famous "explosion" shows up here as a dense burst
+Cambrian began; the famous "explosion" shows up here as a dense burst
 of splits just *before* the boundary. (The one split you can see on the
-Cambrian side of the line involves `Brachiopoda-3` — an artifact of
+Cambrian side of the line involves `Brachiopoda-3`, an artifact of
 TimeTree splitting a group it cannot recover as one clade; see the
 serving notes.) And no branch ends at either extinction
 line: at phylum level, every lineage on this chart survived both of the
 worst catastrophes in the fossil record.
 
 Because branch lengths are time, "when did X and Y split?" is one
-subtraction — the root's age minus the depth of the two tips' MRCA:
+subtraction, the root's age minus the depth of the two tips' MRCA:
 
 ```{pyodide}
 print(f"chordates vs arthropods (us vs insects): "
@@ -830,15 +830,15 @@ print(f"animals vs choanoflagellates: "
 assert round(euk_age - clade(euk, ["Mammalia", "Agaricomycetes"]).depth) == 1275
 assert round(euk_age - clade(euk, ["Mammalia", "Magnoliopsida"]).depth) == 1598
 print("✓ the animal–fungus split (1,275 Mya) is younger than the animal–plant "
-      "split (1,598 Mya) — fungi really are our closer cousins")
+      "split (1,598 Mya): fungi really are our closer cousins")
 ```
 
 Notice we just wrote the same subtraction four times, each time reaching
 for the right root age by hand. That kind of repetition is code begging
-to be packaged into a function — which is exactly the exercise.
+to be packaged into a function, which is exactly the exercise.
 
 The last line above is worth a pause: **choanoflagellates**, single-celled
-flagellates that strain bacteria out of water, split from us ~894 Mya —
+flagellates that strain bacteria out of water, split from us ~894 Mya;
 they are the closest living relatives of all animals, and they look
 remarkably like the feeding cells of a sponge.
 
@@ -846,7 +846,7 @@ remarkably like the feeding cells of a sponge.
 
 In Section 3 the amniote family tree put the amniote root at **319 Myr**.
 The eukaryote class tree is a completely different file, built from a
-different set of studies at a different taxonomic rank — but it contains
+different set of studies at a different taxonomic rank, but it contains
 `Mammalia` and `Aves` as tips. Write a `divergence(root, a, b)` helper
 and use it to date the mammal–bird split in *this* tree, then compare.
 
@@ -949,24 +949,24 @@ print(f"Amniote root in the family-level file:           319.0 Mya")
 ```
 
 ::: {.hint exercise="ex_split"}
-**Hint 1** — The split date of two tips is the age of their most recent
-common ancestor — and you already have a helper on this page that finds
+**Hint 1**: The split date of two tips is the age of their most recent
+common ancestor, and you already have a helper on this page that finds
 that node from two names. What it stores is measured *from the root*,
 and you want years *before today*.
 :::
 
 ::: {.hint exercise="ex_split"}
-**Hint 2** — In a dated tree, every living tip is the same total
+**Hint 2**: In a dated tree, every living tip is the same total
 distance from the root, so the root's age is the depth of any tip
 (safest: the maximum leaf depth). Age and depth run in opposite
 directions.
 :::
 
-**How to know you got it.** No solution button here — this function is
+**How to know you got it.** No solution button here: this function is
 yours. If it works, the two printed dates agree *exactly*. Before you
 celebrate independent confirmation, ask two questions. First, why is the
 mammal–bird split the very same event as the amniote root? Second, both
-numbers ultimately came from the same database — what would it actually
+numbers ultimately came from the same database: what would it actually
 take for two dates like these to count as independent evidence?
 
 {{< include _instructor-b.qmd >}}
@@ -976,16 +976,16 @@ take for two dates like these to count as independent evidence?
 Reading a phylogeny is a visual skill worth being pedantic about:
 
 - **Only the nodes and branch lengths carry information.** The vertical
-  order of tips is arbitrary — every internal node can be flipped like a
+  order of tips is arbitrary: every internal node can be flipped like a
   mobile, so "top of the chart" means nothing. Humans are not "at the
   end" of the tree; every living tip is exactly the same distance from
   the root.
-- **The level of aggregation is part of the claim** — the Part A lesson
+- **The level of aggregation is part of the claim**: the Part A lesson
   again. At phylum level no lineage dies in the great extinctions; at
   family level, recently lost lineages like the sloth lemurs sit in the
   tree beside the living. Same history, different rank, different story.
 - **Every internal node is an inference**, and some are genuinely
-  contested — whether sponges or comb jellies split from the rest of the
+  contested: whether sponges or comb jellies split from the rest of the
   animals first is a live argument in the literature, and this page's
   files quietly take a side. A drawn tree always looks more certain than
   the science behind it.
@@ -993,12 +993,12 @@ Reading a phylogeny is a visual skill worth being pedantic about:
 ## Sources and serving notes
 
 - Kumar et al. (2022) *TimeTree 5: an expanded resource for species
-  divergence times*, Molecular Biology and Evolution 39:msac174 —
+  divergence times*, Molecular Biology and Evolution 39:msac174;
   [timetree.org](https://timetree.org). Trees downloaded via "Build a
   Timetree" (group: Amniota at family rank; Eukaryota at class and phylum
   rank), Newick format, branch lengths in Myr; values unmodified.
 - Names with suffixes (`Cebidae-1`, `Cebidae-2`) are TimeTree's way of
-  serving groups that its consensus does not recover as single clades —
+  serving groups that its consensus does not recover as single clades:
   the name is split, the tree is left honest.
-- Tobias et al. (2022) AVONET and Myhrvold et al. (2015) — the Part A
+- Tobias et al. (2022) AVONET and Myhrvold et al. (2015): the Part A
   datasets this page's amniotes connect back to.

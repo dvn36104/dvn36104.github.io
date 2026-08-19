@@ -10,10 +10,8 @@ project:
 website:
   title: "36104 · Data Visualisation and Narratives"
   navbar:
-    background: "#0f4beb"
+    background: "#3b5b7c"
     left:
-      - href: index.qmd
-        text: Home
       - text: "Session 1"
         menu:
           - href: session1/part-a.qmd

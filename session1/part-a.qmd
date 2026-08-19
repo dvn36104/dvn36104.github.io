@@ -1,6 +1,6 @@
 ---
 title: "Allometry"
-subtitle: "Session 1 · Part A — scaling relationships across levels of aggregation"
+subtitle: "Session 1 · Part A: scaling relationships across levels of aggregation"
 engine: markdown
 pyodide:
   packages:
@@ -10,10 +10,10 @@ pyodide:
 ---
 
 **Allometry** is the study of how traits scale with size. Across birds,
-mammals and reptiles, most size-related traits follow power laws — straight
+mammals and reptiles, most size-related traits follow power laws: straight
 lines once both axes are logged. In this part you will draw the same
-allometric relationship at three levels of aggregation — individual
-specimens, species, and families — and watch what aggregation does to the
+allometric relationship at three levels of aggregation (individual
+specimens, species, and families) and watch what aggregation does to the
 picture.
 
 Two real datasets, served with this page:
@@ -70,7 +70,7 @@ class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"
 
 AVONET publishes the raw measurements behind its species table: museum
 specimens and field captures, measured to a common protocol. We serve four
-of the original 26 columns — species (BirdLife taxonomy), beak length along
+of the original 26 columns: species (BirdLife taxonomy), beak length along
 the culmen, tarsus length, and wing length, all in millimetres.
 
 ```{pyodide}
@@ -82,7 +82,7 @@ birds.head()
 ```{pyodide}
 assert len(birds) == 90371
 assert birds["species"].nunique() == 11020
-print(f"✓ {len(birds):,} individual measurements, {birds['species'].nunique():,} species — as published")
+print(f"✓ {len(birds):,} individual measurements, {birds['species'].nunique():,} species, as published")
 ```
 
 ## 2 · Cleaning: where do the rows go?
@@ -114,7 +114,7 @@ print("✓ 69,509 individuals keep both measurements; all values positive, so lo
 ```
 
 We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
-step — but it is a decision, it changes what "n" means in every caption
+step, but it is a decision, it changes what "n" means in every caption
 downstream, and it must be disclosed. Any figure built from this table
 should say 69,509 individuals, not 90,371.
 
@@ -182,14 +182,14 @@ plt.show()
 
 Averaging removed 59,000 points but the cloud barely tightened
 (r ≈ 0.61 → 0.62). Within-species measurement scatter is small compared to
-the real, ecological differences in beak shape *between* species —
+the real, ecological differences in beak shape *between* species:
 hummingbirds, finches and curlews genuinely sit in different places.
 Aggregation is not a magic de-noiser: it removes exactly the variation that
 happens within groups, no more.
 
 ### Your turn: a different trait pair {#sec-ex-wing}
 
-Repeat the whole pipeline — **cleaning included** — for **wing length vs
+Repeat the whole pipeline (**cleaning included**) for **wing length vs
 tarsus length**. Wing length has its own, different pattern of missing
 values, so start from `birds`, not from `clean`. Print n after cleaning,
 and show the species-level n in the plot title.
@@ -228,13 +228,13 @@ plt.show()
 ```
 
 ::: {.hint exercise="ex_wing"}
-**Hint 1** — The subset to require is `["species", "wing_length_mm",
-"tarsus_length_mm"]`. Beak gaps are irrelevant to this comparison — don't
+**Hint 1:** The subset to require is `["species", "wing_length_mm",
+"tarsus_length_mm"]`. Beak gaps are irrelevant to this comparison; don't
 drop rows for a column you aren't using.
 :::
 
 ::: {.hint exercise="ex_wing"}
-**Hint 2** — `birds.dropna(subset=...)` then
+**Hint 2:** `birds.dropna(subset=...)` then
 `.groupby("species")[["wing_length_mm", "tarsus_length_mm"]].mean()`, then
 `ax.scatter(np.log10(...), np.log10(...), s=4, alpha=0.25)`.
 :::
@@ -261,23 +261,23 @@ plt.show()
 ```
 
 Wing length is missing in only ~1,100 rows, so this cleaning keeps far more
-data than the beak comparison did — the n you report depends on the
+data than the beak comparison did: the n you report depends on the
 comparison you chose. The wing–tarsus cloud is also tighter than
 beak–tarsus: both are limb-skeleton traits that track overall body size,
 while beaks track feeding ecology.
 
 And look at the bottom of your chart: five points stranded far below the
-cloud, at log10(wing) ≈ −1. Those are the five kiwi species — flightless
+cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless
 birds whose wing length is coded as **0.1 mm**, a placeholder, not a
 measurement. `dropna` cannot catch missingness that has been written down
 as a fake number. Remember the Amniote database recoding its `-999`s?
-Same disease, different symptom — and the only cure is looking at the
+Same disease, different symptom, and the only cure is looking at the
 chart.
 :::
 
 ## 5 · Amniote: a table where the groupby already happened
 
-The Amniote life-history database is one row per **species** — 21,322 of
+The Amniote life-history database is one row per **species**: 21,322 of
 them across birds, mammals and reptiles. Somebody else already did the
 aggregation; what you download is the equivalent of `species_means` above.
 (In the published archive, missing values are coded `-999`; the copy served
@@ -293,12 +293,12 @@ amniote.head()
 assert len(amniote) == 21322
 assert amniote["class"].value_counts().to_dict() == {
     "Aves": 9802, "Reptilia": 6567, "Mammalia": 4953}
-print("✓ 21,322 species: 9,802 birds, 6,567 reptiles, 4,953 mammals — as published")
+print("✓ 21,322 species: 9,802 birds, 6,567 reptiles, 4,953 mammals, as published")
 ```
 
 Broad allometry: how does maximum longevity scale with adult body mass,
 from a 2-gram shrew to a multi-tonne crocodile? Note the cleaning step is
-the same decision as before — and it costs far more rows here:
+the same decision as before, and it costs far more rows here:
 
 ```{pyodide}
 pair = amniote.dropna(subset=["adult_body_mass_g", "maximum_longevity_y"])
@@ -314,7 +314,7 @@ for cls, grp in pair.groupby("class"):
                s=6, alpha=0.35, color=class_colours[cls], label=cls)
 ax.set_xlabel("log10 adult body mass (g)")
 ax.set_ylabel("log10 maximum longevity (years)")
-ax.set_title(f"Bigger animals live longer — unevenly (n = {len(pair):,} species)")
+ax.set_title(f"Bigger animals live longer, unevenly (n = {len(pair):,} species)")
 ax.legend(frameon=False)
 plt.show()
 ```
@@ -326,7 +326,7 @@ r_species = np.corrcoef(np.log10(pair["adult_body_mass_g"]),
 print(f"✓ species level: r = {r_species:.3f} across {len(pair):,} species")
 ```
 
-Only 5,122 of 21,322 species — 24% — have both traits recorded. Missingness
+Only 5,122 of 21,322 species (24%) have both traits recorded. Missingness
 is not decoration in comparative databases; it is most of the table.
 
 ### Your turn: one rank up {#sec-ex-family}
@@ -370,36 +370,36 @@ plt.show()
 ```
 
 ::: {.hint exercise="ex_family"}
-**Hint 1** — Group by *two* keys — class and family — so each family
+**Hint 1:** Group by *two* keys (class and family) so each family
 keeps its class for colouring, and remember `.reset_index()` afterwards
 so `class` becomes an ordinary column again.
 :::
 
 ::: {.hint exercise="ex_family"}
-**Hint 2** — Average the two *logged* columns in the groupby, then reuse
+**Hint 2:** Average the two *logged* columns in the groupby, then reuse
 the plotting pattern from the species-level chart. You should end up with
 327 points.
 :::
 
-**How to know you got it.** This exercise has no solution button — the
+**How to know you got it.** This exercise has no solution button; the
 chart is yours. Check yourself against three facts: you should have
 **327 families**; the correlation should come out around **0.65**, up
 from 0.52 at species level; and the long-lived eccentrics (naked
 mole-rats, bats, seabirds) should have vanished into their families'
 averages. Then ask yourself why the instructions insisted on averaging
-the *logged* values — what would one elephant have done to its family in
+the *logged* values: what would one elephant have done to its family in
 raw grams?
 
 {{< include _instructor-a.qmd >}}
 
 ## What aggregation did, and did not, do
 
-The relationship was "the same" at every level — log-linear, positive —
+The relationship was "the same" at every level (log-linear, positive),
 but every property a reader can quote changed with the level: n went from
 90,371 measurements to 69,509 usable ones, to 10,601 species, to 327
 families; the correlation moved; outliers appeared and vanished. A claim
 made from one level does not automatically hold at another. When you
-caption a chart, the level of aggregation is part of the claim — say what
+caption a chart, the level of aggregation is part of the claim: say what
 one point is, say what n is, and say where the dropped rows went.
 
 ## Sources and serving notes
