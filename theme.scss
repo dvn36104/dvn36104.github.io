@@ -1,21 +1,22 @@
 /*-- scss:defaults --*/
 
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Code+Pro:wght@400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
 
 // warm cream background
 $body-bg: #faf5ec;
 $body-color: #2b2a26;
 
 // LaTeX-flavoured serif for everything, code in a quiet mono
-$font-family-sans-serif: "STIX Two Text", "Times New Roman", Georgia, serif;
+$font-family-sans-serif: "Computer Modern Serif", "Times New Roman", Georgia, serif;
 $font-family-monospace: "Source Code Pro", ui-monospace, SFMono-Regular,
   Menlo, monospace;
 
-$headings-font-family: "STIX Two Text", "Times New Roman", Georgia, serif;
+$headings-font-family: "Computer Modern Serif", "Times New Roman", Georgia, serif;
 $headings-font-weight: 700;
 $headings-color: #232028;
 
-$font-size-root: 17.5px;
+$font-size-root: 18px;
 $line-height-base: 1.6;
 
 // muted ink blue that sits comfortably on cream
@@ -25,7 +26,7 @@ $link-color: #38618c;
 
 // navbar typography matches the rest of the site
 .navbar, .navbar-brand, .navbar .nav-link {
-  font-family: "STIX Two Text", "Times New Roman", Georgia, serif;
+  font-family: "Computer Modern Serif", "Times New Roman", Georgia, serif;
 }
 .navbar-brand {
   font-weight: 700;
