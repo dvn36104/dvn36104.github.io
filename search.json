@@ -123,7 +123,7 @@
     "href": "index.html",
     "title": "36104 · Data Visualisation and Narratives",
     "section": "",
-    "text": "Welcome. This site hosts the asynchronous sessions for 36104. The pages are live: every code cell runs Python in your browser — nothing to install. Edit the code, press Run Code, and the output updates."
+    "text": "This site hosts the asynchronous sessions for 36104 — nothing to install.\nEvery code cell runs Python in your browser. Edit the code and press Run Code."
   },
   {
     "objectID": "index.html#how-to-use-these-pages",
