@@ -4,8 +4,6 @@ title: "Asynchronous sessions"
 
 This site hosts the asynchronous sessions for DVN36104.
 
-## How to use these pages
-
 1. Work through the parts of each session in order.
 2. Every code cell runs Python in your browser. Edit the code and press **Run Code**.
 3. Where a page has an exercise, attempt it before using the hints. Check the solution only after making your own attempt.

@@ -80,35 +80,37 @@ print("Environment ready.")
 birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"), low_memory=False)
 measured = birds[birds["data_type"].notna()]
 
-column_catalogue = pd.DataFrame([
-    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "-", "distinct count", "table, tooltip", "nominal"),
-    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("data_type", "Sampling design", "Nominal (binary)", "1 = museum specimen; 2 = live individual", "code", "count, proportion", "bar, dot", "nominal"),
-    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "-", "distinct count", "table, tooltip", "nominal"),
-    ("sex", "Sampling design", "Nominal", "M = male; F = female; U = unknown", "code", "count, proportion", "bar, dot", "nominal"),
-    ("age", "Sampling design", "Ordinal (binary)", "0 = adult measurement; 1 = immature measurement", "code", "count, proportion", "ordered bar, dot", "ordinal"),
-    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("beak_length_culmen_mm", "Morphology", "Quantitative (continuous)", "Beak tip to base of skull along the culmen", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_length_nares_mm", "Morphology", "Quantitative (continuous)", "Anterior edge of nostril to beak tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_width_mm", "Morphology", "Quantitative (continuous)", "Beak width at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_depth_mm", "Morphology", "Quantitative (continuous)", "Beak depth at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("tarsus_length_mm", "Morphology", "Quantitative (continuous)", "Length of the tarsus", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("wing_length_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to longest primary on the unflattened wing", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("kipps_distance_mm", "Morphology", "Quantitative (continuous)", "First secondary tip to longest primary tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("secondary1_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to the first secondary feather", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("hand_wing_index", "Morphology", "Quantitative (continuous)", "100 × Kipp's distance / wing length", "index", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("tail_length_mm", "Morphology", "Quantitative (continuous)", "Longest rectrix tip to its emergence from the skin", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("protocol", "Sampling design", "Nominal (binary)", "1 = AVONET protocol; 0 = another protocol", "code", "count, proportion", "bar, dot", "nominal"),
-    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "-", "count, distinct count", "bar, table", "nominal"),
-], columns=["column", "group", "semantic_type", "meaning", "unit",
-            "useful_aggregates", "suitable_views", "scale"])
+metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
+course_annotations = pd.DataFrame([
+    ('avibase_id', 'Taxonomy & ID', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
+    ('species', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('species_ebird', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('ebird_species_group', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('species_birdtree', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('data_type', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
+    ('source', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('specimen_number', 'Provenance', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
+    ('sex', 'Sampling design', 'Nominal', 'count, proportion', 'bar, dot', 'nominal'),
+    ('age', 'Sampling design', 'Ordinal (binary)', 'count, proportion', 'ordered bar, dot', 'ordinal'),
+    ('locality', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('country_wri', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('country', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('beak_length_culmen_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_length_nares_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_width_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_depth_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('tarsus_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('wing_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('kipps_distance_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('secondary1_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('hand_wing_index', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('tail_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('measurer', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('protocol', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
+    ('publication', 'Provenance', 'Nominal / text', 'count, distinct count', 'bar, table', 'nominal'),
+], columns=["column", "group", "semantic_type", "useful_aggregates",
+            "suitable_views", "scale"])
+column_catalogue = metadata.merge(course_annotations, on="column")
 
 trait_catalogue = pd.DataFrame([
     ("beak_length_culmen_mm", "Beak length: culmen", "mm"),
@@ -354,45 +356,71 @@ print(f"{birds['species'].nunique():,} distinct BirdLife species labels")
 
 ### The complete column dictionary
 
-The columns fall into five jobs. Taxonomy fields say *which bird* under
-several naming systems; design fields say *what kind of record* was sampled;
-provenance fields say *where the record came from*; geography fields say
-*where the bird was collected*; and morphology fields contain the
-measurements used for allometry.
+A data dictionary is not something to invent. AVONET ships an official
+metadata worksheet defining every field, and we serve it with this page,
+verbatim, as `avonet_metadata.csv`; only our `snake_case` names are added
+so the two tables can be joined. Provenance first: check that the
+dictionary and the data actually describe each other.
 
 ```{pyodide}
-column_catalogue = pd.DataFrame([
-    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "-", "distinct count", "table, tooltip", "nominal"),
-    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("data_type", "Sampling design", "Nominal (binary)", "1 = museum specimen; 2 = live individual", "code", "count, proportion", "bar, dot", "nominal"),
-    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "-", "distinct count", "table, tooltip", "nominal"),
-    ("sex", "Sampling design", "Nominal", "M = male; F = female; U = unknown", "code", "count, proportion", "bar, dot", "nominal"),
-    ("age", "Sampling design", "Ordinal (binary)", "0 = adult measurement; 1 = immature measurement", "code", "count, proportion", "ordered bar, dot", "ordinal"),
-    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "-", "count, proportion", "bar, map", "nominal/geographic"),
-    ("beak_length_culmen_mm", "Morphology", "Quantitative (continuous)", "Beak tip to base of skull along the culmen", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_length_nares_mm", "Morphology", "Quantitative (continuous)", "Anterior edge of nostril to beak tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_width_mm", "Morphology", "Quantitative (continuous)", "Beak width at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("beak_depth_mm", "Morphology", "Quantitative (continuous)", "Beak depth at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("tarsus_length_mm", "Morphology", "Quantitative (continuous)", "Length of the tarsus", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("wing_length_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to longest primary on the unflattened wing", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("kipps_distance_mm", "Morphology", "Quantitative (continuous)", "First secondary tip to longest primary tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("secondary1_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to the first secondary feather", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("hand_wing_index", "Morphology", "Quantitative (continuous)", "100 × Kipp's distance / wing length", "index", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("tail_length_mm", "Morphology", "Quantitative (continuous)", "Longest rectrix tip to its emergence from the skin", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "-", "count, proportion", "bar, dot, facet", "nominal"),
-    ("protocol", "Sampling design", "Nominal (binary)", "1 = AVONET protocol; 0 = another protocol", "code", "count, proportion", "bar, dot", "nominal"),
-    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "-", "count, distinct count", "bar, table", "nominal"),
-], columns=["column", "group", "semantic_type", "meaning", "unit",
-            "useful_aggregates", "suitable_views", "scale"])
+metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
 
-column_catalogue
+assert set(metadata["column"]) == set(birds.columns)
+print("✓ every served column has an official definition, and no extras")
+
+metadata[["column", "source_variable", "description", "variable_type", "unit"]]
 ```
+
+The authors' definitions settle what each field **is**. What they cannot
+settle is how we should treat each field analytically: that is a
+judgment, so the annotations below are ours, labelled as such, and open
+to argument. The columns fall into five jobs. Taxonomy fields say *which
+bird* under several naming systems; design fields say *what kind of
+record* was sampled; provenance fields say *where the record came from*;
+geography fields say *where the bird was collected*; and morphology
+fields contain the measurements used for allometry.
+
+```{pyodide}
+course_annotations = pd.DataFrame([
+    ('avibase_id', 'Taxonomy & ID', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
+    ('species', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('species_ebird', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('ebird_species_group', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('species_birdtree', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('data_type', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
+    ('source', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('specimen_number', 'Provenance', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
+    ('sex', 'Sampling design', 'Nominal', 'count, proportion', 'bar, dot', 'nominal'),
+    ('age', 'Sampling design', 'Ordinal (binary)', 'count, proportion', 'ordered bar, dot', 'ordinal'),
+    ('locality', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('country_wri', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('country', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
+    ('beak_length_culmen_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_length_nares_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_width_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('beak_depth_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('tarsus_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('wing_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('kipps_distance_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('secondary1_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('hand_wing_index', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('tail_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
+    ('measurer', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
+    ('protocol', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
+    ('publication', 'Provenance', 'Nominal / text', 'count, distinct count', 'bar, table', 'nominal'),
+], columns=["column", "group", "semantic_type", "useful_aggregates",
+            "suitable_views", "scale"])
+
+column_catalogue = metadata.merge(course_annotations, on="column")
+column_catalogue[["column", "group", "semantic_type", "description",
+                  "unit", "useful_aggregates", "suitable_views", "scale"]]
+```
+
+One instructive disagreement is already visible: the official metadata
+types `age` as binary, which it is as stored, while our annotation calls
+it ordinal, because adult and immature order naturally. Storage type,
+official type, and semantic type are three different judgments, and only
+the first is made by the computer.
 
 ### From semantic type to visual form
 
@@ -1743,7 +1771,10 @@ why.
   rows (90,020 measurement records plus 351 taxonomy-only rows). Column names
   are normalised to `snake_case`, measurement units are included in names,
   and trailing whitespace in text fields is removed; observed values are
-  otherwise unchanged.
+  otherwise unchanged. The official AVONET metadata worksheet is served
+  verbatim as `avonet_metadata.csv` (26 field definitions mapped to the
+  served column names); the semantic-type annotations on this page are
+  course judgments, not part of the source.
 - Myhrvold et al. (2015) *An amniote life-history database to perform
   comparative analyses with birds, mammals, and reptiles*, Ecology 96:3109.
   Served with 10 of 36 columns, all 21,322 rows; the archive's `-999`
