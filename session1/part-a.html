@@ -270,6 +270,30 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </blockquote>
 <p>A chart is not a decorative endpoint. It is a claim produced by that entire pipeline. Changing <code>count</code> to <code>mean</code>, a linear axis to a logarithmic one, or a nominal field to a quantitative field changes what the chart says.</p>
 <p><a href="https://doi.org/10.6084/m9.figshare.16586228.v7">AVONET</a> is a global bird trait database assembled by Tobias et al.&nbsp;(2022). Its raw-data worksheet combines measurements from museum specimens and live birds. A measured row records the bird’s taxonomic identities, sampling provenance, sex and age, collection geography, ten morphological traits, the measurer, and whether the AVONET measurement protocol was used.</p>
+<p>The dataset is documented in Tobias et al., <a href="https://onlinelibrary.wiley.com/doi/10.1111/ele.13898">“AVONET: morphological, ecological and geographical data for all birds”</a>, published in <em>Ecology Letters</em>. Keep the paper open while working through this EDA: it shows how the dataset’s authors turned these records into visual evidence.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Required visual audit of the AVONET paper">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Required visual audit of the AVONET paper
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Review <strong>every visualisation in the paper</strong>, treating every panel in a multi-panel figure as a separate design decision. Do not only summarise what the paper is about. Read each visualisation as an argument built from data.</p>
+<p>For every figure or panel, record:</p>
+<ol type="1">
+<li><strong>Visual form:</strong> What type of visualisation is used: scatterplot, map, histogram, density display, diagram, coefficient plot, or another form? What marks and channels carry the information?</li>
+<li><strong>Data visualised:</strong> Which features are shown, what are their semantic data types, what does one observation represent, and which rows or taxa are included or excluded?</li>
+<li><strong>Transformation and aggregation:</strong> Are values raw, logged, standardised, binned, averaged, modelled, grouped by species, or otherwise transformed?</li>
+<li><strong>Scales and encodings:</strong> Are position and colour scales linear, logarithmic, categorical, sequential, or diverging? What is mapped to position, colour, size, shape, connection, or facet?</li>
+<li><strong>Claim supported:</strong> What comparison, pattern, or model result is the panel intended to support? State the claim in one precise sentence.</li>
+<li><strong>Strength of support:</strong> Does the chosen visualisation make that claim convincing? Identify ambiguity, overplotting, aggregation effects, uncertainty, missing context, or a plausible alternative visual form.</li>
+</ol>
+<p>Use a table with one row per figure panel and these columns: <code>figure/panel</code>, <code>visual form</code>, <code>data and unit</code>, <code>transformation/aggregation</code>, <code>encodings/scales</code>, <code>claim</code>, and <code>critique or alternative</code>. You should be able to connect every claim you identify back to visible evidence in the panel.</p>
+</div>
+</div>
 <p>The worksheet has <strong>90,371 rows and 26 columns</strong>, but that does not mean 90,371 measured birds. It contains 90,020 measurement records plus 351 <code>GAPSPECIES</code> rows that connect taxonomies for species without raw measurements. We retain all 26 source fields, rename them to readable <code>snake_case</code>, and append <code>_mm</code> to measurements recorded in millimetres.</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
