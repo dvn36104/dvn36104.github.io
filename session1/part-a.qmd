@@ -263,7 +263,7 @@ AVONET measurement protocol was used.
 <figure class="figure">
   <img src="../images/blue-jay-avonet.jpg"
        class="figure-img img-fluid mx-auto d-block"
-       style="width: 100%; max-width: 680px;"
+       style="width: 45%; min-width: 240px; max-width: 380px;"
        alt="Illustrated Blue Jay with measurement guides for wing length, wing-tip length, tarsus length, and tail length.">
   <figcaption class="figure-caption text-center">
     Examples of functional traits recorded by AVONET: wing, wing-tip, tarsus,
