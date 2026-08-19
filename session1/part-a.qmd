@@ -54,9 +54,12 @@ from pyodide.http import open_url
 # Data files live beside this page; the Python worker runs from site_libs/.
 DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
 
-# We send compact summaries to Altair rather than all 90,000 rows, but some
-# summary tables are still larger than Altair's conservative default.
-alt.data_transformers.disable_max_rows()
+# Altair embeds each chart's data inside the page, so a chart's cost grows
+# with rows times encoded columns. The policy here is discipline, not a
+# switched-off guardrail: aggregate before charting, keep only the columns
+# a chart encodes, sample with a fixed seed when raw points are the point,
+# and declare an explicit budget for the largest deliberate exceptions.
+alt.data_transformers.enable("default", max_rows=12_000)
 
 plt.rcParams.update({
     "figure.figsize": (9, 5),
@@ -74,7 +77,133 @@ print("Environment ready.")
 #| include: false
 # Pre-build every name the page uses, so each cell works no matter which
 # cells were run before it. The visible cells re-derive all of this.
-birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"))
+birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"), low_memory=False)
+measured = birds[birds["data_type"].notna()]
+
+column_catalogue = pd.DataFrame([
+    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "-", "distinct count", "table, tooltip", "nominal"),
+    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("data_type", "Sampling design", "Nominal (binary)", "1 = museum specimen; 2 = live individual", "code", "count, proportion", "bar, dot", "nominal"),
+    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "-", "distinct count", "table, tooltip", "nominal"),
+    ("sex", "Sampling design", "Nominal", "M = male; F = female; U = unknown", "code", "count, proportion", "bar, dot", "nominal"),
+    ("age", "Sampling design", "Ordinal (binary)", "0 = adult measurement; 1 = immature measurement", "code", "count, proportion", "ordered bar, dot", "ordinal"),
+    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "-", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "-", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "-", "count, proportion", "bar, map", "nominal/geographic"),
+    ("beak_length_culmen_mm", "Morphology", "Quantitative (continuous)", "Beak tip to base of skull along the culmen", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_length_nares_mm", "Morphology", "Quantitative (continuous)", "Anterior edge of nostril to beak tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_width_mm", "Morphology", "Quantitative (continuous)", "Beak width at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_depth_mm", "Morphology", "Quantitative (continuous)", "Beak depth at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("tarsus_length_mm", "Morphology", "Quantitative (continuous)", "Length of the tarsus", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("wing_length_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to longest primary on the unflattened wing", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("kipps_distance_mm", "Morphology", "Quantitative (continuous)", "First secondary tip to longest primary tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("secondary1_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to the first secondary feather", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("hand_wing_index", "Morphology", "Quantitative (continuous)", "100 × Kipp's distance / wing length", "index", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("tail_length_mm", "Morphology", "Quantitative (continuous)", "Longest rectrix tip to its emergence from the skin", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("protocol", "Sampling design", "Nominal (binary)", "1 = AVONET protocol; 0 = another protocol", "code", "count, proportion", "bar, dot", "nominal"),
+    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "-", "count, distinct count", "bar, table", "nominal"),
+], columns=["column", "group", "semantic_type", "meaning", "unit",
+            "useful_aggregates", "suitable_views", "scale"])
+
+trait_catalogue = pd.DataFrame([
+    ("beak_length_culmen_mm", "Beak length: culmen", "mm"),
+    ("beak_length_nares_mm", "Beak length: nares", "mm"),
+    ("beak_width_mm", "Beak width", "mm"),
+    ("beak_depth_mm", "Beak depth", "mm"),
+    ("tarsus_length_mm", "Tarsus length", "mm"),
+    ("wing_length_mm", "Wing length", "mm"),
+    ("kipps_distance_mm", "Kipp's distance", "mm"),
+    ("secondary1_mm", "First secondary", "mm"),
+    ("hand_wing_index", "Hand-wing index", "index"),
+    ("tail_length_mm", "Tail length", "mm"),
+], columns=["column", "trait", "unit"])
+trait_columns = trait_catalogue["column"].tolist()
+trait_names = dict(zip(trait_catalogue["column"], trait_catalogue["trait"]))
+
+def first_example(series):
+    observed = series.dropna()
+    if observed.empty:
+        return "-"
+    value = observed.iloc[0]
+    return str(round(value, 3) if isinstance(value, float) else value)[:45]
+
+audit = pd.DataFrame({
+    "column": birds.columns,
+    "dtype": birds.dtypes.astype(str).values,
+    "observed_n": birds.notna().sum().values,
+    "missing_n": birds.isna().sum().values,
+    "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
+    "distinct_observed": birds.nunique(dropna=True).values,
+    "example": [first_example(birds[c]) for c in birds.columns],
+}).merge(column_catalogue[["column", "group", "semantic_type",
+                           "useful_aggregates", "suitable_views", "scale"]],
+         on="column", how="left")
+
+species_depth = (measured.groupby("species").size()
+                 .rename("individuals").reset_index())
+
+species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
+    .groupby("species")["wing_length_mm"]
+    .agg(
+        n="count",
+        mean="mean",
+        median="median",
+        minimum="min",
+        q25=lambda values: values.quantile(0.25),
+        q75=lambda values: values.quantile(0.75),
+        maximum="max",
+        sd="std",
+    )
+    .reset_index())
+
+kw = measured.dropna(subset=["kipps_distance_mm", "wing_length_mm"])
+sw = measured.dropna(subset=["secondary1_mm", "wing_length_mm"])
+hw = measured.dropna(subset=["hand_wing_index", "kipps_distance_mm",
+                             "wing_length_mm"])
+hwi_rebuilt = 100 * hw["kipps_distance_mm"] / hw["wing_length_mm"]
+
+validation_rules = pd.DataFrame([
+    ("Kipp's distance <= wing length", len(kw),
+     int((kw["kipps_distance_mm"] > kw["wing_length_mm"]).sum())),
+    ("first secondary <= wing length", len(sw),
+     int((sw["secondary1_mm"] > sw["wing_length_mm"]).sum())),
+    ("stored HWI within 0.6 of recomputed", len(hw),
+     int((~np.isclose(hwi_rebuilt, hw["hand_wing_index"], atol=0.6)).sum())),
+    ("wing length above 0.5 mm",
+     int(measured["wing_length_mm"].notna().sum()),
+     int((measured["wing_length_mm"].dropna() <= 0.5).sum())),
+], columns=["rule", "rows_checked", "violations"])
+
+handbook = pd.DataFrame([
+    ("Passer domesticus", "house sparrow", 70, 85),
+    ("Anas platyrhynchos", "mallard", 240, 300),
+    ("Apus apus", "common swift", 160, 185),
+    ("Troglodytes troglodytes", "Eurasian wren", 44, 55),
+], columns=["species", "common_name", "handbook_low_mm", "handbook_high_mm"])
+
+observed_wing = (measured[measured["species"].isin(handbook["species"])]
+    .groupby("species")["wing_length_mm"].agg(n="count", mean_mm="mean")
+    .reset_index())
+
+external_check = handbook.merge(observed_wing, on="species")
+external_check["within_range"] = external_check["mean_mm"].between(
+    external_check["handbook_low_mm"], external_check["handbook_high_mm"])
+
+scale_pair = birds.dropna(
+    subset=["species", "tarsus_length_mm", "beak_length_culmen_mm"]
+)
+scale_sample = scale_pair.sample(n=6000, random_state=36104)
+regression_sample = (scale_pair[["tarsus_length_mm", "beak_length_culmen_mm",
+                                 "data_type"]]
+                     .sample(n=8000, random_state=36104).copy())
+regression_sample["log10_tarsus"] = np.log10(regression_sample["tarsus_length_mm"])
+regression_sample["log10_culmen"] = np.log10(regression_sample["beak_length_culmen_mm"])
+
 clean = birds.dropna(subset=["species", "beak_length_culmen_mm", "tarsus_length_mm"])
 species_means = (clean
                  .groupby("species")[["beak_length_culmen_mm", "tarsus_length_mm"]]
@@ -104,6 +233,25 @@ visual encoding, and then choose a scale. The sequence matters:
 A chart is not a decorative endpoint. It is a claim produced by that entire
 pipeline. Changing `count` to `mean`, a linear axis to a logarithmic one, or a
 nominal field to a quantitative field changes what the chart says.
+
+This audit is not improvised. It follows the published discipline of
+**initial data analysis (IDA)**: set up the metadata, screen the data,
+report what was found, and only then refine the analysis plan. The
+sections below walk those stages in order: structure and metadata first,
+then the unit of analysis and the sampling design, then the content of
+the measurements, and modelling last.
+
+::: {.callout-tip title="Assigned reading: how professionals do this"}
+Baillie et al. (2022), [Ten simple rules for initial data
+analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS
+Computational Biology* 18(2). Ten rules in four pages; this page is an
+extended worked example of most of them. The fuller framework is Huebner
+et al. (2018), *A contemporary conceptual framework for initial data
+analysis*. A compact classic is the EDA checklist in Peng's
+[*Exploratory Data Analysis with R*](https://bookdown.org/rdpeng/exdata/):
+formulate the question, check the packaging, check your n's, validate
+against at least one external source. Watch those phrases reappear below.
+:::
 
 [AVONET](https://doi.org/10.6084/m9.figshare.16586228.v7) is a global bird
 trait database assembled by Tobias et al. (2022). Its raw-data worksheet
@@ -154,6 +302,22 @@ The worksheet has **90,371 rows and 26 columns**, but that does not mean
 measurements. We retain all 26 source fields, rename them to readable
 `snake_case`, and append `_mm` to measurements recorded in millimetres.
 
+Rigorous screening states its expectations **before** looking. Each row of
+the table below was written down first, with its source; the cells that
+follow confirm or refute it. That habit (expectation, observation,
+comparison) is the engine of initial data analysis.
+
+```{pyodide}
+expectations = pd.DataFrame([
+    ("table shape", "90,371 rows x 26 columns", "figshare raw-data worksheet"),
+    ("measured records", "90,020", "Tobias et al. (2022), Methods"),
+    ("taxonomy-only GAPSPECIES rows", "351", "AVONET metadata sheet"),
+    ("distinct BirdLife species labels", "11,020", "Tobias et al. (2022)"),
+    ("wing length coverage", "near-complete", "AVONET protocol description"),
+], columns=["quantity", "expected", "source"])
+expectations
+```
+
 ```{pyodide}
 birds = pd.read_csv(
     open_url(DATA_URL + "avonet_individuals.csv"),
@@ -188,19 +352,19 @@ measurements used for allometry.
 
 ```{pyodide}
 column_catalogue = pd.DataFrame([
-    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "—", "distinct count", "table, tooltip", "nominal"),
-    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "—", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "—", "count, proportion", "bar, dot, facet", "nominal"),
-    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "—", "count, proportion", "bar, dot, facet", "nominal"),
-    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "-", "distinct count", "table, tooltip", "nominal"),
+    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "-", "count, proportion", "bar, dot, facet", "nominal"),
     ("data_type", "Sampling design", "Nominal (binary)", "1 = museum specimen; 2 = live individual", "code", "count, proportion", "bar, dot", "nominal"),
-    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "—", "count, proportion", "bar, dot, facet", "nominal"),
-    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "—", "distinct count", "table, tooltip", "nominal"),
+    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "-", "count, proportion", "bar, dot, facet", "nominal"),
+    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "-", "distinct count", "table, tooltip", "nominal"),
     ("sex", "Sampling design", "Nominal", "M = male; F = female; U = unknown", "code", "count, proportion", "bar, dot", "nominal"),
     ("age", "Sampling design", "Ordinal (binary)", "0 = adult measurement; 1 = immature measurement", "code", "count, proportion", "ordered bar, dot", "ordinal"),
-    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "—", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "—", "count, proportion", "bar, map", "nominal/geographic"),
-    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "—", "count, proportion", "bar, map", "nominal/geographic"),
+    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "-", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "-", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "-", "count, proportion", "bar, map", "nominal/geographic"),
     ("beak_length_culmen_mm", "Morphology", "Quantitative (continuous)", "Beak tip to base of skull along the culmen", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
     ("beak_length_nares_mm", "Morphology", "Quantitative (continuous)", "Anterior edge of nostril to beak tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
     ("beak_width_mm", "Morphology", "Quantitative (continuous)", "Beak width at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
@@ -211,9 +375,9 @@ column_catalogue = pd.DataFrame([
     ("secondary1_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to the first secondary feather", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
     ("hand_wing_index", "Morphology", "Quantitative (continuous)", "100 × Kipp's distance / wing length", "index", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
     ("tail_length_mm", "Morphology", "Quantitative (continuous)", "Longest rectrix tip to its emergence from the skin", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
-    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "-", "count, proportion", "bar, dot, facet", "nominal"),
     ("protocol", "Sampling design", "Nominal (binary)", "1 = AVONET protocol; 0 = another protocol", "code", "count, proportion", "bar, dot", "nominal"),
-    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "—", "count, distinct count", "bar, table", "nominal"),
+    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "-", "count, distinct count", "bar, table", "nominal"),
 ], columns=["column", "group", "semantic_type", "meaning", "unit",
             "useful_aggregates", "suitable_views", "scale"])
 
@@ -274,7 +438,7 @@ distinct observed values, and one example for **every column**.
 def first_example(series):
     observed = series.dropna()
     if observed.empty:
-        return "—"
+        return "-"
     value = observed.iloc[0]
     return str(round(value, 3) if isinstance(value, float) else value)[:45]
 
@@ -438,6 +602,61 @@ measured rows were taken under a protocol other than the AVONET protocol.
 These imbalances may matter if sex, age, preservation, or protocol changes a
 trait.
 
+### The unit of analysis: observations per species
+
+With the design fields decoded, the first content question is not about
+any measurement. It is about the **unit of analysis**. Rows are individual
+birds, but the claims of this part are about species, so before looking at
+a single trait we ask: how many measured birds does each species
+contribute, and how unevenly is that effort spread? Every later summary
+inherits its stability from these counts.
+
+```{pyodide}
+measured = birds[birds["data_type"].notna()]
+species_depth = (measured.groupby("species").size()
+                 .rename("individuals").reset_index())
+
+depth_summary = (species_depth["individuals"]
+                 .describe(percentiles=[0.25, 0.5, 0.75, 0.9, 0.95, 0.99])
+                 .rename("individuals_per_species")
+                 .to_frame())
+depth_summary
+```
+
+```{pyodide}
+depth_frequency = (species_depth["individuals"].value_counts().sort_index()
+                   .rename_axis("individuals").reset_index(name="species_count"))
+top_species = species_depth.nlargest(15, "individuals")
+
+depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
+    .encode(
+        x=alt.X("individuals:Q", title="Measured individuals per species",
+                scale=alt.Scale(type="log")),
+        y=alt.Y("species_count:Q", title="Number of species",
+                scale=alt.Scale(type="log")),
+        tooltip=["individuals:Q", alt.Tooltip("species_count:Q", format=",")],
+    )
+    .properties(width=330, height=300, title="Sampling-depth distribution"))
+
+top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
+    .encode(
+        x=alt.X("individuals:Q", title="Measured individuals"),
+        y=alt.Y("species:N", title=None, sort="-x"),
+        tooltip=["species:N", alt.Tooltip("individuals:Q", format=",")],
+    )
+    .properties(width=330, height=300, title="15 most-sampled species"))
+
+depth_chart | top_species_chart
+```
+
+The median measured species has five birds, 383 species have only one, and
+the most-sampled species has 784. Treating all 90,020 measured records as
+independent would let a few heavily sampled species dominate; treating every
+species mean as equally precise would ignore the opposite problem. And the
+accounting closes: 10,669 species have at least one measured bird, and the
+remaining 351 of the 11,020 named species are exactly the taxonomy-only
+GAPSPECIES rows.
+
 ### Provenance and geographic coverage
 
 Large global datasets are often collections of collections. The leading
@@ -476,6 +695,45 @@ The NHMUK source alone contributes 46,060 rows, and the largest country
 counts come from tropical, species-rich regions rather than an even global
 sample. Contributor concentration is not automatically a flaw, but it warns
 us that source, protocol, geography, and morphology may be entangled.
+
+### The measurement process leaves fingerprints
+
+Screening is not only about values; it is also about how values were
+produced. One classic check is measurement granularity: what fraction of
+each measurer's wing lengths are whole millimetres? Rulers, calipers, and
+personal habit leave different fingerprints, and a mixture of precisions
+inside one column is worth knowing before comparing small differences.
+
+```{pyodide}
+wing_measured = measured.dropna(subset=["wing_length_mm", "measurer"])
+top_measurers = wing_measured["measurer"].value_counts().head(10).index
+
+granularity = (wing_measured[wing_measured["measurer"].isin(top_measurers)]
+    .groupby("measurer")["wing_length_mm"]
+    .agg(rows="count",
+         whole_mm_pct=lambda v: (v % 1 == 0).mean() * 100)
+    .reset_index()
+    .sort_values("whole_mm_pct"))
+
+(alt.Chart(granularity)
+ .mark_bar(color="#4e79a7")
+ .encode(
+     x=alt.X("whole_mm_pct:Q", title="Wing lengths recorded as whole mm (%)",
+             scale=alt.Scale(domain=[0, 100])),
+     y=alt.Y("measurer:N", title="Measurer", sort="-x"),
+     tooltip=["measurer:N", alt.Tooltip("rows:Q", format=","),
+              alt.Tooltip("whole_mm_pct:Q", format=".1f")],
+ )
+ .properties(width=600, height=260,
+             title="Recording precision differs by measurer (10 largest)"))
+```
+
+Among the ten largest measurer codes, the share of whole-millimetre wing
+lengths runs from about 79% to exactly 100%: some measurers worked to a
+tenth of a millimetre, others to the nearest millimetre. That caps the
+precision of any comparison that mixes their records. In the
+initial-data-analysis literature this screening step is called checking
+for digit preference, or heaping.
 
 ### All ten morphological columns
 
@@ -575,6 +833,89 @@ make shapes comparable across traits, while independent facet scales let each
 trait use its own range. That choice helps see shape but prevents direct
 comparison of absolute magnitudes across panels.
 
+### Validation rules, stated as code
+
+Suspicion should be turned into named, checkable rules. Three kinds are
+available here. **Physical rules** bound what a measurement can be.
+**Consistency rules** relate columns that must agree: Kipp's distance is
+part of the wing, so it cannot exceed wing length. **Derivation rules**
+recompute stored derived fields from their ingredients: hand-wing index is
+defined as 100 x Kipp's distance / wing length, so we can rebuild it and
+compare it to the stored column.
+
+```{pyodide}
+kw = measured.dropna(subset=["kipps_distance_mm", "wing_length_mm"])
+sw = measured.dropna(subset=["secondary1_mm", "wing_length_mm"])
+hw = measured.dropna(subset=["hand_wing_index", "kipps_distance_mm",
+                             "wing_length_mm"])
+hwi_rebuilt = 100 * hw["kipps_distance_mm"] / hw["wing_length_mm"]
+
+validation_rules = pd.DataFrame([
+    ("Kipp's distance <= wing length", len(kw),
+     int((kw["kipps_distance_mm"] > kw["wing_length_mm"]).sum())),
+    ("first secondary <= wing length", len(sw),
+     int((sw["secondary1_mm"] > sw["wing_length_mm"]).sum())),
+    ("stored HWI within 0.6 of recomputed", len(hw),
+     int((~np.isclose(hwi_rebuilt, hw["hand_wing_index"], atol=0.6)).sum())),
+    ("wing length above 0.5 mm",
+     int(measured["wing_length_mm"].notna().sum()),
+     int((measured["wing_length_mm"].dropna() <= 0.5).sum())),
+], columns=["rule", "rows_checked", "violations"])
+validation_rules
+```
+
+```{pyodide}
+assert validation_rules["violations"].tolist() == [0, 4, 37, 18]
+print("✓ 0, 4, 37 and 18 violations: every one is now a named, reproducible")
+print("  finding instead of a lurking surprise")
+```
+
+The zero matters as much as the violations. No bird's Kipp's distance
+exceeds its wing, which is evidence those two fields really were measured
+on the same wing. The four secondary-feather violations and 37
+rebuilt-index mismatches are rows to inspect; the 18 wing lengths at or
+below half a millimetre are the 0.1 placeholders found above, now caught
+by a rule rather than by luck. Writing checks this way, as declared rules
+with pass and fail counts, comes from the data-validation literature (van
+der Loo and de Jonge, *Statistical Data Cleaning*); the same idea powers
+tools such as `pandera` in Python and `validate` in R.
+
+### Validate against the world
+
+Internal checks cannot catch a dataset that is consistently wrong. Peng's
+EDA checklist insists on validating against **at least one external
+source**, so we compare species-mean wing lengths for four well-documented
+species with the ranges given in standard field handbooks.
+
+```{pyodide}
+handbook = pd.DataFrame([
+    ("Passer domesticus", "house sparrow", 70, 85),
+    ("Anas platyrhynchos", "mallard", 240, 300),
+    ("Apus apus", "common swift", 160, 185),
+    ("Troglodytes troglodytes", "Eurasian wren", 44, 55),
+], columns=["species", "common_name", "handbook_low_mm", "handbook_high_mm"])
+
+observed_wing = (measured[measured["species"].isin(handbook["species"])]
+    .groupby("species")["wing_length_mm"].agg(n="count", mean_mm="mean")
+    .reset_index())
+
+external_check = handbook.merge(observed_wing, on="species")
+external_check["within_range"] = external_check["mean_mm"].between(
+    external_check["handbook_low_mm"], external_check["handbook_high_mm"])
+external_check.round(1)
+```
+
+```{pyodide}
+assert external_check["within_range"].all()
+print("✓ all four species-mean wing lengths fall inside handbook ranges")
+```
+
+Four species is a spot check, not proof. But this is the kind of check
+that catches unit errors, decimal shifts, and column mix-ups that no
+amount of internal consistency can reveal. If the mallard's mean wing had
+come out at 26 mm or at 2,634 mm, everything downstream would have been
+wrong for a reason no histogram could explain.
+
 ### Completeness is a row-level pattern
 
 Column percentages do not show whether gaps fall in the same birds. Count
@@ -638,6 +979,17 @@ the discrete nominal palette used for column groups. Colour is less precise
 than position, but it is effective for scanning a two-dimensional matrix for
 blocks and exceptions.
 
+The pattern in this heatmap has a name. Statisticians distinguish data
+missing completely at random (MCAR), missing at random given known
+variables (MAR), and missing not at random (MNAR, where the gap depends on
+the unobserved value itself). Whole missing blocks aligned with sources
+are direct evidence against MCAR: absence here is predictable from
+provenance. The practical consequence is that complete-case analysis does
+not just shrink the sample, it **reweights** it toward the sources that
+measured everything, and any trait difference between sources rides along.
+The taxonomy is from Little and Rubin's *Statistical Analysis with Missing
+Data*, and "which mechanism?" is a standard screening question.
+
 ### Scales map data values to visual values
 
 A scale maps a **data domain** to a **visual range**. An x-scale maps numbers
@@ -661,12 +1013,12 @@ scale_base = alt.Chart(scale_demo).mark_circle(size=90, color="#4e79a7").encode(
 )
 
 linear_scale = scale_base.encode(
-    x=alt.X("value:Q", title="Value — linear scale",
+    x=alt.X("value:Q", title="Value (linear scale)",
             scale=alt.Scale(type="linear", domain=[1, 1000]))
 ).properties(width=330, height=70, title="Equal differences occupy equal distance")
 
 log_scale = scale_base.encode(
-    x=alt.X("value:Q", title="Value — logarithmic scale",
+    x=alt.X("value:Q", title="Value (logarithmic scale)",
             scale=alt.Scale(type="log", domain=[1, 1000]))
 ).properties(width=330, height=70, title="Equal ratios occupy equal distance")
 
@@ -778,7 +1130,9 @@ the fitted line. The accompanying table makes the transformation and fit
 statistics explicit.
 
 ```{pyodide}
-regression_sample = scale_pair.sample(n=8000, random_state=36104).copy()
+regression_sample = (scale_pair[["tarsus_length_mm", "beak_length_culmen_mm",
+                                 "data_type"]]
+                     .sample(n=8000, random_state=36104).copy())
 regression_sample["log10_tarsus"] = np.log10(regression_sample["tarsus_length_mm"])
 regression_sample["log10_culmen"] = np.log10(regression_sample["beak_length_culmen_mm"])
 
@@ -838,53 +1192,55 @@ line can hide different trends by sex, source, protocol, or species. A useful
 visualisation states what was fitted, on which scale, to which rows, and at
 which unit of analysis.
 
-### Sampling depth by species
+### One line can hide two populations
 
-AVONET is individual-level, but individuals are nested within species. The
-number of birds per species determines how stable a species mean can be.
+The record-type field from the design audit earns its keep here. Fit the
+same log-log regression separately for museum specimens and live birds:
 
 ```{pyodide}
-measured = birds[birds["data_type"].notna()]
-species_depth = (measured.groupby("species").size()
-                 .rename("individuals").reset_index())
+regression_sample["record_type"] = regression_sample["data_type"].map(
+    {1: "Museum specimen", 2: "Live individual"})
 
-depth_summary = (species_depth["individuals"]
-                 .describe(percentiles=[0.25, 0.5, 0.75, 0.9, 0.95, 0.99])
-                 .rename("individuals_per_species")
-                 .to_frame())
-depth_summary
+subgroup_rows = []
+for record_type, subset in regression_sample.groupby("record_type"):
+    slope, intercept = np.polyfit(subset["log10_tarsus"],
+                                  subset["log10_culmen"], 1)
+    subgroup_rows.append({
+        "record_type": record_type,
+        "n": len(subset),
+        "slope": slope,
+        "r": np.corrcoef(subset["log10_tarsus"],
+                         subset["log10_culmen"])[0, 1],
+    })
+pd.DataFrame(subgroup_rows).round(3)
 ```
 
 ```{pyodide}
-depth_frequency = (species_depth["individuals"].value_counts().sort_index()
-                   .rename_axis("individuals").reset_index(name="species_count"))
-top_species = species_depth.nlargest(15, "individuals")
+subgroup_base = alt.Chart(regression_sample).encode(
+    x=alt.X("log10_tarsus:Q", title="log10 tarsus length"),
+    y=alt.Y("log10_culmen:Q", title="log10 culmen length"),
+    color=alt.Color("record_type:N", title="Record type",
+                    scale=alt.Scale(range=["#e15759", "#4e79a7"])),
+)
 
-depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
-    .encode(
-        x=alt.X("individuals:Q", title="Measured individuals per species",
-                scale=alt.Scale(type="log")),
-        y=alt.Y("species_count:Q", title="Number of species",
-                scale=alt.Scale(type="log")),
-        tooltip=["individuals:Q", alt.Tooltip("species_count:Q", format=",")],
-    )
-    .properties(width=330, height=300, title="Sampling-depth distribution"))
-
-top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
-    .encode(
-        x=alt.X("individuals:Q", title="Measured individuals"),
-        y=alt.Y("species:N", title=None, sort="-x"),
-        tooltip=["species:N", alt.Tooltip("individuals:Q", format=",")],
-    )
-    .properties(width=330, height=300, title="15 most-sampled species"))
-
-depth_chart | top_species_chart
+(subgroup_base.mark_circle(size=11, opacity=0.15)
+ + subgroup_base.transform_regression(
+       "log10_tarsus", "log10_culmen", groupby=["record_type"]
+   ).mark_line(size=3)
+).properties(width=560, height=380,
+             title="The pooled slope belongs to neither subgroup equally")
 ```
 
-The median measured species has five birds, 383 species have only one, and
-the most-sampled species has 784. Treating all 90,020 measured records as
-independent would let a few heavily sampled species dominate; treating every
-species mean as equally precise would ignore the opposite problem.
+In the full data the museum-specimen slope is 0.62 with r = 0.63, close to
+the pooled fit, while the live-bird slope is almost exactly **zero**. That
+is not because live birds obey different biology. The live records cover
+only 702 species, mostly small passerines from a few ringing projects, so
+their tarsus lengths span a much narrower range (log10 spread 0.16, versus
+0.25 for specimens). Within a thin slice of the size axis the
+between-species scaling signal nearly vanishes and noise dominates: classic
+**range restriction**. The lesson generalises. A pooled line describes the
+mixture you happened to assemble, and screening the design fields first is
+what lets you notice.
 
 ### Aggregation functions change the question
 
@@ -974,7 +1330,9 @@ identity_limits = pd.DataFrame({
     "y": [species_wing["mean"].min(), species_wing["mean"].max()],
 })
 
-mean_median_points = (alt.Chart(species_wing)
+mean_median_data = species_wing[["species", "n", "mean", "median"]]
+
+mean_median_points = (alt.Chart(mean_median_data)
     .mark_circle(opacity=0.25, color="#4e79a7")
     .encode(
         x=alt.X("mean:Q", title="Species mean wing length (mm)",
@@ -1020,9 +1378,36 @@ individual wing length within each species" is a reproducible visual claim.
   median, range, quantiles, and standard deviation answer different questions.
 - Regression lines summarise a fitted relationship on a declared scale; they
   do not establish mechanism, causality, or a universal trend.
+- Named validation rules returned 0, 4, 37 and 18 violations; the zeros are
+  findings too.
+- Four handbook spot checks put species-mean wing lengths inside published
+  ranges, so units and columns line up with the outside world.
+- Recording precision differs by measurer, from tenth-millimetre habits to
+  whole-millimetre habits.
+- The pooled regression slope is carried by the museum series; the
+  live-bird subset alone, restricted in range, shows almost none of it.
 
 Only after this audit are we ready to choose two traits and define the rows
 that can support their comparison.
+
+One principle before moving on. Everything above is **exploration**, and
+exploration generates hypotheses rather than confirming them: a pattern
+noticed while rummaging cannot be certified by the same look at the same
+data (Tukey's exploratory/confirmatory distinction; Gelman and Loken call
+the danger the "garden of forking paths"). This part stays exploratory.
+When a later assessment asks you to test a claim, the test must be
+specified before the rummaging starts.
+
+::: {.callout-note title="Where these practices come from"}
+- Tukey (1977), *Exploratory Data Analysis*: the founding text.
+- Baillie et al. (2022), [Ten simple rules for initial data analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS Computational Biology*: the assigned reading for this page.
+- Huebner et al. (2018), *A contemporary conceptual framework for initial data analysis*, Observational Studies 4:171–192: the full IDA framework.
+- Peng, [*Exploratory Data Analysis with R*](https://bookdown.org/rdpeng/exdata/): the EDA checklist ("check your n's"; "validate with an external source").
+- Wickham, Cetinkaya-Rundel and Grolemund, [*R for Data Science*, EDA chapter](https://r4ds.hadley.nz/eda): variation and covariation as the two standing questions.
+- van der Loo and de Jonge (2018), *Statistical Data Cleaning with Applications in R*: validation rules as code.
+- Little and Rubin, *Statistical Analysis with Missing Data*: the MCAR / MAR / MNAR taxonomy.
+- Broman and Woo (2018), [Data organization in spreadsheets](https://doi.org/10.1080/00031305.2017.1375989), *The American Statistician*: data dictionaries and raw-file hygiene.
+:::
 
 ## 2 · Cleaning: where do the rows go?
 
@@ -1056,6 +1441,31 @@ We just discarded **nearly a quarter of the dataset**. That is a legitimate clea
 step, but it is a decision, it changes what "n" means in every caption
 downstream, and it must be disclosed. Any figure built from this table
 should say 69,509 individuals, not 90,371.
+
+Clinical trials report exactly this accounting as a flow diagram (the
+CONSORT standard), and the habit transfers to any analysis: you should be
+able to draw the path from raw file to analysed rows, with the rule that
+caused every drop.
+
+```{pyodide}
+row_flow = pd.DataFrame([
+    ("1. raw worksheet", len(birds), "as downloaded"),
+    ("2. measured records", int(birds["data_type"].notna().sum()),
+     "drop 351 taxonomy-only GAPSPECIES rows"),
+    ("3. beak-tarsus complete", len(clean),
+     "require species, culmen and tarsus"),
+], columns=["stage", "rows", "rule"])
+
+(alt.Chart(row_flow)
+ .mark_bar(color="#4e79a7")
+ .encode(
+     x=alt.X("rows:Q", title="Rows"),
+     y=alt.Y("stage:N", title=None, sort=None),
+     tooltip=["stage:N", alt.Tooltip("rows:Q", format=","), "rule:N"],
+ )
+ .properties(width=600, height=150,
+             title="Row flow from raw file to analysis table"))
+```
 
 ## 3 · The individual level
 
