@@ -11,7 +11,7 @@ website:
   title: "36104 · Data Visualisation and Narratives"
   navbar:
     background: "#4e4a84"
-    left:
+    right:
       - text: "Session 1"
         menu:
           - href: session1/part-a.qmd
