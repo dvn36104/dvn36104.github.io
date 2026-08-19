@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-07b47d838eda2b396da26c3fd10be513.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bddd9fb77de3aeca9efad670fead5a6e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a959c9107cf3fe900a9921acec6d2bb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -162,10 +162,6 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Session 1</span>
@@ -221,7 +217,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Triangle of Everything</h1>
-<p class="subtitle lead">Session 1 · Part C — rebuilding the chart of all objects in the Universe</p>
+<p class="subtitle lead">Session 1 · Part C: rebuilding the chart of all objects in the Universe</p>
 </div>
 
 
@@ -238,8 +234,8 @@ window.Quarto = {
 </header>
 
 
-<p>In 2023, two astrophysicists published a chart that went viral: <strong>every object in the Universe on one pair of axes</strong> — quarks, viruses, fleas, whales, planets, stars, black holes, galaxies, and the observable Universe itself (Lineweaver &amp; Patel, <em>All objects and some questions</em>, American Journal of Physics 91:819). Plot mass against radius on log scales and everything that exists falls inside a <strong>triangle</strong>: one wall drawn by gravity, one wall drawn by quantum mechanics, and an apex where the two meet at the smallest possible object.</p>
-<p>In this part you rebuild that chart step by step. Every ingredient is something you can compute: two axes, one curated table, one fact about spheres, and two famous formulas. By the end you will have drawn the figure — and you will know why it has the shape it has.</p>
+<p>In 2023, two astrophysicists published a chart that went viral: <strong>every object in the Universe on one pair of axes</strong>: quarks, viruses, fleas, whales, planets, stars, black holes, galaxies, and the observable Universe itself (Lineweaver &amp; Patel, <em>All objects and some questions</em>, American Journal of Physics 91:819). Plot mass against radius on log scales and everything that exists falls inside a <strong>triangle</strong>: one wall drawn by gravity, one wall drawn by quantum mechanics, and an apex where the two meet at the smallest possible object.</p>
+<p>In this part you rebuild that chart step by step. Every ingredient is something you can compute: two axes, one curated table, one fact about spheres, and two famous formulas. By the end you will have drawn the figure, and you will know why it has the shape it has.</p>
 <p>The rebuild happens in five steps:</p>
 <table class="caption-top table">
 <colgroup>
@@ -301,9 +297,9 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </div>
 <section id="one-pair-of-axes-for-everything" class="level2">
 <h2 class="anchored" data-anchor-id="one-pair-of-axes-for-everything">1 · One pair of axes for everything</h2>
-<p>Why mass and radius? Because they are the two properties <strong>every physical object has</strong>. A virus has no temperature you can easily assign, a galaxy has no chemistry — but both have a mass and a size. If you want a chart of <em>everything</em>, you need axes everything can land on.</p>
-<p>The catch is range. From a neutrino to the observable Universe, mass spans about <strong>90 orders of magnitude</strong> and radius about <strong>44</strong>. On linear axes, a wall chart wide enough to show the Universe would have to draw the Sun hundreds of times smaller than a single proton. So both axes are logarithmic — the same move you made for allometry in Part A, stretched to its absolute limit. (We work in grams and centimetres, following the paper; on axes this wide the choice of unit just slides everything by a constant, and changes nothing about the shape.)</p>
-<p>The chart’s raw material is a curated table — one row per object, a name, a group, a mass and a radius:</p>
+<p>Why mass and radius? Because they are the two properties <strong>every physical object has</strong>. A virus has no temperature you can easily assign, a galaxy has no chemistry, but both have a mass and a size. If you want a chart of <em>everything</em>, you need axes everything can land on.</p>
+<p>The catch is range. From a neutrino to the observable Universe, mass spans about <strong>90 orders of magnitude</strong> and radius about <strong>44</strong>. On linear axes, a wall chart wide enough to show the Universe would have to draw the Sun hundreds of times smaller than a single proton. So both axes are logarithmic: the same move you made for allometry in Part A, stretched to its absolute limit. (We work in grams and centimetres, following the paper; on axes this wide the choice of unit just slides everything by a constant, and changes nothing about the shape.)</p>
+<p>The chart’s raw material is a curated table: one row per object, a name, a group, a mass and a radius:</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
 
@@ -326,10 +322,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihuYW1lcykg
 
 </div>
 <script type="pyodide-5-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRkFNSUxJQVIgPSBbXCJmbGVhXCIsIFwiaHVtYW5cIiwgXCJibHVlIHdoYWxlXCIsIFwiRWFydGhcIiwgXCJTdW5cIl1cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg4LCA1LjUpKVxuZm9yIG5tIGluIEZBTUlMSUFSOlxuICAgIGkgPSBuYW1lcy5pbmRleChubSlcbiAgICBheC5zY2F0dGVyKHJhZGl1c1tpXSwgbWFzc1tpXSwgcz0zMCwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxuICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT0xMClcbmF4LnNldF94c2NhbGUoXCJsb2dcIik7IGF4LnNldF95c2NhbGUoXCJsb2dcIilcbmF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG5heC5zZXRfdGl0bGUoXCJGaXZlIGZhbWlsaWFyIG9iamVjdHMg4oCUIGFscmVhZHkgMjkgb3JkZXJzIG9mIG1hZ25pdHVkZSBpbiBtYXNzXCIpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRkFNSUxJQVIgPSBbXCJmbGVhXCIsIFwiaHVtYW5cIiwgXCJibHVlIHdoYWxlXCIsIFwiRWFydGhcIiwgXCJTdW5cIl1cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg4LCA1LjUpKVxuZm9yIG5tIGluIEZBTUlMSUFSOlxuICAgIGkgPSBuYW1lcy5pbmRleChubSlcbiAgICBheC5zY2F0dGVyKHJhZGl1c1tpXSwgbWFzc1tpXSwgcz0zMCwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxuICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT0xMClcbmF4LnNldF94c2NhbGUoXCJsb2dcIik7IGF4LnNldF95c2NhbGUoXCJsb2dcIilcbmF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG5heC5zZXRfdGl0bGUoXCJGaXZlIGZhbWlsaWFyIG9iamVjdHM6IGFscmVhZHkgMjkgb3JkZXJzIG9mIG1hZ25pdHVkZSBpbiBtYXNzXCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>Notice they fall roughly on a straight line. Hold that thought — it is the key to Step 3.</p>
+<p>Notice they fall roughly on a straight line. Hold that thought; it is the key to Step 3.</p>
 <p>First, a confession about the data. What is “the radius of a human”? The paper treats you as a <strong>sphere of radius 50 cm</strong> with mass 70 kg. Check what that implies:</p>
 <div>
 <div id="pyodide-6" class="exercise-cell">
@@ -344,27 +340,27 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaSA9IG5hbWVzLmluZGV4KFwi
 
 </div>
 <script type="pyodide-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IDAuMSA8IHJob19odW1hbiA8IDAuMlxucHJpbnQoXCLinJMgdGhlIHNwaGVyaWNhbCBodW1hbiBpcyB+MC4xMyBnL2NtwrMg4oCUIHNldmVuIHRpbWVzIGZsdWZmaWVyIHRoYW4gd2F0ZXJcIikifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IDAuMSA8IHJob19odW1hbiA8IDAuMlxucHJpbnQoXCLinJMgdGhlIHNwaGVyaWNhbCBodW1hbiBpcyB+MC4xMyBnL2NtwrMsIHNldmVuIHRpbWVzIGZsdWZmaWVyIHRoYW4gd2F0ZXJcIikifQ==
 </script>
 </div>
-<p>Real humans are almost exactly water density; the 50-cm sphere overestimates your volume about sevenfold. On an ordinary chart that would be a scandal. Here, one decade of error is <strong>one percent of the axis</strong> — invisible. That is the quiet trade this figure makes everywhere: every value is an order-of-magnitude sketch, and at this scale that is exactly good enough. Say so in the caption, and it is honest; hide it, and it is not.</p>
+<p>Real humans are almost exactly water density; the 50-cm sphere overestimates your volume about sevenfold. On an ordinary chart that would be a scandal. Here, one decade of error is <strong>one percent of the axis</strong>: invisible. That is the quiet trade this figure makes everywhere: every value is an order-of-magnitude sketch, and at this scale that is exactly good enough. Say so in the caption, and it is honest; hide it, and it is not.</p>
 </section>
 <section id="the-full-bestiary" class="level2">
 <h2 class="anchored" data-anchor-id="the-full-bestiary">2 · The full bestiary</h2>
-<p>Now all 29 objects, coloured by kind. Six groups: particles (grey), life, worlds, stars, black holes (black, naturally), and cosmic structures. The palette is colour-blind-checked, and every point carries its own label — colour alone is never the only way to tell things apart:</p>
+<p>Now all 29 objects, coloured by kind. Six groups: particles (grey), life, worlds, stars, black holes (black, naturally), and cosmic structures. The palette is colour-blind-checked, and every point carries its own label; colour alone is never the only way to tell things apart:</p>
 <div>
 <div id="pyodide-8" class="exercise-cell">
 
 </div>
 <script type="pyodide-8-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ3JvdXBfY29sb3VycyA9IHtcbiAgICBcInBhcnRpY2xlc1wiOiAgICAgICAgIFwiIzY2NjY2NlwiLFxuICAgIFwibGlmZVwiOiAgICAgICAgICAgICAgXCIjMzBhOGIxXCIsXG4gICAgXCJ3b3JsZHNcIjogICAgICAgICAgICBcIiM0MjY5ZDBcIixcbiAgICBcInN0YXJzXCI6ICAgICAgICAgICAgIFwiI2M5OGEwMFwiLFxuICAgIFwiYmxhY2sgaG9sZXNcIjogICAgICAgXCIjMTcxNzE3XCIsXG4gICAgXCJjb3NtaWMgc3RydWN0dXJlc1wiOiBcIiM5NDc1Y2RcIixcbn1cblxuTEFCRUxfTEVGVCAgPSB7XCJIaWdncyBib3NvblwiLCBcIndoaXRlIGR3YXJmXCIsIFwiZ2xvYnVsYXIgY2x1c3RlclwifVxuTEFCRUxfQkVMT1cgPSB7XCJuZXV0cm9uIHN0YXJcIiwgXCJDZXJlc1wifVxuXG5kZWYgZHJhd19vYmplY3RzKGF4LCBmb250c2l6ZT03LjUpOlxuICAgIGZvciBpLCBubSBpbiBlbnVtZXJhdGUobmFtZXMpOlxuICAgICAgICBjb2wgPSBncm91cF9jb2xvdXJzW2dyb3Vwc1tpXV1cbiAgICAgICAgYXguc2NhdHRlcihyYWRpdXNbaV0sIG1hc3NbaV0sIHM9MTgsIGNvbG9yPWNvbCwgem9yZGVyPTMpXG4gICAgICAgIGlmIG5tIGluIExBQkVMX0xFRlQ6ICAgICAgIyBudWRnZSBhIGZldyBsYWJlbHMgb3V0IG9mIGNvbGxpc2lvbnNcbiAgICAgICAgICAgIGF4LmFubm90YXRlKG5tICsgXCIgXCIsIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIGhhPVwicmlnaHRcIilcbiAgICAgICAgZWxpZiBubSBpbiBMQUJFTF9CRUxPVzpcbiAgICAgICAgICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIHZhPVwidG9wXCIpXG4gICAgICAgIGVsc2U6XG4gICAgICAgICAgICBheC5hbm5vdGF0ZShcIiBcIiArIG5tLCAocmFkaXVzW2ldLCBtYXNzW2ldKSwgZm9udHNpemU9Zm9udHNpemUsXG4gICAgICAgICAgICAgICAgICAgICAgICBjb2xvcj1jb2wsIHpvcmRlcj0zKVxuXG5kZWYgY29zbW9zX2F4ZXMoZmlnc2l6ZT0oMTAsIDEwKSk6XG4gICAgZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPWZpZ3NpemUpXG4gICAgYXguc2V0X3hzY2FsZShcImxvZ1wiKTsgYXguc2V0X3lzY2FsZShcImxvZ1wiKVxuICAgIGF4LnNldF94bGltKDFlLTM1LCAxZTMwKTsgYXguc2V0X3lsaW0oMWUtNDAsIDFlNjApXG4gICAgYXguc2V0X3h0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtMzUsIDMxLCA1KV0pXG4gICAgYXguc2V0X3l0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtNDAsIDYxLCAxMCldKVxuICAgIGF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG4gICAgcmV0dXJuIGZpZywgYXhcblxuZmlnLCBheCA9IGNvc21vc19heGVzKClcbmRyYXdfb2JqZWN0cyhheClcbmF4LnNldF90aXRsZShcIkFsbCAyOSBvYmplY3RzIOKAlCBub3RlIHRoZSB0d28gZ3JlYXQgZW1wdHkgY29ybmVyc1wiKVxucGx0LnNob3coKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ3JvdXBfY29sb3VycyA9IHtcbiAgICBcInBhcnRpY2xlc1wiOiAgICAgICAgIFwiIzY2NjY2NlwiLFxuICAgIFwibGlmZVwiOiAgICAgICAgICAgICAgXCIjMzBhOGIxXCIsXG4gICAgXCJ3b3JsZHNcIjogICAgICAgICAgICBcIiM0MjY5ZDBcIixcbiAgICBcInN0YXJzXCI6ICAgICAgICAgICAgIFwiI2M5OGEwMFwiLFxuICAgIFwiYmxhY2sgaG9sZXNcIjogICAgICAgXCIjMTcxNzE3XCIsXG4gICAgXCJjb3NtaWMgc3RydWN0dXJlc1wiOiBcIiM5NDc1Y2RcIixcbn1cblxuTEFCRUxfTEVGVCAgPSB7XCJIaWdncyBib3NvblwiLCBcIndoaXRlIGR3YXJmXCIsIFwiZ2xvYnVsYXIgY2x1c3RlclwifVxuTEFCRUxfQkVMT1cgPSB7XCJuZXV0cm9uIHN0YXJcIiwgXCJDZXJlc1wifVxuXG5kZWYgZHJhd19vYmplY3RzKGF4LCBmb250c2l6ZT03LjUpOlxuICAgIGZvciBpLCBubSBpbiBlbnVtZXJhdGUobmFtZXMpOlxuICAgICAgICBjb2wgPSBncm91cF9jb2xvdXJzW2dyb3Vwc1tpXV1cbiAgICAgICAgYXguc2NhdHRlcihyYWRpdXNbaV0sIG1hc3NbaV0sIHM9MTgsIGNvbG9yPWNvbCwgem9yZGVyPTMpXG4gICAgICAgIGlmIG5tIGluIExBQkVMX0xFRlQ6ICAgICAgIyBudWRnZSBhIGZldyBsYWJlbHMgb3V0IG9mIGNvbGxpc2lvbnNcbiAgICAgICAgICAgIGF4LmFubm90YXRlKG5tICsgXCIgXCIsIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIGhhPVwicmlnaHRcIilcbiAgICAgICAgZWxpZiBubSBpbiBMQUJFTF9CRUxPVzpcbiAgICAgICAgICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIHZhPVwidG9wXCIpXG4gICAgICAgIGVsc2U6XG4gICAgICAgICAgICBheC5hbm5vdGF0ZShcIiBcIiArIG5tLCAocmFkaXVzW2ldLCBtYXNzW2ldKSwgZm9udHNpemU9Zm9udHNpemUsXG4gICAgICAgICAgICAgICAgICAgICAgICBjb2xvcj1jb2wsIHpvcmRlcj0zKVxuXG5kZWYgY29zbW9zX2F4ZXMoZmlnc2l6ZT0oMTAsIDEwKSk6XG4gICAgZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPWZpZ3NpemUpXG4gICAgYXguc2V0X3hzY2FsZShcImxvZ1wiKTsgYXguc2V0X3lzY2FsZShcImxvZ1wiKVxuICAgIGF4LnNldF94bGltKDFlLTM1LCAxZTMwKTsgYXguc2V0X3lsaW0oMWUtNDAsIDFlNjApXG4gICAgYXguc2V0X3h0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtMzUsIDMxLCA1KV0pXG4gICAgYXguc2V0X3l0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtNDAsIDYxLCAxMCldKVxuICAgIGF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG4gICAgcmV0dXJuIGZpZywgYXhcblxuZmlnLCBheCA9IGNvc21vc19heGVzKClcbmRyYXdfb2JqZWN0cyhheClcbmF4LnNldF90aXRsZShcIkFsbCAyOSBvYmplY3RzOiBub3RlIHRoZSB0d28gZ3JlYXQgZW1wdHkgY29ybmVyc1wiKVxucGx0LnNob3coKSJ9
 </script>
 </div>
-<p>The interesting thing is not where the points are — it is where they <strong>aren’t</strong>. Nothing in the top-left (small but monstrously heavy), nothing in the bottom-right (huge but almost massless). Two whole corners of possibility, empty. The rest of this page explains why they <em>must</em> be.</p>
+<p>The interesting thing is not where the points are; it is where they <strong>aren’t</strong>. Nothing in the top-left (small but monstrously heavy), nothing in the bottom-right (huge but almost massless). Two whole corners of possibility, empty. The rest of this page explains why they <em>must</em> be.</p>
 </section>
 <section id="density-is-a-straight-line-here" class="level2">
 <h2 class="anchored" data-anchor-id="density-is-a-straight-line-here">3 · Density is a straight line here</h2>
-<p>Any object of roughly uniform density <span class="math inline">\(\rho\)</span> obeys <span class="math inline">\(m = \frac{4}{3}\pi \rho\, r^3\)</span>. Take logs and this becomes <span class="math inline">\(\log m = 3\log r + \text{const}\)</span> — on our axes, <strong>a straight line of slope 3</strong>, one line per density. Chemistry pins atomic matter near <span class="math inline">\(\rho \approx 1\ \text{g/cm}^3\)</span>; nuclear matter sits fourteen decades higher:</p>
+<p>Any object of roughly uniform density <span class="math inline">\(\rho\)</span> obeys <span class="math inline">\(m = \frac{4}{3}\pi \rho\, r^3\)</span>. Take logs and this becomes <span class="math inline">\(\log m = 3\log r + \text{const}\)</span>: on our axes, <strong>a straight line of slope 3</strong>, one line per density. Chemistry pins atomic matter near <span class="math inline">\(\rho \approx 1\ \text{g/cm}^3\)</span>; nuclear matter sits fourteen decades higher:</p>
 <div>
 <div id="pyodide-9" class="exercise-cell">
 
@@ -373,7 +369,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ3JvdXBfY29sb3VycyA9IHtc
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicl9saW5lID0gbnAubG9nc3BhY2UoLTM1LCAzMCwgMjAwKVxuXG5kZWYgbWFzc19hdF9kZW5zaXR5KHJobywgcik6XG4gICAgcmV0dXJuIDQvMyAqIG5wLnBpICogcmhvICogcioqM1xuXG5maWcsIGF4ID0gY29zbW9zX2F4ZXMoKVxuZHJhd19vYmplY3RzKGF4KVxuZm9yIHJobyBpbiAoMS4wLCAyLjNlMTQpOlxuICAgIGF4LnBsb3Qocl9saW5lLCBtYXNzX2F0X2RlbnNpdHkocmhvLCByX2xpbmUpLCBscz1cIi0tXCIsIGx3PTEsIGNvbG9yPVwiIzg4ODg4OFwiKVxuYXgudGV4dCgyZTE0LCBtYXNzX2F0X2RlbnNpdHkoMSwgMWUxNCksIFwiYXRvbWljIGRlbnNpdHlcIiwgcm90YXRpb249NjQsXG4gICAgICAgIGZvbnRzaXplPTksIGNvbG9yPVwiIzg4ODg4OFwiKVxuYXgudGV4dCgyZTIsIG1hc3NfYXRfZGVuc2l0eSgyLjNlMTQsIDFlMiksIFwibnVjbGVhciBkZW5zaXR5XCIsIHJvdGF0aW9uPTY0LFxuICAgICAgICBmb250c2l6ZT05LCBjb2xvcj1cIiM4ODg4ODhcIilcbmF4LnNldF90aXRsZShcIlR3byBkZW5zaXRpZXMgb3JnYW5pc2UgYWxtb3N0IGV2ZXJ5dGhpbmdcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>Suddenly the scatter has a skeleton. Everything made of atoms — viruses, fleas, whales, asteroids, planets, the Sun — strings out along the atomic line: that <em>was</em> the straight line hiding in the five familiar objects. The proton and the neutron star, nineteen decades apart in size, share the nuclear line: <strong>a neutron star really is matter at the density of an atomic nucleus, the size of a city</strong>.</p>
+<p>Suddenly the scatter has a skeleton. Everything made of atoms (viruses, fleas, whales, asteroids, planets, the Sun) strings out along the atomic line: that <em>was</em> the straight line hiding in the five familiar objects. The proton and the neutron star, nineteen decades apart in size, share the nuclear line: <strong>a neutron star really is matter at the density of an atomic nucleus, the size of a city</strong>.</p>
 <div>
 <div id="pyodide-10" class="exercise-cell">
 
@@ -382,10 +378,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicl9saW5lID0gbnAubG9nc3Bh
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmhvX2FsbCA9IG1hc3MgLyAoNC8zICogbnAucGkgKiByYWRpdXMqKjMpXG5cbmlfbnMsIGlfcCA9IG5hbWVzLmluZGV4KFwibmV1dHJvbiBzdGFyXCIpLCBuYW1lcy5pbmRleChcInByb3RvblwiKVxuYXNzZXJ0IDFlMTQgPCByaG9fYWxsW2lfbnNdIDwgMWUxNSBhbmQgMWUxNCA8IHJob19hbGxbaV9wXSA8IDFlMTVcbmFzc2VydCByaG9fYWxsW25hbWVzLmluZGV4KFwicmVkIGdpYW50XCIpXSA8IDFlLTVcbnByaW50KFwi4pyTIHByb3RvbiBhbmQgbmV1dHJvbiBzdGFyIGJvdGggc2l0IGF0IG51Y2xlYXIgZGVuc2l0eSwgfjEwwrnigbQgZy9jbcKzXCIpXG5wcmludChmXCJkZW5zZXN0IG9iamVjdDogIHtuYW1lc1tpbnQobnAuYXJnbWF4KHJob19hbGwpKV19XCIpXG5wcmludChmXCJmbHVmZmllc3Qgb2JqZWN0OiB7bmFtZXNbaW50KG5wLmFyZ21pbihyaG9fYWxsKSldfVwiKSJ9
 </script>
 </div>
-<p>Read that last line again: the least dense thing in the Universe <strong>is the Universe</strong> — about <span class="math inline">\(10^{-29}\ \text{g/cm}^3\)</span>, six protons per cubic metre.</p>
+<p>Read that last line again: the least dense thing in the Universe <strong>is the Universe</strong>, about <span class="math inline">\(10^{-29}\ \text{g/cm}^3\)</span>, six protons per cubic metre.</p>
 <section id="sec-ex-density" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ex-density">Your turn: interrogate the densities</h3>
-<p>You have <code>rho_all</code> for all 29 objects. Rank everything by density and print a table from densest to fluffiest, with the group and the density of each object. Then answer from your output: which <strong>group</strong> owns the top of the table, and how many decades of density separate a red giant from a white dwarf — two objects of nearly the same <em>mass</em>?</p>
+<p>You have <code>rho_all</code> for all 29 objects. Rank everything by density and print a table from densest to fluffiest, with the group and the density of each object. Then answer from your output: which <strong>group</strong> owns the top of the table, and how many decades of density separate a red giant from a white dwarf, two objects of nearly the same <em>mass</em>?</p>
 <script type="exercise-setup-ex_density-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZGVuc2l0eSIsInNldHVwIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5mcm9tIHB5b2RpZGUuaHR0cCBpbXBvcnQgb3Blbl91cmxcbkRBVEFfVVJMID0ganMubG9jYXRpb24uaHJlZi5zcGxpdChcInNpdGVfbGlicy9cIilbMF0gKyBcImRhdGEvXCJcbnRleHQgPSBvcGVuX3VybChEQVRBX1VSTCArIFwib2JqZWN0c191bml2ZXJzZS5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5uYW1lcyAgPSBbclswXSBmb3IgciBpbiByb3dzXVxuZ3JvdXBzID0gW3JbMV0gZm9yIHIgaW4gcm93c11cbm1hc3MgICA9IG5wLmFycmF5KFtmbG9hdChyWzJdKSBmb3IgciBpbiByb3dzXSlcbnJhZGl1cyA9IG5wLmFycmF5KFtmbG9hdChyWzNdKSBmb3IgciBpbiByb3dzXSlcbnJob19hbGwgPSBtYXNzIC8gKDQvMyAqIG5wLnBpICogcmFkaXVzKiozKSJ9
 </script>
@@ -398,10 +394,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZGVuc2l0eSJ9LCJj
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_density">
-<p><strong>Hint 1</strong> — <code>np.argsort(rho_all)</code> gives indices from <em>smallest</em> to largest; reverse it with <code>[::-1]</code> to get densest first.</p>
+<p><strong>Hint 1</strong>: <code>np.argsort(rho_all)</code> gives indices from <em>smallest</em> to largest; reverse it with <code>[::-1]</code> to get densest first.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_density">
-<p><strong>Hint 2</strong> — A “decade” is a factor of ten, so the gap in decades is <code>np.log10(rho_wd / rho_rg)</code>. Get each with <code>rho_all[names.index("white dwarf")]</code>.</p>
+<p><strong>Hint 2</strong>: A “decade” is a factor of ten, so the gap in decades is <code>np.log10(rho_wd / rho_rg)</code>. Get each with <code>rho_all[names.index("white dwarf")]</code>.</p>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_density">
 <p><strong>Fully worked solution:</strong></p>
@@ -413,15 +409,15 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZGVuc2l0eSJ9LCJj
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gap <span class="op">=</span> np.log10(rho_all[names.index(<span class="st">"white dwarf"</span>)]</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               <span class="op">/</span> rho_all[names.index(<span class="st">"red giant"</span>)])</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">red giant vs white dwarf: </span><span class="sc">{</span>gap<span class="sc">:.0f}</span><span class="ss"> decades of density"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The top of the table belongs entirely to <strong>particles</strong> — the top quark and Higgs boson are the densest “objects” plotted, though for them density is a strange notion (their radius is a quantum limit, not a surface). The red giant and white dwarf differ by roughly <strong>12 decades</strong> of density despite nearly identical masses — they are the same kind of star at two different moments of its life, which is why mass alone tells you so little and the mass–radius <em>pair</em> tells you so much.</p>
+<p>The top of the table belongs entirely to <strong>particles</strong>: the top quark and Higgs boson are the densest “objects” plotted, though for them density is a strange notion (their radius is a quantum limit, not a surface). The red giant and white dwarf differ by roughly <strong>12 decades</strong> of density despite nearly identical masses; they are the same kind of star at two different moments of its life, which is why mass alone tells you so little and the mass–radius <em>pair</em> tells you so much.</p>
 </div>
 </section>
 </section>
 <section id="the-two-walls" class="level2">
 <h2 class="anchored" data-anchor-id="the-two-walls">4 · The two walls</h2>
 <p>Now the physics that gives the chart its shape. Both walls are one-line formulas.</p>
-<p><strong>The gravity wall.</strong> Squeeze a mass <span class="math inline">\(m\)</span> into a small enough radius and it becomes a black hole. That radius is the Schwarzschild radius <span class="math inline">\(r_s = 2Gm/c^2\)</span> — for a given radius, the heaviest possible object is <span class="math inline">\(m = rc^2/2G\)</span>: <strong>slope +1</strong> on our axes. Nothing can sit above this line: an object of that mass would already have collapsed. Black holes sit exactly <em>on</em> it — that is what a black hole is.</p>
-<p><strong>The quantum wall.</strong> Quantum mechanics denies small masses a definite tiny size: a particle of mass <span class="math inline">\(m\)</span> cannot be localised below its Compton wavelength <span class="math inline">\(\lambda_c = \hbar / mc\)</span>, so the lightest possible object of radius <span class="math inline">\(r\)</span> is <span class="math inline">\(m = \hbar/rc\)</span>: <strong>slope −1</strong>. Below this line, “object” stops meaning anything — try to confine a particle tighter and you create new particles instead. Fundamental particles (top quark, Higgs, electron, neutrino) are plotted <em>on</em> their Compton wavelengths; the composite proton gets its measured charge radius.</p>
+<p><strong>The gravity wall.</strong> Squeeze a mass <span class="math inline">\(m\)</span> into a small enough radius and it becomes a black hole. That radius is the Schwarzschild radius <span class="math inline">\(r_s = 2Gm/c^2\)</span>; for a given radius, the heaviest possible object is <span class="math inline">\(m = rc^2/2G\)</span>: <strong>slope +1</strong> on our axes. Nothing can sit above this line: an object of that mass would already have collapsed. Black holes sit exactly <em>on</em> it; that is what a black hole is.</p>
+<p><strong>The quantum wall.</strong> Quantum mechanics denies small masses a definite tiny size: a particle of mass <span class="math inline">\(m\)</span> cannot be localised below its Compton wavelength <span class="math inline">\(\lambda_c = \hbar / mc\)</span>, so the lightest possible object of radius <span class="math inline">\(r\)</span> is <span class="math inline">\(m = \hbar/rc\)</span>: <strong>slope −1</strong>. Below this line, “object” stops meaning anything; try to confine a particle tighter and you create new particles instead. Fundamental particles (top quark, Higgs, electron, neutrino) are plotted <em>on</em> their Compton wavelengths; the composite proton gets its measured charge radius.</p>
 <div>
 <div id="pyodide-13" class="exercise-cell">
 
@@ -430,7 +426,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZGVuc2l0eSJ9LCJj
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHNjaHdhcnpzY2hpbGRfbWFzcyhyKTogICAjIGhlYXZpZXN0IG9iamVjdCBvZiByYWRpdXMgciAoaXQncyBhIGJsYWNrIGhvbGUpXG4gICAgcmV0dXJuIHIgKiBjKioyIC8gKDIgKiBHKVxuXG5kZWYgY29tcHRvbl9tYXNzKHIpOiAgICAgICAgICMgbGlnaHRlc3Qgb2JqZWN0IG9mIHJhZGl1cyByIChxdWFudHVtIGxpbWl0KVxuICAgIHJldHVybiBoYmFyIC8gKHIgKiBjKVxuXG5maWcsIGF4ID0gY29zbW9zX2F4ZXMoKVxuYXguZmlsbF9iZXR3ZWVuKHJfbGluZSwgc2Nod2FyenNjaGlsZF9tYXNzKHJfbGluZSksIDFlNjAsXG4gICAgICAgICAgICAgICAgY29sb3I9XCIjZTY2ODUyXCIsIGFscGhhPTAuMTUsIHpvcmRlcj0wKVxuYXguZmlsbF9iZXR3ZWVuKHJfbGluZSwgMWUtNDAsIGNvbXB0b25fbWFzcyhyX2xpbmUpLFxuICAgICAgICAgICAgICAgIGNvbG9yPVwiIzQyNjlkMFwiLCBhbHBoYT0wLjE1LCB6b3JkZXI9MClcbmF4LnBsb3Qocl9saW5lLCBzY2h3YXJ6c2NoaWxkX21hc3Mocl9saW5lKSwgY29sb3I9XCIjMTcxNzE3XCIsIGx3PTEuNClcbmF4LnBsb3Qocl9saW5lLCBjb21wdG9uX21hc3Mocl9saW5lKSwgY29sb3I9XCIjMTcxNzE3XCIsIGx3PTEuNClcbmRyYXdfb2JqZWN0cyhheClcbmF4LnRleHQoM2UtMTQsIDFlNDUsIFwiZm9yYmlkZGVuIGJ5IGdyYXZpdHlcIiwgcm90YXRpb249MzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiM4YTMzMjRcIilcbmF4LnRleHQoM2UtNSwgMWUtMjQsIFwicXVhbnR1bSB1bmNlcnRhaW50eVwiLCByb3RhdGlvbj0tMzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiMxZDNmOGZcIilcbmF4LnNldF90aXRsZShcIlRoZSB0d28gd2FsbHM6IG5vdGhpbmcgYWJvdmUgdGhlIGJsYWNrLWhvbGUgbGluZSwgbm90aGluZyBiZWxvdyBDb21wdG9uXCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>The empty corners of Step 2 are now explained — and shaded. They are not unexplored; they are <strong>impossible</strong>. This is the deepest trick in the figure: the <em>absence</em> of data is carrying the physics, and the shading turns absence into a statement.</p>
+<p>The empty corners of Step 2 are now explained, and shaded. They are not unexplored; they are <strong>impossible</strong>. This is the deepest trick in the figure: the <em>absence</em> of data is carrying the physics, and the shading turns absence into a statement.</p>
 <p>One object deserves a second look. Check the top-right corner:</p>
 <div>
 <div id="pyodide-14" class="exercise-cell">
@@ -448,7 +444,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaVUgPSBuYW1lcy5pbmRleChc
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IDAuOCA8IHJhdGlvIDwgMS4yXG5wcmludChcIuKckyB0aGUgb2JzZXJ2YWJsZSBVbml2ZXJzZSBzaXRzIE9OIHRoZSBibGFjay1ob2xlIGxpbmVcIikifQ==
 </script>
 </div>
-<p>The Universe’s mass and radius satisfy the black-hole relation almost exactly. Does that mean we live inside a black hole? The paper’s answer is careful: the Schwarzschild formula assumes empty space <em>outside</em> the object, and outside our Hubble volume the density carries on much the same — so no. But <em>why</em> the numbers land on the line so precisely is the second exercise.</p>
+<p>The Universe’s mass and radius satisfy the black-hole relation almost exactly. Does that mean we live inside a black hole? The paper’s answer is careful: the Schwarzschild formula assumes empty space <em>outside</em> the object, and outside our Hubble volume the density carries on much the same, so no. But <em>why</em> the numbers land on the line so precisely is the second exercise.</p>
 </section>
 <section id="the-apex-and-the-finished-chart" class="level2">
 <h2 class="anchored" data-anchor-id="the-apex-and-the-finished-chart">5 · The apex, and the finished chart</h2>
@@ -473,14 +469,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicl94ID0gbnAuc3FydCgyICog
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGFicyhyX3ggLyAobnAuc3FydCgyKSAqIGxfcCkgLSAxKSA8IDFlLTZcbmFzc2VydCBhYnMobV94IC8gKG1fcCAvIG5wLnNxcnQoMikpIC0gMSkgPCAxZS02XG5wcmludChcIuKckyB0aGUgd2FsbHMgY3Jvc3MgYXQgdGhlIFBsYW5jayBzY2FsZSAodGltZXMgYSBmYWN0b3Igb2Yg4oiaMilcIikifQ==
 </script>
 </div>
-<p>The crossing point is the <strong>Planck scale</strong> — about <span class="math inline">\(10^{-33}\)</span> cm and <span class="math inline">\(2\times10^{-5}\)</span> g, the mass of a flea’s egg compressed to a point <span class="math inline">\(10^{20}\)</span> times smaller than a proton. The smallest possible object is a Planck-mass black hole, which the paper calls an <strong>instanton</strong>: the only thing that is simultaneously as small as gravity allows and as small as quantum mechanics allows. Left of the Planck length, physics has no tested theory at all — the paper shades it “sub-Planckian unknown”, and so will we.</p>
-<p>Now assemble everything — regions, walls, density skeleton, objects, apex:</p>
+<p>The crossing point is the <strong>Planck scale</strong>: about <span class="math inline">\(10^{-33}\)</span> cm and <span class="math inline">\(2\times10^{-5}\)</span> g, the mass of a flea’s egg compressed to a point <span class="math inline">\(10^{20}\)</span> times smaller than a proton. The smallest possible object is a Planck-mass black hole, which the paper calls an <strong>instanton</strong>: the only thing that is simultaneously as small as gravity allows and as small as quantum mechanics allows. Left of the Planck length, physics has no tested theory at all; the paper shades it “sub-Planckian unknown”, and so will we.</p>
+<p>Now assemble everything (regions, walls, density skeleton, objects, apex):</p>
 <div>
 <div id="pyodide-18" class="exercise-cell">
 
 </div>
 <script type="pyodide-18-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IGNvc21vc19heGVzKGZpZ3NpemU9KDEwLjUsIDEwLjUpKVxuXG4jIGZvcmJpZGRlbiByZWdpb25zXG5heC5maWxsX2JldHdlZW4ocl9saW5lLCBzY2h3YXJ6c2NoaWxkX21hc3Mocl9saW5lKSwgMWU2MCxcbiAgICAgICAgICAgICAgICBjb2xvcj1cIiNlNjY4NTJcIiwgYWxwaGE9MC4xNSwgem9yZGVyPTApXG5heC5maWxsX2JldHdlZW4ocl9saW5lLCAxZS00MCwgY29tcHRvbl9tYXNzKHJfbGluZSksXG4gICAgICAgICAgICAgICAgY29sb3I9XCIjNDI2OWQwXCIsIGFscGhhPTAuMTUsIHpvcmRlcj0wKVxuYXguYXh2c3BhbigxZS0zNSwgbF9wLCBjb2xvcj1cIiM1NTU1NTVcIiwgYWxwaGE9MC4yNSwgem9yZGVyPTApXG5cbiMgdGhlIHR3byB3YWxsc1xuYXgucGxvdChyX2xpbmUsIHNjaHdhcnpzY2hpbGRfbWFzcyhyX2xpbmUpLCBjb2xvcj1cIiMxNzE3MTdcIiwgbHc9MS40KVxuYXgucGxvdChyX2xpbmUsIGNvbXB0b25fbWFzcyhyX2xpbmUpLCBjb2xvcj1cIiMxNzE3MTdcIiwgbHc9MS40KVxuXG4jIGRlbnNpdHkgc2tlbGV0b25cbmZvciByaG8gaW4gKDEuMCwgMi4zZTE0KTpcbiAgICBheC5wbG90KHJfbGluZSwgbWFzc19hdF9kZW5zaXR5KHJobywgcl9saW5lKSwgbHM9XCItLVwiLCBsdz0wLjksXG4gICAgICAgICAgICBjb2xvcj1cIiM5OTk5OTlcIiwgem9yZGVyPTEpXG5cbiMgZXZlcnkgb2JqZWN0LCBwbHVzIHRoZSBhcGV4IChtYXJrZWQgYXQgdGhlIFBsYW5jayBwb2ludCwgZm9sbG93aW5nIHRoZVxuIyBwYXBlciDigJQgdGhlIGRyYXduIHdhbGxzIGNyb3NzIGEgZmFjdG9yIG9mIOKImjIgYXdheSwgaW52aXNpYmxlIGF0IHRoaXMgc2NhbGUpXG5kcmF3X29iamVjdHMoYXgpXG5heC5zY2F0dGVyKFtsX3BdLCBbbV9wXSwgbWFya2VyPVwiRFwiLCBzPTQ1LCBjb2xvcj1cIiMxNzE3MTdcIiwgem9yZGVyPTQpXG5heC5hbm5vdGF0ZShcIiAgaW5zdGFudG9uXFxuICAoUGxhbmNrIHNjYWxlKVwiLCAobF9wLCBtX3ApLCBmb250c2l6ZT04LjUpXG5cbiMgYW5ub3RhdGlvbnNcbmF4LnRleHQoM2UtMTQsIDFlNDUsIFwiZm9yYmlkZGVuIGJ5IGdyYXZpdHlcIiwgcm90YXRpb249MzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiM4YTMzMjRcIilcbmF4LnRleHQoM2UtNSwgMWUtMjQsIFwicXVhbnR1bSB1bmNlcnRhaW50eVwiLCByb3RhdGlvbj0tMzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiMxZDNmOGZcIilcbmF4LnRleHQoMS43ZS0zNSwgMWUxMCwgXCJzdWItUGxhbmNraWFuIHVua25vd25cIiwgcm90YXRpb249OTAsIGZvbnRzaXplPTksIGNvbG9yPVwiIzQ0NDQ0NFwiKVxuYXgudGV4dCgxZS0yNCwgM2U2LCBcImJsYWNrIGhvbGVzXCIsIHJvdGF0aW9uPTM4LCBmb250c2l6ZT05LCBjb2xvcj1cIiMxNzE3MTdcIilcbmF4LnRleHQoMi41ZS0xMCwgM2UtMjEsIFwiQ29tcHRvbiBsaW1pdFwiLCByb3RhdGlvbj0tMzgsIGZvbnRzaXplPTksIGNvbG9yPVwiIzE3MTcxN1wiKVxuYXgudGV4dCgyZTE0LCBtYXNzX2F0X2RlbnNpdHkoMSwgMWUxNCksIFwiYXRvbWljIGRlbnNpdHlcIiwgcm90YXRpb249NjQsXG4gICAgICAgIGZvbnRzaXplPTksIGNvbG9yPVwiIzg4ODg4OFwiKVxuYXgudGV4dCgyZTIsIG1hc3NfYXRfZGVuc2l0eSgyLjNlMTQsIDFlMiksIFwibnVjbGVhciBkZW5zaXR5XCIsIHJvdGF0aW9uPTY0LFxuICAgICAgICBmb250c2l6ZT05LCBjb2xvcj1cIiM4ODg4ODhcIilcbmF4LnNldF90aXRsZShcIkV2ZXJ5dGhpbmcgaW4gdGhlIFVuaXZlcnNlLCBvbmUgY2hhcnQg4oCUIGFmdGVyIExpbmV3ZWF2ZXIgJiBQYXRlbCAoMjAyMylcIilcbnBsdC5zaG93KCkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IGNvc21vc19heGVzKGZpZ3NpemU9KDEwLjUsIDEwLjUpKVxuXG4jIGZvcmJpZGRlbiByZWdpb25zXG5heC5maWxsX2JldHdlZW4ocl9saW5lLCBzY2h3YXJ6c2NoaWxkX21hc3Mocl9saW5lKSwgMWU2MCxcbiAgICAgICAgICAgICAgICBjb2xvcj1cIiNlNjY4NTJcIiwgYWxwaGE9MC4xNSwgem9yZGVyPTApXG5heC5maWxsX2JldHdlZW4ocl9saW5lLCAxZS00MCwgY29tcHRvbl9tYXNzKHJfbGluZSksXG4gICAgICAgICAgICAgICAgY29sb3I9XCIjNDI2OWQwXCIsIGFscGhhPTAuMTUsIHpvcmRlcj0wKVxuYXguYXh2c3BhbigxZS0zNSwgbF9wLCBjb2xvcj1cIiM1NTU1NTVcIiwgYWxwaGE9MC4yNSwgem9yZGVyPTApXG5cbiMgdGhlIHR3byB3YWxsc1xuYXgucGxvdChyX2xpbmUsIHNjaHdhcnpzY2hpbGRfbWFzcyhyX2xpbmUpLCBjb2xvcj1cIiMxNzE3MTdcIiwgbHc9MS40KVxuYXgucGxvdChyX2xpbmUsIGNvbXB0b25fbWFzcyhyX2xpbmUpLCBjb2xvcj1cIiMxNzE3MTdcIiwgbHc9MS40KVxuXG4jIGRlbnNpdHkgc2tlbGV0b25cbmZvciByaG8gaW4gKDEuMCwgMi4zZTE0KTpcbiAgICBheC5wbG90KHJfbGluZSwgbWFzc19hdF9kZW5zaXR5KHJobywgcl9saW5lKSwgbHM9XCItLVwiLCBsdz0wLjksXG4gICAgICAgICAgICBjb2xvcj1cIiM5OTk5OTlcIiwgem9yZGVyPTEpXG5cbiMgZXZlcnkgb2JqZWN0LCBwbHVzIHRoZSBhcGV4IChtYXJrZWQgYXQgdGhlIFBsYW5jayBwb2ludCwgZm9sbG93aW5nIHRoZVxuIyBwYXBlcjsgdGhlIGRyYXduIHdhbGxzIGNyb3NzIGEgZmFjdG9yIG9mIOKImjIgYXdheSwgaW52aXNpYmxlIGF0IHRoaXMgc2NhbGUpXG5kcmF3X29iamVjdHMoYXgpXG5heC5zY2F0dGVyKFtsX3BdLCBbbV9wXSwgbWFya2VyPVwiRFwiLCBzPTQ1LCBjb2xvcj1cIiMxNzE3MTdcIiwgem9yZGVyPTQpXG5heC5hbm5vdGF0ZShcIiAgaW5zdGFudG9uXFxuICAoUGxhbmNrIHNjYWxlKVwiLCAobF9wLCBtX3ApLCBmb250c2l6ZT04LjUpXG5cbiMgYW5ub3RhdGlvbnNcbmF4LnRleHQoM2UtMTQsIDFlNDUsIFwiZm9yYmlkZGVuIGJ5IGdyYXZpdHlcIiwgcm90YXRpb249MzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiM4YTMzMjRcIilcbmF4LnRleHQoM2UtNSwgMWUtMjQsIFwicXVhbnR1bSB1bmNlcnRhaW50eVwiLCByb3RhdGlvbj0tMzgsIGZvbnRzaXplPTEzLCBjb2xvcj1cIiMxZDNmOGZcIilcbmF4LnRleHQoMS43ZS0zNSwgMWUxMCwgXCJzdWItUGxhbmNraWFuIHVua25vd25cIiwgcm90YXRpb249OTAsIGZvbnRzaXplPTksIGNvbG9yPVwiIzQ0NDQ0NFwiKVxuYXgudGV4dCgxZS0yNCwgM2U2LCBcImJsYWNrIGhvbGVzXCIsIHJvdGF0aW9uPTM4LCBmb250c2l6ZT05LCBjb2xvcj1cIiMxNzE3MTdcIilcbmF4LnRleHQoMi41ZS0xMCwgM2UtMjEsIFwiQ29tcHRvbiBsaW1pdFwiLCByb3RhdGlvbj0tMzgsIGZvbnRzaXplPTksIGNvbG9yPVwiIzE3MTcxN1wiKVxuYXgudGV4dCgyZTE0LCBtYXNzX2F0X2RlbnNpdHkoMSwgMWUxNCksIFwiYXRvbWljIGRlbnNpdHlcIiwgcm90YXRpb249NjQsXG4gICAgICAgIGZvbnRzaXplPTksIGNvbG9yPVwiIzg4ODg4OFwiKVxuYXgudGV4dCgyZTIsIG1hc3NfYXRfZGVuc2l0eSgyLjNlMTQsIDFlMiksIFwibnVjbGVhciBkZW5zaXR5XCIsIHJvdGF0aW9uPTY0LFxuICAgICAgICBmb250c2l6ZT05LCBjb2xvcj1cIiM4ODg4ODhcIilcbmF4LnNldF90aXRsZShcIkV2ZXJ5dGhpbmcgaW4gdGhlIFVuaXZlcnNlLCBvbmUgY2hhcnQsIGFmdGVyIExpbmV3ZWF2ZXIgJiBQYXRlbCAoMjAyMylcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
 <p>That is the triangle of everything: gravity above, quantum uncertainty below, the unknown to the left, the Universe pinned to the top of the gravity wall, and every known thing strung out on density lines in between.</p>
@@ -495,34 +491,34 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfaHViYmxlIiwic2V0
 
 </div>
 <script type="pyodide-20-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfaHViYmxlIn0sImNvZGUiOiIjIENvbnN0YW50cyBHLCBjIGFuZCBIMCBhcmUgbG9hZGVkIChjZ3MgdW5pdHMpLlxuIyAxLiBIdWJibGUgcmFkaXVzLCBjcml0aWNhbCBkZW5zaXR5LCBhbmQgdGhlIG1hc3Mgb2YgdGhlIEh1YmJsZSBzcGhlcmUuXG4jIDIuIFNjaHdhcnpzY2hpbGQgcmFkaXVzIG9mIHRoYXQgbWFzcyDigJQgaG93IGRvZXMgaXQgY29tcGFyZSB0byByX0g/XG5cbnJfSCAgID0gX19fX19fXG5yaG9fYyA9IF9fX19fX1xubV9VICAgPSBfX19fX19cblxucl9zID0gMiAqIEcgKiBtX1UgLyBjKioyXG5wcmludChmXCJyX0ggPSB7cl9IOi4yZX0gY20gICBtX1UgPSB7bV9VOi4yZX0gZ1wiKVxucHJpbnQoZlwiU2Nod2FyenNjaGlsZCByYWRpdXMgb2YgdGhlIFVuaXZlcnNlJ3MgbWFzczoge3JfczouMmV9IGNtXCIpXG5wcmludChmXCJyYXRpbyByX3MgLyByX0ggPSB7cl9zIC8gcl9IOi4zZn1cIikifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfaHViYmxlIn0sImNvZGUiOiIjIENvbnN0YW50cyBHLCBjIGFuZCBIMCBhcmUgbG9hZGVkIChjZ3MgdW5pdHMpLlxuIyAxLiBIdWJibGUgcmFkaXVzLCBjcml0aWNhbCBkZW5zaXR5LCBhbmQgdGhlIG1hc3Mgb2YgdGhlIEh1YmJsZSBzcGhlcmUuXG4jIDIuIFNjaHdhcnpzY2hpbGQgcmFkaXVzIG9mIHRoYXQgbWFzczogaG93IGRvZXMgaXQgY29tcGFyZSB0byByX0g/XG5cbnJfSCAgID0gX19fX19fXG5yaG9fYyA9IF9fX19fX1xubV9VICAgPSBfX19fX19cblxucl9zID0gMiAqIEcgKiBtX1UgLyBjKioyXG5wcmludChmXCJyX0ggPSB7cl9IOi4yZX0gY20gICBtX1UgPSB7bV9VOi4yZX0gZ1wiKVxucHJpbnQoZlwiU2Nod2FyenNjaGlsZCByYWRpdXMgb2YgdGhlIFVuaXZlcnNlJ3MgbWFzczoge3JfczouMmV9IGNtXCIpXG5wcmludChmXCJyYXRpbyByX3MgLyByX0ggPSB7cl9zIC8gcl9IOi4zZn1cIikifQ==
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_hubble">
-<p><strong>Hint 1</strong> — All three formulas are written in the task text above; your job is to translate them into code, in order, using the constants provided. Watch the parentheses in the critical-density formula.</p>
+<p><strong>Hint 1</strong>: All three formulas are written in the task text above; your job is to translate them into code, in order, using the constants provided. Watch the parentheses in the critical-density formula.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_hubble">
-<p><strong>Hint 2</strong> — If your ratio comes out wildly far from 1 (say <span class="math inline">\(10^{-57}\)</span>), you almost certainly forgot to cube <span class="math inline">\(r_H\)</span> in the volume of the sphere.</p>
+<p><strong>Hint 2</strong>: If your ratio comes out wildly far from 1 (say <span class="math inline">\(10^{-57}\)</span>), you almost certainly forgot to cube <span class="math inline">\(r_H\)</span> in the volume of the sphere.</p>
 </div>
-<p><strong>How to know you got it.</strong> No solution button — the derivation is yours. Done right, the ratio comes out <strong>suspiciously exact</strong>. That exactness is itself the final puzzle: take the three formulas you just coded, substitute them into each other on paper, and watch what happens to the constants. What you find is a lesson about reading charts, not just making them — when a data point lands perfectly on a theory line, always ask whether the two were secretly computed from the same ingredients.</p>
+<p><strong>How to know you got it.</strong> No solution button; the derivation is yours. Done right, the ratio comes out <strong>suspiciously exact</strong>. That exactness is itself the final puzzle: take the three formulas you just coded, substitute them into each other on paper, and watch what happens to the constants. What you find is a lesson about reading charts, not just making them: when a data point lands perfectly on a theory line, always ask whether the two were secretly computed from the same ingredients.</p>
 </section>
 </section>
 <section id="what-went-into-the-chart" class="level2">
 <h2 class="anchored" data-anchor-id="what-went-into-the-chart">What went into the chart</h2>
 <p>Count the ingredients you actually used:</p>
 <ul>
-<li><strong>one curated table</strong> — 29 rows, every value an order-of-magnitude sketch, sources mixed from measurement (Earth), convention (the 50-cm spherical human), and definition (black-hole radii);</li>
-<li><strong>two log axes</strong> — doing more work than everything else combined, turning 90 orders of magnitude into a readable square and power laws into straight lines;</li>
-<li><strong>one fact about spheres</strong> — <span class="math inline">\(m \propto \rho r^3\)</span>, which organises all atomic matter onto one line and all nuclear matter onto another;</li>
-<li><strong>two formulas</strong> — <span class="math inline">\(r_s = 2Gm/c^2\)</span> and <span class="math inline">\(\lambda_c = \hbar/mc\)</span>, drawn not as data but as <em>walls</em>, turning empty space into a claim;</li>
-<li><strong>annotation</strong> — region labels, line labels, direct point labels: the difference between a scatter plot and an explanation.</li>
+<li><strong>one curated table</strong>: 29 rows, every value an order-of-magnitude sketch, sources mixed from measurement (Earth), convention (the 50-cm spherical human), and definition (black-hole radii);</li>
+<li><strong>two log axes</strong>: doing more work than everything else combined, turning 90 orders of magnitude into a readable square and power laws into straight lines;</li>
+<li><strong>one fact about spheres</strong>: <span class="math inline">\(m \propto \rho r^3\)</span>, which organises all atomic matter onto one line and all nuclear matter onto another;</li>
+<li><strong>two formulas</strong>: <span class="math inline">\(r_s = 2Gm/c^2\)</span> and <span class="math inline">\(\lambda_c = \hbar/mc\)</span>, drawn not as data but as <em>walls</em>, turning empty space into a claim;</li>
+<li><strong>annotation</strong>: region labels, line labels, direct point labels: the difference between a scatter plot and an explanation.</li>
 </ul>
-<p>That is the whole machine. The famous figure is not famous for its data — half its rows you could have written down yourself — but for its <em>framing</em>: pick axes everything shares, let physics draw the boundaries, and the emptiness becomes the story.</p>
+<p>That is the whole machine. The famous figure is not famous for its data (half its rows you could have written down yourself) but for its <em>framing</em>: pick axes everything shares, let physics draw the boundaries, and the emptiness becomes the story.</p>
 </section>
 <section id="sources-and-serving-notes" class="level2">
 <h2 class="anchored" data-anchor-id="sources-and-serving-notes">Sources and serving notes</h2>
 <ul>
-<li>Lineweaver, C. H. &amp; Patel, V. M. (2023) <em>All objects and some questions</em>, American Journal of Physics 91:819–825 (<a href="https://doi.org/10.1119/5.0150209">doi:10.1119/5.0150209</a>) — the original Figure 2, which this page rebuilds in simplified form (we omit the cosmological-epoch background shading and plot a smaller object sample).</li>
+<li>Lineweaver, C. H. &amp; Patel, V. M. (2023) <em>All objects and some questions</em>, American Journal of Physics 91:819–825 (<a href="https://doi.org/10.1119/5.0150209">doi:10.1119/5.0150209</a>), the original Figure 2, which this page rebuilds in simplified form (we omit the cosmological-epoch background shading and plot a smaller object sample).</li>
 <li><code>objects_universe.csv</code> is curated for this course: masses and radii are order-of-magnitude values assembled from standard references; the human and whale entries deliberately reproduce the paper’s values, sphericity and all. Fundamental particles are plotted at their Compton wavelengths (the proton at its measured charge radius); black holes at their Schwarzschild radii.</li>
 <li>Constants: CODATA values rounded to 4 significant figures; <span class="math inline">\(H_0 = 70\)</span> km/s/Mpc.</li>
 </ul>

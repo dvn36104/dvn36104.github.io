@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-07b47d838eda2b396da26c3fd10be513.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bddd9fb77de3aeca9efad670fead5a6e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a959c9107cf3fe900a9921acec6d2bb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -162,10 +162,6 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Session 1</span>
@@ -221,7 +217,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Periodic Spiral</h1>
-<p class="subtitle lead">Session 1 · Part D — the periodic table as a design problem</p>
+<p class="subtitle lead">Session 1 · Part D: the periodic table as a design problem</p>
 </div>
 
 
@@ -238,8 +234,8 @@ window.Quarto = {
 </header>
 
 
-<p>The periodic table might be the most successful data visualisation ever made: one diagram, on the wall of every chemistry room on Earth, encoding the structure of all matter. But here is the thing it is easy to forget — underneath it, the data is just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118. Every “table” you have ever seen is a <em>layout choice</em> for that list, and for 150 years chemists have argued about the right one. Spirals, circles, staircases — and the familiar castle-with-two-basements that won.</p>
-<p>In this part you will: build the physics that makes the list periodic, look at real alternative designs (and pick a favourite), construct a <strong>periodic spiral</strong> yourself, and then construct the canonical table — and ask, as designers, why it became <em>the</em> one.</p>
+<p>The periodic table might be the most successful data visualisation ever made: one diagram, on the wall of every chemistry room on Earth, encoding the structure of all matter. But here is the thing it is easy to forget: underneath it, the data is just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118. Every “table” you have ever seen is a <em>layout choice</em> for that list, and for 150 years chemists have argued about the right one. Spirals, circles, staircases, and the familiar castle-with-two-basements that won.</p>
+<p>In this part you will: build the physics that makes the list periodic, look at real alternative designs (and pick a favourite), construct a <strong>periodic spiral</strong> yourself, and then construct the canonical table, and ask, as designers, why it became <em>the</em> one.</p>
 <p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
@@ -259,8 +255,8 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </div>
 <section id="an-atom-in-three-sentences" class="level2">
 <h2 class="anchored" data-anchor-id="an-atom-in-three-sentences">1 · An atom, in three sentences</h2>
-<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus — carbon <em>is</em> “element six”. A neutral atom carries Z electrons, and they do not sit anywhere they like: they stack into <strong>shells</strong> around the nucleus, and shell <em>n</em> holds at most <span class="math inline">\(2n^2\)</span> electrons — 2, 8, 18, 32. Almost everything in chemistry follows from the third sentence: <strong>only the outermost shell touches the world</strong>, so atoms with the same outer arrangement behave alike.</p>
-<p>The data for this page is one row per element — number, symbol, name, and a few properties we will meet as we need them:</p>
+<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus: carbon <em>is</em> “element six”. A neutral atom carries Z electrons, and they do not sit anywhere they like: they stack into <strong>shells</strong> around the nucleus, and shell <em>n</em> holds at most <span class="math inline">\(2n^2\)</span> electrons: 2, 8, 18, 32. Almost everything in chemistry follows from the third sentence: <strong>only the outermost shell touches the world</strong>, so atoms with the same outer arrangement behave alike.</p>
+<p>The data for this page is one row per element: number, symbol, name, and a few properties we will meet as we need them:</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
 
@@ -274,10 +270,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 
 </div>
 <script type="pyodide-4-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihaKSA9PSAxMTggYW5kIFogPT0gbGlzdChyYW5nZSgxLCAxMTkpKVxucHJpbnQoXCLinJMgMTE4IGVsZW1lbnRzIOKAlCB0aGUgZGF0YSBpcyBsaXRlcmFsbHkganVzdCBhIHNvcnRlZCBsaXN0XCIpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihaKSA9PSAxMTggYW5kIFogPT0gbGlzdChyYW5nZSgxLCAxMTkpKVxucHJpbnQoXCLinJMgMTE4IGVsZW1lbnRzOiB0aGUgZGF0YSBpcyBsaXRlcmFsbHkganVzdCBhIHNvcnRlZCBsaXN0XCIpIn0=
 </script>
 </div>
-<p>Shells fill in a fixed order (the <em>aufbau</em> order — sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Ten lines of code capture it well enough to rebuild the entire table:</p>
+<p>Shells fill in a fixed order (the <em>aufbau</em> order: sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Ten lines of code capture it well enough to rebuild the entire table:</p>
 <div>
 <div id="pyodide-5" class="exercise-cell">
 
@@ -291,11 +287,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3Vic2hlbGxzID0gc29ydGVk
 
 </div>
 <script type="pyodide-6-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkgPT0gezE6IDIsIDI6IDgsIDM6IDF9XG5hc3NlcnQgc3VtKGUgZm9yIF8sIF8sIGUgaW4gY29uZmlndXJhdGlvbigyNikpID09IDI2XG5hc3NlcnQgWzIgKiBuKioyIGZvciBuIGluICgxLCAyLCAzLCA0KV0gPT0gWzIsIDgsIDE4LCAzMl1cbnByaW50KFwi4pyTIHNvZGl1bSBpcyAyLCA4LCAxIOKAlCBhbmQgc2hlbGwgY2FwYWNpdGllcyBhcmUgMm7CslwiKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkgPT0gezE6IDIsIDI6IDgsIDM6IDF9XG5hc3NlcnQgc3VtKGUgZm9yIF8sIF8sIGUgaW4gY29uZmlndXJhdGlvbigyNikpID09IDI2XG5hc3NlcnQgWzIgKiBuKioyIGZvciBuIGluICgxLCAyLCAzLCA0KV0gPT0gWzIsIDgsIDE4LCAzMl1cbnByaW50KFwi4pyTIHNvZGl1bSBpcyAyLCA4LCAxLCBhbmQgc2hlbGwgY2FwYWNpdGllcyBhcmUgMm7CslwiKSJ9
 </script>
 </div>
-<p>(Real atoms have about twenty famous exceptions — chromium and copper borrow an electron between sub-shells — which we cheerfully ignore: the idealised rule is what the table’s <em>shape</em> encodes.)</p>
-<p>Here is sodium drawn the way every textbook draws it — and note that this picture is a <em>diagram</em>, not a photograph of anything:</p>
+<p>(Real atoms have about twenty famous exceptions, where chromium and copper borrow an electron between sub-shells, which we cheerfully ignore: the idealised rule is what the table’s <em>shape</em> encodes.)</p>
+<p>Here is sodium drawn the way every textbook draws it, and note that this picture is a <em>diagram</em>, not a photograph of anything:</p>
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
@@ -304,7 +300,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkg
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg1LCA1KSlcbmF4LnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXguYXhpcyhcIm9mZlwiKVxuYXguc2NhdHRlcihbMF0sIFswXSwgcz0yMDAsIGNvbG9yPVwiIzE3MTcxN1wiLCB6b3JkZXI9MylcbmF4LmFubm90YXRlKFwiTmFcIiwgKDAsIDApLCBjb2xvcj1cIndoaXRlXCIsIGhhPVwiY2VudGVyXCIsIHZhPVwiY2VudGVyXCIsXG4gICAgICAgICAgICBmb250c2l6ZT04LCB6b3JkZXI9NClcbmZvciBuLCBjb3VudCBpbiBzaGVsbHMoMTEpLml0ZW1zKCk6XG4gICAgYXguYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCBuLCBmaWxsPUZhbHNlLCBjb2xvcj1cIiNiYmJiYmJcIiwgbHc9MSkpXG4gICAgYW5nID0gbnAubGluc3BhY2UoMCwgMiAqIG5wLnBpLCBjb3VudCwgZW5kcG9pbnQ9RmFsc2UpICsgbnAucGkgLyAyXG4gICAgYXguc2NhdHRlcihuICogbnAuY29zKGFuZyksIG4gKiBucC5zaW4oYW5nKSwgcz00NSwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxubGltID0gbWF4KHNoZWxscygxMSkpICsgMC42XG5heC5zZXRfeGxpbSgtbGltLCBsaW0pOyBheC5zZXRfeWxpbSgtbGltLCBsaW0pXG5heC5zZXRfdGl0bGUoXCJTb2RpdW06IDIsIDgsIDFcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>That lone outer electron is why sodium reacts so violently — sometimes explosively — with water, and why it sits in the same column as lithium and potassium, which have the same lonely arrangement.</p>
+<p>That lone outer electron is why sodium reacts so violently (sometimes explosively) with water, and why it sits in the same column as lithium and potassium, which have the same lonely arrangement.</p>
 </section>
 <section id="periodicity-the-pattern-in-the-list" class="level2">
 <h2 class="anchored" data-anchor-id="periodicity-the-pattern-in-the-list">2 · Periodicity: the pattern in the list</h2>
@@ -325,8 +321,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoienogPSBsaXN0KHJhbmdlKDEs
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICBhc3NlcnQgdmFsZW5jZSh6KSA9PSAoMiBpZiB6ID09IDIgZWxzZSA4KSAgICMgY2xvc2VkIHNoZWxsczogbm9ibGUgZ2FzZXNcbmZvciB6IGluICgzLCAxMSwgMTksIDM3LCA1NSwgODcpOlxuICAgIGFzc2VydCB2YWxlbmNlKHopID09IDEgICAgICAgICAgICAgICAgICAgICAgIyBmcmVzaCBzaGVsbHM6IGFsa2FsaSBtZXRhbHNcbnByaW50KFwi4pyTIHNoZWxsIGNsb3N1cmVzIGFuZCBmcmVzaCBzdGFydHMgcmVjdXIgYWxsIHRoZSB3YXkgdG8gWiA9IDExOFwiKSJ9
 </script>
 </div>
-<p>This sawtooth <strong>is</strong> the periodic law. Every row of any periodic table is one tooth; every column collects atoms caught at the same point of the cycle — the <strong>groups</strong>. Group 1 (one outer electron) are the violent alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing; group 17, one electron short of closing, are the halogens that grab one from anything nearby.</p>
-<p>And periodicity is not just electron bookkeeping — it shows up in every measurable property. Prove it to yourself:</p>
+<p>This sawtooth <strong>is</strong> the periodic law. Every row of any periodic table is one tooth; every column collects atoms caught at the same point of the cycle: the <strong>groups</strong>. Group 1 (one outer electron) are the violent alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing; group 17, one electron short of closing, are the halogens that grab one from anything nearby.</p>
+<p>And periodicity is not just electron bookkeeping; it shows up in every measurable property. Prove it to yourself:</p>
 <section id="sec-ex-radius" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ex-radius">Your turn: the size of atoms</h3>
 <p>The data column <code>radius</code> holds each element’s covalent radius in picometres. Plot radius against Z for all 118 elements, joined by a faint line, and highlight the <strong>alkali metals</strong> (Z = 3, 11, 19, 37, 55, 87) in one colour and the <strong>noble gases</strong> (Z = 2, 10, 18, 36, 54, 86) in another. What does the pattern do at each shell closure?</p>
@@ -342,10 +338,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
-<p><strong>Hint 1</strong> — Three layers: a faint <code>ax.plot(Z, radius, ...)</code> line, an <code>ax.scatter</code> of all the points, then two more scatters for the highlighted sets. <code>radius[z - 1]</code> is the radius of element <code>z</code>.</p>
+<p><strong>Hint 1.</strong> Three layers: a faint <code>ax.plot(Z, radius, ...)</code> line, an <code>ax.scatter</code> of all the points, then two more scatters for the highlighted sets. <code>radius[z - 1]</code> is the radius of element <code>z</code>.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
-<p><strong>Hint 2</strong> — For the highlights, loop <code>for z in ALKALI: ax.scatter([z], [radius[z - 1]], ...)</code>, and add <code>ax.annotate(symbol[z - 1], ...)</code> if you want labels.</p>
+<p><strong>Hint 2.</strong> For the highlights, loop <code>for z in ALKALI: ax.scatter([z], [radius[z - 1]], ...)</code>, and add <code>ax.annotate(symbol[z - 1], ...)</code> if you want labels.</p>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_radius">
 <p><strong>Fully worked solution:</strong></p>
@@ -365,14 +361,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"covalent radius (pm)"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Atomic size is periodic: peaks at the alkali metals"</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter), then at each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth in size mirrors the sawtooth in valence — same cycle, different property. This is the same cycle Lothar Meyer plotted as atomic volume in 1870, and that Mendeleev could read in 1869 from valences and atomic weights alone — decades before anyone knew electrons existed.</p>
+<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter), then at each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth in size mirrors the sawtooth in valence: same cycle, different property. This is the same cycle Lothar Meyer plotted as atomic volume in 1870, and that Mendeleev could read in 1869 from valences and atomic weights alone, decades before anyone knew electrons existed.</p>
 </div>
 </section>
 </section>
 <section id="the-zoo-one-list-many-tables" class="level2">
 <h2 class="anchored" data-anchor-id="the-zoo-one-list-many-tables">3 · The zoo: one list, many tables</h2>
-<p>If the data is a cycle, should its picture be a <em>grid</em> — or should it wind? Chemists have proposed hundreds of layouts. Here are four real ones. Look at each and ask the same two questions: <em>what does this design make easy to see?</em> and <em>what does it hide?</em></p>
-<p><strong>Mendeleev’s own table (1869).</strong> The original. Periods run <em>down</em> the columns and groups run across the rows — transposed from the modern convention — with gaps deliberately left for elements he predicted must exist (they did: gallium, scandium, germanium).</p>
+<p>If the data is a cycle, should its picture be a <em>grid</em>, or should it wind? Chemists have proposed hundreds of layouts. Here are four real ones. Look at each and ask the same two questions: <em>what does this design make easy to see?</em> and <em>what does it hide?</em></p>
+<p><strong>Mendeleev’s own table (1869).</strong> The original. Periods run <em>down</em> the columns and groups run across the rows (transposed from the modern convention), with gaps deliberately left for elements he predicted must exist (they did: gallium, scandium, germanium).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/mendeleev-1869.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
@@ -384,13 +380,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 <p><img src="../images/benfey-spiral.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
 </figure>
 </div>
-<p><strong>Janet’s left-step table (1928).</strong> Rows end where shells <em>actually</em> close in the aufbau order, so the blocks form perfect staircase steps — physicists tend to love it; chemists complain that helium ends up above beryllium.</p>
+<p><strong>Janet’s left-step table (1928).</strong> Rows end where shells <em>actually</em> close in the aufbau order, so the blocks form perfect staircase steps. Physicists tend to love it; chemists complain that helium ends up above beryllium.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/janet-left-step.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
 </figure>
 </div>
-<p><strong>A circular table.</strong> Periods as concentric rings — the cycle is explicit, at the price of the outer rings stretching and the inner ones cramping.</p>
+<p><strong>A circular table.</strong> Periods as concentric rings: the cycle is explicit, at the price of the outer rings stretching and the inner ones cramping.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/circular-table.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
@@ -406,13 +402,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before reading on, decide — seriously, pick one — which of the four you would hang in a classroom, and write down (a note on paper is fine) your one-sentence reason. Then note one thing your favourite makes <em>harder</em> to see than the standard table does. You will need both notes at the end of the page.</p>
+<p>Before reading on, decide (seriously, pick one) which of the four you would hang in a classroom, and write down (a note on paper is fine) your one-sentence reason. Then note one thing your favourite makes <em>harder</em> to see than the standard table does. You will need both notes at the end of the page.</p>
 </div>
 </div>
 </section>
 <section id="build-the-spiral" class="level2">
 <h2 class="anchored" data-anchor-id="build-the-spiral">4 · Build the spiral</h2>
-<p>The spiral’s claim is that the element list is a <strong>cycle with no breaks</strong> — so draw it as one. Give every period one full turn: an element’s angle is its <em>fraction of the way through its period</em>, and its radius grows steadily outward. Colour by <strong>block</strong> (which kind of sub-shell is filling — the four “districts” of the table):</p>
+<p>The spiral’s claim is that the element list is a <strong>cycle with no breaks</strong>, so draw it as one. Give every period one full turn: an element’s angle is its <em>fraction of the way through its period</em>, and its radius grows steadily outward. Colour by <strong>block</strong> (which kind of sub-shell is filling: the four “districts” of the table):</p>
 <div>
 <div id="pyodide-12" class="exercise-cell">
 
@@ -426,29 +422,29 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiUEVSSU9EX0xFTiA9IHsxOiAy
 
 </div>
 <script type="pyodide-13-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICB0aCwgXyA9IHNwaXJhbF9jb29yZHMoeiAtIDEpXG4gICAgYXNzZXJ0IGFicyh0aCAtIDIgKiBucC5waSkgPCAxZS05XG5wcmludChcIuKckyBldmVyeSBub2JsZSBnYXMgc2l0cyBhdCB0aGUgZW5kIG9mIGl0cyB0dXJuIOKAlCBzaGVsbCBjbG9zdXJlcyBhbGlnbmVkXCIpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICB0aCwgXyA9IHNwaXJhbF9jb29yZHMoeiAtIDEpXG4gICAgYXNzZXJ0IGFicyh0aCAtIDIgKiBucC5waSkgPCAxZS05XG5wcmludChcIuKckyBldmVyeSBub2JsZSBnYXMgc2l0cyBhdCB0aGUgZW5kIG9mIGl0cyB0dXJuOiBzaGVsbCBjbG9zdXJlcyBhbGlnbmVkXCIpIn0=
 </script>
 </div>
-<p>Study what your spiral wins and loses. <strong>Wins:</strong> the sequence is unbroken (no gap between Ba and La — the f-block is just part of the winding); the blocks appear as coloured arcs (the lone gold dot opening each purple arc is real chemistry showing through: lanthanum and actinium actually take a d electron before the f shell starts filling); every shell closure lands at the same angle, so the noble gases form a perfect ray. <strong>Loses:</strong> almost every <em>other</em> group is misaligned — lithium and potassium sit at different angles because their periods have different lengths, so “reading down a group”, the single most useful act chemists perform, no longer works. Benfey’s design (above) fixes this by distorting the spiral into bulges — buying back group alignment by spending the clean geometry. Every design pays for what it shows.</p>
+<p>Study what your spiral wins and loses. <strong>Wins:</strong> the sequence is unbroken (no gap between Ba and La: the f-block is just part of the winding); the blocks appear as coloured arcs (the lone gold dot opening each purple arc is real chemistry showing through: lanthanum and actinium actually take a d electron before the f shell starts filling); every shell closure lands at the same angle, so the noble gases form a perfect ray. <strong>Loses:</strong> almost every <em>other</em> group is misaligned: lithium and potassium sit at different angles because their periods have different lengths, so “reading down a group”, the single most useful act chemists perform, no longer works. Benfey’s design (above) fixes this by distorting the spiral into bulges, buying back group alignment by spending the clean geometry. Every design pays for what it shows.</p>
 </section>
 <section id="build-the-canonical-table" class="level2">
 <h2 class="anchored" data-anchor-id="build-the-canonical-table">5 · Build the canonical table</h2>
-<p>Now the winner. Its layout rule is: <strong>new row at every shell closure, and columns collect equal outer-shell counts</strong> — rows are periods, columns are groups. Watch what happens with just the first 18 elements:</p>
+<p>Now the winner. Its layout rule is: <strong>new row at every shell closure, and columns collect equal outer-shell counts</strong>: rows are periods, columns are groups. Watch what happens with just the first 18 elements:</p>
 <div>
 <div id="pyodide-14" class="exercise-cell">
 
 </div>
 <script type="pyodide-14-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDIuNikpXG5mb3IgaSBpbiByYW5nZSgxOCk6XG4gICAgeCwgeSA9IGdyb3VwW2ldLCAtcGVyaW9kW2ldXG4gICAgYXguYWRkX3BhdGNoKHBsdC5SZWN0YW5nbGUoKHggLSAwLjQ1LCB5IC0gMC40NSksIDAuOSwgMC45LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhY2Vjb2xvcj1cIiNlZWYxZjZcIiwgZWRnZWNvbG9yPVwiIzg4ODg4OFwiKSlcbiAgICBheC50ZXh0KHgsIHksIHN5bWJvbFtpXSwgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9MTEpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0zLjgsIC0wLjIpXG5heC5zZXRfYXNwZWN0KFwiZXF1YWxcIik7IGF4LmF4aXMoXCJvZmZcIilcbmF4LnNldF90aXRsZShcIlBlcmlvZHMgYXMgcm93cywgZ3JvdXBzIGFzIGNvbHVtbnMg4oCUIGFuZCBhIGdhcCBhcHBlYXJzXCIpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDIuNikpXG5mb3IgaSBpbiByYW5nZSgxOCk6XG4gICAgeCwgeSA9IGdyb3VwW2ldLCAtcGVyaW9kW2ldXG4gICAgYXguYWRkX3BhdGNoKHBsdC5SZWN0YW5nbGUoKHggLSAwLjQ1LCB5IC0gMC40NSksIDAuOSwgMC45LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhY2Vjb2xvcj1cIiNlZWYxZjZcIiwgZWRnZWNvbG9yPVwiIzg4ODg4OFwiKSlcbiAgICBheC50ZXh0KHgsIHksIHN5bWJvbFtpXSwgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9MTEpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0zLjgsIC0wLjIpXG5heC5zZXRfYXNwZWN0KFwiZXF1YWxcIik7IGF4LmF4aXMoXCJvZmZcIilcbmF4LnNldF90aXRsZShcIlBlcmlvZHMgYXMgcm93cywgZ3JvdXBzIGFzIGNvbHVtbnMsIGFuZCBhIGdhcCBhcHBlYXJzXCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>There it is: the strange moat between beryllium and boron. The gap exists because period 4 will need eighteen columns while periods 2 and 3 only have eight members — the layout reserves space for columns that do not exist <em>yet</em>. That emptiness is the design’s masterstroke: gaps in a grid are <strong>predictions</strong>. Mendeleev’s version of this move — holes left under aluminium and silicon — told the world exactly what to look for, and gallium (1875) and germanium (1886) walked into them with almost exactly the predicted properties. Few charts in history have predicted anything; this one predicted <em>matter</em>.</p>
+<p>There it is: the strange moat between beryllium and boron. The gap exists because period 4 will need eighteen columns while periods 2 and 3 only have eight members; the layout reserves space for columns that do not exist <em>yet</em>. That emptiness is the design’s masterstroke: gaps in a grid are <strong>predictions</strong>. Mendeleev’s version of this move (holes left under aluminium and silicon) told the world exactly what to look for, and gallium (1875) and germanium (1886) walked into them with almost exactly the predicted properties. Few charts in history have predicted anything; this one predicted <em>matter</em>.</p>
 <section id="sec-ex-table" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ex-table">Your turn: the whole thing</h3>
 <p>Build the full canonical table, all 118 elements. You have <code>Z</code>, <code>symbol</code>, <code>period</code>, <code>group</code> and <code>category</code> (plus <code>cat_colours</code>, the conventional colour for each category). Two things need decisions:</p>
 <ol type="1">
-<li><strong>Main grid:</strong> elements with a <code>group</code> go at column <code>group</code>, row <code>period</code> — exactly like the 18-element version.</li>
-<li><strong>The f-block:</strong> the lanthanides (Z 57–71) and actinides (Z 89–103) have <code>group = None</code>. The canonical design exiles them to two <strong>footnote rows</strong> below the table. Place them there — 15 per row — and choose the rows’ vertical position yourself.</li>
+<li><strong>Main grid:</strong> elements with a <code>group</code> go at column <code>group</code>, row <code>period</code>, exactly like the 18-element version.</li>
+<li><strong>The f-block:</strong> the lanthanides (Z 57–71) and actinides (Z 89–103) have <code>group = None</code>. The canonical design exiles them to two <strong>footnote rows</strong> below the table. Place them there (15 per row) and choose the rows’ vertical position yourself.</li>
 </ol>
 <p>Colour every cell by its category, put the symbol (and, if you like, Z) in each cell, and add a legend.</p>
 <script type="exercise-setup-ex_table-contents">
@@ -463,24 +459,24 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUifSwiY29k
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
-<p><strong>Hint 1</strong> — <code>cell_position</code> has three cases: a real <code>group</code> (use it with <code>period</code> directly), a lanthanide (57 ≤ Z ≤ 71), and an actinide. The footnote rows need y values <em>below</em> row 7 — leave a blank row as a visual separator.</p>
+<p><strong>Hint 1.</strong> <code>cell_position</code> has three cases: a real <code>group</code> (use it with <code>period</code> directly), a lanthanide (57 ≤ Z ≤ 71), and an actinide. The footnote rows need y values <em>below</em> row 7; leave a blank row as a visual separator.</p>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
-<p><strong>Hint 2</strong> — Within a footnote row the column should step with Z: something of the shape <code>constant + (Z[i] - 57)</code> spreads the fifteen lanthanides across fifteen consecutive columns. Pick the constant so they sit roughly under the middle of the table.</p>
+<p><strong>Hint 2.</strong> Within a footnote row the column should step with Z: something of the shape <code>constant + (Z[i] - 57)</code> spreads the fifteen lanthanides across fifteen consecutive columns. Pick the constant so they sit roughly under the middle of the table.</p>
 </div>
-<p><strong>How to know you got it.</strong> No solution button — this table is yours. Hold your result next to any printed periodic table: you should count <strong>18 columns</strong>, <strong>7 main rows</strong>, and <strong>two footnote rows of 15</strong>; hydrogen alone at top-left, helium at top-right above the noble-gas column, and the colour regions forming solid blocks, not confetti. Two things are worth noticing about what you just built. First, you never told it any chemistry — <code>group</code> and <code>period</code> came from shell-counting, yet sodium landed under lithium. Second, look at the two rows you exiled: the footnote is a <em>lie of layout</em> (element 57 is not really “below” the table — it belongs between 56 and 72), told to keep the table printable. The spiral you built in Section 4 tells the truth about continuity and lies about groups; the grid does the opposite. Which lie you prefer is a design decision — now check the notes you made in Section 3 and see whether you still agree with yourself.</p>
+<p><strong>How to know you got it.</strong> No solution button: this table is yours. Hold your result next to any printed periodic table: you should count <strong>18 columns</strong>, <strong>7 main rows</strong>, and <strong>two footnote rows of 15</strong>; hydrogen alone at top-left, helium at top-right above the noble-gas column, and the colour regions forming solid blocks, not confetti. Two things are worth noticing about what you just built. First, you never told it any chemistry: <code>group</code> and <code>period</code> came from shell-counting, yet sodium landed under lithium. Second, look at the two rows you exiled: the footnote is a <em>lie of layout</em> (element 57 is not really “below” the table; it belongs between 56 and 72), told to keep the table printable. The spiral you built in Section 4 tells the truth about continuity and lies about groups; the grid does the opposite. Which lie you prefer is a design decision. Now check the notes you made in Section 3 and see whether you still agree with yourself.</p>
 </section>
 </section>
 <section id="why-this-one-won" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-one-won">6 · Why this one won</h2>
 <p>The canonical table beat the spirals for reasons worth naming, because they are the same reasons any visualisation wins:</p>
 <ul>
-<li><strong>It aligns the most-used comparison.</strong> Chemists constantly reason “down a group” — same outer shell, same reactions. The grid makes that a straight vertical scan; the spiral makes it a hunt.</li>
+<li><strong>It aligns the most-used comparison.</strong> Chemists constantly reason “down a group”: same outer shell, same reactions. The grid makes that a straight vertical scan; the spiral makes it a hunt.</li>
 <li><strong>It is rectangular.</strong> It fits pages, posters, screens and blackboards; every cell has room for symbol, number, and mass. Most spiral designs waste half their canvas and cramp their inner turns.</li>
 <li><strong>Its gaps did work.</strong> Empty grid cells are legible predictions; a spiral closes seamlessly over its own ignorance.</li>
-<li><strong>And then it won for winning.</strong> After a century on every classroom wall, familiarity itself became the strongest argument — a standard everyone can read beats a design a few prefer (ask the QWERTY keyboard).</li>
+<li><strong>And then it won for winning.</strong> After a century on every classroom wall, familiarity itself became the strongest argument: a standard everyone can read beats a design a few prefer (ask the QWERTY keyboard).</li>
 </ul>
-<p>But “won” does not mean “true”. The grid’s clean rows are punctured by a gap that means nothing physical, its f-block sits in exile, and the cycle at the heart of the periodic law — the thing your sawtooth plots showed most clearly — is invisible unless you already know to see it. The spiral shows the cycle and hides the groups. Janet’s steps show the physics and misplace helium. Every layout of this list is an argument about what matters; the one on the wall is just the argument that won.</p>
+<p>But “won” does not mean “true”. The grid’s clean rows are punctured by a gap that means nothing physical, its f-block sits in exile, and the cycle at the heart of the periodic law (the thing your sawtooth plots showed most clearly) is invisible unless you already know to see it. The spiral shows the cycle and hides the groups. Janet’s steps show the physics and misplace helium. Every layout of this list is an argument about what matters; the one on the wall is just the argument that won.</p>
 </section>
 <section id="sources-and-serving-notes" class="level2">
 <h2 class="anchored" data-anchor-id="sources-and-serving-notes">Sources and serving notes</h2>
@@ -488,7 +484,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUifSwiY29k
 <li><code>elements.csv</code> is generated from the <a href="https://mendeleev.readthedocs.io/">mendeleev</a> Python package (v1.2): IUPAC groups and periods, Pyykkö covalent radii (all 118 elements, one consistent convention), Pauling electronegativities. The f-block rows carry no group number, following the common 18-column convention.</li>
 <li>The <code>configuration()</code> function implements the idealised Madelung (aufbau) rule and ignores the ~20 real-world exceptions (Cr, Cu, Nb, …); none of them change where any element sits in the table.</li>
 <li>Images, all from Wikimedia Commons: Mendeleev’s 1869 table (redrawn by NikNaks, public domain); Benfey-style element spiral by DePiep (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular table by Cbuckley (CC BY 3.0).</li>
-<li>Category colours follow the long-standing Wikipedia convention — used here deliberately: this page is about <em>the</em> canonical design, and its colours are part of the canon. Note they are not a colour-blind-safe palette; the table survives that because position and text labels, not colour, carry the structure — worth noticing as a design lesson in itself.</li>
+<li>Category colours follow the long-standing Wikipedia convention, used here deliberately: this page is about <em>the</em> canonical design, and its colours are part of the canon. Note they are not a colour-blind-safe palette; the table survives that because position and text labels, not colour, carry the structure (worth noticing as a design lesson in itself).</li>
 </ul>
 
 
