@@ -112,6 +112,42 @@ records the bird's taxonomic identities, sampling provenance, sex and age,
 collection geography, ten morphological traits, the measurer, and whether the
 AVONET measurement protocol was used.
 
+The dataset is documented in Tobias et al.,
+["AVONET: morphological, ecological and geographical data for all birds"](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
+published in *Ecology Letters*. Keep the paper open while working through this
+EDA: it shows how the dataset's authors turned these records into visual
+evidence.
+
+::: {.callout-important title="Required visual audit of the AVONET paper"}
+Review **every visualisation in the paper**, treating every panel in a
+multi-panel figure as a separate design decision. Do not only summarise what
+the paper is about. Read each visualisation as an argument built from data.
+
+For every figure or panel, record:
+
+1. **Visual form:** What type of visualisation is used: scatterplot, map,
+   histogram, density display, diagram, coefficient plot, or another form?
+   What marks and channels carry the information?
+2. **Data visualised:** Which features are shown, what are their semantic data
+   types, what does one observation represent, and which rows or taxa are
+   included or excluded?
+3. **Transformation and aggregation:** Are values raw, logged, standardised,
+   binned, averaged, modelled, grouped by species, or otherwise transformed?
+4. **Scales and encodings:** Are position and colour scales linear,
+   logarithmic, categorical, sequential, or diverging? What is mapped to
+   position, colour, size, shape, connection, or facet?
+5. **Claim supported:** What comparison, pattern, or model result is the panel
+   intended to support? State the claim in one precise sentence.
+6. **Strength of support:** Does the chosen visualisation make that claim
+   convincing? Identify ambiguity, overplotting, aggregation effects,
+   uncertainty, missing context, or a plausible alternative visual form.
+
+Use a table with one row per figure panel and these columns:
+`figure/panel`, `visual form`, `data and unit`, `transformation/aggregation`,
+`encodings/scales`, `claim`, and `critique or alternative`. You should be able
+to connect every claim you identify back to visible evidence in the panel.
+:::
+
 The worksheet has **90,371 rows and 26 columns**, but that does not mean
 90,371 measured birds. It contains 90,020 measurement records plus 351
 `GAPSPECIES` rows that connect taxonomies for species without raw
