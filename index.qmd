@@ -3,9 +3,11 @@ title: "36104 · Data Visualisation and Narratives"
 subtitle: "Asynchronous sessions"
 ---
 
-Welcome. This site hosts the **asynchronous sessions** for 36104. The pages
-are live: every code cell runs Python in your browser — nothing to install.
-Edit the code, press **Run Code**, and the output updates.
+This site hosts the **asynchronous sessions** for 36104 — nothing to
+install.
+
+Every code cell runs Python in your browser. Edit the code and press
+**Run Code**.
 
 ## How to use these pages
 

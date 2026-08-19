@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bitter:wght@600;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+// warm cream background instead of white
+$body-bg: #faf5ec;
+$body-color: #2b2a26;
+
+$font-family-sans-serif: "Atkinson Hyperlegible", -apple-system, "Segoe UI",
+  Helvetica, Arial, sans-serif;
+$font-family-monospace: "Source Code Pro", ui-monospace, SFMono-Regular,
+  Menlo, monospace;
+
+$headings-font-family: "Bitter", Georgia, serif;
+$headings-font-weight: 700;
+$headings-color: #232028;
+
+$font-size-root: 17px;
+$line-height-base: 1.65;
+
+$link-color: #0f4beb;
+
+/*-- scss:rules --*/
+
+// let code editors and outputs sit as soft cards on the cream page
+div.sourceCode, pre.sourceCode {
+  background-color: #fffdf8;
+  border: 1px solid #e7dfd0;
+  border-radius: 6px;
+}
+
+.cell-output pre, .exercise-cell-output pre {
+  background-color: #f4eee0;
+  border-radius: 6px;
+}
+
+.callout {
+  background-color: #fffdf8;
+}
+
+.table thead th {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+.sidebar nav[role="doc-toc"] a {
+  font-size: 0.85rem;
+}
