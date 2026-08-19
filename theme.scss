@@ -28,3 +28,8 @@ div.sourceCode, pre.sourceCode {
 .sidebar nav[role="doc-toc"] a {
   font-size: 0.85rem;
 }
+
+// breathing room between the course title and the nav items
+.navbar .navbar-nav:first-of-type {
+  margin-left: 2.5rem;
+}
