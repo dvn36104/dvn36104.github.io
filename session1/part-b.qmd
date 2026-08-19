@@ -16,13 +16,17 @@ against a time axis), and what the words biologists use for it (*clade*,
 *ancestor*, *divergence*) mean on the screen.
 
 Note what changed and why. Part A's amniote table (Myhrvold et al. 2015)
-stores **traits**: one row per species, no information about which species
-are related. A tree stores the opposite: **relationships and dates**, and
-not a single measurement. Same animals, different questions, so a
-different data structure from a different source. All three trees on this
-page come from [TimeTree](https://timetree.org) (Kumar et al. 2022), and
-one of them is the family tree of exactly the amniotes whose traits you
-analysed in Part A:
+stores **traits**, and its nested taxonomy columns (class, order, family,
+genus) do encode a tree: nesting is a hierarchy. But it is a tree of
+*named ranks*: it carries no dates, and inside every rank it is silent.
+The table can say that fifteen families belong to the primates without
+saying anything about how those families relate to one another. The trees
+on this page store what the table cannot: **resolved relationships with
+dates**, and not a single measurement. Same animals, complementary data
+structures, different sources. All three trees come from
+[TimeTree](https://timetree.org) (Kumar et al. 2022), one of them the
+family tree of exactly the amniotes whose traits you analysed in Part A,
+and below we will draw the table's tree and TimeTree's side by side:
 
 | File | Tips | What one tip is |
 |---|---|---|
@@ -216,6 +220,10 @@ amniotes = parse_newick(open_url(DATA_URL + "amniotes_family.nwk").read())
 set_depths(amniotes)
 root_age = max(l.depth for l in amniotes.leaves())
 primates = clade(amniotes, ["Hominidae", "Lemuridae"])
+
+amniote_rows = [line.split(",") for line in
+                open_url(DATA_URL + "amniote_species.csv").read().strip().split("\n")[1:]]
+primate_families = sorted({r[2] for r in amniote_rows if r[1] == "Primates"})
 
 euk = parse_newick(open_url(DATA_URL + "eukaryotes_class.nwk").read())
 set_depths(euk)
@@ -493,6 +501,58 @@ sloth lemurs, are **extinct**: humans reached Madagascar roughly two
 thousand years ago, and the last sloth lemurs disappeared around 500
 years ago. A dated tree can carry recently-lost lineages alongside
 living ones, though nothing in the drawing itself marks them as gone.
+
+### The tree hiding in Part A's table
+
+A fair objection: Part A's amniote table has class, order, family and
+genus columns, and that nesting *is* a tree. True, so let us build it.
+Take every primate family in the life-history table and hang it off one
+node, which is exactly the structure the columns encode, then draw it
+next to the TimeTree primate clade:
+
+```{pyodide}
+text = open_url(DATA_URL + "amniote_species.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+primate_families = sorted({r[2] for r in rows if r[1] == "Primates"})
+
+star = Node("Primates")
+for name in primate_families:
+    tip = Node(name, length=1.0)
+    tip.parent = star
+    star.children.append(tip)
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 5.5))
+draw_tree(star, axes[0], labels=True, fontsize=9)
+axes[0].set_title(f"Part A's taxonomy: {len(primate_families)} families, one node")
+axes[0].set_xticks([])
+draw_tree(primates, axes[1], labels=True, fontsize=9, default="#4269d0")
+axes[1].set_title("TimeTree: the same clade, resolved and dated")
+axes[1].set_xlabel("Myr since the amniote root")
+plt.tight_layout()
+plt.show()
+```
+
+The left tree is real, but look at what it knows. Every family attaches
+directly to the order: one giant **polytomy**, because the table records
+membership, not relatedness, and its branch lengths mean nothing. The
+right tree makes claims the left cannot: apes split from monkeys before
+either split from lemurs, and every split has a date. Rank nesting gives
+you a tree of *names*; a phylogeny gives you a tree of *events*.
+
+```{pyodide}
+tree_names = {l.name.split("-")[0] for l in primates.leaves()}
+assert len(primate_families) == 15
+assert "Indridae" in primate_families and "Indriidae" in tree_names
+assert "Paleopropithecidae" in tree_names and "Paleopropithecidae" not in primate_families
+print("✓ 15 families in the table, 16 in the tree, and the mismatches teach:")
+print("  Indridae vs Indriidae is the same family spelled two ways by two")
+print("  databases, and the extinct sloth lemurs cannot appear in a table")
+print("  of measured life histories")
+```
+
+Even the family *lists* disagree between the two sources: a one-letter
+spelling drift and an extinct lineage. Whenever two databases must be
+joined on names, this is the normal condition, not the exception.
 
 ### Your turn: the carnivore clade {#sec-ex-carnivora}
 
