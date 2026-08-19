@@ -569,8 +569,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29sdW1uX29yZGVyID0gKGF1
 <p>Why this visual form? <code>column</code> is nominal and has 26 levels, so it works as a text-labelled y-position but not as 26 colours. <code>missing_pct</code> is quantitative, so bar length on a common x-axis makes values directly comparable. Colour shows AVONET’s documented variable type; it is not a classification added for the chart. The quantitative scale is fixed to the meaningful 0–100% domain and starts at zero; truncating a bar scale would exaggerate small differences. Exact values remain in tooltips rather than cluttering every bar.</p>
 <p>Two fields, <code>locality</code> and <code>country</code>, are completely blank in this public release; <code>country_wri</code> is the usable harmonised geography field. The publication field is mostly blank because most rows are direct specimen or field measurements rather than measurements transcribed from papers. Wing length is almost complete, while several flight-shape and beak measurements are absent in roughly one-third of rows. There is no single universal “complete case” definition: it depends on the traits being compared.</p>
 </section>
-<section id="identity-and-taxonomy-are-part-of-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="identity-and-taxonomy-are-part-of-the-data">Identity and taxonomy are part of the data</h3>
+<section id="identity-and-taxonomy-checks" class="level3">
+<h3 class="anchored" data-anchor-id="identity-and-taxonomy-checks">Identity and taxonomy checks</h3>
 <p>The four taxonomic name columns are not redundant copies. They represent different taxonomic authorities, and splits or lumps can assign the same individual to different names. AVONET also supplies <code>avibase_id</code> as a more stable bridge.</p>
 <div>
 <div id="pyodide-23" class="exercise-cell">
@@ -639,8 +639,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHRvcF9sZXZlbHNfY2hh
 <p>Each view performs two transformations before drawing a mark: <code>count</code> rows by category, then keep the 15 largest counts. That top-<span class="math inline">\(N\)</span> filter makes labels readable but hides the long tail, so the title must disclose it. We use three separate panels with independent category axes instead of one shared colour legend containing unrelated codes.</p>
 <p>The NHMUK source alone contributes 46,060 rows, and the largest country counts come from tropical, species-rich regions rather than an even global sample. Contributor concentration is not automatically a flaw, but it warns us that source, protocol, geography, and morphology may be entangled.</p>
 </section>
-<section id="the-measurement-process-leaves-fingerprints" class="level3">
-<h3 class="anchored" data-anchor-id="the-measurement-process-leaves-fingerprints">The measurement process leaves fingerprints</h3>
+<section id="recording-precision-by-measurer" class="level3">
+<h3 class="anchored" data-anchor-id="recording-precision-by-measurer">Recording precision by measurer</h3>
 <p>Screening is not only about values; it is also about how values were produced. One classic check is measurement granularity: what fraction of each measurer’s wing lengths are whole millimetres? Rulers, calipers, and personal habit leave different fingerprints, and a mixture of precisions inside one column is worth knowing before comparing small differences.</p>
 <div>
 <div id="pyodide-29" class="exercise-cell">
@@ -687,8 +687,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoia3cgPSBtZWFzdXJlZC5kcm9w
 </div>
 <p>The zero matters as much as the violations. No bird’s Kipp’s distance exceeds its wing, which is evidence those two fields really were measured on the same wing. The four secondary-feather violations and 37 rebuilt-index mismatches are rows to inspect; the 18 wing lengths at or below half a millimetre are the 0.1 placeholders found above, now caught by a rule rather than by luck. Writing checks this way, as declared rules with pass and fail counts, comes from the data-validation literature (van der Loo and de Jonge, <em>Statistical Data Cleaning</em>); the same idea powers tools such as <code>pandera</code> in Python and <code>validate</code> in R.</p>
 </section>
-<section id="validate-against-the-world" class="level3">
-<h3 class="anchored" data-anchor-id="validate-against-the-world">Validate against the world</h3>
+<section id="external-validation" class="level3">
+<h3 class="anchored" data-anchor-id="external-validation">External validation</h3>
 <p>Internal checks cannot catch a dataset that is consistently wrong. Peng’s EDA checklist insists on validating against <strong>at least one external source</strong>, so we compare species-mean wing lengths for four well-documented species with the ranges given in standard field handbooks.</p>
 <div>
 <div id="pyodide-33" class="exercise-cell">
@@ -700,8 +700,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaGFuZGJvb2sgPSBwZC5EYXRh
 </div>
 <p>Four species is a spot check, not proof. But this is the kind of check that catches unit errors, decimal shifts, and column mix-ups that no amount of internal consistency can reveal. If the mallard’s mean wing had come out at 26 mm or at 2,634 mm, everything downstream would have been wrong for a reason no histogram could explain.</p>
 </section>
-<section id="completeness-is-a-row-level-pattern" class="level3">
-<h3 class="anchored" data-anchor-id="completeness-is-a-row-level-pattern">Completeness is a row-level pattern</h3>
+<section id="row-level-completeness" class="level3">
+<h3 class="anchored" data-anchor-id="row-level-completeness">Row-level completeness</h3>
 <p>Column percentages do not show whether gaps fall in the same birds. Count the number of observed morphology fields in every row, then ask whether leading data sources measured the same trait set.</p>
 <div>
 <div id="pyodide-34" class="exercise-cell">
@@ -723,8 +723,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidG9wX3NvdXJjZXMgPSBiaXJk
 <p>The heatmap uses a <strong>sequential quantitative colour scale</strong> with a fixed 0–100% domain: darker colours mean more observed rows. That is different from the discrete palette used for documented variable types in the missingness chart. Colour is less precise than position, but it is effective for scanning a two-dimensional matrix for blocks and exceptions.</p>
 <p>The pattern in this heatmap has a name. Statisticians distinguish data missing completely at random (MCAR), missing at random given known variables (MAR), and missing not at random (MNAR, where the gap depends on the unobserved value itself). Whole missing blocks aligned with sources are direct evidence against MCAR: absence here is predictable from provenance. The practical consequence is that complete-case analysis does not just shrink the sample, it <strong>reweights</strong> it toward the sources that measured everything, and any trait difference between sources rides along. The taxonomy is from Little and Rubin’s <em>Statistical Analysis with Missing Data</em>, and “which mechanism?” is a standard screening question.</p>
 </section>
-<section id="scales-map-data-values-to-visual-values" class="level3">
-<h3 class="anchored" data-anchor-id="scales-map-data-values-to-visual-values">Scales map data values to visual values</h3>
+<section id="linear-and-logarithmic-scales" class="level3">
+<h3 class="anchored" data-anchor-id="linear-and-logarithmic-scales">Linear and logarithmic scales</h3>
 <p>A scale maps a <strong>data domain</strong> to a <strong>visual range</strong>. An x-scale maps numbers to horizontal pixel positions; a colour scale maps values or categories to colours. The scale is part of the argument, because it defines what equal visual distances mean.</p>
 <p>The next two charts use exactly the same values and point marks. On the linear scale, equal distances represent equal <em>differences</em>. On the logarithmic scale, equal distances represent equal <em>ratios</em>.</p>
 <div>
@@ -746,8 +746,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2NhbGVfcGFpciA9IGJpcmRz
 </div>
 <p>Notice another scale rule: bars generally need a zero baseline because length encodes magnitude; scatterplots do not always need zero because position, not length, carries the comparison. Any truncated position scale should still be visible and justified. A scale can reveal structure, but it must never be used silently to manufacture it.</p>
 </section>
-<section id="relationships-across-the-complete-measurement-block" class="level3">
-<h3 class="anchored" data-anchor-id="relationships-across-the-complete-measurement-block">Relationships across the complete measurement block</h3>
+<section id="correlations-among-the-ten-traits" class="level3">
+<h3 class="anchored" data-anchor-id="correlations-among-the-ten-traits">Correlations among the ten traits</h3>
 <p>A correlation matrix is a compact scan of all pairwise linear relationships among the logged traits. It is descriptive, not a fitted allometric model: each cell uses the rows available for that pair, ignores taxonomy and shared evolutionary history, and does not distinguish within-species from between-species variation.</p>
 <div>
 <div id="pyodide-38" class="exercise-cell">
@@ -759,8 +759,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibG9nZ2VkX3RyYWl0cyA9IG5w
 </div>
 <p>The diverging colour scale is centred at zero because positive and negative correlations are qualitatively different directions. Its symmetric <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span> domain prevents the strongest observed value from redefining the meaning of the colours. The printed values provide precision; colour provides pattern.</p>
 </section>
-<section id="regression-lines-are-transformations-not-decoration" class="level3">
-<h3 class="anchored" data-anchor-id="regression-lines-are-transformations-not-decoration">Regression lines are transformations, not decoration</h3>
+<section id="regression-on-raw-and-logged-scales" class="level3">
+<h3 class="anchored" data-anchor-id="regression-on-raw-and-logged-scales">Regression on raw and logged scales</h3>
 <p>A regression line can summarise a bivariate trend, but its meaning depends on the variables fitted. A straight-line fit in raw millimetres asks about additive change. A straight-line fit after logging both features asks about proportional change and estimates an allometric exponent. Merely changing the axis scale is not the same as changing the model.</p>
 <p>The charts below use the same deterministic 8,000-row display sample. Altair’s <code>transform_regression()</code> performs the aggregation from thousands of points to the fitted line. The accompanying table makes the transformation and fit statistics explicit.</p>
 <div>
@@ -781,8 +781,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmF3X2Jhc2UgPSBhbHQuQ2hh
 </div>
 <p>The red line is a model layer, not proof of mechanism or causality. Outliers can pull it, unevenly sampled species can dominate it, and a single pooled line can hide different trends by sex, source, protocol, or species. A useful visualisation states what was fitted, on which scale, to which rows, and at which unit of analysis.</p>
 </section>
-<section id="one-line-can-hide-two-populations" class="level3">
-<h3 class="anchored" data-anchor-id="one-line-can-hide-two-populations">One line can hide two populations</h3>
+<section id="subgroup-check-museum-specimens-versus-live-birds" class="level3">
+<h3 class="anchored" data-anchor-id="subgroup-check-museum-specimens-versus-live-birds">Subgroup check: museum specimens versus live birds</h3>
 <p>The record-type field from the design audit earns its keep here. Fit the same log-log regression separately for museum specimens and live birds:</p>
 <div>
 <div id="pyodide-41" class="exercise-cell">
@@ -797,13 +797,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVncmVzc2lvbl9zYW1wbGVb
 
 </div>
 <script type="pyodide-42-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3ViZ3JvdXBfYmFzZSA9IGFsdC5DaGFydChyZWdyZXNzaW9uX3NhbXBsZSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJsb2cxMF90YXJzdXM6UVwiLCB0aXRsZT1cImxvZzEwIHRhcnN1cyBsZW5ndGhcIiksXG4gICAgeT1hbHQuWShcImxvZzEwX2N1bG1lbjpRXCIsIHRpdGxlPVwibG9nMTAgY3VsbWVuIGxlbmd0aFwiKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJyZWNvcmRfdHlwZTpOXCIsIHRpdGxlPVwiUmVjb3JkIHR5cGVcIixcbiAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHJhbmdlPVtcIiNlMTU3NTlcIiwgXCIjNGU3OWE3XCJdKSksXG4pXG5cbihzdWJncm91cF9iYXNlLm1hcmtfY2lyY2xlKHNpemU9MTEsIG9wYWNpdHk9MC4xNSlcbiArIHN1Ymdyb3VwX2Jhc2UudHJhbnNmb3JtX3JlZ3Jlc3Npb24oXG4gICAgICAgXCJsb2cxMF90YXJzdXNcIiwgXCJsb2cxMF9jdWxtZW5cIiwgZ3JvdXBieT1bXCJyZWNvcmRfdHlwZVwiXVxuICAgKS5tYXJrX2xpbmUoc2l6ZT0zKVxuKS5wcm9wZXJ0aWVzKHdpZHRoPTU2MCwgaGVpZ2h0PTM4MCxcbiAgICAgICAgICAgICB0aXRsZT1cIlRoZSBwb29sZWQgc2xvcGUgYmVsb25ncyB0byBuZWl0aGVyIHN1Ymdyb3VwIGVxdWFsbHlcIikifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3ViZ3JvdXBfYmFzZSA9IGFsdC5DaGFydChyZWdyZXNzaW9uX3NhbXBsZSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJsb2cxMF90YXJzdXM6UVwiLCB0aXRsZT1cImxvZzEwIHRhcnN1cyBsZW5ndGhcIiksXG4gICAgeT1hbHQuWShcImxvZzEwX2N1bG1lbjpRXCIsIHRpdGxlPVwibG9nMTAgY3VsbWVuIGxlbmd0aFwiKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJyZWNvcmRfdHlwZTpOXCIsIHRpdGxlPVwiUmVjb3JkIHR5cGVcIixcbiAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHJhbmdlPVtcIiNlMTU3NTlcIiwgXCIjNGU3OWE3XCJdKSksXG4pXG5cbihzdWJncm91cF9iYXNlLm1hcmtfY2lyY2xlKHNpemU9MTEsIG9wYWNpdHk9MC4xNSlcbiArIHN1Ymdyb3VwX2Jhc2UudHJhbnNmb3JtX3JlZ3Jlc3Npb24oXG4gICAgICAgXCJsb2cxMF90YXJzdXNcIiwgXCJsb2cxMF9jdWxtZW5cIiwgZ3JvdXBieT1bXCJyZWNvcmRfdHlwZVwiXVxuICAgKS5tYXJrX2xpbmUoc2l6ZT0zKVxuKS5wcm9wZXJ0aWVzKHdpZHRoPTU2MCwgaGVpZ2h0PTM4MCxcbiAgICAgICAgICAgICB0aXRsZT1cIlNhbWUgZml0LCBzcGxpdCBieSByZWNvcmQgdHlwZVwiKSJ9
 </script>
 </div>
 <p>In the full data the museum-specimen slope is 0.62 with r = 0.63, close to the pooled fit, while the live-bird slope is almost exactly <strong>zero</strong>. That is not because live birds obey different biology. The live records cover only 702 species, mostly small passerines from a few ringing projects, so their tarsus lengths span a much narrower range (log10 spread 0.16, versus 0.25 for specimens). Within a thin slice of the size axis the between-species scaling signal nearly vanishes and noise dominates: classic <strong>range restriction</strong>. The lesson generalises. A pooled line describes the mixture you happened to assemble, and screening the design fields first is what lets you notice.</p>
 </section>
-<section id="aggregation-functions-change-the-question" class="level3">
-<h3 class="anchored" data-anchor-id="aggregation-functions-change-the-question">Aggregation functions change the question</h3>
+<section id="choosing-an-aggregation-function" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-an-aggregation-function">Choosing an aggregation function</h3>
 <p>An aggregate turns many rows into one value or mark. Different functions are not interchangeable summaries:</p>
 <table class="caption-top table">
 <colgroup>
