@@ -28,3 +28,14 @@ div.sourceCode, pre.sourceCode {
 .sidebar nav[role="doc-toc"] a {
   font-size: 0.85rem;
 }
+
+// smaller type in code cells, editors and outputs
+div.sourceCode pre, pre.sourceCode, pre code {
+  font-size: 0.85em;
+}
+.cm-editor {
+  font-size: 0.85em;
+}
+.cell-output pre, .exercise-cell-output pre {
+  font-size: 0.85em;
+}

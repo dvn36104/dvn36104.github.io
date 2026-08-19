@@ -93,6 +93,18 @@ what every column means, how the sample was assembled, and where information
 is absent. Skipping that work is how collection artefacts become biological
 claims.
 
+Because this is a **data visualisation** course, the EDA is also a sequence of
+design decisions. For each feature we will establish its semantic data type,
+ask what comparison it can support, choose an aggregation, choose a mark and
+visual encoding, and then choose a scale. The sequence matters:
+
+> **feature → data type → question → transformation/aggregation → mark →
+> encoding → scale → interpretation**
+
+A chart is not a decorative endpoint. It is a claim produced by that entire
+pipeline. Changing `count` to `mean`, a linear axis to a logarithmic one, or a
+nominal field to a quantitative field changes what the chart says.
+
 [AVONET](https://doi.org/10.6084/m9.figshare.16586228.v7) is a global bird
 trait database assembled by Tobias et al. (2022). Its raw-data worksheet
 combines measurements from museum specimens and live birds. A measured row
@@ -140,36 +152,81 @@ measurements used for allometry.
 
 ```{pyodide}
 column_catalogue = pd.DataFrame([
-    ("avibase_id", "Taxonomy & ID", "Stable Avibase taxon or species-group identifier", "—"),
-    ("species", "Taxonomy & ID", "Species name in the BirdLife 2020 taxonomy", "—"),
-    ("species_ebird", "Taxonomy & ID", "Species name in eBird/Clements 2021", "—"),
-    ("ebird_species_group", "Taxonomy & ID", "eBird species or broader group when assignment is uncertain", "—"),
-    ("species_birdtree", "Taxonomy & ID", "Species name in the Jetz BirdTree taxonomy", "—"),
-    ("data_type", "Sampling design", "1 = museum specimen; 2 = live individual", "code"),
-    ("source", "Provenance", "Museum, research collection, or field-data source code", "—"),
-    ("specimen_number", "Provenance", "Accession or collection number", "—"),
-    ("sex", "Sampling design", "M = male; F = female; U = unknown", "code"),
-    ("age", "Sampling design", "0 = adult measurement; 1 = immature measurement", "code"),
-    ("locality", "Geography", "Original collection locality; withheld in this release", "—"),
-    ("country_wri", "Geography", "Collection country harmonised to WRI boundaries", "—"),
-    ("country", "Geography", "Original country or territorial designation; withheld", "—"),
-    ("beak_length_culmen_mm", "Morphology", "Beak tip to base of skull along the culmen", "mm"),
-    ("beak_length_nares_mm", "Morphology", "Anterior edge of nostril to beak tip", "mm"),
-    ("beak_width_mm", "Morphology", "Beak width at the anterior edge of the nostrils", "mm"),
-    ("beak_depth_mm", "Morphology", "Beak depth at the anterior edge of the nostrils", "mm"),
-    ("tarsus_length_mm", "Morphology", "Length of the tarsus", "mm"),
-    ("wing_length_mm", "Morphology", "Carpal joint to longest primary on the unflattened wing", "mm"),
-    ("kipps_distance_mm", "Morphology", "First secondary tip to longest primary tip", "mm"),
-    ("secondary1_mm", "Morphology", "Carpal joint to the first secondary feather", "mm"),
-    ("hand_wing_index", "Morphology", "100 × Kipp's distance / wing length", "index"),
-    ("tail_length_mm", "Morphology", "Longest rectrix tip to its emergence from the skin", "mm"),
-    ("measurer", "Provenance", "Code identifying the person who measured the bird", "—"),
-    ("protocol", "Sampling design", "1 = AVONET protocol; 0 = another protocol", "code"),
-    ("publication", "Provenance", "Citation when measurements came from a publication", "—"),
-], columns=["column", "group", "meaning", "unit"])
+    ("avibase_id", "Taxonomy & ID", "Identifier", "Stable Avibase taxon or species-group identifier", "—", "distinct count", "table, tooltip", "nominal"),
+    ("species", "Taxonomy & ID", "Nominal", "Species name in the BirdLife 2020 taxonomy", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_ebird", "Taxonomy & ID", "Nominal", "Species name in eBird/Clements 2021", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("ebird_species_group", "Taxonomy & ID", "Nominal", "eBird species or broader group when assignment is uncertain", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("species_birdtree", "Taxonomy & ID", "Nominal", "Species name in the Jetz BirdTree taxonomy", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("data_type", "Sampling design", "Nominal (binary)", "1 = museum specimen; 2 = live individual", "code", "count, proportion", "bar, dot", "nominal"),
+    ("source", "Provenance", "Nominal", "Museum, research collection, or field-data source code", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("specimen_number", "Provenance", "Identifier", "Accession or collection number", "—", "distinct count", "table, tooltip", "nominal"),
+    ("sex", "Sampling design", "Nominal", "M = male; F = female; U = unknown", "code", "count, proportion", "bar, dot", "nominal"),
+    ("age", "Sampling design", "Ordinal (binary)", "0 = adult measurement; 1 = immature measurement", "code", "count, proportion", "ordered bar, dot", "ordinal"),
+    ("locality", "Geography", "Nominal (geographic)", "Original collection locality; withheld in this release", "—", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country_wri", "Geography", "Nominal (geographic)", "Collection country harmonised to WRI boundaries", "—", "count, proportion", "bar, map", "nominal/geographic"),
+    ("country", "Geography", "Nominal (geographic)", "Original country or territorial designation; withheld", "—", "count, proportion", "bar, map", "nominal/geographic"),
+    ("beak_length_culmen_mm", "Morphology", "Quantitative (continuous)", "Beak tip to base of skull along the culmen", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_length_nares_mm", "Morphology", "Quantitative (continuous)", "Anterior edge of nostril to beak tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_width_mm", "Morphology", "Quantitative (continuous)", "Beak width at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("beak_depth_mm", "Morphology", "Quantitative (continuous)", "Beak depth at the anterior edge of the nostrils", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("tarsus_length_mm", "Morphology", "Quantitative (continuous)", "Length of the tarsus", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("wing_length_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to longest primary on the unflattened wing", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("kipps_distance_mm", "Morphology", "Quantitative (continuous)", "First secondary tip to longest primary tip", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("secondary1_mm", "Morphology", "Quantitative (continuous)", "Carpal joint to the first secondary feather", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("hand_wing_index", "Morphology", "Quantitative (continuous)", "100 × Kipp's distance / wing length", "index", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("tail_length_mm", "Morphology", "Quantitative (continuous)", "Longest rectrix tip to its emergence from the skin", "mm", "mean, median, quantile, SD", "histogram, box, scatter", "linear or log"),
+    ("measurer", "Provenance", "Nominal", "Code identifying the person who measured the bird", "—", "count, proportion", "bar, dot, facet", "nominal"),
+    ("protocol", "Sampling design", "Nominal (binary)", "1 = AVONET protocol; 0 = another protocol", "code", "count, proportion", "bar, dot", "nominal"),
+    ("publication", "Provenance", "Nominal / text", "Citation when measurements came from a publication", "—", "count, distinct count", "bar, table", "nominal"),
+], columns=["column", "group", "semantic_type", "meaning", "unit",
+            "useful_aggregates", "suitable_views", "scale"])
 
 column_catalogue
 ```
+
+### From semantic type to visual form
+
+A computer's storage type is not the feature's analytical type. `data_type`,
+`age`, and `protocol` are stored as numbers, but arithmetic on their codes is
+meaningless: museum specimen `1` plus live bird `2` does not make category
+`3`. Conversely, hand-wing index is dimensionless but still quantitative.
+We therefore type features from their meaning, not from what `pandas` guessed.
+
+Altair makes this decision explicit in every encoding:
+
+| Semantic type | Altair code | Comparisons it supports | Usually effective visual forms |
+|---|---:|---|---|
+| Identifier | usually `N` | lookup, linking, duplicate detection | table rows and tooltips; rarely an axis |
+| Nominal | `N` | same/different; frequency and proportion | sorted bars or dots; colour/facet for a few levels |
+| Ordinal | `O` | same/different plus rank | ordered bars/dots; ordered colour steps |
+| Quantitative | `Q` | difference, ratio, distribution, association | histogram, box/violin, dot, line, scatter, heatmap |
+
+`N`, `O`, and `Q` are not cosmetic suffixes. They tell Altair which scale,
+axis, legend, and default aggregation are defensible. High-cardinality names
+such as species should not be mapped blindly to colour: 11,020 hues would be
+unreadable. They become useful grouping keys, filters, facets for a selected
+subset, or tooltip detail.
+
+```{pyodide}
+semantic_counts = (column_catalogue["semantic_type"].value_counts()
+                   .rename_axis("semantic_type")
+                   .reset_index(name="features"))
+
+(alt.Chart(semantic_counts)
+ .mark_bar(color="#4e79a7")
+ .encode(
+     x=alt.X("features:Q", title="Number of features"),
+     y=alt.Y("semantic_type:N", title=None, sort="-x"),
+     tooltip=["semantic_type:N", "features:Q"],
+ )
+ .properties(width=500, height=220,
+             title="Semantic feature types in the AVONET raw table"))
+```
+
+The catalogue also records suitable aggregates and candidate visual forms
+for every feature. Those are starting points, not recipes. The question still
+decides the chart: a country field could support a sorted count bar when we
+care about sampling balance, or a map when we care about spatial pattern.
 
 ### Audit every column
 
@@ -193,10 +250,13 @@ audit = pd.DataFrame({
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
     "example": [first_example(birds[c]) for c in birds.columns],
-}).merge(column_catalogue[["column", "group"]], on="column", how="left")
+}).merge(column_catalogue[["column", "group", "semantic_type",
+                           "useful_aggregates", "suitable_views", "scale"]],
+         on="column", how="left")
 
-audit[["group", "column", "dtype", "observed_n", "missing_n",
-       "missing_pct", "distinct_observed", "example"]]
+audit[["group", "column", "semantic_type", "dtype", "observed_n",
+       "missing_pct", "distinct_observed", "useful_aggregates",
+       "suitable_views", "scale", "example"]]
 ```
 
 ```{pyodide}
@@ -220,6 +280,14 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
  .properties(width=700, height=570,
              title="Missingness across all 26 AVONET raw-data columns"))
 ```
+
+Why this visual form? `column` is nominal and has 26 levels, so it works as a
+text-labelled y-position but not as 26 colours. `missing_pct` is quantitative,
+so bar length on a common x-axis makes values directly comparable. `group` is
+a five-level nominal feature, so a small discrete colour palette remains
+legible. The quantitative scale is fixed to the meaningful 0–100% domain and
+starts at zero; truncating a bar scale would exaggerate small differences.
+Exact values remain in tooltips rather than cluttering every bar.
 
 Two fields, `locality` and `country`, are completely blank in this public
 release; `country_wri` is the usable harmonised geography field. The
@@ -289,6 +357,13 @@ number, taxonomy, and the measurement fields.
 Four coded fields expose the design of the sample. Decode them before using
 them as if they were continuous numbers.
 
+For these categorical features, `count` is the natural first aggregate. A
+sorted bar chart uses position and length to compare category frequencies;
+the zero baseline gives length an honest origin. Computing a mean of the
+stored codes would be concise but semantically empty. Dividing each count by
+its field total would produce proportions instead when relative composition,
+rather than workload, is the question.
+
 ```{pyodide}
 code_specs = {
     "Record type": ("data_type", {1: "Museum specimen", 2: "Live individual"}),
@@ -354,6 +429,12 @@ measurer_chart = top_levels_chart("measurer", "Top 15 measurers", colour="#f28e2
 
 source_chart | country_chart | measurer_chart
 ```
+
+Each view performs two transformations before drawing a mark: `count` rows by
+category, then keep the 15 largest counts. That top-$N$ filter makes labels
+readable but hides the long tail, so the title must disclose it. We use three
+separate panels with independent category axes instead of one shared colour
+legend containing unrelated codes.
 
 The NHMUK source alone contributes 46,060 rows, and the largest country
 counts come from tropical, species-rich regions rather than an even global
@@ -448,6 +529,16 @@ hist_data = pd.DataFrame(hist_rows)
  .resolve_scale(x="independent", y="independent"))
 ```
 
+A histogram is already an aggregate chart: continuous values are transformed
+into intervals with `bin`, then rows are aggregated with `count`. Changing the
+number or width of bins can reveal or conceal modes and outliers. A box plot
+would instead aggregate to quartiles and whiskers; an empirical cumulative
+distribution would preserve every rank; a strip plot would preserve every
+row but overplot badly at this sample size. Here, identical histogram marks
+make shapes comparable across traits, while independent facet scales let each
+trait use its own range. That choice helps see shape but prevents direct
+comparison of absolute magnitudes across panels.
+
 ### Completeness is a row-level pattern
 
 Column percentages do not show whether gaps fall in the same birds. Count
@@ -505,6 +596,90 @@ availability_long["trait"] = availability_long["column"].map(trait_names)
              title="Trait coverage differs across the 12 largest sources"))
 ```
 
+The heatmap uses a **sequential quantitative colour scale** with a fixed
+0–100% domain: darker colours mean more observed rows. That is different from
+the discrete nominal palette used for column groups. Colour is less precise
+than position, but it is effective for scanning a two-dimensional matrix for
+blocks and exceptions.
+
+### Scales map data values to visual values
+
+A scale maps a **data domain** to a **visual range**. An x-scale maps numbers
+to horizontal pixel positions; a colour scale maps values or categories to
+colours. The scale is part of the argument, because it defines what equal
+visual distances mean.
+
+The next two charts use exactly the same values and point marks. On the linear
+scale, equal distances represent equal *differences*. On the logarithmic
+scale, equal distances represent equal *ratios*.
+
+```{pyodide}
+scale_demo = pd.DataFrame({
+    "value": [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000],
+    "row": ["same ten values"] * 10,
+})
+
+scale_base = alt.Chart(scale_demo).mark_circle(size=90, color="#4e79a7").encode(
+    y=alt.Y("row:N", title=None, axis=alt.Axis(labels=False, ticks=False)),
+    tooltip=["value:Q"],
+)
+
+linear_scale = scale_base.encode(
+    x=alt.X("value:Q", title="Value — linear scale",
+            scale=alt.Scale(type="linear", domain=[1, 1000]))
+).properties(width=330, height=70, title="Equal differences occupy equal distance")
+
+log_scale = scale_base.encode(
+    x=alt.X("value:Q", title="Value — logarithmic scale",
+            scale=alt.Scale(type="log", domain=[1, 1000]))
+).properties(width=330, height=70, title="Equal ratios occupy equal distance")
+
+linear_scale | log_scale
+```
+
+The same decision matters in the bird measurements. A linear scale foregrounds
+absolute millimetre differences among larger birds; a log scale opens the
+small-bird region and frames the relationship in ratios, which is appropriate
+for a power law. A log scale is only defined for positive values, so its use
+depends on the earlier validity check.
+
+```{pyodide}
+scale_pair = birds.dropna(
+    subset=["species", "tarsus_length_mm", "beak_length_culmen_mm"]
+)
+scale_sample = scale_pair.sample(n=6000, random_state=36104)
+
+bird_points = alt.Chart(scale_sample).mark_circle(
+    size=12, opacity=0.12, color="#4e79a7"
+).encode(
+    tooltip=["species:N",
+             alt.Tooltip("tarsus_length_mm:Q", format=".1f"),
+             alt.Tooltip("beak_length_culmen_mm:Q", format=".1f")],
+)
+
+linear_birds = bird_points.encode(
+    x=alt.X("tarsus_length_mm:Q", title="Tarsus length (mm)",
+            scale=alt.Scale(type="linear", zero=False)),
+    y=alt.Y("beak_length_culmen_mm:Q", title="Culmen length (mm)",
+            scale=alt.Scale(type="linear", zero=False)),
+).properties(width=330, height=300, title="Linear position scales")
+
+log_birds = bird_points.encode(
+    x=alt.X("tarsus_length_mm:Q", title="Tarsus length (mm, log scale)",
+            scale=alt.Scale(type="log")),
+    y=alt.Y("beak_length_culmen_mm:Q", title="Culmen length (mm, log scale)",
+            scale=alt.Scale(type="log")),
+).properties(width=330, height=300, title="Logarithmic position scales")
+
+linear_birds | log_birds
+```
+
+Notice another scale rule: bars generally need a zero baseline because length
+encodes magnitude; scatterplots do not always need zero because position, not
+length, carries the comparison. Any truncated position scale should still be
+visible and justified. A scale can reveal structure, but it must never be used
+silently to manufacture it.
+
 ### Relationships across the complete measurement block
 
 A correlation matrix is a compact scan of all pairwise linear relationships
@@ -547,6 +722,85 @@ labels = base.mark_text(fontSize=10).encode(
     title="Pairwise correlations among all ten log-transformed traits"
 )
 ```
+
+The diverging colour scale is centred at zero because positive and negative
+correlations are qualitatively different directions. Its symmetric $-1$ to
+$1$ domain prevents the strongest observed value from redefining the meaning
+of the colours. The printed values provide precision; colour provides pattern.
+
+### Regression lines are transformations, not decoration
+
+A regression line can summarise a bivariate trend, but its meaning depends on
+the variables fitted. A straight-line fit in raw millimetres asks about
+additive change. A straight-line fit after logging both features asks about
+proportional change and estimates an allometric exponent. Merely changing the
+axis scale is not the same as changing the model.
+
+The charts below use the same deterministic 8,000-row display sample. Altair's
+`transform_regression()` performs the aggregation from thousands of points to
+the fitted line. The accompanying table makes the transformation and fit
+statistics explicit.
+
+```{pyodide}
+regression_sample = scale_pair.sample(n=8000, random_state=36104).copy()
+regression_sample["log10_tarsus"] = np.log10(regression_sample["tarsus_length_mm"])
+regression_sample["log10_culmen"] = np.log10(regression_sample["beak_length_culmen_mm"])
+
+def regression_summary(x, y, model):
+    slope, intercept = np.polyfit(x, y, 1)
+    fitted = intercept + slope * x
+    r_squared = 1 - ((y - fitted) ** 2).sum() / ((y - y.mean()) ** 2).sum()
+    return {"model": model, "intercept": intercept,
+            "slope": slope, "r_squared": r_squared}
+
+regression_stats = pd.DataFrame([
+    regression_summary(
+        regression_sample["tarsus_length_mm"],
+        regression_sample["beak_length_culmen_mm"],
+        "raw millimetres: culmen ~ tarsus",
+    ),
+    regression_summary(
+        regression_sample["log10_tarsus"],
+        regression_sample["log10_culmen"],
+        "log10–log10: culmen ~ tarsus",
+    ),
+])
+regression_stats.round(3)
+```
+
+```{pyodide}
+raw_base = alt.Chart(regression_sample).encode(
+    x=alt.X("tarsus_length_mm:Q", title="Tarsus length (mm)",
+            scale=alt.Scale(zero=False)),
+    y=alt.Y("beak_length_culmen_mm:Q", title="Culmen length (mm)",
+            scale=alt.Scale(zero=False)),
+)
+raw_regression = (
+    raw_base.mark_circle(size=11, opacity=0.10, color="#4e79a7")
+    + raw_base.transform_regression(
+        "tarsus_length_mm", "beak_length_culmen_mm"
+      ).mark_line(size=3, color="#e15759")
+).properties(width=330, height=300, title="OLS in raw measurement space")
+
+log_base = alt.Chart(regression_sample).encode(
+    x=alt.X("log10_tarsus:Q", title="log10 tarsus length"),
+    y=alt.Y("log10_culmen:Q", title="log10 culmen length"),
+)
+log_regression = (
+    log_base.mark_circle(size=11, opacity=0.10, color="#4e79a7")
+    + log_base.transform_regression(
+        "log10_tarsus", "log10_culmen"
+      ).mark_line(size=3, color="#e15759")
+).properties(width=330, height=300, title="OLS in log10–log10 space")
+
+raw_regression | log_regression
+```
+
+The red line is a model layer, not proof of mechanism or causality. Outliers
+can pull it, unevenly sampled species can dominate it, and a single pooled
+line can hide different trends by sex, source, protocol, or species. A useful
+visualisation states what was fitted, on which scale, to which rows, and at
+which unit of analysis.
 
 ### Sampling depth by species
 
@@ -596,11 +850,127 @@ the most-sampled species has 784. Treating all 90,020 measured records as
 independent would let a few heavily sampled species dominate; treating every
 species mean as equally precise would ignore the opposite problem.
 
+### Aggregation functions change the question
+
+An aggregate turns many rows into one value or mark. Different functions are
+not interchangeable summaries:
+
+| Aggregate | Question answered | Useful visual role | Main caution |
+|---|---|---|---|
+| `count` | How many records? | bar length, point size, annotation | sampling effort is not biological magnitude |
+| `mean` | What is the arithmetic centre? | point, line, model input | sensitive to skew and outliers |
+| `median` | What is the middle observed value? | point, line inside a box plot | ignores distance from the middle |
+| `min`, `max` | What is the observed range? | endpoints of a rule | extremely sample-size and outlier sensitive |
+| 25th/75th quantiles | Where is the middle half? | box or thick interval | hides tails |
+| standard deviation | How dispersed are values around the mean? | error bar or uncertainty channel | assumes the mean is a useful centre |
+| `sum` | What is the total amount? | bar/area for additive quantities | meaningless for anatomical lengths here |
+
+The next transformation groups wing measurements by species and calculates
+all the defensible summaries at once. The chart then layers the full range,
+interquartile range, median, and mean for the 15 most-sampled species. Each
+layer answers a different question about the same groups.
+
+```{pyodide}
+species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
+    .groupby("species")["wing_length_mm"]
+    .agg(
+        n="count",
+        mean="mean",
+        median="median",
+        minimum="min",
+        q25=lambda values: values.quantile(0.25),
+        q75=lambda values: values.quantile(0.75),
+        maximum="max",
+        sd="std",
+    )
+    .reset_index())
+
+species_wing.nlargest(15, "n").round(2)
+```
+
+```{pyodide}
+wing_top = species_wing.nlargest(15, "n")
+wing_order = wing_top.sort_values("median")["species"].tolist()
+
+wing_base = alt.Chart(wing_top).encode(
+    y=alt.Y("species:N", title=None, sort=wing_order),
+    tooltip=[
+        "species:N", alt.Tooltip("n:Q", format=","),
+        alt.Tooltip("minimum:Q", format=".1f"),
+        alt.Tooltip("q25:Q", format=".1f"),
+        alt.Tooltip("median:Q", format=".1f"),
+        alt.Tooltip("mean:Q", format=".1f"),
+        alt.Tooltip("q75:Q", format=".1f"),
+        alt.Tooltip("maximum:Q", format=".1f"),
+        alt.Tooltip("sd:Q", format=".1f"),
+    ],
+)
+
+full_range = wing_base.mark_rule(color="#bab0ac", strokeWidth=2).encode(
+    x=alt.X("minimum:Q", title="Wing length (mm)", scale=alt.Scale(zero=False)),
+    x2="maximum:Q",
+)
+middle_half = wing_base.mark_rule(color="#4e79a7", strokeWidth=8).encode(
+    x="q25:Q", x2="q75:Q",
+)
+median_mark = wing_base.mark_tick(color="#111", thickness=2, size=16).encode(
+    x="median:Q",
+)
+mean_mark = wing_base.mark_circle(color="#e15759", size=55).encode(
+    x="mean:Q",
+)
+
+(full_range + middle_half + median_mark + mean_mark).properties(
+    width=650, height=360,
+    title="Species summaries: range, IQR, median (tick), and mean (red point)"
+)
+```
+
+Mean and median can be compared across every measured species. The diagonal
+reference line means equality; departures identify species whose wing-length
+distribution is asymmetric or affected by extreme records. Point area encodes
+sample size, reminding us that a difference based on two birds is not as
+stable as one based on two hundred.
+
+```{pyodide}
+identity_limits = pd.DataFrame({
+    "x": [species_wing["mean"].min(), species_wing["mean"].max()],
+    "y": [species_wing["mean"].min(), species_wing["mean"].max()],
+})
+
+mean_median_points = (alt.Chart(species_wing)
+    .mark_circle(opacity=0.25, color="#4e79a7")
+    .encode(
+        x=alt.X("mean:Q", title="Species mean wing length (mm)",
+                scale=alt.Scale(type="log")),
+        y=alt.Y("median:Q", title="Species median wing length (mm)",
+                scale=alt.Scale(type="log")),
+        size=alt.Size("n:Q", title="Individuals", scale=alt.Scale(type="sqrt")),
+        tooltip=["species:N", "n:Q",
+                 alt.Tooltip("mean:Q", format=".1f"),
+                 alt.Tooltip("median:Q", format=".1f")],
+    ))
+
+identity_line = (alt.Chart(identity_limits).mark_line(
+    color="#e15759", strokeDash=[6, 4]
+).encode(x="x:Q", y="y:Q"))
+
+(mean_median_points + identity_line).properties(
+    width=560, height=430,
+    title="Aggregation choice: species mean versus species median"
+)
+```
+
+This is why every chart caption should name both the **grouping level** and
+the **aggregate function**. "Wing length by species" is incomplete; "median
+individual wing length within each species" is a reproducible visual claim.
+
 ### What the EDA has established
 
 - The raw worksheet contains 90,020 measured records and 351 taxonomy-only
   rows, not 90,371 interchangeable observations.
-- All 26 columns now have an explicit role, unit, coverage count, and example.
+- All 26 columns now have an explicit semantic type, role, unit, coverage
+  count, suitable aggregate, candidate visual form, and scale.
 - Taxonomic names depend on the chosen authority; `species` is the BirdLife
   version used for the next aggregation.
 - Sampling is concentrated by source, geography, measurer, sex, and protocol.
@@ -610,6 +980,10 @@ species mean as equally precise would ignore the opposite problem.
   question-specific.
 - Species sampling depth ranges from one to 784 individuals, making the unit
   of analysis a substantive choice rather than a formatting detail.
+- Linear and logarithmic scales show different comparisons; count, mean,
+  median, range, quantiles, and standard deviation answer different questions.
+- Regression lines summarise a fitted relationship on a declared scale; they
+  do not establish mechanism, causality, or a universal trend.
 
 Only after this audit are we ready to choose two traits and define the rows
 that can support their comparison.
