@@ -1893,6 +1893,19 @@ life-history traits (adult body mass in grams, maximum longevity in
 years, litter or clutch size, female age at maturity in days, birth or
 hatching weight in grams).
 
+<figure class="figure">
+  <img src="../images/amniota-timetree.png"
+       class="figure-img img-fluid mx-auto d-block"
+       style="width: 82%; min-width: 320px; max-width: 720px;"
+       alt="Dated evolutionary tree of the seven living amniote lineages: monotremes, marsupials and placentals on the mammal side; lepidosaurs, turtles, crocodylians and birds on the reptile side, diverging from a common ancestor 319 million years ago.">
+  <figcaption class="figure-caption text-center">
+    The seven living amniote lineages. Part I's birds are a single tip of
+    this tree; Part II's table covers all of it. Divergence dates computed
+    from the same TimeTree data (Kumar et al. 2022) served with Part B,
+    where you will learn to draw trees like this yourself.
+  </figcaption>
+</figure>
+
 Apply the same sequence used in Part I, then take one question through to a
 finished chart. The cells below identify each stage and leave the analysis to
 you.
