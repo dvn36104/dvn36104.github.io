@@ -97,7 +97,7 @@ def spiral_coords(i):
 
 ```
 
-## 1 · An atom, in three sentences
+## 1 · Atoms and electron shells
 
 An element is defined by one number: **Z**, the count of protons in the
 nucleus: carbon *is* "element six". A neutral atom carries Z electrons,
@@ -217,7 +217,7 @@ for z in (2, 10, 18, 36):                       # shell closures: noble gases
     ax.annotate(" " + symbol[z - 1], (z, valence(z)), fontsize=9, color="#e66852")
 ax.set_xlabel("atomic number Z")
 ax.set_ylabel("electrons in outermost shell")
-ax.set_title("The outer shell fills, closes, and starts again")
+ax.set_title("Electrons in the outermost shell, Z = 1 to 38")
 plt.show()
 ```
 
@@ -323,7 +323,7 @@ that Mendeleev could read in 1869 from valences and atomic weights
 alone, decades before anyone knew electrons existed.
 :::
 
-## 3 · The zoo: one list, many tables
+## 3 · Alternative table designs
 
 If the data is a cycle, should its picture be a *grid*, or should it
 wind? Chemists have proposed hundreds of layouts. Here are four real
@@ -397,7 +397,7 @@ from matplotlib.lines import Line2D
 ax.legend(handles=[Line2D([], [], marker="o", ls="", color=c, label=f"{b}-block")
                    for b, c in block_colours.items()],
           loc="upper left", bbox_to_anchor=(-0.1, 1.05), frameon=False, fontsize=9)
-ax.set_title("One turn per period: the sequence never breaks")
+ax.set_title("The periodic spiral: one turn per period")
 plt.show()
 ```
 
@@ -541,7 +541,7 @@ Section 3 and see whether you still agree with yourself.
 
 {{< include _instructor-d.qmd >}}
 
-## 6 · Why this one won
+## 6 · Why the standard table won
 
 The canonical table beat the spirals for reasons worth naming, because
 they are the same reasons any visualisation wins:

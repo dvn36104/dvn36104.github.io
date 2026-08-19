@@ -724,7 +724,7 @@ length is almost complete, while several flight-shape and beak measurements
 are absent in roughly one-third of rows. There is no single universal
 "complete case" definition: it depends on the traits being compared.
 
-### Identity and taxonomy are part of the data
+### Identity and taxonomy checks
 
 The four taxonomic name columns are not redundant copies. They represent
 different taxonomic authorities, and splits or lumps can assign the same
@@ -923,7 +923,7 @@ counts come from tropical, species-rich regions rather than an even global
 sample. Contributor concentration is not automatically a flaw, but it warns
 us that source, protocol, geography, and morphology may be entangled.
 
-### The measurement process leaves fingerprints
+### Recording precision by measurer
 
 Screening is not only about values; it is also about how values were
 produced. One classic check is measurement granularity: what fraction of
@@ -1102,7 +1102,7 @@ with pass and fail counts, comes from the data-validation literature (van
 der Loo and de Jonge, *Statistical Data Cleaning*); the same idea powers
 tools such as `pandera` in Python and `validate` in R.
 
-### Validate against the world
+### External validation
 
 Internal checks cannot catch a dataset that is consistently wrong. Peng's
 EDA checklist insists on validating against **at least one external
@@ -1133,7 +1133,7 @@ amount of internal consistency can reveal. If the mallard's mean wing had
 come out at 26 mm or at 2,634 mm, everything downstream would have been
 wrong for a reason no histogram could explain.
 
-### Completeness is a row-level pattern
+### Row-level completeness
 
 Column percentages do not show whether gaps fall in the same birds. Count
 the number of observed morphology fields in every row, then ask whether
@@ -1207,7 +1207,7 @@ measured everything, and any trait difference between sources rides along.
 The taxonomy is from Little and Rubin's *Statistical Analysis with Missing
 Data*, and "which mechanism?" is a standard screening question.
 
-### Scales map data values to visual values
+### Linear and logarithmic scales
 
 A scale maps a **data domain** to a **visual range**. An x-scale maps numbers
 to horizontal pixel positions; a colour scale maps values or categories to
@@ -1285,7 +1285,7 @@ length, carries the comparison. Any truncated position scale should still be
 visible and justified. A scale can reveal structure, but it must never be used
 silently to manufacture it.
 
-### Relationships across the complete measurement block
+### Correlations among the ten traits
 
 A correlation matrix is a compact scan of all pairwise linear relationships
 among the logged traits. It is descriptive, not a fitted allometric model:
@@ -1333,7 +1333,7 @@ correlations are qualitatively different directions. Its symmetric $-1$ to
 $1$ domain prevents the strongest observed value from redefining the meaning
 of the colours. The printed values provide precision; colour provides pattern.
 
-### Regression lines are transformations, not decoration
+### Regression on raw and logged scales
 
 A regression line can summarise a bivariate trend, but its meaning depends on
 the variables fitted. A straight-line fit in raw millimetres asks about
@@ -1409,7 +1409,7 @@ line can hide different trends by sex, source, protocol, or species. A useful
 visualisation states what was fitted, on which scale, to which rows, and at
 which unit of analysis.
 
-### One line can hide two populations
+### Subgroup check: museum specimens versus live birds
 
 The record-type field from the design audit earns its keep here. Fit the
 same log-log regression separately for museum specimens and live birds:
@@ -1445,7 +1445,7 @@ subgroup_base = alt.Chart(regression_sample).encode(
        "log10_tarsus", "log10_culmen", groupby=["record_type"]
    ).mark_line(size=3)
 ).properties(width=560, height=380,
-             title="The pooled slope belongs to neither subgroup equally")
+             title="Same fit, split by record type")
 ```
 
 In the full data the museum-specimen slope is 0.62 with r = 0.63, close to
@@ -1459,7 +1459,7 @@ between-species scaling signal nearly vanishes and noise dominates: classic
 mixture you happened to assemble, and screening the design fields first is
 what lets you notice.
 
-### Aggregation functions change the question
+### Choosing an aggregation function
 
 An aggregate turns many rows into one value or mark. Different functions are
 not interchangeable summaries:

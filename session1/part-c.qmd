@@ -182,7 +182,7 @@ for nm in FAMILIAR:
     ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=10)
 ax.set_xscale("log"); ax.set_yscale("log")
 ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
-ax.set_title("Five familiar objects: already 29 orders of magnitude in mass")
+ax.set_title("Five familiar objects: 37 orders of magnitude in mass")
 plt.show()
 ```
 
@@ -212,7 +212,7 @@ value is an order-of-magnitude sketch, and at this scale that is exactly
 good enough. Say so in the caption, and it is honest; hide it, and it
 is not.
 
-## 2 · The full bestiary
+## 2 · All 29 objects
 
 Now all 29 objects, coloured by kind. Six groups: particles (grey), life,
 worlds, stars, black holes (black, naturally), and cosmic structures. The
@@ -257,7 +257,7 @@ def cosmos_axes(figsize=(10, 10)):
 
 fig, ax = cosmos_axes()
 draw_objects(ax)
-ax.set_title("All 29 objects: note the two great empty corners")
+ax.set_title("All 29 objects, coloured by kind")
 plt.show()
 ```
 
@@ -266,7 +266,7 @@ The interesting thing is not where the points are; it is where they
 in the bottom-right (huge but almost massless). Two whole corners of
 possibility, empty. The rest of this page explains why they *must* be.
 
-## 3 · Density is a straight line here
+## 3 · Lines of constant density
 
 Any object of roughly uniform density $\rho$ obeys
 $m = \frac{4}{3}\pi \rho\, r^3$. Take logs and this becomes
@@ -388,7 +388,7 @@ star at two different moments of its life, which is why mass alone tells
 you so little and the mass–radius *pair* tells you so much.
 :::
 
-## 4 · The two walls
+## 4 · The two physical limits
 
 Now the physics that gives the chart its shape. Both walls are one-line
 formulas.
@@ -426,7 +426,7 @@ ax.plot(r_line, compton_mass(r_line), color="#171717", lw=1.4)
 draw_objects(ax)
 ax.text(3e-14, 1e45, "forbidden by gravity", rotation=38, fontsize=13, color="#8a3324")
 ax.text(3e-5, 1e-24, "quantum uncertainty", rotation=-38, fontsize=13, color="#1d3f8f")
-ax.set_title("The two walls: nothing above the black-hole line, nothing below Compton")
+ax.set_title("Nothing above the black-hole line, nothing below the Compton line")
 plt.show()
 ```
 
@@ -455,7 +455,7 @@ object, and outside our Hubble volume the density carries on much the
 same, so no. But *why* the numbers land on the line so precisely is the
 second exercise.
 
-## 5 · The apex, and the finished chart
+## 5 · The Planck scale, and the finished chart
 
 Walls of slope +1 and −1 must meet. Set them equal:
 

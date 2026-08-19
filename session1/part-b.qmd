@@ -238,7 +238,7 @@ set_depths(phyla)
 phyla_age = max(l.depth for l in phyla.leaves())
 ```
 
-## 1 · A tree is a claim about history
+## 1 · Reading a phylogenetic tree
 
 A phylogenetic tree has three kinds of parts, and each one asserts
 something:
@@ -259,7 +259,7 @@ against fossils whose age and position are known. TimeTree, the source of
 our files, aggregates thousands of such published studies into consensus
 dated trees, which is why every tree here comes with real ages attached.
 
-## 2 · A tree as text: the Newick format
+## 2 · The Newick format
 
 Before we can draw a tree we need it as data. The standard format,
 **Newick**, writes a tree as nested parentheses: each pair of parentheses
@@ -360,7 +360,7 @@ assert mini.children[0].children[0].length == 6.7
 print("✓ parser reads tips, structure and branch lengths correctly")
 ```
 
-## 3 · From text to picture
+## 3 · Drawing the tree
 
 To draw a tree we give every node two coordinates. **x** is its total
 distance from the root: add branch lengths from the root down, which for
@@ -452,7 +452,7 @@ ago, and the big early fork you can see near the root is mammals splitting
 from the reptile-plus-bird lineage. That number is not decoration; you
 will meet it again below, coming from a completely different file.
 
-## 4 · Clades: subtrees you can point at
+## 4 · Clades and common ancestors
 
 A **clade** is an ancestor plus *all* of its descendants: a complete
 subtree, snapped off at one internal node. "Mammals" is a clade;
@@ -502,7 +502,7 @@ thousand years ago, and the last sloth lemurs disappeared around 500
 years ago. A dated tree can carry recently-lost lineages alongside
 living ones, though nothing in the drawing itself marks them as gone.
 
-### The tree hiding in Part A's table
+### Taxonomy columns versus a phylogeny
 
 A fair objection: Part A's amniote table has class, order, family and
 genus columns, and that nesting *is* a tree. True, so let us build it.
@@ -1036,7 +1036,7 @@ take for two dates like these to count as independent evidence?
 
 {{< include _instructor-b.qmd >}}
 
-## What a tree does, and does not, say
+## What a tree shows and what it does not
 
 Reading a phylogeny is a visual skill worth being pedantic about:
 
