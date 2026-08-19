@@ -37,6 +37,13 @@ large organisms share a readable axis, but it does not repair poor
 measurements, missing data, mixed sampling units, or uneven sampling. Those
 problems have to be understood before fitting an allometric line.
 
+::: {.callout-tip title="Assigned reading"}
+Read Baillie et al. (2022), [Ten simple rules for initial data
+analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS Computational
+Biology* 18(2), before starting Part I. It gives a short workflow for checking
+data structure, metadata, missingness and plausibility before modelling.
+:::
+
 All code runs in your browser. The first cell may take a few seconds while
 Python loads.
 
@@ -53,11 +60,7 @@ from pyodide.http import open_url
 # Data files live beside this page; the Python worker runs from site_libs/.
 DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
 
-# Altair embeds each chart's data inside the page, so a chart's cost grows
-# with rows times encoded columns. The policy here is discipline, not a
-# switched-off guardrail: aggregate before charting, keep only the columns
-# a chart encodes, sample with a fixed seed when raw points are the point,
-# and declare an explicit budget for the largest deliberate exceptions.
+# Keep chart datasets small enough to embed in the page.
 alt.data_transformers.enable("default", max_rows=12_000)
 
 plt.rcParams.update({
@@ -214,43 +217,7 @@ r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
 amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
 ```
 
-## Part I · The worked example: AVONET
-
-Before estimating any scaling relationship, we need to know what a row is,
-what every column means, how the sample was assembled, and where information
-is absent. Skipping that work is how collection artefacts become biological
-claims.
-
-Because this is a **data visualisation** course, the EDA is also a sequence of
-design decisions. For each feature we will establish its semantic data type,
-ask what comparison it can support, choose an aggregation, choose a mark and
-visual encoding, and then choose a scale. The sequence matters:
-
-> **feature → data type → question → transformation/aggregation → mark →
-> encoding → scale → interpretation**
-
-A chart is not a decorative endpoint. It is a claim produced by that entire
-pipeline. Changing `count` to `mean`, a linear axis to a logarithmic one, or a
-nominal field to a quantitative field changes what the chart says.
-
-This audit is not improvised. It follows the published discipline of
-**initial data analysis (IDA)**: set up the metadata, screen the data,
-report what was found, and only then refine the analysis plan. The
-sections below walk those stages in order: structure and metadata first,
-then the unit of analysis and the sampling design, then the content of
-the measurements, and modelling last.
-
-::: {.callout-tip title="Assigned reading: how professionals do this"}
-Baillie et al. (2022), [Ten simple rules for initial data
-analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS
-Computational Biology* 18(2). Ten rules in four pages; this page is an
-extended worked example of most of them. The fuller framework is Huebner
-et al. (2018), *A contemporary conceptual framework for initial data
-analysis*. A compact classic is the EDA checklist in Peng's
-[*Exploratory Data Analysis with R*](https://bookdown.org/rdpeng/exdata/):
-formulate the question, check the packaging, check your n's, validate
-against at least one external source. Watch those phrases reappear below.
-:::
+## Part I · AVONET
 
 [AVONET](https://doi.org/10.6084/m9.figshare.16586228.v7) is a global bird
 trait database assembled by Tobias et al. (2022). Its raw-data worksheet
@@ -307,27 +274,10 @@ Use a table with one row per figure panel and these columns:
 to connect every claim you identify back to visible evidence in the panel.
 :::
 
-The worksheet has **90,371 rows and 26 columns**, but that does not mean
-90,371 measured birds. It contains 90,020 measurement records plus 351
-`GAPSPECIES` rows that connect taxonomies for species without raw
-measurements. We retain all 26 source fields, rename them to readable
-`snake_case`, and append `_mm` to measurements recorded in millimetres.
+### Load the file and inspect its structure
 
-Rigorous screening states its expectations **before** looking. Each row of
-the table below was written down first, with its source; the cells that
-follow confirm or refute it. That habit (expectation, observation,
-comparison) is the engine of initial data analysis.
-
-```{pyodide}
-expectations = pd.DataFrame([
-    ("table shape", "90,371 rows x 26 columns", "figshare raw-data worksheet"),
-    ("measured records", "90,020", "Tobias et al. (2022), Methods"),
-    ("taxonomy-only GAPSPECIES rows", "351", "AVONET metadata sheet"),
-    ("distinct BirdLife species labels", "11,020", "Tobias et al. (2022)"),
-    ("wing length coverage", "near-complete", "AVONET protocol description"),
-], columns=["quantity", "expected", "source"])
-expectations
-```
+Start with the file itself. `.shape` gives the number of rows and columns;
+`.head()` shows how a row is laid out.
 
 ```{pyodide}
 birds = pd.read_csv(
@@ -339,45 +289,144 @@ print(f"table shape: {birds.shape[0]:,} rows × {birds.shape[1]} columns")
 birds.head(3)
 ```
 
+`info()` reports each column's storage type and non-missing count. It is a
+quick way to find fields that need closer inspection.
+
 ```{pyodide}
-measured_rows = birds["data_type"].notna().sum()
-gap_rows = birds["measurer"].eq("GAPSPECIES").sum()
-
-assert birds.shape == (90371, 26)
-assert measured_rows == 90020
-assert gap_rows == 351
-assert birds["species"].nunique() == 11020
-
-print(f"{measured_rows:,} measured records")
-print(f"{gap_rows:,} taxonomy-only GAPSPECIES rows")
-print(f"{birds['species'].nunique():,} distinct BirdLife species labels")
+birds.info()
 ```
 
-### The complete column dictionary
+The output shows 90,020 observed values in `data_type`, although the file has
+90,371 rows. Inspect the values before deciding what the missing 351 mean.
 
-A data dictionary is not something to invent. AVONET ships an official
-metadata worksheet defining every field, and we serve it with this page,
-verbatim, as `avonet_metadata.csv`; only our `snake_case` names are added
-so the two tables can be joined. Provenance first: check that the
-dictionary and the data actually describe each other.
+```{pyodide}
+(birds["data_type"]
+ .value_counts(dropna=False)
+ .rename_axis("stored_value")
+ .reset_index(name="rows"))
+```
+
+The codes `1` and `2` need documentation. Read the matching row in the
+metadata supplied with AVONET.
 
 ```{pyodide}
 metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
 
-assert set(metadata["column"]) == set(birds.columns)
-print("✓ every served column has an official definition, and no extras")
+metadata.loc[
+    metadata["column"].eq("data_type"),
+    ["column", "source_variable", "description", "variable_type"],
+]
+```
 
+The metadata identifies `1` as a museum specimen and `2` as a live
+individual. It does not explain the missing values. Look at those rows.
+
+```{pyodide}
+untyped = birds.loc[birds["data_type"].isna()].copy()
+
+untyped[[
+    "species", "species_ebird", "data_type", "source",
+    "specimen_number", "measurer", "wing_length_mm",
+]].head(8)
+```
+
+The first few rows suggest that `GAPSPECIES` is a label rather than a person's
+name. Profile every column in the subset to see which fields are populated.
+
+```{pyodide}
+untyped_profile = pd.DataFrame({
+    "column": untyped.columns,
+    "observed_rows": untyped.notna().sum().values,
+    "distinct_values": untyped.nunique(dropna=True).values,
+})
+
+untyped_profile["example"] = [
+    untyped[column].dropna().iloc[0]
+    if untyped[column].notna().any()
+    else "—"
+    for column in untyped.columns
+]
+
+untyped_profile
+```
+
+Only the five taxonomy/identifier fields and `measurer` are populated. Check
+the row counts and confirm that none contains a morphology value.
+
+```{pyodide}
+measurement_columns = [
+    column for column in birds.columns
+    if column.endswith("_mm")
+] + ["hand_wing_index"]
+
+gap_check = pd.Series({
+    "rows with missing data_type": len(untyped),
+    "rows labelled GAPSPECIES": untyped["measurer"].eq("GAPSPECIES").sum(),
+    "rows with any morphology value": (
+        untyped[measurement_columns].notna().any(axis=1).sum()
+    ),
+    "distinct BirdLife species labels": untyped["species"].nunique(),
+}, name="count")
+
+gap_check
+```
+
+The sequence above establishes what the rows represent. There are 90,020 rows
+with a recorded specimen type. The other 351 contain names from the different
+taxonomic systems, carry the `GAPSPECIES` label, and contain no morphology
+measurements. They are taxonomy links, not measured birds.
+
+Now label the three row types and count them.
+
+```{pyodide}
+row_types = (
+    birds.assign(
+        record_type=birds["data_type"]
+        .map({1: "Museum specimen", 2: "Live individual"})
+        .fillna("Taxonomy-only GAPSPECIES")
+    )
+    .groupby("record_type", as_index=False)
+    .agg(
+        rows=("species", "size"),
+        species_labels=("species", "nunique"),
+    )
+    .sort_values("rows", ascending=False)
+)
+
+row_types
+```
+
+```{pyodide}
+measured = birds.loc[birds["data_type"].notna()].copy()
+print(f"measured records retained for morphology: {len(measured):,}")
+```
+
+### Read the supplied metadata
+
+AVONET includes a metadata worksheet defining its fields. The copy served
+with this page keeps those definitions and adds the `snake_case` column names
+used in the CSV. Compare the two sets of columns before using the definitions.
+
+```{pyodide}
+data_columns = set(birds.columns)
+metadata_columns = set(metadata["column"])
+
+pd.Series({
+    "columns in data": len(data_columns),
+    "columns in metadata": len(metadata_columns),
+    "data columns missing from metadata": len(data_columns - metadata_columns),
+    "metadata columns absent from data": len(metadata_columns - data_columns),
+})
+```
+
+```{pyodide}
 metadata[["column", "source_variable", "description", "variable_type", "unit"]]
 ```
 
-The authors' definitions settle what each field **is**. What they cannot
-settle is how we should treat each field analytically: that is a
-judgment, so the annotations below are ours, labelled as such, and open
-to argument. The columns fall into five jobs. Taxonomy fields say *which
-bird* under several naming systems; design fields say *what kind of
-record* was sampled; provenance fields say *where the record came from*;
-geography fields say *where the bird was collected*; and morphology
-fields contain the measurements used for allometry.
+The metadata supplies definitions, units and storage categories. The course
+annotations below add a semantic type, useful summaries, possible visual
+forms and a likely scale. The five groups separate taxonomy, sampling design,
+provenance, geography and morphology.
 
 ```{pyodide}
 course_annotations = pd.DataFrame([
@@ -415,11 +464,10 @@ column_catalogue[["column", "group", "semantic_type", "description",
                   "unit", "useful_aggregates", "suitable_views", "scale"]]
 ```
 
-One instructive disagreement is already visible: the official metadata
-types `age` as binary, which it is as stored, while our annotation calls
-it ordinal, because adult and immature order naturally. Storage type,
-official type, and semantic type are three different judgments, and only
-the first is made by the computer.
+The `age` field shows why these distinctions matter. The official metadata
+types it as binary, which describes how it is stored. Our annotation calls it
+ordinal because adult and immature have a natural order. Storage type,
+official type and semantic type answer different questions.
 
 ### From semantic type to visual form
 
@@ -442,15 +490,14 @@ A real chart can also include transformations, scales, guides, interactions,
 facets and layers, but those three pieces are the foundation. Altair works
 best with tidy data: one row per observation and one column per feature.
 
-We will build a first chart rather than beginning with a finished example.
-First make a small table in which one row is one record type. This is ordinary
-`pandas`; no visual decisions have been made yet.
+Build the first chart in stages. Start with a small table in which one row is
+one record type.
 
 ```{pyodide}
 record_counts = (
     birds["data_type"]
-    .map({1: "Museum specimen", 2: "Live bird"})
-    .fillna("Taxonomy-only")
+    .map({1: "Museum specimen", 2: "Live individual"})
+    .fillna("Taxonomy-only GAPSPECIES")
     .value_counts()
     .rename_axis("record_type")
     .reset_index(name="rows")
@@ -548,8 +595,7 @@ Several different objects are doing different jobs:
 
 The zero baseline is deliberate: bar length represents magnitude, so each bar
 must begin at zero. Later we will use non-zero and logarithmic scales when the
-question and mark justify them. A scale is therefore part of the claim, not a
-styling afterthought.
+question and mark justify them. The choice of scale changes the comparison.
 
 #### A constant is not an encoding
 
@@ -579,9 +625,8 @@ constant_colour | mapped_colour
 ```
 
 Colour is redundant in the right-hand chart because vertical position already
-separates the three record types. Redundancy can aid emphasis, but an encoding
-should earn its place. Adding channels merely because Altair makes them easy
-usually creates a busier chart, not a more informative one.
+separates the three record types. Use the constant colour unless the colour
+mapping helps answer the question.
 
 #### Aggregation is part of the specification
 
@@ -629,10 +674,14 @@ aggregation, scale, guide or view. That vocabulary will be used throughout
 the course.
 :::
 
-Altair does **not** decide whether a coded number is a category, whether mean
-or median is defensible, which rows should be excluded, or what claim deserves
-to be made. It faithfully renders the specification we provide. That is why
-semantic typing and data auditing come before visual polish.
+Use this sequence when designing the charts that follow:
+
+> **feature → data type → question → transformation/aggregation → mark →
+> encoding → scale → interpretation**
+
+We still have to decide whether a coded number is a category, whether mean or
+median is suitable, and which rows belong in the analysis. Altair applies
+those decisions to the chart specification.
 
 The catalogue also records suitable aggregates and candidate visual forms
 for every feature. Those are starting points, not recipes. The question still
@@ -641,9 +690,9 @@ care about sampling balance, or a map when we care about spatial pattern.
 
 ### Audit every column
 
-An EDA begins with structure, not a favourite plot. The next table reports
-the storage type, observed and missing rows, percentage missing, number of
-distinct observed values, and one example for **every column**.
+The next table extends the structural check to every column: storage type,
+observed and missing rows, percentage missing, distinct values, and one
+example.
 
 ```{pyodide}
 def first_example(series):
@@ -1072,13 +1121,12 @@ validation_rules = pd.DataFrame([
      int(measured["wing_length_mm"].notna().sum()),
      int((measured["wing_length_mm"].dropna() <= 0.5).sum())),
 ], columns=["rule", "rows_checked", "violations"])
+validation_rules["result"] = np.where(
+    validation_rules["violations"].eq(0),
+    "no violations found",
+    "inspect rows",
+)
 validation_rules
-```
-
-```{pyodide}
-assert validation_rules["violations"].tolist() == [0, 4, 37, 18]
-print("✓ 0, 4, 37 and 18 violations: every one is now a named, reproducible")
-print("  finding instead of a lurking surprise")
 ```
 
 The zero matters as much as the violations. No bird's Kipp's distance
@@ -1114,11 +1162,6 @@ external_check = handbook.merge(observed_wing, on="species")
 external_check["within_range"] = external_check["mean_mm"].between(
     external_check["handbook_low_mm"], external_check["handbook_high_mm"])
 external_check.round(1)
-```
-
-```{pyodide}
-assert external_check["within_range"].all()
-print("✓ all four species-mean wing lengths fall inside handbook ranges")
 ```
 
 Four species is a spot check, not proof. But this is the kind of check
@@ -1641,11 +1684,12 @@ print(f"{len(birds):,} rows → {len(clean):,} rows "
 ```
 
 ```{pyodide}
-assert len(clean) == 69509
-assert clean["species"].nunique() == 10601
-assert clean["beak_length_culmen_mm"].min() > 0
-assert clean["tarsus_length_mm"].min() > 0
-print("✓ 69,509 individuals keep both measurements; all values positive, so logs are safe")
+pd.Series({
+    "rows retained": len(clean),
+    "species represented": clean["species"].nunique(),
+    "minimum culmen length (mm)": clean["beak_length_culmen_mm"].min(),
+    "minimum tarsus length (mm)": clean["tarsus_length_mm"].min(),
+})
 ```
 
 We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
@@ -1711,12 +1755,6 @@ species_means = (clean
                  .mean())
 print(species_means.shape)
 species_means.head()
-```
-
-```{pyodide}
-assert len(species_means) == 10601
-assert species_means.notna().all().all()
-print("✓ one row per species: 10,601 average birds")
 ```
 
 ```{pyodide}
@@ -1835,7 +1873,7 @@ Same disease, different symptom, and the only cure is looking at the
 chart.
 :::
 
-### What the worked example established
+### What Part I established
 
 The relationship was "the same" at both levels (log-linear, positive),
 but every property a reader can quote changed with the level: n went from
@@ -1843,12 +1881,9 @@ but every property a reader can quote changed with the level: n went from
 and the cleaning decision was different for every trait pair. A claim
 made at one level does not automatically hold at another. When you
 caption a chart, the level of aggregation is part of the claim: say what
-one point is, say what n is, and say where the dropped rows went. That
-checklist is about to become your job.
+one point is, say what n is, and say where the dropped rows went.
 
 ## Part II · Your investigation: the amniote life-history database
-
-Part I was the worked example. Now the method is yours.
 
 The second dataset served with this page is the **Amniote life-history
 database** (Myhrvold et al. 2015): one row per species, 21,322 of them
@@ -1858,18 +1893,15 @@ life-history traits (adult body mass in grams, maximum longevity in
 years, litter or clutch size, female age at maturity in days, birth or
 hatching weight in grams).
 
-Nobody walks you through this one. Run the same initial data analysis you
-just watched, then take one question all the way to a defensible chart.
-Work in the cells below; each states its stage and leaves the code to
-you. Everything you need was demonstrated in Part I.
+Apply the same sequence used in Part I, then take one question through to a
+finished chart. The cells below identify each stage and leave the analysis to
+you.
 
-**Stage 1: expectations, then structure.** Write down at least three
-expectations with sources before touching the table (the serving notes at
-the bottom of this page count as a source, and so does the Myhrvold et
-al. paper). Then load and audit: shape, storage types, missingness per
-column, distinct values, and a small column dictionary with semantic
-types. Pay attention to which columns are almost complete and which are
-mostly holes.
+**Stage 1: load and inspect the structure.** Report the shape, view several
+rows, inspect storage types, count missing and distinct values, and build a
+small column dictionary with semantic types. Note which columns are almost
+complete and which are mostly missing. Use the Myhrvold et al. paper and the
+serving notes to interpret what you find.
 
 ```{pyodide}
 amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
