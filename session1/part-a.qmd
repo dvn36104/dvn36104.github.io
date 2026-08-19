@@ -258,6 +258,18 @@ records the bird's taxonomic identities, sampling provenance, sex and age,
 collection geography, ten morphological traits, the measurer, and whether the
 AVONET measurement protocol was used.
 
+<figure class="figure">
+  <img src="../images/blue-jay-avonet.jpg"
+       class="figure-img img-fluid mx-auto d-block"
+       style="width: 100%; max-width: 680px;"
+       alt="Illustrated Blue Jay with measurement guides for wing length, wing-tip length, tarsus length, and tail length.">
+  <figcaption class="figure-caption text-center">
+    Examples of functional traits recorded by AVONET: wing, wing-tip, tarsus,
+    and tail length. Illustration by Jillian Ditner; source:
+    <a href="https://www.allaboutbirds.org/news/sizing-up-the-worlds-birds-with-avonet/">Living Bird, Cornell Lab of Ornithology</a>.
+  </figcaption>
+</figure>
+
 The dataset is documented in Tobias et al.,
 ["AVONET: morphological, ecological and geographical data for all birds"](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
 published in *Ecology Letters*. Keep the paper open while working through this
