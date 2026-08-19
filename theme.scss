@@ -29,13 +29,29 @@ div.sourceCode, pre.sourceCode {
   font-size: 0.85rem;
 }
 
-// smaller type in code cells, editors and outputs
-div.sourceCode pre, pre.sourceCode, pre code {
-  font-size: 0.85em;
+// compact, consistent type in static Python blocks, live editors and text outputs
+$cell-code-font-size: 0.65rem;
+
+div.sourceCode pre.sourceCode,
+div.sourceCode pre.sourceCode > code.sourceCode {
+  font-size: $cell-code-font-size !important;
 }
-.cm-editor {
-  font-size: 0.85em;
+
+.card.exercise-editor {
+  --exercise-font-size: #{$cell-code-font-size};
+  font-size: var(--exercise-font-size) !important;
 }
-.cell-output pre, .exercise-cell-output pre {
-  font-size: 0.85em;
+
+.card.exercise-editor .cm-editor,
+.card.exercise-editor .cm-scroller,
+.card.exercise-editor .cm-content,
+.card.exercise-editor .cm-gutter {
+  font-size: var(--exercise-font-size) !important;
+}
+
+.cell-output pre,
+.cell-output pre code,
+.exercise-cell-output pre,
+.exercise-cell-output pre code {
+  font-size: $cell-code-font-size !important;
 }
