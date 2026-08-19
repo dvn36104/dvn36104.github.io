@@ -1,0 +1,30 @@
+/*-- scss:defaults --*/
+
+// warm cream background, default fonts
+$body-bg: #faf5ec;
+$body-color: #2b2a26;
+
+// muted ink blue links that sit comfortably on cream
+$link-color: #38618c;
+
+/*-- scss:rules --*/
+
+// code editors and outputs as soft cards on the cream page
+div.sourceCode, pre.sourceCode {
+  background-color: #fffdf8;
+  border: 1px solid #e7dfd0;
+  border-radius: 6px;
+}
+
+.cell-output pre, .exercise-cell-output pre {
+  background-color: #f4eee0;
+  border-radius: 6px;
+}
+
+.callout {
+  background-color: #fffdf8;
+}
+
+.sidebar nav[role="doc-toc"] a {
+  font-size: 0.85rem;
+}
