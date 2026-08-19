@@ -429,36 +429,210 @@ meaningless: museum specimen `1` plus live bird `2` does not make category
 `3`. Conversely, hand-wing index is dimensionless but still quantitative.
 We therefore type features from their meaning, not from what `pandas` guessed.
 
-Altair makes this decision explicit in every encoding:
+#### Altair in one sentence
 
-| Semantic type | Altair code | Comparisons it supports | Usually effective visual forms |
-|---|---:|---|---|
-| Identifier | usually `N` | lookup, linking, duplicate detection | table rows and tooltips; rarely an axis |
-| Nominal | `N` | same/different; frequency and proportion | sorted bars or dots; colour/facet for a few levels |
-| Ordinal | `O` | same/different plus rank | ordered bars/dots; ordered colour steps |
-| Quantitative | `Q` | difference, ratio, distribution, association | histogram, box/violin, dot, line, scatter, heatmap |
+[Vega-Altair](https://altair-viz.github.io/) is a **declarative** visualisation
+library. We describe what the data fields mean and how they should be mapped
+to visual properties; Altair produces the axes, scales, legend and marks. The
+smallest useful grammar is:
 
-`N`, `O`, and `Q` are not cosmetic suffixes. They tell Altair which scale,
-axis, legend, and default aggregation are defensible. High-cardinality names
-such as species should not be mapped blindly to colour: 11,020 hues would be
-unreadable. They become useful grouping keys, filters, facets for a selected
-subset, or tooltip detail.
+> **data + mark + encodings**
+
+A real chart can also include transformations, scales, guides, interactions,
+facets and layers, but those three pieces are the foundation. Altair works
+best with tidy data: one row per observation and one column per feature.
+
+We will build a first chart rather than beginning with a finished example.
+First make a small table in which one row is one record type. This is ordinary
+`pandas`; no visual decisions have been made yet.
 
 ```{pyodide}
-semantic_counts = (column_catalogue["semantic_type"].value_counts()
-                   .rename_axis("semantic_type")
-                   .reset_index(name="features"))
+record_counts = (
+    birds["data_type"]
+    .map({1: "Museum specimen", 2: "Live bird"})
+    .fillna("Taxonomy-only")
+    .value_counts()
+    .rename_axis("record_type")
+    .reset_index(name="rows")
+)
 
-(alt.Chart(semantic_counts)
- .mark_bar(color="#4e79a7")
- .encode(
-     x=alt.X("features:Q", title="Number of features"),
-     y=alt.Y("semantic_type:N", title=None, sort="-x"),
-     tooltip=["semantic_type:N", "features:Q"],
- )
- .properties(width=500, height=220,
-             title="Semantic feature types in the AVONET raw table"))
+record_counts
 ```
+
+Now attach that table to an Altair `Chart`, choose rectangular marks, and map
+the two fields to position:
+
+```{pyodide}
+(alt.Chart(record_counts)
+ .mark_bar()
+ .encode(
+     x="rows:Q",
+     y="record_type:N",
+ ))
+```
+
+Read that code literally:
+
+- `alt.Chart(record_counts)` supplies the data.
+- `.mark_bar()` says that each result should be drawn as a rectangle.
+- `.encode(...)` maps data fields to visual channels.
+- `x="rows:Q"` maps `rows` to horizontal position and declares it
+  **quantitative**.
+- `y="record_type:N"` maps `record_type` to vertical position and declares it
+  **nominal**.
+
+The shorthand is always `"field:type"`. The field is a column in the table;
+the letter after the colon tells Altair what the values *mean*. The main
+semantic types are:
+
+- `Q`, quantitative: numeric magnitude, where differences or ratios may be
+  meaningful;
+- `N`, nominal: unordered categories, where only same/different is meaningful;
+- `O`, ordinal: categories with a defensible order;
+- `T`, temporal: dates or times;
+- `G`, geographic: GeoJSON shapes.
+
+An identifier is normally declared `N`, but that does not make it a good
+axis or colour field. A species identifier with 11,020 levels is usually
+better used for filtering, grouping or a tooltip than for 11,020 coloured
+marks. Altair can infer types from a DataFrame, but numeric category codes are
+exactly why we will declare them explicitly throughout this course.
+
+#### From a default chart to an intentional chart
+
+The short form is useful for sketching. The channel objects `alt.X`, `alt.Y`,
+`alt.Color` and `alt.Tooltip` expose the design decisions we need for a
+finished chart:
+
+```{pyodide}
+record_chart = (
+    alt.Chart(record_counts)
+    .mark_bar(color="#4e79a7")
+    .encode(
+        x=alt.X(
+            "rows:Q",
+            title="Rows",
+            scale=alt.Scale(zero=True),
+        ),
+        y=alt.Y(
+            "record_type:N",
+            title=None,
+            sort="-x",
+        ),
+        tooltip=[
+            alt.Tooltip("record_type:N", title="Record type"),
+            alt.Tooltip("rows:Q", title="Rows", format=","),
+        ],
+    )
+    .properties(
+        width=560,
+        height=150,
+        title="What kind of record is each AVONET row?",
+    )
+)
+
+record_chart
+```
+
+Several different objects are doing different jobs:
+
+- the **mark** controls the geometric object and its constant appearance;
+- an **encoding** maps a changing data value to position, colour, size, shape
+  or another visual channel;
+- a **scale** translates a data domain into visual values such as pixels or
+  colours;
+- an axis or legend is a **guide** that explains that scale;
+- `sort="-x"` orders categories by decreasing x-value;
+- a **tooltip** reveals values on demand without crowding the static display;
+- `.properties(...)` controls the view, not the data transformation.
+
+The zero baseline is deliberate: bar length represents magnitude, so each bar
+must begin at zero. Later we will use non-zero and logarithmic scales when the
+question and mark justify them. A scale is therefore part of the claim, not a
+styling afterthought.
+
+#### A constant is not an encoding
+
+Compare `mark_bar(color="#4e79a7")` with
+`encode(color="record_type:N")`. The first gives every mark the same colour;
+the second creates a data mapping and therefore a colour scale. Both are valid
+code, but they say different things.
+
+```{pyodide}
+comparison_base = (alt.Chart(record_counts)
+    .encode(
+        x=alt.X("rows:Q", title="Rows"),
+        y=alt.Y("record_type:N", title=None, sort="-x"),
+        tooltip=["record_type:N", alt.Tooltip("rows:Q", format=",")],
+    ))
+
+constant_colour = (comparison_base
+    .mark_bar(color="#4e79a7")
+    .properties(width=260, height=125, title="Constant colour"))
+
+mapped_colour = (comparison_base
+    .mark_bar()
+    .encode(color=alt.Color("record_type:N", legend=None))
+    .properties(width=260, height=125, title="Colour encodes record type"))
+
+constant_colour | mapped_colour
+```
+
+Colour is redundant in the right-hand chart because vertical position already
+separates the three record types. Redundancy can aid emphasis, but an encoding
+should earn its place. Adding channels merely because Altair makes them easy
+usually creates a busier chart, not a more informative one.
+
+#### Aggregation is part of the specification
+
+Altair can also aggregate. The next chart receives the 26-row column
+catalogue—not a pre-computed count table. `count():Q` asks Altair to count rows,
+while the unaggregated `group:N` field becomes the grouping key. This is the
+visual equivalent of `column_catalogue.groupby("group").size()`.
+
+```{pyodide}
+(alt.Chart(column_catalogue)
+ .mark_bar(color="#59a14f")
+ .encode(
+     x=alt.X("count():Q", title="Number of features"),
+     y=alt.Y("group:N", title=None, sort="-x"),
+     tooltip=[
+         alt.Tooltip("group:N", title="Feature group"),
+         alt.Tooltip("count():Q", title="Features"),
+     ],
+ )
+ .properties(
+     width=520,
+     height=190,
+     title="The five jobs performed by AVONET columns",
+ ))
+```
+
+The same grammar supports `mean(field)`, `median(field)`, `sum(field)`,
+`min(field)` and `max(field)`, as well as binning and other transformations.
+Changing the aggregate changes what one mark represents and therefore changes
+the claim. We will compare those choices explicitly later in the EDA.
+
+::: {.callout-tip title="Make one change at a time"}
+Return to the `record_chart` cell and try these edits separately:
+
+1. Swap the x and y encodings. What changes, and what stays invariant?
+2. Remove `sort="-x"`. Which ordering does Altair choose?
+3. Replace `.mark_bar(...)` with
+   `.mark_point(filled=True, size=100, color="#4e79a7")`. Does a zero baseline
+   still matter in the same way?
+4. Change `rows:Q` to `rows:O`. Inspect the axis. The numbers did not change,
+   but their semantic type—and therefore the scale—did.
+
+For each edit, name the component you changed: data, mark, encoding,
+aggregation, scale, guide or view. That vocabulary will be used throughout
+the course.
+:::
+
+Altair does **not** decide whether a coded number is a category, whether mean
+or median is defensible, which rows should be excluded, or what claim deserves
+to be made. It faithfully renders the specification we provide. That is why
+semantic typing and data auditing come before visual polish.
 
 The catalogue also records suitable aggregates and candidate visual forms
 for every feature. Those are starting points, not recipes. The question still
