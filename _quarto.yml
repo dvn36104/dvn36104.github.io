@@ -10,7 +10,7 @@ project:
 website:
   title: "36104 · Data Visualisation and Narratives"
   navbar:
-    background: "#3b5b7c"
+    background: "#4e4a84"
     left:
       - text: "Session 1"
         menu:
