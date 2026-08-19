@@ -343,7 +343,7 @@ untyped_profile = pd.DataFrame({
 untyped_profile["example"] = [
     untyped[column].dropna().iloc[0]
     if untyped[column].notna().any()
-    else "—"
+    else "-"
     for column in untyped.columns
 ]
 
@@ -631,7 +631,7 @@ mapping helps answer the question.
 #### Aggregation is part of the specification
 
 Altair can also aggregate. The next chart receives the 26-row column
-catalogue—not a pre-computed count table. `count():Q` asks Altair to count rows,
+catalogue, not a pre-computed count table. `count():Q` asks Altair to count rows,
 while the unaggregated `group:N` field becomes the grouping key. This is the
 visual equivalent of `column_catalogue.groupby("group").size()`.
 
@@ -667,7 +667,7 @@ Return to the `record_chart` cell and try these edits separately:
    `.mark_point(filled=True, size=100, color="#4e79a7")`. Does a zero baseline
    still matter in the same way?
 4. Change `rows:Q` to `rows:O`. Inspect the axis. The numbers did not change,
-   but their semantic type—and therefore the scale—did.
+   but their semantic type (and therefore the scale) did.
 
 For each edit, name the component you changed: data, mark, encoding,
 aggregation, scale, guide or view. That vocabulary will be used throughout
