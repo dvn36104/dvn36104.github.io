@@ -211,11 +211,9 @@ species_means = (clean
 r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
                     np.log10(clean["beak_length_culmen_mm"]))[0, 1]
 amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
-pair = amniote.dropna(subset=["adult_body_mass_g", "maximum_longevity_y"])
-class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"}
 ```
 
-## Part I · AVONET: examine the individuals before the model
+## Part I · The worked example: AVONET
 
 Before estimating any scaling relationship, we need to know what a row is,
 what every column means, how the sample was assembled, and where information
@@ -1409,7 +1407,7 @@ specified before the rummaging starts.
 - Broman and Woo (2018), [Data organization in spreadsheets](https://doi.org/10.1080/00031305.2017.1375989), *The American Statistician*: data dictionaries and raw-file hygiene.
 :::
 
-## 2 · Cleaning: where do the rows go?
+### Cleaning: where do the rows go?
 
 We want to plot beak length against tarsus length, which means every row we
 use needs **both** measurements (and a species name). Museum specimens are
@@ -1467,7 +1465,7 @@ row_flow = pd.DataFrame([
              title="Row flow from raw file to analysis table"))
 ```
 
-## 3 · The individual level
+### The individual level
 
 Each point is one bird. Both axes are logged: allometry is about ratios,
 and a hummingbird and an ostrich need to share a readable axis.
@@ -1489,7 +1487,7 @@ r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
 print(f"correlation of the logged traits, individual level: r = {r_ind:.3f}")
 ```
 
-## 4 · The groupby: from individuals to species
+### The groupby: from individuals to species
 
 One line of code changes what a point *means*. `groupby("species").mean()`
 collapses every bird of a species into a single average bird:
@@ -1624,132 +1622,106 @@ Same disease, different symptom, and the only cure is looking at the
 chart.
 :::
 
-## 5 · Amniote: a table where the groupby already happened
+### What the worked example established
 
-The Amniote life-history database is one row per **species**: 21,322 of
-them across birds, mammals and reptiles. Somebody else already did the
-aggregation; what you download is the equivalent of `species_means` above.
-(In the published archive, missing values are coded `-999`; the copy served
-here has them recoded as proper missing values.)
+The relationship was "the same" at both levels (log-linear, positive),
+but every property a reader can quote changed with the level: n went from
+90,371 raw rows to 69,509 usable measurements to 10,601 species means,
+and the cleaning decision was different for every trait pair. A claim
+made at one level does not automatically hold at another. When you
+caption a chart, the level of aggregation is part of the claim: say what
+one point is, say what n is, and say where the dropped rows went. That
+checklist is about to become your job.
+
+## Part II · Your investigation: the amniote life-history database
+
+Part I was the worked example. Now the method is yours.
+
+The second dataset served with this page is the **Amniote life-history
+database** (Myhrvold et al. 2015): one row per species, 21,322 of them
+across birds, mammals and reptiles. Ten columns: four taxonomy fields
+(class, order, family, genus) plus the species name, and five
+life-history traits (adult body mass in grams, maximum longevity in
+years, litter or clutch size, female age at maturity in days, birth or
+hatching weight in grams).
+
+Nobody walks you through this one. Run the same initial data analysis you
+just watched, then take one question all the way to a defensible chart.
+Work in the cells below; each states its stage and leaves the code to
+you. Everything you need was demonstrated in Part I.
+
+**Stage 1: expectations, then structure.** Write down at least three
+expectations with sources before touching the table (the serving notes at
+the bottom of this page count as a source, and so does the Myhrvold et
+al. paper). Then load and audit: shape, storage types, missingness per
+column, distinct values, and a small column dictionary with semantic
+types. Pay attention to which columns are almost complete and which are
+mostly holes.
 
 ```{pyodide}
 amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
-print(amniote.shape)
+
+# Stage 1: your structural audit here.
+
 amniote.head()
 ```
 
-```{pyodide}
-assert len(amniote) == 21322
-assert amniote["class"].value_counts().to_dict() == {
-    "Aves": 9802, "Reptilia": 6567, "Mammalia": 4953}
-print("✓ 21,322 species: 9,802 birds, 6,567 reptiles, 4,953 mammals, as published")
-```
-
-Broad allometry: how does maximum longevity scale with adult body mass,
-from a 2-gram shrew to a multi-tonne crocodile? Note the cleaning step is
-the same decision as before, and it costs far more rows here:
+**Stage 2: the unit of analysis.** One row is a species, but species sit
+inside genera, families, orders and classes. How are the species spread
+across the three classes? Across families? Which family is largest, and
+how many families contain exactly one species? What do those counts imply
+for any family-level aggregation you might do later?
 
 ```{pyodide}
-pair = amniote.dropna(subset=["adult_body_mass_g", "maximum_longevity_y"])
-print(f"{len(amniote):,} species → {len(pair):,} with both mass and longevity "
-      f"({len(pair)/len(amniote):.0%} of the table)")
-
-class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"}
-
-fig, ax = plt.subplots(figsize=(9, 6))
-for cls, grp in pair.groupby("class"):
-    ax.scatter(np.log10(grp["adult_body_mass_g"]),
-               np.log10(grp["maximum_longevity_y"]),
-               s=6, alpha=0.35, color=class_colours[cls], label=cls)
-ax.set_xlabel("log10 adult body mass (g)")
-ax.set_ylabel("log10 maximum longevity (years)")
-ax.set_title(f"Bigger animals live longer, unevenly (n = {len(pair):,} species)")
-ax.legend(frameon=False)
-plt.show()
+# Stage 2: your counts here.
 ```
+
+**Stage 3: validation.** The serving notes claim the archive's -999
+missing-value codes were all recoded to NA: verify that claim rather than
+trusting it. State at least two of your own rules (can a body mass be
+zero or negative? can age at maturity exceed maximum longevity? watch the
+units) and report violation counts. Then validate one species against the
+world: pick an animal you know and check its values against an external
+reference.
 
 ```{pyodide}
-assert len(pair) == 5122
-r_species = np.corrcoef(np.log10(pair["adult_body_mass_g"]),
-                        np.log10(pair["maximum_longevity_y"]))[0, 1]
-print(f"✓ species level: r = {r_species:.3f} across {len(pair):,} species")
+# Stage 3: your validation rules and external check here.
 ```
 
-Only 5,122 of 21,322 species (24%) have both traits recorded. Missingness
-is not decoration in comparative databases; it is most of the table.
-
-### Your turn: one rank up {#sec-ex-family}
-
-Repeat the aggregation **one taxonomic rank up**: collapse species into
-**family means** and redraw the mass–longevity plot. Average the *logged*
-values (a family containing a 3 kg and a 3,000 kg species should average in
-ratio space, not gram space).
+**Stage 4: choose a question and account for the rows.** Pick a trait
+pair. Mass and longevity is the classic allometry, but clutch size,
+maturity and birth weight are all open questions. Define exactly the rows
+that can support your comparison, and draw the row flow from the full
+table to your analysis table.
 
 ```{pyodide}
-#| setup: true
-#| exercise: ex_family
-import js
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from pyodide.http import open_url
-
-DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
-amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
-pair = amniote.dropna(subset=["adult_body_mass_g", "maximum_longevity_y"]).copy()
-pair["log_mass"] = np.log10(pair["adult_body_mass_g"])
-pair["log_longevity"] = np.log10(pair["maximum_longevity_y"])
-class_colours = {"Aves": "#4269d0", "Mammalia": "#e66852", "Reptilia": "#30a8b1"}
+# Stage 4: your cleaning decision and row accounting here.
 ```
+
+**Stage 5: the chart, and one rank up.** Produce one final chart of your
+relationship, with a caption that states the unit of analysis, the n,
+every transformation and aggregation, the scales, and where the dropped
+rows went. Then aggregate one taxonomic rank up (family means of the
+*logged* values), redraw, and say in two sentences what the aggregation
+gave you and what it took away.
 
 ```{pyodide}
-#| exercise: ex_family
-# `pair` (5,122 species) includes the columns you need: class, family,
-# log_mass, log_longevity. `class_colours` is defined.
-# 1. Aggregate to one row per family (keep class for colouring).
-# 2. Scatter family-mean log longevity against family-mean log mass, by class.
-
-families = ______
-
-fig, ax = plt.subplots(figsize=(9, 6))
-______
-ax.set_xlabel("family mean log10 adult body mass (g)")
-ax.set_ylabel("family mean log10 maximum longevity (years)")
-plt.show()
+# Stage 5: your final chart and its one-rank-up comparison here.
 ```
 
-::: {.hint exercise="ex_family"}
-**Hint 1:** Group by *two* keys (class and family) so each family
-keeps its class for colouring, and remember `.reset_index()` afterwards
-so `class` becomes an ordinary column again.
-:::
-
-::: {.hint exercise="ex_family"}
-**Hint 2:** Average the two *logged* columns in the groupby, then reuse
-the plotting pattern from the species-level chart. You should end up with
-327 points.
-:::
-
-**How to know you got it.** This exercise has no solution button; the
-chart is yours. Check yourself against three facts: you should have
-**327 families**; the correlation should come out around **0.65**, up
-from 0.52 at species level; and the long-lived eccentrics (naked
-mole-rats, bats, seabirds) should have vanished into their families'
-averages. Then ask yourself why the instructions insisted on averaging
-the *logged* values: what would one elephant have done to its family in
-raw grams?
+**How to know you got it.** No solution button: this investigation is
+yours. But the accounting has fixed points. Your class counts must sum to
+21,322 exactly. If your audit is honest, you will conclude that
+missingness is most of this table, not an edge case. Your validation
+stage should catch at least one genuinely suspicious set of rows (there
+is more than one to find, and at least one involves units). And whatever
+pair you choose, your final caption must survive the Part I checklist:
+what is one point, what is n, what was transformed, what was dropped. If
+your family-level chart averages raw grams instead of logs, one elephant
+will drag its whole family across the plot; you should be able to explain
+why.
 
 {{< include _instructor-a.qmd >}}
-
-## What aggregation did, and did not, do
-
-The relationship was "the same" at every level (log-linear, positive),
-but every property a reader can quote changed with the level: n went from
-90,371 measurements to 69,509 usable ones, to 10,601 species, to 327
-families; the correlation moved; outliers appeared and vanished. A claim
-made from one level does not automatically hold at another. When you
-caption a chart, the level of aggregation is part of the claim: say what
-one point is, say what n is, and say where the dropped rows went.
 
 ## Sources and serving notes
 
