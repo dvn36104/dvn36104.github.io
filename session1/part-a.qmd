@@ -83,49 +83,18 @@ birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"), low_memory=Fa
 measured = birds[birds["data_type"].notna()]
 
 metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
-course_annotations = pd.DataFrame([
-    ('avibase_id', 'Taxonomy & ID', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
-    ('species', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('species_ebird', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('ebird_species_group', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('species_birdtree', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('data_type', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
-    ('source', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('specimen_number', 'Provenance', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
-    ('sex', 'Sampling design', 'Nominal', 'count, proportion', 'bar, dot', 'nominal'),
-    ('age', 'Sampling design', 'Ordinal (binary)', 'count, proportion', 'ordered bar, dot', 'ordinal'),
-    ('locality', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('country_wri', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('country', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('beak_length_culmen_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_length_nares_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_width_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_depth_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('tarsus_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('wing_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('kipps_distance_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('secondary1_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('hand_wing_index', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('tail_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('measurer', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('protocol', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
-    ('publication', 'Provenance', 'Nominal / text', 'count, distinct count', 'bar, table', 'nominal'),
-], columns=["column", "group", "semantic_type", "useful_aggregates",
-            "suitable_views", "scale"])
-column_catalogue = metadata.merge(course_annotations, on="column")
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
+)
 
-trait_catalogue = pd.DataFrame([
-    ("beak_length_culmen_mm", "Beak length: culmen", "mm"),
-    ("beak_length_nares_mm", "Beak length: nares", "mm"),
-    ("beak_width_mm", "Beak width", "mm"),
-    ("beak_depth_mm", "Beak depth", "mm"),
-    ("tarsus_length_mm", "Tarsus length", "mm"),
-    ("wing_length_mm", "Wing length", "mm"),
-    ("kipps_distance_mm", "Kipp's distance", "mm"),
-    ("secondary1_mm", "First secondary", "mm"),
-    ("hand_wing_index", "Hand-wing index", "index"),
-    ("tail_length_mm", "Tail length", "mm"),
-], columns=["column", "trait", "unit"])
+trait_catalogue = (metadata
+    .loc[metadata["variable_type"].eq("continuous"),
+         ["column", "source_variable", "unit"]]
+    .rename(columns={"source_variable": "trait"})
+    .reset_index(drop=True))
+trait_catalogue["trait"] = (trait_catalogue["trait"]
+    .str.replace(".", " ", regex=False)
+    .str.replace("_", " ", regex=False))
 trait_columns = trait_catalogue["column"].tolist()
 trait_names = dict(zip(trait_catalogue["column"], trait_catalogue["trait"]))
 
@@ -144,8 +113,7 @@ audit = pd.DataFrame({
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
     "example": [first_example(birds[c]) for c in birds.columns],
-}).merge(column_catalogue[["column", "group", "semantic_type",
-                           "useful_aggregates", "suitable_views", "scale"]],
+}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
 species_depth = (measured.groupby("species").size()
@@ -423,59 +391,59 @@ pd.Series({
 metadata[["column", "source_variable", "description", "variable_type", "unit"]]
 ```
 
-The metadata supplies definitions, units and storage categories. The course
-annotations below add a semantic type, useful summaries, possible visual
-forms and a likely scale. The five groups separate taxonomy, sampling design,
-provenance, geography and morphology.
+That table is the data dictionary. Chart choices do not belong in it. A field
+does not have one universally correct aggregation, mark or scale; those
+decisions depend on the question being asked.
 
 ```{pyodide}
-course_annotations = pd.DataFrame([
-    ('avibase_id', 'Taxonomy & ID', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
-    ('species', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('species_ebird', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('ebird_species_group', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('species_birdtree', 'Taxonomy & ID', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('data_type', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
-    ('source', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('specimen_number', 'Provenance', 'Identifier', 'distinct count', 'table, tooltip', 'nominal'),
-    ('sex', 'Sampling design', 'Nominal', 'count, proportion', 'bar, dot', 'nominal'),
-    ('age', 'Sampling design', 'Ordinal (binary)', 'count, proportion', 'ordered bar, dot', 'ordinal'),
-    ('locality', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('country_wri', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('country', 'Geography', 'Nominal (geographic)', 'count, proportion', 'bar, map', 'nominal/geographic'),
-    ('beak_length_culmen_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_length_nares_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_width_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('beak_depth_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('tarsus_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('wing_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('kipps_distance_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('secondary1_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('hand_wing_index', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('tail_length_mm', 'Morphology', 'Quantitative (continuous)', 'mean, median, quantile, SD', 'histogram, box, scatter', 'linear or log'),
-    ('measurer', 'Provenance', 'Nominal', 'count, proportion', 'bar, dot, facet', 'nominal'),
-    ('protocol', 'Sampling design', 'Nominal (binary)', 'count, proportion', 'bar, dot', 'nominal'),
-    ('publication', 'Provenance', 'Nominal / text', 'count, distinct count', 'bar, table', 'nominal'),
-], columns=["column", "group", "semantic_type", "useful_aggregates",
-            "suitable_views", "scale"])
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
+)
 
-column_catalogue = metadata.merge(course_annotations, on="column")
-column_catalogue[["column", "group", "semantic_type", "description",
-                  "unit", "useful_aggregates", "suitable_views", "scale"]]
+(metadata_types["documented_type"]
+ .value_counts(dropna=False)
+ .rename_axis("documented_type")
+ .reset_index(name="columns"))
 ```
 
-The `age` field shows why these distinctions matter. The official metadata
-types it as binary, which describes how it is stored. Our annotation calls it
-ordinal because adult and immature have a natural order. Storage type,
-official type and semantic type answer different questions.
+The categories in that summary come from AVONET, not from us. Two fields have
+no documented variable type; keep them as `not specified` until their
+definitions and observed values have been checked.
 
 ### From semantic type to visual form
 
-A computer's storage type is not the feature's analytical type. `data_type`,
-`age`, and `protocol` are stored as numbers, but arithmetic on their codes is
-meaningless: museum specimen `1` plus live bird `2` does not make category
-`3`. Conversely, hand-wing index is dimensionless but still quantitative.
-We therefore type features from their meaning, not from what `pandas` guessed.
+Pandas reports how values are stored. AVONET documents what the values mean.
+Altair needs to know how a field should behave in a particular chart. Check
+all three before choosing an encoding.
+
+Here are the three numeric codes in the AVONET metadata, alongside their
+Pandas storage types and observed values:
+
+```{pyodide}
+coded_columns = ["data_type", "age", "protocol"]
+
+coded_check = metadata.loc[
+    metadata["column"].isin(coded_columns),
+    ["column", "description", "variable_type"],
+].copy()
+
+coded_check["pandas_dtype"] = coded_check["column"].map(
+    lambda column: str(birds[column].dtype)
+)
+coded_check["observed_values"] = coded_check["column"].map(
+    lambda column: ", ".join(
+        str(value) for value in sorted(birds[column].dropna().unique())
+    )
+)
+
+coded_check
+```
+
+All three columns contain numbers, but their documented values are category
+codes. A mean `data_type` or mean `protocol` has no useful interpretation.
+For a chart of specimen type, `data_type` is therefore nominal. For a chart
+that orders immature before adult, `age` could be ordinal. The decision is
+recorded with the chart and justified from the documentation.
 
 #### Altair in one sentence
 
@@ -490,8 +458,10 @@ A real chart can also include transformations, scales, guides, interactions,
 facets and layers, but those three pieces are the foundation. Altair works
 best with tidy data: one row per observation and one column per feature.
 
-Build the first chart in stages. Start with a small table in which one row is
-one record type.
+The first question is: **how many AVONET rows are there of each record type?**
+The unit being counted is an AVONET row, `data_type` supplies the groups, and
+the aggregation is a row count. Decode the documented category codes, then
+build a small table in which one row is one record type.
 
 ```{pyodide}
 record_counts = (
@@ -630,26 +600,26 @@ mapping helps answer the question.
 
 #### Aggregation is part of the specification
 
-Altair can also aggregate. The next chart receives the 26-row column
-catalogue, not a pre-computed count table. `count():Q` asks Altair to count rows,
-while the unaggregated `group:N` field becomes the grouping key. This is the
-visual equivalent of `column_catalogue.groupby("group").size()`.
+Altair can also aggregate. The next chart receives AVONET's 26-row metadata
+table, not a pre-computed count table. `count():Q` asks Altair to count rows,
+while `documented_type:N` supplies the groups. This is the visual equivalent
+of `metadata_types.groupby("documented_type").size()`.
 
 ```{pyodide}
-(alt.Chart(column_catalogue)
+(alt.Chart(metadata_types)
  .mark_bar(color="#59a14f")
  .encode(
      x=alt.X("count():Q", title="Number of features"),
-     y=alt.Y("group:N", title=None, sort="-x"),
+     y=alt.Y("documented_type:N", title=None, sort="-x"),
      tooltip=[
-         alt.Tooltip("group:N", title="Feature group"),
+         alt.Tooltip("documented_type:N", title="Documented type"),
          alt.Tooltip("count():Q", title="Features"),
      ],
  )
  .properties(
      width=520,
      height=190,
-     title="The five jobs performed by AVONET columns",
+     title="Variable types in the AVONET metadata",
  ))
 ```
 
@@ -681,12 +651,10 @@ Use this sequence when designing the charts that follow:
 
 We still have to decide whether a coded number is a category, whether mean or
 median is suitable, and which rows belong in the analysis. Altair applies
-those decisions to the chart specification.
-
-The catalogue also records suitable aggregates and candidate visual forms
-for every feature. Those are starting points, not recipes. The question still
-decides the chart: a country field could support a sorted count bar when we
-care about sampling balance, or a map when we care about spatial pattern.
+those decisions to the chart specification. The same field can support
+different charts for different questions: `country_wri` could be counted in a
+bar chart to examine sampling balance or located on a map to examine spatial
+coverage.
 
 ### Audit every column
 
@@ -710,13 +678,12 @@ audit = pd.DataFrame({
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
     "example": [first_example(birds[c]) for c in birds.columns],
-}).merge(column_catalogue[["column", "group", "semantic_type",
-                           "useful_aggregates", "suitable_views", "scale"]],
+}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
-audit[["group", "column", "semantic_type", "dtype", "observed_n",
-       "missing_pct", "distinct_observed", "useful_aggregates",
-       "suitable_views", "scale", "example"]]
+audit[["column", "description", "documented_type", "unit", "dtype",
+       "observed_n", "missing_n", "missing_pct", "distinct_observed",
+       "example"]]
 ```
 
 ```{pyodide}
@@ -729,7 +696,7 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
      x=alt.X("missing_pct:Q", title="Missing rows (%)",
              scale=alt.Scale(domain=[0, 100])),
      y=alt.Y("column:N", title=None, sort=column_order),
-     color=alt.Color("group:N", title="Column group"),
+     color=alt.Color("documented_type:N", title="Documented type"),
      tooltip=[
          alt.Tooltip("column:N", title="Column"),
          alt.Tooltip("missing_n:Q", title="Missing", format=","),
@@ -743,10 +710,10 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
 
 Why this visual form? `column` is nominal and has 26 levels, so it works as a
 text-labelled y-position but not as 26 colours. `missing_pct` is quantitative,
-so bar length on a common x-axis makes values directly comparable. `group` is
-a five-level nominal feature, so a small discrete colour palette remains
-legible. The quantitative scale is fixed to the meaningful 0–100% domain and
-starts at zero; truncating a bar scale would exaggerate small differences.
+so bar length on a common x-axis makes values directly comparable. Colour
+shows AVONET's documented variable type; it is not a classification added for
+the chart. The quantitative scale is fixed to the meaningful 0–100% domain
+and starts at zero; truncating a bar scale would exaggerate small differences.
 Exact values remain in tooltips rather than cluttering every bar.
 
 Two fields, `locality` and `country`, are completely blank in this public
@@ -1004,18 +971,14 @@ shown alongside minima and maxima because means and standard deviations alone
 hide long tails and suspicious edge values.
 
 ```{pyodide}
-trait_catalogue = pd.DataFrame([
-    ("beak_length_culmen_mm", "Beak length: culmen", "mm"),
-    ("beak_length_nares_mm", "Beak length: nares", "mm"),
-    ("beak_width_mm", "Beak width", "mm"),
-    ("beak_depth_mm", "Beak depth", "mm"),
-    ("tarsus_length_mm", "Tarsus length", "mm"),
-    ("wing_length_mm", "Wing length", "mm"),
-    ("kipps_distance_mm", "Kipp's distance", "mm"),
-    ("secondary1_mm", "First secondary", "mm"),
-    ("hand_wing_index", "Hand-wing index", "index"),
-    ("tail_length_mm", "Tail length", "mm"),
-], columns=["column", "trait", "unit"])
+trait_catalogue = (metadata
+    .loc[metadata["variable_type"].eq("continuous"),
+         ["column", "source_variable", "unit"]]
+    .rename(columns={"source_variable": "trait"})
+    .reset_index(drop=True))
+trait_catalogue["trait"] = (trait_catalogue["trait"]
+    .str.replace(".", " ", regex=False)
+    .str.replace("_", " ", regex=False))
 
 trait_columns = trait_catalogue["column"].tolist()
 trait_names = dict(zip(trait_catalogue["column"], trait_catalogue["trait"]))
@@ -1229,9 +1192,9 @@ availability_long["trait"] = availability_long["column"].map(trait_names)
 
 The heatmap uses a **sequential quantitative colour scale** with a fixed
 0–100% domain: darker colours mean more observed rows. That is different from
-the discrete nominal palette used for column groups. Colour is less precise
-than position, but it is effective for scanning a two-dimensional matrix for
-blocks and exceptions.
+the discrete palette used for documented variable types in the missingness
+chart. Colour is less precise than position, but it is effective for scanning
+a two-dimensional matrix for blocks and exceptions.
 
 The pattern in this heatmap has a name. Statisticians distinguish data
 missing completely at random (MCAR), missing at random given known
@@ -1990,9 +1953,8 @@ why.
   are normalised to `snake_case`, measurement units are included in names,
   and trailing whitespace in text fields is removed; observed values are
   otherwise unchanged. The official AVONET metadata worksheet is served
-  verbatim as `avonet_metadata.csv` (26 field definitions mapped to the
-  served column names); the semantic-type annotations on this page are
-  course judgments, not part of the source.
+  as `avonet_metadata.csv`, with its 26 definitions mapped to the served
+  column names.
 - Myhrvold et al. (2015) *An amniote life-history database to perform
   comparative analyses with birds, mammals, and reptiles*, Ecology 96:3109.
   Served with 10 of 36 columns, all 21,322 rows; the archive's `-999`
