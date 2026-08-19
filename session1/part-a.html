@@ -355,7 +355,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZCA9IGJpcmRzLmxv
 
 </div>
 <script type="pyodide-8-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZF9wcm9maWxlID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcImNvbHVtblwiOiB1bnR5cGVkLmNvbHVtbnMsXG4gICAgXCJvYnNlcnZlZF9yb3dzXCI6IHVudHlwZWQubm90bmEoKS5zdW0oKS52YWx1ZXMsXG4gICAgXCJkaXN0aW5jdF92YWx1ZXNcIjogdW50eXBlZC5udW5pcXVlKGRyb3BuYT1UcnVlKS52YWx1ZXMsXG59KVxuXG51bnR5cGVkX3Byb2ZpbGVbXCJleGFtcGxlXCJdID0gW1xuICAgIHVudHlwZWRbY29sdW1uXS5kcm9wbmEoKS5pbG9jWzBdXG4gICAgaWYgdW50eXBlZFtjb2x1bW5dLm5vdG5hKCkuYW55KClcbiAgICBlbHNlIFwi4oCUXCJcbiAgICBmb3IgY29sdW1uIGluIHVudHlwZWQuY29sdW1uc1xuXVxuXG51bnR5cGVkX3Byb2ZpbGUifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZF9wcm9maWxlID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcImNvbHVtblwiOiB1bnR5cGVkLmNvbHVtbnMsXG4gICAgXCJvYnNlcnZlZF9yb3dzXCI6IHVudHlwZWQubm90bmEoKS5zdW0oKS52YWx1ZXMsXG4gICAgXCJkaXN0aW5jdF92YWx1ZXNcIjogdW50eXBlZC5udW5pcXVlKGRyb3BuYT1UcnVlKS52YWx1ZXMsXG59KVxuXG51bnR5cGVkX3Byb2ZpbGVbXCJleGFtcGxlXCJdID0gW1xuICAgIHVudHlwZWRbY29sdW1uXS5kcm9wbmEoKS5pbG9jWzBdXG4gICAgaWYgdW50eXBlZFtjb2x1bW5dLm5vdG5hKCkuYW55KClcbiAgICBlbHNlIFwiLVwiXG4gICAgZm9yIGNvbHVtbiBpbiB1bnR5cGVkLmNvbHVtbnNcbl1cblxudW50eXBlZF9wcm9maWxlIn0=
 </script>
 </div>
 <p>Only the five taxonomy/identifier fields and <code>measurer</code> are populated. Check the row counts and confirm that none contains a morphology value.</p>
@@ -500,7 +500,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29tcGFyaXNvbl9iYXNlID0g
 </section>
 <section id="aggregation-is-part-of-the-specification" class="level4">
 <h4 class="anchored" data-anchor-id="aggregation-is-part-of-the-specification">Aggregation is part of the specification</h4>
-<p>Altair can also aggregate. The next chart receives the 26-row column catalogue—not a pre-computed count table. <code>count():Q</code> asks Altair to count rows, while the unaggregated <code>group:N</code> field becomes the grouping key. This is the visual equivalent of <code>column_catalogue.groupby("group").size()</code>.</p>
+<p>Altair can also aggregate. The next chart receives the 26-row column catalogue, not a pre-computed count table. <code>count():Q</code> asks Altair to count rows, while the unaggregated <code>group:N</code> field becomes the grouping key. This is the visual equivalent of <code>column_catalogue.groupby("group").size()</code>.</p>
 <div>
 <div id="pyodide-19" class="exercise-cell">
 
@@ -525,7 +525,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiKGFsdC5DaGFydChjb2x1bW5f
 <li>Swap the x and y encodings. What changes, and what stays invariant?</li>
 <li>Remove <code>sort="-x"</code>. Which ordering does Altair choose?</li>
 <li>Replace <code>.mark_bar(...)</code> with <code>.mark_point(filled=True, size=100, color="#4e79a7")</code>. Does a zero baseline still matter in the same way?</li>
-<li>Change <code>rows:Q</code> to <code>rows:O</code>. Inspect the axis. The numbers did not change, but their semantic type—and therefore the scale—did.</li>
+<li>Change <code>rows:Q</code> to <code>rows:O</code>. Inspect the axis. The numbers did not change, but their semantic type (and therefore the scale) did.</li>
 </ol>
 <p>For each edit, name the component you changed: data, mark, encoding, aggregation, scale, guide or view. That vocabulary will be used throughout the course.</p>
 </div>
