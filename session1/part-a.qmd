@@ -118,6 +118,10 @@ audit = pd.DataFrame({
 }).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
+rows_per_species = (birds.dropna(subset=["species"])
+    .groupby("species")
+    .size())
+
 species_depth = (measured.groupby("species").size()
                  .rename("individuals").reset_index())
 
@@ -367,15 +371,26 @@ The file has 90,371 rows and 11,020 distinct BirdLife species labels. Of those
 rows, 90,033 have a value in `species` and 338 do not. Dividing the labelled
 rows by the number of labels gives a crude mean of 8.17 rows per species, but
 the median is five and 734 species labels occur only once. The rows are not
-spread evenly across species. This first calculation uses every row in the
-worksheet; below we will use `data_type` to separate measured individuals from
-the extra taxonomy-only rows.
+spread evenly across species, and a quick histogram makes the unevenness
+visible:
 
-The metadata also answers the question "what does one measured row
-represent?" `data_type = 1` means a museum specimen and `data_type = 2` means
-a live individual. Tobias et al. likewise describe the raw morphology data as
-measurements from [90,020 individual birds](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
-with duplicate measurements discounted. Therefore the 90,020 rows with a
+```{pyodide}
+fig, ax = plt.subplots(figsize=(9, 4))
+ax.hist(rows_per_species, bins=60, color="#4e79a7")
+ax.set_yscale("log")
+ax.set_xlabel("rows per species label")
+ax.set_ylabel("number of species (log scale)")
+ax.set_title("Most species have a handful of rows; one has 784")
+plt.show()
+```
+
+The y axis is logarithmic: without it, the 734 single-row species and
+their neighbours would form one giant bar and everything to their right
+would vanish. At the far right sits the most sampled bird in the file,
+*Zosterops chloris*, the lemon-bellied white-eye, with 784 rows.
+
+The metadata explain that `data_type = 1` means a museum specimen and `data_type = 2` means
+a live individual.  Therefore the 90,020 rows with a
 recorded `data_type` are individual birds. The remaining 351 rows have no
 `data_type` and need to be examined separately. `source` and
 `specimen_number` record provenance; they do not define the row unit.
