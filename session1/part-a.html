@@ -348,7 +348,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQoZlwibWV0YWRhdGEg
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2V0KG1ldGFkYXRhW1wiY29sdW1uXCJdKSA9PSBzZXQoYmlyZHMuY29sdW1ucykifQ==
 </script>
 </div>
-<p>Now make a small inspection function. For one named field it prints the definition, semantic type and unit supplied by AVONET, followed by its Pandas storage type, coverage and number of distinct observed values. Run it for all 26 fields in file order.</p>
+<p>Now make an inspection function to read the metadata definitions.</p>
 <div>
 <div id="pyodide-6" class="exercise-cell">
 
@@ -362,17 +362,21 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHRleHR3cmFwXG5c
 <li><code>avibase_id</code> is a machine-readable key used to link a taxon to Avibase. The full metadata definition says <strong>species or species group</strong>, not necessarily one currently accepted species. The code has no biological meaning and is not intended as a chart label.</li>
 <li><code>species</code> is the human-readable scientific name assigned under the particular BirdLife taxonomy used by this release. It is useful for tables, labels and grouping, but a name can change when a species moves genus or when a taxonomic authority splits or lumps taxa.</li>
 </ul>
-<p>The identifier is therefore useful for joining data across files and tracing taxonomic changes; the name is useful for interpretation. They are related, but do not assume the relationship is one-to-one. Check it.</p>
+<p>The identifier is useful for joining; the species name is useful for grouping and interpretation. We will use the BirdLife <code>species</code> field for the first count. How many rows and species labels are present?</p>
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
 </div>
 <script type="pyodide-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGF4b25fcGFpcnMgPSAoYmlyZHNbW1wiYXZpYmFzZV9pZFwiLCBcInNwZWNpZXNcIl1dXG4gICAgLmRyb3BuYSgpXG4gICAgLmRyb3BfZHVwbGljYXRlcygpKVxuXG5zcGVjaWVzX3Blcl9pZCA9IHRheG9uX3BhaXJzLmdyb3VwYnkoXCJhdmliYXNlX2lkXCIpW1wic3BlY2llc1wiXS5udW5pcXVlKClcbmlkc19wZXJfc3BlY2llcyA9IHRheG9uX3BhaXJzLmdyb3VwYnkoXCJzcGVjaWVzXCIpW1wiYXZpYmFzZV9pZFwiXS5udW5pcXVlKClcblxucGQuU2VyaWVzKHtcbiAgICBcImRpc3RpbmN0IEF2aWJhc2XigJNCaXJkTGlmZSBwYWlyc1wiOiBsZW4odGF4b25fcGFpcnMpLFxuICAgIFwiQXZpYmFzZSBJRHMgbGlua2VkIHRvIG11bHRpcGxlIEJpcmRMaWZlIHNwZWNpZXNcIjogc3BlY2llc19wZXJfaWQuZ3QoMSkuc3VtKCksXG4gICAgXCJCaXJkTGlmZSBzcGVjaWVzIGxpbmtlZCB0byBtdWx0aXBsZSBBdmliYXNlIElEc1wiOiBpZHNfcGVyX3NwZWNpZXMuZ3QoMSkuc3VtKCksXG4gICAgXCJtYXhpbXVtIEJpcmRMaWZlIHNwZWNpZXMgZm9yIG9uZSBBdmliYXNlIElEXCI6IHNwZWNpZXNfcGVyX2lkLm1heCgpLFxuICAgIFwibWF4aW11bSBBdmliYXNlIElEcyBmb3Igb25lIEJpcmRMaWZlIHNwZWNpZXNcIjogaWRzX3Blcl9zcGVjaWVzLm1heCgpLFxufSkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicm93c19wZXJfc3BlY2llcyA9IChiaXJkcy5kcm9wbmEoc3Vic2V0PVtcInNwZWNpZXNcIl0pXG4gICAgLmdyb3VwYnkoXCJzcGVjaWVzXCIpXG4gICAgLnNpemUoKSlcblxucGQuU2VyaWVzKHtcbiAgICBcInJvd3MgaW4gdGhlIGZpbGVcIjogbGVuKGJpcmRzKSxcbiAgICBcInJvd3Mgd2l0aCBhIEJpcmRMaWZlIHNwZWNpZXMgbGFiZWxcIjogYmlyZHNbXCJzcGVjaWVzXCJdLm5vdG5hKCkuc3VtKCksXG4gICAgXCJyb3dzIHdpdGhvdXQgYSBCaXJkTGlmZSBzcGVjaWVzIGxhYmVsXCI6IGJpcmRzW1wic3BlY2llc1wiXS5pc25hKCkuc3VtKCksXG4gICAgXCJ1bmlxdWUgQmlyZExpZmUgc3BlY2llcyBsYWJlbHNcIjogYmlyZHNbXCJzcGVjaWVzXCJdLm51bmlxdWUoKSxcbiAgICBcIm1lYW4gcm93cyBwZXIgbGFiZWxsZWQgc3BlY2llc1wiOiByb3dzX3Blcl9zcGVjaWVzLm1lYW4oKSxcbiAgICBcIm1lZGlhbiByb3dzIHBlciBsYWJlbGxlZCBzcGVjaWVzXCI6IHJvd3NfcGVyX3NwZWNpZXMubWVkaWFuKCksXG4gICAgXCJzcGVjaWVzIGxhYmVscyBvY2N1cnJpbmcgb25jZVwiOiByb3dzX3Blcl9zcGVjaWVzLmVxKDEpLnN1bSgpLFxuICAgIFwibWF4aW11bSByb3dzIGZvciBvbmUgc3BlY2llcyBsYWJlbFwiOiByb3dzX3Blcl9zcGVjaWVzLm1heCgpLFxufSkucm91bmQoMikifQ==
 </script>
 </div>
-<p>Among rows where both fields are present, 27 Avibase IDs link to more than one BirdLife species, while 137 BirdLife species link to more than one Avibase ID. For example, one Avibase group is reconciled to both <em>Milvus aegyptius</em> and <em>Milvus migrans</em>, while the BirdLife name <em>Acanthis flammea</em> occurs with two Avibase IDs. Those are taxonomic reconciliation cases, not repeated birds.</p>
-<p>The other three fields give names under eBird/Clements, eBird’s broader assignable group, and BirdTree. Their different vocabulary sizes are further evidence of taxonomic splits, lumps and unassigned records, not duplicate columns to discard.</p>
+<p>The file has 90,371 rows and 11,020 distinct BirdLife species labels. Of those rows, 90,033 have a value in <code>species</code> and 338 do not. Dividing the labelled rows by the number of labels gives a crude mean of 8.17 rows per species, but the median is five and 734 species labels occur only once. The rows are not spread evenly across species. At this point these are simply <strong>rows per label</strong>—we have not yet established that every row is a measured bird.</p>
+</section>
+<section id="what-is-a-species" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-a-species">What is a species?</h4>
+<p>A species is not a value measured from a specimen in the way that wing length is. It is a taxonomic decision about which organisms belong to the same evolutionary group. Under the biological species concept, a species is a group of actually or potentially interbreeding natural populations that is reproductively isolated from other such groups. In practice that test is difficult for geographically separated birds, so taxonomists also use ancestry, genetics, anatomy, plumage, song and behaviour. Different authorities can weigh that evidence differently and split one group into several species or lump several groups into one.</p>
+<p>For this analysis, a “species” means a distinct name in the BirdLife taxonomy used by this AVONET release. The count of 11,020 is therefore a count under a specified classification, not a timeless count of natural entities. The <code>species_ebird</code>, <code>ebird_species_group</code> and <code>species_birdtree</code> columns preserve alternative classifications needed for other analyses.</p>
 <p>The printout calls <code>source</code> the museum or research collection and <code>specimen_number</code> an accession or collection number. A specimen number is therefore only meaningful within its source. Test the pair before treating it as an individual identifier.</p>
 <div>
 <div id="pyodide-8" class="exercise-cell">
