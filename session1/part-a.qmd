@@ -198,13 +198,13 @@ AVONET measurement protocol was used.
 
 ```{=html}
 <figure class="figure">
-  <div class="row g-3 align-items-center mx-auto" style="max-width: 920px;">
-    <div class="col-12 col-md-6">
+  <div class="row g-2 align-items-center flex-nowrap mx-auto" style="max-width: 660px;">
+    <div class="col-6">
       <img src="../images/blue-jay-avonet.jpg"
            class="figure-img img-fluid mx-auto d-block"
            alt="Illustrated Blue Jay showing how wing length, wing-tip length, tarsus length, and tail length are measured.">
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-6">
       <img src="../images/blue-jay-avonet-companion.png"
            class="figure-img img-fluid mx-auto d-block"
            alt="Illustrated Blue Jay bill and wing showing bill length, depth and width, plus wing and secondary length.">

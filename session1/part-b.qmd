@@ -10,31 +10,11 @@ pyodide:
 In Part A you worked with a **table** of amniotes: one row per species, no
 structure between the rows. But those species are not an unordered bag:
 every one of them sits on a family tree that connects it, through shared
-ancestors, to every other living thing. This part is about that tree: how
-it is stored as data, how to draw it three ways (rectangular, round, and
-against a time axis), and what the words biologists use for it (*clade*,
-*ancestor*, *divergence*) mean on the screen.
-
-Note what changed and why. Part A's 
-
-In Part A, the amniote table (Myhrvold et al. 2015) stores **traits**. 
-Its nested taxonomy columns (class, order, family, genus) encode a tree: 
-nesting is a hierarchy. But it is a tree of
-*named ranks*: it carries no dates, and inside every rank it is silent.
-The table can say that fifteen families belong to the primates without
-saying anything about how those families relate to one another. The trees
-on this page store what the table cannot: **resolved relationships with
-dates**, and not a single measurement. Same animals, complementary data
-structures, different sources. All three trees come from
-[TimeTree](https://timetree.org) (Kumar et al. 2022), one of them the
-family tree of exactly the amniotes whose traits you analysed in Part A,
-and we start by drawing the tree that Part A's own columns already encode:
-
-| File | Tips | What one tip is |
-|---|---|---|
-| `amniotes_family.nwk` | 956 | one family of amniotes (mammals, birds, reptiles) |
-| `eukaryotes_class.nwk` | 235 | one class of eukaryotes: animals, fungi, plants, protists |
-| `eukaryotes_phylum.nwk` | 66 | one phylum of eukaryotes |
+ancestors, to every other living thing. This part is about trees: how
+they are stored as data, how to draw them (rectangular, round, and
+against a time axis), and what the words biologists use for them
+(*clade*, *ancestor*, *divergence*) mean on the screen. We start with a
+tree you already have: the one hiding in Part A's own taxonomy columns.
 
 All code runs in your browser. The first cell may take a few seconds while
 Python loads.
@@ -389,8 +369,22 @@ record membership, not history. The x axis is rank, not time. The
 vertical order of siblings is arbitrary. And nothing in it makes one
 order closer to another: passerines are as related to parrots as to
 ostriches, as far as these columns know. To go further we need data built
-to store *resolved, dated* relationships, and that is exactly what this
-page's three tree files are.
+to store *resolved, dated* relationships.
+
+That is what the rest of this page uses. Note what changed and why: the
+amniote table stores traits and rank membership; the files below store
+what the table cannot, **resolved relationships with dates**, and not a
+single measurement. Same animals, complementary data structures,
+different sources. All three come from
+[TimeTree](https://timetree.org) (Kumar et al. 2022), and one of them is
+the family tree of exactly the amniotes whose traits you analysed in
+Part A.
+
+| File | Tips | What one tip is |
+|---|---|---|
+| `amniotes_family.nwk` | 956 | one family of amniotes (mammals, birds, reptiles) |
+| `eukaryotes_class.nwk` | 235 | one class of eukaryotes: animals, fungi, plants, protists |
+| `eukaryotes_phylum.nwk` | 66 | one phylum of eukaryotes |
 
 ## 2 · Reading a phylogenetic tree
 
