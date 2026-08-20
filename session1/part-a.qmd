@@ -348,6 +348,7 @@ The identifier is useful for joining; the species name is useful for grouping
 and interpretation. The `species_ebird`, `ebird_species_group` and
 `species_birdtree` columns preserve alternative classifications needed for
 other analyses. We will use the BirdLife `species` field for the first count.
+
 How many rows and species labels are present?
 
 ```{pyodide}
@@ -375,19 +376,25 @@ spread evenly across species, and a quick histogram makes the unevenness
 visible:
 
 ```{pyodide}
+counts_of_counts = rows_per_species.value_counts().sort_index()
+
 fig, ax = plt.subplots(figsize=(9, 4))
-ax.hist(rows_per_species, bins=60, color="#4e79a7")
-ax.set_yscale("log")
+ax.bar(counts_of_counts.index, counts_of_counts.values, color="#4e79a7")
+ax.set_xlim(0.5, 30.5)
 ax.set_xlabel("rows per species label")
-ax.set_ylabel("number of species (log scale)")
-ax.set_title("Most species have a handful of rows; one has 784")
+ax.set_ylabel("number of species")
+ax.set_title("Rows per species, shown to 30; the tail runs on to 784")
 plt.show()
 ```
 
-The y axis is logarithmic: without it, the 734 single-row species and
-their neighbours would form one giant bar and everything to their right
-would vanish. At the far right sits the most sampled bird in the file,
-*Zosterops chloris*, the lemon-bellied white-eye, with 784 rows.
+Every bar is an exact count on plain linear axes. The 734 single-row
+species are the bar at 1. The tallest bar is at 5 rows (3,081 species),
+with 4 close behind: AVONET's protocol aimed to measure at least four
+birds per species, and that target is stamped straight into the shape of
+the data. The x axis stops at 30 because only 262 species lie beyond it,
+stretched all the way to the most sampled bird in the file, *Zosterops
+chloris*, the lemon-bellied white-eye, at 784 rows. Truncating an axis is
+fine; doing it silently is not, so the title says so.
 
 The metadata explain that `data_type = 1` means a museum specimen and `data_type = 2` means
 a live individual.  Therefore the 90,020 rows with a
@@ -395,14 +402,11 @@ recorded `data_type` are individual birds. The remaining 351 rows have no
 `data_type` and need to be examined separately. `source` and
 `specimen_number` record provenance; they do not define the row unit.
 
-The same printout shows that `sex` is a three-level category (`M`, `F`, `U`),
-not free text. `locality` and
-`country` are completely absent because those data were embargoed in this
-release; `country_wri` is the available harmonised geography. `measurer` is
-an identifier for the person taking the measurements, not for the bird.
+The same printout shows that `sex` is a three-level category (`M`, `F`, `U`);
+ `country_wri` is the available harmonised geography; `measurer` is
+an identifier for the person taking the measurements;
 `publication` is provenance for measurements transcribed from published
-sources and is populated for only a small subset of rows. Each field supports
-a different question, despite Pandas storing most of them as `object`.
+sources and is populated for only a small subset of rows. 
 
 **The number columns.** The default `describe` covers exactly these:
 
@@ -412,8 +416,7 @@ birds.describe().T.round(2)
 
 Read the min and max columns and the floats split in two as well. Ten
 are measurements with continuous ranges in millimetres. But `data_type`,
-`age` and `protocol` run between 0 and 2, and counting distinct values
-confirms the suspicion:
+`age` and `protocol` run between 0 and 2. These are categorical values 
 
 ```{pyodide}
 (birds.select_dtypes("float64").nunique()
