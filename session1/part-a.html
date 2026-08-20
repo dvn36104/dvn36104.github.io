@@ -534,7 +534,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVjb3JkX2NoYXJ0ID0gKFxu
 <li><code>sort="-x"</code> orders categories by decreasing x-value;</li>
 <li>a <strong>tooltip</strong> reveals values on demand without crowding the static display;</li>
 </ul>
-<p>Compare <code>mark_bar(color="#4269d0")</code> with <code>encode(color="record_type:N")</code>. The first gives every mark the same colour; the second creates a data mapping and therefore a colour scale. Both are valid code, but they say different things.</p>
+<p>Compare <code>mark_bar(color="#4269d0")</code> with <code>encode(color="record_type:N")</code>. The first gives every mark the same colour; the second creates a data mapping and therefore a colour scale. Colour is redundant in the right-hand chart because vertical position already separates the three record types. Use the constant colour unless the colour mapping helps answer the question.</p>
 <div>
 <div id="pyodide-20" class="exercise-cell">
 
@@ -543,21 +543,19 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVjb3JkX2NoYXJ0ID0gKFxu
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29tcGFyaXNvbl9iYXNlID0gKGFsdC5DaGFydChyZWNvcmRfY291bnRzKVxuICAgIC5lbmNvZGUoXG4gICAgICAgIHg9YWx0LlgoXCJyb3dzOlFcIiwgdGl0bGU9XCJSb3dzXCIpLFxuICAgICAgICB5PWFsdC5ZKFwicmVjb3JkX3R5cGU6TlwiLCB0aXRsZT1Ob25lLCBzb3J0PVwiLXhcIiksXG4gICAgICAgIHRvb2x0aXA9W1wicmVjb3JkX3R5cGU6TlwiLCBhbHQuVG9vbHRpcChcInJvd3M6UVwiLCBmb3JtYXQ9XCIsXCIpXSxcbiAgICApKVxuXG5jb25zdGFudF9jb2xvdXIgPSAoY29tcGFyaXNvbl9iYXNlXG4gICAgLm1hcmtfYmFyKGNvbG9yPVwiIzQyNjlkMFwiKVxuICAgIC5wcm9wZXJ0aWVzKHdpZHRoPTI2MCwgaGVpZ2h0PTEyNSwgdGl0bGU9XCJDb25zdGFudCBjb2xvdXJcIikpXG5cbm1hcHBlZF9jb2xvdXIgPSAoY29tcGFyaXNvbl9iYXNlXG4gICAgLm1hcmtfYmFyKClcbiAgICAuZW5jb2RlKGNvbG9yPWFsdC5Db2xvcihcInJlY29yZF90eXBlOk5cIiwgbGVnZW5kPU5vbmUpKVxuICAgIC5wcm9wZXJ0aWVzKHdpZHRoPTI2MCwgaGVpZ2h0PTEyNSwgdGl0bGU9XCJDb2xvdXIgZW5jb2RlcyByZWNvcmQgdHlwZVwiKSlcblxuY29uc3RhbnRfY29sb3VyIHwgbWFwcGVkX2NvbG91ciJ9
 </script>
 </div>
-<p>Colour is redundant in the right-hand chart because vertical position already separates the three record types. Use the constant colour unless the colour mapping helps answer the question.</p>
-<section id="make-the-aggregate-table-before-drawing-it" class="level4">
-<h4 class="anchored" data-anchor-id="make-the-aggregate-table-before-drawing-it">Make the aggregate table before drawing it</h4>
 <p>The metadata has one row for each of AVONET’s 26 features. Suppose we want to know how many features have each documented type. That question requires a new table: one row per documented type and a count of the metadata rows belonging to it.</p>
+<p>First a small preparation: the metadata’s <code>variable_type</code> column has two blank entries, and a blank makes a poor group label, so copy it into a new column with the blanks filled in.</p>
 <div>
 <div id="pyodide-21" class="exercise-cell">
 
 </div>
 <script type="pyodide-21-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWV0YWRhdGFfdHlwZV9jb3VudHMgPSAoXG4gICAgbWV0YWRhdGFfdHlwZXNcbiAgICAuZ3JvdXBieShcImRvY3VtZW50ZWRfdHlwZVwiLCBhc19pbmRleD1GYWxzZSlcbiAgICAuc2l6ZSgpXG4gICAgLnJlbmFtZShjb2x1bW5zPXtcInNpemVcIjogXCJmZWF0dXJlc1wifSlcbilcblxubWV0YWRhdGFfdHlwZV9jb3VudHMifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWV0YWRhdGFfdHlwZXMgPSBtZXRhZGF0YS5hc3NpZ24oXG4gICAgZG9jdW1lbnRlZF90eXBlPW1ldGFkYXRhW1widmFyaWFibGVfdHlwZVwiXS5maWxsbmEoXCJub3Qgc3BlY2lmaWVkXCIpXG4pXG5cbm1ldGFkYXRhX3R5cGVfY291bnRzID0gKFxuICAgIG1ldGFkYXRhX3R5cGVzXG4gICAgLmdyb3VwYnkoXCJkb2N1bWVudGVkX3R5cGVcIiwgYXNfaW5kZXg9RmFsc2UpXG4gICAgLnNpemUoKVxuICAgIC5yZW5hbWUoY29sdW1ucz17XCJzaXplXCI6IFwiZmVhdHVyZXNcIn0pXG4pXG5cbm1ldGFkYXRhX3R5cGVfY291bnRzIn0=
 </script>
 </div>
 <p>Read the transformation in order:</p>
 <ol type="1">
-<li>Start with 26 rows, one per AVONET feature.</li>
+<li>Start with 26 rows, one per AVONET feature. <code>documented_type</code> is the metadata’s own <code>variable_type</code>, with its two blanks filled as <code>not specified</code>.</li>
 <li><code>groupby("documented_type")</code> collects rows that share the same documented type.</li>
 <li><code>.size()</code> counts how many rows are in each group.</li>
 <li>The result has one row per type and a new <code>features</code> column containing the count.</li>
@@ -615,7 +613,6 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29sdW1uX29yZGVyID0gKGF1
 </div>
 <p>Why this visual form? <code>column</code> is nominal and has 26 levels, so it works as a text-labelled y-position but not as 26 colours. <code>missing_pct</code> is quantitative, so bar length on a common x-axis makes values directly comparable. Colour shows AVONET’s documented variable type; it is not a classification added for the chart. The quantitative scale is fixed to the meaningful 0–100% domain and starts at zero; truncating a bar scale would exaggerate small differences. Exact values remain in tooltips rather than cluttering every bar.</p>
 <p>Two fields, <code>locality</code> and <code>country</code>, are completely blank in this public release; <code>country_wri</code> is the usable harmonised geography field. The publication field is mostly blank because most rows are direct specimen or field measurements rather than measurements transcribed from papers. Wing length is almost complete, while several flight-shape and beak measurements are absent in roughly one-third of rows. There is no single universal “complete case” definition: it depends on the traits being compared.</p>
-</section>
 </section>
 <section id="row-level-completeness" class="level3">
 <h3 class="anchored" data-anchor-id="row-level-completeness">Row-level completeness</h3>
