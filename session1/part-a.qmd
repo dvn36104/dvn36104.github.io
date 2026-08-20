@@ -330,21 +330,21 @@ for column in birds.columns:
 ```
 
 For this analysis, a "species" means a distinct name in the BirdLife taxonomy
-used by this AVONET release. Why keep both `avibase_id` and `species`? 
+used by this AVONET release. Why keep both `avibase_id` and `species`?
 
 - `avibase_id` is a machine-readable key used to link a taxon to Avibase. The
   full metadata definition says **species or species group**, not necessarily
-  one currently accepted species. 
+  one currently accepted species.
 - `species` is the human-readable scientific name assigned under the
   particular BirdLife taxonomy used by this release. It is useful for tables,
   labels and grouping, but a name can change when a species moves genus or
   when a taxonomic authority splits or lumps taxa.
 
 The identifier is useful for joining; the species name is useful for grouping
-and interpretation. The
-`species_ebird`, `ebird_species_group` and `species_birdtree` columns preserve
-alternative classifications needed for other analyses.We will use the BirdLife `species` field for the first
-count. How many rows and species labels are present?
+and interpretation. The `species_ebird`, `ebird_species_group` and
+`species_birdtree` columns preserve alternative classifications needed for
+other analyses. We will use the BirdLife `species` field for the first count.
+How many rows and species labels are present?
 
 ```{pyodide}
 rows_per_species = (birds.dropna(subset=["species"])
@@ -375,10 +375,10 @@ The metadata also answers the question "what does one measured row
 represent?" `data_type = 1` means a museum specimen and `data_type = 2` means
 a live individual. Tobias et al. likewise describe the raw morphology data as
 measurements from [90,020 individual birds](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
-with duplicate measurements discounted. We should therefore call those
-90,020 rows **individual birds**, not cast doubt on their unit because some
-accession numbers are absent or reused. `source` and `specimen_number` record
-provenance; they are not the definition of the row unit.
+with duplicate measurements discounted. Therefore the 90,020 rows with a
+recorded `data_type` are individual birds. The remaining 351 rows have no
+`data_type` and need to be examined separately. `source` and
+`specimen_number` record provenance; they do not define the row unit.
 
 The same printout shows that `sex` is a three-level category (`M`, `F`, `U`),
 not free text. `locality` and
