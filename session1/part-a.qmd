@@ -236,8 +236,11 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 
 ### Load and inspect data and metadata
 
-Start with the file itself. `.shape` gives the number of rows and columns;
-`.head()` shows how a row is laid out.
+Start with the file itself. `.shape` gives the number of rows and
+columns; `info()` reports each column's storage type and non-missing
+count; `describe()` summarises every numeric column's count, centre,
+spread and range. Between them they answer the first screening questions
+without printing a single raw row.
 
 ```{pyodide}
 birds = pd.read_csv(
@@ -246,17 +249,68 @@ birds = pd.read_csv(
 )
 
 print(f"table shape: {birds.shape[0]:,} rows × {birds.shape[1]} columns")
-birds.head(3)
-```
-
-`info()` reports each column's storage type and non-missing count. It is a
-quick way to find fields that need closer inspection.
-
-```{pyodide}
 birds.info()
 ```
 
-The output shows 90,020 observed values in `data_type`, although the file has
+```{pyodide}
+birds.describe().T.round(2)
+```
+
+Storage types and summary numbers are the computer's view. What each
+column *means* is documented: AVONET ships a metadata worksheet defining
+every field, and it is served with this page alongside the data. Confirm
+that the dictionary and the table describe each other, then read it.
+
+```{pyodide}
+metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
+
+data_columns = set(birds.columns)
+metadata_columns = set(metadata["column"])
+
+pd.Series({
+    "columns in data": len(data_columns),
+    "columns in metadata": len(metadata_columns),
+    "data columns missing from metadata": len(data_columns - metadata_columns),
+    "metadata columns absent from data": len(metadata_columns - data_columns),
+})
+```
+
+```{pyodide}
+metadata[["column", "source_variable", "description", "variable_type", "unit"]]
+```
+
+That table is the data dictionary. Chart choices do not belong in it. A
+field does not have one universally correct aggregation, mark or scale;
+those decisions depend on the question being asked.
+
+```{pyodide}
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
+)
+
+(metadata_types["documented_type"]
+ .value_counts(dropna=False)
+ .rename_axis("documented_type")
+ .reset_index(name="columns"))
+```
+
+The categories in that summary come from AVONET, not from us. Two fields
+have no documented variable type; keep them as `not specified` until
+their definitions and observed values have been checked.
+
+One more thing to establish about the dictionary: search it for
+`GAPSPECIES`, a value that will matter in a moment, and the search comes
+back empty. Dictionaries describe columns; they do not always describe
+every convention hiding in the values.
+
+```{pyodide}
+metadata.loc[
+    metadata["description"].str.contains("GAP", case=False, na=False),
+    ["column", "description"],
+]
+```
+
+Back to the numbers. `info()` showed 90,020 observed values in `data_type`, although the file has
 90,371 rows. Inspect the values before deciding what the missing 351 mean.
 
 ```{pyodide}
@@ -270,8 +324,6 @@ The codes `1` and `2` need documentation. Read the matching row in the
 metadata supplied with AVONET.
 
 ```{pyodide}
-metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
-
 metadata.loc[
     metadata["column"].eq("data_type"),
     ["column", "source_variable", "description", "variable_type"],
@@ -279,19 +331,19 @@ metadata.loc[
 ```
 
 The metadata identifies `1` as a museum specimen and `2` as a live
-individual. It does not explain the missing values. Look at those rows.
+individual. It does not explain the missing values. Isolate those rows
+and ask what fills the fields they do have:
 
 ```{pyodide}
 untyped = birds.loc[birds["data_type"].isna()].copy()
 
-untyped[[
-    "species", "species_ebird", "data_type", "source",
-    "specimen_number", "measurer", "wing_length_mm",
-]].head(8)
+untyped["measurer"].value_counts(dropna=False)
 ```
 
-The first few rows suggest that `GAPSPECIES` is a label rather than a person's
-name. Profile every column in the subset to see which fields are populated.
+Every one of the 351 rows carries `GAPSPECIES` in the measurer field: a
+label, not a person's name, and, as the dictionary search just showed, an
+undocumented one. Profile every column in the subset to see which fields
+are populated.
 
 ```{pyodide}
 untyped_profile = pd.DataFrame({
@@ -361,55 +413,15 @@ measured = birds.loc[birds["data_type"].notna()].copy()
 print(f"measured records retained for morphology: {len(measured):,}")
 ```
 
-### Read the supplied metadata
-
-AVONET includes a metadata worksheet defining its fields. The copy served
-with this page keeps those definitions and adds the `snake_case` column names
-used in the CSV. Compare the two sets of columns before using the definitions.
-
-```{pyodide}
-data_columns = set(birds.columns)
-metadata_columns = set(metadata["column"])
-
-pd.Series({
-    "columns in data": len(data_columns),
-    "columns in metadata": len(metadata_columns),
-    "data columns missing from metadata": len(data_columns - metadata_columns),
-    "metadata columns absent from data": len(metadata_columns - data_columns),
-})
-```
-
-```{pyodide}
-metadata[["column", "source_variable", "description", "variable_type", "unit"]]
-```
-
-That table is the data dictionary. Chart choices do not belong in it. A field
-does not have one universally correct aggregation, mark or scale; those
-decisions depend on the question being asked.
-
-```{pyodide}
-metadata_types = metadata.assign(
-    documented_type=metadata["variable_type"].fillna("not specified")
-)
-
-(metadata_types["documented_type"]
- .value_counts(dropna=False)
- .rename_axis("documented_type")
- .reset_index(name="columns"))
-```
-
-The categories in that summary come from AVONET, not from us. Two fields have
-no documented variable type; keep them as `not specified` until their
-definitions and observed values have been checked.
-
 ### From semantic type to visual form
 
 Pandas reports how values are stored. AVONET documents what the values mean.
 Altair needs to know how a field should behave in a particular chart. Check
 all three before choosing an encoding.
 
-Here are the three numeric codes in the AVONET metadata, alongside their
-Pandas storage types and observed values:
+Three fields store their categories as numbers: `data_type`, `age` and
+`protocol`. Here they are alongside their Pandas storage types and
+observed values:
 
 ```{pyodide}
 coded_columns = ["data_type", "age", "protocol"]
