@@ -510,16 +510,36 @@ print(f"individual birds retained for morphology: {len(measured):,}")
 
 ### Introduction to Altair
 
-[Vega-Altair](https://altair-viz.github.io/) is a **declarative** visualisation
-library. We describe what the data fields mean and how they should be mapped
-to visual properties; Altair produces the axes, scales, legend and marks. The
-smallest useful grammar is:
+[Vega-Altair](https://altair-viz.github.io/) implements a **grammar of
+graphics**. A chart is built from a small set of parts that can be combined in
+different ways. We do not calculate pixel coordinates or draw every bar
+ourselves. We state what the fields mean and how values should become visual
+properties; Altair works out the geometry, axes and legends.
 
-> **data + mark + encodings**
+Read an Altair specification from left to right:
 
-A real chart can also include transformations, scales, guides, interactions,
-facets and layers, but those three pieces are the foundation. Altair works
-best with tidy data: one row per observation and one column per feature.
+> **data → transformation → mark → encoding → scale → guide → composition**
+
+- **Data** is the table supplied to the chart. In tidy data, one row is one
+  observation and one column is one feature.
+- A **transformation** filters, groups, counts, averages or bins those rows.
+  It determines what one mark in the resulting chart represents.
+- The **mark** is the geometric object used to show that result: a bar, point,
+  line, area, rectangle or text label.
+- An **encoding** maps a data field to a visual channel such as x-position,
+  y-position, colour, size, shape or opacity.
+- A **scale** translates values in the data domain into positions, lengths,
+  sizes or colours in the visual range.
+- A **guide**—an axis or legend—explains that scale to the reader.
+- **Composition** combines views through layers, facets or concatenation;
+  interaction can then add selections, filtering and linked views.
+
+The grammar matters because these decisions are separable. Keep the data and
+encodings but change the mark, and the same values take a different visual
+form. Keep the mark but change `count` to `mean`, and each bar now makes a
+different statistical claim. Change a field from nominal to quantitative,
+and Altair constructs a different scale. The code is therefore a readable
+specification of the chart's argument, not merely a set of drawing commands.
 
 The first question is: **how many AVONET rows are there of each record type?**
 The unit being counted is an AVONET row, `data_type` supplies the groups, and
