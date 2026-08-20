@@ -119,7 +119,7 @@ audit = pd.DataFrame({
          on="column", how="left")
 
 species_depth = (measured.groupby("species").size()
-                 .rename("records").reset_index())
+                 .rename("individuals").reset_index())
 
 species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
     .groupby("species")["wing_length_mm"]
@@ -271,8 +271,8 @@ decimal number (`float64`).
 
 #### Read every feature one by one
 
-The metadata file has 26 rows because it has one row for each feature in
-`birds`. Its six columns describe different parts of that feature:
+The metadata file has 26 rows (one row for each feature in
+`birds`). Its six columns describe different parts of that feature:
 
 - `column`: the column name used in the CSV served on this site;
 - `source_variable`: its original heading in the AVONET worksheet;
@@ -290,14 +290,14 @@ print(metadata.columns.tolist())
 metadata.head(3)
 ```
 
-Now check that the dictionary actually covers the data file. Its `column`
+Check that the dictionary actually covers the data file. Its `column`
 field should contain exactly the same names as `birds.columns`.
 
 ```{pyodide}
 set(metadata["column"]) == set(birds.columns)
 ```
 
-Now make an inspection function to read the metadata definitions.
+Make an inspection function to read the metadata definitions.
 
 ```{pyodide}
 import textwrap
@@ -329,19 +329,21 @@ for column in birds.columns:
     inspect_field(column)
 ```
 
-Why keep both `avibase_id` and `species`? They do different jobs:
+For this analysis, a "species" means a distinct name in the BirdLife taxonomy
+used by this AVONET release. Why keep both `avibase_id` and `species`? 
 
 - `avibase_id` is a machine-readable key used to link a taxon to Avibase. The
   full metadata definition says **species or species group**, not necessarily
-  one currently accepted species. The code has no biological meaning and is
-  not intended as a chart label.
+  one currently accepted species. 
 - `species` is the human-readable scientific name assigned under the
   particular BirdLife taxonomy used by this release. It is useful for tables,
   labels and grouping, but a name can change when a species moves genus or
   when a taxonomic authority splits or lumps taxa.
 
 The identifier is useful for joining; the species name is useful for grouping
-and interpretation. We will use the BirdLife `species` field for the first
+and interpretation. The
+`species_ebird`, `ebird_species_group` and `species_birdtree` columns preserve
+alternative classifications needed for other analyses.We will use the BirdLife `species` field for the first
 count. How many rows and species labels are present?
 
 ```{pyodide}
@@ -365,67 +367,18 @@ The file has 90,371 rows and 11,020 distinct BirdLife species labels. Of those
 rows, 90,033 have a value in `species` and 338 do not. Dividing the labelled
 rows by the number of labels gives a crude mean of 8.17 rows per species, but
 the median is five and 734 species labels occur only once. The rows are not
-spread evenly across species. At this point these are simply **rows per
-label**—we have not yet established that every row is a measured bird.
+spread evenly across species. This first calculation uses every row in the
+worksheet; below we will use `data_type` to separate measured individuals from
+the extra taxonomy-only rows.
 
-#### What is a species?
-
-A species is not a value measured from a specimen in the way that wing length
-is. It is a taxonomic decision about which organisms belong to the same
-evolutionary group. Under the biological species concept, a species is a group
-of actually or potentially interbreeding natural populations that is
-reproductively isolated from other such groups. In practice that test is
-difficult for geographically separated birds,
-so taxonomists also use ancestry, genetics, anatomy, plumage, song and
-behaviour. Different authorities can weigh that evidence differently and
-split one group into several species or lump several groups into one.
-
-For this analysis, a "species" means a distinct name in the BirdLife taxonomy
-used by this AVONET release. The count of 11,020 is therefore a count under a
-specified classification, not a timeless count of natural entities. The
-`species_ebird`, `ebird_species_group` and `species_birdtree` columns preserve
-alternative classifications needed for other analyses.
-
-The printout calls `source` the museum or research collection and
-`specimen_number` an accession or collection number. A specimen number is
-therefore only meaningful within its source. Test the pair before treating it
-as an individual identifier.
-
-```{pyodide}
-identified = birds.dropna(subset=["source", "specimen_number"])
-
-candidate_key_counts = (identified
-    .groupby(["source", "specimen_number"])
-    .size()
-    .rename("rows")
-    .sort_values(ascending=False))
-
-candidate_key_species = (identified
-    .groupby(["source", "specimen_number"])["species"]
-    .nunique(dropna=True))
-
-pd.Series({
-    "rows with a specimen number": birds["specimen_number"].notna().sum(),
-    "rows without a specimen number": birds["specimen_number"].isna().sum(),
-    "distinct source + specimen labels": len(candidate_key_counts),
-    "source + specimen labels appearing more than once": candidate_key_counts.gt(1).sum(),
-    "rows covered by those repeated labels": candidate_key_counts[candidate_key_counts.gt(1)].sum(),
-    "repeated labels assigned to more than one species": candidate_key_species.gt(1).sum(),
-})
-```
-
-```{pyodide}
-candidate_key_counts[candidate_key_counts.gt(1)].head(10).reset_index()
-```
-
-So the file does **not** let us conclude that every row is a different bird,
-or that a repeated label is the same bird measured repeatedly. Specimen
-numbers are absent from 16,578 rows. Even the candidate key
-`source + specimen_number` repeats for 462 labels, and 262 of those labels are
-attached to more than one species. Values such as `NOLABEL`, reused collection
-numbers and transcription problems are mixed together. Do not deduplicate on
-this pair. The defensible wording for now is **measurement record**; later we
-will count records per species and examine full-row duplicates separately.
+The metadata also answers the question "what does one measured row
+represent?" `data_type = 1` means a museum specimen and `data_type = 2` means
+a live individual. Tobias et al. likewise describe the raw morphology data as
+measurements from [90,020 individual birds](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
+with duplicate measurements discounted. We should therefore call those
+90,020 rows **individual birds**, not cast doubt on their unit because some
+accession numbers are absent or reused. `source` and `specimen_number` record
+provenance; they are not the definition of the row unit.
 
 The same printout shows that `sex` is a three-level category (`M`, `F`, `U`),
 not free text. `locality` and
@@ -565,7 +518,7 @@ gap_check
 The sequence above establishes what the rows represent. There are 90,020 rows
 with a recorded specimen type. The other 351 contain names from the different
 taxonomic systems, carry the `GAPSPECIES` label, and contain no morphology
-measurements. They are taxonomy links, not measurement records.
+measurements. They are taxonomy links, not individual birds.
 
 Now label the three row types and count them.
 
@@ -589,40 +542,38 @@ row_types
 
 ```{pyodide}
 measured = birds.loc[birds["data_type"].notna()].copy()
-print(f"measured records retained for morphology: {len(measured):,}")
+print(f"individual birds retained for morphology: {len(measured):,}")
 ```
 
-Now the species count has a defined numerator: measured records, excluding the
-351 taxonomy-only rows. Count records within the documented BirdLife
+Now the species count has a defined numerator: individual birds, excluding the
+351 taxonomy-only rows. Count individuals within the documented BirdLife
 `species` field.
 
 ```{pyodide}
 species_depth = (measured.dropna(subset=["species"])
     .groupby("species")
     .size()
-    .rename("records")
+    .rename("individuals")
     .reset_index())
 
 pd.Series({
-    "measured records": len(measured),
-    "measured records with a BirdLife species": measured["species"].notna().sum(),
-    "measured records without a BirdLife species": measured["species"].isna().sum(),
-    "BirdLife species with at least one record": len(species_depth),
-    "species represented by one record": species_depth["records"].eq(1).sum(),
-    "median records per species": species_depth["records"].median(),
-    "25th percentile": species_depth["records"].quantile(0.25),
-    "75th percentile": species_depth["records"].quantile(0.75),
-    "maximum records for one species": species_depth["records"].max(),
+    "individual birds": len(measured),
+    "individuals with a BirdLife species": measured["species"].notna().sum(),
+    "individuals without a BirdLife species": measured["species"].isna().sum(),
+    "BirdLife species with at least one individual": len(species_depth),
+    "species represented by one individual": species_depth["individuals"].eq(1).sum(),
+    "median individuals per species": species_depth["individuals"].median(),
+    "25th percentile": species_depth["individuals"].quantile(0.25),
+    "75th percentile": species_depth["individuals"].quantile(0.75),
+    "maximum individuals for one species": species_depth["individuals"].max(),
 })
 ```
 
-There are 89,682 measured records with a BirdLife species label, spread across
-10,669 species. The median species contributes five records; the middle half
-contribute four to nine; 383 species contribute only one; and the largest
-contributes 784. These are record counts, not proven counts of unique birds.
-That distinction follows directly from the incomplete and non-unique specimen
-identifiers above. We will visualise this unequal sampling depth after the
-Altair introduction.
+There are 89,682 individual birds with a BirdLife species label, spread across
+10,669 species. The median species contributes five individuals; the middle
+half contribute four to nine; 383 species contribute only one; and the largest
+contributes 784. We will visualise this unequal sampling depth after the Altair
+introduction.
 
 ### From semantic type to visual form
 
@@ -943,7 +894,7 @@ are absent in roughly one-third of rows. There is no single universal
 
 The four taxonomic name columns are not redundant copies. They represent
 different taxonomic authorities, and splits or lumps can assign the same
-measurement record to different names. AVONET also supplies `avibase_id` as a more
+individual to different names. AVONET also supplies `avibase_id` as a more
 stable bridge.
 
 ```{pyodide}
@@ -986,12 +937,13 @@ pd.Series({
 })
 ```
 
-There are 261 copies beyond the first occurrence, involving 457 rows. These
-are exact repeated records and therefore candidates for investigation. They
-still are not automatic deletions: first trace whether duplication entered
-when source tables were combined. This check is different from the repeated
-`source + specimen_number` labels above, where the rows often disagree on
-species and clearly cannot all denote repeated measurements of one bird.
+There are 261 rows beyond the first occurrence with the same values in all 26
+served columns, involving 457 rows altogether. Equality across the available
+columns does not prove they are repeated measurements of one bird: some rows
+lack accession numbers, and two individuals can otherwise share the recorded
+values. The publication states that duplicate measurements were discounted,
+so retain the documented individual-bird unit and flag these rows for source
+checking rather than silently deleting or reinterpreting them.
 
 ### Who and what was sampled?
 
@@ -1036,62 +988,61 @@ code_counts = pd.DataFrame(code_rows)
  .resolve_scale(y="independent", color="independent"))
 ```
 
-This is predominantly a museum dataset: 75,843 measured rows are specimens
-and 14,177 are live-bird records. Males outnumber females, 14,276 measured records have
+This is predominantly a museum dataset: 75,843 individuals are specimens
+and 14,177 are live birds. Males outnumber females, 14,276 individuals have
 unknown sex, 1,269 rows are coded as immature measurements, and 38,666
 measured rows were taken under a protocol other than the AVONET protocol.
 These imbalances may matter if sex, age, preservation, or protocol changes a
 trait.
 
-### The unit of analysis: measurement records per species
+### The unit of analysis: individuals per species
 
 With the design fields decoded, the first content question is not about
-any measurement. It is about the **unit of analysis**. Rows are individual
-measurement records intended to describe specimens or live birds, but the
-identifier audit showed that row identity is not perfect. The claims of this
-part are about species, so before looking at a trait we ask: how many measured
-records does each species contribute, and how unevenly is that effort spread?
-Every later summary inherits its stability from these counts.
+any measurement. It is about the **unit of analysis**. The 90,020 measured
+rows are individual museum specimens or live birds. The claims of this part
+are about species, so before looking at a trait we ask: how many individuals
+does each species contribute, and how unevenly is that effort spread? Every
+later summary inherits its stability from these counts.
 
 ```{pyodide}
-depth_summary = (species_depth["records"]
+depth_summary = (species_depth["individuals"]
                  .describe(percentiles=[0.25, 0.5, 0.75, 0.9, 0.95, 0.99])
-                 .rename("measurement_records_per_species")
+                 .rename("individuals_per_species")
                  .to_frame())
 depth_summary
 ```
 
 ```{pyodide}
-depth_frequency = (species_depth["records"].value_counts().sort_index()
-                   .rename_axis("records").reset_index(name="species_count"))
-top_species = species_depth.nlargest(15, "records")
+depth_frequency = (species_depth["individuals"].value_counts().sort_index()
+                   .rename_axis("individuals").reset_index(name="species_count"))
+top_species = species_depth.nlargest(15, "individuals")
 
 depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
     .encode(
-        x=alt.X("records:Q", title="Measurement records per species",
+        x=alt.X("individuals:Q", title="Individuals per species",
                 scale=alt.Scale(type="log")),
         y=alt.Y("species_count:Q", title="Number of species",
                 scale=alt.Scale(type="log")),
-        tooltip=["records:Q", alt.Tooltip("species_count:Q", format=",")],
+        tooltip=["individuals:Q", alt.Tooltip("species_count:Q", format=",")],
     )
     .properties(width=330, height=300, title="Sampling-depth distribution"))
 
 top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
     .encode(
-        x=alt.X("records:Q", title="Measurement records"),
+        x=alt.X("individuals:Q", title="Individuals"),
         y=alt.Y("species:N", title=None, sort="-x"),
-        tooltip=["species:N", alt.Tooltip("records:Q", format=",")],
+        tooltip=["species:N", alt.Tooltip("individuals:Q", format=",")],
     )
     .properties(width=330, height=300, title="15 most-sampled species"))
 
 depth_chart | top_species_chart
 ```
 
-The median measured species has five records, 383 species have only one, and
-the most-sampled species has 784. Treating all 90,020 measured records as
+The median measured species has five individuals, 383 species have only one,
+and the most-sampled species has 784. Treating all 90,020 individuals as
 independent would let a few heavily sampled species dominate; treating every
 species mean as equally precise would ignore the opposite problem. And the
-accounting closes: 10,669 species have at least one measured record, and the
+accounting closes: 10,669 species have at least one measured individual, and the
 remaining 351 of the 11,020 named species are exactly the taxonomy-only
 GAPSPECIES rows.
 
@@ -1789,7 +1740,7 @@ individual wing length within each species" is a reproducible visual claim.
 
 ### What the EDA has established
 
-- The raw worksheet contains 90,020 measured records and 351 taxonomy-only
+- The raw worksheet contains 90,020 individual birds and 351 taxonomy-only
   rows, not 90,371 interchangeable observations.
 - All 26 columns now have an explicit semantic type, role, unit, coverage
   count, suitable aggregate, candidate visual form, and scale.
@@ -1800,7 +1751,7 @@ individual wing length within each species" is a reproducible visual claim.
   biological investigation rather than automatic acceptance.
 - Only 45,669 rows have all ten morphology fields, so cleaning must be
   question-specific.
-- Species sampling depth ranges from one to 784 measurement records, making the unit
+- Species sampling depth ranges from one to 784 individuals, making the unit
   of analysis a substantive choice rather than a formatting detail.
 - Linear and logarithmic scales show different comparisons; count, mean,
   median, range, quantiles, and standard deviation answer different questions.
@@ -1869,7 +1820,7 @@ pd.Series({
 We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
 step, but it is a decision, it changes what "n" means in every caption
 downstream, and it must be disclosed. Any figure built from this table
-should say 69,509 measurement records, not 90,371.
+should say 69,509 individual birds, not 90,371 worksheet rows.
 
 Clinical trials report exactly this accounting as a flow diagram (the
 CONSORT standard), and the habit transfers to any analysis: you should be
@@ -1879,7 +1830,7 @@ caused every drop.
 ```{pyodide}
 row_flow = pd.DataFrame([
     ("1. raw worksheet", len(birds), "as downloaded"),
-    ("2. measured records", int(birds["data_type"].notna().sum()),
+    ("2. individual birds", int(birds["data_type"].notna().sum()),
      "drop 351 taxonomy-only GAPSPECIES rows"),
     ("3. beak-tarsus complete", len(clean),
      "require species, culmen and tarsus"),
@@ -1896,13 +1847,11 @@ row_flow = pd.DataFrame([
              title="Row flow from raw file to analysis table"))
 ```
 
-### The measurement-record level
+### The individual level
 
-Each point is one retained measurement record. Most are intended to represent
-one specimen or live bird, but the identifier audit showed why that is not a
-guaranteed one-to-one count of unique individuals. Both axes are logged:
-allometry is about ratios, and a hummingbird and an ostrich need to share a
-readable axis.
+Each point is one individual museum specimen or live bird retained after
+requiring both traits. Both axes are logged: allometry is about ratios, and a
+hummingbird and an ostrich need to share a readable axis.
 
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -1911,20 +1860,20 @@ ax.scatter(np.log10(clean["tarsus_length_mm"]),
            s=2, alpha=0.1, color="#4269d0")
 ax.set_xlabel("log10 tarsus length (mm)")
 ax.set_ylabel("log10 beak length, culmen (mm)")
-ax.set_title(f"Each point is one measurement record (n = {len(clean):,})")
+ax.set_title(f"Each point is one individual bird (n = {len(clean):,})")
 plt.show()
 ```
 
 ```{pyodide}
 r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
                     np.log10(clean["beak_length_culmen_mm"]))[0, 1]
-print(f"correlation of the logged traits, measurement-record level: r = {r_ind:.3f}")
+print(f"correlation of the logged traits, individual level: r = {r_ind:.3f}")
 ```
 
-### The groupby: from measurement records to species
+### The groupby: from individuals to species
 
 One line of code changes what a point *means*. `groupby("species").mean()`
-collapses the retained records for a species into one species mean:
+collapses the retained individuals for a species into one species mean:
 
 ```{pyodide}
 species_means = (clean
@@ -1950,7 +1899,7 @@ axes[0].set_ylabel("log10 beak length, culmen (mm)")
 
 r_sp = np.corrcoef(np.log10(species_means["tarsus_length_mm"]),
                    np.log10(species_means["beak_length_culmen_mm"]))[0, 1]
-fig.suptitle(f"Same relationship, two levels: r = {r_ind:.3f} (records) vs r = {r_sp:.3f} (species)")
+fig.suptitle(f"Same relationship, two levels: r = {r_ind:.3f} (individuals) vs r = {r_sp:.3f} (species)")
 plt.tight_layout()
 plt.show()
 ```
@@ -2172,7 +2121,7 @@ why.
 - Tobias et al. (2022) *AVONET: morphological, ecological and geographical
   data for all birds*, Ecology Letters 25:581–597. The complete 26-column
   raw-data worksheet from supplementary dataset 1 is served here: all 90,371
-  rows (90,020 measurement records plus 351 taxonomy-only rows). Column names
+  rows (90,020 individual birds plus 351 taxonomy-only rows). Column names
   are normalised to `snake_case`, measurement units are included in names,
   and trailing whitespace in text fields is removed; observed values are
   otherwise unchanged. The official AVONET metadata worksheet is served
