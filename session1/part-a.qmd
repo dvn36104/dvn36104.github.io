@@ -779,6 +779,80 @@ length is almost complete, while several flight-shape and beak measurements
 are absent in roughly one-third of rows. There is no single universal
 "complete case" definition: it depends on the traits being compared.
 
+### Row-level completeness
+
+Column percentages do not show whether gaps fall in the same birds. Count
+the number of observed morphology fields in every row, then ask whether
+leading data sources measured the same trait set.
+
+```{pyodide}
+row_completeness = (birds[trait_columns].notna().sum(axis=1)
+                    .value_counts().sort_index()
+                    .rename_axis("traits_observed")
+                    .reset_index(name="rows"))
+
+(alt.Chart(row_completeness)
+ .mark_bar(color="#59a14f")
+ .encode(
+     x=alt.X("traits_observed:O", title="Morphology fields observed (out of 10)"),
+     y=alt.Y("rows:Q", title="Rows"),
+     tooltip=["traits_observed:O", alt.Tooltip("rows:Q", format=",")],
+ )
+ .properties(width=650, height=260,
+             title="How complete is each raw-data row?"))
+```
+
+There are 45,669 rows with all ten traits, while 44,351 measured rows have at
+least one morphology gap. The 351 taxonomy-only rows correctly appear with
+zero traits. A blanket `dropna()` would therefore throw away about half the
+table even when an analysis needs only two columns.
+
+```{pyodide}
+top_sources = birds["source"].value_counts().head(12).index
+source_subset = birds[birds["source"].isin(top_sources)]
+source_sizes = source_subset.groupby("source").size()
+
+availability = (source_subset.groupby("source")[trait_columns].count()
+                .div(source_sizes, axis=0).mul(100))
+availability.index.name = "source"
+availability_long = (availability.reset_index()
+                     .melt(id_vars="source", var_name="column",
+                           value_name="observed_pct"))
+availability_long["trait"] = availability_long["column"].map(trait_names)
+
+(alt.Chart(availability_long)
+ .mark_rect()
+ .encode(
+     x=alt.X("source:N", title="Source",
+             sort=birds["source"].value_counts().head(12).index.tolist()),
+     y=alt.Y("trait:N", title=None,
+             sort=trait_catalogue["trait"].tolist()),
+     color=alt.Color("observed_pct:Q", title="Observed (%)",
+                     scale=alt.Scale(scheme="viridis", domain=[0, 100])),
+     tooltip=["source:N", "trait:N",
+              alt.Tooltip("observed_pct:Q", title="Observed %", format=".1f")],
+ )
+ .properties(width=650, height=300,
+             title="Trait coverage differs across the 12 largest sources"))
+```
+
+The heatmap uses a **sequential quantitative colour scale** with a fixed
+0–100% domain: darker colours mean more observed rows. That is different from
+the discrete palette used for documented variable types in the missingness
+chart. Colour is less precise than position, but it is effective for scanning
+a two-dimensional matrix for blocks and exceptions.
+
+The pattern in this heatmap has a name. Statisticians distinguish data
+missing completely at random (MCAR), missing at random given known
+variables (MAR), and missing not at random (MNAR, where the gap depends on
+the unobserved value itself). Whole missing blocks aligned with sources
+are direct evidence against MCAR: absence here is predictable from
+provenance. The practical consequence is that complete-case analysis does
+not just shrink the sample, it **reweights** it toward the sources that
+measured everything, and any trait difference between sources rides along.
+The taxonomy is from Little and Rubin's *Statistical Analysis with Missing
+Data*, and "which mechanism?" is a standard screening question.
+
 ### Identity and taxonomy checks
 
 The four taxonomic name columns are not redundant copies. They represent
@@ -1182,80 +1256,6 @@ that catches unit errors, decimal shifts, and column mix-ups that no
 amount of internal consistency can reveal. If the mallard's mean wing had
 come out at 26 mm or at 2,634 mm, everything downstream would have been
 wrong for a reason no histogram could explain.
-
-### Row-level completeness
-
-Column percentages do not show whether gaps fall in the same birds. Count
-the number of observed morphology fields in every row, then ask whether
-leading data sources measured the same trait set.
-
-```{pyodide}
-row_completeness = (birds[trait_columns].notna().sum(axis=1)
-                    .value_counts().sort_index()
-                    .rename_axis("traits_observed")
-                    .reset_index(name="rows"))
-
-(alt.Chart(row_completeness)
- .mark_bar(color="#59a14f")
- .encode(
-     x=alt.X("traits_observed:O", title="Morphology fields observed (out of 10)"),
-     y=alt.Y("rows:Q", title="Rows"),
-     tooltip=["traits_observed:O", alt.Tooltip("rows:Q", format=",")],
- )
- .properties(width=650, height=260,
-             title="How complete is each raw-data row?"))
-```
-
-There are 45,669 rows with all ten traits, while 44,351 measured rows have at
-least one morphology gap. The 351 taxonomy-only rows correctly appear with
-zero traits. A blanket `dropna()` would therefore throw away about half the
-table even when an analysis needs only two columns.
-
-```{pyodide}
-top_sources = birds["source"].value_counts().head(12).index
-source_subset = birds[birds["source"].isin(top_sources)]
-source_sizes = source_subset.groupby("source").size()
-
-availability = (source_subset.groupby("source")[trait_columns].count()
-                .div(source_sizes, axis=0).mul(100))
-availability.index.name = "source"
-availability_long = (availability.reset_index()
-                     .melt(id_vars="source", var_name="column",
-                           value_name="observed_pct"))
-availability_long["trait"] = availability_long["column"].map(trait_names)
-
-(alt.Chart(availability_long)
- .mark_rect()
- .encode(
-     x=alt.X("source:N", title="Source",
-             sort=birds["source"].value_counts().head(12).index.tolist()),
-     y=alt.Y("trait:N", title=None,
-             sort=trait_catalogue["trait"].tolist()),
-     color=alt.Color("observed_pct:Q", title="Observed (%)",
-                     scale=alt.Scale(scheme="viridis", domain=[0, 100])),
-     tooltip=["source:N", "trait:N",
-              alt.Tooltip("observed_pct:Q", title="Observed %", format=".1f")],
- )
- .properties(width=650, height=300,
-             title="Trait coverage differs across the 12 largest sources"))
-```
-
-The heatmap uses a **sequential quantitative colour scale** with a fixed
-0–100% domain: darker colours mean more observed rows. That is different from
-the discrete palette used for documented variable types in the missingness
-chart. Colour is less precise than position, but it is effective for scanning
-a two-dimensional matrix for blocks and exceptions.
-
-The pattern in this heatmap has a name. Statisticians distinguish data
-missing completely at random (MCAR), missing at random given known
-variables (MAR), and missing not at random (MNAR, where the gap depends on
-the unobserved value itself). Whole missing blocks aligned with sources
-are direct evidence against MCAR: absence here is predictable from
-provenance. The practical consequence is that complete-case analysis does
-not just shrink the sample, it **reweights** it toward the sources that
-measured everything, and any trait difference between sources rides along.
-The taxonomy is from Little and Rubin's *Statistical Analysis with Missing
-Data*, and "which mechanism?" is a standard screening question.
 
 ### Linear and logarithmic scales
 
