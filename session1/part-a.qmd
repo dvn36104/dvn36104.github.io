@@ -12,7 +12,7 @@ pyodide:
 **Allometry** is the study of how one biological trait changes as another
 measure of size changes. A familiar example is that a larger animal tends to
 have longer limbs, but not necessarily in direct proportion to body size.
-Allometry measures how fast one changes relative to the other.
+Allometry measures how fast one feature changes relative to the other.
 
 A common allometric model is a power law:
 
@@ -119,7 +119,7 @@ audit = pd.DataFrame({
          on="column", how="left")
 
 species_depth = (measured.groupby("species").size()
-                 .rename("individuals").reset_index())
+                 .rename("records").reset_index())
 
 species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
     .groupby("species")["wing_length_mm"]
@@ -198,17 +198,15 @@ AVONET measurement protocol was used.
 
 ```{=html}
 <figure class="figure">
-  <div class="row g-2 align-items-center flex-nowrap mx-auto" style="max-width: 660px;">
-    <div class="col-6">
+  <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 10px; max-width: 620px; margin: 0 auto;">
       <img src="../images/blue-jay-avonet.jpg"
-           class="figure-img img-fluid mx-auto d-block"
+           class="figure-img"
+           style="display: block; width: calc(50% - 5px); height: auto; min-width: 0;"
            alt="Illustrated Blue Jay showing how wing length, wing-tip length, tarsus length, and tail length are measured.">
-    </div>
-    <div class="col-6">
       <img src="../images/blue-jay-avonet-companion.png"
-           class="figure-img img-fluid mx-auto d-block"
+           class="figure-img"
+           style="display: block; width: calc(50% - 5px); height: auto; min-width: 0;"
            alt="Illustrated Blue Jay bill and wing showing bill length, depth and width, plus wing and secondary length.">
-    </div>
   </div>
   <figcaption class="figure-caption text-center">
     The complete group of AVONET measurement examples: bill, wing, wing-tip,
@@ -251,47 +249,141 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 
 ### Load and inspect data and metadata
 
-Start with reading the file. `.shape` gives the number of rows and
-columns; `info()` reports each column's storage type and non-missing
-count; `describe()` summarises every numeric column's count, centre,
-spread and range. 
+Start by reading both the data and the metadata supplied with it. `.shape`
+gives the number of rows and columns, while `info()` reports each column's
+storage type and non-missing count.
 
 ```{pyodide}
 birds = pd.read_csv(
     open_url(DATA_URL + "avonet_individuals.csv"),
     low_memory=False,
 )
+metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
 
 print(f"table shape: {birds.shape[0]:,} rows × {birds.shape[1]} columns")
 birds.info()
 ```
 
-Three observations before touching anything else. First, the non-null
-counts differ column by column: wing length is nearly complete at
-89,275, the nares measurement stops at 55,738, and the gaps do not line
-up across columns. Second, two columns (`locality` and `country`) have
-**zero** observed values: entirely empty in this public release. Third,
-every column is stored as one of exactly two types, text (`object`) or
-decimal number (`float64`), and that split is the computer's whole
-understanding of the table. Work through the two families separately.
+Non-null counts differ between columns. Two columns (`locality` and `country`) have
+**zero** observed values: entirely empty in this release. 
+Every column is stored as one of two data types, text (`object`) or
+decimal number (`float64`).
 
-**The text columns.** `describe` restricted to them reports, per column,
-how many values are observed, how many are distinct, and the most common
-value with its frequency:
+#### Read the identifier and text fields one by one
+
+First check that the dictionary actually covers the file we loaded. Its
+`column` field should contain exactly the same names as `birds.columns`.
 
 ```{pyodide}
-birds.describe(include="object").T
+set(metadata["column"]) == set(birds.columns)
 ```
 
-The distinct counts split the text columns into three kinds: identifiers
-with nearly as many values as rows (`avibase_id`, `specimen_number`),
-names with thousands of repeats (the four taxonomy columns), and small
-closed vocabularies (`source` has 80 values, `measurer` 153, `sex` just
-three). For a small vocabulary the whole class list fits on screen:
+Now make a small inspection function. For one named field it prints the
+definition supplied by AVONET, its Pandas storage type, coverage, number of
+distinct observed values, and its five most frequent values. This is more
+useful than asking `describe()` to treat every text field as though it had the
+same role.
 
 ```{pyodide}
-birds["sex"].value_counts(dropna=False)
+import textwrap
+
+metadata_by_column = metadata.set_index("column")
+
+def inspect_field(column, top=5):
+    definition = str(metadata_by_column.loc[column, "description"])
+    values = birds[column]
+
+    print(column)
+    print(textwrap.fill(definition, width=82,
+                        initial_indent="    ", subsequent_indent="    "))
+    print(f"    storage: {values.dtype}")
+    print(f"    observed: {values.notna().sum():,} / {len(values):,}")
+    print(f"    distinct observed values: {values.nunique(dropna=True):,}")
+
+    if values.notna().any():
+        print("    most frequent observed values:")
+        print(values.dropna().astype(str).value_counts().head(top).to_string())
+    print()
 ```
+
+Start with the five taxonomic fields, one at a time.
+
+```{pyodide}
+for column in ["avibase_id", "species", "species_ebird",
+               "ebird_species_group", "species_birdtree"]:
+    inspect_field(column)
+```
+
+`avibase_id` is explicitly a **species or species-group identifier**. It does
+not identify an individual bird, which is why the same value occurs on many
+rows. The other four fields give names under different taxonomic systems:
+BirdLife, eBird/Clements, eBird's broader assignable group, and BirdTree.
+Their different vocabulary sizes are evidence of taxonomic splits, lumps and
+unassigned individuals, not duplicate columns to discard.
+
+Next inspect the fields that come closest to identifying a sampled bird.
+
+```{pyodide}
+inspect_field("source")
+inspect_field("specimen_number")
+```
+
+The metadata calls `source` the museum or research collection and
+`specimen_number` an accession or collection number. A specimen number is
+therefore only meaningful within its source. Test the pair before treating it
+as an individual identifier.
+
+```{pyodide}
+identified = birds.dropna(subset=["source", "specimen_number"])
+
+candidate_key_counts = (identified
+    .groupby(["source", "specimen_number"])
+    .size()
+    .rename("rows")
+    .sort_values(ascending=False))
+
+candidate_key_species = (identified
+    .groupby(["source", "specimen_number"])["species"]
+    .nunique(dropna=True))
+
+pd.Series({
+    "rows with a specimen number": birds["specimen_number"].notna().sum(),
+    "rows without a specimen number": birds["specimen_number"].isna().sum(),
+    "distinct source + specimen labels": len(candidate_key_counts),
+    "source + specimen labels appearing more than once": candidate_key_counts.gt(1).sum(),
+    "rows covered by those repeated labels": candidate_key_counts[candidate_key_counts.gt(1)].sum(),
+    "repeated labels assigned to more than one species": candidate_key_species.gt(1).sum(),
+})
+```
+
+```{pyodide}
+candidate_key_counts[candidate_key_counts.gt(1)].head(10).reset_index()
+```
+
+So the file does **not** let us conclude that every row is a different bird,
+or that a repeated label is the same bird measured repeatedly. Specimen
+numbers are absent from 16,578 rows. Even the candidate key
+`source + specimen_number` repeats for 462 labels, and 262 of those labels are
+attached to more than one species. Values such as `NOLABEL`, reused collection
+numbers and transcription problems are mixed together. Do not deduplicate on
+this pair. The defensible wording for now is **measurement record**; later we
+will count records per species and examine full-row duplicates separately.
+
+Finish the documented text-like fields individually.
+
+```{pyodide}
+for column in ["sex", "locality", "country_wri", "country",
+               "measurer", "publication"]:
+    inspect_field(column)
+```
+
+`sex` is a three-level category (`M`, `F`, `U`), not free text. `locality` and
+`country` are completely absent because those data were embargoed in this
+release; `country_wri` is the available harmonised geography. `measurer` is
+an identifier for the person taking the measurements, not for the bird.
+`publication` is provenance for measurements transcribed from published
+sources and is populated for only a small subset of rows. Each field supports
+a different question, despite Pandas storing most of them as `object`.
 
 **The number columns.** The default `describe` covers exactly these:
 
@@ -316,43 +408,8 @@ encoding stored as a number, and no amount of arithmetic on the codes
 means anything. Deciding what the codes stand for is a job for
 documentation, so read it.
 
-AVONET's metadata worksheet contains a definition of every field. It is
-itself a table, so inspect it the same way:
-
-```{pyodide}
-metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
-
-metadata.info()
-```
-
-Six columns describing columns, 26 rows for 26 fields. The one called
-`column` holds the data table's column names, which makes it the join
-key between dictionary and data. If the dictionary really describes our
-table, the two sets of names should be equal:
-
-```{pyodide}
-set(metadata["column"]) == set(birds.columns)
-```
-
-The dictionary and the data agree on the column list, so read the
-definitions in full. Long text dies in a table cell, so print them
-instead:
-
-```{pyodide}
-import textwrap
-
-for _, row in metadata.iterrows():
-    vtype = row["variable_type"] if isinstance(row["variable_type"], str) else "type not documented"
-    unit = f", {row['unit']}" if isinstance(row["unit"], str) else ""
-    print(f"{row['column']}  ({vtype}{unit})")
-    print(textwrap.fill(str(row["description"]), width=78,
-                        initial_indent="    ", subsequent_indent="    "))
-    print()
-```
-
-That listing is the data dictionary. Chart choices do not belong in it. A
-field does not have one universally correct aggregation, mark or scale;
-those decisions depend on the question being asked.
+The metadata loaded above also classifies the numeric fields. Count its
+documented types before interpreting the numeric summary.
 
 ```{pyodide}
 metadata_types = metadata.assign(
@@ -457,7 +514,7 @@ gap_check
 The sequence above establishes what the rows represent. There are 90,020 rows
 with a recorded specimen type. The other 351 contain names from the different
 taxonomic systems, carry the `GAPSPECIES` label, and contain no morphology
-measurements. They are taxonomy links, not measured birds.
+measurements. They are taxonomy links, not measurement records.
 
 Now label the three row types and count them.
 
@@ -803,7 +860,7 @@ are absent in roughly one-third of rows. There is no single universal
 
 The four taxonomic name columns are not redundant copies. They represent
 different taxonomic authorities, and splits or lumps can assign the same
-individual to different names. AVONET also supplies `avibase_id` as a more
+measurement record to different names. AVONET also supplies `avibase_id` as a more
 stable bridge.
 
 ```{pyodide}
@@ -837,22 +894,21 @@ labels_chart | gaps_chart
 ```
 
 ```{pyodide}
-identity_checks = pd.DataFrame([
-    ("Exact duplicate rows", int(birds.duplicated().sum())),
-    ("Rows without an Avibase ID", int(birds["avibase_id"].isna().sum())),
-    ("Rows without a specimen number", int(birds["specimen_number"].isna().sum())),
-    ("Repeated non-missing specimen numbers",
-     int(birds.loc[birds["specimen_number"].notna(), "specimen_number"].duplicated().sum())),
-], columns=["check", "rows"])
+duplicate_rows = birds[birds.duplicated(keep=False)]
 
-identity_checks
+pd.Series({
+    "duplicate rows beyond the first copy": birds.duplicated().sum(),
+    "all rows involved in an exact-duplicate group": len(duplicate_rows),
+    "distinct repeated full-row patterns": len(duplicate_rows.drop_duplicates()),
+})
 ```
 
-The 261 exact duplicate rows are candidates for investigation, not an
-automatic deletion instruction. Specimen numbers are also not globally
-unique: collections can reuse number formats, and repeated measurements can
-be legitimate. A defensible duplicate rule would combine source, specimen
-number, taxonomy, and the measurement fields.
+There are 261 copies beyond the first occurrence, involving 457 rows. These
+are exact repeated records and therefore candidates for investigation. They
+still are not automatic deletions: first trace whether duplication entered
+when source tables were combined. This check is different from the repeated
+`source + specimen_number` labels above, where the rows often disagree on
+species and clearly cannot all denote repeated measurements of one bird.
 
 ### Who and what was sampled?
 
@@ -898,64 +954,65 @@ code_counts = pd.DataFrame(code_rows)
 ```
 
 This is predominantly a museum dataset: 75,843 measured rows are specimens
-and 14,177 are live birds. Males outnumber females, 14,276 measured birds have
+and 14,177 are live-bird records. Males outnumber females, 14,276 measured records have
 unknown sex, 1,269 rows are coded as immature measurements, and 38,666
 measured rows were taken under a protocol other than the AVONET protocol.
 These imbalances may matter if sex, age, preservation, or protocol changes a
 trait.
 
-### The unit of analysis: observations per species
+### The unit of analysis: measurement records per species
 
 With the design fields decoded, the first content question is not about
 any measurement. It is about the **unit of analysis**. Rows are individual
-birds, but the claims of this part are about species, so before looking at
-a single trait we ask: how many measured birds does each species
-contribute, and how unevenly is that effort spread? Every later summary
-inherits its stability from these counts.
+measurement records intended to describe specimens or live birds, but the
+identifier audit showed that row identity is not perfect. The claims of this
+part are about species, so before looking at a trait we ask: how many measured
+records does each species contribute, and how unevenly is that effort spread?
+Every later summary inherits its stability from these counts.
 
 ```{pyodide}
 measured = birds[birds["data_type"].notna()]
 species_depth = (measured.groupby("species").size()
-                 .rename("individuals").reset_index())
+                 .rename("records").reset_index())
 
-depth_summary = (species_depth["individuals"]
+depth_summary = (species_depth["records"]
                  .describe(percentiles=[0.25, 0.5, 0.75, 0.9, 0.95, 0.99])
-                 .rename("individuals_per_species")
+                 .rename("measurement_records_per_species")
                  .to_frame())
 depth_summary
 ```
 
 ```{pyodide}
-depth_frequency = (species_depth["individuals"].value_counts().sort_index()
-                   .rename_axis("individuals").reset_index(name="species_count"))
-top_species = species_depth.nlargest(15, "individuals")
+depth_frequency = (species_depth["records"].value_counts().sort_index()
+                   .rename_axis("records").reset_index(name="species_count"))
+top_species = species_depth.nlargest(15, "records")
 
 depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
     .encode(
-        x=alt.X("individuals:Q", title="Measured individuals per species",
+        x=alt.X("records:Q", title="Measurement records per species",
                 scale=alt.Scale(type="log")),
         y=alt.Y("species_count:Q", title="Number of species",
                 scale=alt.Scale(type="log")),
-        tooltip=["individuals:Q", alt.Tooltip("species_count:Q", format=",")],
+        tooltip=["records:Q", alt.Tooltip("species_count:Q", format=",")],
     )
     .properties(width=330, height=300, title="Sampling-depth distribution"))
 
 top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
     .encode(
-        x=alt.X("individuals:Q", title="Measured individuals"),
+        x=alt.X("records:Q", title="Measurement records"),
         y=alt.Y("species:N", title=None, sort="-x"),
-        tooltip=["species:N", alt.Tooltip("individuals:Q", format=",")],
+        tooltip=["species:N", alt.Tooltip("records:Q", format=",")],
     )
     .properties(width=330, height=300, title="15 most-sampled species"))
 
 depth_chart | top_species_chart
 ```
 
-The median measured species has five birds, 383 species have only one, and
+The median measured species has five records, 383 species have only one, and
 the most-sampled species has 784. Treating all 90,020 measured records as
 independent would let a few heavily sampled species dominate; treating every
 species mean as equally precise would ignore the opposite problem. And the
-accounting closes: 10,669 species have at least one measured bird, and the
+accounting closes: 10,669 species have at least one measured record, and the
 remaining 351 of the 11,020 named species are exactly the taxonomy-only
 GAPSPECIES rows.
 
@@ -1664,7 +1721,7 @@ individual wing length within each species" is a reproducible visual claim.
   biological investigation rather than automatic acceptance.
 - Only 45,669 rows have all ten morphology fields, so cleaning must be
   question-specific.
-- Species sampling depth ranges from one to 784 individuals, making the unit
+- Species sampling depth ranges from one to 784 measurement records, making the unit
   of analysis a substantive choice rather than a formatting detail.
 - Linear and logarithmic scales show different comparisons; count, mean,
   median, range, quantiles, and standard deviation answer different questions.
@@ -1733,7 +1790,7 @@ pd.Series({
 We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
 step, but it is a decision, it changes what "n" means in every caption
 downstream, and it must be disclosed. Any figure built from this table
-should say 69,509 individuals, not 90,371.
+should say 69,509 measurement records, not 90,371.
 
 Clinical trials report exactly this accounting as a flow diagram (the
 CONSORT standard), and the habit transfers to any analysis: you should be
@@ -1760,10 +1817,13 @@ row_flow = pd.DataFrame([
              title="Row flow from raw file to analysis table"))
 ```
 
-### The individual level
+### The measurement-record level
 
-Each point is one bird. Both axes are logged: allometry is about ratios,
-and a hummingbird and an ostrich need to share a readable axis.
+Each point is one retained measurement record. Most are intended to represent
+one specimen or live bird, but the identifier audit showed why that is not a
+guaranteed one-to-one count of unique individuals. Both axes are logged:
+allometry is about ratios, and a hummingbird and an ostrich need to share a
+readable axis.
 
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -1772,20 +1832,20 @@ ax.scatter(np.log10(clean["tarsus_length_mm"]),
            s=2, alpha=0.1, color="#4269d0")
 ax.set_xlabel("log10 tarsus length (mm)")
 ax.set_ylabel("log10 beak length, culmen (mm)")
-ax.set_title(f"Each point is one bird (n = {len(clean):,})")
+ax.set_title(f"Each point is one measurement record (n = {len(clean):,})")
 plt.show()
 ```
 
 ```{pyodide}
 r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
                     np.log10(clean["beak_length_culmen_mm"]))[0, 1]
-print(f"correlation of the logged traits, individual level: r = {r_ind:.3f}")
+print(f"correlation of the logged traits, measurement-record level: r = {r_ind:.3f}")
 ```
 
-### The groupby: from individuals to species
+### The groupby: from measurement records to species
 
 One line of code changes what a point *means*. `groupby("species").mean()`
-collapses every bird of a species into a single average bird:
+collapses the retained records for a species into one species mean:
 
 ```{pyodide}
 species_means = (clean
@@ -1811,7 +1871,7 @@ axes[0].set_ylabel("log10 beak length, culmen (mm)")
 
 r_sp = np.corrcoef(np.log10(species_means["tarsus_length_mm"]),
                    np.log10(species_means["beak_length_culmen_mm"]))[0, 1]
-fig.suptitle(f"Same relationship, two levels: r = {r_ind:.3f} (individuals) vs r = {r_sp:.3f} (species)")
+fig.suptitle(f"Same relationship, two levels: r = {r_ind:.3f} (records) vs r = {r_sp:.3f} (species)")
 plt.tight_layout()
 plt.show()
 ```
