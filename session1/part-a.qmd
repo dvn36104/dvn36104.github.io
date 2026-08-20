@@ -59,6 +59,9 @@ from pyodide.http import open_url
 # Data files live beside this page; the Python worker runs from site_libs/.
 DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
 
+# show text columns in full instead of truncating them with "..."
+pd.set_option("display.max_colwidth", None)
+
 # Keep chart datasets small enough to embed in the page.
 alt.data_transformers.enable("default", max_rows=12_000)
 
@@ -263,9 +266,55 @@ print(f"table shape: {birds.shape[0]:,} rows × {birds.shape[1]} columns")
 birds.info()
 ```
 
+Three observations before touching anything else. First, the non-null
+counts differ column by column: wing length is nearly complete at
+89,275, the nares measurement stops at 55,738, and the gaps do not line
+up across columns. Second, two columns (`locality` and `country`) have
+**zero** observed values: entirely empty in this public release. Third,
+every column is stored as one of exactly two types, text (`object`) or
+decimal number (`float64`), and that split is the computer's whole
+understanding of the table. Work through the two families separately.
+
+**The text columns.** `describe` restricted to them reports, per column,
+how many values are observed, how many are distinct, and the most common
+value with its frequency:
+
+```{pyodide}
+birds.describe(include="object").T
+```
+
+The distinct counts split the text columns into three kinds: identifiers
+with nearly as many values as rows (`avibase_id`, `specimen_number`),
+names with thousands of repeats (the four taxonomy columns), and small
+closed vocabularies (`source` has 80 values, `measurer` 153, `sex` just
+three). For a small vocabulary the whole class list fits on screen:
+
+```{pyodide}
+birds["sex"].value_counts(dropna=False)
+```
+
+**The number columns.** The default `describe` covers exactly these:
+
 ```{pyodide}
 birds.describe().T.round(2)
 ```
+
+Read the min and max columns and the floats split in two as well. Ten
+are measurements with continuous ranges in millimetres. But `data_type`,
+`age` and `protocol` run between 0 and 2, and counting distinct values
+confirms the suspicion:
+
+```{pyodide}
+(birds.select_dtypes("float64").nunique()
+ .sort_values()
+ .rename("distinct_values")
+ .to_frame())
+```
+
+Exactly two distinct values each. That is not a measurement; it is an
+encoding stored as a number, and no amount of arithmetic on the codes
+means anything. Deciding what the codes stand for is a job for
+documentation, so read it.
 
 AVONET's metadata worksheet contains a definition of every field. It is
 itself a table, so inspect it the same way:
@@ -285,11 +334,23 @@ table, the two sets of names should be equal:
 set(metadata["column"]) == set(birds.columns)
 ```
 
+The dictionary and the data agree on the column list, so read the
+definitions in full. Long text dies in a table cell, so print them
+instead:
+
 ```{pyodide}
-metadata[["column", "source_variable", "description", "variable_type", "unit"]]
+import textwrap
+
+for _, row in metadata.iterrows():
+    vtype = row["variable_type"] if isinstance(row["variable_type"], str) else "type not documented"
+    unit = f", {row['unit']}" if isinstance(row["unit"], str) else ""
+    print(f"{row['column']}  ({vtype}{unit})")
+    print(textwrap.fill(str(row["description"]), width=78,
+                        initial_indent="    ", subsequent_indent="    "))
+    print()
 ```
 
-That table is the data dictionary. Chart choices do not belong in it. A
+That listing is the data dictionary. Chart choices do not belong in it. A
 field does not have one universally correct aggregation, mark or scale;
 those decisions depend on the question being asked.
 
