@@ -313,12 +313,48 @@ for column in birds.columns:
     inspect_field(column)
 ```
 
-`avibase_id` is explicitly a **species or species-group identifier**. It does
-not identify an individual bird, which is why the same value occurs on many
-rows. The other four fields give names under different taxonomic systems:
-BirdLife, eBird/Clements, eBird's broader assignable group, and BirdTree.
-Their different vocabulary sizes are evidence of taxonomic splits, lumps and
-unassigned individuals, not duplicate columns to discard.
+Why keep both `avibase_id` and `species`? They do different jobs:
+
+- `avibase_id` is a machine-readable key used to link a taxon to Avibase. The
+  full metadata definition says **species or species group**, not necessarily
+  one currently accepted species. The code has no biological meaning and is
+  not intended as a chart label.
+- `species` is the human-readable scientific name assigned under the
+  particular BirdLife taxonomy used by this release. It is useful for tables,
+  labels and grouping, but a name can change when a species moves genus or
+  when a taxonomic authority splits or lumps taxa.
+
+The identifier is therefore useful for joining data across files and tracing
+taxonomic changes; the name is useful for interpretation. They are related,
+but do not assume the relationship is one-to-one. Check it.
+
+```{pyodide}
+taxon_pairs = (birds[["avibase_id", "species"]]
+    .dropna()
+    .drop_duplicates())
+
+species_per_id = taxon_pairs.groupby("avibase_id")["species"].nunique()
+ids_per_species = taxon_pairs.groupby("species")["avibase_id"].nunique()
+
+pd.Series({
+    "distinct Avibase–BirdLife pairs": len(taxon_pairs),
+    "Avibase IDs linked to multiple BirdLife species": species_per_id.gt(1).sum(),
+    "BirdLife species linked to multiple Avibase IDs": ids_per_species.gt(1).sum(),
+    "maximum BirdLife species for one Avibase ID": species_per_id.max(),
+    "maximum Avibase IDs for one BirdLife species": ids_per_species.max(),
+})
+```
+
+Among rows where both fields are present, 27 Avibase IDs link to more than one
+BirdLife species, while 137 BirdLife species link to more than one Avibase ID.
+For example, one Avibase group is reconciled to both *Milvus aegyptius* and
+*Milvus migrans*, while the BirdLife name *Acanthis flammea* occurs with two
+Avibase IDs. Those are taxonomic reconciliation cases, not repeated birds.
+
+The other three fields give names under eBird/Clements, eBird's broader
+assignable group, and BirdTree. Their different vocabulary sizes are further
+evidence of taxonomic splits, lumps and unassigned records, not duplicate
+columns to discard.
 
 The printout calls `source` the museum or research collection and
 `specimen_number` an accession or collection number. A specimen number is
