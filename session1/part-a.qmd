@@ -312,7 +312,7 @@ def inspect_field(column):
         if pd.notna(documentation["variable_type"])
         else "not specified"
     )
-    unit = documentation["unit"] if pd.notna(documentation["unit"]) else "—"
+    unit = documentation["unit"] if pd.notna(documentation["unit"]) else ", "
     values = birds[column]
 
     print(column)
