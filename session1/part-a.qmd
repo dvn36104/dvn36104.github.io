@@ -398,14 +398,14 @@ The default buries every species with
 fewer than ~80 rows in one bar. A log y axis makes the tail visible, but counting each integer 
 value exactly shows the real shape, with
 734 single-row species and a spike at 4 and 5 rows (AVONET's protocol
-aimed for at least four birds per species). 
+aimed for at least four birds per species). To make this visible, the graph is truncated at 30 rows.
 
 From the same printout: `sex` has three codes, `country_wri` is the
 usable geography field, `measurer` identifies who measured, and
 `publication` is filled only where values were transcribed from papers.
 The 351 rows with no `data_type` get their own investigation below.
 
-**The number columns.** The default `describe` covers exactly these:
+**The number columns.** The default `describe` covers these:
 
 ```{pyodide}
 birds.describe().T.round(2)
@@ -1575,6 +1575,48 @@ between-species scaling signal nearly vanishes and noise dominates: classic
 **range restriction**. The lesson generalises. A pooled line describes the
 mixture you happened to assemble, and screening the design fields first is
 what lets you notice.
+
+### A second subgroup check: the age flag
+
+The metadata warned that `age = 1` marks birds measured while immature,
+and immature birds can have not-fully-grown flight feathers. Check it,
+but carefully: comparing all adult wings against all immature wings would
+mostly compare different species. The fair test is within species. For
+every species with at least five adult and three immature wing
+measurements, take the ratio of the two means:
+
+```{pyodide}
+by_age = (measured.dropna(subset=["species", "wing_length_mm", "age"])
+    .groupby(["species", "age"])["wing_length_mm"]
+    .agg(["count", "mean"])
+    .unstack("age"))
+by_age.columns = ["n_adult", "n_immature", "mean_adult", "mean_immature"]
+
+enough = by_age[(by_age["n_adult"] >= 5) & (by_age["n_immature"] >= 3)].copy()
+enough["ratio"] = enough["mean_immature"] / enough["mean_adult"]
+
+fig, ax = plt.subplots(figsize=(8, 3.6))
+ax.hist(enough["ratio"], bins=24, color="#4e79a7")
+ax.axvline(1.0, color="#e15759", lw=1.5)
+ax.set_xlabel("immature mean wing / adult mean wing, within species")
+ax.set_ylabel("species")
+ax.set_title(f"{len(enough)} species with enough of both; red line = no difference")
+plt.show()
+```
+
+```{pyodide}
+assert len(enough) == 108
+assert (enough["ratio"] < 1).sum() == 77
+print(f"✓ median ratio {enough['ratio'].median():.3f}: immature wings run about")
+print("  1.3% short, in 77 of 108 species, just as the metadata warned")
+```
+
+The effect is small but real, and it was found the right way: within
+species, so that species composition cannot fake it. This is the same
+lesson as the museum-versus-live check at a smaller scale. A design
+field the dictionary flagged turned out to matter, and an analysis of
+wing length can now decide, explicitly, whether to exclude the 1,269
+immature rows or accept a percent of shrinkage.
 
 ### Choosing an aggregation function
 
