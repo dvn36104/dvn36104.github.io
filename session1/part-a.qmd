@@ -28,13 +28,11 @@ $$
 \log(Y) = \log(a) + b\log(X)
 $$
 
-The exponent carries the biological meaning. When the two measurements have
+When the two measurements have
 the same dimensions, $b=1$ means proportional or **isometric** scaling;
 $b>1$ means that $Y$ increases more than proportionally; and $b<1$ means that
-it increases less than proportionally. Logging also lets very small and very
-large organisms share a readable axis, but it does not repair poor
-measurements, missing data, mixed sampling units, or uneven sampling. Those
-problems have to be understood before fitting an allometric line.
+it increases less than proportionally. Logging allows very small and very
+large organisms to share a readable axis.
 
 ::: {.callout-tip title="Reading"}
 Read Baillie et al. (2022), [Ten simple rules for initial data
@@ -393,12 +391,12 @@ plt.tight_layout()
 plt.show()
 ```
 
-The histogram is here drawn three different ways.
-The default obscures the distribution in a single bar. Logging the y axis
+The histogram is drawn three different ways here.
+The default (left) obscures the distribution in a single bar. Logging the y axis (middle)
 makes the tail visible (the small number of species with many rows), but
 counting each integer value exactly shows the real shape, with
 734 single-row species and a spike at 4 and 5 rows (AVONET's protocol
-aimed for at least four birds per species). To make this visible, the graph is truncated at 30 rows.
+aimed for at least four birds per species). To make this visible, the graph (right) is truncated at 30 rows.
 
 **The text columns.** For these, `describe` reports how many values are
 observed, how many are distinct, and the most common value with its
@@ -407,11 +405,10 @@ frequency:
 ```{pyodide}
 birds.describe(include="object").T
 ```
-
-The `unique` column sorts the text fields into kinds: identifiers with
-tens of thousands of distinct values, names with thousands, and small
-closed vocabularies. For a small vocabulary the whole class list with
-counts fits on screen:
+s
+The `unique` column sorts the text fields; this may be thousands of distinct values or a small class list
+with
+counts that fit on screen.
 
 ```{pyodide}
 birds["sex"].value_counts(dropna=False)
@@ -419,7 +416,7 @@ birds["sex"].value_counts(dropna=False)
 
 45,523 males, 30,221 females, 14,276 birds of unknown sex, and 351
 blanks from rows investigated below. Do the same for
-`country_wri`, the usable geography field, and `measurer`, which identifies who
+`country_wri` - the usable geography field - and `measurer`, which identifies who
 measured.
 
 ```{pyodide}
@@ -449,11 +446,10 @@ print(birds["measurer"].value_counts(dropna=False).head(15))
 birds.describe().T.round(2)
 ```
 
-Read the min and max columns and the floats split in two as well. Ten
-are measurements with continuous ranges in millimetres. But three
-columns have suspiciously tiny ranges: `data_type` is only ever 1 or 2,
-and `age` and `protocol` only 0 or 1. These look like categorical codes;
-encodings stored as a number.
+Read the feature summary statistics. Three
+columns have unusually small ranges: `data_type` is only ever 1 or 2,
+and `age` and `protocol` only 0 or 1. These are categorical codes
+(encodings stored as a number). Refer to the metatdata.
 
 `info()` showed 90,020 observed values in `data_type`, although the file has
 90,371 rows. The metadata identifies `1` as a museum specimen and `2` as a live
@@ -564,22 +560,19 @@ The shorthand is always `"field:type"`. The field is a column in the table;
 the letter after the colon tells Altair what the values mean. The main
 types are:
 
-- `Q`, quantitative: numeric magnitude, where differences or ratios may be
-  meaningful;
-- `N`, nominal: unordered categories, where only same/different is meaningful;
+- `Q`, quantitative: numeric magnitude; differences or ratios;
+- `N`, nominal: unordered categories; only same/different is meaningful;
 - `O`, ordinal: categories with a defensible order;
 - `T`, temporal: dates or times;
 - `G`, geographic: GeoJSON shapes.
 
 An identifier is normally declared `N`, but that does not make it a good
-axis or colour field. A species identifier with 11,020 levels is usually
-better used for filtering, grouping or a tooltip than for 11,020 coloured
-marks.
+axis or colour field. A species identifier with 11,020 levels could not be effectively encoded in color.
 
-#### Chart designx
+### Chart design
 
-The short form is useful for sketching. The channel objects `alt.X`, `alt.Y`,
-`alt.Color` and `alt.Tooltip` expose the design decisions we need for a
+The channel objects `alt.X`, `alt.Y`,
+`alt.Color` and `alt.Tooltip` expose the design decisions required for a
 finished chart:
 
 ```{pyodide}
@@ -612,23 +605,17 @@ record_chart = (
 record_chart
 ```
 
-Several different objects are doing different jobs:
+Chart objects:
 
-- the **mark** controls the geometric object and its constant appearance;
-- an **encoding** maps a changing data value to position, colour, size, shape
+- **mark** controls the geometric object and its constant appearance;
+- **encoding** maps a changing data value to position, colour, size, shape
   or another visual channel;
-- a **scale** translates a data domain into visual values such as pixels or
+-**scale** translates a data domain into visual values such as pixels or
   colours;
 - an axis or legend is a **guide** that explains that scale;
 - `sort="-x"` orders categories by decreasing x-value;
 - a **tooltip** reveals values on demand without crowding the static display;
-- `.properties(...)` controls the view, not the data transformation.
 
-The zero baseline is deliberate: bar length represents magnitude, so each bar
-must begin at zero. Later we will use non-zero and logarithmic scales when the
-question and mark justify them. The choice of scale changes the comparison.
-
-#### A constant is not an encoding
 
 Compare `mark_bar(color="#4e79a7")` with
 `encode(color="record_type:N")`. The first gives every mark the same colour;
@@ -659,22 +646,46 @@ Colour is redundant in the right-hand chart because vertical position already
 separates the three record types. Use the constant colour unless the colour
 mapping helps answer the question.
 
-#### Aggregation is part of the specification
+#### Make the aggregate table before drawing it
 
-Altair can also aggregate. The next chart receives AVONET's 26-row metadata
-table, not a pre-computed count table. `count():Q` asks Altair to count rows,
-while `documented_type:N` supplies the groups. This is the visual equivalent
-of `metadata_types.groupby("documented_type").size()`.
+The metadata has one row for each of AVONET's 26 features. Suppose we want to
+know how many features have each documented type. That question requires a new
+table: one row per documented type and a count of the metadata rows belonging
+to it.
 
 ```{pyodide}
-(alt.Chart(metadata_types)
+metadata_type_counts = (
+    metadata_types
+    .groupby("documented_type", as_index=False)
+    .size()
+    .rename(columns={"size": "features"})
+)
+
+metadata_type_counts
+```
+
+Read the transformation in order:
+
+1. Start with 26 rows—one per AVONET feature.
+2. `groupby("documented_type")` collects rows that share the same documented
+   type.
+3. `.size()` counts how many rows are in each group.
+4. The result has one row per type and a new `features` column containing the
+   count.
+
+Now the chart is straightforward. Each row of `metadata_type_counts` becomes
+one bar. The type determines the bar's vertical position; the number of
+features determines its length.
+
+```{pyodide}
+(alt.Chart(metadata_type_counts)
  .mark_bar(color="#59a14f")
  .encode(
-     x=alt.X("count():Q", title="Number of features"),
+     x=alt.X("features:Q", title="Number of features"),
      y=alt.Y("documented_type:N", title=None, sort="-x"),
      tooltip=[
          alt.Tooltip("documented_type:N", title="Documented type"),
-         alt.Tooltip("count():Q", title="Features"),
+         alt.Tooltip("features:Q", title="Features"),
      ],
  )
  .properties(
@@ -684,10 +695,10 @@ of `metadata_types.groupby("documented_type").size()`.
  ))
 ```
 
-The same grammar supports `mean(field)`, `median(field)`, `sum(field)`,
-`min(field)` and `max(field)`, as well as binning and other transformations.
-Changing the aggregate changes what one mark represents and therefore changes
-the claim. We will compare those choices explicitly later in the EDA.
+The aggregation happens in Pandas and the visual encoding happens in Altair.
+Keeping those two steps visible makes it clear what one bar represents. Later
+we will build tables with `mean`, `median`, `min`, `max` and quantiles before
+comparing how those different summaries change a chart's claim.
 
 ::: {.callout-tip title="Make one change at a time"}
 Return to the `record_chart` cell and try these edits separately:
