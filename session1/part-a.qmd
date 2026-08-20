@@ -617,8 +617,9 @@ Chart objects:
 
 Compare `mark_bar(color="#4269d0")` with
 `encode(color="record_type:N")`. The first gives every mark the same colour;
-the second creates a data mapping and therefore a colour scale. Both are valid
-code, but they say different things.
+the second creates a data mapping and therefore a colour scale. Colour is redundant in the right-hand chart because vertical position already
+separates the three record types. Use the constant colour unless the colour
+mapping helps answer the question.
 
 ```{pyodide}
 comparison_base = (alt.Chart(record_counts)
@@ -640,18 +641,24 @@ mapped_colour = (comparison_base
 constant_colour | mapped_colour
 ```
 
-Colour is redundant in the right-hand chart because vertical position already
-separates the three record types. Use the constant colour unless the colour
-mapping helps answer the question.
 
-#### Make the aggregate table before drawing it
+
+
 
 The metadata has one row for each of AVONET's 26 features. Suppose we want to
 know how many features have each documented type. That question requires a new
 table: one row per documented type and a count of the metadata rows belonging
 to it.
 
+First a small preparation: the metadata's `variable_type` column has two
+blank entries, and a blank makes a poor group label, so copy it into a
+new column with the blanks filled in.
+
 ```{pyodide}
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
+)
+
 metadata_type_counts = (
     metadata_types
     .groupby("documented_type", as_index=False)
@@ -664,7 +671,9 @@ metadata_type_counts
 
 Read the transformation in order:
 
-1. Start with 26 rows, one per AVONET feature.
+1. Start with 26 rows, one per AVONET feature. `documented_type` is the
+   metadata's own `variable_type`, with its two blanks filled as
+   `not specified`.
 2. `groupby("documented_type")` collects rows that share the same documented
    type.
 3. `.size()` counts how many rows are in each group.
