@@ -123,7 +123,7 @@
     "href": "index.html",
     "title": "Asynchronous sessions",
     "section": "",
-    "text": "This site hosts the asynchronous sessions for DVN36104.\nYour work here is not saved when you close the tab."
+    "text": "This site hosts the asynchronous sessions for DVN36104.\nWork through the parts of each session in order.\nEvery code cell runs Python in your browser. Edit the code and press Run Code.\nWhere a page has an exercise, attempt it before using the hints. Check the solution only after making your own attempt.\nYour work here is not saved when you close the tab.\nSubmit exercise files through canvas."
   },
   {
     "objectID": "index.html#session-1",
@@ -137,7 +137,7 @@
     "href": "session1/part-a.html",
     "title": "Allometry",
     "section": "",
-    "text": "Allometry is the study of how one biological trait changes as another measure of size changes. A familiar example is that a larger animal tends to have longer limbs, but not necessarily in direct proportion to its body size. The question is not merely whether two traits are associated; it is how fast one changes relative to the other.\nA common allometric model is a power law:\n\\[\nY = aX^b\n\\]\nHere, \\(X\\) is a size measure, \\(Y\\) is the trait being explained, \\(a\\) sets the overall scale, and \\(b\\) is the scaling exponent. Taking logarithms turns the curve into a straight-line model:\n\\[\n\\log(Y) = \\log(a) + b\\log(X)\n\\]\nThe exponent carries the biological meaning. When the two measurements have the same dimensions, \\(b=1\\) means proportional or isometric scaling; \\(b&gt;1\\) means that \\(Y\\) increases more than proportionally; and \\(b&lt;1\\) means that it increases less than proportionally. Logging also lets very small and very large organisms share a readable axis, but it does not repair poor measurements, missing data, mixed sampling units, or uneven sampling. Those problems have to be understood before fitting an allometric line.\nAll code runs in your browser. The first cell may take a few seconds while Python loads."
+    "text": "Allometry is the study of how one biological trait changes as another measure of size changes. A familiar example is that a larger animal tends to have longer limbs, but not necessarily in direct proportion to body size. Allometry measures how fast one changes relative to the other.\nA common allometric model is a power law:\n\\[\nY = aX^b\n\\]\nHere, \\(X\\) is a size measure, \\(Y\\) is the trait being explained, \\(a\\) sets the overall scale, and \\(b\\) is the scaling exponent. Taking logarithms turns the curve into a straight-line model:\n\\[\n\\log(Y) = \\log(a) + b\\log(X)\n\\]\nThe exponent carries the biological meaning. When the two measurements have the same dimensions, \\(b=1\\) means proportional or isometric scaling; \\(b&gt;1\\) means that \\(Y\\) increases more than proportionally; and \\(b&lt;1\\) means that it increases less than proportionally. Logging also lets very small and very large organisms share a readable axis, but it does not repair poor measurements, missing data, mixed sampling units, or uneven sampling. Those problems have to be understood before fitting an allometric line.\nAll code runs in your browser. The first cell may take a few seconds while Python loads."
   },
   {
     "objectID": "session1/part-a.html#part-i-avonet",
