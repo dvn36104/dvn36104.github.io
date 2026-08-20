@@ -236,11 +236,10 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 
 ### Load and inspect data and metadata
 
-Start with the file itself. `.shape` gives the number of rows and
+Start with reading the file. `.shape` gives the number of rows and
 columns; `info()` reports each column's storage type and non-missing
 count; `describe()` summarises every numeric column's count, centre,
-spread and range. Between them they answer the first screening questions
-without printing a single raw row.
+spread and range. 
 
 ```{pyodide}
 birds = pd.read_csv(
@@ -256,23 +255,22 @@ birds.info()
 birds.describe().T.round(2)
 ```
 
-Storage types and summary numbers are the computer's view. What each
-column *means* is documented: AVONET ships a metadata worksheet defining
-every field, and it is served with this page alongside the data. Confirm
-that the dictionary and the table describe each other, then read it.
+AVONET's metadata worksheet contains a definition of every field. It is
+itself a table, so inspect it the same way:
 
 ```{pyodide}
 metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
 
-data_columns = set(birds.columns)
-metadata_columns = set(metadata["column"])
+metadata.info()
+```
 
-pd.Series({
-    "columns in data": len(data_columns),
-    "columns in metadata": len(metadata_columns),
-    "data columns missing from metadata": len(data_columns - metadata_columns),
-    "metadata columns absent from data": len(metadata_columns - data_columns),
-})
+Six columns describing columns, 26 rows for 26 fields. The one called
+`column` holds the data table's column names, which makes it the join
+key between dictionary and data. If the dictionary really describes our
+table, the two sets of names should be equal:
+
+```{pyodide}
+set(metadata["column"]) == set(birds.columns)
 ```
 
 ```{pyodide}
