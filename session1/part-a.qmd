@@ -234,7 +234,7 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 
 :::
 
-### Load and inspect file
+### Load and inspect data and metadata
 
 Start with the file itself. `.shape` gives the number of rows and columns;
 `.head()` shows how a row is laid out.
@@ -1849,18 +1849,19 @@ years, litter or clutch size, female age at maturity in days, birth or
 hatching weight in grams).
 
 The life-history CSV does not contain a phylogenetic tree or divergence
-dates. The diagram below adds context from a separate dated tree.
+dates. The published figure below provides phylogenetic context from a
+separate source.
 
 <figure class="figure">
-  <img src="../images/amniota-timetree.png"
+  <img src="https://ars.els-cdn.com/content/image/3-s2.0-B9780128040423000294-f00029-01-9780128040423.jpg"
        class="figure-img img-fluid mx-auto d-block"
-       style="width: 82%; min-width: 320px; max-width: 720px;"
-       alt="Dated evolutionary tree of the seven living amniote lineages: monotremes, marsupials and placentals on the mammal side; lepidosaurs, turtles, crocodylians and birds on the reptile side, diverging from a common ancestor 319 million years ago.">
+       style="width: 78%; min-width: 320px; max-width: 680px;"
+       alt="Phylogeny of major amniote clades plotted against the geological timescale, with living and fossil skeletons.">
   <figcaption class="figure-caption text-center">
-    The seven major living amniote lineages. This diagram was drawn with
-    Matplotlib from the branch lengths in the separate TimeTree family tree
-    (<code>amniotes_family.nwk</code>) used in Part B. The Myhrvold
-    life-history table contains none of these divergence dates.
+    Phylogeny of the major amniote clades over geological time. Figure 1 from
+    T. B. Rowe (2017),
+    <a href="https://doi.org/10.1016/B978-0-12-804042-3.00029-4">“The Emergence of Mammals”</a>,
+    <em>Evolution of Nervous Systems</em>, second edition. © 2017 Elsevier.
   </figcaption>
 </figure>
 
