@@ -300,8 +300,8 @@ Examples of functional traits recorded by AVONET: wing, wing-tip, tarsus, and ta
 </ol>
 </div>
 </div>
-<section id="load-and-inspect-file" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-inspect-file">Load and inspect file</h3>
+<section id="load-and-inspect-data-and-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-inspect-data-and-metadata">Load and inspect data and metadata</h3>
 <p>Start with the file itself. <code>.shape</code> gives the number of rows and columns; <code>.head()</code> shows how a row is laid out.</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
@@ -1062,11 +1062,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfd2luZyJ9LCJjb2Rl
 <section id="part-ii-amniote-life-history-database" class="level2">
 <h2 class="anchored" data-anchor-id="part-ii-amniote-life-history-database">Part II · Amniote Life-History Database</h2>
 <p>The second dataset served with this page is the <strong>Amniote life-history database</strong> (Myhrvold et al.&nbsp;2015): one row per species, 21,322 of them across birds, mammals and reptiles. Ten columns: four taxonomy fields (class, order, family, genus) plus the species name, and five life-history traits (adult body mass in grams, maximum longevity in years, litter or clutch size, female age at maturity in days, birth or hatching weight in grams).</p>
-<p>The life-history CSV does not contain a phylogenetic tree or divergence dates. The diagram below adds context from a separate dated tree.</p>
+<p>The life-history CSV does not contain a phylogenetic tree or divergence dates. The published figure below provides phylogenetic context from a separate source.</p>
 <figure class="figure">
-<img src="../images/amniota-timetree.png" class="figure-img img-fluid mx-auto d-block" style="width: 82%; min-width: 320px; max-width: 720px;" alt="Dated evolutionary tree of the seven living amniote lineages: monotremes, marsupials and placentals on the mammal side; lepidosaurs, turtles, crocodylians and birds on the reptile side, diverging from a common ancestor 319 million years ago.">
+<img src="https://ars.els-cdn.com/content/image/3-s2.0-B9780128040423000294-f00029-01-9780128040423.jpg" class="figure-img img-fluid mx-auto d-block" style="width: 78%; min-width: 320px; max-width: 680px;" alt="Phylogeny of major amniote clades plotted against the geological timescale, with living and fossil skeletons.">
 <figcaption class="figure-caption text-center">
-The seven major living amniote lineages. This diagram was drawn with Matplotlib from the branch lengths in the separate TimeTree family tree (<code>amniotes_family.nwk</code>) used in Part B. The Myhrvold life-history table contains none of these divergence dates.
+Phylogeny of the major amniote clades over geological time. Figure 1 from T. B. Rowe (2017), <a href="https://doi.org/10.1016/B978-0-12-804042-3.00029-4">“The Emergence of Mammals”</a>, <em>Evolution of Nervous Systems</em>, second edition. © 2017 Elsevier.
 </figcaption>
 </figure>
 <p>Apply the same sequence used in Part I, then take one question through to a finished chart. The cells below identify each stage and leave the analysis to you.</p>
