@@ -400,10 +400,28 @@ value exactly shows the real shape, with
 734 single-row species and a spike at 4 and 5 rows (AVONET's protocol
 aimed for at least four birds per species). To make this visible, the graph is truncated at 30 rows.
 
-From the same printout: `sex` has three codes, `country_wri` is the
-usable geography field, `measurer` identifies who measured, and
-`publication` is filled only where values were transcribed from papers.
-The 351 rows with no `data_type` get their own investigation below.
+**The text columns.** For these, `describe` reports how many values are
+observed, how many are distinct, and the most common value with its
+frequency:
+
+```{pyodide}
+birds.describe(include="object").T
+```
+
+The `unique` column sorts the text fields into kinds: identifiers with
+tens of thousands of distinct values, names with thousands, and small
+closed vocabularies. For a small vocabulary the whole class list with
+counts fits on screen:
+
+```{pyodide}
+birds["sex"].value_counts(dropna=False)
+```
+
+45,523 males, 30,221 females, 14,276 birds of unknown sex, and 351
+blanks from rows investigated below. Also visible in the summary:
+`country_wri` is the usable geography field, `measurer` identifies who
+measured, and `publication` is filled only where values were transcribed
+from papers.
 
 **The number columns.** The default `describe` covers these:
 
@@ -527,10 +545,9 @@ pd.Series({
 There are 89,682 individual birds with a BirdLife species label, spread across
 10,669 species. The median species contributes five individuals; the middle
 half contribute four to nine; 383 species contribute only one; and the largest
-contributes 784. We will visualise this unequal sampling depth after the Altair
-introduction.
+contributes 784. 
 
-### From semantic type to visual form
+### Introduction to Altair
 
 Pandas reports how values are stored. AVONET documents what the values mean.
 Altair needs to know how a field should behave in a particular chart. Check
