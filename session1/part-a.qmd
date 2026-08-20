@@ -394,9 +394,9 @@ plt.show()
 ```
 
 The histogram is here drawn three different ways.
-The default buries every species with
-fewer than ~80 rows in one bar. A log y axis makes the tail visible, but counting each integer 
-value exactly shows the real shape, with
+The default obscures the distribution in a single bar. Logging the y axis
+makes the tail visible (the small number of species with many rows), but
+counting each integer value exactly shows the real shape, with
 734 single-row species and a spike at 4 and 5 rows (AVONET's protocol
 aimed for at least four birds per species). To make this visible, the graph is truncated at 30 rows.
 
@@ -418,10 +418,30 @@ birds["sex"].value_counts(dropna=False)
 ```
 
 45,523 males, 30,221 females, 14,276 birds of unknown sex, and 351
-blanks from rows investigated below. Also visible in the summary:
-`country_wri` is the usable geography field, `measurer` identifies who
-measured, and `publication` is filled only where values were transcribed
-from papers.
+blanks from rows investigated below. Do the same for
+`country_wri`, the usable geography field, and `measurer`, which identifies who
+measured.
+
+```{pyodide}
+#| exercise: ex_text_counts
+# Your code here.
+```
+
+::: {.hint exercise="ex_text_counts"}
+Select one column and call `.value_counts(dropna=False)`, just as in the sex
+example. Both fields have many levels, so append `.head(15)` to keep each
+result readable. Use `print()` to give each result a heading.
+:::
+
+::: {.solution exercise="ex_text_counts"}
+```python
+print("15 most frequent country_wri values")
+print(birds["country_wri"].value_counts(dropna=False).head(15))
+
+print("\n15 most frequent measurers")
+print(birds["measurer"].value_counts(dropna=False).head(15))
+```
+:::
 
 **The number columns.** The default `describe` covers these:
 
@@ -433,55 +453,12 @@ Read the min and max columns and the floats split in two as well. Ten
 are measurements with continuous ranges in millimetres. But three
 columns have suspiciously tiny ranges: `data_type` is only ever 1 or 2,
 and `age` and `protocol` only 0 or 1. These look like categorical codes,
+encodings stored as a number.
 
-
-```{pyodide}
-(birds.select_dtypes("float64").nunique()
- .sort_values()
- .rename("distinct_values")
- .to_frame())
-```
-
-Exactly two distinct values each. That is not a measurement; it is an
-encoding stored as a number, and no amount of arithmetic on the codes
-means anything. Deciding what the codes stand for is a job for
-documentation, so read it.
-
-One more thing to establish about the dictionary: search it for
-`GAPSPECIES`, a value that will matter in a moment, and the search comes
-back empty. Dictionaries describe columns; they do not always describe
-every convention hiding in the values.
-
-```{pyodide}
-metadata.loc[
-    metadata["description"].str.contains("GAP", case=False, na=False),
-    ["column", "description"],
-]
-```
-
-Back to the numbers. `info()` showed 90,020 observed values in `data_type`, although the file has
-90,371 rows. Inspect the values before deciding what the missing 351 mean.
-
-```{pyodide}
-(birds["data_type"]
- .value_counts(dropna=False)
- .rename_axis("stored_value")
- .reset_index(name="rows"))
-```
-
-The codes `1` and `2` need documentation. Read the matching row in the
-metadata supplied with AVONET.
-
-```{pyodide}
-metadata.loc[
-    metadata["column"].eq("data_type"),
-    ["column", "source_variable", "description", "variable_type"],
-]
-```
-
-The metadata identifies `1` as a museum specimen and `2` as a live
+`info()` showed 90,020 observed values in `data_type`, although the file has
+90,371 rows. The metadata identifies `1` as a museum specimen and `2` as a live
 individual. It does not explain the missing values. Isolate those rows
-and ask what fills the fields they do have:
+and check what fields they do have:
 
 ```{pyodide}
 untyped = birds.loc[birds["data_type"].isna()].copy()
@@ -547,43 +524,8 @@ There are 89,682 individual birds with a BirdLife species label, spread across
 half contribute four to nine; 383 species contribute only one; and the largest
 contributes 784. 
 
+
 ### Introduction to Altair
-
-Pandas reports how values are stored. AVONET documents what the values mean.
-Altair needs to know how a field should behave in a particular chart. Check
-all three before choosing an encoding.
-
-Three fields store their categories as numbers: `data_type`, `age` and
-`protocol`. Here they are alongside their Pandas storage types and
-observed values:
-
-```{pyodide}
-coded_columns = ["data_type", "age", "protocol"]
-
-coded_check = metadata.loc[
-    metadata["column"].isin(coded_columns),
-    ["column", "description", "variable_type"],
-].copy()
-
-coded_check["pandas_dtype"] = coded_check["column"].map(
-    lambda column: str(birds[column].dtype)
-)
-coded_check["observed_values"] = coded_check["column"].map(
-    lambda column: ", ".join(
-        str(value) for value in sorted(birds[column].dropna().unique())
-    )
-)
-
-coded_check
-```
-
-All three columns contain numbers, but their documented values are category
-codes. A mean `data_type` or mean `protocol` has no useful interpretation.
-For a chart of specimen type, `data_type` is therefore nominal. For a chart
-that orders immature before adult, `age` could be ordinal. The decision is
-recorded with the chart and justified from the documentation.
-
-#### Altair in one sentence
 
 [Vega-Altair](https://altair-viz.github.io/) is a **declarative** visualisation
 library. We describe what the data fields mean and how they should be mapped
