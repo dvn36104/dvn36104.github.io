@@ -304,13 +304,16 @@ def inspect_field(column, top=5):
         print("    most frequent observed values:")
         print(values.dropna().astype(str).value_counts().head(top).to_string())
     print()
+
+inspect_field("avibase_id")
 ```
 
-Start with the five taxonomic fields, one at a time.
+The first call shows that the function is working and inspects `avibase_id`.
+Continue with the other four taxonomic fields, one at a time.
 
 ```{pyodide}
-for column in ["avibase_id", "species", "species_ebird",
-               "ebird_species_group", "species_birdtree"]:
+for column in ["species", "species_ebird", "ebird_species_group",
+               "species_birdtree"]:
     inspect_field(column)
 ```
 
