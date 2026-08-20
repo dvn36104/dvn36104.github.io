@@ -137,39 +137,6 @@ species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
     )
     .reset_index())
 
-kw = measured.dropna(subset=["kipps_distance_mm", "wing_length_mm"])
-sw = measured.dropna(subset=["secondary1_mm", "wing_length_mm"])
-hw = measured.dropna(subset=["hand_wing_index", "kipps_distance_mm",
-                             "wing_length_mm"])
-hwi_rebuilt = 100 * hw["kipps_distance_mm"] / hw["wing_length_mm"]
-
-validation_rules = pd.DataFrame([
-    ("Kipp's distance <= wing length", len(kw),
-     int((kw["kipps_distance_mm"] > kw["wing_length_mm"]).sum())),
-    ("first secondary <= wing length", len(sw),
-     int((sw["secondary1_mm"] > sw["wing_length_mm"]).sum())),
-    ("stored HWI within 0.6 of recomputed", len(hw),
-     int((~np.isclose(hwi_rebuilt, hw["hand_wing_index"], atol=0.6)).sum())),
-    ("wing length above 0.5 mm",
-     int(measured["wing_length_mm"].notna().sum()),
-     int((measured["wing_length_mm"].dropna() <= 0.5).sum())),
-], columns=["rule", "rows_checked", "violations"])
-
-handbook = pd.DataFrame([
-    ("Passer domesticus", "house sparrow", 70, 85),
-    ("Anas platyrhynchos", "mallard", 240, 300),
-    ("Apus apus", "common swift", 160, 185),
-    ("Troglodytes troglodytes", "Eurasian wren", 44, 55),
-], columns=["species", "common_name", "handbook_low_mm", "handbook_high_mm"])
-
-observed_wing = (measured[measured["species"].isin(handbook["species"])]
-    .groupby("species")["wing_length_mm"].agg(n="count", mean_mm="mean")
-    .reset_index())
-
-external_check = handbook.merge(observed_wing, on="species")
-external_check["within_range"] = external_check["mean_mm"].between(
-    external_check["handbook_low_mm"], external_check["handbook_high_mm"])
-
 scale_pair = birds.dropna(
     subset=["species", "tarsus_length_mm", "beak_length_culmen_mm"]
 )
@@ -187,6 +154,37 @@ species_means = (clean
 r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
                     np.log10(clean["beak_length_culmen_mm"]))[0, 1]
 amniote = pd.read_csv(open_url(DATA_URL + "amniote_species.csv"))
+```
+
+```{pyodide}
+#| autorun: true
+#| include: false
+# Altair chart styling for the whole page.
+def course_theme():
+    return {
+        "config": {
+            "view": {"stroke": None},
+            "background": "transparent",
+            "font": "Source Sans Pro, -apple-system, sans-serif",
+            "axis": {"gridColor": "#e8e2d6", "domainColor": "#b9b2a4",
+                     "tickColor": "#b9b2a4", "labelColor": "#4a463c",
+                     "titleColor": "#2b2a26", "labelFontSize": 12,
+                     "titleFontSize": 13, "titleFontWeight": 600},
+            "legend": {"labelColor": "#4a463c", "titleColor": "#2b2a26",
+                       "labelFontSize": 12, "titleFontSize": 12},
+            "title": {"anchor": "start", "fontSize": 15, "fontWeight": 600,
+                      "color": "#232028", "offset": 12},
+            "bar": {"color": "#4269d0"},
+            "range": {"category": ["#4269d0", "#e66852", "#30a8b1",
+                                   "#c98a00", "#9475cd", "#8a8a8a"]},
+        }
+    }
+
+try:
+    alt.themes.register("course", course_theme)
+    alt.themes.enable("course")
+except Exception:
+    pass
 ```
 
 ## Part I · AVONET
@@ -376,12 +374,12 @@ number of rows
 counts_of_counts = rows_per_species.value_counts().sort_index()
 
 fig, axes = plt.subplots(1, 3, figsize=(10, 3.2))
-axes[0].hist(rows_per_species, color="#4e79a7")
+axes[0].hist(rows_per_species, color="#4269d0")
 axes[0].set_title("histogram, default bins")
-axes[1].hist(rows_per_species, color="#4e79a7")
+axes[1].hist(rows_per_species, color="#4269d0")
 axes[1].set_yscale("log")
 axes[1].set_title("same, log y")
-axes[2].bar(counts_of_counts.index, counts_of_counts.values, color="#4e79a7")
+axes[2].bar(counts_of_counts.index, counts_of_counts.values, color="#4269d0")
 axes[2].set_xlim(0.5, 30.5)
 axes[2].set_title("exact counts, shown to 30")
 for ax in axes:
@@ -578,7 +576,7 @@ finished chart:
 ```{pyodide}
 record_chart = (
     alt.Chart(record_counts)
-    .mark_bar(color="#4e79a7")
+    .mark_bar(color="#4269d0")
     .encode(
         x=alt.X(
             "rows:Q",
@@ -617,7 +615,7 @@ Chart objects:
 - a **tooltip** reveals values on demand without crowding the static display;
 
 
-Compare `mark_bar(color="#4e79a7")` with
+Compare `mark_bar(color="#4269d0")` with
 `encode(color="record_type:N")`. The first gives every mark the same colour;
 the second creates a data mapping and therefore a colour scale. Both are valid
 code, but they say different things.
@@ -631,7 +629,7 @@ comparison_base = (alt.Chart(record_counts)
     ))
 
 constant_colour = (comparison_base
-    .mark_bar(color="#4e79a7")
+    .mark_bar(color="#4269d0")
     .properties(width=260, height=125, title="Constant colour"))
 
 mapped_colour = (comparison_base
@@ -679,7 +677,7 @@ features determines its length.
 
 ```{pyodide}
 (alt.Chart(metadata_type_counts)
- .mark_bar(color="#59a14f")
+ .mark_bar(color="#30a8b1")
  .encode(
      x=alt.X("features:Q", title="Number of features"),
      y=alt.Y("documented_type:N", title=None, sort="-x"),
@@ -706,7 +704,7 @@ Return to the `record_chart` cell and try these edits separately:
 1. Swap the x and y encodings. What changes, and what stays invariant?
 2. Remove `sort="-x"`. Which ordering does Altair choose?
 3. Replace `.mark_bar(...)` with
-   `.mark_point(filled=True, size=100, color="#4e79a7")`. Does a zero baseline
+   `.mark_point(filled=True, size=100, color="#4269d0")`. Does a zero baseline
    still matter in the same way?
 4. Change `rows:Q` to `rows:O`. Inspect the axis. The numbers did not change,
    but their semantic type (and therefore the scale) did.
@@ -792,7 +790,7 @@ row_completeness = (birds[trait_columns].notna().sum(axis=1)
                     .reset_index(name="rows"))
 
 (alt.Chart(row_completeness)
- .mark_bar(color="#59a14f")
+ .mark_bar(color="#30a8b1")
  .encode(
      x=alt.X("traits_observed:O", title="Morphology fields observed (out of 10)"),
      y=alt.Y("rows:Q", title="Rows"),
@@ -871,7 +869,7 @@ taxonomy_audit = pd.DataFrame({
     "distinct_labels": [birds[c].nunique() for c in taxonomy_columns],
 })
 
-labels_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#4e79a7")
+labels_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#4269d0")
     .encode(
         x=alt.X("distinct_labels:Q", title="Distinct labels", scale=alt.Scale(zero=False)),
         y=alt.Y("taxonomy:N", title=None, sort="-x"),
@@ -879,7 +877,7 @@ labels_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#4e79a7")
     )
     .properties(width=320, height=130, title="Vocabulary size"))
 
-gaps_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#e15759")
+gaps_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#e66852")
     .encode(
         x=alt.X("missing_rows:Q", title="Missing rows"),
         y=alt.Y("taxonomy:N", title=None, sort="-x"),
@@ -937,7 +935,7 @@ for field_label, (column, labels) in code_specs.items():
 code_counts = pd.DataFrame(code_rows)
 
 (alt.Chart(code_counts)
- .mark_bar(color="#4e79a7")
+ .mark_bar(color="#4269d0")
  .encode(
      x=alt.X("rows:Q", title="Rows"),
      y=alt.Y("level:N", title=None, sort="-x"),
@@ -979,7 +977,7 @@ depth_frequency = (species_depth["individuals"].value_counts().sort_index()
                    .rename_axis("individuals").reset_index(name="species_count"))
 top_species = species_depth.nlargest(15, "individuals")
 
-depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
+depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4269d0")
     .encode(
         x=alt.X("individuals:Q", title="Individuals per species",
                 scale=alt.Scale(type="log")),
@@ -989,7 +987,7 @@ depth_chart = (alt.Chart(depth_frequency).mark_line(point=True, color="#4e79a7")
     )
     .properties(width=330, height=300, title="Sampling-depth distribution"))
 
-top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
+top_species_chart = (alt.Chart(top_species).mark_bar(color="#c98a00")
     .encode(
         x=alt.X("individuals:Q", title="Individuals"),
         y=alt.Y("species:N", title=None, sort="-x"),
@@ -1028,11 +1026,11 @@ GAPSPECIES rows.
 ### Provenance and geographic coverage
 
 Large global datasets are often collections of collections. The leading
-source, country, and measurer codes reveal whether the table is broadly
-balanced or dominated by a few contributors.
+source and country codes reveal whether the table is broadly balanced or
+dominated by a few contributors.
 
 ```{pyodide}
-def top_levels_chart(column, title, n=15, colour="#4e79a7"):
+def top_levels_chart(column, title, n=15, colour="#4269d0"):
     counts = birds[column].dropna().astype(str).value_counts().head(n)
     table = pd.DataFrame({"level": counts.index, "rows": counts.values})
     return (alt.Chart(table)
@@ -1043,19 +1041,17 @@ def top_levels_chart(column, title, n=15, colour="#4e79a7"):
             tooltip=[alt.Tooltip("level:N", title=column),
                      alt.Tooltip("rows:Q", format=",")],
         )
-        .properties(width=225, height=320, title=title))
+        .properties(width=300, height=320, title=title))
 
-source_chart = top_levels_chart("source", "Top 15 sources", colour="#4e79a7")
+source_chart = top_levels_chart("source", "Top 15 sources", colour="#4269d0")
 country_chart = top_levels_chart("country_wri", "Top 15 collection countries",
-                                 colour="#59a14f")
-measurer_chart = top_levels_chart("measurer", "Top 15 measurers", colour="#f28e2b")
-
-source_chart | country_chart | measurer_chart
+                                 colour="#30a8b1")
+source_chart | country_chart
 ```
 
 Each view performs two transformations before drawing a mark: `count` rows by
 category, then keep the 15 largest counts. That top-$N$ filter makes labels
-readable but hides the long tail, so the title must disclose it. We use three
+readable but hides the long tail, so the title must disclose it. We use two
 separate panels with independent category axes instead of one shared colour
 legend containing unrelated codes.
 
@@ -1063,45 +1059,6 @@ The NHMUK source alone contributes 46,060 rows, and the largest country
 counts come from tropical, species-rich regions rather than an even global
 sample. Contributor concentration is not automatically a flaw, but it warns
 us that source, protocol, geography, and morphology may be entangled.
-
-### Recording precision by measurer
-
-Screening is not only about values; it is also about how values were
-produced. One classic check is measurement granularity: what fraction of
-each measurer's wing lengths are whole millimetres? Rulers, calipers, and
-personal habit leave different fingerprints, and a mixture of precisions
-inside one column is worth knowing before comparing small differences.
-
-```{pyodide}
-wing_measured = measured.dropna(subset=["wing_length_mm", "measurer"])
-top_measurers = wing_measured["measurer"].value_counts().head(10).index
-
-granularity = (wing_measured[wing_measured["measurer"].isin(top_measurers)]
-    .groupby("measurer")["wing_length_mm"]
-    .agg(rows="count",
-         whole_mm_pct=lambda v: (v % 1 == 0).mean() * 100)
-    .reset_index()
-    .sort_values("whole_mm_pct"))
-
-(alt.Chart(granularity)
- .mark_bar(color="#4e79a7")
- .encode(
-     x=alt.X("whole_mm_pct:Q", title="Wing lengths recorded as whole mm (%)",
-             scale=alt.Scale(domain=[0, 100])),
-     y=alt.Y("measurer:N", title="Measurer", sort="-x"),
-     tooltip=["measurer:N", alt.Tooltip("rows:Q", format=","),
-              alt.Tooltip("whole_mm_pct:Q", format=".1f")],
- )
- .properties(width=600, height=260,
-             title="Recording precision differs by measurer (10 largest)"))
-```
-
-Among the ten largest measurer codes, the share of whole-millimetre wing
-lengths runs from about 79% to exactly 100%: some measurers worked to a
-tenth of a millimetre, others to the nearest millimetre. That caps the
-precision of any comparison that mixes their records. In the
-initial-data-analysis literature this screening step is called checking
-for digit preference, or heaping.
 
 ### All ten morphological columns
 
@@ -1168,7 +1125,7 @@ for column in trait_columns:
 hist_data = pd.DataFrame(hist_rows)
 
 (alt.Chart(hist_data)
- .mark_bar(color="#4e79a7")
+ .mark_bar(color="#4269d0")
  .encode(
      x=alt.X("bin_start:Q", title="log10(value)", bin="binned"),
      x2="bin_end:Q",
@@ -1197,83 +1154,6 @@ make shapes comparable across traits, while independent facet scales let each
 trait use its own range. That choice helps see shape but prevents direct
 comparison of absolute magnitudes across panels.
 
-### Validation rules, stated as code
-
-Suspicion should be turned into named, checkable rules. Three kinds are
-available here. **Physical rules** bound what a measurement can be.
-**Consistency rules** relate columns that must agree: Kipp's distance is
-part of the wing, so it cannot exceed wing length. **Derivation rules**
-recompute stored derived fields from their ingredients: hand-wing index is
-defined as 100 x Kipp's distance / wing length, so we can rebuild it and
-compare it to the stored column.
-
-```{pyodide}
-kw = measured.dropna(subset=["kipps_distance_mm", "wing_length_mm"])
-sw = measured.dropna(subset=["secondary1_mm", "wing_length_mm"])
-hw = measured.dropna(subset=["hand_wing_index", "kipps_distance_mm",
-                             "wing_length_mm"])
-hwi_rebuilt = 100 * hw["kipps_distance_mm"] / hw["wing_length_mm"]
-
-validation_rules = pd.DataFrame([
-    ("Kipp's distance <= wing length", len(kw),
-     int((kw["kipps_distance_mm"] > kw["wing_length_mm"]).sum())),
-    ("first secondary <= wing length", len(sw),
-     int((sw["secondary1_mm"] > sw["wing_length_mm"]).sum())),
-    ("stored HWI within 0.6 of recomputed", len(hw),
-     int((~np.isclose(hwi_rebuilt, hw["hand_wing_index"], atol=0.6)).sum())),
-    ("wing length above 0.5 mm",
-     int(measured["wing_length_mm"].notna().sum()),
-     int((measured["wing_length_mm"].dropna() <= 0.5).sum())),
-], columns=["rule", "rows_checked", "violations"])
-validation_rules["result"] = np.where(
-    validation_rules["violations"].eq(0),
-    "no violations found",
-    "inspect rows",
-)
-validation_rules
-```
-
-The zero matters as much as the violations. No bird's Kipp's distance
-exceeds its wing, which is evidence those two fields really were measured
-on the same wing. The four secondary-feather violations and 37
-rebuilt-index mismatches are rows to inspect; the 18 wing lengths at or
-below half a millimetre are the 0.1 placeholders found above, now caught
-by a rule rather than by luck. Writing checks this way, as declared rules
-with pass and fail counts, comes from the data-validation literature (van
-der Loo and de Jonge, *Statistical Data Cleaning*); the same idea powers
-tools such as `pandera` in Python and `validate` in R.
-
-### External validation
-
-Internal checks cannot catch a dataset that is consistently wrong. Peng's
-EDA checklist insists on validating against **at least one external
-source**, so we compare species-mean wing lengths for four well-documented
-species with the ranges given in standard field handbooks.
-
-```{pyodide}
-handbook = pd.DataFrame([
-    ("Passer domesticus", "house sparrow", 70, 85),
-    ("Anas platyrhynchos", "mallard", 240, 300),
-    ("Apus apus", "common swift", 160, 185),
-    ("Troglodytes troglodytes", "Eurasian wren", 44, 55),
-], columns=["species", "common_name", "handbook_low_mm", "handbook_high_mm"])
-
-observed_wing = (measured[measured["species"].isin(handbook["species"])]
-    .groupby("species")["wing_length_mm"].agg(n="count", mean_mm="mean")
-    .reset_index())
-
-external_check = handbook.merge(observed_wing, on="species")
-external_check["within_range"] = external_check["mean_mm"].between(
-    external_check["handbook_low_mm"], external_check["handbook_high_mm"])
-external_check.round(1)
-```
-
-Four species is a spot check, not proof. But this is the kind of check
-that catches unit errors, decimal shifts, and column mix-ups that no
-amount of internal consistency can reveal. If the mallard's mean wing had
-come out at 26 mm or at 2,634 mm, everything downstream would have been
-wrong for a reason no histogram could explain.
-
 ### Linear and logarithmic scales
 
 A scale maps a **data domain** to a **visual range**. An x-scale maps numbers
@@ -1291,7 +1171,7 @@ scale_demo = pd.DataFrame({
     "row": ["same ten values"] * 10,
 })
 
-scale_base = alt.Chart(scale_demo).mark_circle(size=90, color="#4e79a7").encode(
+scale_base = alt.Chart(scale_demo).mark_circle(size=90, color="#4269d0").encode(
     y=alt.Y("row:N", title=None, axis=alt.Axis(labels=False, ticks=False)),
     tooltip=["value:Q"],
 )
@@ -1322,7 +1202,7 @@ scale_pair = birds.dropna(
 scale_sample = scale_pair.sample(n=6000, random_state=36104)
 
 bird_points = alt.Chart(scale_sample).mark_circle(
-    size=12, opacity=0.12, color="#4e79a7"
+    size=12, opacity=0.12, color="#4269d0"
 ).encode(
     tooltip=["species:N",
              alt.Tooltip("tarsus_length_mm:Q", format=".1f"),
@@ -1450,10 +1330,10 @@ raw_base = alt.Chart(regression_sample).encode(
             scale=alt.Scale(zero=False)),
 )
 raw_regression = (
-    raw_base.mark_circle(size=11, opacity=0.10, color="#4e79a7")
+    raw_base.mark_circle(size=11, opacity=0.10, color="#4269d0")
     + raw_base.transform_regression(
         "tarsus_length_mm", "beak_length_culmen_mm"
-      ).mark_line(size=3, color="#e15759")
+      ).mark_line(size=3, color="#e66852")
 ).properties(width=330, height=300, title="OLS in raw measurement space")
 
 log_base = alt.Chart(regression_sample).encode(
@@ -1461,10 +1341,10 @@ log_base = alt.Chart(regression_sample).encode(
     y=alt.Y("log10_culmen:Q", title="log10 culmen length"),
 )
 log_regression = (
-    log_base.mark_circle(size=11, opacity=0.10, color="#4e79a7")
+    log_base.mark_circle(size=11, opacity=0.10, color="#4269d0")
     + log_base.transform_regression(
         "log10_tarsus", "log10_culmen"
-      ).mark_line(size=3, color="#e15759")
+      ).mark_line(size=3, color="#e66852")
 ).properties(width=330, height=300, title="OLS in log10–log10 space")
 
 raw_regression | log_regression
@@ -1504,7 +1384,7 @@ subgroup_base = alt.Chart(regression_sample).encode(
     x=alt.X("log10_tarsus:Q", title="log10 tarsus length"),
     y=alt.Y("log10_culmen:Q", title="log10 culmen length"),
     color=alt.Color("record_type:N", title="Record type",
-                    scale=alt.Scale(range=["#e15759", "#4e79a7"])),
+                    scale=alt.Scale(range=["#e66852", "#4269d0"])),
 )
 
 (subgroup_base.mark_circle(size=11, opacity=0.15)
@@ -1546,8 +1426,8 @@ enough = by_age[(by_age["n_adult"] >= 5) & (by_age["n_immature"] >= 3)].copy()
 enough["ratio"] = enough["mean_immature"] / enough["mean_adult"]
 
 fig, ax = plt.subplots(figsize=(8, 3.6))
-ax.hist(enough["ratio"], bins=24, color="#4e79a7")
-ax.axvline(1.0, color="#e15759", lw=1.5)
+ax.hist(enough["ratio"], bins=24, color="#4269d0")
+ax.axvline(1.0, color="#e66852", lw=1.5)
 ax.set_xlabel("immature mean wing / adult mean wing, within species")
 ax.set_ylabel("species")
 ax.set_title(f"{len(enough)} species with enough of both; red line = no difference")
@@ -1624,17 +1504,17 @@ wing_base = alt.Chart(wing_top).encode(
     ],
 )
 
-full_range = wing_base.mark_rule(color="#bab0ac", strokeWidth=2).encode(
+full_range = wing_base.mark_rule(color="#b9b2a4", strokeWidth=2).encode(
     x=alt.X("minimum:Q", title="Wing length (mm)", scale=alt.Scale(zero=False)),
     x2="maximum:Q",
 )
-middle_half = wing_base.mark_rule(color="#4e79a7", strokeWidth=8).encode(
+middle_half = wing_base.mark_rule(color="#4269d0", strokeWidth=8).encode(
     x="q25:Q", x2="q75:Q",
 )
 median_mark = wing_base.mark_tick(color="#111", thickness=2, size=16).encode(
     x="median:Q",
 )
-mean_mark = wing_base.mark_circle(color="#e15759", size=55).encode(
+mean_mark = wing_base.mark_circle(color="#e66852", size=55).encode(
     x="mean:Q",
 )
 
@@ -1659,7 +1539,7 @@ identity_limits = pd.DataFrame({
 mean_median_data = species_wing[["species", "n", "mean", "median"]]
 
 mean_median_points = (alt.Chart(mean_median_data)
-    .mark_circle(opacity=0.25, color="#4e79a7")
+    .mark_circle(opacity=0.25, color="#4269d0")
     .encode(
         x=alt.X("mean:Q", title="Species mean wing length (mm)",
                 scale=alt.Scale(type="log")),
@@ -1672,7 +1552,7 @@ mean_median_points = (alt.Chart(mean_median_data)
     ))
 
 identity_line = (alt.Chart(identity_limits).mark_line(
-    color="#e15759", strokeDash=[6, 4]
+    color="#e66852", strokeDash=[6, 4]
 ).encode(x="x:Q", y="y:Q"))
 
 (mean_median_points + identity_line).properties(
@@ -1693,7 +1573,7 @@ individual wing length within each species" is a reproducible visual claim.
   count, suitable aggregate, candidate visual form, and scale.
 - Taxonomic names depend on the chosen authority; `species` is the BirdLife
   version used for the next aggregation.
-- Sampling is concentrated by source, geography, measurer, sex, and protocol.
+- Sampling is concentrated by source, geography, sex, and protocol.
 - Every morphology field is positive, but extreme 0.1 values require
   biological investigation rather than automatic acceptance.
 - Only 45,669 rows have all ten morphology fields, so cleaning must be
@@ -1704,12 +1584,6 @@ individual wing length within each species" is a reproducible visual claim.
   median, range, quantiles, and standard deviation answer different questions.
 - Regression lines summarise a fitted relationship on a declared scale; they
   do not establish mechanism, causality, or a universal trend.
-- Named validation rules returned 0, 4, 37 and 18 violations; the zeros are
-  findings too.
-- Four handbook spot checks put species-mean wing lengths inside published
-  ranges, so units and columns line up with the outside world.
-- Recording precision differs by measurer, from tenth-millimetre habits to
-  whole-millimetre habits.
 - The pooled regression slope is carried by the museum series; the
   live-bird subset alone, restricted in range, shows almost none of it.
 
@@ -1784,7 +1658,7 @@ row_flow = pd.DataFrame([
 ], columns=["stage", "rows", "rule"])
 
 (alt.Chart(row_flow)
- .mark_bar(color="#4e79a7")
+ .mark_bar(color="#4269d0")
  .encode(
      x=alt.X("rows:Q", title="Rows"),
      y=alt.Y("stage:N", title=None, sort=None),
@@ -1946,15 +1820,6 @@ sentinel value in this course, and the only reliable detector is looking
 at the chart.
 :::
 
-### What Part I established
-
-The relationship was "the same" at both levels (log-linear, positive),
-but every property a reader can quote changed with the level: n went from
-90,371 raw rows to 69,509 usable measurements to 10,601 species means,
-and the cleaning decision was different for every trait pair. A claim
-made at one level does not automatically hold at another. When you
-caption a chart, the level of aggregation is part of the claim: say what
-one point is, say what n is, and say where the dropped rows went.
 
 ## Part II · Amniote Life-History Database
 
