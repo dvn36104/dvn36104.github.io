@@ -721,14 +721,7 @@ Use this sequence when designing the charts that follow:
 > **feature → data type → question → transformation/aggregation → mark →
 > encoding → scale → interpretation**
 
-We still have to decide whether a coded number is a category, whether mean or
-median is suitable, and which rows belong in the analysis. Altair applies
-those decisions to the chart specification. The same field can support
-different charts for different questions: `country_wri` could be counted in a
-bar chart to examine sampling balance or located on a map to examine spatial
-coverage.
 
-### Audit every column
 
 The next table extends the structural check to every column: storage type,
 observed and missing rows, percentage missing, distinct values, and one
@@ -880,18 +873,17 @@ for field_label, (column, labels) in code_specs.items():
 code_counts = pd.DataFrame(code_rows)
 
 (alt.Chart(code_counts)
- .mark_bar()
+ .mark_bar(color="#4e79a7")
  .encode(
      x=alt.X("rows:Q", title="Rows"),
      y=alt.Y("level:N", title=None, sort="-x"),
-     color=alt.Color("level:N", legend=None),
      tooltip=["field:N", "level:N", alt.Tooltip("rows:Q", format=",")],
  )
  .properties(width=300, height=115)
  .facet(facet=alt.Facet("field:N", title=None,
                         sort=["Record type", "Sex", "Age", "Protocol"]),
         columns=2)
- .resolve_scale(y="independent", color="independent"))
+ .resolve_scale(y="independent"))
 ```
 
 This is predominantly a museum dataset: 75,843 individuals are specimens
