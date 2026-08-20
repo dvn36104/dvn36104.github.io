@@ -83,8 +83,8 @@ birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"), low_memory=Fa
 measured = birds[birds["data_type"].notna()]
 
 metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
-metadata_types = metadata.assign(
-    documented_type=metadata["variable_type"].fillna("not specified")
+metadata_for_charts = metadata.assign(
+    variable_type=metadata["variable_type"].fillna("not specified")
 )
 
 trait_catalogue = (metadata
@@ -113,7 +113,7 @@ audit = pd.DataFrame({
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
     "example": [first_example(birds[c]) for c in birds.columns],
-}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
+}).merge(metadata_for_charts[["column", "description", "variable_type", "unit"]],
          on="column", how="left")
 
 rows_per_species = (birds.dropna(subset=["species"])
@@ -305,7 +305,7 @@ metadata_by_column = metadata.set_index("column")
 def inspect_field(column):
     documentation = metadata_by_column.loc[column]
     definition = str(documentation["description"])
-    documented_type = (
+    variable_type = (
         documentation["variable_type"]
         if pd.notna(documentation["variable_type"])
         else "not specified"
@@ -316,7 +316,7 @@ def inspect_field(column):
     print(column)
     print(textwrap.fill(definition, width=82,
                         initial_indent="    ", subsequent_indent="    "))
-    print(f"    documented type: {documented_type}")
+    print(f"    AVONET variable type: {variable_type}")
     print(f"    unit: {unit}")
     print(f"    storage: {values.dtype}")
     print(f"    observed: {values.notna().sum():,} / {len(values):,}")
@@ -567,10 +567,8 @@ types are:
 An identifier is normally declared `N`, but that does not make it a good
 axis or colour field. A species identifier with 11,020 levels could not be effectively encoded in color.
 
-### Chart design
-
 The channel objects `alt.X`, `alt.Y`,
-`alt.Color` and `alt.Tooltip` expose the design decisions required for a
+`alt.Color` and `alt.Tooltip` specify what will be included in a
 finished chart:
 
 ```{pyodide}
@@ -646,22 +644,18 @@ constant_colour | mapped_colour
 
 
 The metadata has one row for each of AVONET's 26 features. Suppose we want to
-know how many features have each documented type. That question requires a new
-table: one row per documented type and a count of the metadata rows belonging
-to it.
-
-First a small preparation: the metadata's `variable_type` column has two
-blank entries, and a blank makes a poor group label, so copy it into a
-new column with the blanks filled in.
+know how many features have each variable type. The categories come directly
+from the metadata's `variable_type` column. Its two blank entries need a label
+before we group and count the rows.
 
 ```{pyodide}
-metadata_types = metadata.assign(
-    documented_type=metadata["variable_type"].fillna("not specified")
+metadata_for_charts = metadata.assign(
+    variable_type=metadata["variable_type"].fillna("not specified")
 )
 
 metadata_type_counts = (
-    metadata_types
-    .groupby("documented_type", as_index=False)
+    metadata_for_charts
+    .groupby("variable_type", as_index=False)
     .size()
     .rename(columns={"size": "features"})
 )
@@ -671,11 +665,9 @@ metadata_type_counts
 
 Read the transformation in order:
 
-1. Start with 26 rows, one per AVONET feature. `documented_type` is the
-   metadata's own `variable_type`, with its two blanks filled as
-   `not specified`.
-2. `groupby("documented_type")` collects rows that share the same documented
-   type.
+1. Start with 26 rows, one per AVONET feature, and label the two blank
+   `variable_type` entries as `not specified`.
+2. `groupby("variable_type")` collects rows that share the same type.
 3. `.size()` counts how many rows are in each group.
 4. The result has one row per type and a new `features` column containing the
    count.
@@ -689,9 +681,9 @@ features determines its length.
  .mark_bar(color="#30a8b1")
  .encode(
      x=alt.X("features:Q", title="Number of features"),
-     y=alt.Y("documented_type:N", title=None, sort="-x"),
+     y=alt.Y("variable_type:N", title=None, sort="-x"),
      tooltip=[
-         alt.Tooltip("documented_type:N", title="Documented type"),
+         alt.Tooltip("variable_type:N", title="Variable type"),
          alt.Tooltip("features:Q", title="Features"),
      ],
  )
@@ -742,7 +734,7 @@ audit = pd.DataFrame({
     "missing_n": birds.isna().sum().values,
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
-}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
+}).merge(metadata_for_charts[["column", "description", "variable_type", "unit"]],
          on="column", how="left")
 
 print(f"audit table built: one row for each of the {len(audit)} columns")
@@ -758,7 +750,7 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
      x=alt.X("missing_pct:Q", title="Missing rows (%)",
              scale=alt.Scale(domain=[0, 100])),
      y=alt.Y("column:N", title=None, sort=column_order),
-     color=alt.Color("documented_type:N", title="Documented type"),
+     color=alt.Color("variable_type:N", title="Variable type"),
      tooltip=[
          alt.Tooltip("column:N", title="Column"),
          alt.Tooltip("missing_n:Q", title="Missing", format=","),
