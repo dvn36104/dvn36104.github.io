@@ -1000,6 +1000,23 @@ top_species_chart = (alt.Chart(top_species).mark_bar(color="#f28e2b")
 depth_chart | top_species_chart
 ```
 
+::: {.callout-tip title="Compare this with the earlier histogram"}
+Look back at the **right-hand panel** of the three-part histogram above. It
+also shows sampling depth: the horizontal axis is the number of records or
+individuals per species, and the vertical axis is the number of species.
+
+Before reading on, compare the two displays:
+
+- What does one bar represent in the earlier panel, and what does one point
+  represent in the sampling-depth chart?
+- Are `rows_per_species` and `species_depth` counting exactly the same rows?
+- How do the earlier linear axes and x-axis limit of 30 differ from the two
+  logarithmic axes used here?
+- What becomes visible in each version, and what becomes harder to judge?
+- Does connecting the points with a line suggest anything that the discrete
+  integer counts do not actually support?
+:::
+
 The median measured species has five individuals, 383 species have only one,
 and the most-sampled species has 784. Treating all 90,020 individuals as
 independent would let a few heavily sampled species dominate; treating every
