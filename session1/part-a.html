@@ -686,6 +686,27 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVwdGhfc3VtbWFyeSA9IChz
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVwdGhfZnJlcXVlbmN5ID0gKHNwZWNpZXNfZGVwdGhbXCJpbmRpdmlkdWFsc1wiXS52YWx1ZV9jb3VudHMoKS5zb3J0X2luZGV4KClcbiAgICAgICAgICAgICAgICAgICAucmVuYW1lX2F4aXMoXCJpbmRpdmlkdWFsc1wiKS5yZXNldF9pbmRleChuYW1lPVwic3BlY2llc19jb3VudFwiKSlcbnRvcF9zcGVjaWVzID0gc3BlY2llc19kZXB0aC5ubGFyZ2VzdCgxNSwgXCJpbmRpdmlkdWFsc1wiKVxuXG5kZXB0aF9jaGFydCA9IChhbHQuQ2hhcnQoZGVwdGhfZnJlcXVlbmN5KS5tYXJrX2xpbmUocG9pbnQ9VHJ1ZSwgY29sb3I9XCIjNGU3OWE3XCIpXG4gICAgLmVuY29kZShcbiAgICAgICAgeD1hbHQuWChcImluZGl2aWR1YWxzOlFcIiwgdGl0bGU9XCJJbmRpdmlkdWFscyBwZXIgc3BlY2llc1wiLFxuICAgICAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZSh0eXBlPVwibG9nXCIpKSxcbiAgICAgICAgeT1hbHQuWShcInNwZWNpZXNfY291bnQ6UVwiLCB0aXRsZT1cIk51bWJlciBvZiBzcGVjaWVzXCIsXG4gICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHR5cGU9XCJsb2dcIikpLFxuICAgICAgICB0b29sdGlwPVtcImluZGl2aWR1YWxzOlFcIiwgYWx0LlRvb2x0aXAoXCJzcGVjaWVzX2NvdW50OlFcIiwgZm9ybWF0PVwiLFwiKV0sXG4gICAgKVxuICAgIC5wcm9wZXJ0aWVzKHdpZHRoPTMzMCwgaGVpZ2h0PTMwMCwgdGl0bGU9XCJTYW1wbGluZy1kZXB0aCBkaXN0cmlidXRpb25cIikpXG5cbnRvcF9zcGVjaWVzX2NoYXJ0ID0gKGFsdC5DaGFydCh0b3Bfc3BlY2llcykubWFya19iYXIoY29sb3I9XCIjZjI4ZTJiXCIpXG4gICAgLmVuY29kZShcbiAgICAgICAgeD1hbHQuWChcImluZGl2aWR1YWxzOlFcIiwgdGl0bGU9XCJJbmRpdmlkdWFsc1wiKSxcbiAgICAgICAgeT1hbHQuWShcInNwZWNpZXM6TlwiLCB0aXRsZT1Ob25lLCBzb3J0PVwiLXhcIiksXG4gICAgICAgIHRvb2x0aXA9W1wic3BlY2llczpOXCIsIGFsdC5Ub29sdGlwKFwiaW5kaXZpZHVhbHM6UVwiLCBmb3JtYXQ9XCIsXCIpXSxcbiAgICApXG4gICAgLnByb3BlcnRpZXMod2lkdGg9MzMwLCBoZWlnaHQ9MzAwLCB0aXRsZT1cIjE1IG1vc3Qtc2FtcGxlZCBzcGVjaWVzXCIpKVxuXG5kZXB0aF9jaGFydCB8IHRvcF9zcGVjaWVzX2NoYXJ0In0=
 </script>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Compare this with the earlier histogram">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Compare this with the earlier histogram
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look back at the <strong>right-hand panel</strong> of the three-part histogram above. It also shows sampling depth: the horizontal axis is the number of records or individuals per species, and the vertical axis is the number of species.</p>
+<p>Before reading on, compare the two displays:</p>
+<ul>
+<li>What does one bar represent in the earlier panel, and what does one point represent in the sampling-depth chart?</li>
+<li>Are <code>rows_per_species</code> and <code>species_depth</code> counting exactly the same rows?</li>
+<li>How do the earlier linear axes and x-axis limit of 30 differ from the two logarithmic axes used here?</li>
+<li>What becomes visible in each version, and what becomes harder to judge?</li>
+<li>Does connecting the points with a line suggest anything that the discrete integer counts do not actually support?</li>
+</ul>
+</div>
+</div>
 <p>The median measured species has five individuals, 383 species have only one, and the most-sampled species has 784. Treating all 90,020 individuals as independent would let a few heavily sampled species dominate; treating every species mean as equally precise would ignore the opposite problem. And the accounting closes: 10,669 species have at least one measured individual, and the remaining 351 of the 11,020 named species are exactly the taxonomy-only GAPSPECIES rows.</p>
 </section>
 <section id="provenance-and-geographic-coverage" class="level3">
@@ -1116,10 +1137,6 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfd2luZyJ9LCJjb2Rl
 <p>Wing length is missing in only ~1,100 rows, so this cleaning keeps far more data than the beak comparison did: the n you report depends on the comparison you chose. The wing–tarsus cloud is also tighter than beak–tarsus: both are limb-skeleton traits that track overall body size, while beaks track feeding ecology.</p>
 <p>And look at the bottom of your chart: five points stranded far below the cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless birds whose wing length is coded as <strong>0.1 mm</strong>, a placeholder, not a measurement. <code>dropna</code> cannot catch missingness that has been written down as a fake number. Keep that idea within reach: this is not the last sentinel value in this course, and the only reliable detector is looking at the chart.</p>
 </div>
-</section>
-<section id="what-part-i-established" class="level3">
-<h3 class="anchored" data-anchor-id="what-part-i-established">What Part I established</h3>
-<p>The relationship was “the same” at both levels (log-linear, positive), but every property a reader can quote changed with the level: n went from 90,371 raw rows to 69,509 usable measurements to 10,601 species means, and the cleaning decision was different for every trait pair. A claim made at one level does not automatically hold at another. When you caption a chart, the level of aggregation is part of the claim: say what one point is, say what n is, and say where the dropped rows went.</p>
 </section>
 </section>
 <section id="part-ii-amniote-life-history-database" class="level2">
