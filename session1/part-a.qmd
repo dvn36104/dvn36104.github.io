@@ -201,11 +201,11 @@ AVONET measurement protocol was used.
   <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 10px; max-width: 620px; margin: 0 auto;">
       <img src="../images/blue-jay-avonet.jpg"
            class="figure-img"
-           style="display: block; width: calc(50% - 5px); height: auto; min-width: 0;"
+           style="display: block; width: calc(52% - 5px); height: auto; min-width: 0;"
            alt="Illustrated Blue Jay showing how wing length, wing-tip length, tarsus length, and tail length are measured.">
       <img src="../images/blue-jay-avonet-companion.png"
            class="figure-img"
-           style="display: block; width: calc(50% - 5px); height: auto; min-width: 0;"
+           style="display: block; width: calc(48% - 5px); height: auto; min-width: 0;"
            alt="Illustrated Blue Jay bill and wing showing bill length, depth and width, plus wing and secondary length.">
   </div>
   <figcaption class="figure-caption text-center">
