@@ -297,10 +297,7 @@ field should contain exactly the same names as `birds.columns`.
 set(metadata["column"]) == set(birds.columns)
 ```
 
-Now make a small inspection function. For one named field it prints the
-definition, semantic type and unit supplied by AVONET, followed by its Pandas
-storage type, coverage and number of distinct observed values. Run it for all
-26 fields in file order.
+Now make an inspection function to read the metadata definitions.
 
 ```{pyodide}
 import textwrap
@@ -343,37 +340,51 @@ Why keep both `avibase_id` and `species`? They do different jobs:
   labels and grouping, but a name can change when a species moves genus or
   when a taxonomic authority splits or lumps taxa.
 
-The identifier is therefore useful for joining data across files and tracing
-taxonomic changes; the name is useful for interpretation. They are related,
-but do not assume the relationship is one-to-one. Check it.
+The identifier is useful for joining; the species name is useful for grouping
+and interpretation. We will use the BirdLife `species` field for the first
+count. How many rows and species labels are present?
 
 ```{pyodide}
-taxon_pairs = (birds[["avibase_id", "species"]]
-    .dropna()
-    .drop_duplicates())
-
-species_per_id = taxon_pairs.groupby("avibase_id")["species"].nunique()
-ids_per_species = taxon_pairs.groupby("species")["avibase_id"].nunique()
+rows_per_species = (birds.dropna(subset=["species"])
+    .groupby("species")
+    .size())
 
 pd.Series({
-    "distinct Avibase–BirdLife pairs": len(taxon_pairs),
-    "Avibase IDs linked to multiple BirdLife species": species_per_id.gt(1).sum(),
-    "BirdLife species linked to multiple Avibase IDs": ids_per_species.gt(1).sum(),
-    "maximum BirdLife species for one Avibase ID": species_per_id.max(),
-    "maximum Avibase IDs for one BirdLife species": ids_per_species.max(),
-})
+    "rows in the file": len(birds),
+    "rows with a BirdLife species label": birds["species"].notna().sum(),
+    "rows without a BirdLife species label": birds["species"].isna().sum(),
+    "unique BirdLife species labels": birds["species"].nunique(),
+    "mean rows per labelled species": rows_per_species.mean(),
+    "median rows per labelled species": rows_per_species.median(),
+    "species labels occurring once": rows_per_species.eq(1).sum(),
+    "maximum rows for one species label": rows_per_species.max(),
+}).round(2)
 ```
 
-Among rows where both fields are present, 27 Avibase IDs link to more than one
-BirdLife species, while 137 BirdLife species link to more than one Avibase ID.
-For example, one Avibase group is reconciled to both *Milvus aegyptius* and
-*Milvus migrans*, while the BirdLife name *Acanthis flammea* occurs with two
-Avibase IDs. Those are taxonomic reconciliation cases, not repeated birds.
+The file has 90,371 rows and 11,020 distinct BirdLife species labels. Of those
+rows, 90,033 have a value in `species` and 338 do not. Dividing the labelled
+rows by the number of labels gives a crude mean of 8.17 rows per species, but
+the median is five and 734 species labels occur only once. The rows are not
+spread evenly across species. At this point these are simply **rows per
+label**—we have not yet established that every row is a measured bird.
 
-The other three fields give names under eBird/Clements, eBird's broader
-assignable group, and BirdTree. Their different vocabulary sizes are further
-evidence of taxonomic splits, lumps and unassigned records, not duplicate
-columns to discard.
+#### What is a species?
+
+A species is not a value measured from a specimen in the way that wing length
+is. It is a taxonomic decision about which organisms belong to the same
+evolutionary group. Under the biological species concept, a species is a group
+of actually or potentially interbreeding natural populations that is
+reproductively isolated from other such groups. In practice that test is
+difficult for geographically separated birds,
+so taxonomists also use ancestry, genetics, anatomy, plumage, song and
+behaviour. Different authorities can weigh that evidence differently and
+split one group into several species or lump several groups into one.
+
+For this analysis, a "species" means a distinct name in the BirdLife taxonomy
+used by this AVONET release. The count of 11,020 is therefore a count under a
+specified classification, not a timeless count of natural entities. The
+`species_ebird`, `ebird_species_group` and `species_birdtree` columns preserve
+alternative classifications needed for other analyses.
 
 The printout calls `source` the museum or research collection and
 `specimen_number` an accession or collection number. A specimen number is
