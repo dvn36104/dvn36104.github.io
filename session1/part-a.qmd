@@ -271,8 +271,27 @@ decimal number (`float64`).
 
 #### Read every feature one by one
 
-First check that the dictionary actually covers the file we loaded. Its
-`column` field should contain exactly the same names as `birds.columns`.
+The metadata file has 26 rows because it has one row for each feature in
+`birds`. Its six columns describe different parts of that feature:
+
+- `column`: the column name used in the CSV served on this site;
+- `source_variable`: its original heading in the AVONET worksheet;
+- `description`: what the recorded values mean;
+- `variable_type`: AVONET's semantic classification of the feature;
+- `unit`: the measurement unit, where one applies;
+- `metadata_source`: the taxonomy, publication or other reference supporting
+  the definition.
+
+Inspect the structure and a few complete metadata rows before using it.
+
+```{pyodide}
+print(f"metadata shape: {metadata.shape[0]} rows × {metadata.shape[1]} columns")
+print(metadata.columns.tolist())
+metadata.head(3)
+```
+
+Now check that the dictionary actually covers the data file. Its `column`
+field should contain exactly the same names as `birds.columns`.
 
 ```{pyodide}
 set(metadata["column"]) == set(birds.columns)
