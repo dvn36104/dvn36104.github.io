@@ -362,7 +362,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHRleHR3cmFwXG5c
 <li><code>avibase_id</code> is a machine-readable key used to link a taxon to Avibase. The full metadata definition says <strong>species or species group</strong>, not necessarily one currently accepted species.</li>
 <li><code>species</code> is the human-readable scientific name assigned under the particular BirdLife taxonomy used by this release. It is useful for tables, labels and grouping, but a name can change when a species moves genus or when a taxonomic authority splits or lumps taxa.</li>
 </ul>
-<p>The identifier is useful for joining; the species name is useful for grouping and interpretation. The <code>species_ebird</code>, <code>ebird_species_group</code> and <code>species_birdtree</code> columns preserve alternative classifications needed for other analyses. We will use the BirdLife <code>species</code> field for the first count. How many rows and species labels are present?</p>
+<p>The identifier is useful for joining; the species name is useful for grouping and interpretation. The <code>species_ebird</code>, <code>ebird_species_group</code> and <code>species_birdtree</code> columns preserve alternative classifications needed for other analyses. We will use the BirdLife <code>species</code> field for the first count.</p>
+<p>How many rows and species labels are present?</p>
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
@@ -377,12 +378,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicm93c19wZXJfc3BlY2llcyA9
 
 </div>
 <script type="pyodide-8-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LCA0KSlcbmF4Lmhpc3Qocm93c19wZXJfc3BlY2llcywgYmlucz02MCwgY29sb3I9XCIjNGU3OWE3XCIpXG5heC5zZXRfeXNjYWxlKFwibG9nXCIpXG5heC5zZXRfeGxhYmVsKFwicm93cyBwZXIgc3BlY2llcyBsYWJlbFwiKVxuYXguc2V0X3lsYWJlbChcIm51bWJlciBvZiBzcGVjaWVzIChsb2cgc2NhbGUpXCIpXG5heC5zZXRfdGl0bGUoXCJNb3N0IHNwZWNpZXMgaGF2ZSBhIGhhbmRmdWwgb2Ygcm93czsgb25lIGhhcyA3ODRcIilcbnBsdC5zaG93KCkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY291bnRzX29mX2NvdW50cyA9IHJvd3NfcGVyX3NwZWNpZXMudmFsdWVfY291bnRzKCkuc29ydF9pbmRleCgpXG5cbmZpZywgYXggPSBwbHQuc3VicGxvdHMoZmlnc2l6ZT0oOSwgNCkpXG5heC5iYXIoY291bnRzX29mX2NvdW50cy5pbmRleCwgY291bnRzX29mX2NvdW50cy52YWx1ZXMsIGNvbG9yPVwiIzRlNzlhN1wiKVxuYXguc2V0X3hsaW0oMC41LCAzMC41KVxuYXguc2V0X3hsYWJlbChcInJvd3MgcGVyIHNwZWNpZXMgbGFiZWxcIilcbmF4LnNldF95bGFiZWwoXCJudW1iZXIgb2Ygc3BlY2llc1wiKVxuYXguc2V0X3RpdGxlKFwiUm93cyBwZXIgc3BlY2llcywgc2hvd24gdG8gMzA7IHRoZSB0YWlsIHJ1bnMgb24gdG8gNzg0XCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>The y axis is logarithmic: without it, the 734 single-row species and their neighbours would form one giant bar and everything to their right would vanish. At the far right sits the most sampled bird in the file, <em>Zosterops chloris</em>, the lemon-bellied white-eye, with 784 rows.</p>
+<p>Every bar is an exact count on plain linear axes. The 734 single-row species are the bar at 1. The tallest bar is at 5 rows (3,081 species), with 4 close behind: AVONET’s protocol aimed to measure at least four birds per species, and that target is stamped straight into the shape of the data. The x axis stops at 30 because only 262 species lie beyond it, stretched all the way to the most sampled bird in the file, <em>Zosterops chloris</em>, the lemon-bellied white-eye, at 784 rows. Truncating an axis is fine; doing it silently is not, so the title says so.</p>
 <p>The metadata explain that <code>data_type = 1</code> means a museum specimen and <code>data_type = 2</code> means a live individual. Therefore the 90,020 rows with a recorded <code>data_type</code> are individual birds. The remaining 351 rows have no <code>data_type</code> and need to be examined separately. <code>source</code> and <code>specimen_number</code> record provenance; they do not define the row unit.</p>
-<p>The same printout shows that <code>sex</code> is a three-level category (<code>M</code>, <code>F</code>, <code>U</code>), not free text. <code>locality</code> and <code>country</code> are completely absent because those data were embargoed in this release; <code>country_wri</code> is the available harmonised geography. <code>measurer</code> is an identifier for the person taking the measurements, not for the bird. <code>publication</code> is provenance for measurements transcribed from published sources and is populated for only a small subset of rows. Each field supports a different question, despite Pandas storing most of them as <code>object</code>.</p>
+<p>The same printout shows that <code>sex</code> is a three-level category (<code>M</code>, <code>F</code>, <code>U</code>); <code>country_wri</code> is the available harmonised geography; <code>measurer</code> is an identifier for the person taking the measurements; <code>publication</code> is provenance for measurements transcribed from published sources and is populated for only a small subset of rows.</p>
 <p><strong>The number columns.</strong> The default <code>describe</code> covers exactly these:</p>
 <div>
 <div id="pyodide-9" class="exercise-cell">
@@ -392,7 +393,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJw
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYmlyZHMuZGVzY3JpYmUoKS5ULnJvdW5kKDIpIn0=
 </script>
 </div>
-<p>Read the min and max columns and the floats split in two as well. Ten are measurements with continuous ranges in millimetres. But <code>data_type</code>, <code>age</code> and <code>protocol</code> run between 0 and 2, and counting distinct values confirms the suspicion:</p>
+<p>Read the min and max columns and the floats split in two as well. Ten are measurements with continuous ranges in millimetres. But <code>data_type</code>, <code>age</code> and <code>protocol</code> run between 0 and 2. These are categorical values</p>
 <div>
 <div id="pyodide-10" class="exercise-cell">
 
