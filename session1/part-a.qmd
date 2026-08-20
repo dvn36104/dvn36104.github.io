@@ -269,7 +269,7 @@ Non-null counts differ between columns. Two columns (`locality` and `country`) h
 Every column is stored as one of two data types, text (`object`) or
 decimal number (`float64`).
 
-#### Read the identifier and text fields one by one
+#### Read every feature one by one
 
 First check that the dictionary actually covers the file we loaded. Its
 `column` field should contain exactly the same names as `birds.columns`.
@@ -279,41 +279,37 @@ set(metadata["column"]) == set(birds.columns)
 ```
 
 Now make a small inspection function. For one named field it prints the
-definition supplied by AVONET, its Pandas storage type, coverage, number of
-distinct observed values, and its five most frequent values. This is more
-useful than asking `describe()` to treat every text field as though it had the
-same role.
+definition, semantic type and unit supplied by AVONET, followed by its Pandas
+storage type, coverage and number of distinct observed values. Run it for all
+26 fields in file order.
 
 ```{pyodide}
 import textwrap
 
 metadata_by_column = metadata.set_index("column")
 
-def inspect_field(column, top=5):
-    definition = str(metadata_by_column.loc[column, "description"])
+def inspect_field(column):
+    documentation = metadata_by_column.loc[column]
+    definition = str(documentation["description"])
+    documented_type = (
+        documentation["variable_type"]
+        if pd.notna(documentation["variable_type"])
+        else "not specified"
+    )
+    unit = documentation["unit"] if pd.notna(documentation["unit"]) else "—"
     values = birds[column]
 
     print(column)
     print(textwrap.fill(definition, width=82,
                         initial_indent="    ", subsequent_indent="    "))
+    print(f"    documented type: {documented_type}")
+    print(f"    unit: {unit}")
     print(f"    storage: {values.dtype}")
     print(f"    observed: {values.notna().sum():,} / {len(values):,}")
     print(f"    distinct observed values: {values.nunique(dropna=True):,}")
-
-    if values.notna().any():
-        print("    most frequent observed values:")
-        print(values.dropna().astype(str).value_counts().head(top).to_string())
     print()
 
-inspect_field("avibase_id")
-```
-
-The first call shows that the function is working and inspects `avibase_id`.
-Continue with the other four taxonomic fields, one at a time.
-
-```{pyodide}
-for column in ["species", "species_ebird", "ebird_species_group",
-               "species_birdtree"]:
+for column in birds.columns:
     inspect_field(column)
 ```
 
@@ -324,14 +320,7 @@ BirdLife, eBird/Clements, eBird's broader assignable group, and BirdTree.
 Their different vocabulary sizes are evidence of taxonomic splits, lumps and
 unassigned individuals, not duplicate columns to discard.
 
-Next inspect the fields that come closest to identifying a sampled bird.
-
-```{pyodide}
-inspect_field("source")
-inspect_field("specimen_number")
-```
-
-The metadata calls `source` the museum or research collection and
+The printout calls `source` the museum or research collection and
 `specimen_number` an accession or collection number. A specimen number is
 therefore only meaningful within its source. Test the pair before treating it
 as an individual identifier.
@@ -372,15 +361,8 @@ numbers and transcription problems are mixed together. Do not deduplicate on
 this pair. The defensible wording for now is **measurement record**; later we
 will count records per species and examine full-row duplicates separately.
 
-Finish the documented text-like fields individually.
-
-```{pyodide}
-for column in ["sex", "locality", "country_wri", "country",
-               "measurer", "publication"]:
-    inspect_field(column)
-```
-
-`sex` is a three-level category (`M`, `F`, `U`), not free text. `locality` and
+The same printout shows that `sex` is a three-level category (`M`, `F`, `U`),
+not free text. `locality` and
 `country` are completely absent because those data were embargoed in this
 release; `country_wri` is the available harmonised geography. `measurer` is
 an identifier for the person taking the measurements, not for the bird.
