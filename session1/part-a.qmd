@@ -235,7 +235,7 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 1. **Visual form:** What type of visualisation is used: scatterplot, map,
    histogram, density display, diagram, coefficient plot, or another form?
    What marks and channels carry the information?
-2. **Data visualised:** Which features are shown, what are their semantic data
+2. **Data visualised:** Which features are shown, what are their data
    types, what does one observation represent, and which rows or taxa are
    included or excluded?
 3. **Transformation and aggregation:** Are values raw, logged, standardised,
@@ -478,11 +478,8 @@ for column in populated:
           f"most common: {counts.index[0]!r} x {counts.iloc[0]}")
 ```
 
-The five name fields behave like taxonomy links should: hundreds of
-distinct values, each appearing once or twice. `measurer` is nothing like
-them: a single value, `GAPSPECIES`, repeated in all 351 rows. That is a
-label, not a person's name, and, as the dictionary search just showed, an
-undocumented one. Confirm none of these rows carries a measurement.
+The `measurer` field for these rows takes on a single value, `GAPSPECIES`, repeated in all 351 rows. That is a
+Confirm none of these rows carries a measurement.
 
 ```{pyodide}
 measurement_columns = [
@@ -510,34 +507,6 @@ with no measurements. Keep the birds.
 measured = birds.loc[birds["data_type"].notna()].copy()
 print(f"individual birds retained for morphology: {len(measured):,}")
 ```
-
-Now the species count has a defined numerator: individual birds, excluding the
-351 taxonomy-only rows. Count individuals within the documented BirdLife
-`species` field.
-
-```{pyodide}
-species_depth = (measured.dropna(subset=["species"])
-    .groupby("species")
-    .size()
-    .rename("individuals")
-    .reset_index())
-
-pd.Series({
-    "individual birds": len(measured),
-    "individuals with a BirdLife species": measured["species"].notna().sum(),
-    "individuals without a BirdLife species": measured["species"].isna().sum(),
-    "BirdLife species with at least one individual": len(species_depth),
-    "species represented by one individual": species_depth["individuals"].eq(1).sum(),
-    "median individuals per species": species_depth["individuals"].median(),
-    "maximum individuals for one species": species_depth["individuals"].max(),
-})
-```
-
-There are 89,682 individual birds with a BirdLife species label, spread across
-10,669 species. The median species contributes five individuals; the middle
-half contribute four to nine; 383 species contribute only one; and the largest
-contributes 784. 
-
 
 ### Introduction to Altair
 
