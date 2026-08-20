@@ -503,18 +503,14 @@ gap_check
 
 [Vega-Altair](https://altair-viz.github.io/) implements a **grammar of
 graphics**. A chart is built from a small set of parts that can be combined in
-different ways. We do not calculate pixel coordinates or draw every bar
-ourselves. We state what the fields mean and how values should become visual
-properties; Altair works out the geometry, axes and legends.
-
-Read an Altair specification from left to right:
+different ways. An Altair specification can be read as a process, from left to right:
 
 > **data → transformation → mark → encoding → scale → guide → composition**
 
 - **Data** is the table supplied to the chart. In tidy data, one row is one
-  observation and one column is one feature.
-- A **transformation** filters, groups, counts, averages or bins those rows.
-  It determines what one mark in the resulting chart represents.
+  observation, and one column is one feature.
+- A **transformation** filters, groups, counts, averages or bins of those rows.
+  This determines what one mark in the resulting chart represents.
 - The **mark** is the geometric object used to show that result: a bar, point,
   line, area, rectangle or text label.
 - An **encoding** maps a data field to a visual channel such as x-position,
@@ -525,17 +521,9 @@ Read an Altair specification from left to right:
 - **Composition** combines views through layers, facets or concatenation;
   interaction can then add selections, filtering and linked views.
 
-The grammar matters because these decisions are separable. Keep the data and
-encodings but change the mark, and the same values take a different visual
-form. Keep the mark but change `count` to `mean`, and each bar now makes a
-different statistical claim. Change a field from nominal to quantitative,
-and Altair constructs a different scale. The code is therefore a readable
-specification of the chart's argument, not merely a set of drawing commands.
-
 The first question is: **how many AVONET rows are there of each record type?**
-The unit being counted is an AVONET row, `data_type` supplies the groups, and
-the aggregation is a row count. Decode the documented category codes, then
-build a small table in which one row is one record type.
+The unit being counted is an AVONET row, and `data_type` are the groups of interest.
+The aggregation is a row count. Build a small table:
 
 ```{pyodide}
 record_counts = (
@@ -573,8 +561,8 @@ Read that code literally:
   **nominal**.
 
 The shorthand is always `"field:type"`. The field is a column in the table;
-the letter after the colon tells Altair what the values *mean*. The main
-semantic types are:
+the letter after the colon tells Altair what the values mean. The main
+types are:
 
 - `Q`, quantitative: numeric magnitude, where differences or ratios may be
   meaningful;
@@ -586,10 +574,9 @@ semantic types are:
 An identifier is normally declared `N`, but that does not make it a good
 axis or colour field. A species identifier with 11,020 levels is usually
 better used for filtering, grouping or a tooltip than for 11,020 coloured
-marks. Altair can infer types from a DataFrame, but numeric category codes are
-exactly why we will declare them explicitly throughout this course.
+marks.
 
-#### From a default chart to an intentional chart
+#### Chart designx
 
 The short form is useful for sketching. The channel objects `alt.X`, `alt.Y`,
 `alt.Color` and `alt.Tooltip` expose the design decisions we need for a
