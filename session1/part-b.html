@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-round-tree-of-life" id="toc-the-round-tree-of-life" class="nav-link" data-scroll-target="#the-round-tree-of-life">6 · The round tree of life</a></li>
   <li><a href="#the-timetree-of-life" id="toc-the-timetree-of-life" class="nav-link" data-scroll-target="#the-timetree-of-life">7 · The timetree of life</a></li>
   <li><a href="#what-a-tree-shows-and-what-it-does-not" id="toc-what-a-tree-shows-and-what-it-does-not" class="nav-link" data-scroll-target="#what-a-tree-shows-and-what-it-does-not">What a tree shows and what it does not</a></li>
-  <li><a href="#sources-and-serving-notes" id="toc-sources-and-serving-notes" class="nav-link" data-scroll-target="#sources-and-serving-notes">Sources and serving notes</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -259,7 +259,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </div>
 <section id="a-tree-from-part-as-columns" class="level2">
 <h2 class="anchored" data-anchor-id="a-tree-from-part-as-columns">1 · A tree from Part A’s columns</h2>
-<p>Part A’s amniote table already contains a tree. Its taxonomy columns nest: every species sits in a genus, every genus in a family, every family in an order, every order in a class. Nesting is a hierarchy, and a hierarchy can be drawn. Before touching any new data, build the tree those columns encode.</p>
+<p>Part A treated every dataset as a flat table: rows and columns, with no structure between the rows. But some data is <strong>hierarchical</strong>: each item belongs to exactly one group, each group to exactly one larger group, and so on up to a single root. File systems are hierarchical (files inside folders inside folders); so are org charts, postal addresses, and the taxonomy columns of Part A’s amniote table, where every species sits in a genus, every genus in a family, every family in an order, and every order in a class. A hierarchy is exactly the structure a <strong>tree</strong> draws: one parent per item, one root, no cycles. Part A’s table therefore already contains a tree. Before touching any new data, build it.</p>
 <p>First the machinery: a node structure, a layout that gives every node two coordinates (x is distance from the root; y spreads the tips one per row, with each ancestor centred on its children), and a drawing function. One trick worth noting: instead of one <code>ax.plot</code> call per branch, thousands of tiny artists, it collects all segments of a colour into a single line broken by <code>None</code> gaps and draws each colour once, which is orders of magnitude faster.</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
@@ -560,8 +560,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQifSwiY29k
 <li><strong>Every internal node is an inference</strong>, and some are genuinely contested: whether sponges or comb jellies split from the rest of the animals first is a live argument in the literature, and this page’s files quietly take a side. A drawn tree always looks more certain than the science behind it.</li>
 </ul>
 </section>
-<section id="sources-and-serving-notes" class="level2">
-<h2 class="anchored" data-anchor-id="sources-and-serving-notes">Sources and serving notes</h2>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
 <ul>
 <li>Kumar et al.&nbsp;(2022) <em>TimeTree 5: an expanded resource for species divergence times</em>, Molecular Biology and Evolution 39:msac174; <a href="https://timetree.org">timetree.org</a>. Trees downloaded via “Build a Timetree” (group: Amniota at family rank; Eukaryota at class and phylum rank), Newick format, branch lengths in Myr; values unmodified.</li>
 <li>Names with suffixes (<code>Cebidae-1</code>, <code>Cebidae-2</code>) are TimeTree’s way of serving groups that its consensus does not recover as single clades: the name is split, the tree is left honest.</li>

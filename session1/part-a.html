@@ -203,7 +203,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#part-i-avonet" id="toc-part-i-avonet" class="nav-link active" data-scroll-target="#part-i-avonet">Part I · AVONET</a></li>
   <li><a href="#part-ii-amniote-life-history-database" id="toc-part-ii-amniote-life-history-database" class="nav-link" data-scroll-target="#part-ii-amniote-life-history-database">Part II · Amniote Life-History Database</a></li>
-  <li><a href="#sources-and-serving-notes" id="toc-sources-and-serving-notes" class="nav-link" data-scroll-target="#sources-and-serving-notes">Sources and serving notes</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -1051,7 +1051,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfd2luZyJ9LCJjb2Rl
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Species means (n = </span><span class="sc">{</span><span class="bu">len</span>(species_w)<span class="sc">:,}</span><span class="ss">)"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Wing length is missing in only ~1,100 rows, so this cleaning keeps far more data than the beak comparison did: the n you report depends on the comparison you chose. The wing–tarsus cloud is also tighter than beak–tarsus: both are limb-skeleton traits that track overall body size, while beaks track feeding ecology.</p>
-<p>And look at the bottom of your chart: five points stranded far below the cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless birds whose wing length is coded as <strong>0.1 mm</strong>, a placeholder, not a measurement. <code>dropna</code> cannot catch missingness that has been written down as a fake number. Remember the Amniote database recoding its <code>-999</code>s? Same disease, different symptom, and the only cure is looking at the chart.</p>
+<p>And look at the bottom of your chart: five points stranded far below the cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless birds whose wing length is coded as <strong>0.1 mm</strong>, a placeholder, not a measurement. <code>dropna</code> cannot catch missingness that has been written down as a fake number. Keep that idea within reach: this is not the last sentinel value in this course, and the only reliable detector is looking at the chart.</p>
 </div>
 </section>
 <section id="what-part-i-established" class="level3">
@@ -1093,7 +1093,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYW1uaW90ZSA9IHBkLnJlYWRf
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSAyOiB5b3VyIGNvdW50cyBoZXJlLiJ9
 </script>
 </div>
-<p><strong>Stage 3: validation.</strong> The serving notes claim the archive’s -999 missing-value codes were all recoded to NA: verify that claim rather than trusting it. State at least two of your own rules (can a body mass be zero or negative? can age at maturity exceed maximum longevity? watch the units) and report violation counts. Then validate one species against the world: pick an animal you know and check its values against an external reference.</p>
+<p><strong>Stage 3: validation.</strong> State validation rules and report violation counts: can a body mass be zero or negative? Can an age at maturity exceed a maximum longevity? (Watch the units.) Then validate one species against the world: pick an animal you know and check its values against an external reference. One warning sign to take seriously: when a rule fires far more often than genuine errors plausibly occur, you have not found thousands of mistakes, you have found a convention. Work out what it is, then handle it explicitly.</p>
 <div>
 <div id="pyodide-58" class="exercise-cell">
 
@@ -1122,11 +1122,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSA1OiB5b3VyIGZp
 </div>
 <p><strong>How to know you got it.</strong> No solution button: this investigation is yours. But the accounting has fixed points. Your class counts must sum to 21,322 exactly. If your audit is honest, you will conclude that missingness is most of this table, not an edge case. Your validation stage should catch at least one genuinely suspicious set of rows (there is more than one to find, and at least one involves units). And whatever pair you choose, your final caption must survive the Part I checklist: what is one point, what is n, what was transformed, what was dropped. If your family-level chart averages raw grams instead of logs, one elephant will drag its whole family across the plot; you should be able to explain why.</p>
 </section>
-<section id="sources-and-serving-notes" class="level2">
-<h2 class="anchored" data-anchor-id="sources-and-serving-notes">Sources and serving notes</h2>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
 <ul>
 <li>Tobias et al.&nbsp;(2022) <em>AVONET: morphological, ecological and geographical data for all birds</em>, Ecology Letters 25:581–597. The complete 26-column raw-data worksheet from supplementary dataset 1 is served here: all 90,371 rows (90,020 measurement records plus 351 taxonomy-only rows). Column names are normalised to <code>snake_case</code>, measurement units are included in names, and trailing whitespace in text fields is removed; observed values are otherwise unchanged. The official AVONET metadata worksheet is served as <code>avonet_metadata.csv</code>, with its 26 definitions mapped to the served column names.</li>
-<li>Myhrvold et al.&nbsp;(2015) <em>An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles</em>, Ecology 96:3109. Served with 10 of 36 columns, all 21,322 rows; the archive’s <code>-999</code> missing-value code recoded to NA. All other values unmodified.</li>
+<li>Myhrvold et al.&nbsp;(2015) <em>An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles</em>, Ecology 96:3109. Served with 10 of 36 columns, all 21,322 rows, values as published.</li>
 </ul>
 
 
