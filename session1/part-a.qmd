@@ -193,6 +193,7 @@ records the bird's taxonomic identities, sampling provenance, sex and age,
 collection geography, ten morphological traits, the measurer, and whether the
 AVONET measurement protocol was used.
 
+```{=html}
 <figure class="figure">
   <div class="row g-3 align-items-center mx-auto" style="max-width: 920px;">
     <div class="col-12 col-md-6">
@@ -214,6 +215,7 @@ AVONET measurement protocol was used.
     <a href="https://www.allaboutbirds.org/news/sizing-up-the-worlds-birds-with-avonet/">Living Bird, Cornell Lab of Ornithology</a>.
   </figcaption>
 </figure>
+```
 
 The dataset is documented in Tobias et al.,
 ["AVONET: morphological, ecological and geographical data for all birds"](https://onlinelibrary.wiley.com/doi/10.1111/ele.13898),
