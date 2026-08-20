@@ -463,18 +463,24 @@ and check what fields they do have:
 ```{pyodide}
 untyped = birds.loc[birds["data_type"].isna()].copy()
 
-untyped.columns[untyped.notna().any()].tolist()
+populated = untyped.columns[untyped.notna().any()].tolist()
+populated
 ```
 
 Of 26 columns, only six contain anything: the five taxonomy and
-identifier fields, and `measurer`. The names are what these rows exist
-for; `measurer` is the odd one out, so look at what it holds.
+identifier fields, and `measurer`. Run value counts across all six and
+compare their shapes.
 
 ```{pyodide}
-untyped["measurer"].value_counts()
+for column in populated:
+    counts = untyped[column].value_counts()
+    print(f"{column}: {len(counts)} distinct values; "
+          f"most common: {counts.index[0]!r} x {counts.iloc[0]}")
 ```
 
-Every one of the 351 rows carries `GAPSPECIES` in the measurer field: a
+The five name fields behave like taxonomy links should: hundreds of
+distinct values, each appearing once or twice. `measurer` is nothing like
+them: a single value, `GAPSPECIES`, repeated in all 351 rows. That is a
 label, not a person's name, and, as the dictionary search just showed, an
 undocumented one. Confirm none of these rows carries a measurement.
 
