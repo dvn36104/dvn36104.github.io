@@ -11,9 +11,8 @@ pyodide:
 
 **Allometry** is the study of how one biological trait changes as another
 measure of size changes. A familiar example is that a larger animal tends to
-have longer limbs, but not necessarily in direct proportion to its body size.
-The question is not merely whether two traits are associated; it is how fast
-one changes relative to the other.
+have longer limbs, but not necessarily in direct proportion to body size.
+Allometry measures how fast one changes relative to the other.
 
 A common allometric model is a power law:
 
@@ -37,10 +36,10 @@ large organisms share a readable axis, but it does not repair poor
 measurements, missing data, mixed sampling units, or uneven sampling. Those
 problems have to be understood before fitting an allometric line.
 
-::: {.callout-tip title="Assigned reading"}
+::: {.callout-tip title="Reading"}
 Read Baillie et al. (2022), [Ten simple rules for initial data
 analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS Computational
-Biology* 18(2), before starting Part I. It gives a short workflow for checking
+Biology* 18(2), for a short workflow: checking
 data structure, metadata, missingness and plausibility before modelling.
 :::
 
