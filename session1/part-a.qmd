@@ -541,6 +541,38 @@ measured = birds.loc[birds["data_type"].notna()].copy()
 print(f"measured records retained for morphology: {len(measured):,}")
 ```
 
+Now the species count has a defined numerator: measured records, excluding the
+351 taxonomy-only rows. Count records within the documented BirdLife
+`species` field.
+
+```{pyodide}
+species_depth = (measured.dropna(subset=["species"])
+    .groupby("species")
+    .size()
+    .rename("records")
+    .reset_index())
+
+pd.Series({
+    "measured records": len(measured),
+    "measured records with a BirdLife species": measured["species"].notna().sum(),
+    "measured records without a BirdLife species": measured["species"].isna().sum(),
+    "BirdLife species with at least one record": len(species_depth),
+    "species represented by one record": species_depth["records"].eq(1).sum(),
+    "median records per species": species_depth["records"].median(),
+    "25th percentile": species_depth["records"].quantile(0.25),
+    "75th percentile": species_depth["records"].quantile(0.75),
+    "maximum records for one species": species_depth["records"].max(),
+})
+```
+
+There are 89,682 measured records with a BirdLife species label, spread across
+10,669 species. The median species contributes five records; the middle half
+contribute four to nine; 383 species contribute only one; and the largest
+contributes 784. These are record counts, not proven counts of unique birds.
+That distinction follows directly from the incomplete and non-unique specimen
+identifiers above. We will visualise this unequal sampling depth after the
+Altair introduction.
+
 ### From semantic type to visual form
 
 Pandas reports how values are stored. AVONET documents what the values mean.
@@ -971,10 +1003,6 @@ records does each species contribute, and how unevenly is that effort spread?
 Every later summary inherits its stability from these counts.
 
 ```{pyodide}
-measured = birds[birds["data_type"].notna()]
-species_depth = (measured.groupby("species").size()
-                 .rename("records").reset_index())
-
 depth_summary = (species_depth["records"]
                  .describe(percentiles=[0.25, 0.5, 0.75, 0.9, 0.95, 0.99])
                  .rename("measurement_records_per_species")
