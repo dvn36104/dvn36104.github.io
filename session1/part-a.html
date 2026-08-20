@@ -380,7 +380,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicm93c19wZXJfc3BlY2llcyA9
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY291bnRzX29mX2NvdW50cyA9IHJvd3NfcGVyX3NwZWNpZXMudmFsdWVfY291bnRzKCkuc29ydF9pbmRleCgpXG5cbmZpZywgYXhlcyA9IHBsdC5zdWJwbG90cygxLCAzLCBmaWdzaXplPSgxMCwgMy4yKSlcbmF4ZXNbMF0uaGlzdChyb3dzX3Blcl9zcGVjaWVzLCBjb2xvcj1cIiM0ZTc5YTdcIilcbmF4ZXNbMF0uc2V0X3RpdGxlKFwiaGlzdG9ncmFtLCBkZWZhdWx0IGJpbnNcIilcbmF4ZXNbMV0uaGlzdChyb3dzX3Blcl9zcGVjaWVzLCBjb2xvcj1cIiM0ZTc5YTdcIilcbmF4ZXNbMV0uc2V0X3lzY2FsZShcImxvZ1wiKVxuYXhlc1sxXS5zZXRfdGl0bGUoXCJzYW1lLCBsb2cgeVwiKVxuYXhlc1syXS5iYXIoY291bnRzX29mX2NvdW50cy5pbmRleCwgY291bnRzX29mX2NvdW50cy52YWx1ZXMsIGNvbG9yPVwiIzRlNzlhN1wiKVxuYXhlc1syXS5zZXRfeGxpbSgwLjUsIDMwLjUpXG5heGVzWzJdLnNldF90aXRsZShcImV4YWN0IGNvdW50cywgc2hvd24gdG8gMzBcIilcbmZvciBheCBpbiBheGVzOlxuICAgIGF4LnNldF94bGFiZWwoXCJyb3dzIHBlciBzcGVjaWVzXCIpXG5heGVzWzBdLnNldF95bGFiZWwoXCJudW1iZXIgb2Ygc3BlY2llc1wiKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>Same data three ways. The default histogram buries every species with fewer than ~80 rows in one bar; a log y axis rescues the tail but not the lumping. Counting each integer value exactly shows the real shape: the 734 single-row species at 1, a spike at 4 and 5 (AVONET’s protocol aimed for at least four birds per species), and a tail running to 784 (<em>Zosterops chloris</em>) that the panel truncates at 30 and says so. Binning and scale are not cosmetics; they decide what a reader can see.</p>
+<p>The histogram is here drawn three different ways. The default buries every species with fewer than ~80 rows in one bar. A log y axis makes the tail visible, but counting each integer value exactly shows the real shape, with 734 single-row species and a spike at 4 and 5 rows (AVONET’s protocol aimed for at least four birds per species).</p>
 <p>From the same printout: <code>sex</code> has three codes, <code>country_wri</code> is the usable geography field, <code>measurer</code> identifies who measured, and <code>publication</code> is filled only where values were transcribed from papers. The 351 rows with no <code>data_type</code> get their own investigation below.</p>
 <p><strong>The number columns.</strong> The default <code>describe</code> covers exactly these:</p>
 <div>
@@ -391,7 +391,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY291bnRzX29mX2NvdW50cyA9
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYmlyZHMuZGVzY3JpYmUoKS5ULnJvdW5kKDIpIn0=
 </script>
 </div>
-<p>Read the min and max columns and the floats split in two as well. Ten are measurements with continuous ranges in millimetres. But <code>data_type</code>, <code>age</code> and <code>protocol</code> run between 0 and 2. These are categorical values</p>
+<p>Read the min and max columns and the floats split in two as well. Ten are measurements with continuous ranges in millimetres. But three columns have suspiciously tiny ranges: <code>data_type</code> is only ever 1 or 2, and <code>age</code> and <code>protocol</code> only 0 or 1. These look like categorical codes,</p>
 <div>
 <div id="pyodide-10" class="exercise-cell">
 
