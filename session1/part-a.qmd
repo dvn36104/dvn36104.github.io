@@ -234,7 +234,7 @@ multi-panel figure as a separate design decision. For every figure or panel, con
 
 :::
 
-### Load the file and inspect its structure
+### Load and inspect file
 
 Start with the file itself. `.shape` gives the number of rows and columns;
 `.head()` shows how a row is laid out.

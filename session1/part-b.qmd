@@ -15,9 +15,11 @@ it is stored as data, how to draw it three ways (rectangular, round, and
 against a time axis), and what the words biologists use for it (*clade*,
 *ancestor*, *divergence*) mean on the screen.
 
-Note what changed and why. Part A's amniote table (Myhrvold et al. 2015)
-stores **traits**, and its nested taxonomy columns (class, order, family,
-genus) do encode a tree: nesting is a hierarchy. But it is a tree of
+Note what changed and why. Part A's 
+
+In Part A, the amniote table (Myhrvold et al. 2015) stores **traits**. 
+Its nested taxonomy columns (class, order, family, genus) encode a tree: 
+nesting is a hierarchy. But it is a tree of
 *named ranks*: it carries no dates, and inside every rank it is silent.
 The table can say that fifteen families belong to the primates without
 saying anything about how those families relate to one another. The trees
@@ -26,7 +28,7 @@ dates**, and not a single measurement. Same animals, complementary data
 structures, different sources. All three trees come from
 [TimeTree](https://timetree.org) (Kumar et al. 2022), one of them the
 family tree of exactly the amniotes whose traits you analysed in Part A,
-and below we will draw the table's tree and TimeTree's side by side:
+and we start by drawing the tree that Part A's own columns already encode:
 
 | File | Tips | What one tip is |
 |---|---|---|
@@ -225,6 +227,21 @@ amniote_rows = [line.split(",") for line in
                 open_url(DATA_URL + "amniote_species.csv").read().strip().split("\n")[1:]]
 primate_families = sorted({r[2] for r in amniote_rows if r[1] == "Primates"})
 
+taxonomy = Node("Amniota")
+index = {}
+for r in amniote_rows:
+    parent = taxonomy
+    for name in (r[0], r[1], r[2]):
+        key = (parent.name, name)
+        child = index.get(key)
+        if child is None:
+            child = Node(name, length=1.0)
+            child.parent = parent
+            parent.children.append(child)
+            index[key] = child
+        parent = child
+fams = taxonomy.leaves()
+
 euk = parse_newick(open_url(DATA_URL + "eukaryotes_class.nwk").read())
 set_depths(euk)
 euk_age = max(l.depth for l in euk.leaves())
@@ -238,50 +255,21 @@ set_depths(phyla)
 phyla_age = max(l.depth for l in phyla.leaves())
 ```
 
-## 1 · Reading a phylogenetic tree
+## 1 · A tree from Part A's columns
 
-A phylogenetic tree has three kinds of parts, and each one asserts
-something:
+Part A's amniote table already contains a tree. Its taxonomy columns
+nest: every species sits in a genus, every genus in a family, every
+family in an order, every order in a class. Nesting is a hierarchy, and
+a hierarchy can be drawn. Before touching any new data, build the tree
+those columns encode.
 
-- **Tips** (leaves) are observed things: living species, families,
-  classes. They are the only part anyone has ever seen.
-- **Internal nodes** are inferred ancestors: "these two lineages were once
-  one population." Nobody has seen one; each is a hypothesis.
-- **Branch lengths**, in the trees on this page, are **time**: a branch of
-  length 6.7 means 6.7 million years of independent evolution.
-
-Where do the trees come from? Mostly from genetics. Take the same gene
-from many species, line the DNA sequences up, and count differences:
-mutations accumulate roughly steadily, so more differences means more time
-since two lineages separated. That gives the *shape* and *relative* ages.
-To turn relative ages into millions of years, the tree is calibrated
-against fossils whose age and position are known. TimeTree, the source of
-our files, aggregates thousands of such published studies into consensus
-dated trees, which is why every tree here comes with real ages attached.
-
-## 2 · The Newick format
-
-Before we can draw a tree we need it as data. The standard format,
-**Newick**, writes a tree as nested parentheses: each pair of parentheses
-is one internal node (one ancestor), and `:number` after a name is the
-branch length. Here is one you can read by eye: humans, chimps and
-gorillas, with TimeTree's ages in millions of years (Myr):
-
-```
-((Homo:6.7, Pan:6.7):2.2, Gorilla:8.9);
-```
-
-Read from the inside out: `Homo` and `Pan` each sit at the end of a
-6.7-Myr branch from their shared ancestor, so the human–chimp split was
-6.7 million years ago. That ancestor connects, 2.2 Myr further back, to
-the ancestor it shares with `Gorilla`: 6.7 + 2.2 = 8.9 Myr, exactly
-`Gorilla`'s own branch length. In a dated tree every tip is the same total
-distance from the root, because every living lineage has had the same
-amount of time.
-
-The format is recursive (a tree is a node whose children are trees), so
-the parser is recursive too. This is the only genuinely fiddly code on the
-page; read it, run it, and then it is just a function we call:
+First the machinery: a node structure, a layout that gives every node
+two coordinates (x is distance from the root; y spreads the tips one per
+row, with each ancestor centred on its children), and a drawing function.
+One trick worth noting: instead of one `ax.plot` call per branch,
+thousands of tiny artists, it collects all segments of a colour into a
+single line broken by `None` gaps and draws each colour once, which is
+orders of magnitude faster.
 
 ```{pyodide}
 class Node:
@@ -303,6 +291,149 @@ class Node:
             yield from c.walk()
 
 
+def set_depths(root):
+    for node in root.walk():
+        node.depth = (node.parent.depth if node.parent else 0.0) + node.length
+
+
+def layout(root):
+    set_depths(root)
+    for i, leaf in enumerate(root.leaves()):
+        leaf.y = float(i)
+    def place(node):
+        if not node.is_leaf():
+            for c in node.children:
+                place(c)
+            node.y = sum(c.y for c in node.children) / len(node.children)
+    place(root)
+
+
+def draw_tree(root, ax, colors=None, default="#555555", lw=0.8,
+              labels=False, fontsize=6):
+    layout(root)
+    segs = {}                     # colour -> one long broken line
+    def add(col, x0, y0, x1, y1):
+        xs, ys = segs.setdefault(col, ([], []))
+        xs += [x0, x1, None]; ys += [y0, y1, None]
+    for node in root.walk():
+        col = (colors or {}).get(id(node), default)
+        if node.parent:                                   # horizontal branch
+            add(col, node.parent.depth, node.y, node.depth, node.y)
+        if not node.is_leaf():                            # vertical connector
+            ys = [c.y for c in node.children]
+            add(col, node.depth, min(ys), node.depth, max(ys))
+    for col, (xs, ys) in segs.items():
+        ax.plot(xs, ys, color=col, lw=lw, solid_capstyle="round")
+    if labels:
+        for leaf in root.leaves():
+            col = (colors or {}).get(id(leaf), "#222222")
+            ax.text(leaf.depth, leaf.y, " " + leaf.name, va="center",
+                    fontsize=fontsize, color=col)
+    ax.set_yticks([])
+    for side in ("left", "top", "right"):
+        ax.spines[side].set_visible(False)
+```
+
+Now the tree itself. Walk the table's rows and create a node the first
+time each class, order and family name appears:
+
+```{pyodide}
+text = open_url(DATA_URL + "amniote_species.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+
+taxonomy = Node("Amniota")
+index = {}
+for r in rows:
+    parent = taxonomy
+    for name in (r[0], r[1], r[2]):          # class > order > family
+        key = (parent.name, name)
+        child = index.get(key)
+        if child is None:
+            child = Node(name, length=1.0)
+            child.parent = parent
+            parent.children.append(child)
+            index[key] = child
+        parent = child
+
+fams = taxonomy.leaves()
+print(f"{len(fams)} families, {len(index) - len(fams)} classes and orders above them")
+```
+
+```{pyodide}
+assert len(fams) == 465
+assert len(taxonomy.children) == 3
+assert sum(len(c.children) for c in taxonomy.children) == 72
+print("✓ 465 families in 72 orders in 3 classes, exactly as the columns nest")
+```
+
+Branch lengths are all set to 1, so x is simply rank:
+
+```{pyodide}
+fig, ax = plt.subplots(figsize=(9, 7))
+draw_tree(taxonomy, ax, lw=0.5)
+ax.set_xticks([0, 1, 2, 3])
+ax.set_xticklabels(["root", "class", "order", "family"])
+ax.set_title(f"The tree encoded by Part A's taxonomy columns: {len(fams)} families")
+plt.show()
+```
+
+This is a real tree, and it is honest about what the table knows. But
+look at what it cannot say. Every internal node is a wide **polytomy**, a
+many-way split: Aves fans straight out into 40 orders because the columns
+record membership, not history. The x axis is rank, not time. The
+vertical order of siblings is arbitrary. And nothing in it makes one
+order closer to another: passerines are as related to parrots as to
+ostriches, as far as these columns know. To go further we need data built
+to store *resolved, dated* relationships, and that is exactly what this
+page's three tree files are.
+
+## 2 · Reading a phylogenetic tree
+
+A phylogenetic tree has three kinds of parts, and each one asserts
+something:
+
+- **Tips** (leaves) are observed things: living species, families,
+  classes. They are the only part anyone has ever seen.
+- **Internal nodes** are inferred ancestors: "these two lineages were once
+  one population." Nobody has seen one; each is a hypothesis.
+- **Branch lengths**, in the trees on this page, are **time**: a branch of
+  length 6.7 means 6.7 million years of independent evolution.
+
+Where do the trees come from? Mostly from genetics. Take the same gene
+from many species, line the DNA sequences up, and count differences:
+mutations accumulate roughly steadily, so more differences means more time
+since two lineages separated. That gives the *shape* and *relative* ages.
+To turn relative ages into millions of years, the tree is calibrated
+against fossils whose age and position are known. TimeTree, the source of
+our files, aggregates thousands of such published studies into consensus
+dated trees, which is why every tree here comes with real ages attached.
+
+## 3 · The Newick format
+
+Before we can draw a tree we need it as data. The standard format,
+**Newick**, writes a tree as nested parentheses: each pair of parentheses
+is one internal node (one ancestor), and `:number` after a name is the
+branch length. Here is one you can read by eye: humans, chimps and
+gorillas, with TimeTree's ages in millions of years (Myr):
+
+```
+((Homo:6.7, Pan:6.7):2.2, Gorilla:8.9);
+```
+
+Read from the inside out: `Homo` and `Pan` each sit at the end of a
+6.7-Myr branch from their shared ancestor, so the human–chimp split was
+6.7 million years ago. That ancestor connects, 2.2 Myr further back, to
+the ancestor it shares with `Gorilla`: 6.7 + 2.2 = 8.9 Myr, exactly
+`Gorilla`'s own branch length. In a dated tree every tip is the same total
+distance from the root, because every living lineage has had the same
+amount of time.
+
+The format is recursive (a tree is a node whose children are trees), so
+the parser is recursive too, reusing the `Node` class from Section 1.
+This is the only genuinely fiddly code on the page; read it, run it, and
+then it is just a function we call:
+
+```{pyodide}
 def parse_newick(text):
     s = text.strip().rstrip(";")
     pos = 0
@@ -360,67 +491,18 @@ assert mini.children[0].children[0].length == 6.7
 print("✓ parser reads tips, structure and branch lengths correctly")
 ```
 
-## 3 · Drawing the tree
+## 4 · Drawing dated trees
 
-To draw a tree we give every node two coordinates. **x** is its total
-distance from the root: add branch lengths from the root down, which for
-a dated tree means x *is* time. **y** spreads the tips out one per row,
-and each ancestor sits at the mean of its children:
+The taxonomy tree's x axis was rank. In a dated tree the branch lengths
+are millions of years, so the same `draw_tree` now puts **time** on the x
+axis. The hominid mini-tree first:
 
 ```{pyodide}
-def set_depths(root):
-    for node in root.walk():
-        node.depth = (node.parent.depth if node.parent else 0.0) + node.length
-
-
-def layout(root):
-    set_depths(root)
-    for i, leaf in enumerate(root.leaves()):
-        leaf.y = float(i)
-    def place(node):
-        if not node.is_leaf():
-            for c in node.children:
-                place(c)
-            node.y = sum(c.y for c in node.children) / len(node.children)
-    place(root)
-
-
-def draw_tree(root, ax, colors=None, default="#555555", lw=0.8,
-              labels=False, fontsize=6):
-    layout(root)
-    segs = {}                     # colour -> one long broken line
-    def add(col, x0, y0, x1, y1):
-        xs, ys = segs.setdefault(col, ([], []))
-        xs += [x0, x1, None]; ys += [y0, y1, None]
-    for node in root.walk():
-        col = (colors or {}).get(id(node), default)
-        if node.parent:                                   # horizontal branch
-            add(col, node.parent.depth, node.y, node.depth, node.y)
-        if not node.is_leaf():                            # vertical connector
-            ys = [c.y for c in node.children]
-            add(col, node.depth, min(ys), node.depth, max(ys))
-    for col, (xs, ys) in segs.items():
-        ax.plot(xs, ys, color=col, lw=lw, solid_capstyle="round")
-    if labels:
-        for leaf in root.leaves():
-            col = (colors or {}).get(id(leaf), "#222222")
-            ax.text(leaf.depth, leaf.y, " " + leaf.name, va="center",
-                    fontsize=fontsize, color=col)
-    ax.set_yticks([])
-    for side in ("left", "top", "right"):
-        ax.spines[side].set_visible(False)
-
-
 fig, ax = plt.subplots(figsize=(7, 2.4))
 draw_tree(mini, ax, labels=True, fontsize=11)
 ax.set_xlabel("Myr since the root")
 plt.show()
 ```
-
-(One drawing trick worth stealing: instead of one `ax.plot` per branch,
-thousands of tiny artists, we collect all segments of a colour into a
-single line broken by `None` gaps and draw it in one call. Same picture,
-orders of magnitude faster.)
 
 Now a real tree. This is every family of **amniotes**, the same group
 whose species table you cleaned in Part A, one level of aggregation up:
@@ -452,7 +534,7 @@ ago, and the big early fork you can see near the root is mammals splitting
 from the reptile-plus-bird lineage. That number is not decoration; you
 will meet it again below, coming from a completely different file.
 
-## 4 · Clades and common ancestors
+## 5 · Clades and common ancestors
 
 A **clade** is an ancestor plus *all* of its descendants: a complete
 subtree, snapped off at one internal node. "Mammals" is a clade;
@@ -504,11 +586,10 @@ living ones, though nothing in the drawing itself marks them as gone.
 
 ### Taxonomy columns versus a phylogeny
 
-A fair objection: Part A's amniote table has class, order, family and
-genus columns, and that nesting *is* a tree. True, so let us build it.
-Take every primate family in the life-history table and hang it off one
-node, which is exactly the structure the columns encode, then draw it
-next to the TimeTree primate clade:
+Section 1 built the tree that Part A's columns encode. Now that we have
+a resolved, dated clade, put the two side by side. Take every primate
+family from the life-history table and hang it off one node, that tree's
+primate slice, and draw it next to the TimeTree primate clade:
 
 ```{pyodide}
 text = open_url(DATA_URL + "amniote_species.csv").read()
@@ -734,7 +815,7 @@ natural pair to us, but the clade says they have been separate lineages
 almost since the dinosaurs left.
 :::
 
-## 5 · The round tree of life
+## 6 · The round tree of life
 
 Rectangular layout runs out of room fast: tips need vertical space, and
 at hundreds of tips the picture becomes a wall. The classic fix is to
@@ -841,7 +922,7 @@ Three things this picture says that a list of species cannot:
   share an ancestor long after either shared one with plants:
   mushrooms are, genealogically, closer to you than to anything green.
 
-## 6 · The timetree of life
+## 7 · The timetree of life
 
 The round tree is for shape; a **timetree** puts the ages back on a
 readable axis. We use the phylum-level file (66 tips) and relabel the
@@ -909,7 +990,7 @@ remarkably like the feeding cells of a sponge.
 
 ### Your turn: close the loop {#sec-ex-split}
 
-In Section 3 the amniote family tree put the amniote root at **319 Myr**.
+In Section 4 the amniote family tree put the amniote root at **319 Myr**.
 The eukaryote class tree is a completely different file, built from a
 different set of studies at a different taxonomic rank, but it contains
 `Mammalia` and `Aves` as tips. Write a `divergence(root, a, b)` helper
