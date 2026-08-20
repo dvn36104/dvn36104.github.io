@@ -273,8 +273,6 @@ Non-null counts differ between columns. Two columns (`locality` and `country`) h
 Every column is stored as one of two data types, text (`object`) or
 decimal number (`float64`).
 
-#### Read every feature one by one
-
 The metadata file has 26 rows (one row for each feature in
 `birds`). Its six columns describe different parts of that feature:
 
@@ -371,42 +369,42 @@ pd.Series({
 The file has 90,371 rows and 11,020 distinct BirdLife species labels. Of those
 rows, 90,033 have a value in `species` and 338 do not. Dividing the labelled
 rows by the number of labels gives a crude mean of 8.17 rows per species, but
-the median is five and 734 species labels occur only once. The rows are not
-spread evenly across species, and a quick histogram makes the unevenness
-visible:
+the median is five and 734 species labels occur only once. 
+
+The rows are not spread evenly across species, as can be seen in a histogram of the 
+number of rows 
 
 ```{pyodide}
 counts_of_counts = rows_per_species.value_counts().sort_index()
 
-fig, ax = plt.subplots(figsize=(9, 4))
-ax.bar(counts_of_counts.index, counts_of_counts.values, color="#4e79a7")
-ax.set_xlim(0.5, 30.5)
-ax.set_xlabel("rows per species label")
-ax.set_ylabel("number of species")
-ax.set_title("Rows per species, shown to 30; the tail runs on to 784")
+fig, axes = plt.subplots(1, 3, figsize=(10, 3.2))
+axes[0].hist(rows_per_species, color="#4e79a7")
+axes[0].set_title("histogram, default bins")
+axes[1].hist(rows_per_species, color="#4e79a7")
+axes[1].set_yscale("log")
+axes[1].set_title("same, log y")
+axes[2].bar(counts_of_counts.index, counts_of_counts.values, color="#4e79a7")
+axes[2].set_xlim(0.5, 30.5)
+axes[2].set_title("exact counts, shown to 30")
+for ax in axes:
+    ax.set_xlabel("rows per species")
+axes[0].set_ylabel("number of species")
+plt.tight_layout()
 plt.show()
 ```
 
-Every bar is an exact count on plain linear axes. The 734 single-row
-species are the bar at 1. The tallest bar is at 5 rows (3,081 species),
-with 4 close behind: AVONET's protocol aimed to measure at least four
-birds per species, and that target is stamped straight into the shape of
-the data. The x axis stops at 30 because only 262 species lie beyond it,
-stretched all the way to the most sampled bird in the file, *Zosterops
-chloris*, the lemon-bellied white-eye, at 784 rows. Truncating an axis is
-fine; doing it silently is not, so the title says so.
+Same data three ways. The default histogram buries every species with
+fewer than ~80 rows in one bar; a log y axis rescues the tail but not
+the lumping. Counting each integer value exactly shows the real shape:
+the 734 single-row species at 1, a spike at 4 and 5 (AVONET's protocol
+aimed for at least four birds per species), and a tail running to 784
+(*Zosterops chloris*) that the panel truncates at 30 and says so.
+Binning and scale are not cosmetics; they decide what a reader can see.
 
-The metadata explain that `data_type = 1` means a museum specimen and `data_type = 2` means
-a live individual.  Therefore the 90,020 rows with a
-recorded `data_type` are individual birds. The remaining 351 rows have no
-`data_type` and need to be examined separately. `source` and
-`specimen_number` record provenance; they do not define the row unit.
-
-The same printout shows that `sex` is a three-level category (`M`, `F`, `U`);
- `country_wri` is the available harmonised geography; `measurer` is
-an identifier for the person taking the measurements;
-`publication` is provenance for measurements transcribed from published
-sources and is populated for only a small subset of rows. 
+From the same printout: `sex` has three codes, `country_wri` is the
+usable geography field, `measurer` identifies who measured, and
+`publication` is filled only where values were transcribed from papers.
+The 351 rows with no `data_type` get their own investigation below.
 
 **The number columns.** The default `describe` covers exactly these:
 
@@ -429,24 +427,6 @@ Exactly two distinct values each. That is not a measurement; it is an
 encoding stored as a number, and no amount of arithmetic on the codes
 means anything. Deciding what the codes stand for is a job for
 documentation, so read it.
-
-The metadata loaded above also classifies the numeric fields. Count its
-documented types before interpreting the numeric summary.
-
-```{pyodide}
-metadata_types = metadata.assign(
-    documented_type=metadata["variable_type"].fillna("not specified")
-)
-
-(metadata_types["documented_type"]
- .value_counts(dropna=False)
- .rename_axis("documented_type")
- .reset_index(name="columns"))
-```
-
-The categories in that summary come from AVONET, not from us. Two fields
-have no documented variable type; keep them as `not specified` until
-their definitions and observed values have been checked.
 
 One more thing to establish about the dictionary: search it for
 `GAPSPECIES`, a value that will matter in a moment, and the search comes
@@ -492,28 +472,7 @@ untyped["measurer"].value_counts(dropna=False)
 
 Every one of the 351 rows carries `GAPSPECIES` in the measurer field: a
 label, not a person's name, and, as the dictionary search just showed, an
-undocumented one. Profile every column in the subset to see which fields
-are populated.
-
-```{pyodide}
-untyped_profile = pd.DataFrame({
-    "column": untyped.columns,
-    "observed_rows": untyped.notna().sum().values,
-    "distinct_values": untyped.nunique(dropna=True).values,
-})
-
-untyped_profile["example"] = [
-    untyped[column].dropna().iloc[0]
-    if untyped[column].notna().any()
-    else "-"
-    for column in untyped.columns
-]
-
-untyped_profile
-```
-
-Only the five taxonomy/identifier fields and `measurer` are populated. Check
-the row counts and confirm that none contains a morphology value.
+undocumented one. Confirm none of these rows carries a measurement.
 
 ```{pyodide}
 measurement_columns = [
@@ -533,30 +492,9 @@ gap_check = pd.Series({
 gap_check
 ```
 
-The sequence above establishes what the rows represent. There are 90,020 rows
-with a recorded specimen type. The other 351 contain names from the different
-taxonomic systems, carry the `GAPSPECIES` label, and contain no morphology
-measurements. They are taxonomy links, not individual birds.
-
-Now label the three row types and count them.
-
-```{pyodide}
-row_types = (
-    birds.assign(
-        record_type=birds["data_type"]
-        .map({1: "Museum specimen", 2: "Live individual"})
-        .fillna("Taxonomy-only GAPSPECIES")
-    )
-    .groupby("record_type", as_index=False)
-    .agg(
-        rows=("species", "size"),
-        species_labels=("species", "nunique"),
-    )
-    .sort_values("rows", ascending=False)
-)
-
-row_types
-```
+Settled: 90,020 rows are individual birds (75,843 museum specimens and
+14,177 live captures), and the 351 GAPSPECIES rows are taxonomy links
+with no measurements. Keep the birds.
 
 ```{pyodide}
 measured = birds.loc[birds["data_type"].notna()].copy()
@@ -581,8 +519,6 @@ pd.Series({
     "BirdLife species with at least one individual": len(species_depth),
     "species represented by one individual": species_depth["individuals"].eq(1).sum(),
     "median individuals per species": species_depth["individuals"].median(),
-    "25th percentile": species_depth["individuals"].quantile(0.25),
-    "75th percentile": species_depth["individuals"].quantile(0.75),
     "maximum individuals for one species": species_depth["individuals"].max(),
 })
 ```
