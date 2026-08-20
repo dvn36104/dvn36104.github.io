@@ -478,7 +478,7 @@ for column in populated:
           f"most common: {counts.index[0]!r} x {counts.iloc[0]}")
 ```
 
-The `measurer` field for these rows takes on a single value, `GAPSPECIES`, repeated in all 351 rows. That is a
+The `measurer` field for these rows takes on a single value, `GAPSPECIES`, repeated in all 351 rows.
 Confirm none of these rows carries a measurement.
 
 ```{pyodide}
@@ -499,9 +499,9 @@ gap_check = pd.Series({
 gap_check
 ```
 
-Settled: 90,020 rows are individual birds (75,843 museum specimens and
+90,020 rows are individual birds (75,843 museum specimens and
 14,177 live captures), and the 351 GAPSPECIES rows are taxonomy links
-with no measurements. Keep the birds.
+with no measurements.
 
 ```{pyodide}
 measured = birds.loc[birds["data_type"].notna()].copy()
