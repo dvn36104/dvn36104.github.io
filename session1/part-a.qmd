@@ -513,7 +513,7 @@ different ways. An Altair specification can be read as a process, from left to r
   y-position, colour, size, shape or opacity.
 - A **scale** translates values in the data domain into positions, lengths,
   sizes or colours in the visual range.
-- A **guide**—an axis or legend—explains that scale to the reader.
+- A **guide** (an axis or legend) explains that scale to the reader.
 - **Composition** combines views through layers, facets or concatenation;
   interaction can then add selections, filtering and linked views.
 
@@ -666,7 +666,7 @@ metadata_type_counts
 
 Read the transformation in order:
 
-1. Start with 26 rows—one per AVONET feature.
+1. Start with 26 rows, one per AVONET feature.
 2. `groupby("documented_type")` collects rows that share the same documented
    type.
 3. `.size()` counts how many rows are in each group.
@@ -723,18 +723,11 @@ Use this sequence when designing the charts that follow:
 
 
 
-The next table extends the structural check to every column: storage type,
-observed and missing rows, percentage missing, distinct values, and one
-example.
+Extend the structural check to every column (storage type, observed and
+missing rows, percentage missing, distinct values), but read the result
+as a chart rather than a 26-row table:
 
 ```{pyodide}
-def first_example(series):
-    observed = series.dropna()
-    if observed.empty:
-        return "-"
-    value = observed.iloc[0]
-    return str(round(value, 3) if isinstance(value, float) else value)[:45]
-
 audit = pd.DataFrame({
     "column": birds.columns,
     "dtype": birds.dtypes.astype(str).values,
@@ -742,13 +735,10 @@ audit = pd.DataFrame({
     "missing_n": birds.isna().sum().values,
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
-    "example": [first_example(birds[c]) for c in birds.columns],
 }).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
-audit[["column", "description", "documented_type", "unit", "dtype",
-       "observed_n", "missing_n", "missing_pct", "distinct_observed",
-       "example"]]
+print(f"audit table built: one row for each of the {len(audit)} columns")
 ```
 
 ```{pyodide}
