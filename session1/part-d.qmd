@@ -567,7 +567,7 @@ The spiral shows the cycle and hides the groups. Janet's steps show the
 physics and misplace helium. Every layout of this list is an argument
 about what matters; the one on the wall is just the argument that won.
 
-## Sources and serving notes
+## Sources
 
 - `elements.csv` is generated from the
   [mendeleev](https://mendeleev.readthedocs.io/) Python package (v1.2):

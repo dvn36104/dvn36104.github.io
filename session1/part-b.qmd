@@ -257,11 +257,16 @@ phyla_age = max(l.depth for l in phyla.leaves())
 
 ## 1 · A tree from Part A's columns
 
-Part A's amniote table already contains a tree. Its taxonomy columns
-nest: every species sits in a genus, every genus in a family, every
-family in an order, every order in a class. Nesting is a hierarchy, and
-a hierarchy can be drawn. Before touching any new data, build the tree
-those columns encode.
+Part A treated every dataset as a flat table: rows and columns, with no
+structure between the rows. But some data is **hierarchical**: each item
+belongs to exactly one group, each group to exactly one larger group, and
+so on up to a single root. File systems are hierarchical (files inside
+folders inside folders); so are org charts, postal addresses, and the
+taxonomy columns of Part A's amniote table, where every species sits in a
+genus, every genus in a family, every family in an order, and every order
+in a class. A hierarchy is exactly the structure a **tree** draws: one
+parent per item, one root, no cycles. Part A's table therefore already
+contains a tree. Before touching any new data, build it.
 
 First the machinery: a node structure, a layout that gives every node
 two coordinates (x is distance from the root; y spreads the tips one per
@@ -1136,7 +1141,7 @@ Reading a phylogeny is a visual skill worth being pedantic about:
   files quietly take a side. A drawn tree always looks more certain than
   the science behind it.
 
-## Sources and serving notes
+## Sources
 
 - Kumar et al. (2022) *TimeTree 5: an expanded resource for species
   divergence times*, Molecular Biology and Evolution 39:msac174;

@@ -1823,9 +1823,9 @@ And look at the bottom of your chart: five points stranded far below the
 cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless
 birds whose wing length is coded as **0.1 mm**, a placeholder, not a
 measurement. `dropna` cannot catch missingness that has been written down
-as a fake number. Remember the Amniote database recoding its `-999`s?
-Same disease, different symptom, and the only cure is looking at the
-chart.
+as a fake number. Keep that idea within reach: this is not the last
+sentinel value in this course, and the only reliable detector is looking
+at the chart.
 :::
 
 ### What Part I established
@@ -1897,13 +1897,14 @@ for any family-level aggregation you might do later?
 # Stage 2: your counts here.
 ```
 
-**Stage 3: validation.** The serving notes claim the archive's -999
-missing-value codes were all recoded to NA: verify that claim rather than
-trusting it. State at least two of your own rules (can a body mass be
-zero or negative? can age at maturity exceed maximum longevity? watch the
-units) and report violation counts. Then validate one species against the
-world: pick an animal you know and check its values against an external
-reference.
+**Stage 3: validation.** State validation rules and report violation
+counts: can a body mass be zero or negative? Can an age at maturity
+exceed a maximum longevity? (Watch the units.) Then validate one species
+against the world: pick an animal you know and check its values against
+an external reference. One warning sign to take seriously: when a rule
+fires far more often than genuine errors plausibly occur, you have not
+found thousands of mistakes, you have found a convention. Work out what
+it is, then handle it explicitly.
 
 ```{pyodide}
 # Stage 3: your validation rules and external check here.
@@ -1944,7 +1945,7 @@ why.
 
 {{< include _instructor-a.qmd >}}
 
-## Sources and serving notes
+## Sources
 
 - Tobias et al. (2022) *AVONET: morphological, ecological and geographical
   data for all birds*, Ecology Letters 25:581–597. The complete 26-column
@@ -1957,5 +1958,4 @@ why.
   column names.
 - Myhrvold et al. (2015) *An amniote life-history database to perform
   comparative analyses with birds, mammals, and reptiles*, Ecology 96:3109.
-  Served with 10 of 36 columns, all 21,322 rows; the archive's `-999`
-  missing-value code recoded to NA. All other values unmodified.
+  Served with 10 of 36 columns, all 21,322 rows, values as published.

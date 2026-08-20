@@ -614,7 +614,7 @@ That is the whole machine. The famous figure is not famous for its data
 *framing*: pick axes everything shares, let physics draw the boundaries,
 and the emptiness becomes the story.
 
-## Sources and serving notes
+## Sources
 
 - Lineweaver, C. H. & Patel, V. M. (2023) *All objects and some
   questions*, American Journal of Physics 91:819–825
