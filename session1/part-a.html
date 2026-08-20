@@ -434,19 +434,19 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYmlyZHMuZGVzY3JpYmUoKS5U
 
 </div>
 <script type="pyodide-13-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZCA9IGJpcmRzLmxvY1tiaXJkc1tcImRhdGFfdHlwZVwiXS5pc25hKCldLmNvcHkoKVxuXG51bnR5cGVkLmNvbHVtbnNbdW50eXBlZC5ub3RuYSgpLmFueSgpXS50b2xpc3QoKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZCA9IGJpcmRzLmxvY1tiaXJkc1tcImRhdGFfdHlwZVwiXS5pc25hKCldLmNvcHkoKVxuXG5wb3B1bGF0ZWQgPSB1bnR5cGVkLmNvbHVtbnNbdW50eXBlZC5ub3RuYSgpLmFueSgpXS50b2xpc3QoKVxucG9wdWxhdGVkIn0=
 </script>
 </div>
-<p>Of 26 columns, only six contain anything: the five taxonomy and identifier fields, and <code>measurer</code>. The names are what these rows exist for; <code>measurer</code> is the odd one out, so look at what it holds.</p>
+<p>Of 26 columns, only six contain anything: the five taxonomy and identifier fields, and <code>measurer</code>. Run value counts across all six and compare their shapes.</p>
 <div>
 <div id="pyodide-14" class="exercise-cell">
 
 </div>
 <script type="pyodide-14-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidW50eXBlZFtcIm1lYXN1cmVyXCJdLnZhbHVlX2NvdW50cygpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIGNvbHVtbiBpbiBwb3B1bGF0ZWQ6XG4gICAgY291bnRzID0gdW50eXBlZFtjb2x1bW5dLnZhbHVlX2NvdW50cygpXG4gICAgcHJpbnQoZlwie2NvbHVtbn06IHtsZW4oY291bnRzKX0gZGlzdGluY3QgdmFsdWVzOyBcIlxuICAgICAgICAgIGZcIm1vc3QgY29tbW9uOiB7Y291bnRzLmluZGV4WzBdIXJ9IHgge2NvdW50cy5pbG9jWzBdfVwiKSJ9
 </script>
 </div>
-<p>Every one of the 351 rows carries <code>GAPSPECIES</code> in the measurer field: a label, not a person’s name, and, as the dictionary search just showed, an undocumented one. Confirm none of these rows carries a measurement.</p>
+<p>The five name fields behave like taxonomy links should: hundreds of distinct values, each appearing once or twice. <code>measurer</code> is nothing like them: a single value, <code>GAPSPECIES</code>, repeated in all 351 rows. That is a label, not a person’s name, and, as the dictionary search just showed, an undocumented one. Confirm none of these rows carries a measurement.</p>
 <div>
 <div id="pyodide-15" class="exercise-cell">
 
