@@ -499,15 +499,6 @@ gap_check = pd.Series({
 gap_check
 ```
 
-90,020 rows are individual birds (75,843 museum specimens and
-14,177 live captures), and the 351 GAPSPECIES rows are taxonomy links
-with no measurements.
-
-```{pyodide}
-measured = birds.loc[birds["data_type"].notna()].copy()
-print(f"individual birds retained for morphology: {len(measured):,}")
-```
-
 ### Introduction to Altair
 
 [Vega-Altair](https://altair-viz.github.io/) implements a **grammar of
