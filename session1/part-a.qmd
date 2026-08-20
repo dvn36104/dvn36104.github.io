@@ -393,13 +393,12 @@ plt.tight_layout()
 plt.show()
 ```
 
-Same data three ways. The default histogram buries every species with
-fewer than ~80 rows in one bar; a log y axis rescues the tail but not
-the lumping. Counting each integer value exactly shows the real shape:
-the 734 single-row species at 1, a spike at 4 and 5 (AVONET's protocol
-aimed for at least four birds per species), and a tail running to 784
-(*Zosterops chloris*) that the panel truncates at 30 and says so.
-Binning and scale are not cosmetics; they decide what a reader can see.
+The histogram is here drawn three different ways.
+The default buries every species with
+fewer than ~80 rows in one bar. A log y axis makes the tail visible, but counting each integer 
+value exactly shows the real shape, with
+734 single-row species and a spike at 4 and 5 rows (AVONET's protocol
+aimed for at least four birds per species). 
 
 From the same printout: `sex` has three codes, `country_wri` is the
 usable geography field, `measurer` identifies who measured, and
@@ -413,8 +412,10 @@ birds.describe().T.round(2)
 ```
 
 Read the min and max columns and the floats split in two as well. Ten
-are measurements with continuous ranges in millimetres. But `data_type`,
-`age` and `protocol` run between 0 and 2. These are categorical values 
+are measurements with continuous ranges in millimetres. But three
+columns have suspiciously tiny ranges: `data_type` is only ever 1 or 2,
+and `age` and `protocol` only 0 or 1. These look like categorical codes,
+
 
 ```{pyodide}
 (birds.select_dtypes("float64").nunique()
