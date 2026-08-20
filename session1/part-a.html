@@ -468,7 +468,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWVhc3VyZW1lbnRfY29sdW1u
 <li>The <strong>mark</strong> is the geometric object used to show that result: a bar, point, line, area, rectangle or text label.</li>
 <li>An <strong>encoding</strong> maps a data field to a visual channel such as x-position, y-position, colour, size, shape or opacity.</li>
 <li>A <strong>scale</strong> translates values in the data domain into positions, lengths, sizes or colours in the visual range.</li>
-<li>A <strong>guide</strong>—an axis or legend—explains that scale to the reader.</li>
+<li>A <strong>guide</strong> (an axis or legend) explains that scale to the reader.</li>
 <li><strong>Composition</strong> combines views through layers, facets or concatenation; interaction can then add selections, filtering and linked views.</li>
 </ul>
 <p>The first question is: <strong>how many AVONET rows are there of each record type?</strong> The unit being counted is an AVONET row, and <code>data_type</code> are the groups of interest. The aggregation is a row count. Build a small table:</p>
@@ -549,7 +549,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWV0YWRhdGFfdHlwZV9jb3Vu
 </div>
 <p>Read the transformation in order:</p>
 <ol type="1">
-<li>Start with 26 rows—one per AVONET feature.</li>
+<li>Start with 26 rows, one per AVONET feature.</li>
 <li><code>groupby("documented_type")</code> collects rows that share the same documented type.</li>
 <li><code>.size()</code> counts how many rows are in each group.</li>
 <li>The result has one row per type and a new <code>features</code> column containing the count.</li>
@@ -588,13 +588,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiKGFsdC5DaGFydChtZXRhZGF0
 <blockquote class="blockquote">
 <p><strong>feature → data type → question → transformation/aggregation → mark → encoding → scale → interpretation</strong></p>
 </blockquote>
-<p>The next table extends the structural check to every column: storage type, observed and missing rows, percentage missing, distinct values, and one example.</p>
+<p>Extend the structural check to every column (storage type, observed and missing rows, percentage missing, distinct values), but read the result as a chart rather than a 26-row table:</p>
 <div>
 <div id="pyodide-22" class="exercise-cell">
 
 </div>
 <script type="pyodide-22-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGZpcnN0X2V4YW1wbGUoc2VyaWVzKTpcbiAgICBvYnNlcnZlZCA9IHNlcmllcy5kcm9wbmEoKVxuICAgIGlmIG9ic2VydmVkLmVtcHR5OlxuICAgICAgICByZXR1cm4gXCItXCJcbiAgICB2YWx1ZSA9IG9ic2VydmVkLmlsb2NbMF1cbiAgICByZXR1cm4gc3RyKHJvdW5kKHZhbHVlLCAzKSBpZiBpc2luc3RhbmNlKHZhbHVlLCBmbG9hdCkgZWxzZSB2YWx1ZSlbOjQ1XVxuXG5hdWRpdCA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJjb2x1bW5cIjogYmlyZHMuY29sdW1ucyxcbiAgICBcImR0eXBlXCI6IGJpcmRzLmR0eXBlcy5hc3R5cGUoc3RyKS52YWx1ZXMsXG4gICAgXCJvYnNlcnZlZF9uXCI6IGJpcmRzLm5vdG5hKCkuc3VtKCkudmFsdWVzLFxuICAgIFwibWlzc2luZ19uXCI6IGJpcmRzLmlzbmEoKS5zdW0oKS52YWx1ZXMsXG4gICAgXCJtaXNzaW5nX3BjdFwiOiAoYmlyZHMuaXNuYSgpLm1lYW4oKS5tdWwoMTAwKS5yb3VuZCgyKSkudmFsdWVzLFxuICAgIFwiZGlzdGluY3Rfb2JzZXJ2ZWRcIjogYmlyZHMubnVuaXF1ZShkcm9wbmE9VHJ1ZSkudmFsdWVzLFxuICAgIFwiZXhhbXBsZVwiOiBbZmlyc3RfZXhhbXBsZShiaXJkc1tjXSkgZm9yIGMgaW4gYmlyZHMuY29sdW1uc10sXG59KS5tZXJnZShtZXRhZGF0YV90eXBlc1tbXCJjb2x1bW5cIiwgXCJkZXNjcmlwdGlvblwiLCBcImRvY3VtZW50ZWRfdHlwZVwiLCBcInVuaXRcIl1dLFxuICAgICAgICAgb249XCJjb2x1bW5cIiwgaG93PVwibGVmdFwiKVxuXG5hdWRpdFtbXCJjb2x1bW5cIiwgXCJkZXNjcmlwdGlvblwiLCBcImRvY3VtZW50ZWRfdHlwZVwiLCBcInVuaXRcIiwgXCJkdHlwZVwiLFxuICAgICAgIFwib2JzZXJ2ZWRfblwiLCBcIm1pc3NpbmdfblwiLCBcIm1pc3NpbmdfcGN0XCIsIFwiZGlzdGluY3Rfb2JzZXJ2ZWRcIixcbiAgICAgICBcImV4YW1wbGVcIl1dIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXVkaXQgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwiY29sdW1uXCI6IGJpcmRzLmNvbHVtbnMsXG4gICAgXCJkdHlwZVwiOiBiaXJkcy5kdHlwZXMuYXN0eXBlKHN0cikudmFsdWVzLFxuICAgIFwib2JzZXJ2ZWRfblwiOiBiaXJkcy5ub3RuYSgpLnN1bSgpLnZhbHVlcyxcbiAgICBcIm1pc3NpbmdfblwiOiBiaXJkcy5pc25hKCkuc3VtKCkudmFsdWVzLFxuICAgIFwibWlzc2luZ19wY3RcIjogKGJpcmRzLmlzbmEoKS5tZWFuKCkubXVsKDEwMCkucm91bmQoMikpLnZhbHVlcyxcbiAgICBcImRpc3RpbmN0X29ic2VydmVkXCI6IGJpcmRzLm51bmlxdWUoZHJvcG5hPVRydWUpLnZhbHVlcyxcbn0pLm1lcmdlKG1ldGFkYXRhX3R5cGVzW1tcImNvbHVtblwiLCBcImRlc2NyaXB0aW9uXCIsIFwiZG9jdW1lbnRlZF90eXBlXCIsIFwidW5pdFwiXV0sXG4gICAgICAgICBvbj1cImNvbHVtblwiLCBob3c9XCJsZWZ0XCIpXG5cbnByaW50KGZcImF1ZGl0IHRhYmxlIGJ1aWx0OiBvbmUgcm93IGZvciBlYWNoIG9mIHRoZSB7bGVuKGF1ZGl0KX0gY29sdW1uc1wiKSJ9
 </script>
 </div>
 <div>
