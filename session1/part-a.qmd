@@ -452,7 +452,7 @@ birds.describe().T.round(2)
 Read the min and max columns and the floats split in two as well. Ten
 are measurements with continuous ranges in millimetres. But three
 columns have suspiciously tiny ranges: `data_type` is only ever 1 or 2,
-and `age` and `protocol` only 0 or 1. These look like categorical codes,
+and `age` and `protocol` only 0 or 1. These look like categorical codes;
 encodings stored as a number.
 
 `info()` showed 90,020 observed values in `data_type`, although the file has
@@ -463,7 +463,15 @@ and check what fields they do have:
 ```{pyodide}
 untyped = birds.loc[birds["data_type"].isna()].copy()
 
-untyped["measurer"].value_counts(dropna=False)
+untyped.columns[untyped.notna().any()].tolist()
+```
+
+Of 26 columns, only six contain anything: the five taxonomy and
+identifier fields, and `measurer`. The names are what these rows exist
+for; `measurer` is the odd one out, so look at what it holds.
+
+```{pyodide}
+untyped["measurer"].value_counts()
 ```
 
 Every one of the 351 rows carries `GAPSPECIES` in the measurer field: a
