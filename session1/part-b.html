@@ -206,40 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In Part A you worked with a <strong>table</strong> of amniotes: one row per species, no structure between the rows. But those species are not an unordered bag: every one of them sits on a family tree that connects it, through shared ancestors, to every other living thing. This part is about that tree: how it is stored as data, how to draw it three ways (rectangular, round, and against a time axis), and what the words biologists use for it (<em>clade</em>, <em>ancestor</em>, <em>divergence</em>) mean on the screen.</p>
-<p>Note what changed and why. Part A’s</p>
-<p>In Part A, the amniote table (Myhrvold et al.&nbsp;2015) stores <strong>traits</strong>. Its nested taxonomy columns (class, order, family, genus) encode a tree: nesting is a hierarchy. But it is a tree of <em>named ranks</em>: it carries no dates, and inside every rank it is silent. The table can say that fifteen families belong to the primates without saying anything about how those families relate to one another. The trees on this page store what the table cannot: <strong>resolved relationships with dates</strong>, and not a single measurement. Same animals, complementary data structures, different sources. All three trees come from <a href="https://timetree.org">TimeTree</a> (Kumar et al.&nbsp;2022), one of them the family tree of exactly the amniotes whose traits you analysed in Part A, and we start by drawing the tree that Part A’s own columns already encode:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>File</th>
-<th>Tips</th>
-<th>What one tip is</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>amniotes_family.nwk</code></td>
-<td>956</td>
-<td>one family of amniotes (mammals, birds, reptiles)</td>
-</tr>
-<tr class="even">
-<td><code>eukaryotes_class.nwk</code></td>
-<td>235</td>
-<td>one class of eukaryotes: animals, fungi, plants, protists</td>
-</tr>
-<tr class="odd">
-<td><code>eukaryotes_phylum.nwk</code></td>
-<td>66</td>
-<td>one phylum of eukaryotes</td>
-</tr>
-</tbody>
-</table>
+<p>In Part A you worked with a <strong>table</strong> of amniotes: one row per species, no structure between the rows. But those species are not an unordered bag: every one of them sits on a family tree that connects it, through shared ancestors, to every other living thing. This part is about trees: how they are stored as data, how to draw them (rectangular, round, and against a time axis), and what the words biologists use for them (<em>clade</em>, <em>ancestor</em>, <em>divergence</em>) mean on the screen. We start with a tree you already have: the one hiding in Part A’s own taxonomy columns.</p>
 <p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
@@ -295,7 +262,39 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihmYW1zKSA9
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LCA3KSlcbmRyYXdfdHJlZSh0YXhvbm9teSwgYXgsIGx3PTAuNSlcbmF4LnNldF94dGlja3MoWzAsIDEsIDIsIDNdKVxuYXguc2V0X3h0aWNrbGFiZWxzKFtcInJvb3RcIiwgXCJjbGFzc1wiLCBcIm9yZGVyXCIsIFwiZmFtaWx5XCJdKVxuYXguc2V0X3RpdGxlKGZcIlRoZSB0cmVlIGVuY29kZWQgYnkgUGFydCBBJ3MgdGF4b25vbXkgY29sdW1uczoge2xlbihmYW1zKX0gZmFtaWxpZXNcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>This is a real tree, and it is honest about what the table knows. But look at what it cannot say. Every internal node is a wide <strong>polytomy</strong>, a many-way split: Aves fans straight out into 40 orders because the columns record membership, not history. The x axis is rank, not time. The vertical order of siblings is arbitrary. And nothing in it makes one order closer to another: passerines are as related to parrots as to ostriches, as far as these columns know. To go further we need data built to store <em>resolved, dated</em> relationships, and that is exactly what this page’s three tree files are.</p>
+<p>This is a real tree, and it is honest about what the table knows. But look at what it cannot say. Every internal node is a wide <strong>polytomy</strong>, a many-way split: Aves fans straight out into 40 orders because the columns record membership, not history. The x axis is rank, not time. The vertical order of siblings is arbitrary. And nothing in it makes one order closer to another: passerines are as related to parrots as to ostriches, as far as these columns know. To go further we need data built to store <em>resolved, dated</em> relationships.</p>
+<p>That is what the rest of this page uses. Note what changed and why: the amniote table stores traits and rank membership; the files below store what the table cannot, <strong>resolved relationships with dates</strong>, and not a single measurement. Same animals, complementary data structures, different sources. All three come from <a href="https://timetree.org">TimeTree</a> (Kumar et al.&nbsp;2022), and one of them is the family tree of exactly the amniotes whose traits you analysed in Part A.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Tips</th>
+<th>What one tip is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>amniotes_family.nwk</code></td>
+<td>956</td>
+<td>one family of amniotes (mammals, birds, reptiles)</td>
+</tr>
+<tr class="even">
+<td><code>eukaryotes_class.nwk</code></td>
+<td>235</td>
+<td>one class of eukaryotes: animals, fungi, plants, protists</td>
+</tr>
+<tr class="odd">
+<td><code>eukaryotes_phylum.nwk</code></td>
+<td>66</td>
+<td>one phylum of eukaryotes</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="reading-a-phylogenetic-tree" class="level2">
 <h2 class="anchored" data-anchor-id="reading-a-phylogenetic-tree">2 · Reading a phylogenetic tree</h2>
