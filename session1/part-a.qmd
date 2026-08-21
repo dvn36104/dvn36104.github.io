@@ -1292,7 +1292,7 @@ labels = base.mark_text(fontSize=10).encode(
 The diverging colour scale is centred at zero because positive and negative
 correlations are qualitatively different directions. Its symmetric $-1$ to
 $1$ domain prevents the strongest observed value from redefining the meaning
-of the colours. The printed values provide precision; colour provides pattern.
+of the colours.
 
 ### Regression on raw and logged scales
 
@@ -1818,19 +1818,16 @@ at the chart. -->
 
 **Amniotes** are vertebrates whose embryos develop within a set of protective
 membranes that includes the amnion. Living amniotes comprise mammals and the
-sauropsid lineage: reptiles, including birds. The term names a shared branch
-of vertebrate evolution; it is not itself a variable in the dataset.
-
+sauropsid lineage: reptiles, including birds.
 The second dataset served with this page is the **Amniote life-history
-database** (Myhrvold et al. 2015): one row per species, 21,322 of them
-across birds, mammals and reptiles. Ten columns: four taxonomy fields
+database** (Myhrvold et al. 2015): one row per species, with 21,322 species
+across birds, mammals and reptiles. The  columns include four taxonomy fields
 (class, order, family, genus) plus the species name, and five
 life-history traits (adult body mass in grams, maximum longevity in
 years, litter or clutch size, female age at maturity in days, birth or
 hatching weight in grams).
 
-The life-history CSV does not contain a phylogenetic tree or divergence
-dates. The published figure below provides phylogenetic context from a
+The figure below shows an amniote phylogenetic tree from a
 separate source.
 
 ```{=html}
@@ -1850,13 +1847,12 @@ separate source.
 </figure>
 ```
 
-Apply the same sequence used in Part I, then take one question through to a
-finished chart. The cells below identify each stage and leave the analysis to
+Apply the same sequence used in Part I. The cells below identify each stage and leave the analysis to
 you.
 
 **Stage 1: load and inspect the structure.** Report the shape, view several
 rows, inspect storage types, count missing and distinct values, and build a
-small column dictionary with semantic types. Note which columns are almost
+small column dictionary with data types. Note which columns are almost
 complete and which are mostly missing. Use the Myhrvold et al. paper and the
 serving notes to interpret what you find.
 
@@ -1879,21 +1875,16 @@ for any family-level aggregation you might do later?
 ```
 
 **Stage 3: validation.** State validation rules and report violation
-counts: can a body mass be zero or negative? Can an age at maturity
-exceed a maximum longevity? (Watch the units.) Then validate one species
-against the world: pick an animal you know and check its values against
-an external reference. One warning sign to take seriously: when a rule
-fires far more often than genuine errors plausibly occur, you have not
-found thousands of mistakes, you have found a convention. Work out what
-it is, then handle it explicitly.
+counts. Can a body mass be zero or negative? Can an age at maturity
+exceed a maximum longevity?
+
 
 ```{pyodide}
 # Stage 3: your validation rules and external check here.
 ```
 
 **Stage 4: choose a question and account for the rows.** Pick a trait
-pair. Mass and longevity is the classic allometry, but clutch size,
-maturity and birth weight are all open questions. Define exactly the rows
+pair.  Define exactly the rows
 that can support your comparison, and draw the row flow from the full
 table to your analysis table.
 
@@ -1904,25 +1895,14 @@ table to your analysis table.
 **Stage 5: the chart, and one rank up.** Produce one final chart of your
 relationship, with a caption that states the unit of analysis, the n,
 every transformation and aggregation, the scales, and where the dropped
-rows went. Then aggregate one taxonomic rank up (family means of the
-*logged* values), redraw, and say in two sentences what the aggregation
-gave you and what it took away.
+rows went. Aggregate one taxonomic rank up (family means of the
+*logged* values) and redraw.
 
 ```{pyodide}
 # Stage 5: your final chart and its one-rank-up comparison here.
 ```
 
-**How to know you got it.** No solution button: this investigation is
-yours. But the accounting has fixed points. Your class counts must sum to
-21,322 exactly. If your audit is honest, you will conclude that
-missingness is most of this table, not an edge case. Your validation
-stage should catch at least one genuinely suspicious set of rows (there
-is more than one to find, and at least one involves units). And whatever
-pair you choose, your final caption must survive the Part I checklist:
-what is one point, what is n, what was transformed, what was dropped. If
-your family-level chart averages raw grams instead of logs, one elephant
-will drag its whole family across the plot; you should be able to explain
-why.
+**Save your final chart!**
 
 {{< include _instructor-a.qmd >}}
 

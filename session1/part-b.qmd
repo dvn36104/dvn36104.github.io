@@ -7,14 +7,7 @@ pyodide:
     - matplotlib
 ---
 
-In Part A you worked with a **table** of amniotes: one row per species, no
-structure between the rows. But those species are not an unordered bag:
-every one of them sits on a family tree that connects it, through shared
-ancestors, to every other living thing. This part is about trees: how
-they are stored as data, how to draw them (rectangular, round, and
-against a time axis), and what the words biologists use for them
-(*clade*, *ancestor*, *divergence*) mean on the screen. We start with a
-tree you already have: the one hiding in Part A's own taxonomy columns.
+
 
 All code runs in your browser. The first cell may take a few seconds while
 Python loads.
@@ -235,26 +228,23 @@ set_depths(phyla)
 phyla_age = max(l.depth for l in phyla.leaves())
 ```
 
-## 1 · A tree from Part A's columns
+## 1 · A tree from Part A
 
-Part A treated every dataset as a flat table: rows and columns, with no
-structure between the rows. But some data is **hierarchical**: each item
+In Part A you worked with a **table** of amniotes: one row per species.
+This data is **hierarchical**: each species
 belongs to exactly one group, each group to exactly one larger group, and
-so on up to a single root. File systems are hierarchical (files inside
-folders inside folders); so are org charts, postal addresses, and the
+so on up to a single root. The
 taxonomy columns of Part A's amniote table, where every species sits in a
 genus, every genus in a family, every family in an order, and every order
-in a class. A hierarchy is exactly the structure a **tree** draws: one
-parent per item, one root, no cycles. Part A's table therefore already
-contains a tree. Before touching any new data, build it.
+in a class. This is the structure a **tree** draws: one
+parent per item, one root, with no cycles.
 
-First the machinery: a node structure, a layout that gives every node
+Part A's table
+contains a tree which can be built with a node structure layout that gives every node
 two coordinates (x is distance from the root; y spreads the tips one per
-row, with each ancestor centred on its children), and a drawing function.
-One trick worth noting: instead of one `ax.plot` call per branch,
-thousands of tiny artists, it collects all segments of a colour into a
-single line broken by `None` gaps and draws each colour once, which is
-orders of magnitude faster.
+row, with each ancestor centred on its children).
+
+
 
 ```{pyodide}
 class Node:
@@ -362,23 +352,13 @@ ax.set_title(f"The tree encoded by Part A's taxonomy columns: {len(fams)} famili
 plt.show()
 ```
 
-This is a real tree, and it is honest about what the table knows. But
-look at what it cannot say. Every internal node is a wide **polytomy**, a
-many-way split: Aves fans straight out into 40 orders because the columns
-record membership, not history. The x axis is rank, not time. The
-vertical order of siblings is arbitrary. And nothing in it makes one
-order closer to another: passerines are as related to parrots as to
-ostriches, as far as these columns know. To go further we need data built
-to store *resolved, dated* relationships.
+Note that the structure of this tree is limited to the four categorical grouping variables;
+vertical order is arbitrary and nothing makes one
+order closer to another.
 
-That is what the rest of this page uses. Note what changed and why: the
-amniote table stores traits and rank membership; the files below store
-what the table cannot, **resolved relationships with dates**, and not a
-single measurement. Same animals, complementary data structures,
-different sources. All three come from
-[TimeTree](https://timetree.org) (Kumar et al. 2022), and one of them is
-the family tree of exactly the amniotes whose traits you analysed in
-Part A.
+[TimeTree](https://timetree.org) (Kumar et al. 2022) provides data sets on relationships between species
+that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree.
+
 
 | File | Tips | What one tip is |
 |---|---|---|
@@ -388,8 +368,7 @@ Part A.
 
 ## 2 · Reading a phylogenetic tree
 
-A phylogenetic tree has three kinds of parts, and each one asserts
-something:
+A phylogenetic tree has three kinds of parts:
 
 - **Tips** (leaves) are observed things: living species, families,
   classes. They are the only part anyone has ever seen.
