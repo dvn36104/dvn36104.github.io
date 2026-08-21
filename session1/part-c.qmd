@@ -186,8 +186,8 @@ density_label_data = pd.DataFrame({
     "label": ["atomic density", "nuclear density"],
 })
 density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, dy=-16,
-    color="#777777", fontSize=11
+    angle=297, align="left", dx=5, dy=-18,
+    color="#777777", fontSize=13
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 wall_data = pd.DataFrame({
@@ -487,11 +487,10 @@ inside an atomic nucleus. One cubic centimetre would contain roughly 230
 billion kilograms of matter. Atomic nuclei and neutron stars lie near this
 density.
 
-These lines are **benchmarks, not boundaries**. We are not claiming that every
-object lies on one line or between the two. Red giants, galaxy clusters and the
+While most objects lie between the two lines, red giants, galaxy clusters and the
 Universe have average densities far below the atomic line. For fundamental
-particles and black holes, “density” is especially difficult to interpret
-because the plotted radius does not describe a uniform ball of material.
+particles and black holes, “density” is difficult to interpret
+because the plotted radius does not describe uniform material.
 
 ```{pyodide}
 r_line = np.logspace(-35, 30, 200)
@@ -525,17 +524,28 @@ density_label_data = pd.DataFrame({
 })
 
 density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, dy=-16,
-    color="#777777", fontSize=11
+    angle=297, align="left", dx=5, dy=-18,
+    color="#777777", fontSize=13
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
 
-(density_line_chart + object_layers() + density_labels).properties(
-    width=740,
-    height=650,
+(density_line_chart + object_layers(point_size=75) + density_labels).properties(
+    width=780,
+    height=700,
     title="Two densities organise almost everything",
-).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
+).configure_axis(
+    gridColor="#dddddd",
+    gridOpacity=0.7,
+    labelFontSize=13,
+    labelPadding=6,
+    titleFontSize=16,
+    titlePadding=14,
+).configure_title(
+    fontSize=20,
+    anchor="start",
+    offset=16,
+)
 ```
 
 The lines give the scatter a skeleton without enclosing it. Several familiar
