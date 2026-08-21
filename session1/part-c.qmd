@@ -121,7 +121,7 @@ about **90 orders of magnitude** and radius about **44**. This means both axes m
 logarithmic.
 
 ::: {.callout-tip title="Powers of Ten"}
-Watch [*Powers of Ten*](https://www.youtube.com/watch?v=0fKBhvDjuy0) before
+Watch the nine-minute 1977 short film [*Powers of Ten*](https://www.youtube.com/watch?v=0fKBhvDjuy0) before
 continuing. Notice how changing scale changes which objects and relationships
 can be seen.
 :::
