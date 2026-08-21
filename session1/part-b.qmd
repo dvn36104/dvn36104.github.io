@@ -1157,6 +1157,65 @@ mammal–bird split the very same event as the amniote root?
 
 {{< include _instructor-b.qmd >}}
 
+## Final task · Design your own tree of life
+
+First look at how other designers handle a tree too large for a conventional
+diagram:
+
+- explore the zoomable, fractal layout in the
+  [OneZoom Tree of Life Explorer](https://www.onezoom.org/);
+- inspect how evidence and taxonomic uncertainty are shown in the
+  [Open Tree of Life browser](https://tree.opentreeoflife.org/opentree);
+- compare rectangular, circular, radial and annotated examples in the
+  [Interactive Tree of Life gallery](https://itol.embl.de/gallery.cgi).
+
+For each site, note what one tip represents, whether branch length encodes
+time, how labels appear as the tree grows, what colour encodes, and what
+interaction contributes. Identify one design decision that helps the reader
+and one that would not work in a static course figure.
+
+Now make your own **eukaryote tree of life** using either
+`eukaryotes_class.nwk` (235 class-level tips) or `eukaryotes_phylum.nwk` (66
+phylum-level tips). Adapt the rectangular, circular or time-axis code from
+this page, or devise another node-link layout. Do not call the result a tree
+of *all* life: these files contain Eukaryota, not Bacteria or Archaea.
+
+Your final visualisation must:
+
+- make the root, tips and branching structure readable;
+- state what one tip represents and report the number of tips;
+- say whether branch length means time and give its unit;
+- use colour only for named clades or another stated variable;
+- explain any labels, taxa or detail you omit;
+- include a title, caption, TimeTree source, and a note naming one online
+  design that influenced your choices.
+
+```{pyodide}
+# Build your final tree here. Leave the completed Matplotlib figure in `fig`.
+```
+
+**Save your final tree-of-life visualisation.** After the figure is complete,
+run this cell to download a 300 dpi PNG from the browser:
+
+```{pyodide}
+import base64
+from io import BytesIO
+
+def download_figure(fig, filename="eukaryote-tree-of-life.png"):
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png", dpi=300,
+                bbox_inches="tight", facecolor="white")
+    encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
+    link = js.document.createElement("a")
+    link.href = "data:image/png;base64," + encoded
+    link.download = filename
+    js.document.body.appendChild(link)
+    link.click()
+    link.remove()
+
+download_figure(fig)
+```
+
 ## Conclusion
 
 When reading or constructing a phylogeny visualisation:
