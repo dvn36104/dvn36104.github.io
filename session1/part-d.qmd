@@ -315,10 +315,10 @@ same shell tighter). At each new shell the size *jumps*: argon is
 ![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
 :::
 
-## 3 · Alternative table designs
+## 3 · Alternative designs
 
-If the data is a cycle, should its picture be a *grid*, or should it
-wind? Chemists have proposed various layouts. Compare these four alternative
+If the data is a cycle, should its picture be a *grid*, or should it spiral?
+Chemists have proposed various layouts. Compare these four alternative
 designs:
 
 **Mendeleev's own table (1869).** Periods run *down* the
