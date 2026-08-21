@@ -173,13 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#a-tree-from-part-a" id="toc-a-tree-from-part-a" class="nav-link active" data-scroll-target="#a-tree-from-part-a">1 · A tree from Part A</a></li>
-  <li><a href="#reading-a-phylogenetic-tree" id="toc-reading-a-phylogenetic-tree" class="nav-link" data-scroll-target="#reading-a-phylogenetic-tree">2 · Reading a phylogenetic tree</a></li>
-  <li><a href="#the-newick-format" id="toc-the-newick-format" class="nav-link" data-scroll-target="#the-newick-format">3 · The Newick format</a></li>
-  <li><a href="#drawing-dated-trees" id="toc-drawing-dated-trees" class="nav-link" data-scroll-target="#drawing-dated-trees">4 · Drawing dated trees</a></li>
-  <li><a href="#clades-and-common-ancestors" id="toc-clades-and-common-ancestors" class="nav-link" data-scroll-target="#clades-and-common-ancestors">5 · Clades and common ancestors</a></li>
-  <li><a href="#the-round-tree-of-life" id="toc-the-round-tree-of-life" class="nav-link" data-scroll-target="#the-round-tree-of-life">6 · The round tree of life</a></li>
-  <li><a href="#the-timetree-of-life" id="toc-the-timetree-of-life" class="nav-link" data-scroll-target="#the-timetree-of-life">7 · The timetree of life</a></li>
-  <li><a href="#what-a-tree-shows-and-what-it-does-not" id="toc-what-a-tree-shows-and-what-it-does-not" class="nav-link" data-scroll-target="#what-a-tree-shows-and-what-it-does-not">What a tree shows and what it does not</a></li>
+  <li><a href="#phylogenetic-trees" id="toc-phylogenetic-trees" class="nav-link" data-scroll-target="#phylogenetic-trees">2 · Phylogenetic trees</a></li>
+  <li><a href="#drawing-dated-trees" id="toc-drawing-dated-trees" class="nav-link" data-scroll-target="#drawing-dated-trees">3 · Drawing dated trees</a></li>
+  <li><a href="#clades-and-common-ancestors" id="toc-clades-and-common-ancestors" class="nav-link" data-scroll-target="#clades-and-common-ancestors">4 · Clades and common ancestors</a></li>
+  <li><a href="#the-round-tree-of-life" id="toc-the-round-tree-of-life" class="nav-link" data-scroll-target="#the-round-tree-of-life">5 · The round tree of life</a></li>
+  <li><a href="#the-timetree-of-life" id="toc-the-timetree-of-life" class="nav-link" data-scroll-target="#the-timetree-of-life">6 · The timetree of life</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
@@ -295,22 +294,21 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJw
 </tbody>
 </table>
 </section>
-<section id="reading-a-phylogenetic-tree" class="level2">
-<h2 class="anchored" data-anchor-id="reading-a-phylogenetic-tree">2 · Reading a phylogenetic tree</h2>
+<section id="phylogenetic-trees" class="level2">
+<h2 class="anchored" data-anchor-id="phylogenetic-trees">2 · Phylogenetic trees</h2>
 <p>A phylogenetic tree has three kinds of parts:</p>
 <ul>
-<li><strong>Tips</strong> (leaves) are observed things: living species, families, classes. They are the only part anyone has ever seen.</li>
-<li><strong>Internal nodes</strong> are inferred ancestors: “these two lineages were once one population.” Nobody has seen one; each is a hypothesis.</li>
+<li><strong>Tips</strong> (leaves) are observed things: living species, families, classes.</li>
+<li><strong>Internal nodes</strong> are inferred ancestors: “these two lineages were once one population.” Each is a hypothesis.</li>
 <li><strong>Branch lengths</strong>, in the trees on this page, are <strong>time</strong>: a branch of length 6.7 means 6.7 million years of independent evolution.</li>
 </ul>
-<p>Where do the trees come from? Mostly from genetics. Take the same gene from many species, line the DNA sequences up, and count differences: mutations accumulate roughly steadily, so more differences means more time since two lineages separated. That gives the <em>shape</em> and <em>relative</em> ages. To turn relative ages into millions of years, the tree is calibrated against fossils whose age and position are known. TimeTree, the source of our files, aggregates thousands of such published studies into consensus dated trees, which is why every tree here comes with real ages attached.</p>
-</section>
-<section id="the-newick-format" class="level2">
-<h2 class="anchored" data-anchor-id="the-newick-format">3 · The Newick format</h2>
-<p>Before we can draw a tree we need it as data. The standard format, <strong>Newick</strong>, writes a tree as nested parentheses: each pair of parentheses is one internal node (one ancestor), and <code>:number</code> after a name is the branch length. Here is one you can read by eye: humans, chimps and gorillas, with TimeTree’s ages in millions of years (Myr):</p>
+<p>Branch lenght is estimated from genetics. Take the same gene from many species, line the DNA sequences up, and count the differences. Mutations accumulate roughly steadily, so more differences means more time since two lineages separated, giving the <em>shape</em> and <em>relative</em> ages. To turn relative ages into millions of years, the tree is calibrated against fossils whose age and position are known. TimeTree, the source of our files, aggregates thousands of such published studies into consensus dated trees.</p>
+<p>Before we can draw a tree we need it as data. The standard format, <strong>Newick</strong>, writes a tree as nested parentheses: each pair of parentheses is one internal node (one ancestor), and <code>:number</code> after a name is the branch length.</p>
+<p>Here is one you can read by eye: humans, chimps and gorillas, with TimeTree’s ages in millions of years (Myr):</p>
 <pre><code>((Homo:6.7, Pan:6.7):2.2, Gorilla:8.9);</code></pre>
-<p>Read from the inside out: <code>Homo</code> and <code>Pan</code> each sit at the end of a 6.7-Myr branch from their shared ancestor, so the human–chimp split was 6.7 million years ago. That ancestor connects, 2.2 Myr further back, to the ancestor it shares with <code>Gorilla</code>: 6.7 + 2.2 = 8.9 Myr, exactly <code>Gorilla</code>’s own branch length. In a dated tree every tip is the same total distance from the root, because every living lineage has had the same amount of time.</p>
-<p>The format is recursive (a tree is a node whose children are trees), so the parser is recursive too, reusing the <code>Node</code> class from Section 1. This is the only genuinely fiddly code on the page; read it, run it, and then it is just a function we call:</p>
+<p>Read from the inside out: <code>Homo</code> and <code>Pan</code> each sit at the end of a 6.7-Myr branch from their shared ancestor, so the human–chimp split was 6.7 million years ago. That ancestor connects, 2.2 Myr further back, to the ancestor it shares with <code>Gorilla</code>: 6.7 + 2.2 = 8.9 Myr, exactly <code>Gorilla</code>’s own branch length.</p>
+<p>In a dated tree every tip is the same total distance from the root, because every living lineage has had the same amount of time.</p>
+<p>The format is recursive (a tree is a node whose children are trees), so the parser is recursive too, reusing the <code>Node</code> class from Section 1.</p>
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
@@ -329,8 +327,9 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IFtsLm5hbWUgZm9y
 </div>
 </section>
 <section id="drawing-dated-trees" class="level2">
-<h2 class="anchored" data-anchor-id="drawing-dated-trees">4 · Drawing dated trees</h2>
-<p>The taxonomy tree’s x axis was rank. In a dated tree the branch lengths are millions of years, so the same <code>draw_tree</code> now puts <strong>time</strong> on the x axis. The hominid mini-tree first:</p>
+<h2 class="anchored" data-anchor-id="drawing-dated-trees">3 · Drawing dated trees</h2>
+<p>The taxonomy tree’s x axis was rank. In a dated tree the branch lengths are millions of years, so the same <code>draw_tree</code> now puts <strong>time</strong> on the x axis.</p>
+<p>Draw the hominid mini-tree first:</p>
 <div>
 <div id="pyodide-9" class="exercise-cell">
 
@@ -339,7 +338,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IFtsLm5hbWUgZm9y
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg3LCAyLjQpKVxuZHJhd190cmVlKG1pbmksIGF4LCBsYWJlbHM9VHJ1ZSwgZm9udHNpemU9MTEpXG5heC5zZXRfeGxhYmVsKFwiTXlyIHNpbmNlIHRoZSByb290XCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>Now a real tree. This is every family of <strong>amniotes</strong>, the same group whose species table you cleaned in Part A, one level of aggregation up:</p>
+<p>Now a tree with every family of <strong>amniotes</strong>, the same group whose species table you cleaned in Part A.</p>
 <div>
 <div id="pyodide-10" class="exercise-cell">
 
@@ -364,11 +363,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihhbW5pb3Rl
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LCA3KSlcbmRyYXdfdHJlZShhbW5pb3RlcywgYXgsIGx3PTAuNClcbmF4LnNldF94bGFiZWwoXCJNeXIgc2luY2UgdGhlIGFtbmlvdGUgcm9vdFwiKVxuYXguc2V0X3RpdGxlKGZcIkFsbCBhbW5pb3RlcyBhdCBmYW1pbHkgbGV2ZWw6IHtsZW4oYW1uaW90ZXMubGVhdmVzKCkpfSB0aXBzLCBvbmUgYW5jZXN0b3JcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>No labels: at 956 tips they would be soup. What the shape alone shows: every mammal, bird and reptile family traces back to <strong>one node</strong> ~319 Myr ago, and the big early fork you can see near the root is mammals splitting from the reptile-plus-bird lineage. That number is not decoration; you will meet it again below, coming from a completely different file.</p>
+<p>No labels (at 956 tips they would be too many).</p>
+<p>The shape shows how every mammal, bird and reptile family trace back to <strong>one node</strong> ~319 Myr ago. The big early fork near the root is mammals splitting from the reptile-plus-bird lineage.</p>
 </section>
 <section id="clades-and-common-ancestors" class="level2">
-<h2 class="anchored" data-anchor-id="clades-and-common-ancestors">5 · Clades and common ancestors</h2>
-<p>A <strong>clade</strong> is an ancestor plus <em>all</em> of its descendants: a complete subtree, snapped off at one internal node. “Mammals” is a clade; “cold-blooded animals” is not, because their common ancestor also has warm-blooded descendants. Clades are the only groups a tree can actually point at, and the way to find one is through the <strong>MRCA</strong>, the most recent common ancestor of some tips you name:</p>
+<h2 class="anchored" data-anchor-id="clades-and-common-ancestors">4 · Clades and common ancestors</h2>
+<p>A <strong>clade</strong> is an ancestor plus <em>all</em> of its descendants: a complete subtree, snapped off at one internal node. “Mammals” is a clade; “cold-blooded animals” is not, because their common ancestor also has warm-blooded descendants. Clades are groups that a tree can point at through the <strong>MRCA</strong>, the most recent common ancestor for a group of tips.</p>
 <div>
 <div id="pyodide-13" class="exercise-cell">
 
@@ -406,7 +406,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihwcmltYXRl
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJhbW5pb3RlX3NwZWNpZXMuY3N2XCIpLnJlYWQoKVxucm93cyA9IFtsaW5lLnNwbGl0KFwiLFwiKSBmb3IgbGluZSBpbiB0ZXh0LnN0cmlwKCkuc3BsaXQoXCJcXG5cIilbMTpdXVxucHJpbWF0ZV9mYW1pbGllcyA9IHNvcnRlZCh7clsyXSBmb3IgciBpbiByb3dzIGlmIHJbMV0gPT0gXCJQcmltYXRlc1wifSlcblxuc3RhciA9IE5vZGUoXCJQcmltYXRlc1wiKVxuZm9yIG5hbWUgaW4gcHJpbWF0ZV9mYW1pbGllczpcbiAgICB0aXAgPSBOb2RlKG5hbWUsIGxlbmd0aD0xLjApXG4gICAgdGlwLnBhcmVudCA9IHN0YXJcbiAgICBzdGFyLmNoaWxkcmVuLmFwcGVuZCh0aXApXG5cbmZpZywgYXhlcyA9IHBsdC5zdWJwbG90cygxLCAyLCBmaWdzaXplPSgxMCwgNS41KSlcbmRyYXdfdHJlZShzdGFyLCBheGVzWzBdLCBsYWJlbHM9VHJ1ZSwgZm9udHNpemU9OSlcbmF4ZXNbMF0uc2V0X3RpdGxlKGZcIlBhcnQgQSdzIHRheG9ub215OiB7bGVuKHByaW1hdGVfZmFtaWxpZXMpfSBmYW1pbGllcywgb25lIG5vZGVcIilcbmF4ZXNbMF0uc2V0X3h0aWNrcyhbXSlcbmRyYXdfdHJlZShwcmltYXRlcywgYXhlc1sxXSwgbGFiZWxzPVRydWUsIGZvbnRzaXplPTksIGRlZmF1bHQ9XCIjNDI2OWQwXCIpXG5heGVzWzFdLnNldF90aXRsZShcIlRpbWVUcmVlOiB0aGUgc2FtZSBjbGFkZSwgcmVzb2x2ZWQgYW5kIGRhdGVkXCIpXG5heGVzWzFdLnNldF94bGFiZWwoXCJNeXIgc2luY2UgdGhlIGFtbmlvdGUgcm9vdFwiKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>The left tree is real, but look at what it knows. Every family attaches directly to the order: one giant <strong>polytomy</strong>, because the table records membership, not relatedness, and its branch lengths mean nothing. The right tree makes claims the left cannot: apes split from monkeys before either split from lemurs, and every split has a date. Rank nesting gives you a tree of <em>names</em>; a phylogeny gives you a tree of <em>events</em>.</p>
+<p>The right tree makes claims that the left tree cannot make. For example, apes split from monkeys before either split from lemurs. Every split has a date.</p>
 <div>
 <div id="pyodide-17" class="exercise-cell">
 
@@ -415,7 +415,6 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidHJlZV9uYW1lcyA9IHtsLm5hbWUuc3BsaXQoXCItXCIpWzBdIGZvciBsIGluIHByaW1hdGVzLmxlYXZlcygpfVxuYXNzZXJ0IGxlbihwcmltYXRlX2ZhbWlsaWVzKSA9PSAxNVxuYXNzZXJ0IFwiSW5kcmlkYWVcIiBpbiBwcmltYXRlX2ZhbWlsaWVzIGFuZCBcIkluZHJpaWRhZVwiIGluIHRyZWVfbmFtZXNcbmFzc2VydCBcIlBhbGVvcHJvcGl0aGVjaWRhZVwiIGluIHRyZWVfbmFtZXMgYW5kIFwiUGFsZW9wcm9waXRoZWNpZGFlXCIgbm90IGluIHByaW1hdGVfZmFtaWxpZXNcbnByaW50KFwi4pyTIDE1IGZhbWlsaWVzIGluIHRoZSB0YWJsZSwgMTYgaW4gdGhlIHRyZWUsIGFuZCB0aGUgbWlzbWF0Y2hlcyB0ZWFjaDpcIilcbnByaW50KFwiICBJbmRyaWRhZSB2cyBJbmRyaWlkYWUgaXMgdGhlIHNhbWUgZmFtaWx5IHNwZWxsZWQgdHdvIHdheXMgYnkgdHdvXCIpXG5wcmludChcIiAgZGF0YWJhc2VzLCBhbmQgdGhlIGV4dGluY3Qgc2xvdGggbGVtdXJzIGNhbm5vdCBhcHBlYXIgaW4gYSB0YWJsZVwiKVxucHJpbnQoXCIgIG9mIG1lYXN1cmVkIGxpZmUgaGlzdG9yaWVzXCIpIn0=
 </script>
 </div>
-<p>Even the family <em>lists</em> disagree between the two sources: a one-letter spelling drift and an extinct lineage. Whenever two databases must be joined on names, this is the normal condition, not the exception.</p>
 </section>
 <section id="sec-ex-carnivora" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ex-carnivora">Your turn: the carnivore clade</h3>
@@ -448,13 +447,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfY2Fybml2b3JhIn0s
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>draw_tree(carnivora, ax, labels<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Myr since the amniote root"</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>16 families from one ancestor ~55 Myr ago, and the tree answers questions the table never could. Cats’ closest relatives here are the civets, hyaenas and mongooses, not dogs; dogs sit on the other side of the very first split, nearer to bears and seals. “Cats and dogs” feel like a natural pair to us, but the clade says they have been separate lineages almost since the dinosaurs left.</p>
+<p>16 families from one ancestor ~55 Myr ago. Cats’ closest relatives here are the civets, hyaenas and mongooses, not dogs. Dogs sit on the other side of the very first split, nearer to bears and seals. “Cats and dogs” feel like a natural pair to us, but the clade says they have been separate lineages almost since the dinosaurs left.</p>
 </div>
 </section>
 </section>
 <section id="the-round-tree-of-life" class="level2">
-<h2 class="anchored" data-anchor-id="the-round-tree-of-life">6 · The round tree of life</h2>
-<p>Rectangular layout runs out of room fast: tips need vertical space, and at hundreds of tips the picture becomes a wall. The classic fix is to bend the y-axis into a <strong>circle</strong>: angle becomes tip position, radius becomes time. Same coordinates, different projection:</p>
+<h2 class="anchored" data-anchor-id="the-round-tree-of-life">5 · The round tree of life</h2>
+<p>Rectangular layout runs out of room fast, as tips need vertical space. A classic fix is to bend the y-axis into a <strong>circle</strong>, with angle as tip position, and radius as time.</p>
 <div>
 <div id="pyodide-20" class="exercise-cell">
 
@@ -488,15 +487,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYW5pbWFscyA9IGNsYWRlKGV1
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IChsZW4oYW5pbWFscy5sZWF2ZXMoKSksIGxlbihmdW5naS5sZWF2ZXMoKSksIGxlbihwbGFudHMubGVhdmVzKCkpKSA9PSAoODAsIDQ0LCAzMilcbnByaW50KFwi4pyTIGFuaW1hbHM6IDgwIGNsYXNzZXMsIGZ1bmdpOiA0NCwgZ3JlZW4gcGxhbnRzOiAzMjsgYW5kIDc5IGNsYXNzZXMgaW4gZ3JleVwiKSJ9
 </script>
 </div>
-<p>Three things this picture says that a list of species cannot:</p>
-<ul>
-<li><strong>Everything familiar is a wedge.</strong> All animals (sponges to humans) are one blue sector. All of <code>Mammalia</code> is a single tick mark.</li>
-<li><strong>The grey is not filler.</strong> A third of the disc is protists: algae, amoebae, ciliates, parasites. “Protist” is not a clade; it is the word for <em>every eukaryote outside the three painted wedges</em>, and the tree shows they do not form one group.</li>
-<li><strong>Fungi sit next to animals, not plants.</strong> The red and blue wedges share an ancestor long after either shared one with plants: mushrooms are, genealogically, closer to you than to anything green.</li>
-</ul>
+<p>All animals (sponges to humans) are one blue sector. All of <code>Mammalia</code> is a single tick mark.</p>
+<p><strong>The grey is not filler.</strong> A third of the disc is protists: algae, amoebae, ciliates, parasites. “Protist” is not a clade; it is the word for <em>every eukaryote outside the three painted wedges</em>. The tree shows they do not form one group.</p>
+<p><strong>Fungi sit next to animals, not plants.</strong> The red and blue wedges share an ancestor long after either shared one with plants.</p>
 </section>
 <section id="the-timetree-of-life" class="level2">
-<h2 class="anchored" data-anchor-id="the-timetree-of-life">7 · The timetree of life</h2>
+<h2 class="anchored" data-anchor-id="the-timetree-of-life">6 · The timetree of life</h2>
 <p>The round tree is for shape; a <strong>timetree</strong> puts the ages back on a readable axis. We use the phylum-level file (66 tips) and relabel the x-axis to run backwards from today, with a few reference events:</p>
 <div>
 <div id="pyodide-24" class="exercise-cell">
@@ -506,8 +502,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IChsZW4oYW5pbWFs
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicGh5bGEgPSBwYXJzZV9uZXdpY2sob3Blbl91cmwoREFUQV9VUkwgKyBcImV1a2FyeW90ZXNfcGh5bHVtLm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKHBoeWxhKVxucGh5bGFfYWdlID0gbWF4KGwuZGVwdGggZm9yIGwgaW4gcGh5bGEubGVhdmVzKCkpXG5uID0gbGVuKHBoeWxhLmxlYXZlcygpKVxuXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDksIDEwKSlcbmRyYXdfdHJlZShwaHlsYSwgYXgsIGxhYmVscz1UcnVlLCBmb250c2l6ZT03KVxubXlhID0gbnAuYXJyYXkoWzE1MDAsIDEyNTAsIDEwMDAsIDc1MCwgNTAwLCAyNTAsIDBdKVxuYXguc2V0X3h0aWNrcyhwaHlsYV9hZ2UgLSBteWEpXG5heC5zZXRfeHRpY2tsYWJlbHMobXlhKVxuYXguc2V0X3hsYWJlbChcIm1pbGxpb25zIG9mIHllYXJzIGFnb1wiKVxuZm9yIGVkZ2UsIGxhYiBpbiBbKDUzOSwgXCJDYW1icmlhbiBiZWdpbnNcIiksICgyNTIsIFwiZW5kLVBlcm1pYW4gZXh0aW5jdGlvblwiKSxcbiAgICAgICAgICAgICAgICAgICg2NiwgXCJlbmQtQ3JldGFjZW91cyBleHRpbmN0aW9uXCIpXTpcbiAgICBheC5heHZsaW5lKHBoeWxhX2FnZSAtIGVkZ2UsIGNvbG9yPVwiI2JiYmJiYlwiLCBsdz0wLjcsIHpvcmRlcj0wKVxuICAgIGF4LnRleHQocGh5bGFfYWdlIC0gZWRnZSwgbiAtIDAuNSwgXCIgXCIgKyBsYWIsIGZvbnRzaXplPTcsIGNvbG9yPVwiIzc3Nzc3N1wiLFxuICAgICAgICAgICAgcm90YXRpb249OTAsIGhhPVwicmlnaHRcIiwgdmE9XCJ0b3BcIilcbmF4LnNldF94bGltKDAsIHBoeWxhX2FnZSAqIDEuMzApXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>Almost every animal phylum was already a separate lineage before the Cambrian began; the famous “explosion” shows up here as a dense burst of splits just <em>before</em> the boundary. (The one split you can see on the Cambrian side of the line involves <code>Brachiopoda-3</code>, an artifact of TimeTree splitting a group it cannot recover as one clade; see the serving notes.) And no branch ends at either extinction line: at phylum level, every lineage on this chart survived both of the worst catastrophes in the fossil record.</p>
-<p>Because branch lengths are time, “when did X and Y split?” is one subtraction, the root’s age minus the depth of the two tips’ MRCA:</p>
+<p>Almost every animal phylum was already a separate lineage before the Cambrian began (the famous “Cambrian explosion” shows up here as a dense burst of splits just <em>before</em> the boundary). No branch ends at either extinction line: at phylum level, every lineage on this chart survived both of the worst catastrophes in the fossil record.</p>
+<p>Because branch lengths are time, “when did X and Y split?” is the root’s age minus the depth of the two tips’ MRCA:</p>
 <div>
 <div id="pyodide-25" class="exercise-cell">
 
@@ -524,11 +520,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQoZlwiY2hvcmRhdGVz
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHJvdW5kKGV1a19hZ2UgLSBjbGFkZShldWssIFtcIk1hbW1hbGlhXCIsIFwiQWdhcmljb215Y2V0ZXNcIl0pLmRlcHRoKSA9PSAxMjc1XG5hc3NlcnQgcm91bmQoZXVrX2FnZSAtIGNsYWRlKGV1aywgW1wiTWFtbWFsaWFcIiwgXCJNYWdub2xpb3BzaWRhXCJdKS5kZXB0aCkgPT0gMTU5OFxucHJpbnQoXCLinJMgdGhlIGFuaW1hbOKAk2Z1bmd1cyBzcGxpdCAoMSwyNzUgTXlhKSBpcyB5b3VuZ2VyIHRoYW4gdGhlIGFuaW1hbOKAk3BsYW50IFwiXG4gICAgICBcInNwbGl0ICgxLDU5OCBNeWEpOiBmdW5naSByZWFsbHkgYXJlIG91ciBjbG9zZXIgY291c2luc1wiKSJ9
 </script>
 </div>
-<p>Notice we just wrote the same subtraction four times, each time reaching for the right root age by hand. That kind of repetition is code begging to be packaged into a function, which is exactly the exercise.</p>
-<p>The last line above is worth a pause: <strong>choanoflagellates</strong>, single-celled flagellates that strain bacteria out of water, split from us ~894 Mya; they are the closest living relatives of all animals, and they look remarkably like the feeding cells of a sponge.</p>
-<section id="sec-ex-split" class="level3">
-<h3 class="anchored" data-anchor-id="sec-ex-split">Your turn: close the loop</h3>
-<p>In Section 4 the amniote family tree put the amniote root at <strong>319 Myr</strong>. The eukaryote class tree is a completely different file, built from a different set of studies at a different taxonomic rank, but it contains <code>Mammalia</code> and <code>Aves</code> as tips. Write a <code>divergence(root, a, b)</code> helper and use it to date the mammal–bird split in <em>this</em> tree, then compare.</p>
+<p>Single-celled flagellates that strain bacteria out of water — <strong>choanoflagellates</strong> — split from us ~894 Mya; they are the closest living relatives of all animals.</p>
+<section id="your-turn" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn">Your turn</h3>
+<p>The amniote family tree put the amniote root at <strong>319 Myr</strong>. The eukaryote class tree is a completely different file, built from a different set of studies at a different taxonomic rank, but it contains <code>Mammalia</code> and <code>Aves</code> as tips. Write a <code>divergence(root, a, b)</code> helper and use it to date the mammal–bird split in <em>this</em> tree, then compare.</p>
 <script type="exercise-setup-ex_split-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQiLCJzZXR1cCI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQganNcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5cbkRBVEFfVVJMID0ganMubG9jYXRpb24uaHJlZi5zcGxpdChcInNpdGVfbGlicy9cIilbMF0gKyBcImRhdGEvXCJcblxuY2xhc3MgTm9kZTpcbiAgICBkZWYgX19pbml0X18oc2VsZiwgbmFtZT1cIlwiLCBsZW5ndGg9MC4wKTpcbiAgICAgICAgc2VsZi5uYW1lID0gbmFtZVxuICAgICAgICBzZWxmLmxlbmd0aCA9IGxlbmd0aFxuICAgICAgICBzZWxmLmNoaWxkcmVuID0gW11cbiAgICAgICAgc2VsZi5wYXJlbnQgPSBOb25lXG4gICAgZGVmIGlzX2xlYWYoc2VsZik6XG4gICAgICAgIHJldHVybiBub3Qgc2VsZi5jaGlsZHJlblxuICAgIGRlZiBsZWF2ZXMoc2VsZik6XG4gICAgICAgIHJldHVybiBbc2VsZl0gaWYgc2VsZi5pc19sZWFmKCkgZWxzZSBbbCBmb3IgYyBpbiBzZWxmLmNoaWxkcmVuIGZvciBsIGluIGMubGVhdmVzKCldXG4gICAgZGVmIHdhbGsoc2VsZik6XG4gICAgICAgIHlpZWxkIHNlbGZcbiAgICAgICAgZm9yIGMgaW4gc2VsZi5jaGlsZHJlbjpcbiAgICAgICAgICAgIHlpZWxkIGZyb20gYy53YWxrKClcblxuZGVmIHBhcnNlX25ld2ljayh0ZXh0KTpcbiAgICBzID0gdGV4dC5zdHJpcCgpLnJzdHJpcChcIjtcIilcbiAgICBwb3MgPSAwXG4gICAgZGVmIHJlYWRfbGFiZWwoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIGlmIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdID09IFwiJ1wiOlxuICAgICAgICAgICAgZW5kID0gcy5pbmRleChcIidcIiwgcG9zICsgMSlcbiAgICAgICAgICAgIGxhYmVsLCBwb3MgPSBzW3BvcyArIDE6ZW5kXSwgZW5kICsgMVxuICAgICAgICBlbHNlOlxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTo7XCI6XG4gICAgICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIGxhYmVsID0gc1tzdGFydDpwb3NdXG4gICAgICAgIHJldHVybiBsYWJlbC5zdHJpcCgpXG4gICAgZGVmIHJlYWRfbGVuZ3RoKCk6XG4gICAgICAgIG5vbmxvY2FsIHBvc1xuICAgICAgICBpZiBwb3MgPCBsZW4ocykgYW5kIHNbcG9zXSA9PSBcIjpcIjpcbiAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICBzdGFydCA9IHBvc1xuICAgICAgICAgICAgd2hpbGUgcG9zIDwgbGVuKHMpIGFuZCBzW3Bvc10gbm90IGluIFwiLCgpO1wiOlxuICAgICAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICByZXR1cm4gZmxvYXQoc1tzdGFydDpwb3NdKVxuICAgICAgICByZXR1cm4gMC4wXG4gICAgZGVmIHJlYWRfbm9kZSgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgbm9kZSA9IE5vZGUoKVxuICAgICAgICBpZiBzW3Bvc10gPT0gXCIoXCI6XG4gICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgd2hpbGUgVHJ1ZTpcbiAgICAgICAgICAgICAgICBjaGlsZCA9IHJlYWRfbm9kZSgpXG4gICAgICAgICAgICAgICAgY2hpbGQucGFyZW50ID0gbm9kZVxuICAgICAgICAgICAgICAgIG5vZGUuY2hpbGRyZW4uYXBwZW5kKGNoaWxkKVxuICAgICAgICAgICAgICAgIGlmIHNbcG9zXSAhPSBcIixcIjpcbiAgICAgICAgICAgICAgICAgICAgYnJlYWtcbiAgICAgICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgbm9kZS5uYW1lID0gcmVhZF9sYWJlbCgpXG4gICAgICAgIG5vZGUubGVuZ3RoID0gcmVhZF9sZW5ndGgoKVxuICAgICAgICByZXR1cm4gbm9kZVxuICAgIHJldHVybiByZWFkX25vZGUoKVxuXG5kZWYgc2V0X2RlcHRocyhyb290KTpcbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgbm9kZS5kZXB0aCA9IChub2RlLnBhcmVudC5kZXB0aCBpZiBub2RlLnBhcmVudCBlbHNlIDAuMCkgKyBub2RlLmxlbmd0aFxuXG5kZWYgY2xhZGUocm9vdCwgbmFtZXMpOlxuICAgIHdhbnQgPSBzZXQobmFtZXMpXG4gICAgYmVzdCA9IE5vbmVcbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgaGF2ZSA9IHtsLm5hbWUgZm9yIGwgaW4gbm9kZS5sZWF2ZXMoKX1cbiAgICAgICAgaWYgd2FudCA8PSBoYXZlIGFuZCAoYmVzdCBpcyBOb25lIG9yIGxlbihoYXZlKSA8IGxlbihiZXN0WzBdKSk6XG4gICAgICAgICAgICBiZXN0ID0gKGhhdmUsIG5vZGUpXG4gICAgcmV0dXJuIGJlc3RbMV0gaWYgYmVzdCBlbHNlIE5vbmVcblxuZXVrID0gcGFyc2VfbmV3aWNrKG9wZW5fdXJsKERBVEFfVVJMICsgXCJldWthcnlvdGVzX2NsYXNzLm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKGV1aykifQ==
 </script>
@@ -546,16 +541,16 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQifSwiY29k
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_split">
 <p><strong>Hint 2</strong>: In a dated tree, every living tip is the same total distance from the root, so the root’s age is the depth of any tip (safest: the maximum leaf depth). Age and depth run in opposite directions.</p>
 </div>
-<p><strong>How to know you got it.</strong> No solution button here: this function is yours. If it works, the two printed dates agree <em>exactly</em>. Before you celebrate independent confirmation, ask two questions. First, why is the mammal–bird split the very same event as the amniote root? Second, both numbers ultimately came from the same database: what would it actually take for two dates like these to count as independent evidence?</p>
+<p><strong>Question.</strong> The two printed dates should agree <em>exactly</em>. Consider, why is the mammal–bird split the very same event as the amniote root?</p>
 </section>
 </section>
-<section id="what-a-tree-shows-and-what-it-does-not" class="level2">
-<h2 class="anchored" data-anchor-id="what-a-tree-shows-and-what-it-does-not">What a tree shows and what it does not</h2>
-<p>Reading a phylogeny is a visual skill worth being pedantic about:</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>When reading or constructing a phylogeny visualisation:</p>
 <ul>
-<li><strong>Only the nodes and branch lengths carry information.</strong> The vertical order of tips is arbitrary: every internal node can be flipped like a mobile, so “top of the chart” means nothing. Humans are not “at the end” of the tree; every living tip is exactly the same distance from the root.</li>
-<li><strong>The level of aggregation is part of the claim</strong>: the Part A lesson again. At phylum level no lineage dies in the great extinctions; at family level, recently lost lineages like the sloth lemurs sit in the tree beside the living. Same history, different rank, different story.</li>
-<li><strong>Every internal node is an inference</strong>, and some are genuinely contested: whether sponges or comb jellies split from the rest of the animals first is a live argument in the literature, and this page’s files quietly take a side. A drawn tree always looks more certain than the science behind it.</li>
+<li><strong>Only the nodes and branch lengths carry information.</strong> The vertical order of tips is arbitrary: every internal node can be flipped, so “top of the chart” means nothing. Humans are not “at the end” of the tree; every living tip is exactly the same distance from the root.</li>
+<li><strong>The level of aggregation is part of the claim</strong>. At phylum level no lineage dies in the great extinctions; at family level, recently lost lineages like the sloth lemurs sit in the tree beside the living.</li>
+<li><strong>Every internal node is an inference</strong>. Some are genuinely contested: e.g.&nbsp;whether sponges or comb jellies split from the rest of the animals first. A drawn tree always looks more certain than the science behind it.</li>
 </ul>
 </section>
 <section id="sources" class="level2">
