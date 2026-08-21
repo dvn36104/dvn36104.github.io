@@ -7,19 +7,18 @@ pyodide:
     - matplotlib
 ---
 
-The periodic table might be the most successful data visualisation ever
-made: one diagram, on the wall of every chemistry room on Earth, encoding
-the structure of all matter. But here is the thing it is easy to forget:
-underneath it, the data is just a **one-dimensional list**: the elements
-sorted by atomic number, 1 to 118. Every "table" you have ever seen is a
-*layout choice* for that list, and for 150 years chemists have argued
-about the right one. Spirals, circles, staircases, and the familiar
-castle-with-two-basements that won.
+The periodic table is one of the most successful data visualisation ever
+made. Its data is essentially just a **one-dimensional list**: the elements
+sorted by atomic number, 1 to 118. Turning this list into a "table" involves a
+*layout choice*.
+Although one version has become canonical over the past 150 years, there are numerous alternative possible designs.
+
+<!--
 
 In this part you will: build the physics that makes the list periodic,
 look at real alternative designs (and pick a favourite), construct a
 **periodic spiral** yourself, and then construct the canonical table,
-and ask, as designers, why it became *the* one.
+and ask, as designers, why it became *the* one. -->
 
 All code runs in your browser. The first cell may take a few seconds while
 Python loads.
@@ -100,11 +99,12 @@ def spiral_coords(i):
 ## 1 · Atoms and electron shells
 
 An element is defined by one number: **Z**, the count of protons in the
-nucleus: carbon *is* "element six". A neutral atom carries Z electrons,
-and they do not sit anywhere they like: they stack into **shells** around
-the nucleus, and shell *n* holds at most $2n^2$ electrons: 2, 8, 18, 32.
-Almost everything in chemistry follows from the third sentence: **only
-the outermost shell touches the world**, so atoms with the same outer
+nucleus (e.g. carbon is "element six").
+
+A neutral atom carries Z electrons. These electrons stack into **shells** around
+the nucleus that hold at most $2n^2$ electrons: 2, 8, 18, 32.
+
+Only the outermost shell interacts with other atoms, so atoms with the same outer shell
 arrangement behave alike.
 
 The data for this page is one row per element: number, symbol, name,
@@ -131,8 +131,7 @@ print("✓ 118 elements: the data is literally just a sorted list")
 ```
 
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
-$n+l$, ties broken by $n$). Ten lines of code capture it well enough to
-rebuild the entire table:
+$n+l$, ties broken by $n$). Carefully review how this is produced by the code:
 
 ```{pyodide}
 subshells = sorted(((n, l) for n in range(1, 8) for l in range(n)),
@@ -173,12 +172,8 @@ assert [2 * n**2 for n in (1, 2, 3, 4)] == [2, 8, 18, 32]
 print("✓ sodium is 2, 8, 1, and shell capacities are 2n²")
 ```
 
-(Real atoms have about twenty famous exceptions, where chromium and copper
-borrow an electron between sub-shells, which we cheerfully ignore: the
-idealised rule is what the table's *shape* encodes.)
 
-Here is sodium drawn the way every textbook draws it, and note that this
-picture is a *diagram*, not a photograph of anything:
+The shell arrangement of sodium can be pictured in a diagram:
 
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -196,14 +191,12 @@ ax.set_title("Sodium: 2, 8, 1")
 plt.show()
 ```
 
-That lone outer electron is why sodium reacts so violently (sometimes
-explosively) with water, and why it sits in the same column as lithium
-and potassium, which have the same lonely arrangement.
+The lone outer electron places sodium in the same column as lithium
+and potassium, also with one outer-shell electron.
 
-## 2 · Periodicity: the pattern in the list
+## 2 · Periodicity
 
-Walk the list from Z = 1 upward and watch only the outer shell. It
-fills... closes... and starts again:
+As Z is increased, the outer shell fills, closes, and starts again:
 
 ```{pyodide}
 zz = list(range(1, 39))
@@ -229,23 +222,24 @@ for z in (3, 11, 19, 37, 55, 87):
 print("✓ shell closures and fresh starts recur all the way to Z = 118")
 ```
 
-This sawtooth **is** the periodic law. Every row of any periodic table is
-one tooth; every column collects atoms caught at the same point of the
-cycle: the **groups**. Group 1 (one outer electron) are the violent
+The sawtooth is the periodic law. Every **row** of any periodic table is
+a "tooth"; every **column** collects atoms caught at the same point of the
+cycle: the **groups**.
+
+Group 1 (one outer electron) are the reactive
 alkali metals; group 18 (closed shell) are the noble gases that react
-with almost nothing; group 17, one electron short of closing, are the
-halogens that grab one from anything nearby.
+with almost nothing.
 
-And periodicity is not just electron bookkeeping; it shows up in every
-measurable property. Prove it to yourself:
 
-### Your turn: the size of atoms {#sec-ex-radius}
+### Size of atoms {#sec-ex-radius}
 
 The data column `radius` holds each element's covalent radius in
 picometres. Plot radius against Z for all 118 elements, joined by a
 faint line, and highlight the **alkali metals** (Z = 3, 11, 19, 37, 55,
 87) in one colour and the **noble gases** (Z = 2, 10, 18, 36, 54, 86) in
-another. What does the pattern do at each shell closure?
+another.
+
+What does the pattern do at each shell closure?
 
 ```{pyodide}
 #| setup: true
@@ -317,10 +311,10 @@ plt.show()
 Across each period atoms *shrink* (the growing nuclear charge pulls the
 same shell tighter), then at each new shell the size *jumps*: argon is
 96 pm, and one proton later potassium is 196 pm. The sawtooth in size
-mirrors the sawtooth in valence: same cycle, different property. This
-is the same cycle Lothar Meyer plotted as atomic volume in 1870, and
-that Mendeleev could read in 1869 from valences and atomic weights
-alone, decades before anyone knew electrons existed.
+mirrors the sawtooth in valence. This
+is the same cycle Lothar Meyer plotted as atomic volume in 1870.
+
+![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
 :::
 
 ## 3 · Alternative table designs
