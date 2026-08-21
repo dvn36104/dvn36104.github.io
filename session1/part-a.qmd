@@ -83,8 +83,8 @@ birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"), low_memory=Fa
 measured = birds[birds["data_type"].notna()]
 
 metadata = pd.read_csv(open_url(DATA_URL + "avonet_metadata.csv"))
-metadata_for_charts = metadata.assign(
-    variable_type=metadata["variable_type"].fillna("not specified")
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
 )
 
 trait_catalogue = (metadata
@@ -113,7 +113,7 @@ audit = pd.DataFrame({
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
     "example": [first_example(birds[c]) for c in birds.columns],
-}).merge(metadata_for_charts[["column", "description", "variable_type", "unit"]],
+}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
 rows_per_species = (birds.dropna(subset=["species"])
@@ -305,7 +305,7 @@ metadata_by_column = metadata.set_index("column")
 def inspect_field(column):
     documentation = metadata_by_column.loc[column]
     definition = str(documentation["description"])
-    variable_type = (
+    documented_type = (
         documentation["variable_type"]
         if pd.notna(documentation["variable_type"])
         else "not specified"
@@ -316,7 +316,7 @@ def inspect_field(column):
     print(column)
     print(textwrap.fill(definition, width=82,
                         initial_indent="    ", subsequent_indent="    "))
-    print(f"    AVONET variable type: {variable_type}")
+    print(f"    documented type: {documented_type}")
     print(f"    unit: {unit}")
     print(f"    storage: {values.dtype}")
     print(f"    observed: {values.notna().sum():,} / {len(values):,}")
@@ -644,17 +644,13 @@ constant_colour | mapped_colour
 
 
 The metadata has one row for each of AVONET's 26 features. Suppose we want to
-know how many features have each variable type. The categories come directly
-from the metadata's `variable_type` column. Its two blank entries need a label
-before we group and count the rows.
+know how many features have each documented type. We can refer to the metadata's `variable_type` column.
+
+We use pandas `groupby` and `size` to count occurances. `groupby("variable_type")` collects rows that share the same variable type and `.size()` counts how many rows are in each group.
 
 ```{pyodide}
-metadata_for_charts = metadata.assign(
-    variable_type=metadata["variable_type"].fillna("not specified")
-)
-
 metadata_type_counts = (
-    metadata_for_charts
+    metadata_types
     .groupby("variable_type", as_index=False)
     .size()
     .rename(columns={"size": "features"})
@@ -663,14 +659,20 @@ metadata_type_counts = (
 metadata_type_counts
 ```
 
-Read the transformation in order:
 
-1. Start with 26 rows, one per AVONET feature, and label the two blank
-   `variable_type` entries as `not specified`.
-2. `groupby("variable_type")` collects rows that share the same type.
-3. `.size()` counts how many rows are in each group.
-4. The result has one row per type and a new `features` column containing the
-   count.
+
+The metadata's `variable_type` column has two
+blank entries. As we do not want a blank group label, copy it into a
+new column with the blanks filled in.
+
+```{pyodide}
+metadata_types = metadata.assign(
+    documented_type=metadata["variable_type"].fillna("not specified")
+)
+
+# your code
+```
+
 
 Now the chart is straightforward. Each row of `metadata_type_counts` becomes
 one bar. The type determines the bar's vertical position; the number of
@@ -681,9 +683,9 @@ features determines its length.
  .mark_bar(color="#30a8b1")
  .encode(
      x=alt.X("features:Q", title="Number of features"),
-     y=alt.Y("variable_type:N", title=None, sort="-x"),
+     y=alt.Y("documented_type:N", title=None, sort="-x"),
      tooltip=[
-         alt.Tooltip("variable_type:N", title="Variable type"),
+         alt.Tooltip("documented_type:N", title="Documented type"),
          alt.Tooltip("features:Q", title="Features"),
      ],
  )
@@ -695,7 +697,7 @@ features determines its length.
 ```
 
 The aggregation happens in Pandas and the visual encoding happens in Altair.
-Keeping those two steps visible makes it clear what one bar represents. Later
+Later
 we will build tables with `mean`, `median`, `min`, `max` and quantiles before
 comparing how those different summaries change a chart's claim.
 
@@ -711,8 +713,7 @@ Return to the `record_chart` cell and try these edits separately:
    but their semantic type (and therefore the scale) did.
 
 For each edit, name the component you changed: data, mark, encoding,
-aggregation, scale, guide or view. That vocabulary will be used throughout
-the course.
+aggregation, scale, guide or view.
 :::
 
 Use this sequence when designing the charts that follow:
@@ -734,7 +735,7 @@ audit = pd.DataFrame({
     "missing_n": birds.isna().sum().values,
     "missing_pct": (birds.isna().mean().mul(100).round(2)).values,
     "distinct_observed": birds.nunique(dropna=True).values,
-}).merge(metadata_for_charts[["column", "description", "variable_type", "unit"]],
+}).merge(metadata_types[["column", "description", "documented_type", "unit"]],
          on="column", how="left")
 
 print(f"audit table built: one row for each of the {len(audit)} columns")
@@ -750,7 +751,7 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
      x=alt.X("missing_pct:Q", title="Missing rows (%)",
              scale=alt.Scale(domain=[0, 100])),
      y=alt.Y("column:N", title=None, sort=column_order),
-     color=alt.Color("variable_type:N", title="Variable type"),
+     color=alt.Color("documented_type:N", title="Documented type"),
      tooltip=[
          alt.Tooltip("column:N", title="Column"),
          alt.Tooltip("missing_n:Q", title="Missing", format=","),
@@ -765,9 +766,8 @@ column_order = (audit.sort_values(["missing_pct", "column"], ascending=[False, T
 Why this visual form? `column` is nominal and has 26 levels, so it works as a
 text-labelled y-position but not as 26 colours. `missing_pct` is quantitative,
 so bar length on a common x-axis makes values directly comparable. Colour
-shows AVONET's documented variable type; it is not a classification added for
-the chart. The quantitative scale is fixed to the meaningful 0–100% domain
-and starts at zero; truncating a bar scale would exaggerate small differences.
+shows AVONET's documented variable type. The quantitative scale is fixed to the meaningful 0–100% domain
+and starts at zero (truncating a bar scale would exaggerate small differences).
 Exact values remain in tooltips rather than cluttering every bar.
 
 Two fields, `locality` and `country`, are completely blank in this public
@@ -775,13 +775,12 @@ release; `country_wri` is the usable harmonised geography field. The
 publication field is mostly blank because most rows are direct specimen or
 field measurements rather than measurements transcribed from papers. Wing
 length is almost complete, while several flight-shape and beak measurements
-are absent in roughly one-third of rows. There is no single universal
-"complete case" definition: it depends on the traits being compared.
+are absent in roughly one-third of rows.
 
 ### Row-level completeness
 
 Column percentages do not show whether gaps fall in the same birds. Count
-the number of observed morphology fields in every row, then ask whether
+the number of observed morphology fields in every row, and check whether
 leading data sources measured the same trait set.
 
 ```{pyodide}
@@ -841,23 +840,20 @@ the discrete palette used for documented variable types in the missingness
 chart. Colour is less precise than position, but it is effective for scanning
 a two-dimensional matrix for blocks and exceptions.
 
-The pattern in this heatmap has a name. Statisticians distinguish data
+Statisticians distinguish data
 missing completely at random (MCAR), missing at random given known
 variables (MAR), and missing not at random (MNAR, where the gap depends on
 the unobserved value itself). Whole missing blocks aligned with sources
 are direct evidence against MCAR: absence here is predictable from
-provenance. The practical consequence is that complete-case analysis does
-not just shrink the sample, it **reweights** it toward the sources that
-measured everything, and any trait difference between sources rides along.
-The taxonomy is from Little and Rubin's *Statistical Analysis with Missing
-Data*, and "which mechanism?" is a standard screening question.
+provenance. The consequence is that complete-case analysis both
+shrinks the sample and **reweights** it toward the sources that
+measured everything.
+
 
 ### Identity and taxonomy checks
 
-The four taxonomic name columns are not redundant copies. They represent
-different taxonomic authorities, and splits or lumps can assign the same
-individual to different names. AVONET also supplies `avibase_id` as a more
-stable bridge.
+The four taxonomic name columns represent
+different taxonomic authorities. These can be compared in terms of the number of labels and the level of coverage.
 
 ```{pyodide}
 taxonomy_columns = ["species", "species_ebird", "ebird_species_group",
@@ -889,35 +885,13 @@ gaps_chart = (alt.Chart(taxonomy_audit).mark_bar(color="#e66852")
 labels_chart | gaps_chart
 ```
 
-```{pyodide}
-duplicate_rows = birds[birds.duplicated(keep=False)]
 
-pd.Series({
-    "duplicate rows beyond the first copy": birds.duplicated().sum(),
-    "all rows involved in an exact-duplicate group": len(duplicate_rows),
-    "distinct repeated full-row patterns": len(duplicate_rows.drop_duplicates()),
-})
-```
 
-There are 261 rows beyond the first occurrence with the same values in all 26
-served columns, involving 457 rows altogether. Equality across the available
-columns does not prove they are repeated measurements of one bird: some rows
-lack accession numbers, and two individuals can otherwise share the recorded
-values. The publication states that duplicate measurements were discounted,
-so retain the documented individual-bird unit and flag these rows for source
-checking rather than silently deleting or reinterpreting them.
-
-### Who and what was sampled?
-
-Four coded fields expose the design of the sample. Decode them before using
-them as if they were continuous numbers.
+Four numerically encoded fields should be decoded instead of treated as continuous numbers.
 
 For these categorical features, `count` is the natural first aggregate. A
-sorted bar chart uses position and length to compare category frequencies;
-the zero baseline gives length an honest origin. Computing a mean of the
-stored codes would be concise but semantically empty. Dividing each count by
-its field total would produce proportions instead when relative composition,
-rather than workload, is the question.
+sorted bar chart uses position and length to compare category frequencies.
+
 
 ```{pyodide}
 code_specs = {
@@ -956,14 +930,12 @@ measured rows were taken under a protocol other than the AVONET protocol.
 These imbalances may matter if sex, age, preservation, or protocol changes a
 trait.
 
-### The unit of analysis: individuals per species
+### Individuals per species
 
-With the design fields decoded, the first content question is not about
-any measurement. It is about the **unit of analysis**. The 90,020 measured
+The first content question is about the **unit of analysis**. The 90,020 measured
 rows are individual museum specimens or live birds. The claims of this part
 are about species, so before looking at a trait we ask: how many individuals
-does each species contribute, and how unevenly is that effort spread? Every
-later summary inherits its stability from these counts.
+does each species contribute?
 
 ```{pyodide}
 depth_summary = (species_depth["individuals"]
@@ -1018,11 +990,8 @@ Before reading on, compare the two displays:
 
 The median measured species has five individuals, 383 species have only one,
 and the most-sampled species has 784. Treating all 90,020 individuals as
-independent would let a few heavily sampled species dominate; treating every
-species mean as equally precise would ignore the opposite problem. And the
-accounting closes: 10,669 species have at least one measured individual, and the
-remaining 351 of the 11,020 named species are exactly the taxonomy-only
-GAPSPECIES rows.
+independent would let a few heavily sampled species dominate, while treating every
+species mean as equally precise would ignore the opposite problem.
 
 ### Provenance and geographic coverage
 
@@ -1053,21 +1022,17 @@ source_chart | country_chart
 Each view performs two transformations before drawing a mark: `count` rows by
 category, then keep the 15 largest counts. That top-$N$ filter makes labels
 readable but hides the long tail, so the title must disclose it. We use two
-separate panels with independent category axes instead of one shared colour
-legend containing unrelated codes.
+separate panels with independent category axes.
 
 The NHMUK source alone contributes 46,060 rows, and the largest country
-counts come from tropical, species-rich regions rather than an even global
-sample. Contributor concentration is not automatically a flaw, but it warns
-us that source, protocol, geography, and morphology may be entangled.
+counts come from tropical, species-rich regions.
+We can infer that relationhips may exist between source, protocol, geography, and morphology.
 
-### All ten morphological columns
+### Morphological features
 
 The table contains ten morphology fields: four beak dimensions, tarsus
 length, three wing-feather lengths, hand-wing index, and tail length. The
-summary below includes every one of them. The 1st and 99th percentiles are
-shown alongside minima and maxima because means and standard deviations alone
-hide long tails and suspicious edge values.
+summary below includes the 1st and 99th percentiles alongside minima and maxim, because means and standard deviations alone hide outliers.
 
 ```{pyodide}
 trait_catalogue = (metadata
@@ -1104,11 +1069,7 @@ trait_summary.round(2)
 ```
 
 All observed trait values are positive, so logarithms are mathematically
-defined. That does **not** make every value biologically credible. Values of
-exactly 0.1 occur in several feather fields and in hand-wing index; on the
-log scale they become isolated points far below the main distributions. They
-need species-level inspection before deciding whether they are measurements,
-rounding artefacts, or placeholders.
+defined.
 
 ```{pyodide}
 hist_rows = []
@@ -1155,11 +1116,72 @@ make shapes comparable across traits, while independent facet scales let each
 trait use its own range. That choice helps see shape but prevents direct
 comparison of absolute magnitudes across panels.
 
+#### Violin plots: a smoothed view of distribution shape
+
+A violin plot estimates the distribution continuously rather than dividing it
+into histogram bins. At any vertical position, the width of the violin shows
+the estimated density of observations near that value. Wide regions contain
+concentrated values; narrow regions contain relatively few.
+
+To keep the browser chart responsive, take the same reproducible sample of at
+most 2,000 observed values from each trait. Sampling is only for drawing the
+violins; the summary table and histograms above still use every observed row.
+
+```{pyodide}
+violin_data = (birds[trait_columns]
+    .rename(columns=trait_names)
+    .melt(var_name="trait", value_name="value")
+    .dropna())
+violin_data["log10_value"] = np.log10(violin_data["value"])
+
+violin_sample = pd.concat(
+    [group.sample(n=min(len(group), 2_000), random_state=36104)
+     for _, group in violin_data.groupby("trait")],
+    ignore_index=True,
+)
+
+(alt.Chart(violin_sample)
+ .transform_density(
+     "log10_value",
+     as_=["log10_value", "density"],
+     groupby=["trait"],
+ )
+ .mark_area(orient="horizontal", color="#30a8b1", opacity=0.82)
+ .encode(
+     x=alt.X(
+         "density:Q",
+         stack="center",
+         impute=None,
+         title=None,
+         axis=alt.Axis(labels=False, ticks=False, grid=False),
+     ),
+     y=alt.Y("log10_value:Q", title="log10(value)"),
+ )
+ .properties(width=120, height=180)
+ .facet(
+     facet=alt.Facet(
+         "trait:N",
+         title=None,
+         sort=trait_catalogue["trait"].tolist(),
+         header=alt.Header(labelAngle=0, labelLimit=120),
+     ),
+     columns=5,
+ )
+ .resolve_scale(x="independent", y="independent"))
+```
+
+Compare these violins with the histograms. The violins avoid a visible bin
+boundary and make modes easier to scan, but their shape depends on the density
+bandwidth. Each facet is independently scaled and normalised, so widths cannot
+be compared as sample sizes and vertical positions cannot be compared as
+absolute magnitudes across traits. Use the histogram or summary table when
+you need counts, ranges, or exact values.
+
 ### Linear and logarithmic scales
 
 A scale maps a **data domain** to a **visual range**. An x-scale maps numbers
 to horizontal pixel positions; a colour scale maps values or categories to
-colours. The scale is part of the argument, because it defines what equal
+colours. The scale defines what equal
 visual distances mean.
 
 The next two charts use exactly the same values and point marks. On the linear
@@ -1190,11 +1212,8 @@ log_scale = scale_base.encode(
 linear_scale | log_scale
 ```
 
-The same decision matters in the bird measurements. A linear scale foregrounds
-absolute millimetre differences among larger birds; a log scale opens the
-small-bird region and frames the relationship in ratios, which is appropriate
-for a power law. A log scale is only defined for positive values, so its use
-depends on the earlier validity check.
+A log scale opens  is appropriate
+for a power law relationship. A log scale is only defined for positive values.
 
 ```{pyodide}
 scale_pair = birds.dropna(
@@ -1227,11 +1246,9 @@ log_birds = bird_points.encode(
 linear_birds | log_birds
 ```
 
-Notice another scale rule: bars generally need a zero baseline because length
-encodes magnitude; scatterplots do not always need zero because position, not
-length, carries the comparison. Any truncated position scale should still be
-visible and justified. A scale can reveal structure, but it must never be used
-silently to manufacture it.
+Bars generally need a zero baseline because length
+encodes magnitude. Scatterplots do not always need zero because position, not
+length, carries the comparison.
 
 ### Correlations among the ten traits
 
@@ -1283,11 +1300,9 @@ of the colours. The printed values provide precision; colour provides pattern.
 
 ### Regression on raw and logged scales
 
-A regression line can summarise a bivariate trend, but its meaning depends on
-the variables fitted. A straight-line fit in raw millimetres asks about
+A regression line can summarise a bivariate trend. A straight-line fit in raw millimetres relates
 additive change. A straight-line fit after logging both features asks about
-proportional change and estimates an allometric exponent. Merely changing the
-axis scale is not the same as changing the model.
+proportional change and estimates an allometric exponent.
 
 The charts below use the same deterministic 8,000-row display sample. Altair's
 `transform_regression()` performs the aggregation from thousands of points to
@@ -1352,14 +1367,14 @@ raw_regression | log_regression
 ```
 
 The red line is a model layer, not proof of mechanism or causality. Outliers
-can pull it, unevenly sampled species can dominate it, and a single pooled
+and unevenly sampled species can dominate it. A single pooled
 line can hide different trends by sex, source, protocol, or species. A useful
-visualisation states what was fitted, on which scale, to which rows, and at
+visualisation should state what was fitted, on which scale, to which rows, and at
 which unit of analysis.
 
 ### Subgroup check: museum specimens versus live birds
 
-The record-type field from the design audit earns its keep here. Fit the
+Fit the
 same log-log regression separately for museum specimens and live birds:
 
 ```{pyodide}
@@ -1401,19 +1416,17 @@ the pooled fit, while the live-bird slope is almost exactly **zero**. That
 is not because live birds obey different biology. The live records cover
 only 702 species, mostly small passerines from a few ringing projects, so
 their tarsus lengths span a much narrower range (log10 spread 0.16, versus
-0.25 for specimens). Within a thin slice of the size axis the
-between-species scaling signal nearly vanishes and noise dominates: classic
-**range restriction**. The lesson generalises. A pooled line describes the
-mixture you happened to assemble, and screening the design fields first is
-what lets you notice.
+0.25 for specimens). Within this narrow range the
+between-species scaling signal nearly vanishes and noise dominates.
 
-### A second subgroup check: the age flag
+### Subgroup check: age
 
 The metadata warned that `age = 1` marks birds measured while immature,
-and immature birds can have not-fully-grown flight feathers. Check it,
-but carefully: comparing all adult wings against all immature wings would
-mostly compare different species. The fair test is within species. For
-every species with at least five adult and three immature wing
+and immature birds can have not-fully-grown flight feathers.
+Comparing all adult wings against all immature wings would
+mostly compare different species, but the fair test is within species.
+
+For every species with at least five adult and three immature wing
 measurements, take the ratio of the two means:
 
 ```{pyodide}
@@ -1442,17 +1455,13 @@ print(f"✓ median ratio {enough['ratio'].median():.3f}: immature wings run abou
 print("  1.3% short, in 77 of 108 species, just as the metadata warned")
 ```
 
-The effect is small but real, and it was found the right way: within
-species, so that species composition cannot fake it. This is the same
-lesson as the museum-versus-live check at a smaller scale. A design
-field the dictionary flagged turned out to matter, and an analysis of
+The effect is small but real. An analysis of
 wing length can now decide, explicitly, whether to exclude the 1,269
 immature rows or accept a percent of shrinkage.
 
 ### Choosing an aggregation function
 
-An aggregate turns many rows into one value or mark. Different functions are
-not interchangeable summaries:
+An aggregate turns many rows into one value or mark.
 
 | Aggregate | Question answered | Useful visual role | Main caution |
 |---|---|---|---|
@@ -1466,8 +1475,7 @@ not interchangeable summaries:
 
 The next transformation groups wing measurements by species and calculates
 all the defensible summaries at once. The chart then layers the full range,
-interquartile range, median, and mean for the 15 most-sampled species. Each
-layer answers a different question about the same groups.
+interquartile range, median, and mean for the 15 most-sampled species.
 
 ```{pyodide}
 species_wing = (measured.dropna(subset=["species", "wing_length_mm"])
@@ -1528,7 +1536,7 @@ mean_mark = wing_base.mark_circle(color="#e66852", size=55).encode(
 Mean and median can be compared across every measured species. The diagonal
 reference line means equality; departures identify species whose wing-length
 distribution is asymmetric or affected by extreme records. Point area encodes
-sample size, reminding us that a difference based on two birds is not as
+sample size, reminding the viewer that a difference based on two birds is not as
 stable as one based on two hundred.
 
 ```{pyodide}
@@ -1562,13 +1570,13 @@ identity_line = (alt.Chart(identity_limits).mark_line(
 )
 ```
 
-This is why every chart caption should name both the **grouping level** and
+Every chart caption should name both the **grouping level** and
 the **aggregate function**. "Wing length by species" is incomplete; "median
 individual wing length within each species" is a reproducible visual claim.
 
-### What the EDA has established
+### Conclusion
 
-- The raw worksheet contains 90,020 individual birds and 351 taxonomy-only
+- The EDA has established that the raw worksheet contains 90,020 individual birds and 351 taxonomy-only
   rows, not 90,371 interchangeable observations.
 - All 26 columns now have an explicit semantic type, role, unit, coverage
   count, suitable aggregate, candidate visual form, and scale.
@@ -1591,15 +1599,9 @@ individual wing length within each species" is a reproducible visual claim.
 Only after this audit are we ready to choose two traits and define the rows
 that can support their comparison.
 
-One principle before moving on. Everything above is **exploration**, and
-exploration generates hypotheses rather than confirming them: a pattern
-noticed while rummaging cannot be certified by the same look at the same
-data (Tukey's exploratory/confirmatory distinction; Gelman and Loken call
-the danger the "garden of forking paths"). This part stays exploratory.
-When a later assessment asks you to test a claim, the test must be
-specified before the rummaging starts.
 
-::: {.callout-note title="Where these practices come from"}
+
+::: {.callout-note title="Sources"}
 - Tukey (1977), *Exploratory Data Analysis*: the founding text.
 - Baillie et al. (2022), [Ten simple rules for initial data analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS Computational Biology*: the assigned reading for this page.
 - Huebner et al. (2018), *A contemporary conceptual framework for initial data analysis*, Observational Studies 4:171–192: the full IDA framework.
@@ -1610,18 +1612,16 @@ specified before the rummaging starts.
 - Broman and Woo (2018), [Data organization in spreadsheets](https://doi.org/10.1080/00031305.2017.1375989), *The American Statistician*: data dictionaries and raw-file hygiene.
 :::
 
-### Cleaning: where do the rows go?
+### Cleaning
 
 We want to plot beak length against tarsus length, which means every row we
-use needs **both** measurements (and a species name). Museum specimens are
-imperfect: a damaged bill or a folded skin means one trait was measured and
-the other was not. Count the gaps before touching anything:
+use needs **both** measurements (and a species name). Count the gaps first.
 
 ```{pyodide}
 birds.isna().sum()
 ```
 
-Every column has holes, and they are not the same holes. Keep only the rows
+Keep only the rows
 that can support the comparison we actually want to make:
 
 ```{pyodide}
@@ -1640,12 +1640,10 @@ pd.Series({
 ```
 
 We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
-step, but it is a decision, it changes what "n" means in every caption
-downstream, and it must be disclosed. Any figure built from this table
+step, but  must be disclosed. Any figure built from this table
 should say 69,509 individual birds, not 90,371 worksheet rows.
 
-Clinical trials report exactly this accounting as a flow diagram (the
-CONSORT standard), and the habit transfers to any analysis: you should be
+You should be
 able to draw the path from raw file to analysed rows, with the rule that
 caused every drop.
 
@@ -1672,8 +1670,7 @@ row_flow = pd.DataFrame([
 ### The individual level
 
 Each point is one individual museum specimen or live bird retained after
-requiring both traits. Both axes are logged: allometry is about ratios, and a
-hummingbird and an ostrich need to share a readable axis.
+requiring both traits. Both axes are logged (allometry is about ratios).
 
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -1692,9 +1689,9 @@ r_ind = np.corrcoef(np.log10(clean["tarsus_length_mm"]),
 print(f"correlation of the logged traits, individual level: r = {r_ind:.3f}")
 ```
 
-### The groupby: from individuals to species
+### Aggregation to species
 
-One line of code changes what a point *means*. `groupby("species").mean()`
+`groupby("species").mean()`
 collapses the retained individuals for a species into one species mean:
 
 ```{pyodide}
@@ -1730,8 +1727,7 @@ Averaging removed 59,000 points but the cloud barely tightened
 (r ≈ 0.61 → 0.62). Within-species measurement scatter is small compared to
 the real, ecological differences in beak shape *between* species:
 hummingbirds, finches and curlews genuinely sit in different places.
-Aggregation is not a magic de-noiser: it removes exactly the variation that
-happens within groups, no more.
+
 
 ### Your turn: a different trait pair {#sec-ex-wing}
 
@@ -1805,7 +1801,7 @@ ax.set_ylabel("log10 wing length (mm)")
 ax.set_title(f"Species means (n = {len(species_w):,})")
 plt.show()
 ```
-
+<!--
 Wing length is missing in only ~1,100 rows, so this cleaning keeps far more
 data than the beak comparison did: the n you report depends on the
 comparison you chose. The wing–tarsus cloud is also tighter than
@@ -1818,11 +1814,16 @@ birds whose wing length is coded as **0.1 mm**, a placeholder, not a
 measurement. `dropna` cannot catch missingness that has been written down
 as a fake number. Keep that idea within reach: this is not the last
 sentinel value in this course, and the only reliable detector is looking
-at the chart.
+at the chart. -->
 :::
 
 
 ## Part II · Amniote Life-History Database
+
+**Amniotes** are vertebrates whose embryos develop within a set of protective
+membranes that includes the amnion. Living amniotes comprise mammals and the
+sauropsid lineage: reptiles, including birds. The term names a shared branch
+of vertebrate evolution; it is not itself a variable in the dataset.
 
 The second dataset served with this page is the **Amniote life-history
 database** (Myhrvold et al. 2015): one row per species, 21,322 of them
