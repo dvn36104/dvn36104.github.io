@@ -341,30 +341,74 @@ assert sum(len(c.children) for c in taxonomy.children) == 72
 print("✓ 465 families in 72 orders in 3 classes, exactly as the columns nest")
 ```
 
-Branch lengths are all set to 1, so x is simply rank:
+This first tree is a hierarchy, not a dated phylogeny. Put each taxonomic rank
+in its own categorical column and draw every node explicitly. The horizontal
+spacing separates ranks; it does not measure evolutionary distance or time.
 
 ```{pyodide}
-fig, ax = plt.subplots(figsize=(9, 7))
-draw_tree(taxonomy, ax, lw=0.5)
+layout(taxonomy)
+
+fig, ax = plt.subplots(figsize=(9, 8))
+
+# Straight lines show parent-child membership.
+edge_x, edge_y = [], []
+for node in taxonomy.walk():
+    if node.parent is not None:
+        edge_x.extend([node.parent.depth, node.depth, None])
+        edge_y.extend([node.parent.y, node.y, None])
+ax.plot(edge_x, edge_y, color="#c7ccd4", lw=0.45, zorder=1)
+
+# A point is a node. Plot each rank separately so the hierarchy is visible.
+rank_style = {
+    0: ("#1f3b5d", 85),
+    1: ("#4269d0", 42),
+    2: ("#30a8b1", 15),
+    3: ("#8b95a5", 7),
+}
+for rank, (colour, size) in rank_style.items():
+    nodes = [node for node in taxonomy.walk() if node.depth == rank]
+    ax.scatter(
+        [node.depth for node in nodes],
+        [node.y for node in nodes],
+        s=size,
+        color=colour,
+        edgecolors="white" if rank < 2 else "none",
+        linewidths=0.6,
+        zorder=3,
+    )
+
+# Label the single root and the three class nodes.
+ax.annotate("Amniota", (taxonomy.depth, taxonomy.y),
+            xytext=(-8, 0), textcoords="offset points",
+            ha="right", va="center", fontsize=9, fontweight="bold")
+for class_node in taxonomy.children:
+    ax.annotate(class_node.name, (class_node.depth, class_node.y),
+                xytext=(6, 0), textcoords="offset points",
+                ha="left", va="center", fontsize=8, color="#244d9b")
+
 ax.set_xticks([0, 1, 2, 3])
-ax.set_xticklabels(["root", "class", "order", "family"])
-ax.set_title(f"The tree encoded by Part A's taxonomy columns: {len(fams)} families")
+ax.set_xticklabels(["ROOT\n1 node", "CLASS\n3 nodes",
+                    "ORDER\n72 nodes", "FAMILY\n465 nodes"])
+ax.xaxis.tick_top()
+ax.tick_params(axis="x", length=0, pad=9)
+ax.set_xlim(-0.28, 3.08)
+ax.set_ylim(-8, len(fams) + 7)
+ax.invert_yaxis()
+ax.set_yticks([])
+ax.grid(axis="x", color="#e8ebef", linewidth=0.8, zorder=0)
+for side in ("left", "right", "top", "bottom"):
+    ax.spines[side].set_visible(False)
+ax.set_title("The hierarchy encoded by Part A's taxonomy columns", pad=42)
+plt.tight_layout()
 plt.show()
 ```
 
-Note that the structure of this tree is limited to the four categorical grouping variables;
-vertical order is arbitrary and nothing makes one
-order closer to another.
+Each dot is now countable: one root, three classes, 72 orders and 465
+families. A line means "belongs to". The vertical ordering only keeps each
+parent near its children; it does not make neighbouring orders more closely
+related. The table records membership at four ranks, not evolutionary
+distances between the groups.
 
-[TimeTree](https://timetree.org) (Kumar et al. 2022) provides data sets on relationships between species
-that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree.
-
-
-| File | Tips | What one tip is |
-|---|---|---|
-| `amniotes_family.nwk` | 956 | one family of amniotes (mammals, birds, reptiles) |
-| `eukaryotes_class.nwk` | 235 | one class of eukaryotes: animals, fungi, plants, protists |
-| `eukaryotes_phylum.nwk` | 66 | one phylum of eukaryotes |
 
 ## 2 · Phylogenetic trees
 
@@ -385,6 +429,18 @@ To turn relative ages into millions of years, the tree is calibrated
 against fossils whose age and position are known. TimeTree, the source of
 our files, aggregates thousands of such published studies into consensus
 dated trees.
+
+
+[TimeTree](https://timetree.org) (Kumar et al. 2022) provides data sets on relationships between species
+that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree.
+
+
+| File | Tips | What one tip is |
+|---|---|---|
+| `amniotes_family.nwk` | 956 | one family of amniotes (mammals, birds, reptiles) |
+| `eukaryotes_class.nwk` | 235 | one class of eukaryotes: animals, fungi, plants, protists |
+| `eukaryotes_phylum.nwk` | 66 | one phylum of eukaryotes |
+
 
 Before we can draw a tree we need it as data. The standard format,
 **Newick**, writes a tree as nested parentheses: each pair of parentheses
