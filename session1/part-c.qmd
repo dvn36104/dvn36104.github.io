@@ -53,12 +53,12 @@ mass   = objects["mass_g"].to_numpy()
 radius = objects["radius_cm"].to_numpy()
 
 group_colours = {
-    "particles":         "#666666",
-    "life":              "#30a8b1",
-    "worlds":            "#4269d0",
-    "stars":             "#c98a00",
-    "black holes":       "#171717",
-    "cosmic structures": "#9475cd",
+    "particles":         "#767676",
+    "life":              "#00A676",
+    "worlds":            "#1D5FD1",
+    "stars":             "#E49B0F",
+    "black holes":       "#111111",
+    "cosmic structures": "#C0448F",
 }
 
 LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
@@ -289,8 +289,7 @@ A 70 kg human has a volume of roughly 70 litres because the human body is
 close to the density of water. The calculation gives 524 litres only because
 we forced the 50 cm characteristic size into a formula for a sphere. The
 result does **not** show that humans have a density of 0.13 g/cm³.
-
-This is a warning about the axis. Radius is a geometric measurement for a
+Radius is a geometric measurement for a
 planet or star, but an approximate characteristic size for an irregular object
 such as a flea, human or whale. The chart is designed for comparisons across
 many orders of magnitude, not precise estimates of each object's density.
@@ -303,12 +302,12 @@ worlds, stars, black holes (black, naturally), and cosmic structures.
 
 ```{pyodide}
 group_colours = {
-    "particles":         "#666666",
-    "life":              "#30a8b1",
-    "worlds":            "#4269d0",
-    "stars":             "#c98a00",
-    "black holes":       "#171717",
-    "cosmic structures": "#9475cd",
+    "particles":         "#767676",
+    "life":              "#00A676",
+    "worlds":            "#1D5FD1",
+    "stars":             "#E49B0F",
+    "black holes":       "#111111",
+    "cosmic structures": "#C0448F",
 }
 
 LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
@@ -385,12 +384,35 @@ possibility, empty. Why?
 
 ## 3 · Lines of constant density
 
-Any object of roughly uniform density $\rho$ obeys
-$m = \frac{4}{3}\pi \rho\, r^3$. Take logs and this becomes
-$\log m = 3\log r + \text{const}$: on our axes, **a straight line of
-slope 3**, one line per density. Chemistry pins atomic matter near
-$\rho \approx 1\ \text{g/cm}^3$; nuclear matter sits fourteen decades
-higher:
+Density is mass divided by volume:
+
+$$\rho = \frac{m}{V}.$$
+
+Here $\rho$ (the Greek letter *rho*) is density in grams per cubic centimetre,
+$m$ is mass in grams, and $V$ is volume in cubic centimetres. Rearranging the
+definition gives $m = \rho V$: an object's mass is its density multiplied by
+the space it occupies.
+
+For a sphere of radius $r$, the volume is
+
+$$V = \frac{4}{3}\pi r^3,$$
+
+where $r$ is the radius in centimetres and $\pi$ is the geometric constant pi.
+Substituting the sphere's volume into $m = \rho V$ gives
+
+$$m = \frac{4}{3}\pi \rho r^3.$$
+
+This is exact for a uniform sphere and an approximation when an irregular
+object is represented by a characteristic radius and an average density. At a
+fixed density, doubling the radius multiplies the volume—and therefore the
+mass—by $2^3 = 8$.
+
+Taking logs gives $\log m = 3\log r + \text{constant}$. A constant-density
+relationship therefore appears as a straight line with **slope 3** on the log–log
+chart. Different densities have the same slope but different vertical
+positions. Ordinary atomic matter lies near
+$\rho \approx 1\ \text{g/cm}^3$; nuclear matter sits fourteen orders of
+magnitude higher:
 
 ```{pyodide}
 r_line = np.logspace(-35, 30, 200)
