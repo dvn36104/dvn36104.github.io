@@ -310,16 +310,7 @@ print(f"volume of a sphere with radius 50 cm: {sphere_volume_litres:.0f} litres"
 print(f"70 kg divided by that volume: {rho_human:.2f} g/cm³")
 ```
 
-::: {.callout-important title="Approximate Magnitude"}
-A 70 kg human has a volume of roughly 70 litres because the human body is
-close to the density of water. The calculation gives 524 litres only because
-we forced the 50 cm characteristic size into a formula for a sphere. The
-result does **not** show that humans have a density of 0.13 g/cm³.
-Radius is a geometric measurement for a
-planet or star, but an approximate characteristic size for an irregular object
-such as a flea, human or whale. The chart is designed for comparisons across
-many orders of magnitude, not precise estimates of each object's density.
-:::
+
 
 ## 2 · All 29 objects
 
@@ -439,10 +430,10 @@ object_layers(point_size=75).properties(
 )
 ```
 
-The interesting thing is where the points
-**aren't**:  Nothing in the top-left (small but extremely heavy), nothing
-in the bottom-right (huge but almost massless). Two whole corners of
-possibility, empty. Why?
+Interestingly, there are **no** points in the top-left area (small but extremely heavy),
+**nor** in the bottom-right (huge but almost massless).
+
+Why are these corners empty?
 
 ## 3 · Lines of constant density
 
@@ -452,8 +443,8 @@ $$\rho = \frac{m}{V}.$$
 
 Here $\rho$ (the Greek letter *rho*) is density in grams per cubic centimetre,
 $m$ is mass in grams, and $V$ is volume in cubic centimetres. Rearranging the
-definition gives $m = \rho V$: an object's mass is its density multiplied by
-the space it occupies.
+definition gives $m = \rho V$ (an object's mass is its density multiplied by
+the space it occupies).
 
 For a sphere of radius $r$, the volume is
 
@@ -465,32 +456,48 @@ Substituting the sphere's volume into $m = \rho V$ gives
 $$m = \frac{4}{3}\pi \rho r^3.$$
 
 This is exact for a uniform sphere and an approximation when an irregular
-object is represented by a characteristic radius and an average density. At a
+object is represented by a characteristic radius and an average density.
+
+::: {.callout-important title="Approximate Magnitude"}
+A 70 kg human has a volume of roughly 70 litres because the human body is
+close to the density of water. The calculation gives 524 litres only because
+we forced the 50 cm characteristic size into a formula for a sphere. The
+result does **not** show that humans have a density of 0.13 g/cm³.
+Radius is a geometric measurement for a
+planet or star, but an approximate characteristic size for an irregular object
+such as a flea, human or whale. The chart is designed for comparisons across
+many orders of magnitude, not precise estimates of each object's density.
+:::
+
+
+
+At a
 fixed density, doubling the radius multiplies the volume—and therefore the
 mass—by $2^3 = 8$.
 
 Taking logs gives $\log m = 3\log r + \text{constant}$. A constant-density
-relationship therefore appears as a straight line with **slope 3** on the log–log
-chart. Different densities have the same slope but different vertical
+relationship therefore appears as a straight line with **slope 3 on the log–log chart**.
+
+Different densities have the same slope but different vertical
 positions.
 
-**Atomic density** and **nuclear density** are two useful reference points.
-Condensed atomic matter—water, flesh, rock and many solids and liquids—often
+**Atomic density** describes typical condensed atomic matter:
+water, flesh, rock and many solids and liquids often
 has an average density near $\rho \approx 1\ \text{g/cm}^3$. Its mass is spread
-over the full volume occupied by atoms, including the space between each tiny
-nucleus and its electrons.
+over the full volume occupied by atoms, including the space between
+nucleus and electrons. Several familiar
+condensed objects —-- viruses, animals, asteroids, planets and the Sun —-- fall near
+the atomic-density line.
 
 **Nuclear density** is about $2.3 \times 10^{14}\ \text{g/cm}^3$: fourteen
-orders of magnitude greater. At this density, atoms no longer exist as
-separate structures; protons and neutrons are packed together as they are
-inside an atomic nucleus. One cubic centimetre would contain roughly 230
+orders of magnitude greater. At this density protons and neutrons are packed together as they are
+inside an atomic nucleus, so atoms no longer exist as
+separate structures. One cubic centimetre would contain roughly 230
 billion kilograms of matter. Atomic nuclei and neutron stars lie near this
 density.
 
-While most objects lie between the two lines, red giants, galaxy clusters and the
-Universe have average densities far below the atomic line. For fundamental
-particles and black holes, “density” is difficult to interpret
-because the plotted radius does not describe uniform material.
+Most objects lie between the two lines. However, red giants, galaxy clusters and the
+Universe have average densities far below the atomic line.
 
 ```{pyodide}
 r_line = np.logspace(-35, 30, 200)
@@ -548,14 +555,10 @@ density_labels = alt.Chart(density_label_data).mark_text(
 )
 ```
 
-The lines give the scatter a skeleton without enclosing it. Several familiar
-condensed objects—viruses, animals, asteroids, planets and the Sun—fall near
-the atomic-density line. That was the approximate straight relationship
-hiding in the five familiar objects. Other objects sit nowhere near it.
 
-The proton and the neutron star, nineteen decades apart in size, both sit near
-the nuclear-density line: **a neutron star is matter at approximately the
-density of an atomic nucleus, compressed into an object the size of a city**.
+The proton and the neutron star both sit near
+the nuclear-density line. A neutron star is matter at approximately the
+density of an atomic nucleus, compressed into an object the size of a city.
 
 ```{pyodide}
 rho_all = mass / (4/3 * np.pi * radius**3)
@@ -568,16 +571,19 @@ print(f"densest object:  {names[int(np.argmax(rho_all))]}")
 print(f"fluffiest object: {names[int(np.argmin(rho_all))]}")
 ```
 
-Read that last line again: the least dense thing in the Universe **is the
-Universe**, about $10^{-29}\ \text{g/cm}^3$, six protons per cubic metre.
+The least dense thing in the Universe is (obviously?) **the
+Universe itself**, about $10^{-29}\ \text{g/cm}^3$, six protons per cubic metre.
 
-### Your turn: interrogate the densities {#sec-ex-density}
+### Densities {#sec-ex-density}
 
 You have `rho_all` for all 29 objects. Rank everything by density and
-print a table from densest to fluffiest, with the group and the density of
-each object. Then answer from your output: which **group** owns the top of
-the table, and how many decades of density separate a red giant from a
-white dwarf, two objects of nearly the same *mass*?
+print a table from densest to least dense, with the group and the density of
+each object.
+
+Which **group** is at the top of
+the table?
+
+A red giant has nearly te same *mass* as a white dwarf; what is the difference in density?
 
 ```{pyodide}
 #| setup: true
@@ -636,35 +642,65 @@ gap = np.log10(rho_all[names.index("white dwarf")]
 print(f"\nred giant vs white dwarf: {gap:.0f} decades of density")
 ```
 
-The top of the table belongs entirely to **particles**: the top quark
-and Higgs boson are the densest "objects" plotted, though for them
-density is a strange notion (their radius is a quantum limit, not a
-surface). The red giant and white dwarf differ by roughly **12 decades**
-of density despite nearly identical masses; they are the same kind of
-star at two different moments of its life, which is why mass alone tells
-you so little and the mass–radius *pair* tells you so much.
+The top of the table belongs entirely to **particles**. The top quark
+and Higgs boson are the densest "objects" plotted. The red giant and white dwarf differ by roughly **12 decades**
+of density.
 :::
 
-## 4 · The two physical limits
+## 4 · The two walls
 
-Now the physics that gives the chart its shape. Both walls are one-line
-formulas.
 
-**The gravity wall.** Squeeze a mass $m$ into a small enough radius and
-it becomes a black hole. That radius is the Schwarzschild radius
-$r_s = 2Gm/c^2$; for a given radius, the heaviest possible object is
-$m = rc^2/2G$: **slope +1** on our axes. Nothing can sit above this line:
-an object of that mass would already have collapsed. Black holes sit
-exactly *on* it; that is what a black hole is.
 
-**The quantum wall.** Quantum mechanics denies small masses a definite
-tiny size: a particle of mass $m$ cannot be localised below its Compton
-wavelength $\lambda_c = \hbar / mc$, so the lightest possible object of
+There are no objects in the top-left (small but extremely heavy), or
+in the bottom-right (huge but almost massless).
+
+This is because physics bounds the set of feasible mass-radius pairings.
+
+The bounds form two "walls":
+
+**The gravity wall.** A mass $m$ becomes a black hole if compressed into a small enough radius; the Schwarzschild radius
+$r_s = 2Gm/c^2$. For a given radius, the heaviest possible object is
+$m = rc^2/2G$: **slope +1** on our axes. Black holes sit
+exactly *on* this line, and nothing can go above it.
+
+**The quantum wall.** According to quantum mechanics,  a particle of mass $m$ cannot be localised
+below its Compton wavelength $\lambda_c = \hbar / mc$, so the lightest possible object of
 radius $r$ is $m = \hbar/rc$: **slope −1**. Below this line, "object"
-stops meaning anything; try to confine a particle tighter and you create
-new particles instead. Fundamental particles (top quark, Higgs, electron,
-neutrino) are plotted *on* their Compton wavelengths; the composite proton
-gets its measured charge radius.
+stops meaning anything. Fundamental particles (top quark, Higgs, electron,
+neutrino) are plotted *on* their Compton wavelengths.
+
+::: {.callout-note title="Why are the slopes +1 and −1?"}
+On a log–log chart, define
+
+$$x = \log_{10}\!\left(\frac{r}{1\ \mathrm{cm}}\right), \qquad
+y = \log_{10}\!\left(\frac{m}{1\ \mathrm{g}}\right).$$
+
+The gravity wall has the form $m=(c^2/2G)r$. Taking the logarithm turns
+multiplication into addition. Using the numerical values of the constants in
+grams and centimetres:
+
+$$y = x + \log_{10}\!\left(\frac{c^2}{2G}\right)
+   = x + 27.83.$$
+
+The coefficient of $x$ is **+1**, so increasing radius by one order of
+magnitude increases the limiting mass by one order of magnitude. The
+intercept is **27.83**: when $r=1$ cm and therefore $x=0$, the line gives
+$m=6.73\times10^{27}$ g.
+
+The quantum wall has the form $m=(\hbar/c)r^{-1}$. Taking the logarithm gives
+
+$$y = -x + \log_{10}\!\left(\frac{\hbar}{c}\right)
+   = -x - 37.45.$$
+
+The coefficient of $x$ is **−1**, so increasing radius by one order of
+magnitude decreases the limiting mass by one order of magnitude. Its
+intercept is **−37.45**: at $r=1$ cm, the line gives
+$m=3.52\times10^{-38}$ g.
+
+The slopes express the exponents of $r$ and do not depend on the chosen units.
+The intercepts come from $G$, $c$ and $\hbar$ and **do** shift if the axes use
+different units.
+:::
 
 ```{pyodide}
 def schwarzschild_mass(r):   # heaviest object of radius r (it's a black hole)
@@ -740,12 +776,12 @@ quantum_label = alt.Chart(pd.DataFrame({
 ).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
-The empty corners of Step 2 are now explained, and shaded. They are not
-unexplored; they are **impossible**. This is the deepest trick in the
-figure: the *absence* of data is carrying the physics, and the shading
-turns absence into a statement.
+The empty corners of Step 2 are now explained and shaded.
+They are empty because they are **impossible**.
 
-One object deserves a second look. Check the top-right corner:
+The *absence* of data carries a claim from physics. The claim is encoded by the shading.
+
+Note the object in the top-right corner:
 
 ```{pyodide}
 iU = names.index("observable Universe")
@@ -759,15 +795,13 @@ print("✓ the observable Universe sits ON the black-hole line")
 ```
 
 The Universe's mass and radius satisfy the black-hole relation almost
-exactly. Does that mean we live inside a black hole? The paper's answer
-is careful: the Schwarzschild formula assumes empty space *outside* the
-object, and outside our Hubble volume the density carries on much the
-same, so no. But *why* the numbers land on the line so precisely is the
-second exercise.
+exactly. Does that mean we live inside a black hole?
 
-## 5 · The Planck scale, and the finished chart
+Read what the paper has to say about this!
 
-Walls of slope +1 and −1 must meet. Set them equal:
+## 5 · The Planck scale
+
+The walls of slope +1 and −1 meet at a crossing point:
 
 $$\frac{rc^2}{2G} = \frac{\hbar}{rc}
 \;\;\Rightarrow\;\;
@@ -791,92 +825,21 @@ print("✓ the walls cross at the Planck scale (times a factor of √2)")
 ```
 
 The crossing point is the **Planck scale**: about $10^{-33}$ cm and
-$2\times10^{-5}$ g, the mass of a flea's egg compressed to a point
-$10^{20}$ times smaller than a proton. The smallest possible object is a
+$2\times10^{-5}$ g. The smallest possible object is a
 Planck-mass black hole, which the paper calls an **instanton**: the only
 thing that is simultaneously as small as gravity allows and as small as
-quantum mechanics allows. Left of the Planck length, physics has no
-tested theory at all; the paper shades it "sub-Planckian unknown", and
-so will we.
+quantum mechanics allows.
 
-Now assemble everything (regions, walls, density skeleton, objects,
-apex):
+Left of the Planck length, physics has no
+tested theory at all (the paper shades it "sub-Planckian unknown").
 
-```{pyodide}
-subplanck_data = pd.DataFrame({
-    "left": [1e-35], "right": [l_p],
-    "bottom": [1e-40], "top": [1e60],
-})
+### Put the Universe on the wall
 
-subplanck_region = alt.Chart(subplanck_data).mark_rect(
-    color="#555555", opacity=0.25
-).encode(
-    x=cosmos_x("left"), x2=alt.X2("right:Q"),
-    y=cosmos_y("bottom"), y2=alt.Y2("top:Q"),
-)
-
-instanton_data = pd.DataFrame({
-    "radius_cm": [l_p], "mass_g": [m_p],
-    "label": ["instanton (Planck scale)"],
-})
-
-instanton_point = alt.Chart(instanton_data).mark_point(
-    shape="diamond", filled=True, size=100, color="#171717"
-).encode(x=cosmos_x(), y=cosmos_y())
-
-instanton_label = alt.Chart(instanton_data).mark_text(
-    align="left", dx=8, dy=12, fontSize=10, color="#171717"
-).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
-
-def chart_annotation(label, x, y, angle=0, colour="#171717", size=11):
-    data = pd.DataFrame({
-        "radius_cm": [x], "mass_g": [y], "label": [label]
-    })
-    return alt.Chart(data).mark_text(
-        angle=angle, color=colour, fontSize=size
-    ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
-
-final_annotations = (
-    chart_annotation("forbidden by gravity", 3e-14, 1e45,
-                     angle=330, colour="#8a3324", size=14)
-    + chart_annotation("quantum uncertainty", 3e-5, 1e-24,
-                       angle=30, colour="#1d3f8f", size=14)
-    + chart_annotation("sub-Planckian unknown", 1.7e-35, 1e10,
-                       angle=270, colour="#444444")
-    + chart_annotation("black holes", 1e-24, 3e6, angle=330)
-    + chart_annotation("Compton limit", 2.5e-10, 3e-21, angle=30)
-)
-
-(
-    gravity_region
-    + quantum_region
-    + subplanck_region
-    + wall_line_chart
-    + density_line_chart
-    + object_layers()
-    + instanton_point
-    + instanton_label
-    + final_annotations
-    + density_labels
-).properties(
-    width=760,
-    height=700,
-    title="Everything in the Universe, one chart, after Lineweaver & Patel (2023)",
-).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
-```
-
-That is the triangle of everything: gravity above, quantum uncertainty
-below, the unknown to the left, the Universe pinned to the top of the
-gravity wall, and every known thing strung out on density lines in
-between.
-
-### Your turn: put the Universe on the wall {#sec-ex-hubble}
-
-The Universe's point was given to you in the table. Derive it. All you
-need is the Hubble constant. The radius of the observable Universe is the
+The Universe's point was given to you in the table. Derive it.
+The radius of the observable Universe is the
 Hubble radius $r_H = c/H_0$; its average density is the critical density
 $\rho_c = 3H_0^2 / 8\pi G$; and its mass is that density times the volume
-of the Hubble sphere. Then test whether your derived Universe lands on
+of the Hubble sphere. Test whether your derived Universe lands on
 the black-hole line.
 
 ```{pyodide}
@@ -915,14 +878,42 @@ provided. Watch the parentheses in the critical-density formula.
 you almost certainly forgot to cube $r_H$ in the volume of the sphere.
 :::
 
-**How to know you got it.** No solution button; the derivation is
-yours. Done right, the ratio comes out **suspiciously exact**. That
-exactness is itself the final puzzle: take the three formulas you just
-coded, substitute them into each other on paper, and watch what happens
-to the constants. What you find is a lesson about reading charts, not
-just making them: when a data point lands perfectly on a theory line,
-always ask whether the two were secretly computed from the same
-ingredients.
+## Final task · Draw the Triangle of Everything
+
+::: {.callout-tip title="Study the published figure"}
+Before drawing your chart, open Lineweaver and Patel's
+[*All objects and some questions*](https://doi.org/10.1119/5.0150209) and
+study Figure 2. Look at how the authors use points, direct labels, boundary
+lines, shaded regions and annotation to explain the mass–radius space. Decide
+which of those choices help the claims you want your version to support.
+:::
+
+Build your own **Triangle of Everything** in Altair. Your final chart should
+include:
+
+- logarithmic mass and radius axes with readable titles and tick labels;
+- all 29 objects, labelled and coloured by group;
+- the atomic-density and nuclear-density reference lines;
+- the gravity and quantum walls, with the impossible regions shaded;
+- the sub-Planckian region and the Planck-scale instanton; and
+- a clear title, legend and annotations that make the chart interpretable
+  without referring back to the code.
+
+You may reuse the data and Altair layers developed above, but the final
+composition, visual hierarchy and annotation choices are yours.
+
+```{pyodide}
+#| exercise: ex_triangle
+# Build your final Altair chart here.
+
+```
+
+::: {.hint exercise="ex_triangle"}
+Altair layers are combined with `+`. The earlier cells created
+`gravity_region`, `quantum_region`, `wall_line_chart`, `density_line_chart`,
+`density_labels` and `object_layers()`. You will need to add the sub-Planckian
+region, the Planck-scale point and your final annotations.
+:::
 
 {{< include _instructor-c.qmd >}}
 
