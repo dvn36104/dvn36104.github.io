@@ -1117,9 +1117,8 @@ at the chart. -->
 </section>
 <section id="part-ii-amniote-life-history-database" class="level2">
 <h2 class="anchored" data-anchor-id="part-ii-amniote-life-history-database">Part II · Amniote Life-History Database</h2>
-<p><strong>Amniotes</strong> are vertebrates whose embryos develop within a set of protective membranes that includes the amnion. Living amniotes comprise mammals and the sauropsid lineage: reptiles, including birds. The term names a shared branch of vertebrate evolution; it is not itself a variable in the dataset.</p>
-<p>The second dataset served with this page is the <strong>Amniote life-history database</strong> (Myhrvold et al.&nbsp;2015): one row per species, 21,322 of them across birds, mammals and reptiles. Ten columns: four taxonomy fields (class, order, family, genus) plus the species name, and five life-history traits (adult body mass in grams, maximum longevity in years, litter or clutch size, female age at maturity in days, birth or hatching weight in grams).</p>
-<p>The life-history CSV does not contain a phylogenetic tree or divergence dates. The published figure below provides phylogenetic context from a separate source.</p>
+<p><strong>Amniotes</strong> are vertebrates whose embryos develop within a set of protective membranes that includes the amnion. Living amniotes comprise mammals and the sauropsid lineage: reptiles, including birds. The second dataset served with this page is the <strong>Amniote life-history database</strong> (Myhrvold et al.&nbsp;2015): one row per species, with 21,322 species across birds, mammals and reptiles. The columns include four taxonomy fields (class, order, family, genus) plus the species name, and five life-history traits (adult body mass in grams, maximum longevity in years, litter or clutch size, female age at maturity in days, birth or hatching weight in grams).</p>
+<p>The figure below shows an amniote phylogenetic tree from a separate source.</p>
 <figure class="figure">
 <div style="width: 84%; max-width: 720px; margin: 0 auto; padding: 18px 28px; background: #fff; box-sizing: border-box;">
 <img src="https://ars.els-cdn.com/content/image/3-s2.0-B9780128040423000294-f00029-01-9780128040423.jpg" class="figure-img img-fluid d-block" style="width: 100%; margin: 0;" alt="Phylogeny of major amniote clades plotted against the geological timescale, with living and fossil skeletons.">
@@ -1131,8 +1130,8 @@ at the chart. -->
     <em>Evolution of Nervous Systems</em>, second edition. © 2017 Elsevier.
   </figcaption>
 </figure>
-<p>Apply the same sequence used in Part I, then take one question through to a finished chart. The cells below identify each stage and leave the analysis to you.</p>
-<p><strong>Stage 1: load and inspect the structure.</strong> Report the shape, view several rows, inspect storage types, count missing and distinct values, and build a small column dictionary with semantic types. Note which columns are almost complete and which are mostly missing. Use the Myhrvold et al.&nbsp;paper and the serving notes to interpret what you find.</p>
+<p>Apply the same sequence used in Part I. The cells below identify each stage and leave the analysis to you.</p>
+<p><strong>Stage 1: load and inspect the structure.</strong> Report the shape, view several rows, inspect storage types, count missing and distinct values, and build a small column dictionary with data types. Note which columns are almost complete and which are mostly missing. Use the Myhrvold et al.&nbsp;paper and the serving notes to interpret what you find.</p>
 <div>
 <div id="pyodide-58" class="exercise-cell">
 
@@ -1150,7 +1149,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYW1uaW90ZSA9IHBkLnJlYWRf
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSAyOiB5b3VyIGNvdW50cyBoZXJlLiJ9
 </script>
 </div>
-<p><strong>Stage 3: validation.</strong> State validation rules and report violation counts: can a body mass be zero or negative? Can an age at maturity exceed a maximum longevity? (Watch the units.) Then validate one species against the world: pick an animal you know and check its values against an external reference. One warning sign to take seriously: when a rule fires far more often than genuine errors plausibly occur, you have not found thousands of mistakes, you have found a convention. Work out what it is, then handle it explicitly.</p>
+<p><strong>Stage 3: validation.</strong> State validation rules and report violation counts. Can a body mass be zero or negative? Can an age at maturity exceed a maximum longevity?</p>
 <div>
 <div id="pyodide-60" class="exercise-cell">
 
@@ -1159,7 +1158,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSAyOiB5b3VyIGNv
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSAzOiB5b3VyIHZhbGlkYXRpb24gcnVsZXMgYW5kIGV4dGVybmFsIGNoZWNrIGhlcmUuIn0=
 </script>
 </div>
-<p><strong>Stage 4: choose a question and account for the rows.</strong> Pick a trait pair. Mass and longevity is the classic allometry, but clutch size, maturity and birth weight are all open questions. Define exactly the rows that can support your comparison, and draw the row flow from the full table to your analysis table.</p>
+<p><strong>Stage 4: choose a question and account for the rows.</strong> Pick a trait pair. Define exactly the rows that can support your comparison, and draw the row flow from the full table to your analysis table.</p>
 <div>
 <div id="pyodide-61" class="exercise-cell">
 
@@ -1168,7 +1167,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSAzOiB5b3VyIHZh
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSA0OiB5b3VyIGNsZWFuaW5nIGRlY2lzaW9uIGFuZCByb3cgYWNjb3VudGluZyBoZXJlLiJ9
 </script>
 </div>
-<p><strong>Stage 5: the chart, and one rank up.</strong> Produce one final chart of your relationship, with a caption that states the unit of analysis, the n, every transformation and aggregation, the scales, and where the dropped rows went. Then aggregate one taxonomic rank up (family means of the <em>logged</em> values), redraw, and say in two sentences what the aggregation gave you and what it took away.</p>
+<p><strong>Stage 5: the chart, and one rank up.</strong> Produce one final chart of your relationship, with a caption that states the unit of analysis, the n, every transformation and aggregation, the scales, and where the dropped rows went. Aggregate one taxonomic rank up (family means of the <em>logged</em> values) and redraw.</p>
 <div>
 <div id="pyodide-62" class="exercise-cell">
 
@@ -1177,7 +1176,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSA0OiB5b3VyIGNs
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdGFnZSA1OiB5b3VyIGZpbmFsIGNoYXJ0IGFuZCBpdHMgb25lLXJhbmstdXAgY29tcGFyaXNvbiBoZXJlLiJ9
 </script>
 </div>
-<p><strong>How to know you got it.</strong> No solution button: this investigation is yours. But the accounting has fixed points. Your class counts must sum to 21,322 exactly. If your audit is honest, you will conclude that missingness is most of this table, not an edge case. Your validation stage should catch at least one genuinely suspicious set of rows (there is more than one to find, and at least one involves units). And whatever pair you choose, your final caption must survive the Part I checklist: what is one point, what is n, what was transformed, what was dropped. If your family-level chart averages raw grams instead of logs, one elephant will drag its whole family across the plot; you should be able to explain why.</p>
+<p><strong>Save your final chart!</strong></p>
 </section>
 <section id="sources" class="level2">
 <h2 class="anchored" data-anchor-id="sources">Sources</h2>
