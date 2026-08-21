@@ -176,8 +176,20 @@ density_lines = pd.concat([
                        (2.3e14, "nuclear density")]
 ], ignore_index=True)
 density_line_chart = alt.Chart(density_lines).mark_line(
-    color="#888888", strokeDash=[7, 5], strokeWidth=1.2, clip=True
-).encode(x=cosmos_x(), y=cosmos_y(), detail="density:N")
+    strokeDash=[7, 5], strokeWidth=1.5, clip=True
+).encode(
+    x=cosmos_x(),
+    y=cosmos_y(),
+    detail="density:N",
+    color=alt.Color(
+        "density:N",
+        scale=alt.Scale(
+            domain=["atomic density", "nuclear density"],
+            range=["#006D77", "#9B2226"],
+        ),
+        legend=None,
+    ),
+)
 
 density_label_data = pd.DataFrame({
     "radius_cm": [2e14, 2e2],
@@ -185,10 +197,21 @@ density_label_data = pd.DataFrame({
                mass_at_density(2.3e14, 2e2)],
     "label": ["atomic density", "nuclear density"],
 })
-density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, dy=-18,
-    color="#777777", fontSize=13
+atomic_density_label = alt.Chart(
+    density_label_data.query("label == 'atomic density'")
+).mark_text(
+    angle=297, align="left", dx=8, dy=18,
+    color="#006D77", fontSize=13
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+nuclear_density_label = alt.Chart(
+    density_label_data.query("label == 'nuclear density'")
+).mark_text(
+    angle=297, align="left", dx=8, dy=-18,
+    color="#9B2226", fontSize=13
+).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+density_labels = atomic_density_label + nuclear_density_label
 
 wall_data = pd.DataFrame({
     "radius_cm": r_line,
@@ -516,11 +539,19 @@ density_lines = pd.concat([
 ], ignore_index=True)
 
 density_line_chart = alt.Chart(density_lines).mark_line(
-    color="#888888", strokeDash=[7, 5], strokeWidth=1.2, clip=True
+    strokeDash=[7, 5], strokeWidth=1.5, clip=True
 ).encode(
     x=cosmos_x(),
     y=cosmos_y(),
     detail="density:N",
+    color=alt.Color(
+        "density:N",
+        scale=alt.Scale(
+            domain=["atomic density", "nuclear density"],
+            range=["#006D77", "#9B2226"],
+        ),
+        legend=None,
+    ),
 )
 
 density_label_data = pd.DataFrame({
@@ -530,17 +561,30 @@ density_label_data = pd.DataFrame({
     "label": ["atomic density", "nuclear density"],
 })
 
-density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, dy=-18,
-    color="#777777", fontSize=13
+atomic_density_label = alt.Chart(
+    density_label_data.query("label == 'atomic density'")
+).mark_text(
+    angle=297, align="left", dx=8, dy=18,
+    color="#006D77", fontSize=13
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
 
+nuclear_density_label = alt.Chart(
+    density_label_data.query("label == 'nuclear density'")
+).mark_text(
+    angle=297, align="left", dx=8, dy=-18,
+    color="#9B2226", fontSize=13
+).encode(
+    x=cosmos_x(), y=cosmos_y(), text="label:N"
+)
+
+density_labels = atomic_density_label + nuclear_density_label
+
 (density_line_chart + object_layers(point_size=75) + density_labels).properties(
     width=780,
     height=700,
-    title="Two densities organise almost everything",
+    title="29 objects",
 ).configure_axis(
     gridColor="#dddddd",
     gridOpacity=0.7,
@@ -756,7 +800,7 @@ gravity_label = alt.Chart(pd.DataFrame({
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 quantum_label = alt.Chart(pd.DataFrame({
-    "radius_cm": [3e-5], "mass_g": [1e-24],
+    "radius_cm": [3e-5], "mass_g": [1e-36],
     "label": ["quantum uncertainty"],
 })).mark_text(
     angle=38, color="#1d3f8f", fontSize=14
