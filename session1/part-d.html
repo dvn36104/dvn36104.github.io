@@ -202,7 +202,7 @@ window.Quarto = {
    
   <ul class="collapse">
   <li><a href="#atoms-and-electron-shells" id="toc-atoms-and-electron-shells" class="nav-link active" data-scroll-target="#atoms-and-electron-shells">1 · Atoms and electron shells</a></li>
-  <li><a href="#periodicity-the-pattern-in-the-list" id="toc-periodicity-the-pattern-in-the-list" class="nav-link" data-scroll-target="#periodicity-the-pattern-in-the-list">2 · Periodicity: the pattern in the list</a></li>
+  <li><a href="#periodicity" id="toc-periodicity" class="nav-link" data-scroll-target="#periodicity">2 · Periodicity</a></li>
   <li><a href="#alternative-table-designs" id="toc-alternative-table-designs" class="nav-link" data-scroll-target="#alternative-table-designs">3 · Alternative table designs</a></li>
   <li><a href="#build-the-spiral" id="toc-build-the-spiral" class="nav-link" data-scroll-target="#build-the-spiral">4 · Build the spiral</a></li>
   <li><a href="#build-the-canonical-table" id="toc-build-the-canonical-table" class="nav-link" data-scroll-target="#build-the-canonical-table">5 · Build the canonical table</a></li>
@@ -233,8 +233,13 @@ window.Quarto = {
 </header>
 
 
-<p>The periodic table might be the most successful data visualisation ever made: one diagram, on the wall of every chemistry room on Earth, encoding the structure of all matter. But here is the thing it is easy to forget: underneath it, the data is just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118. Every “table” you have ever seen is a <em>layout choice</em> for that list, and for 150 years chemists have argued about the right one. Spirals, circles, staircases, and the familiar castle-with-two-basements that won.</p>
-<p>In this part you will: build the physics that makes the list periodic, look at real alternative designs (and pick a favourite), construct a <strong>periodic spiral</strong> yourself, and then construct the canonical table, and ask, as designers, why it became <em>the</em> one.</p>
+<p>The periodic table is one of the most successful data visualisation ever made. Its data is essentially just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118. Turning this list into a “table” involves a <em>layout choice</em>. Although one version has become canonical over the past 150 years, there are numerous alternative possible designs.</p>
+<!--
+
+In this part you will: build the physics that makes the list periodic,
+look at real alternative designs (and pick a favourite), construct a
+**periodic spiral** yourself, and then construct the canonical table,
+and ask, as designers, why it became *the* one. -->
 <p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
@@ -254,7 +259,9 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </div>
 <section id="atoms-and-electron-shells" class="level2">
 <h2 class="anchored" data-anchor-id="atoms-and-electron-shells">1 · Atoms and electron shells</h2>
-<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus: carbon <em>is</em> “element six”. A neutral atom carries Z electrons, and they do not sit anywhere they like: they stack into <strong>shells</strong> around the nucleus, and shell <em>n</em> holds at most <span class="math inline">\(2n^2\)</span> electrons: 2, 8, 18, 32. Almost everything in chemistry follows from the third sentence: <strong>only the outermost shell touches the world</strong>, so atoms with the same outer arrangement behave alike.</p>
+<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus (e.g.&nbsp;carbon is “element six”).</p>
+<p>A neutral atom carries Z electrons. These electrons stack into <strong>shells</strong> around the nucleus that hold at most <span class="math inline">\(2n^2\)</span> electrons: 2, 8, 18, 32.</p>
+<p>Only the outermost shell interacts with other atoms, so atoms with the same outer shell arrangement behave alike.</p>
 <p>The data for this page is one row per element: number, symbol, name, and a few properties we will meet as we need them:</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
@@ -272,7 +279,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihaKSA9PSAxMTggYW5kIFogPT0gbGlzdChyYW5nZSgxLCAxMTkpKVxucHJpbnQoXCLinJMgMTE4IGVsZW1lbnRzOiB0aGUgZGF0YSBpcyBsaXRlcmFsbHkganVzdCBhIHNvcnRlZCBsaXN0XCIpIn0=
 </script>
 </div>
-<p>Shells fill in a fixed order (the <em>aufbau</em> order: sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Ten lines of code capture it well enough to rebuild the entire table:</p>
+<p>Shells fill in a fixed order (the <em>aufbau</em> order: sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Carefully review how this is produced by the code:</p>
 <div>
 <div id="pyodide-5" class="exercise-cell">
 
@@ -289,8 +296,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3Vic2hlbGxzID0gc29ydGVk
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkgPT0gezE6IDIsIDI6IDgsIDM6IDF9XG5hc3NlcnQgc3VtKGUgZm9yIF8sIF8sIGUgaW4gY29uZmlndXJhdGlvbigyNikpID09IDI2XG5hc3NlcnQgWzIgKiBuKioyIGZvciBuIGluICgxLCAyLCAzLCA0KV0gPT0gWzIsIDgsIDE4LCAzMl1cbnByaW50KFwi4pyTIHNvZGl1bSBpcyAyLCA4LCAxLCBhbmQgc2hlbGwgY2FwYWNpdGllcyBhcmUgMm7CslwiKSJ9
 </script>
 </div>
-<p>(Real atoms have about twenty famous exceptions, where chromium and copper borrow an electron between sub-shells, which we cheerfully ignore: the idealised rule is what the table’s <em>shape</em> encodes.)</p>
-<p>Here is sodium drawn the way every textbook draws it, and note that this picture is a <em>diagram</em>, not a photograph of anything:</p>
+<p>The shell arrangement of sodium can be pictured in a diagram:</p>
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
@@ -299,11 +305,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IHNoZWxscygxMSkg
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg1LCA1KSlcbmF4LnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXguYXhpcyhcIm9mZlwiKVxuYXguc2NhdHRlcihbMF0sIFswXSwgcz0yMDAsIGNvbG9yPVwiIzE3MTcxN1wiLCB6b3JkZXI9MylcbmF4LmFubm90YXRlKFwiTmFcIiwgKDAsIDApLCBjb2xvcj1cIndoaXRlXCIsIGhhPVwiY2VudGVyXCIsIHZhPVwiY2VudGVyXCIsXG4gICAgICAgICAgICBmb250c2l6ZT04LCB6b3JkZXI9NClcbmZvciBuLCBjb3VudCBpbiBzaGVsbHMoMTEpLml0ZW1zKCk6XG4gICAgYXguYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCBuLCBmaWxsPUZhbHNlLCBjb2xvcj1cIiNiYmJiYmJcIiwgbHc9MSkpXG4gICAgYW5nID0gbnAubGluc3BhY2UoMCwgMiAqIG5wLnBpLCBjb3VudCwgZW5kcG9pbnQ9RmFsc2UpICsgbnAucGkgLyAyXG4gICAgYXguc2NhdHRlcihuICogbnAuY29zKGFuZyksIG4gKiBucC5zaW4oYW5nKSwgcz00NSwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxubGltID0gbWF4KHNoZWxscygxMSkpICsgMC42XG5heC5zZXRfeGxpbSgtbGltLCBsaW0pOyBheC5zZXRfeWxpbSgtbGltLCBsaW0pXG5heC5zZXRfdGl0bGUoXCJTb2RpdW06IDIsIDgsIDFcIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>That lone outer electron is why sodium reacts so violently (sometimes explosively) with water, and why it sits in the same column as lithium and potassium, which have the same lonely arrangement.</p>
+<p>The lone outer electron places sodium in the same column as lithium and potassium, also with one outer-shell electron.</p>
 </section>
-<section id="periodicity-the-pattern-in-the-list" class="level2">
-<h2 class="anchored" data-anchor-id="periodicity-the-pattern-in-the-list">2 · Periodicity: the pattern in the list</h2>
-<p>Walk the list from Z = 1 upward and watch only the outer shell. It fills… closes… and starts again:</p>
+<section id="periodicity" class="level2">
+<h2 class="anchored" data-anchor-id="periodicity">2 · Periodicity</h2>
+<p>As Z is increased, the outer shell fills, closes, and starts again:</p>
 <div>
 <div id="pyodide-8" class="exercise-cell">
 
@@ -320,11 +326,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoienogPSBsaXN0KHJhbmdlKDEs
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KTpcbiAgICBhc3NlcnQgdmFsZW5jZSh6KSA9PSAoMiBpZiB6ID09IDIgZWxzZSA4KSAgICMgY2xvc2VkIHNoZWxsczogbm9ibGUgZ2FzZXNcbmZvciB6IGluICgzLCAxMSwgMTksIDM3LCA1NSwgODcpOlxuICAgIGFzc2VydCB2YWxlbmNlKHopID09IDEgICAgICAgICAgICAgICAgICAgICAgIyBmcmVzaCBzaGVsbHM6IGFsa2FsaSBtZXRhbHNcbnByaW50KFwi4pyTIHNoZWxsIGNsb3N1cmVzIGFuZCBmcmVzaCBzdGFydHMgcmVjdXIgYWxsIHRoZSB3YXkgdG8gWiA9IDExOFwiKSJ9
 </script>
 </div>
-<p>This sawtooth <strong>is</strong> the periodic law. Every row of any periodic table is one tooth; every column collects atoms caught at the same point of the cycle: the <strong>groups</strong>. Group 1 (one outer electron) are the violent alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing; group 17, one electron short of closing, are the halogens that grab one from anything nearby.</p>
-<p>And periodicity is not just electron bookkeeping; it shows up in every measurable property. Prove it to yourself:</p>
+<p>The sawtooth is the periodic law. Every <strong>row</strong> of any periodic table is a “tooth”; every <strong>column</strong> collects atoms caught at the same point of the cycle: the <strong>groups</strong>.</p>
+<p>Group 1 (one outer electron) are the reactive alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing.</p>
 <section id="sec-ex-radius" class="level3">
-<h3 class="anchored" data-anchor-id="sec-ex-radius">Your turn: the size of atoms</h3>
-<p>The data column <code>radius</code> holds each element’s covalent radius in picometres. Plot radius against Z for all 118 elements, joined by a faint line, and highlight the <strong>alkali metals</strong> (Z = 3, 11, 19, 37, 55, 87) in one colour and the <strong>noble gases</strong> (Z = 2, 10, 18, 36, 54, 86) in another. What does the pattern do at each shell closure?</p>
+<h3 class="anchored" data-anchor-id="sec-ex-radius">Size of atoms</h3>
+<p>The data column <code>radius</code> holds each element’s covalent radius in picometres. Plot radius against Z for all 118 elements, joined by a faint line, and highlight the <strong>alkali metals</strong> (Z = 3, 11, 19, 37, 55, 87) in one colour and the <strong>noble gases</strong> (Z = 2, 10, 18, 36, 54, 86) in another.</p>
+<p>What does the pattern do at each shell closure?</p>
 <script type="exercise-setup-ex_radius-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIiwic2V0dXAiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGpzXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gcHlvZGlkZS5odHRwIGltcG9ydCBvcGVuX3VybFxuREFUQV9VUkwgPSBqcy5sb2NhdGlvbi5ocmVmLnNwbGl0KFwic2l0ZV9saWJzL1wiKVswXSArIFwiZGF0YS9cIlxudGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgPSBbaW50KHJbMF0pIGZvciByIGluIHJvd3NdXG5zeW1ib2wgPSBbclsxXSBmb3IgciBpbiByb3dzXVxucmFkaXVzID0gW2Zsb2F0KHJbN10pIGlmIHJbN10gZWxzZSBOb25lIGZvciByIGluIHJvd3NdXG5wbHQucmNQYXJhbXMudXBkYXRlKHtcbiAgICBcImF4ZXMuc3BpbmVzLnRvcFwiOiBGYWxzZSwgXCJheGVzLnNwaW5lcy5yaWdodFwiOiBGYWxzZSxcbiAgICBcImF4ZXMuZ3JpZFwiOiBUcnVlLCBcImdyaWQuYWxwaGFcIjogMC4yMiwgXCJmb250LnNpemVcIjogMTEsXG59KSJ9
 </script>
@@ -360,7 +367,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"covalent radius (pm)"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Atomic size is periodic: peaks at the alkali metals"</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter), then at each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth in size mirrors the sawtooth in valence: same cycle, different property. This is the same cycle Lothar Meyer plotted as atomic volume in 1870, and that Mendeleev could read in 1869 from valences and atomic weights alone, decades before anyone knew electrons existed.</p>
+<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter), then at each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth in size mirrors the sawtooth in valence. This is the same cycle Lothar Meyer plotted as atomic volume in 1870.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/lothar-meyer-atomic-volume.webp" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Lothar Meyer’s 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.</figcaption>
+</figure>
+</div>
 </div>
 </section>
 </section>
