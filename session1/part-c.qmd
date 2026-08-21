@@ -415,7 +415,7 @@ def object_layers(table=objects, show_legend=True, point_size=55):
 object_layers(point_size=75).properties(
     width=780,
     height=700,
-    title="All 29 objects, coloured by kind",
+    title="29 objects",
 ).configure_axis(
     gridColor="#dddddd",
     gridOpacity=0.7,
@@ -766,14 +766,25 @@ quantum_label = alt.Chart(pd.DataFrame({
     gravity_region
     + quantum_region
     + wall_line_chart
-    + object_layers()
+    + object_layers(point_size=75)
     + gravity_label
     + quantum_label
 ).properties(
-    width=740,
-    height=650,
-    title="Nothing above the black-hole line, nothing below the Compton line",
-).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
+    width=780,
+    height=700,
+    title="29 objects",
+).configure_axis(
+    gridColor="#dddddd",
+    gridOpacity=0.7,
+    labelFontSize=13,
+    labelPadding=6,
+    titleFontSize=16,
+    titlePadding=14,
+).configure_title(
+    fontSize=20,
+    anchor="start",
+    offset=16,
+)
 ```
 
 The empty corners of Step 2 are now explained and shaded.
