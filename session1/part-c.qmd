@@ -4,7 +4,8 @@ engine: markdown
 pyodide:
   packages:
     - numpy
-    - matplotlib
+    - pandas
+    - altair
 ---
 
 In 2023, two astrophysicists published a chart that placed **every
@@ -20,20 +21,14 @@ Journal of Physics 91:819). In this part you will rebuild that chart, step by st
 #| edit: false
 import js
 import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd
+import altair as alt
 from pyodide.http import open_url
 
 # Data files live beside this page; the Python worker runs from site_libs/.
 DATA_URL = js.location.href.split("site_libs/")[0] + "data/"
 
-plt.rcParams.update({
-    "figure.figsize": (9, 5),
-    "axes.spines.top": False,
-    "axes.spines.right": False,
-    "axes.grid": True,
-    "grid.alpha": 0.22,
-    "font.size": 11,
-})
+alt.data_transformers.enable("default", max_rows=12_000)
 
 # Physical constants, cgs units (grams, centimetres, seconds)
 G    = 6.674e-8       # gravitational constant [cm^3 g^-1 s^-2]
@@ -50,11 +45,12 @@ print("Environment ready.")
 # Pre-build every name the page uses, so each cell works no matter which
 # cells were run before it. The visible cells re-derive all of this.
 text = open_url(DATA_URL + "objects_universe.csv").read()
-rows = [line.split(",") for line in text.strip().split("\n")[1:]]
-names  = [r[0] for r in rows]
-groups = [r[1] for r in rows]
-mass   = np.array([float(r[2]) for r in rows])
-radius = np.array([float(r[3]) for r in rows])
+objects = pd.read_csv(open_url(DATA_URL + "objects_universe.csv"))
+rows = objects.astype(str).values.tolist()
+names  = objects["name"].tolist()
+groups = objects["group"].tolist()
+mass   = objects["mass_g"].to_numpy()
+radius = objects["radius_cm"].to_numpy()
 
 group_colours = {
     "particles":         "#666666",
@@ -68,28 +64,62 @@ group_colours = {
 LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
 LABEL_BELOW = {"neutron star", "Ceres"}
 
-def draw_objects(ax, fontsize=7.5):
-    for i, nm in enumerate(names):
-        col = group_colours[groups[i]]
-        ax.scatter(radius[i], mass[i], s=18, color=col, zorder=3)
-        if nm in LABEL_LEFT:
-            ax.annotate(nm + " ", (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3, ha="right")
-        elif nm in LABEL_BELOW:
-            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3, va="top")
-        else:
-            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3)
+GROUP_DOMAIN = list(group_colours)
+GROUP_RANGE = [group_colours[group] for group in GROUP_DOMAIN]
 
-def cosmos_axes(figsize=(10, 10)):
-    fig, ax = plt.subplots(figsize=figsize)
-    ax.set_xscale("log"); ax.set_yscale("log")
-    ax.set_xlim(1e-35, 1e30); ax.set_ylim(1e-40, 1e60)
-    ax.set_xticks([10.0**k for k in range(-35, 31, 5)])
-    ax.set_yticks([10.0**k for k in range(-40, 61, 10)])
-    ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
-    return fig, ax
+def cosmos_x(field="radius_cm"):
+    return alt.X(
+        f"{field}:Q",
+        title="radius (cm)",
+        scale=alt.Scale(type="log", domain=[1e-35, 1e30], nice=False),
+        axis=alt.Axis(grid=True, tickCount=14, format=".0e"),
+    )
+
+def cosmos_y(field="mass_g"):
+    return alt.Y(
+        f"{field}:Q",
+        title="mass (g)",
+        scale=alt.Scale(type="log", domain=[1e-40, 1e60], nice=False),
+        axis=alt.Axis(grid=True, tickCount=11, format=".0e"),
+    )
+
+def group_colour(show_legend=True):
+    legend = alt.Legend(title="Object group") if show_legend else None
+    return alt.Color(
+        "group:N",
+        scale=alt.Scale(domain=GROUP_DOMAIN, range=GROUP_RANGE),
+        legend=legend,
+    )
+
+def object_layers(table=objects, show_legend=True, point_size=55):
+    points = alt.Chart(table).mark_circle(size=point_size).encode(
+        x=cosmos_x(),
+        y=cosmos_y(),
+        color=group_colour(show_legend),
+        tooltip=[
+            alt.Tooltip("name:N", title="Object"),
+            alt.Tooltip("group:N", title="Group"),
+            alt.Tooltip("mass_g:Q", title="Mass (g)", format=".2e"),
+            alt.Tooltip("radius_cm:Q", title="Radius (cm)", format=".2e"),
+        ],
+    )
+
+    left = table[table["name"].isin(LABEL_LEFT)]
+    below = table[table["name"].isin(LABEL_BELOW)]
+    regular = table[~table["name"].isin(LABEL_LEFT | LABEL_BELOW)]
+
+    def labels(data, **mark_options):
+        return alt.Chart(data).mark_text(fontSize=10, **mark_options).encode(
+            x=cosmos_x(), y=cosmos_y(), text="name:N",
+            color=group_colour(False),
+        )
+
+    return (
+        points
+        + labels(regular, align="left", dx=6)
+        + labels(left, align="right", dx=-6)
+        + labels(below, align="left", dx=6, dy=10)
+    )
 
 r_line = np.logspace(-35, 30, 200)
 
@@ -110,6 +140,60 @@ m_x = np.sqrt(hbar * c / (2 * G))
 rho_human = rho_all[names.index("human")]
 iU = names.index("observable Universe")
 ratio = 2 * G * mass[iU] / c**2 / radius[iU]
+
+density_lines = pd.concat([
+    pd.DataFrame({
+        "radius_cm": r_line,
+        "mass_g": mass_at_density(rho, r_line),
+        "density": label,
+    })
+    for rho, label in [(1.0, "atomic density"),
+                       (2.3e14, "nuclear density")]
+], ignore_index=True)
+density_line_chart = alt.Chart(density_lines).mark_line(
+    color="#888888", strokeDash=[7, 5], strokeWidth=1.2, clip=True
+).encode(x=cosmos_x(), y=cosmos_y(), detail="density:N")
+
+density_label_data = pd.DataFrame({
+    "radius_cm": [2e14, 2e2],
+    "mass_g": [mass_at_density(1, 1e14),
+               mass_at_density(2.3e14, 1e2)],
+    "label": ["atomic density", "nuclear density"],
+})
+density_labels = alt.Chart(density_label_data).mark_text(
+    angle=297, align="left", dx=5, color="#777777", fontSize=11
+).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+wall_data = pd.DataFrame({
+    "radius_cm": r_line,
+    "gravity_mass_g": schwarzschild_mass(r_line),
+    "compton_mass_g": compton_mass(r_line),
+    "upper_mass_g": 1e60,
+    "lower_mass_g": 1e-40,
+})
+gravity_region = alt.Chart(wall_data).mark_area(
+    color="#e66852", opacity=0.15, clip=True
+).encode(
+    x=cosmos_x(), y=cosmos_y("gravity_mass_g"),
+    y2=alt.Y2("upper_mass_g:Q"),
+)
+quantum_region = alt.Chart(wall_data).mark_area(
+    color="#4269d0", opacity=0.15, clip=True
+).encode(
+    x=cosmos_x(), y=cosmos_y("lower_mass_g"),
+    y2=alt.Y2("compton_mass_g:Q"),
+)
+wall_lines = pd.concat([
+    pd.DataFrame({"radius_cm": r_line,
+                  "mass_g": schwarzschild_mass(r_line),
+                  "wall": "black-hole limit"}),
+    pd.DataFrame({"radius_cm": r_line,
+                  "mass_g": compton_mass(r_line),
+                  "wall": "Compton limit"}),
+], ignore_index=True)
+wall_line_chart = alt.Chart(wall_lines).mark_line(
+    color="#171717", strokeWidth=1.5, clip=True
+).encode(x=cosmos_x(), y=cosmos_y(), detail="wall:N")
 ```
 
 ## 1 · One pair of axes for everything
@@ -131,11 +215,12 @@ group, mass and radius:
 
 ```{pyodide}
 text = open_url(DATA_URL + "objects_universe.csv").read()
-rows = [line.split(",") for line in text.strip().split("\n")[1:]]
-names  = [r[0] for r in rows]
-groups = [r[1] for r in rows]
-mass   = np.array([float(r[2]) for r in rows])
-radius = np.array([float(r[3]) for r in rows])
+objects = pd.read_csv(open_url(DATA_URL + "objects_universe.csv"))
+rows = objects.astype(str).values.tolist()
+names  = objects["name"].tolist()
+groups = objects["group"].tolist()
+mass   = objects["mass_g"].to_numpy()
+radius = objects["radius_cm"].to_numpy()
 
 print(f"{'name':<22} {'group':<18} {'mass':>13} {'radius':>14}")
 print("-" * 70)
@@ -156,15 +241,30 @@ Start with five more familiar objects:
 ```{pyodide}
 FAMILIAR = ["flea", "human", "blue whale", "Earth", "Sun"]
 
-fig, ax = plt.subplots(figsize=(8, 5.5))
-for nm in FAMILIAR:
-    i = names.index(nm)
-    ax.scatter(radius[i], mass[i], s=30, color="#4269d0", zorder=3)
-    ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=10)
-ax.set_xscale("log"); ax.set_yscale("log")
-ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
-ax.set_title("Five familiar objects: 37 orders of magnitude in mass")
-plt.show()
+familiar = objects[objects["name"].isin(FAMILIAR)]
+
+familiar_base = alt.Chart(familiar).encode(
+    x=alt.X("radius_cm:Q", title="radius (cm)",
+            scale=alt.Scale(type="log", nice=False)),
+    y=alt.Y("mass_g:Q", title="mass (g)",
+            scale=alt.Scale(type="log", nice=False)),
+    tooltip=[
+        alt.Tooltip("name:N", title="Object"),
+        alt.Tooltip("mass_g:Q", title="Mass (g)", format=".2e"),
+        alt.Tooltip("radius_cm:Q", title="Radius (cm)", format=".2e"),
+    ],
+)
+
+familiar_points = familiar_base.mark_circle(size=80, color="#4269d0")
+familiar_labels = familiar_base.mark_text(
+    align="left", dx=7, fontSize=12, color="#4269d0"
+).encode(text="name:N")
+
+(familiar_points + familiar_labels).properties(
+    width=720,
+    height=420,
+    title="Five familiar objects: 37 orders of magnitude in mass",
+).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
 Notice that they fall roughly on a straight line.
@@ -184,6 +284,7 @@ print(f"volume of a sphere with radius 50 cm: {sphere_volume_litres:.0f} litres"
 print(f"70 kg divided by that volume: {rho_human:.2f} g/cm³")
 ```
 
+::: {.callout-important title="Approximate Magnitude"}
 A 70 kg human has a volume of roughly 70 litres because the human body is
 close to the density of water. The calculation gives 524 litres only because
 we forced the 50 cm characteristic size into a formula for a sphere. The
@@ -193,6 +294,7 @@ This is a warning about the axis. Radius is a geometric measurement for a
 planet or star, but an approximate characteristic size for an irregular object
 such as a flea, human or whale. The chart is designed for comparisons across
 many orders of magnitude, not precise estimates of each object's density.
+:::
 
 ## 2 · All 29 objects
 
@@ -212,33 +314,68 @@ group_colours = {
 LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
 LABEL_BELOW = {"neutron star", "Ceres"}
 
-def draw_objects(ax, fontsize=7.5):
-    for i, nm in enumerate(names):
-        col = group_colours[groups[i]]
-        ax.scatter(radius[i], mass[i], s=18, color=col, zorder=3)
-        if nm in LABEL_LEFT:      # nudge a few labels out of collisions
-            ax.annotate(nm + " ", (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3, ha="right")
-        elif nm in LABEL_BELOW:
-            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3, va="top")
-        else:
-            ax.annotate(" " + nm, (radius[i], mass[i]), fontsize=fontsize,
-                        color=col, zorder=3)
+GROUP_DOMAIN = list(group_colours)
+GROUP_RANGE = [group_colours[group] for group in GROUP_DOMAIN]
 
-def cosmos_axes(figsize=(10, 10)):
-    fig, ax = plt.subplots(figsize=figsize)
-    ax.set_xscale("log"); ax.set_yscale("log")
-    ax.set_xlim(1e-35, 1e30); ax.set_ylim(1e-40, 1e60)
-    ax.set_xticks([10.0**k for k in range(-35, 31, 5)])
-    ax.set_yticks([10.0**k for k in range(-40, 61, 10)])
-    ax.set_xlabel("radius (cm)"); ax.set_ylabel("mass (g)")
-    return fig, ax
+def cosmos_x(field="radius_cm"):
+    return alt.X(
+        f"{field}:Q",
+        title="radius (cm)",
+        scale=alt.Scale(type="log", domain=[1e-35, 1e30], nice=False),
+        axis=alt.Axis(grid=True, tickCount=14, format=".0e"),
+    )
 
-fig, ax = cosmos_axes()
-draw_objects(ax)
-ax.set_title("All 29 objects, coloured by kind")
-plt.show()
+def cosmos_y(field="mass_g"):
+    return alt.Y(
+        f"{field}:Q",
+        title="mass (g)",
+        scale=alt.Scale(type="log", domain=[1e-40, 1e60], nice=False),
+        axis=alt.Axis(grid=True, tickCount=11, format=".0e"),
+    )
+
+def group_colour(show_legend=True):
+    legend = alt.Legend(title="Object group") if show_legend else None
+    return alt.Color(
+        "group:N",
+        scale=alt.Scale(domain=GROUP_DOMAIN, range=GROUP_RANGE),
+        legend=legend,
+    )
+
+def object_layers(table=objects, show_legend=True, point_size=55):
+    points = alt.Chart(table).mark_circle(size=point_size).encode(
+        x=cosmos_x(),
+        y=cosmos_y(),
+        color=group_colour(show_legend),
+        tooltip=[
+            alt.Tooltip("name:N", title="Object"),
+            alt.Tooltip("group:N", title="Group"),
+            alt.Tooltip("mass_g:Q", title="Mass (g)", format=".2e"),
+            alt.Tooltip("radius_cm:Q", title="Radius (cm)", format=".2e"),
+        ],
+    )
+
+    left = table[table["name"].isin(LABEL_LEFT)]
+    below = table[table["name"].isin(LABEL_BELOW)]
+    regular = table[~table["name"].isin(LABEL_LEFT | LABEL_BELOW)]
+
+    def labels(data, **mark_options):
+        return alt.Chart(data).mark_text(fontSize=10, **mark_options).encode(
+            x=cosmos_x(), y=cosmos_y(), text="name:N",
+            color=group_colour(False),
+        )
+
+    return (
+        points
+        + labels(regular, align="left", dx=6)
+        + labels(left, align="right", dx=-6)
+        + labels(below, align="left", dx=6, dy=10)
+    )
+
+object_layers().properties(
+    width=740,
+    height=650,
+    title="All 29 objects, coloured by kind",
+).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
 The interesting thing is where the points
@@ -261,16 +398,42 @@ r_line = np.logspace(-35, 30, 200)
 def mass_at_density(rho, r):
     return 4/3 * np.pi * rho * r**3
 
-fig, ax = cosmos_axes()
-draw_objects(ax)
-for rho in (1.0, 2.3e14):
-    ax.plot(r_line, mass_at_density(rho, r_line), ls="--", lw=1, color="#888888")
-ax.text(2e14, mass_at_density(1, 1e14), "atomic density", rotation=64,
-        fontsize=9, color="#888888")
-ax.text(2e2, mass_at_density(2.3e14, 1e2), "nuclear density", rotation=64,
-        fontsize=9, color="#888888")
-ax.set_title("Two densities organise almost everything")
-plt.show()
+density_lines = pd.concat([
+    pd.DataFrame({
+        "radius_cm": r_line,
+        "mass_g": mass_at_density(rho, r_line),
+        "density": label,
+    })
+    for rho, label in [(1.0, "atomic density"),
+                       (2.3e14, "nuclear density")]
+], ignore_index=True)
+
+density_line_chart = alt.Chart(density_lines).mark_line(
+    color="#888888", strokeDash=[7, 5], strokeWidth=1.2, clip=True
+).encode(
+    x=cosmos_x(),
+    y=cosmos_y(),
+    detail="density:N",
+)
+
+density_label_data = pd.DataFrame({
+    "radius_cm": [2e14, 2e2],
+    "mass_g": [mass_at_density(1, 1e14),
+               mass_at_density(2.3e14, 1e2)],
+    "label": ["atomic density", "nuclear density"],
+})
+
+density_labels = alt.Chart(density_label_data).mark_text(
+    angle=297, align="left", dx=5, color="#777777", fontSize=11
+).encode(
+    x=cosmos_x(), y=cosmos_y(), text="label:N"
+)
+
+(density_line_chart + object_layers() + density_labels).properties(
+    width=740,
+    height=650,
+    title="Two densities organise almost everything",
+).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
 Suddenly the scatter has a skeleton. Everything made of atoms (viruses,
@@ -396,18 +559,71 @@ def schwarzschild_mass(r):   # heaviest object of radius r (it's a black hole)
 def compton_mass(r):         # lightest object of radius r (quantum limit)
     return hbar / (r * c)
 
-fig, ax = cosmos_axes()
-ax.fill_between(r_line, schwarzschild_mass(r_line), 1e60,
-                color="#e66852", alpha=0.15, zorder=0)
-ax.fill_between(r_line, 1e-40, compton_mass(r_line),
-                color="#4269d0", alpha=0.15, zorder=0)
-ax.plot(r_line, schwarzschild_mass(r_line), color="#171717", lw=1.4)
-ax.plot(r_line, compton_mass(r_line), color="#171717", lw=1.4)
-draw_objects(ax)
-ax.text(3e-14, 1e45, "forbidden by gravity", rotation=38, fontsize=13, color="#8a3324")
-ax.text(3e-5, 1e-24, "quantum uncertainty", rotation=-38, fontsize=13, color="#1d3f8f")
-ax.set_title("Nothing above the black-hole line, nothing below the Compton line")
-plt.show()
+wall_data = pd.DataFrame({
+    "radius_cm": r_line,
+    "gravity_mass_g": schwarzschild_mass(r_line),
+    "compton_mass_g": compton_mass(r_line),
+    "upper_mass_g": 1e60,
+    "lower_mass_g": 1e-40,
+})
+
+gravity_region = alt.Chart(wall_data).mark_area(
+    color="#e66852", opacity=0.15, clip=True
+).encode(
+    x=cosmos_x(),
+    y=cosmos_y("gravity_mass_g"),
+    y2=alt.Y2("upper_mass_g:Q"),
+)
+
+quantum_region = alt.Chart(wall_data).mark_area(
+    color="#4269d0", opacity=0.15, clip=True
+).encode(
+    x=cosmos_x(),
+    y=cosmos_y("lower_mass_g"),
+    y2=alt.Y2("compton_mass_g:Q"),
+)
+
+wall_lines = pd.concat([
+    pd.DataFrame({"radius_cm": r_line,
+                  "mass_g": schwarzschild_mass(r_line),
+                  "wall": "black-hole limit"}),
+    pd.DataFrame({"radius_cm": r_line,
+                  "mass_g": compton_mass(r_line),
+                  "wall": "Compton limit"}),
+], ignore_index=True)
+
+wall_line_chart = alt.Chart(wall_lines).mark_line(
+    color="#171717", strokeWidth=1.5, clip=True
+).encode(
+    x=cosmos_x(), y=cosmos_y(), detail="wall:N"
+)
+
+gravity_label = alt.Chart(pd.DataFrame({
+    "radius_cm": [3e-14], "mass_g": [1e45],
+    "label": ["forbidden by gravity"],
+})).mark_text(
+    angle=322, color="#8a3324", fontSize=14
+).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+quantum_label = alt.Chart(pd.DataFrame({
+    "radius_cm": [3e-5], "mass_g": [1e-24],
+    "label": ["quantum uncertainty"],
+})).mark_text(
+    angle=38, color="#1d3f8f", fontSize=14
+).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+(
+    gravity_region
+    + quantum_region
+    + wall_line_chart
+    + object_layers()
+    + gravity_label
+    + quantum_label
+).properties(
+    width=740,
+    height=650,
+    title="Nothing above the black-hole line, nothing below the Compton line",
+).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
 The empty corners of Step 2 are now explained, and shaded. They are not
@@ -473,42 +689,66 @@ Now assemble everything (regions, walls, density skeleton, objects,
 apex):
 
 ```{pyodide}
-fig, ax = cosmos_axes(figsize=(10.5, 10.5))
+subplanck_data = pd.DataFrame({
+    "left": [1e-35], "right": [l_p],
+    "bottom": [1e-40], "top": [1e60],
+})
 
-# forbidden regions
-ax.fill_between(r_line, schwarzschild_mass(r_line), 1e60,
-                color="#e66852", alpha=0.15, zorder=0)
-ax.fill_between(r_line, 1e-40, compton_mass(r_line),
-                color="#4269d0", alpha=0.15, zorder=0)
-ax.axvspan(1e-35, l_p, color="#555555", alpha=0.25, zorder=0)
+subplanck_region = alt.Chart(subplanck_data).mark_rect(
+    color="#555555", opacity=0.25
+).encode(
+    x=cosmos_x("left"), x2=alt.X2("right:Q"),
+    y=cosmos_y("bottom"), y2=alt.Y2("top:Q"),
+)
 
-# the two walls
-ax.plot(r_line, schwarzschild_mass(r_line), color="#171717", lw=1.4)
-ax.plot(r_line, compton_mass(r_line), color="#171717", lw=1.4)
+instanton_data = pd.DataFrame({
+    "radius_cm": [l_p], "mass_g": [m_p],
+    "label": ["instanton (Planck scale)"],
+})
 
-# density skeleton
-for rho in (1.0, 2.3e14):
-    ax.plot(r_line, mass_at_density(rho, r_line), ls="--", lw=0.9,
-            color="#999999", zorder=1)
+instanton_point = alt.Chart(instanton_data).mark_point(
+    shape="diamond", filled=True, size=100, color="#171717"
+).encode(x=cosmos_x(), y=cosmos_y())
 
-# every object, plus the apex (marked at the Planck point, following the
-# paper; the drawn walls cross a factor of √2 away, invisible at this scale)
-draw_objects(ax)
-ax.scatter([l_p], [m_p], marker="D", s=45, color="#171717", zorder=4)
-ax.annotate("  instanton\n  (Planck scale)", (l_p, m_p), fontsize=8.5)
+instanton_label = alt.Chart(instanton_data).mark_text(
+    align="left", dx=8, dy=12, fontSize=10, color="#171717"
+).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
-# annotations
-ax.text(3e-14, 1e45, "forbidden by gravity", rotation=38, fontsize=13, color="#8a3324")
-ax.text(3e-5, 1e-24, "quantum uncertainty", rotation=-38, fontsize=13, color="#1d3f8f")
-ax.text(1.7e-35, 1e10, "sub-Planckian unknown", rotation=90, fontsize=9, color="#444444")
-ax.text(1e-24, 3e6, "black holes", rotation=38, fontsize=9, color="#171717")
-ax.text(2.5e-10, 3e-21, "Compton limit", rotation=-38, fontsize=9, color="#171717")
-ax.text(2e14, mass_at_density(1, 1e14), "atomic density", rotation=64,
-        fontsize=9, color="#888888")
-ax.text(2e2, mass_at_density(2.3e14, 1e2), "nuclear density", rotation=64,
-        fontsize=9, color="#888888")
-ax.set_title("Everything in the Universe, one chart, after Lineweaver & Patel (2023)")
-plt.show()
+def chart_annotation(label, x, y, angle=0, colour="#171717", size=11):
+    data = pd.DataFrame({
+        "radius_cm": [x], "mass_g": [y], "label": [label]
+    })
+    return alt.Chart(data).mark_text(
+        angle=angle, color=colour, fontSize=size
+    ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
+
+final_annotations = (
+    chart_annotation("forbidden by gravity", 3e-14, 1e45,
+                     angle=330, colour="#8a3324", size=14)
+    + chart_annotation("quantum uncertainty", 3e-5, 1e-24,
+                       angle=30, colour="#1d3f8f", size=14)
+    + chart_annotation("sub-Planckian unknown", 1.7e-35, 1e10,
+                       angle=270, colour="#444444")
+    + chart_annotation("black holes", 1e-24, 3e6, angle=330)
+    + chart_annotation("Compton limit", 2.5e-10, 3e-21, angle=30)
+)
+
+(
+    gravity_region
+    + quantum_region
+    + subplanck_region
+    + wall_line_chart
+    + density_line_chart
+    + object_layers()
+    + instanton_point
+    + instanton_label
+    + final_annotations
+    + density_labels
+).properties(
+    width=760,
+    height=700,
+    title="Everything in the Universe, one chart, after Lineweaver & Patel (2023)",
+).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
 That is the triangle of everything: gravity above, quantum uncertainty
