@@ -61,8 +61,24 @@ group_colours = {
     "cosmic structures": "#C0448F",
 }
 
-LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
-LABEL_BELOW = {"neutron star", "Ceres"}
+LABEL_PLACEMENTS = {
+    "top quark":           ("right", -8, -11),
+    "Higgs boson":         ("right", -8,  11),
+    "stellar black hole":  ("right", -8, -22),
+    "neutron star":        ("right", -8, -13),
+    "white dwarf":         ("right", -8,   1),
+    "brown dwarf":         ("right", -8,   5),
+    "Jupiter":             ("right", -8,  12),
+    "red giant":           ("left",   8,  -4),
+    "Sun":                 ("left",   8,  11),
+    "Earth":               ("left",   8,   6),
+    "Moon":                ("left",   8,   8),
+    "Ceres":               ("left",   8,  11),
+    "globular cluster":    ("right", -8,  15),
+    "galaxy cluster":      ("right", -8, -12),
+    "supercluster":        ("right", -8,  12),
+    "observable Universe": ("right", -8,   0),
+}
 
 GROUP_DOMAIN = list(group_colours)
 GROUP_RANGE = [group_colours[group] for group in GROUP_DOMAIN]
@@ -104,22 +120,31 @@ def object_layers(table=objects, show_legend=True, point_size=55):
         ],
     )
 
-    left = table[table["name"].isin(LABEL_LEFT)]
-    below = table[table["name"].isin(LABEL_BELOW)]
-    regular = table[~table["name"].isin(LABEL_LEFT | LABEL_BELOW)]
+    label_table = table.copy()
+    label_table["label_align"] = "left"
+    label_table["label_dx"] = 8
+    label_table["label_dy"] = 0
 
-    def labels(data, **mark_options):
-        return alt.Chart(data).mark_text(fontSize=10, **mark_options).encode(
-            x=cosmos_x(), y=cosmos_y(), text="name:N",
-            color=group_colour(False),
+    for name, (align, dx, dy) in LABEL_PLACEMENTS.items():
+        row = label_table["name"].eq(name)
+        label_table.loc[row, ["label_align", "label_dx", "label_dy"]] = [
+            align, dx, dy
+        ]
+
+    label_layers = []
+    for (align, dx, dy), label_group in label_table.groupby(
+        ["label_align", "label_dx", "label_dy"], sort=False
+    ):
+        label_layers.append(
+            alt.Chart(label_group).mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11
+            ).encode(
+                x=cosmos_x(), y=cosmos_y(), text="name:N",
+                color=group_colour(False),
+            )
         )
 
-    return (
-        points
-        + labels(regular, align="left", dx=6)
-        + labels(left, align="right", dx=-6)
-        + labels(below, align="left", dx=6, dy=10)
-    )
+    return alt.layer(points, *label_layers)
 
 r_line = np.logspace(-35, 30, 200)
 
@@ -310,8 +335,24 @@ group_colours = {
     "cosmic structures": "#C0448F",
 }
 
-LABEL_LEFT  = {"Higgs boson", "white dwarf", "globular cluster"}
-LABEL_BELOW = {"neutron star", "Ceres"}
+LABEL_PLACEMENTS = {
+    "top quark":           ("right", -8, -11),
+    "Higgs boson":         ("right", -8,  11),
+    "stellar black hole":  ("right", -8, -22),
+    "neutron star":        ("right", -8, -13),
+    "white dwarf":         ("right", -8,   1),
+    "brown dwarf":         ("right", -8,   5),
+    "Jupiter":             ("right", -8,  12),
+    "red giant":           ("left",   8,  -4),
+    "Sun":                 ("left",   8,  11),
+    "Earth":               ("left",   8,   6),
+    "Moon":                ("left",   8,   8),
+    "Ceres":               ("left",   8,  11),
+    "globular cluster":    ("right", -8,  15),
+    "galaxy cluster":      ("right", -8, -12),
+    "supercluster":        ("right", -8,  12),
+    "observable Universe": ("right", -8,   0),
+}
 
 GROUP_DOMAIN = list(group_colours)
 GROUP_RANGE = [group_colours[group] for group in GROUP_DOMAIN]
@@ -353,28 +394,48 @@ def object_layers(table=objects, show_legend=True, point_size=55):
         ],
     )
 
-    left = table[table["name"].isin(LABEL_LEFT)]
-    below = table[table["name"].isin(LABEL_BELOW)]
-    regular = table[~table["name"].isin(LABEL_LEFT | LABEL_BELOW)]
+    label_table = table.copy()
+    label_table["label_align"] = "left"
+    label_table["label_dx"] = 8
+    label_table["label_dy"] = 0
 
-    def labels(data, **mark_options):
-        return alt.Chart(data).mark_text(fontSize=10, **mark_options).encode(
-            x=cosmos_x(), y=cosmos_y(), text="name:N",
-            color=group_colour(False),
+    for name, (align, dx, dy) in LABEL_PLACEMENTS.items():
+        row = label_table["name"].eq(name)
+        label_table.loc[row, ["label_align", "label_dx", "label_dy"]] = [
+            align, dx, dy
+        ]
+
+    label_layers = []
+    for (align, dx, dy), label_group in label_table.groupby(
+        ["label_align", "label_dx", "label_dy"], sort=False
+    ):
+        label_layers.append(
+            alt.Chart(label_group).mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11
+            ).encode(
+                x=cosmos_x(), y=cosmos_y(), text="name:N",
+                color=group_colour(False),
+            )
         )
 
-    return (
-        points
-        + labels(regular, align="left", dx=6)
-        + labels(left, align="right", dx=-6)
-        + labels(below, align="left", dx=6, dy=10)
-    )
+    return alt.layer(points, *label_layers)
 
-object_layers().properties(
-    width=740,
-    height=650,
+object_layers(point_size=75).properties(
+    width=780,
+    height=700,
     title="All 29 objects, coloured by kind",
-).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
+).configure_axis(
+    gridColor="#dddddd",
+    gridOpacity=0.7,
+    labelFontSize=13,
+    labelPadding=6,
+    titleFontSize=16,
+    titlePadding=14,
+).configure_title(
+    fontSize=20,
+    anchor="start",
+    offset=16,
+)
 ```
 
 The interesting thing is where the points
