@@ -421,7 +421,17 @@ A phylogenetic tree has three kinds of parts:
 - **Branch lengths**, in the trees on this page, are **time**: a branch of
   length 6.7 means 6.7 million years of independent evolution.
 
-Branch lenght is estimated from genetics. Take the same gene
+Haeckel made the tree metaphor literal in this 1866 genealogy of mammals:
+ancestry grows from a trunk and living groups occupy the outer branches. The
+form makes hierarchy immediately legible, but its branch lengths are not a
+measured time scale. Modern phylogenetic trees retain the branching structure
+while treating topology and branch length as claims supported by data.
+
+![Ernst Haeckel's 1866 *Stammbaum der Säugethiere mit Inbegriff des Menschen*
+(family tree of mammals, including humans). [Source image: Johns Hopkins
+University Press.](https://jhupress.wordpress.com/wp-content/uploads/2014/08/pg-110.jpg)](../images/haeckel-mammal-tree-1866.jpg){#fig-haeckel-mammals width=52% fig-alt="A black-and-white nineteenth-century genealogy of mammals drawn as a large branching tree, with Mammalia at the trunk and named mammal groups on the branches."}
+
+Branch length is estimated from genetics. Take the same gene
 from many species, line the DNA sequences up, and count the differences.
 Mutations accumulate roughly steadily, so more differences means more time
 since two lineages separated, giving the *shape* and *relative* ages.
