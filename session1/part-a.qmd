@@ -669,8 +669,6 @@ new column with the blanks filled in.
 metadata_types = metadata.assign(
     documented_type=metadata["variable_type"].fillna("not specified")
 )
-
-# your code
 ```
 
 
@@ -683,9 +681,9 @@ features determines its length.
  .mark_bar(color="#30a8b1")
  .encode(
      x=alt.X("features:Q", title="Number of features"),
-     y=alt.Y("documented_type:N", title=None, sort="-x"),
+     y=alt.Y("variable_type:N", title=None, sort="-x"),
      tooltip=[
-         alt.Tooltip("documented_type:N", title="Documented type"),
+         alt.Tooltip("variable_type:N", title="Documented type"),
          alt.Tooltip("features:Q", title="Features"),
      ],
  )
@@ -1109,11 +1107,9 @@ hist_data = pd.DataFrame(hist_rows)
 A histogram is already an aggregate chart: continuous values are transformed
 into intervals with `bin`, then rows are aggregated with `count`. Changing the
 number or width of bins can reveal or conceal modes and outliers. A box plot
-would instead aggregate to quartiles and whiskers; an empirical cumulative
-distribution would preserve every rank; a strip plot would preserve every
-row but overplot badly at this sample size. Here, identical histogram marks
+would instead aggregate to quartiles and whiskers. Here, identical histogram marks
 make shapes comparable across traits, while independent facet scales let each
-trait use its own range. That choice helps see shape but prevents direct
+trait use its own range. That choice helps see shape, but prevents direct
 comparison of absolute magnitudes across panels.
 
 #### Violin plots: a smoothed view of distribution shape
@@ -1124,7 +1120,7 @@ the estimated density of observations near that value. Wide regions contain
 concentrated values; narrow regions contain relatively few.
 
 To keep the browser chart responsive, take the same reproducible sample of at
-most 2,000 observed values from each trait. Sampling is only for drawing the
+most 1,000 observed values from each trait. Sampling is only for drawing the
 violins; the summary table and histograms above still use every observed row.
 
 ```{pyodide}
@@ -1135,7 +1131,7 @@ violin_data = (birds[trait_columns]
 violin_data["log10_value"] = np.log10(violin_data["value"])
 
 violin_sample = pd.concat(
-    [group.sample(n=min(len(group), 2_000), random_state=36104)
+    [group.sample(n=min(len(group), 1_000), random_state=36104)
      for _, group in violin_data.groupby("trait")],
     ignore_index=True,
 )
