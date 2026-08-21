@@ -7,32 +7,15 @@ pyodide:
     - matplotlib
 ---
 
-In 2023, two astrophysicists published a chart that went viral: **every
+In 2023, two astrophysicists published a chart that placed **every
 object in the Universe on one pair of axes**: quarks, viruses, fleas,
 whales, planets, stars, black holes, galaxies, and the observable Universe
 itself (Lineweaver & Patel, *All objects and some questions*, American
-Journal of Physics 91:819). Plot mass against radius on log scales and
-everything that exists falls inside a **triangle**: one wall drawn by
-gravity, one wall drawn by quantum mechanics, and an apex where the two
-meet at the smallest possible object.
+Journal of Physics 91:819).
 
-In this part you rebuild that chart step by step. Every ingredient is
-something you can compute: two axes, one curated table, one fact about
-spheres, and two famous formulas. By the end you will have drawn the
-figure, and you will know why it has the shape it has.
+In this part you rebuild that chart step by step.
 
-The rebuild happens in five steps:
 
-| Step | What you add | What it teaches |
-|---|---|---|
-| 1 | axes + five familiar objects | log scales across ~100 decades |
-| 2 | the full table, coloured by kind | curating and encoding a dataset |
-| 3 | lines of constant density | why spheres make slope-3 lines |
-| 4 | the black-hole and quantum walls | physical limits as plotted lines |
-| 5 | the apex | where the walls meet: the Planck scale |
-
-All code runs in your browser. The first cell may take a few seconds while
-Python loads.
 
 ```{pyodide}
 #| autorun: true
@@ -133,22 +116,14 @@ ratio = 2 * G * mass[iU] / c**2 / radius[iU]
 
 ## 1 · One pair of axes for everything
 
-Why mass and radius? Because they are the two properties **every physical
-object has**. A virus has no temperature you can easily assign, a galaxy
-has no chemistry, but both have a mass and a size. If you want a chart of
-*everything*, you need axes everything can land on.
+What would a graph of everything compare?
+Mass and radius are the two properties **every physical
+object has**. But from a neutrino to the observable Universe, mass spans
+about **90 orders of magnitude** and radius about **44**. This means both axes must be
+logarithmic.
 
-The catch is range. From a neutrino to the observable Universe, mass spans
-about **90 orders of magnitude** and radius about **44**. On linear axes,
-a wall chart wide enough to show the Universe would have to draw the Sun
-hundreds of times smaller than a single proton. So both axes are
-logarithmic: the same move you made for allometry in Part A, stretched to
-its absolute limit. (We work in grams and centimetres, following the
-paper; on axes this wide the choice of unit just slides everything by a
-constant, and changes nothing about the shape.)
-
-The chart's raw material is a curated table: one row per object, a name,
-a group, a mass and a radius:
+The chart's raw material is a curated table with one row per object; name,
+group, mass and radius:
 
 ```{pyodide}
 text = open_url(DATA_URL + "objects_universe.csv").read()
@@ -170,7 +145,7 @@ assert radius.max() / radius.min() > 1e43
 print("✓ 29 objects; mass spans 90 orders of magnitude, radius spans 44")
 ```
 
-Start with five things you have an intuition for:
+Start with five more familiar objects:
 
 ```{pyodide}
 FAMILIAR = ["flea", "human", "blue whale", "Earth", "Sun"]
@@ -186,10 +161,9 @@ ax.set_title("Five familiar objects: 37 orders of magnitude in mass")
 plt.show()
 ```
 
-Notice they fall roughly on a straight line. Hold that thought; it is the
-key to Step 3.
+Notice that they fall roughly on a straight line.
 
-First, a confession about the data. What is "the radius of a human"? The
+But first, consider; what is "the radius of a human"? The
 paper treats you as a **sphere of radius 50 cm** with mass 70 kg. Check
 what that implies:
 
@@ -204,20 +178,14 @@ assert 0.1 < rho_human < 0.2
 print("✓ the spherical human is ~0.13 g/cm³, seven times fluffier than water")
 ```
 
-Real humans are almost exactly water density; the 50-cm sphere
-overestimates your volume about sevenfold. On an ordinary chart that would
-be a scandal. Here, one decade of error is **one percent of the axis**:
-invisible. That is the quiet trade this figure makes everywhere: every
-value is an order-of-magnitude sketch, and at this scale that is exactly
-good enough. Say so in the caption, and it is honest; hide it, and it
-is not.
+Real humans are almost exactly water density. The 50-cm sphere
+overestimates your volume about sevenfold, but this is invisible on the scale.
+Every value is a similar order-of-magnitude estimate.
 
 ## 2 · All 29 objects
 
 Now all 29 objects, coloured by kind. Six groups: particles (grey), life,
-worlds, stars, black holes (black, naturally), and cosmic structures. The
-palette is colour-blind-checked, and every point carries its own label;
-colour alone is never the only way to tell things apart:
+worlds, stars, black holes (black, naturally), and cosmic structures.
 
 ```{pyodide}
 group_colours = {
@@ -261,10 +229,10 @@ ax.set_title("All 29 objects, coloured by kind")
 plt.show()
 ```
 
-The interesting thing is not where the points are; it is where they
-**aren't**. Nothing in the top-left (small but monstrously heavy), nothing
+The interesting thing is where the points
+**aren't**:  Nothing in the top-left (small but extremely heavy), nothing
 in the bottom-right (huge but almost massless). Two whole corners of
-possibility, empty. The rest of this page explains why they *must* be.
+possibility, empty. Why?
 
 ## 3 · Lines of constant density
 

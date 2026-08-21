@@ -1180,8 +1180,6 @@ phylum-level tips). Adapt the rectangular, circular or time-axis code from
 this page, or devise another node-link layout. Do not call the result a tree
 of *all* life: these files contain Eukaryota, not Bacteria or Archaea.
 
-Your final visualisation must:
-
 - make the root, tips and branching structure readable;
 - state what one tip represents and report the number of tips;
 - say whether branch length means time and give its unit;
