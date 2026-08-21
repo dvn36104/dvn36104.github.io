@@ -557,10 +557,22 @@ assert round(root_age) == 319
 print("✓ 956 amniote families; the amniote common ancestor lived ~319 Myr ago")
 ```
 
+The mini-tree used **Myr since the root**, which matches the stored branch
+depths but is not the most natural way to read historical dates. For this
+larger tree, label the axis in **millions of years ago**: about 319 at the root,
+counting down to 0 at the living tips. Only the tick labels are reversed; the
+tree geometry and branch lengths do not change.
+
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(9, 7))
 draw_tree(amniotes, ax, lw=0.4)
-ax.set_xlabel("Myr since the amniote root")
+
+mya_labels = [round(root_age), 250, 200, 150, 100, 50, 0]
+depth_ticks = [0] + [root_age - age for age in mya_labels[1:]]
+ax.set_xticks(depth_ticks)
+ax.set_xticklabels(mya_labels)
+ax.set_xlim(0, root_age * 1.02)
+ax.set_xlabel("millions of years ago")
 ax.set_title(f"All amniotes at family level: {len(amniotes.leaves())} tips, one ancestor")
 plt.show()
 ```
@@ -569,7 +581,9 @@ No labels (at 956 tips they would be too many).
 
 The shape shows how every mammal, bird and reptile family trace back to **one node** ~319 Myr
 ago. The big early fork near the root is mammals splitting
-from the reptile-plus-bird lineage.
+from the reptile-plus-bird lineage. Reading left to right now also reads as
+deep past to present: the numbers decrease from about 319 million years ago to
+0, rather than increasing as distance from the root.
 
 ## 4 · Clades and common ancestors
 
