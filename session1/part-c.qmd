@@ -850,9 +850,9 @@ print("✓ the observable Universe sits ON the black-hole line")
 ```
 
 The Universe's mass and radius satisfy the black-hole relation almost
-exactly. Does that mean we live inside a black hole?
+exactly.
 
-Read what the paper has to say about this!
+Does that mean we live inside a black hole? Read what the paper has to say about this!
 
 ## 5 · The Planck scale
 
@@ -888,14 +888,15 @@ quantum mechanics allows.
 Left of the Planck length, physics has no
 tested theory at all (the paper shades it "sub-Planckian unknown").
 
-### Put the Universe on the wall
+#### Place the Universe
 
-The Universe's point was given to you in the table. Derive it.
+Derive the Universe's point (given to you in the table).
+
 The radius of the observable Universe is the
-Hubble radius $r_H = c/H_0$; its average density is the critical density
-$\rho_c = 3H_0^2 / 8\pi G$; and its mass is that density times the volume
-of the Hubble sphere. Test whether your derived Universe lands on
-the black-hole line.
+Hubble radius $r_H = c/H_0$. Its average density is the critical density
+$\rho_c = 3H_0^2 / 8\pi G$. Its mass is that density times the volume
+of the Hubble sphere. Does your derived Universe lands on
+the black-hole line?
 
 ```{pyodide}
 #| setup: true
@@ -933,7 +934,7 @@ provided. Watch the parentheses in the critical-density formula.
 you almost certainly forgot to cube $r_H$ in the volume of the sphere.
 :::
 
-## Final task · Draw the Triangle of Everything
+## Draw the Triangle of Everything
 
 ::: {.callout-tip title="Study the published figure"}
 Before drawing your chart, open Lineweaver and Patel's
@@ -943,7 +944,8 @@ lines, shaded regions and annotation to explain the mass–radius space. Decide
 which of those choices help the claims you want your version to support.
 :::
 
-Build your own **Triangle of Everything** in Altair. Your final chart should
+Build your own **Triangle of Everything** using Altair (or another library of your choice).
+Your final chart should
 include:
 
 - logarithmic mass and radius axes with readable titles and tick labels;
@@ -955,7 +957,7 @@ include:
   without referring back to the code.
 
 You may reuse the data and Altair layers developed above, but the final
-composition, visual hierarchy and annotation choices are yours.
+composition, visual hierarchy and annotation choices should be yours.
 
 ```{pyodide}
 #| exercise: ex_triangle
@@ -972,27 +974,7 @@ region, the Planck-scale point and your final annotations.
 
 {{< include _instructor-c.qmd >}}
 
-## What went into the chart
 
-Count the ingredients you actually used:
-
-- **one curated table**: 29 rows, every value an order-of-magnitude
-  sketch, sources mixed from measurement (Earth), convention (the 50-cm
-  spherical human), and definition (black-hole radii);
-- **two log axes**: doing more work than everything else combined,
-  turning 90 orders of magnitude into a readable square and power laws
-  into straight lines;
-- **one fact about spheres**: $m \propto \rho r^3$, which organises all
-  atomic matter onto one line and all nuclear matter onto another;
-- **two formulas**: $r_s = 2Gm/c^2$ and $\lambda_c = \hbar/mc$, drawn
-  not as data but as *walls*, turning empty space into a claim;
-- **annotation**: region labels, line labels, direct point labels: the
-  difference between a scatter plot and an explanation.
-
-That is the whole machine. The famous figure is not famous for its data
-(half its rows you could have written down yourself) but for its
-*framing*: pick axes everything shares, let physics draw the boundaries,
-and the emptiness becomes the story.
 
 ## Sources
 

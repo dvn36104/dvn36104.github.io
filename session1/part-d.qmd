@@ -309,10 +309,8 @@ plt.show()
 ```
 
 Across each period atoms *shrink* (the growing nuclear charge pulls the
-same shell tighter), then at each new shell the size *jumps*: argon is
-96 pm, and one proton later potassium is 196 pm. The sawtooth in size
-mirrors the sawtooth in valence. This
-is the same cycle Lothar Meyer plotted as atomic volume in 1870.
+same shell tighter). At each new shell the size *jumps*: argon is
+96 pm, and one proton later potassium is 196 pm. The sawtooth pattern is the same cycle Lothar Meyer plotted as atomic volume in 1870.
 
 ![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
 :::
@@ -320,43 +318,34 @@ is the same cycle Lothar Meyer plotted as atomic volume in 1870.
 ## 3 · Alternative table designs
 
 If the data is a cycle, should its picture be a *grid*, or should it
-wind? Chemists have proposed hundreds of layouts. Here are four real
-ones. Look at each and ask the same two questions: *what does this
-design make easy to see?* and *what does it hide?*
+wind? Chemists have proposed various layouts. Compare these four alternative
+designs:
 
-**Mendeleev's own table (1869).** The original. Periods run *down* the
-columns and groups run across the rows (transposed from the modern
-convention), with gaps deliberately left for elements he predicted must
-exist (they did: gallium, scandium, germanium).
+**Mendeleev's own table (1869).** Periods run *down* the
+columns. Groups run across the rows, transposed from the modern
+convention. Gaps are deliberately left for elements Mendeleev predicted must
+exist (gallium, scandium, germanium).
 
 ![](../images/mendeleev-1869.svg){width=45% fig-align="center"}
 
 **Benfey's spiral (1964).** The list winds continuously outward from
-hydrogen; the transition metals and the f-block bulge out as peninsulas.
-Nothing is ever cut: element 56 is *next to* element 57.
+hydrogen. The transition metals and the F-block bulge out.
+
 
 ![](../images/benfey-spiral.svg){width=75% fig-align="center"}
 
 **Janet's left-step table (1928).** Rows end where shells *actually*
 close in the aufbau order, so the blocks form perfect staircase steps.
-Physicists tend to love it; chemists complain that helium ends up above
-beryllium.
+
 
 ![](../images/janet-left-step.png){width=95% fig-align="center"}
 
-**A circular table.** Periods as concentric rings: the cycle is
-explicit, at the price of the outer rings stretching and the inner ones
-cramping.
+**A circular table.** Periodicity explicitly represented with concentric rings.
 
 ![](../images/circular-table.svg){width=60% fig-align="center"}
 
-::: {.callout-note title="Pause: your preference"}
-Before reading on, decide (seriously, pick one) which of the four you
-would hang in a classroom, and write down (a note on paper is fine) your
-one-sentence reason. Then note one thing your favourite makes *harder*
-to see than the standard table does. You will need both notes at the end
-of the page.
-:::
+
+What are their advantages and disadvantages? Which do you prefer?
 
 ## 4 · Build the spiral
 
