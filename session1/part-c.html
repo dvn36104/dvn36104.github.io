@@ -233,51 +233,8 @@ window.Quarto = {
 </header>
 
 
-<p>In 2023, two astrophysicists published a chart that went viral: <strong>every object in the Universe on one pair of axes</strong>: quarks, viruses, fleas, whales, planets, stars, black holes, galaxies, and the observable Universe itself (Lineweaver &amp; Patel, <em>All objects and some questions</em>, American Journal of Physics 91:819). Plot mass against radius on log scales and everything that exists falls inside a <strong>triangle</strong>: one wall drawn by gravity, one wall drawn by quantum mechanics, and an apex where the two meet at the smallest possible object.</p>
-<p>In this part you rebuild that chart step by step. Every ingredient is something you can compute: two axes, one curated table, one fact about spheres, and two famous formulas. By the end you will have drawn the figure, and you will know why it has the shape it has.</p>
-<p>The rebuild happens in five steps:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Step</th>
-<th>What you add</th>
-<th>What it teaches</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>axes + five familiar objects</td>
-<td>log scales across ~100 decades</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>the full table, coloured by kind</td>
-<td>curating and encoding a dataset</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>lines of constant density</td>
-<td>why spheres make slope-3 lines</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>the black-hole and quantum walls</td>
-<td>physical limits as plotted lines</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>the apex</td>
-<td>where the walls meet: the Planck scale</td>
-</tr>
-</tbody>
-</table>
-<p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
+<p>In 2023, two astrophysicists published a chart that placed <strong>every object in the Universe on one pair of axes</strong>: quarks, viruses, fleas, whales, planets, stars, black holes, galaxies, and the observable Universe itself (Lineweaver &amp; Patel, <em>All objects and some questions</em>, American Journal of Physics 91:819).</p>
+<p>In this part you rebuild that chart step by step.</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
 
@@ -296,9 +253,8 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 </div>
 <section id="one-pair-of-axes-for-everything" class="level2">
 <h2 class="anchored" data-anchor-id="one-pair-of-axes-for-everything">1 · One pair of axes for everything</h2>
-<p>Why mass and radius? Because they are the two properties <strong>every physical object has</strong>. A virus has no temperature you can easily assign, a galaxy has no chemistry, but both have a mass and a size. If you want a chart of <em>everything</em>, you need axes everything can land on.</p>
-<p>The catch is range. From a neutrino to the observable Universe, mass spans about <strong>90 orders of magnitude</strong> and radius about <strong>44</strong>. On linear axes, a wall chart wide enough to show the Universe would have to draw the Sun hundreds of times smaller than a single proton. So both axes are logarithmic: the same move you made for allometry in Part A, stretched to its absolute limit. (We work in grams and centimetres, following the paper; on axes this wide the choice of unit just slides everything by a constant, and changes nothing about the shape.)</p>
-<p>The chart’s raw material is a curated table: one row per object, a name, a group, a mass and a radius:</p>
+<p>What would a graph of everything compare? Mass and radius are the two properties <strong>every physical object has</strong>. But from a neutrino to the observable Universe, mass spans about <strong>90 orders of magnitude</strong> and radius about <strong>44</strong>. This means both axes must be logarithmic.</p>
+<p>The chart’s raw material is a curated table with one row per object; name, group, mass and radius:</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
 
@@ -315,7 +271,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihuYW1lcykgPT0gMjlcbmFzc2VydCBtYXNzLm1heCgpIC8gbWFzcy5taW4oKSA+IDFlODlcbmFzc2VydCByYWRpdXMubWF4KCkgLyByYWRpdXMubWluKCkgPiAxZTQzXG5wcmludChcIuKckyAyOSBvYmplY3RzOyBtYXNzIHNwYW5zIDkwIG9yZGVycyBvZiBtYWduaXR1ZGUsIHJhZGl1cyBzcGFucyA0NFwiKSJ9
 </script>
 </div>
-<p>Start with five things you have an intuition for:</p>
+<p>Start with five more familiar objects:</p>
 <div>
 <div id="pyodide-5" class="exercise-cell">
 
@@ -324,8 +280,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihuYW1lcykg
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRkFNSUxJQVIgPSBbXCJmbGVhXCIsIFwiaHVtYW5cIiwgXCJibHVlIHdoYWxlXCIsIFwiRWFydGhcIiwgXCJTdW5cIl1cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg4LCA1LjUpKVxuZm9yIG5tIGluIEZBTUlMSUFSOlxuICAgIGkgPSBuYW1lcy5pbmRleChubSlcbiAgICBheC5zY2F0dGVyKHJhZGl1c1tpXSwgbWFzc1tpXSwgcz0zMCwgY29sb3I9XCIjNDI2OWQwXCIsIHpvcmRlcj0zKVxuICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT0xMClcbmF4LnNldF94c2NhbGUoXCJsb2dcIik7IGF4LnNldF95c2NhbGUoXCJsb2dcIilcbmF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG5heC5zZXRfdGl0bGUoXCJGaXZlIGZhbWlsaWFyIG9iamVjdHM6IDM3IG9yZGVycyBvZiBtYWduaXR1ZGUgaW4gbWFzc1wiKVxucGx0LnNob3coKSJ9
 </script>
 </div>
-<p>Notice they fall roughly on a straight line. Hold that thought; it is the key to Step 3.</p>
-<p>First, a confession about the data. What is “the radius of a human”? The paper treats you as a <strong>sphere of radius 50 cm</strong> with mass 70 kg. Check what that implies:</p>
+<p>Notice that they fall roughly on a straight line.</p>
+<p>But first, consider; what is “the radius of a human”? The paper treats you as a <strong>sphere of radius 50 cm</strong> with mass 70 kg. Check what that implies:</p>
 <div>
 <div id="pyodide-6" class="exercise-cell">
 
@@ -342,11 +298,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaSA9IG5hbWVzLmluZGV4KFwi
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IDAuMSA8IHJob19odW1hbiA8IDAuMlxucHJpbnQoXCLinJMgdGhlIHNwaGVyaWNhbCBodW1hbiBpcyB+MC4xMyBnL2NtwrMsIHNldmVuIHRpbWVzIGZsdWZmaWVyIHRoYW4gd2F0ZXJcIikifQ==
 </script>
 </div>
-<p>Real humans are almost exactly water density; the 50-cm sphere overestimates your volume about sevenfold. On an ordinary chart that would be a scandal. Here, one decade of error is <strong>one percent of the axis</strong>: invisible. That is the quiet trade this figure makes everywhere: every value is an order-of-magnitude sketch, and at this scale that is exactly good enough. Say so in the caption, and it is honest; hide it, and it is not.</p>
+<p>Real humans are almost exactly water density. The 50-cm sphere overestimates your volume about sevenfold, but this is invisible on the scale. Every value is a similar order-of-magnitude estimate.</p>
 </section>
 <section id="all-29-objects" class="level2">
 <h2 class="anchored" data-anchor-id="all-29-objects">2 · All 29 objects</h2>
-<p>Now all 29 objects, coloured by kind. Six groups: particles (grey), life, worlds, stars, black holes (black, naturally), and cosmic structures. The palette is colour-blind-checked, and every point carries its own label; colour alone is never the only way to tell things apart:</p>
+<p>Now all 29 objects, coloured by kind. Six groups: particles (grey), life, worlds, stars, black holes (black, naturally), and cosmic structures.</p>
 <div>
 <div id="pyodide-8" class="exercise-cell">
 
@@ -355,7 +311,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IDAuMSA8IHJob19o
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ3JvdXBfY29sb3VycyA9IHtcbiAgICBcInBhcnRpY2xlc1wiOiAgICAgICAgIFwiIzY2NjY2NlwiLFxuICAgIFwibGlmZVwiOiAgICAgICAgICAgICAgXCIjMzBhOGIxXCIsXG4gICAgXCJ3b3JsZHNcIjogICAgICAgICAgICBcIiM0MjY5ZDBcIixcbiAgICBcInN0YXJzXCI6ICAgICAgICAgICAgIFwiI2M5OGEwMFwiLFxuICAgIFwiYmxhY2sgaG9sZXNcIjogICAgICAgXCIjMTcxNzE3XCIsXG4gICAgXCJjb3NtaWMgc3RydWN0dXJlc1wiOiBcIiM5NDc1Y2RcIixcbn1cblxuTEFCRUxfTEVGVCAgPSB7XCJIaWdncyBib3NvblwiLCBcIndoaXRlIGR3YXJmXCIsIFwiZ2xvYnVsYXIgY2x1c3RlclwifVxuTEFCRUxfQkVMT1cgPSB7XCJuZXV0cm9uIHN0YXJcIiwgXCJDZXJlc1wifVxuXG5kZWYgZHJhd19vYmplY3RzKGF4LCBmb250c2l6ZT03LjUpOlxuICAgIGZvciBpLCBubSBpbiBlbnVtZXJhdGUobmFtZXMpOlxuICAgICAgICBjb2wgPSBncm91cF9jb2xvdXJzW2dyb3Vwc1tpXV1cbiAgICAgICAgYXguc2NhdHRlcihyYWRpdXNbaV0sIG1hc3NbaV0sIHM9MTgsIGNvbG9yPWNvbCwgem9yZGVyPTMpXG4gICAgICAgIGlmIG5tIGluIExBQkVMX0xFRlQ6ICAgICAgIyBudWRnZSBhIGZldyBsYWJlbHMgb3V0IG9mIGNvbGxpc2lvbnNcbiAgICAgICAgICAgIGF4LmFubm90YXRlKG5tICsgXCIgXCIsIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIGhhPVwicmlnaHRcIilcbiAgICAgICAgZWxpZiBubSBpbiBMQUJFTF9CRUxPVzpcbiAgICAgICAgICAgIGF4LmFubm90YXRlKFwiIFwiICsgbm0sIChyYWRpdXNbaV0sIG1hc3NbaV0pLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWNvbCwgem9yZGVyPTMsIHZhPVwidG9wXCIpXG4gICAgICAgIGVsc2U6XG4gICAgICAgICAgICBheC5hbm5vdGF0ZShcIiBcIiArIG5tLCAocmFkaXVzW2ldLCBtYXNzW2ldKSwgZm9udHNpemU9Zm9udHNpemUsXG4gICAgICAgICAgICAgICAgICAgICAgICBjb2xvcj1jb2wsIHpvcmRlcj0zKVxuXG5kZWYgY29zbW9zX2F4ZXMoZmlnc2l6ZT0oMTAsIDEwKSk6XG4gICAgZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPWZpZ3NpemUpXG4gICAgYXguc2V0X3hzY2FsZShcImxvZ1wiKTsgYXguc2V0X3lzY2FsZShcImxvZ1wiKVxuICAgIGF4LnNldF94bGltKDFlLTM1LCAxZTMwKTsgYXguc2V0X3lsaW0oMWUtNDAsIDFlNjApXG4gICAgYXguc2V0X3h0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtMzUsIDMxLCA1KV0pXG4gICAgYXguc2V0X3l0aWNrcyhbMTAuMCoqayBmb3IgayBpbiByYW5nZSgtNDAsIDYxLCAxMCldKVxuICAgIGF4LnNldF94bGFiZWwoXCJyYWRpdXMgKGNtKVwiKTsgYXguc2V0X3lsYWJlbChcIm1hc3MgKGcpXCIpXG4gICAgcmV0dXJuIGZpZywgYXhcblxuZmlnLCBheCA9IGNvc21vc19heGVzKClcbmRyYXdfb2JqZWN0cyhheClcbmF4LnNldF90aXRsZShcIkFsbCAyOSBvYmplY3RzLCBjb2xvdXJlZCBieSBraW5kXCIpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-<p>The interesting thing is not where the points are; it is where they <strong>aren’t</strong>. Nothing in the top-left (small but monstrously heavy), nothing in the bottom-right (huge but almost massless). Two whole corners of possibility, empty. The rest of this page explains why they <em>must</em> be.</p>
+<p>The interesting thing is where the points <strong>aren’t</strong>: Nothing in the top-left (small but extremely heavy), nothing in the bottom-right (huge but almost massless). Two whole corners of possibility, empty. Why?</p>
 </section>
 <section id="lines-of-constant-density" class="level2">
 <h2 class="anchored" data-anchor-id="lines-of-constant-density">3 · Lines of constant density</h2>
