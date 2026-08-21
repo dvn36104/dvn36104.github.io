@@ -169,24 +169,30 @@ plt.show()
 
 Notice that they fall roughly on a straight line.
 
-But first, consider; what is "the radius of a human"? The
-paper treats you as a **sphere of radius 50 cm** with mass 70 kg. Check
-what that implies:
+Before interpreting that line, ask what **radius** means for a human. A human
+is not a sphere. The table assigns the human a mass of 70 kg and a radius of
+50 cm, where 50 cm is a convenient measure of characteristic size. What would
+happen if we mistakenly treated it as a literal spherical radius?
 
 ```{pyodide}
 i = names.index("human")
-rho_human = mass[i] / (4/3 * np.pi * radius[i]**3)
-print(f"implied human density: {rho_human:.2f} g/cm³")
+sphere_volume_cm3 = 4/3 * np.pi * radius[i]**3
+sphere_volume_litres = sphere_volume_cm3 / 1000
+rho_human = mass[i] / sphere_volume_cm3
+
+print(f"volume of a sphere with radius 50 cm: {sphere_volume_litres:.0f} litres")
+print(f"70 kg divided by that volume: {rho_human:.2f} g/cm³")
 ```
 
-```{pyodide}
-assert 0.1 < rho_human < 0.2
-print("✓ the spherical human is ~0.13 g/cm³, seven times fluffier than water")
-```
+A 70 kg human has a volume of roughly 70 litres because the human body is
+close to the density of water. The calculation gives 524 litres only because
+we forced the 50 cm characteristic size into a formula for a sphere. The
+result does **not** show that humans have a density of 0.13 g/cm³.
 
-Real humans are almost exactly water density. The 50-cm sphere
-overestimates your volume about sevenfold, but this is invisible on the scale.
-Every value is a similar order-of-magnitude estimate.
+This is a warning about the axis. Radius is a geometric measurement for a
+planet or star, but an approximate characteristic size for an irregular object
+such as a flea, human or whale. The chart is designed for comparisons across
+many orders of magnitude, not precise estimates of each object's density.
 
 ## 2 · All 29 objects
 
