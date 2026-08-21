@@ -181,12 +181,13 @@ density_line_chart = alt.Chart(density_lines).mark_line(
 
 density_label_data = pd.DataFrame({
     "radius_cm": [2e14, 2e2],
-    "mass_g": [mass_at_density(1, 1e14),
-               mass_at_density(2.3e14, 1e2)],
+    "mass_g": [mass_at_density(1, 2e14),
+               mass_at_density(2.3e14, 2e2)],
     "label": ["atomic density", "nuclear density"],
 })
 density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, color="#777777", fontSize=11
+    angle=297, align="left", dx=5, dy=-16,
+    color="#777777", fontSize=11
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 wall_data = pd.DataFrame({
@@ -471,9 +472,26 @@ mass—by $2^3 = 8$.
 Taking logs gives $\log m = 3\log r + \text{constant}$. A constant-density
 relationship therefore appears as a straight line with **slope 3** on the log–log
 chart. Different densities have the same slope but different vertical
-positions. Ordinary atomic matter lies near
-$\rho \approx 1\ \text{g/cm}^3$; nuclear matter sits fourteen orders of
-magnitude higher:
+positions.
+
+**Atomic density** and **nuclear density** are two useful reference points.
+Condensed atomic matter—water, flesh, rock and many solids and liquids—often
+has an average density near $\rho \approx 1\ \text{g/cm}^3$. Its mass is spread
+over the full volume occupied by atoms, including the space between each tiny
+nucleus and its electrons.
+
+**Nuclear density** is about $2.3 \times 10^{14}\ \text{g/cm}^3$: fourteen
+orders of magnitude greater. At this density, atoms no longer exist as
+separate structures; protons and neutrons are packed together as they are
+inside an atomic nucleus. One cubic centimetre would contain roughly 230
+billion kilograms of matter. Atomic nuclei and neutron stars lie near this
+density.
+
+These lines are **benchmarks, not boundaries**. We are not claiming that every
+object lies on one line or between the two. Red giants, galaxy clusters and the
+Universe have average densities far below the atomic line. For fundamental
+particles and black holes, “density” is especially difficult to interpret
+because the plotted radius does not describe a uniform ball of material.
 
 ```{pyodide}
 r_line = np.logspace(-35, 30, 200)
@@ -501,13 +519,14 @@ density_line_chart = alt.Chart(density_lines).mark_line(
 
 density_label_data = pd.DataFrame({
     "radius_cm": [2e14, 2e2],
-    "mass_g": [mass_at_density(1, 1e14),
-               mass_at_density(2.3e14, 1e2)],
+    "mass_g": [mass_at_density(1, 2e14),
+               mass_at_density(2.3e14, 2e2)],
     "label": ["atomic density", "nuclear density"],
 })
 
 density_labels = alt.Chart(density_label_data).mark_text(
-    angle=297, align="left", dx=5, color="#777777", fontSize=11
+    angle=297, align="left", dx=5, dy=-16,
+    color="#777777", fontSize=11
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
@@ -519,12 +538,14 @@ density_labels = alt.Chart(density_label_data).mark_text(
 ).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
 ```
 
-Suddenly the scatter has a skeleton. Everything made of atoms (viruses,
-fleas, whales, asteroids, planets, the Sun) strings out along the atomic
-line: that *was* the straight line hiding in the five familiar objects.
-The proton and the neutron star, nineteen decades apart in size, share the
-nuclear line: **a neutron star really is matter at the density of an
-atomic nucleus, the size of a city**.
+The lines give the scatter a skeleton without enclosing it. Several familiar
+condensed objects—viruses, animals, asteroids, planets and the Sun—fall near
+the atomic-density line. That was the approximate straight relationship
+hiding in the five familiar objects. Other objects sit nowhere near it.
+
+The proton and the neutron star, nineteen decades apart in size, both sit near
+the nuclear-density line: **a neutron star is matter at approximately the
+density of an atomic nucleus, compressed into an object the size of a city**.
 
 ```{pyodide}
 rho_all = mass / (4/3 * np.pi * radius**3)
