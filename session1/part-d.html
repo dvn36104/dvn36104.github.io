@@ -364,7 +364,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 </section>
 <section id="alternative-designs" class="level2">
 <h2 class="anchored" data-anchor-id="alternative-designs">3 · Alternative designs</h2>
-<p>If the data is a cycle, should its picture be a <em>grid</em>, or should it spiral round and round? Chemists have proposed various layouts. Compare these four alternative designs:</p>
+<p>If the data is a cycle, should its picture be a <em>grid</em>, or should it spiral round and round? Chemists have proposed various layouts. Compare these six alternative designs:</p>
 <p><strong>Mendeleev’s own table (1869).</strong> Periods run <em>down</em> the columns. Groups run across the rows, transposed from the modern convention. Gaps are deliberately left for elements Mendeleev predicted must exist (gallium, scandium, germanium).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -389,7 +389,34 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 <p><img src="../images/circular-table.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<p>What are their advantages and disadvantages? Which do you prefer?</p>
+<p><strong>Jeff Moran’s hexagonal spiral (1999).</strong> Hydrogen sits at the centre rather than at one end of a row. The connected hexagons make the sequence continuous, while colour, outlines and annotations expose blocks, metal categories, diagonal relationships and oxidation states.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/jeff-moran-periodic-table.png" class="img-fluid figure-img" style="width:82.0%"></p>
+<figcaption>Jeff Moran’s hexagonal periodic table. <a href="https://labnews.co.uk/alternative-periodic-tables/">Source: <em>Laboratory News</em>, “Alternative periodic tables”.</a></figcaption>
+</figure>
+</div>
+<p><strong>James Franklin Hyde’s curled-ribbon table (1975).</strong> Hyde was an organosilicon chemist, and his arrangement gives carbon and silicon the centre of the composition. A continuous ribbon curls around them, replacing the standard table’s separated rows with one connected path.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/hyde-curled-ribbon-periodic-table.svg" class="img-fluid figure-img" style="width:88.0%"></p>
+<figcaption>James Franklin Hyde’s curled-ribbon periodic table, reproduced by Rezmason. <a href="https://commons.wikimedia.org/wiki/File:The_chemical_elements_and_their_periodic_relationships.svg">Source and licence: Wikimedia Commons, CC BY-SA 4.0.</a></figcaption>
+</figure>
+</div>
+<p>What are their advantages and disadvantages? Which version do you prefer, and why?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Find another periodic table">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Find another periodic table
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look beyond these six examples and find at least one other periodic-table design. Your search must include <strong>three-dimensional tables</strong> as well as flat ones. Record the designer and date, link to the source, and explain what the layout makes easier to see and what it makes harder to see. Be precise about what position, shape, colour and any third spatial dimension encode.</p>
+</div>
+</div>
 </section>
 <section id="build-the-spiral" class="level2">
 <h2 class="anchored" data-anchor-id="build-the-spiral">4 · Build the spiral</h2>
@@ -471,7 +498,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUifSwiY29k
 <ul>
 <li><code>elements.csv</code> is generated from the <a href="https://mendeleev.readthedocs.io/">mendeleev</a> Python package (v1.2): IUPAC groups and periods, Pyykkö covalent radii (all 118 elements, one consistent convention), Pauling electronegativities. The f-block rows carry no group number, following the common 18-column convention.</li>
 <li>The <code>configuration()</code> function implements the idealised Madelung (aufbau) rule and ignores the ~20 real-world exceptions (Cr, Cu, Nb, …); none of them change where any element sits in the table.</li>
-<li>Images, all from Wikimedia Commons: Mendeleev’s 1869 table (redrawn by NikNaks, public domain); Benfey-style element spiral by DePiep (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular table by Cbuckley (CC BY 3.0).</li>
+<li>Images, all from Wikimedia Commons: Mendeleev’s 1869 table (redrawn by NikNaks, public domain); Benfey-style element spiral by DePiep (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular table by Cbuckley (CC BY 3.0); and James Franklin Hyde’s curled-ribbon table, reproduced by Rezmason (CC BY-SA 4.0). Jeff Moran’s hexagonal table is credited to Moran and sourced from <em>Laboratory News</em>.</li>
 <li>Category colours follow the long-standing Wikipedia convention, used here deliberately: this page is about <em>the</em> canonical design, and its colours are part of the canon. Note they are not a colour-blind-safe palette; the table survives that because position and text labels, not colour, carry the structure (worth noticing as a design lesson in itself).</li>
 </ul>
 
