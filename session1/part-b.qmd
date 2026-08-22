@@ -679,7 +679,10 @@ ax.margins(x=0.16)
 for label in ax.texts:
     if label.get_text().strip() == "Hominidae":
         label.set_fontweight("bold")
-ax.set_xlabel("Myr since the amniote root")
+ticks = range(0, 80, 10)
+ax.set_xticks([root_age - t for t in ticks])
+ax.set_xticklabels([str(t) for t in ticks])
+ax.set_xlabel("Myr ago")
 ax.set_title("The 19 Primate Families")
 plt.show()
 ```
