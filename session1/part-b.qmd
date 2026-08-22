@@ -722,20 +722,32 @@ plt.show()
 The right tree makes claims that the left tree cannot make. For example, the claim that apes split from monkeys before
 either split from lemurs. Every split has a date.
 
-The two sources do not even agree on the families themselves. Compare
-the name sets directly:
+Compare the family names used by the two sources:
 
 ```{pyodide}
-tree_names = {l.name.split("-")[0] for l in primates.leaves()}
+import re
 
-print(f"{len(primate_families)} families in the table, {len(tree_names)} in the tree")
-print("only in the table:", sorted(set(primate_families) - tree_names))
-print("only in the tree: ", sorted(tree_names - set(primate_families)))
+table_families = set(primate_families)
+tree_tips = [leaf.name for leaf in primates.leaves()]
+tree_families = {re.sub(r"-\d+$", "", name) for name in tree_tips}
+
+print(f"life-history table: {len(table_families)} family names")
+print(f"TimeTree: {len(tree_tips)} tips, representing "
+      f"{len(tree_families)} family names")
+print("only in life-history table:",
+      sorted(table_families - tree_families))
+print("only in TimeTree:",
+      sorted(tree_families - table_families))
 ```
 
-Indridae and Indriidae are the same family spelled two ways by two
-databases. Paleopropithecidae, the extinct sloth lemurs, cannot appear
-in a table of measured life histories.
+The life-history table uses `Indridae`; TimeTree uses `Indriidae`. They refer
+to the same living family. TimeTree also contains `Paleopropithecidae`, the
+extinct sloth lemurs, which are absent from the table of living species.
+
+TimeTree has 19 tips because `Cebidae`, `Indriidae` and `Lepilemuridae` each
+appear twice, with `-1` and `-2` suffixes. Removing those suffixes leaves 16
+family names: the same 15 living families after correcting the spelling, plus
+`Paleopropithecidae`.
 
 
 ### Back to Part A's seven lineages
