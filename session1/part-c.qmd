@@ -1048,17 +1048,17 @@ region, the Planck-scale point and your final annotations.
 
 
 
-## Bonus: The Fine Structure Constant
+## Bonus: The Fine Structure Constant and the Anthropic Principle
 
-One more constant of nature is hiding in the objects table. The
+An interesting feature of nature is hidden in the objects table. The
 **fine-structure constant** $\alpha \approx 1/137$ measures the strength
-of the electromagnetic interaction, and it connects two rows you have
-already plotted. The electron sits at its reduced Compton wavelength
+of the electromagnetic interaction, connecting two of the objects.
+The electron sits at its reduced Compton wavelength
 $\bar\lambda_e = \hbar/m_e c$, the smallest region quantum mechanics
 lets it be confined to. The hydrogen atom sits at the Bohr radius $a_0$,
 the size electromagnetism actually builds an atom at. The two are related
 by $a_0 = \bar\lambda_e/\alpha$, so dividing one radius by the other
-recovers $\alpha$ with nothing but the table:
+recovers $\alpha$, the **fine structure constant**.
 
 ```{pyodide}
 r_electron = float(objects.loc[objects["name"] == "electron", "radius_cm"].iloc[0])
@@ -1069,24 +1069,20 @@ print(f"alpha     = {alpha:.5f}")
 print(f"1 / alpha = {1 / alpha:.1f}")
 ```
 
-There is a geometric reading on the chart itself. The electron and the
-hydrogen atom sit at nearly the same mass (the electron is 1836 times
-lighter, about 3.3 decades, small change on a 100-decade axis), so the
-vertical jump between those two points is essentially
-$\log_{10}(1/\alpha) \approx 2.14$ decades. The fine-structure constant
-is visible in your figure as the gap between two dots: quantum mechanics
+The fine-structure constant
+is visible in the Triangle of Everything figure as the gap between the two dots: quantum mechanics
 says how small an electron can be, and $\alpha$ says how much bigger
 than that an actual atom turns out to be.
 
-The walls of the triangle are drawn by $G$, $c$ and $\hbar$ alone, but
-$\alpha$ decides much of what happens between them. The atomic-density
-line sits where it does because atoms have the size $\alpha$ gives them,
-and landmark masses along it (the largest planet, the smallest star) are
-power laws in $\alpha$ and its gravitational cousin
-$\alpha_G = Gm_p^2/\hbar c \approx 6\times10^{-39}$. The classic paper
-on this is Carr and Rees (1979), *The anthropic principle and the
-structure of the physical world*, which reconstructs essentially this
-whole diagram from a handful of dimensionless constants.
+The atomic-density
+line sits where it does because atoms have the size $\alpha$ gives them.
+ The classic paper
+on this is Carr and Rees (1979),
+[*The anthropic principle and the structure of the physical
+world*](https://www.nature.com/articles/278605a0), which reconstructs
+essentially this whole diagram from a handful of dimensionless constants.
+
+What is the anthropic principle?
 
 ## Sources
 
