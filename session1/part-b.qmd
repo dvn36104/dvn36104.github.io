@@ -669,10 +669,14 @@ Name two primate families and you get all of Primates, every family
 descended from the same ancestor, ~74 Myr ago:
 
 ```{pyodide}
-fig, ax = plt.subplots(figsize=(8, 4.6))
+fig, ax = plt.subplots(figsize=(8.8, 4.6))
 draw_tree(primates, ax, labels=True, fontsize=9, default="#4269d0")
+ax.margins(x=0.16)
+for label in ax.texts:
+    if label.get_text().strip() == "Hominidae":
+        label.set_fontweight("bold")
 ax.set_xlabel("Myr since the amniote root")
-ax.set_title("The primate clade, cut from the amniote tree")
+ax.set_title("The 19 Primate Families")
 plt.show()
 ```
 
