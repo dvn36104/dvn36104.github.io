@@ -11,8 +11,12 @@ $$\text{DNA} \;\xrightarrow{\ \text{transcription}\ }\; \text{RNA}
 
 This is the **central dogma of molecular biology** (Crick, 1958). A gene
 is a stretch of DNA written in a four-letter alphabet of bases: A, C, G
-and T. **Transcription** copies that stretch into messenger RNA, the same
-message with the base U standing in for T. **Translation** then reads the
+and T.
+
+**Transcription** copies that stretch into messenger RNA, the same
+message with the base U standing in for T.
+
+**Translation** then reads the
 RNA message and assembles a protein from it, one amino acid at a time.
 
 ## Amino acids

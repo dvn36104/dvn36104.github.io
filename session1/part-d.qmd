@@ -274,16 +274,13 @@ Closed shells (red, 8 outer electrons except helium's 2) and fresh
 starts (teal, 1 outer electron) recur all the way to Z = 118. The long
 flat stretches at 2 between the teeth are the transition metals and the
 lanthanide and actinide series, where electrons fill inner subshells
-while the outermost shell holds steady.
-
-The sawtooth is the periodic law. The sequence closes a shell and begins again.
-Later we will cut that sequence at each closure, stack the resulting periods as
-rows, and see how recurring electron arrangements become vertical groups.
+while the outermost shell holds steady. The sequence closes a shell and begins again.
+This "sawtooth" is the periodic law.
 
 
 ### Eighteen Groups
 
-The sawtooth's teeth have lengths 2, 8, 8, 18, 18, 32 and 32. Look
+The sawtooth "teeth" have lengths 2, 8, 8, 18, 18, 32 and 32. Look
 closely at period 4, the first long one, to see where the standard
 table's famous 18 columns come from. After argon closes period 3, the
 next electrons are added in three consecutive runs:
@@ -324,11 +321,19 @@ plt.show()
 ```
 
 When the standard table stacks each period as a row, these
-runs become the **blocks**: the two elements of the s run form a
-two-column s-block, the ten of the d run a ten-column d-block, and the
-six of the p run a six-column p-block. The columns then form $2 + 10 + 6 = 18$ vertical **groups**, numbered
-1–2 (s), 3–12 (d) and 13–18 (p). The table has 18 groups because period
-4 establishes 18 recurring positions.
+runs become the **blocks**.
+
+The two elements of the s run form a
+two-column s-block.
+
+The ten elements of the d run a ten-column d-block, and the
+six of the p run a six-column p-block.
+
+The columns then form $2 + 10 + 6 = 18$ vertical **groups**, numbered
+1–2 (s), 3–12 (d) and 13–18 (p).
+
+The table has 18 groups essentially because period
+four establishes 18 recurring positions.
 
 The numbers 1–18 are the standardised group labels. Six numbered groups also
 have IUPAC-approved collective names that chemists commonly use:
@@ -348,9 +353,6 @@ The other columns do not have IUPAC-approved collective names. They can be
 described using their first element—*the titanium group* for group 4, *the
 boron group* for group 13 and *the carbon group* for group 14—but these are
 descriptive labels rather than standardised replacements for the numbers.
-Groups 3–11 are collectively the **transition elements** in IUPAC usage. Group
-12 is part of the d-block but is usually excluded from that strict definition;
-many introductory tables nevertheless call groups 3–12 the transition metals.
 
 Hydrogen sits in group 1 by electron configuration but is not an alkali metal.
 The **lanthanoids** and **actinoids** are also IUPAC-approved collective names,
@@ -647,7 +649,7 @@ This is a weakness. Chemists constantly reason "down a group", and the
 spiral makes that vertical scan impossible. A smooth spiral
 cannot avoid this: a turn must hold 2, 8, 18 or 32 elements, so groups will be misaligned unless corrections to the angles are made.
 
-Make that correction directly. Give each of the 18 numbered groups one fixed
+To make that correction, give each of the 18 numbered groups one fixed
 angle. The elements in the two detached sequences have no group number in our
 data, so squeeze each 15-element sequence into the small angular sector between
 groups 2 and 3. Keep the same radial progression as before:
@@ -699,11 +701,9 @@ plt.show()
 ```
 
 Lithium, sodium and potassium now lie on one ray, as do the other numbered
-groups. The cost is visible elsewhere. The short periods leave large empty
+groups. The groups are aligned, but at the cost of the shorter periods leaving large empty
 angular gaps, while the lanthanides and actinides are compressed into a narrow
-wedge between groups 2 and 3. Their overlapping labels are evidence of the
-layout problem, not a labelling accident. A bulged spiral gives that crowded
-sequence more circumference; here we have deliberately left it squeezed.
+wedge (this is why other spiral designs introduce bulges for these elements).
 
 ## 5 · Build the canonical table
 
@@ -714,11 +714,7 @@ row. The remaining design decision is where each element should sit
 horizontally.
 
 The standard table shifts the shorter rows sideways so recurring valence
-configurations and chemical behaviour line up vertically. Each vertical set is
-called a **group**. Thus **rows are periods and columns are groups**. This is
-more precise than saying that every group has the same number of outer-shell
-electrons: that shortcut works well for the left and right sides, but not for
-all transition metals.
+configurations and chemical behaviour line up vertically: **rows are periods and columns are groups**.
 
 The `group` field in our data records those conventional horizontal positions.
 Use it to place the first 18 elements:
@@ -737,15 +733,14 @@ plt.show()
 ```
 
 The first period has two elements; the second and third have eight each. The
-chart nevertheless reserves 18 horizontal positions: as Section 2
-showed, period 4's three filling runs (4s, 3d, 4p) establish 18
-recurring positions, and the layout reserves all of them in every row.
+chart nevertheless reserves 18 horizontal positions, because (as Section 2
+showed), period 4's three filling runs (4s, 3d, 4p) establish 18
+recurring positions.
 So lithium, sodium and potassium all begin an s sub-shell and align in
 group 1, while boron, aluminium and gallium begin a p sub-shell and
 align in group 13. Periods 2 and 3 contain no d-filling run, which is
-why beryllium sits in position 2, boron in position 13, and positions
-3–12 between them stay empty: the gap is the d-block's reserved space,
-not a mistake.
+why beryllium sits in position 2 and boron in position 13.
+Positions 3–12 between them stay empty; this gap is the space reserved for the d-block.
 
 ### Create the standard periodic table from the data {#sec-ex-table}
 
@@ -821,20 +816,11 @@ lanthanides across fifteen consecutive columns. Pick the constant so
 they sit roughly under the middle of the table.
 :::
 
-**How to know you got it.** No solution button: this table is yours.
-Hold your result next to any printed periodic table: you should count
+**Review.**
+Compare your result next to any printed periodic table: you should count
 **18 columns**, **7 main rows**, and **two footnote rows of 15**;
 hydrogen alone at top-left, helium at top-right above the noble-gas
-column, and the colour regions forming solid blocks, not confetti. Two
-things are worth noticing about what you just built. First, you never
-told it any chemistry: `group` and `period` came from shell-counting,
-yet sodium landed under lithium. Second, look at the two rows you
-exiled: the footnote is a *lie of layout* (element 57 is not really
-"below" the table; it belongs between 56 and 72), told to keep the
-table printable. The spiral you built in Section 4 tells the truth about
-continuity and lies about groups; the grid does the opposite. Which lie
-you prefer is a design decision. Now check the notes you made in
-Section 3 and see whether you still agree with yourself.
+column, and the colour regions forming solid blocks.
 
 {{< include _instructor-d.qmd >}}
 
@@ -848,20 +834,14 @@ The canonical table has become favored over the spiral designs for a few reasons
 - **It is rectangular.** It fits pages, posters, screens and
   blackboards; every cell has room for symbol, number, and mass. Most
   spiral designs cramp inner turns and waste space on outer turns.
-- **Gaps are informative.** Empty grid cells were legible predictions.
-  A spiral has no natural place for a hole: if an element is missing,
-  the winding simply continues and nothing looks wrong.
+- **Gaps are informative.** Empty grid cells can be used to make legible predictions.
 - **Familiarity.** After a century on every classroom wall, the standard
-  layout is the one everyone can already read, and a standard everyone
-  can read beats a design a few prefer (ask the QWERTY keyboard).
+  layout is the one everyone can already recognise.
 
-But "won" does not mean "true". The grid's clean rows are punctured by a
-gap that means nothing physical, its f-block sits in exile, and the
-cycle at the heart of the periodic law (the thing your sawtooth plots
-showed most clearly) is invisible unless you already know to see it.
-The spiral shows the cycle and hides the groups. Janet's steps show the
-physics and misplace helium. Every layout of this list is an argument
-about what matters; the one on the wall is just the argument that won.
+Just because this visualisation of the elements "won" does not mean it is "true".
+Different representations show some relationships while hiding others.
+Every layout is an argument
+about what matters, and opinions on the what makes one version the "best" version continue to differ.
 
 ## Sources
 
