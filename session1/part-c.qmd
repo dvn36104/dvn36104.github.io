@@ -654,16 +654,16 @@ density of an atomic nucleus, compressed into an object the size of a city.
 ```{pyodide}
 rho_all = mass / (4/3 * np.pi * radius**3)
 
-i_ns, i_p = names.index("neutron star"), names.index("proton")
-assert 1e14 < rho_all[i_ns] < 1e15 and 1e14 < rho_all[i_p] < 1e15
-assert rho_all[names.index("red giant")] < 1e-5
-print("✓ proton and neutron star both sit at nuclear density, ~10¹⁴ g/cm³")
-print(f"densest object:  {names[int(np.argmax(rho_all))]}")
-print(f"fluffiest object: {names[int(np.argmin(rho_all))]}")
+print(f"densest object:  {names[int(np.argmax(rho_all))]}, {rho_all.max():.1e} g/cm³")
+print(f"fluffiest object: {names[int(np.argmin(rho_all))]}, {rho_all.min():.1e} g/cm³")
 ```
 
-The least dense thing in the Universe is (obviously?) **the
-Universe itself**, about $10^{-29}\ \text{g/cm}^3$, six protons per cubic metre.
+The least dense object in our table is **the Universe itself**, about
+$10^{-29}\ \text{g/cm}^3$, six protons per cubic metre. That is an
+artefact of our sample: the emptiest regions in existence, the giant
+intergalactic **voids**, have matter densities around a tenth of the
+cosmic average (an average which includes them). The published figure
+plots the largest known voids; our smaller table leaves them out.
 
 #### Densities {#sec-ex-density}
 

@@ -218,9 +218,13 @@ fams = taxonomy.leaves()
 euk = parse_newick(open_url(DATA_URL + "eukaryotes_class.nwk").read())
 set_depths(euk)
 euk_age = max(l.depth for l in euk.leaves())
-animals = clade(euk, ["Mammalia", "Demospongiae"])
-fungi   = clade(euk, ["Agaricomycetes", "Chytridiomycetes-1"])
-plants  = clade(euk, ["Magnoliopsida", "Chlorophyceae"])
+side_a, side_b = euk.children
+block_1, block_2 = side_a.children
+fungi = block_1
+small_1, rest = block_2.children
+animals, small_2 = rest.children
+plants = clade(euk, ["Magnoliopsida", "Chlorophyceae"])
+block = plants
 colors = paint([(animals, "#4269d0"), (fungi, "#e66852"), (plants, "#30a8b1")])
 
 phyla = parse_newick(open_url(DATA_URL + "eukaryotes_phylum.nwk").read())
@@ -817,9 +821,7 @@ ax.set_title("The seven living amniote lineages")
 plt.show()
 ```
 
-The seven clades tile the tree. 
-
-Notice what is missing: there are no extinct amniote lineages here. TimeTree is
+The seven clades tile the tree. Notice what is missing: there are no extinct amniote lineages here. TimeTree is
 built from DNA comparisons, so every branch must end in an organism
 somebody could sequence; a lineage with no living descendants leaves no
 tip to sample and vanishes from the tree entirely. The sloth lemurs got
@@ -1064,21 +1066,98 @@ euk_age = max(l.depth for l in euk.leaves())
 print(f"{len(euk.leaves())} classes of eukaryotes, root {euk_age:.0f} Myr ago")
 ```
 
-### Colouring whole clades
-
-The general method for colouring a distinct clade is to name two tips that
-belong to it; `clade()` finds their most recent common ancestor, and `paint()`
-walks from that ancestor through every descendant node so that all of those
-branches receive the same colour.
-
-We use that method on the eukaryote tree for three clades: animals,
-fungi and green plants. Everything not in a painted clade stays grey:
+Draw the whole tree first, with no colouring:
 
 ```{pyodide}
-animals = clade(euk, ["Mammalia", "Demospongiae"])       # vertebrates .. sponges
-fungi   = clade(euk, ["Agaricomycetes", "Chytridiomycetes-1"])
-plants  = clade(euk, ["Magnoliopsida", "Chlorophyceae"]) # flowering plants .. green algae
+fig = plt.figure(figsize=(9.5, 9.5))
+ax = fig.add_subplot(projection="polar")
+draw_round(euk, ax, labels=True, fontsize=4.5)
+plt.show()
+```
 
+Most of the 235 class names around the rim are unfamiliar, but some are
+not. `Mammalia`, `Aves` and `Insecta` sit near the sponge classes.
+`Magnoliopsida` (the flowering plants) and `Chlorophyceae` (the green
+algae) are in a different part of the circle. `Agaricomycetes` (the
+mushrooms) is somewhere else again.
+
+### Finding animals, fungi and plants
+
+The three kingdoms are clades somewhere on this tree, but nothing in the
+file marks where. We can find them by starting at the root and taking
+one split at a time. `paint()` colours a node and everything below it,
+so each split can be shown as two colours:
+
+```{pyodide}
+side_a, side_b = euk.children
+print(len(side_a.leaves()), "classes |", len(side_b.leaves()), "classes")
+
+fig = plt.figure(figsize=(9.5, 9.5))
+ax = fig.add_subplot(projection="polar")
+draw_round(euk, ax, colors=paint([(side_a, "#c98a00"), (side_b, "#9475cd")]),
+           labels=True, fontsize=4.5)
+plt.show()
+```
+
+Read the labels. The ochre side has `Mammalia`, `Aves`, `Insecta` and
+the sponges, and it also has `Agaricomycetes` and `Saccharomycetes`, the
+mushrooms and the yeasts. The purple side has the flowering plants, the
+conifers, the green algae and the diatoms. So the first split in the
+tree already says something that was not known before DNA sequencing:
+fungi sit on the animal side, not the plant side.
+
+Split the ochre side once more:
+
+```{pyodide}
+block_1, block_2 = side_a.children
+print(len(block_1.leaves()), "and", len(block_2.leaves()), "classes")
+print("block 1 examples:", sorted(l.name for l in block_1.leaves())[:4])
+```
+
+Every one of the 46 names in the first block ends in `-mycetes`. That
+block is the fungi. The other 83 classes are the animals plus a few
+single-celled classes, which the next two splits separate out:
+
+```{pyodide}
+fungi = block_1
+
+small_1, rest = block_2.children
+animals, small_2 = rest.children
+print("split off:", [l.name for l in small_1.leaves()],
+      "then", [l.name for l in small_2.leaves()])
+print(len(animals.leaves()), "classes remain: the animals, sponges to mammals")
+```
+
+`Choanoflagellata`, the last class to separate before the animals, are
+single-celled filter feeders. They are the closest living relatives of
+all animals.
+
+The plant side takes more steps. Follow the child that contains
+`Magnoliopsida` and watch the counts:
+
+```{pyodide}
+def side_with(node, name):
+    for c in node.children:
+        if name in {l.name for l in c.leaves()}:
+            return c
+
+block = side_b
+for step in range(6):
+    block = side_with(block, "Magnoliopsida")
+    print("step", step + 1, "->", len(block.leaves()), "classes")
+plants = block
+```
+
+Each step drops a group: the amoebae, then the euglenids, then a
+51-class block that holds the diatoms and the ciliates, then the
+glaucophytes, then the red algae, then the cryptophytes. After six steps
+32 classes remain, running from green algae to flowering plants. Whether
+the red algae dropped at step five count as plants is a judgement call;
+on this page plants means green plants.
+
+Now colour the three kingdoms on one figure. Everything else stays grey:
+
+```{pyodide}
 colors = paint([(animals, "#4269d0"), (fungi, "#e66852"), (plants, "#30a8b1")])
 
 fig = plt.figure(figsize=(10.5, 10.5))
@@ -1095,16 +1174,7 @@ ax.legend(handles=[
 plt.show()
 ```
 
-```{pyodide}
-assert (len(animals.leaves()), len(fungi.leaves()), len(plants.leaves())) == (80, 44, 32)
-print("✓ animals: 80 classes, fungi: 44, green plants: 32; and 79 classes in grey")
-```
-
 All animals (sponges to humans) are one blue sector. All of `Mammalia` is a single tick mark.
-
-
-**Fungi sit next to animals, not plants.** The red and blue wedges
-  share an ancestor long after either shared one with plants.
 
 ## 6 · The timetree of life
 
