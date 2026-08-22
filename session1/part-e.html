@@ -170,8 +170,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#amino-acids" id="toc-amino-acids" class="nav-link active" data-scroll-target="#amino-acids">Amino acids</a></li>
-  <li><a href="#the-genetic-code" id="toc-the-genetic-code" class="nav-link" data-scroll-target="#the-genetic-code">The genetic code</a></li>
+  <li><a href="#amino-acids-and-the-genetic-code" id="toc-amino-acids-and-the-genetic-code" class="nav-link active" data-scroll-target="#amino-acids-and-the-genetic-code">Amino acids and the genetic code</a></li>
   <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
@@ -204,8 +203,8 @@ window.Quarto = {
 <p>This is the <strong>central dogma of molecular biology</strong> (Crick, 1958). A gene is a stretch of DNA written in a four-letter alphabet of bases: A, C, G and T.</p>
 <p><strong>Transcription</strong> copies that stretch into messenger RNA, the same message with the base U standing in for T.</p>
 <p><strong>Translation</strong> then reads the RNA message and assembles a protein from it, one amino acid at a time.</p>
-<section id="amino-acids" class="level2">
-<h2 class="anchored" data-anchor-id="amino-acids">Amino acids</h2>
+<section id="amino-acids-and-the-genetic-code" class="level2">
+<h2 class="anchored" data-anchor-id="amino-acids-and-the-genetic-code">Amino acids and the genetic code</h2>
 <p>Proteins are chains built from <strong>amino acids</strong>: small molecules with a common backbone and one of 20 different side chains.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Why you may see 22 amino acids">
 <div class="callout-header d-flex align-content-center">
@@ -220,20 +219,24 @@ window.Quarto = {
 <p>You may also see the count 22: two rare extras, selenocysteine and pyrrolysine, are installed by recoding a stop codon rather than by codons of their own, so they sit outside the standard table below. Pyrrolysine occurs only in some archaea and bacteria.</p>
 </div>
 </div>
-<p>The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), from water-repelling to charged.</p>
-<p>Sequences of amino acids determines how the chain folds, and the fold determines what the protein does. A protein is typically hundreds of amino acids long, so the 20-letter alphabet supports an astronomical space of possible sequences.</p>
-<p>The three-letter abbreviations in the table below (Phe, Leu, Ser, …) are the standard shorthand for the 20 amino acids.</p>
-</section>
-<section id="the-genetic-code" class="level2">
-<h2 class="anchored" data-anchor-id="the-genetic-code">The genetic code</h2>
-<p>Translation reads RNA three bases at a time. Each triplet is a <strong>codon</strong>, and each codon means one amino acid, or “stop”. With four bases there are <span class="math inline">\(4^3 = 64\)</span> possible codons for only 20 amino acids plus a stop signal, so the code is <strong>redundant</strong>: most amino acids are spelled by more than one codon. Leucine, serine and arginine have six spellings each; tryptophan and methionine have exactly one. AUG doubles as the <strong>start</strong> signal that begins every protein, and UAA, UAG and UGA are the three <strong>stop</strong> codons that end one.</p>
+<p>The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), and their chemistry sorts the 20 amino acids into a few standard categories:</p>
+<ul>
+<li><strong>nonpolar (hydrophobic):</strong> glycine, alanine, valine, leucine, isoleucine, proline, methionine, phenylalanine, tryptophan</li>
+<li><strong>polar, uncharged:</strong> serine, threonine, cysteine, tyrosine, asparagine, glutamine</li>
+<li><strong>positively charged:</strong> lysine, arginine, histidine</li>
+<li><strong>negatively charged:</strong> aspartate, glutamate</li>
+</ul>
+<p>The sequence of amino acids determines how the chain folds, and the fold determines what the protein does.</p>
+<p>Now the code itself. RNA has four letters: A, C, G and U. Translation reads them three at a time, and each three-letter sequence is a <strong>codon</strong>. There are <span class="math inline">\(4^3 = 64\)</span> possible codons, and each one corresponds to an amino acid or to a stop signal: 61 of them spell the 20 amino acids (so most amino acids have several spellings), three mean “stop”, and AUG doubles as the “start” that begins every protein.</p>
+<p><strong>Design question.</strong> That is the entire dataset: 64 three-letter sequences, each mapped to one of 21 meanings, and every amino acid belonging to one of the chemical categories above. Before reading further, sketch how you would visualise this mapping. What does position encode? Where does colour go? How does a reader look up a codon quickly, and how do they see the categories?</p>
+<p>The standard answer that biologists converged on is the <strong>codon chart</strong>. Find one in the wild (they appear everywhere genetics is taught), study how its layout answers the questions above, and then build your own version of it, with the amino acids coloured by category.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/codon-table.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<figcaption>The standard genetic code: 64 codons mapped to 20 amino acids, one start and three stops. (OpenStax Biology 2e, CC BY 4.0)</figcaption>
+<figcaption>The standard genetic code: first base picks the row, second base picks the column, third base picks the line within the cell. (OpenStax Biology 2e, CC BY 4.0)</figcaption>
 </figure>
 </div>
-<p>Read it like a coordinate lookup: first base picks the row, second base picks the column, third base picks the line within the cell. The redundancy is not scattered at random. It is concentrated in the third position, where a mutation often changes nothing at all. Notice that the table’s layout choice makes that pattern visible: whole cells of four codons collapsing to a single amino acid.</p>
+<p>The three-letter labels (Phe, Leu, Ser, …) are the standard shorthand for the 20 amino acids. And notice, once you can read the chart, that the spellings of one amino acid are not scattered at random: they usually differ only in the third base, so a mutation there often changes nothing at all. A good design makes that pattern easy to see.</p>
 </section>
 <section id="sources" class="level2">
 <h2 class="anchored" data-anchor-id="sources">Sources</h2>
