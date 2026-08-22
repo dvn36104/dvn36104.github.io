@@ -350,28 +350,50 @@ layout(taxonomy)
 
 fig, ax = plt.subplots(figsize=(9, 8))
 
-# Straight lines show parent-child membership.
-edge_x, edge_y = [], []
+# Give each class one colour, then carry that colour down all its branches.
+class_colours = {
+    "Mammalia": "#2764C7",
+    "Aves": "#D86B18",
+    "Reptilia": "#12806A",
+}
+class_labels = {
+    "Mammalia": "Mammalia (mammals)",
+    "Aves": "Aves (birds)",
+    "Reptilia": "Reptilia (reptiles)",
+}
+
+def class_of(node):
+    """Return the class immediately below the Amniota root."""
+    branch = node
+    while branch.parent is not None and branch.parent is not taxonomy:
+        branch = branch.parent
+    return None if branch is taxonomy else branch.name
+
+# Group parent-child lines by class so all descendant branches inherit colour.
+edges = {name: ([], []) for name in class_colours}
 for node in taxonomy.walk():
     if node.parent is not None:
+        edge_x, edge_y = edges[class_of(node)]
         edge_x.extend([node.parent.depth, node.depth, None])
         edge_y.extend([node.parent.y, node.y, None])
-ax.plot(edge_x, edge_y, color="#c7ccd4", lw=0.45, zorder=1)
+
+for class_name, (edge_x, edge_y) in edges.items():
+    ax.plot(edge_x, edge_y, color=class_colours[class_name],
+            lw=0.55, alpha=0.75, zorder=1)
 
 # A point is a node. Plot each rank separately so the hierarchy is visible.
-rank_style = {
-    0: ("#1f3b5d", 85),
-    1: ("#4269d0", 42),
-    2: ("#30a8b1", 15),
-    3: ("#8b95a5", 7),
-}
-for rank, (colour, size) in rank_style.items():
+rank_sizes = {0: 85, 1: 42, 2: 15, 3: 7}
+for rank, size in rank_sizes.items():
     nodes = [node for node in taxonomy.walk() if node.depth == rank]
+    colours = [
+        "#1f3b5d" if node is taxonomy else class_colours[class_of(node)]
+        for node in nodes
+    ]
     ax.scatter(
         [node.depth for node in nodes],
         [node.y for node in nodes],
         s=size,
-        color=colour,
+        color=colours,
         edgecolors="white" if rank < 2 else "none",
         linewidths=0.6,
         zorder=3,
@@ -382,9 +404,11 @@ ax.annotate("Amniota", (taxonomy.depth, taxonomy.y),
             xytext=(-8, 0), textcoords="offset points",
             ha="right", va="center", fontsize=9, fontweight="bold")
 for class_node in taxonomy.children:
-    ax.annotate(class_node.name, (class_node.depth, class_node.y),
+    ax.annotate(class_labels[class_node.name],
+                (class_node.depth, class_node.y),
                 xytext=(6, 0), textcoords="offset points",
-                ha="left", va="center", fontsize=8, color="#244d9b")
+                ha="left", va="center", fontsize=8,
+                color=class_colours[class_node.name], fontweight="bold")
 
 ax.set_xticks([0, 1, 2, 3])
 ax.set_xticklabels(["ROOT\n1 node", "CLASS\n3 nodes",
@@ -404,13 +428,19 @@ plt.show()
 ```
 
 Each dot is now countable: one root, three classes, 72 orders and 465
-families. A line means "belongs to". The vertical ordering only keeps each
-parent near its children; it does not make neighbouring orders more closely
-related. The table records membership at four ranks, not evolutionary
-distances between the groups.
+families. A line means "belongs to". Colour traces each of the three classes
+from its class node through all of its orders and families. The vertical
+ordering only keeps each parent near its children; it does not make
+neighbouring orders more closely related. The table records membership at
+four ranks, not evolutionary distances between the groups.
 
 
 ## 2 · Phylogenetic trees
+
+The word *phylogenetic* comes from *phylogeny*: Greek *phylon* (a tribe,
+kind or lineage) and *-geneia* (origin). Ernst Haeckel coined the German word
+*Phylogenie* in 1866 for the evolutionary history of a group. A phylogenetic
+tree is therefore a diagram of a hypothesis about descent and shared origins.
 
 A phylogenetic tree has three kinds of parts:
 
@@ -421,7 +451,7 @@ A phylogenetic tree has three kinds of parts:
 - **Branch lengths**, in the trees on this page, are **time**: a branch of
   length 6.7 means 6.7 million years of independent evolution.
 
-Haeckel made the tree metaphor literal in this 1866 genealogy of mammals:
+Haeckel introduces the tree metaphor in this 1866 genealogy of mammals:
 ancestry grows from a trunk and living groups occupy the outer branches. The
 form makes hierarchy immediately legible, but its branch lengths are not a
 measured time scale. Modern phylogenetic trees retain the branching structure
@@ -431,12 +461,14 @@ while treating topology and branch length as claims supported by data.
 (family tree of mammals, including humans). [Source image: Johns Hopkins
 University Press.](https://jhupress.wordpress.com/wp-content/uploads/2014/08/pg-110.jpg)](../images/haeckel-mammal-tree-1866.jpg){#fig-haeckel-mammals width=52% fig-alt="A black-and-white nineteenth-century genealogy of mammals drawn as a large branching tree, with Mammalia at the trunk and named mammal groups on the branches."}
 
-Branch length is estimated from genetics. Take the same gene
-from many species, line the DNA sequences up, and count the differences.
-Mutations accumulate roughly steadily, so more differences means more time
-since two lineages separated, giving the *shape* and *relative* ages.
-To turn relative ages into millions of years, the tree is calibrated
-against fossils whose age and position are known. TimeTree, the source of
+Branch length is estimated from genetics.
+DNA sequences for the same gene can be compared across many species.
+Mutations accumulate at a roughly steady rate, so differences in the sequences is proportional to the time
+since lineages separated, giving the *relative* ages.
+To turn relative ages into *absolute* ages (millions of years ago), the tree is calibrated
+against fossils whose age and position are known.
+
+TimeTree, the source of
 our files, aggregates thousands of such published studies into consensus
 dated trees.
 
@@ -933,9 +965,15 @@ assert round(euk_age) == 1598
 print("✓ 235 classes; the eukaryote root here is ~1,598 Myr, about 1.6 billion years")
 ```
 
-We colour three clades (animals, fungi, green plants) by naming two
-anchor tips for each, exactly as we did for primates. Everything not in a
-painted clade stays grey:
+### Colouring whole clades
+
+Here is the general method for colouring a distinct clade. Name two tips that
+belong to it; `clade()` finds their most recent common ancestor, and `paint()`
+walks from that ancestor through every descendant node so that all of those
+branches receive the same colour.
+
+We use that method for three clades (animals, fungi and green plants).
+Everything not in a painted clade stays grey:
 
 ```{pyodide}
 animals = clade(euk, ["Mammalia", "Demospongiae"])       # vertebrates .. sponges
@@ -1219,18 +1257,14 @@ download_figure(fig)
 When reading or constructing a phylogeny visualisation:
 
 - **Only the nodes and branch lengths carry information.** The vertical
-  order of tips is arbitrary: every internal node can be flipped, so "top of the chart" means nothing.
+  order of tips is arbitrary: every internal node can be flipped.
   Humans are not "at the
-  end" of the tree; every living tip is exactly the same distance from
+  end" of the tree, because every living thing is exactly the same distance from
   the root.
-- **The level of aggregation is part of the claim**. At phylum level no lineage dies in the great extinctions; at
-  family level, recently lost lineages like the sloth lemurs sit in the
-  tree beside the living.
+- **The level of aggregation is part of the claim**. At phylum level no lineage dies in the great extinctions.
 - **Every internal node is an inference**. Some are genuinely
   contested: e.g. whether sponges or comb jellies split from the rest of the
-  animals first. A drawn tree always looks more certain than
-  the science behind it.
-
+  animals first.
 ## Sources
 
 - Kumar et al. (2022) *TimeTree 5: an expanded resource for species
