@@ -579,9 +579,10 @@ axis.
 Draw the hominid mini-tree first:
 
 ```{pyodide}
-fig, ax = plt.subplots(figsize=(7, 2.4))
+fig, ax = plt.subplots(figsize=(7, 2.6))
 draw_tree(mini, ax, labels=True, fontsize=11)
 ax.set_xlabel("Myr since the root")
+plt.tight_layout()
 plt.show()
 ```
 
@@ -1013,10 +1014,6 @@ print("✓ animals: 80 classes, fungi: 44, green plants: 32; and 79 classes in g
 
 All animals (sponges to humans) are one blue sector. All of `Mammalia` is a single tick mark.
 
-**The grey is not filler.** A third of the disc is protists: algae,
-  amoebae, ciliates, parasites. "Protist" is not a clade; it is the word
-  for *every eukaryote outside the three painted wedges*. The tree
-  shows they do not form one group.
 
 **Fungi sit next to animals, not plants.** The red and blue wedges
   share an ancestor long after either shared one with plants.
