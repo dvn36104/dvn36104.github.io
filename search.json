@@ -189,6 +189,13 @@
     "text": "Conclusion\nWhen reading or constructing a phylogeny visualisation:\n\nOnly the nodes and branch lengths carry information. The vertical order of tips is arbitrary: every internal node can be flipped. Humans are not “at the end” of the tree, because every living thing is exactly the same distance from the root.\nThe level of aggregation is part of the claim. At phylum level no lineage dies in the great extinctions.\nEvery internal node is an inference. Some are genuinely contested: e.g. whether sponges or comb jellies split from the rest of the animals first."
   },
   {
+    "objectID": "session1/part-b.html#bonus",
+    "href": "session1/part-b.html#bonus",
+    "title": "The Tree of Life",
+    "section": "Bonus",
+    "text": "Bonus\nRead Long et al. (2025), Earliest amniote tracks recalibrate the timeline of tetrapod evolution. Dates on a phylogenetic tree are estimates: fossils help to date its branches, and new fossil evidence can revise those dates. The tracks described in this paper push the likely origin of crown-group amniotes back by at least 35–40 million years."
+  },
+  {
     "objectID": "session1/part-b.html#sources",
     "href": "session1/part-b.html#sources",
     "title": "The Tree of Life",
