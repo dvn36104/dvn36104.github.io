@@ -1362,11 +1362,7 @@ log_regression = (
 raw_regression | log_regression
 ```
 
-The red line is a model layer, not proof of mechanism or causality. Outliers
-and unevenly sampled species can dominate it. A single pooled
-line can hide different trends by sex, source, protocol, or species. A useful
-visualisation should state what was fitted, on which scale, to which rows, and at
-which unit of analysis.
+The red line of best fit is not proof of causality.
 
 ### Subgroup check: museum specimens versus live birds
 
@@ -1408,12 +1404,11 @@ subgroup_base = alt.Chart(regression_sample).encode(
 ```
 
 In the full data the museum-specimen slope is 0.62 with r = 0.63, close to
-the pooled fit, while the live-bird slope is almost exactly **zero**. That
-is not because live birds obey different biology. The live records cover
-only 702 species, mostly small passerines from a few ringing projects, so
-their tarsus lengths span a much narrower range (log10 spread 0.16, versus
+the pooled fit, while the live-bird slope is almost exactly **zero**. Live records cover
+only 702 species, with
+tarsus lengths that span a much narrower range (log10 spread 0.16, versus
 0.25 for specimens). Within this narrow range the
-between-species scaling signal nearly vanishes and noise dominates.
+between-species scaling signal is weak.
 
 ### Subgroup check: age
 
@@ -1451,7 +1446,7 @@ print(f"✓ median ratio {enough['ratio'].median():.3f}: immature wings run abou
 print("  1.3% short, in 77 of 108 species, just as the metadata warned")
 ```
 
-The effect is small but real. An analysis of
+Analysis of
 wing length can now decide, explicitly, whether to exclude the 1,269
 immature rows or accept a percent of shrinkage.
 
@@ -1530,10 +1525,8 @@ mean_mark = wing_base.mark_circle(color="#e66852", size=55).encode(
 ```
 
 Mean and median can be compared across every measured species. The diagonal
-reference line means equality; departures identify species whose wing-length
-distribution is asymmetric or affected by extreme records. Point area encodes
-sample size, reminding the viewer that a difference based on two birds is not as
-stable as one based on two hundred.
+reference line means equality. Point area encodes
+sample size.
 
 ```{pyodide}
 identity_limits = pd.DataFrame({
@@ -1567,37 +1560,15 @@ identity_line = (alt.Chart(identity_limits).mark_line(
 ```
 
 Every chart caption should name both the **grouping level** and
-the **aggregate function**. "Wing length by species" is incomplete; "median
-individual wing length within each species" is a reproducible visual claim.
-
-### Conclusion
-
-- The EDA has established that the raw worksheet contains 90,020 individual birds and 351 taxonomy-only
-  rows, not 90,371 interchangeable observations.
-- All 26 columns now have an explicit semantic type, role, unit, coverage
-  count, suitable aggregate, candidate visual form, and scale.
-- Taxonomic names depend on the chosen authority; `species` is the BirdLife
-  version used for the next aggregation.
-- Sampling is concentrated by source, geography, sex, and protocol.
-- Every morphology field is positive, but extreme 0.1 values require
-  biological investigation rather than automatic acceptance.
-- Only 45,669 rows have all ten morphology fields, so cleaning must be
-  question-specific.
-- Species sampling depth ranges from one to 784 individuals, making the unit
-  of analysis a substantive choice rather than a formatting detail.
-- Linear and logarithmic scales show different comparisons; count, mean,
-  median, range, quantiles, and standard deviation answer different questions.
-- Regression lines summarise a fitted relationship on a declared scale; they
-  do not establish mechanism, causality, or a universal trend.
-- The pooled regression slope is carried by the museum series; the
-  live-bird subset alone, restricted in range, shows almost none of it.
-
-Only after this audit are we ready to choose two traits and define the rows
-that can support their comparison.
+the **aggregate function**.
+"Median
+individual wing length within each species" is better than "wing length by species".
 
 
 
-::: {.callout-note title="Sources"}
+
+
+::: {.callout-note title="EDA Sources"}
 - Tukey (1977), *Exploratory Data Analysis*: the founding text.
 - Baillie et al. (2022), [Ten simple rules for initial data analysis](https://doi.org/10.1371/journal.pcbi.1009819), *PLOS Computational Biology*: the assigned reading for this page.
 - Huebner et al. (2018), *A contemporary conceptual framework for initial data analysis*, Observational Studies 4:171–192: the full IDA framework.
@@ -1611,7 +1582,7 @@ that can support their comparison.
 ### Cleaning
 
 We want to plot beak length against tarsus length, which means every row we
-use needs **both** measurements (and a species name). Count the gaps first.
+use needs **both** measurements (and a species name).
 
 ```{pyodide}
 birds.isna().sum()
@@ -1635,9 +1606,8 @@ pd.Series({
 })
 ```
 
-We just discarded **nearly a quarter of the dataset**. That is a legitimate cleaning
-step, but  must be disclosed. Any figure built from this table
-should say 69,509 individual birds, not 90,371 worksheet rows.
+We just discarded **nearly a quarter of the dataset**.  Any figure built from this table
+should now say 69,509 individual birds, not 90,371.
 
 You should be
 able to draw the path from raw file to analysed rows, with the rule that
@@ -1892,17 +1862,19 @@ table to your analysis table.
 # Stage 4: your cleaning decision and row accounting here.
 ```
 
-**Stage 5: the chart, and one rank up.** Produce one final chart of your
+**Stage 5: disaggregated and aggregated taxonomic ranks.** Produce one final chart of your
 relationship, with a caption that states the unit of analysis, the n,
 every transformation and aggregation, the scales, and where the dropped
-rows went. Aggregate one taxonomic rank up (family means of the
+rows went.
+
+Aggregate one taxonomic rank up (family means of the
 *logged* values) and redraw.
 
 ```{pyodide}
 # Stage 5: your final chart and its one-rank-up comparison here.
 ```
 
-**Save your final chart!**
+**Save your final chart!** This should be a multi-panel chart, with each panel showing a different level of aggregation. Include at least two; you may also add additional panels at higher levels of aggregation.
 
 {{< include _instructor-a.qmd >}}
 
