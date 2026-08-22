@@ -1047,12 +1047,6 @@ euk_age = max(l.depth for l in euk.leaves())
 print(f"{len(euk.leaves())} classes of eukaryotes, root {euk_age:.0f} Myr ago")
 ```
 
-```{pyodide}
-assert len(euk.leaves()) == 235
-assert round(euk_age) == 1598
-print("✓ 235 classes; the eukaryote root here is ~1,598 Myr, about 1.6 billion years")
-```
-
 ### Colouring whole clades
 
 The general method for colouring a distinct clade is to name two tips that
@@ -1060,8 +1054,8 @@ belong to it; `clade()` finds their most recent common ancestor, and `paint()`
 walks from that ancestor through every descendant node so that all of those
 branches receive the same colour.
 
-We use that method for three clades (animals, fungi and green plants).
-Everything not in a painted clade stays grey:
+We use that method on the eukaryote tree for three clades: animals,
+fungi and green plants. Everything not in a painted clade stays grey:
 
 ```{pyodide}
 animals = clade(euk, ["Mammalia", "Demospongiae"])       # vertebrates .. sponges
