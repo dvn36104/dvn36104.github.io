@@ -12,7 +12,7 @@ Where a page has an exercise, attempt it before using the hints. Check the solut
 
 Your work here is **not saved** when you close the tab.
 
-Submit through Canvas:
+Submit through [Canvas](https://canvas.uts.edu.au/courses/41964/assignments/293267):
 
 - **Part A**: the final chart of your amniote investigation, with panels
   at different levels of aggregation.
