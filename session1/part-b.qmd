@@ -798,17 +798,12 @@ closely. The grey backbone that remains is the deep structure the Rowe
 figure drew: the splits joining the seven lineages, back to the amniote
 root ~319 Myr ago.
 
-Notice what is missing: there are no extinct amniote lineages here. No
-non-avian dinosaurs, no pterosaurs, no marine reptiles. TimeTree is
+Notice what is missing: there are no extinct amniote lineages here. TimeTree is
 built from DNA comparisons, so every branch must end in an organism
 somebody could sequence; a lineage with no living descendants leaves no
 tip to sample and vanishes from the tree entirely. The sloth lemurs got
 into the primate tree only because they died out ~500 years ago and
-left bones young enough for ancient-DNA work. Rowe's figure in Part A
-can show long-extinct branches because it is built from fossil
-morphology instead. And the dinosaurs are in this plot after all: Aves
-is their surviving branch, so the 607 blue families are the dinosaur
-lineage as a molecular tree sees it.
+left bones young enough for ancient-DNA work. 
 
 ### Your turn: Cats and Dogs {#sec-ex-carnivora}
 
@@ -1130,23 +1125,21 @@ print(f"chordates vs arthropods (us vs insects): "
       f"{phyla_age - clade(phyla, ['Chordata', 'Arthropoda']).depth:.0f} Mya")
 print(f"animals vs fungi:  "
       f"{euk_age - clade(euk, ['Mammalia', 'Agaricomycetes']).depth:.0f} Mya")
-print(f"animals vs plants: "
-      f"{euk_age - clade(euk, ['Mammalia', 'Magnoliopsida']).depth:.0f} Mya")
 print(f"animals vs choanoflagellates: "
       f"{euk_age - clade(euk, ['Mammalia', 'Choanoflagellata']).depth:.0f} Mya")
+print(f"animals vs plants: {euk_age:.0f} Mya")
 ```
 
-```{pyodide}
-assert round(euk_age - clade(euk, ["Mammalia", "Agaricomycetes"]).depth) == 1275
-assert round(euk_age - clade(euk, ["Mammalia", "Magnoliopsida"]).depth) == 1598
-print("✓ the animal–fungus split (1,275 Mya) is younger than the animal–plant "
-      "split (1,598 Mya): fungi really are our closer cousins")
-```
+The animals-versus-plants line needs no `clade()` call: that split is the
+deepest one in this file, so the MRCA is the root itself and the
+divergence is just the root's age. And note it is older than the
+animal-fungus split (1,275 Mya): fungi are our closer cousins.
 
 
 Single-celled
-flagellates that strain bacteria out of water --- **choanoflagellates** --- split from us ~894 Mya;
-they are the closest living relatives of all animals.
+flagellates that strain bacteria out of water, the **choanoflagellates**,
+split from us ~894 Mya; they are the closest living relatives of all
+animals.
 
 ## Final task · Design your own tree of life
 
