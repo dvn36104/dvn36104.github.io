@@ -583,7 +583,7 @@ figure-eight; the f-block is the detached double loop at the top.
 
 What are their advantages and disadvantages? Which version do you prefer, and why?
 
-::: {.callout-tip title="Find another periodic table"}
+::: {.callout-tip title="Find another periodic ‘table’"}
 Look beyond these six examples and find at least one other periodic-table
 design. Consider what the
 layout makes easier to see and what it makes harder to see. Be precise about
@@ -649,11 +649,13 @@ plt.show()
 
 The sequence is unbroken, the blocks
 appear as coloured arcs, and every shell closure lands at the same angle, so the
-noble gases line up on a single ray. However, as the sodium and potassium angles showed, no other
-group lines up.
+noble gases (Group 18) line up on a single ray.
 
-This is a weakness. Chemists constantly reason "down a group", and the
-spiral makes that vertical scan impossible. A smooth spiral
+However, as the sodium and potassium angles showed, no other
+group lines up. This is a weakness. Chemists constantly reason "down a group", and the
+spiral makes that vertical scan impossible.
+
+A smooth spiral
 cannot avoid this: a turn must hold 2, 8, 18 or 32 elements, so groups will be misaligned unless corrections to the angles are made.
 
 To make that correction, give each of the 18 numbered groups one fixed
@@ -688,22 +690,39 @@ ax = fig.add_subplot(projection="polar")
 aligned = [aligned_spiral_coords(i) for i in range(118)]
 aligned_theta, aligned_radius = zip(*aligned)
 
+# Give every numbered group a fixed guide ray and label it outside the spiral.
+outer_group_radius = 7.45
+for g in range(1, 19):
+    group_theta = 2 * np.pi * g / 18
+    ax.plot([group_theta, group_theta], [0.35, 7.15],
+            color="#d8d3ca", lw=0.8, zorder=0)
+    ax.text(group_theta, outer_group_radius, str(g),
+            ha="center", va="center", fontsize=9, fontweight="bold",
+            color="#555555", clip_on=False)
+
 ax.plot(aligned_theta, aligned_radius, color="#dddddd", lw=0.7, zorder=1)
 for i in range(118):
-    ax.scatter(aligned_theta[i], aligned_radius[i], s=40,
-               color=block_colours[block[i]], zorder=3)
+    edge = "#d62728" if group[i] == 18 else "none"
+    ax.scatter(aligned_theta[i], aligned_radius[i], s=300,
+               color=block_colours[block[i]], edgecolor=edge,
+               linewidth=2, zorder=3)
     ax.annotate(symbol[i], (aligned_theta[i], aligned_radius[i]),
-                fontsize=4.5, ha="center", va="center",
+                fontsize=8, ha="center", va="center",
                 color="white", zorder=4)
 
 ax.set_xticks([]); ax.set_yticks([])
+ax.set_ylim(0, 7.75)
 ax.spines["polar"].set_visible(False)
-ax.legend(handles=[Line2D([], [], marker="o", ls="", color=c,
-                          label=f"{b}-block")
-                   for b, c in block_colours.items()],
-          loc="upper left", bbox_to_anchor=(-0.1, 1.05),
-          frameon=False, fontsize=9)
-ax.set_title("A group-aligned spiral: alignment creates crowding")
+handles = [Line2D([], [], marker="o", ls="", color=c, markersize=11,
+                  label=f"{b}-block")
+           for b, c in block_colours.items()]
+handles.append(Line2D([], [], marker="o", ls="", markerfacecolor="none",
+                      markeredgecolor="#d62728", markeredgewidth=2,
+                      markersize=11, label="group 18"))
+ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.06),
+          ncol=5, frameon=False, fontsize=10)
+ax.set_title("Group-Aligned Period Spiral", fontsize=17)
+fig.subplots_adjust(top=0.92, bottom=0.12)
 plt.show()
 ```
 
