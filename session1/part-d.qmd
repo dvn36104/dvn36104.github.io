@@ -281,6 +281,88 @@ Later we will cut that sequence at each closure, stack the resulting periods as
 rows, and see how recurring electron arrangements become vertical groups.
 
 
+### Eighteen Groups
+
+The sawtooth's teeth have lengths 2, 8, 8, 18, 18, 32 and 32. Look
+closely at period 4, the first long one, to see where the standard
+table's famous 18 columns come from. After argon closes period 3, the
+next electrons are added in three consecutive runs:
+
+| elements | sub-shell being filled | number of available electron places |
+|---|---|---:|
+| potassium–calcium | 4s | 2 |
+| scandium–zinc | 3d | 10 |
+| gallium–krypton | 4p | 6 |
+
+Those run lengths were not chosen to make a table. They come from the quantum
+capacities established earlier: s has one orbital, d has five and p has three,
+with two electrons per orbital. Period 4 therefore contains
+$2 + 10 + 6 = 18$ elements. Draw that sequence as one row:
+
+```{pyodide}
+run_colours = {"s": "#4269d0", "d": "#c98a00", "p": "#30a8b1"}
+
+fig, ax = plt.subplots(figsize=(11, 2.2))
+for position, i in enumerate(range(18, 36), start=1):
+    kind = block[i]
+    ax.add_patch(plt.Rectangle(
+        (position - 0.46, -0.46), 0.92, 0.92,
+        facecolor=run_colours[kind], edgecolor="white", lw=1,
+    ))
+    ax.text(position, 0, symbol[i], ha="center", va="center",
+            color="white", fontsize=10, fontweight="bold")
+
+for start, end, label in [(1, 2, "4s: 2"),
+                          (3, 12, "3d: 10"),
+                          (13, 18, "4p: 6")]:
+    ax.plot([start, end], [0.72, 0.72], color="#333333", lw=1.4)
+    ax.text((start + end) / 2, 0.92, label, ha="center", va="bottom",
+            fontsize=10)
+
+ax.set_xlim(0.3, 18.7); ax.set_ylim(-0.7, 1.25)
+ax.set_aspect("equal"); ax.axis("off")
+ax.set_title("Period 4 has 18 positions: 2 + 10 + 6", pad=14)
+plt.show()
+```
+
+When the standard table stacks each period as a row (Section 5), these
+runs become the **blocks**: the two elements of the s run form a
+two-column s-block, the ten of the d run a ten-column d-block, and the
+six of the p run a six-column p-block. Stacking equivalent positions in
+successive periods gives $2 + 10 + 6 = 18$ vertical **groups**, numbered
+1–2 (s), 3–12 (d) and 13–18 (p). The table has 18 groups because period
+4 establishes 18 recurring positions, not because somebody began with an
+18-column box.
+
+The outer-electron sawtooth alone could not show all of this. Across the ten
+transition-metal positions an inner d sub-shell is filling while the outermost
+shell can remain unchanged. Group position depends on the fuller electron
+configuration and the chemical similarities it produces, not just a count of
+outermost-shell electrons.
+
+Many of the groups carry standardised names, which chemists use more
+often than the numbers:
+
+| group | standardised name | first members |
+|---:|---|---|
+| 1 | alkali metals | Li, Na, K |
+| 2 | alkaline earth metals | Be, Mg, Ca |
+| 3–12 | no individual names; collectively the transition metals | Sc, Ti, V, ... |
+| 13 | boron group | B, Al, Ga |
+| 14 | carbon group | C, Si, Ge |
+| 15 | pnictogens | N, P, As |
+| 16 | chalcogens | O, S, Se |
+| 17 | halogens | F, Cl, Br |
+| 18 | noble gases | He, Ne, Ar |
+
+The names for groups 1, 2 and 15 to 18 are IUPAC-approved collective
+names; "boron group" and "carbon group" are conventional labels taken
+from the top element. Two footnotes: hydrogen sits in group 1 by
+electron configuration but is not an alkali metal, and the lanthanides
+and actinides have collective names but no group number at all, a
+problem the standard table handles by detaching them entirely
+(Section 5).
+
 ### Size of atoms {#sec-ex-radius}
 
 The data column `radius` holds each element's covalent radius in
@@ -662,71 +744,15 @@ plt.show()
 ```
 
 The first period has two elements; the second and third have eight each. The
-chart nevertheless reserves 18 horizontal positions. Beryllium is placed in
-position 2 and boron in position 13, leaving positions 3–12 empty. To understand
-why, continue the sequence into period 4.
-
-### Where the 18 groups come from
-
-After argon closes period 3, the next electrons are added in three consecutive
-runs:
-
-| elements | sub-shell being filled | number of available electron places |
-|---|---|---:|
-| potassium–calcium | 4s | 2 |
-| scandium–zinc | 3d | 10 |
-| gallium–krypton | 4p | 6 |
-
-Those run lengths were not chosen to make a table. They come from the quantum
-capacities established earlier: s has one orbital, d has five and p has three,
-with two electrons per orbital. Period 4 therefore contains
-$2 + 10 + 6 = 18$ elements. Draw that sequence as one row:
-
-```{pyodide}
-run_colours = {"s": "#4269d0", "d": "#c98a00", "p": "#30a8b1"}
-
-fig, ax = plt.subplots(figsize=(11, 2.2))
-for position, i in enumerate(range(18, 36), start=1):
-    kind = block[i]
-    ax.add_patch(plt.Rectangle(
-        (position - 0.46, -0.46), 0.92, 0.92,
-        facecolor=run_colours[kind], edgecolor="white", lw=1,
-    ))
-    ax.text(position, 0, symbol[i], ha="center", va="center",
-            color="white", fontsize=10, fontweight="bold")
-
-for start, end, label in [(1, 2, "4s: 2"),
-                          (3, 12, "3d: 10"),
-                          (13, 18, "4p: 6")]:
-    ax.plot([start, end], [0.72, 0.72], color="#333333", lw=1.4)
-    ax.text((start + end) / 2, 0.92, label, ha="center", va="bottom",
-            fontsize=10)
-
-ax.set_xlim(0.3, 18.7); ax.set_ylim(-0.7, 1.25)
-ax.set_aspect("equal"); ax.axis("off")
-ax.set_title("Period 4 has 18 positions: 2 + 10 + 6", pad=14)
-plt.show()
-```
-
-Only now do the **blocks** acquire widths in a rectangular layout. The two
-elements in the s-filling run make a two-column s-block; the ten in the
-d-filling run make a ten-column d-block; and the six in the p-filling run make
-a six-column p-block. Stacking equivalent positions in successive periods gives
-$2 + 10 + 6 = 18$ vertical groups: groups 1–2, 3–12 and 13–18.
-
-This explains the gap in the first chart. Lithium, sodium and potassium all
-begin an s sub-shell and align in group 1. Beryllium, magnesium and calcium
-complete it and align in group 2. Boron, aluminium and gallium begin a p
-sub-shell and align in group 13; neon, argon and krypton close it and align in
-group 18. Periods 2 and 3 contain no d-filling run, so their positions 3–12 are
-empty. The table has 18 groups because period 4 establishes 18 recurring
-positions, not because somebody began with an 18-column box.
-
-The outer-electron sawtooth alone could not show all of this. Across the ten
-transition-metal positions an inner d sub-shell is filling while the outermost
-shell can remain unchanged. Group position depends on the fuller electron
-configuration and the chemical similarities it produces, not just a count of
-outermost-shell electrons.
+chart nevertheless reserves 18 horizontal positions: as Section 2
+showed, period 4's three filling runs (4s, 3d, 4p) establish 18
+recurring positions, and the layout reserves all of them in every row.
+So lithium, sodium and potassium all begin an s sub-shell and align in
+group 1, while boron, aluminium and gallium begin a p sub-shell and
+align in group 13. Periods 2 and 3 contain no d-filling run, which is
+why beryllium sits in position 2, boron in position 13, and positions
+3–12 between them stay empty: the gap is the d-block's reserved space,
+not a mistake.
 
 ### Create the standard periodic table from the data {#sec-ex-table}
 
