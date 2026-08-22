@@ -1008,10 +1008,12 @@ include:
   without referring back to the code.
 
 The original figure also contains things we have not replicated here. The
-most prominent are the four shaded regions labelled *domination* (radiation,
-matter, dark-energy and quantum domination). We have not covered what they
-mean, but you are welcome to read the paper, work it out, and include any
-of them in your version if you like.
+most prominent are the four shaded regions labelled *domination*: radiation
+($\Omega_r$), matter ($\Omega_m$), dark energy ($\Omega_\Lambda$), and
+quantum domination, which carries no $\Omega$ because it is not a
+cosmological density component. We have not covered what they mean, but you
+are welcome to read the paper, work it out, and include any of them in your
+version if you like.
 
 You may reuse the data and Altair layers developed above, but the final
 composition, visual hierarchy and annotation choices should be yours.
