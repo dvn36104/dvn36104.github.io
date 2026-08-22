@@ -1,0 +1,34 @@
+column,source_variable,description,variable_type,unit,metadata_source
+avibase_id,Avibase.ID,"Unique identifier for species (or species group) linking to the Avibase dataset which provide detailed information on taxonomy, synonymy and distribution for the world's birds. See https://avibase.bsc-eoc.org/",ID,,https://avibase.bsc-eoc.org/
+species,Species1,Species taxonomy according to BirdLife international,categorical,,"HBW-BirdLife Version 5.0 (December 2020). Handbook of the Birds of the World and BirdLife International (2020). Handbook of the Birds of the World and BirdLife International digital checklist of the birds of the world. Version 5. Available at: http://datazone.birdlife.org/userfiles/file/Species/Taxonomy/HBW-BirdLife_Checklist_v5_Dec20.zip    
+Current BirdLife taxonomy including detailed taxonomic notes is available at http://datazone.birdlife.org/species/taxonomy"
+species_ebird,Species2,Species taxonomy according to eBird (following latest updates in the Clements checklist),categorical,,"eBird/Clements v2021 (Aug 2021). Clements, J.F., Schulenberg, T.S., Iliff, M.J., Billerman, S.M., Fredericks, T.A., Gerbracht, J.A., Lepage, D., Sullivan, B.L. & Wood, C.L. (2021). The eBird/Clements checklist of birds of the world: v2021. Available at https://www.birds.cornell.edu/clementschecklist/download/ Current 
+eBird/Clements taxonomy including detailed taxonomic notes are available at https://www.birds.cornell.edu/clementschecklist/overview-august-2021/ and  https://support.ebird.org/en/support/solutions/articles/48000837816-the-ebird-taxonomy"
+ebird_species_group,eBird.species.group,"Names of taxonomic units linking trait data in the AVONET raw data to eBird. Unlike the species-level data in AVONET 2, this list contains standard eBird names for individuals that cannot be assigned to species (e.g. Acanthis hornemanni/flammea/cabaret for redpolls that could not be assigned to a particular species)",categorical,,
+species_birdtree,Species3,"Species taxonomy and nomenclature according to BirdTree, the most recent global bird phylogeny",categorical,,Jetz et al. 2012 Nature (www.birdtree.org)
+data_type,Data.type,"1 = museum specimen
+2 =  live individual",binary,,
+source,Source,"Abbreviation of the source collection (museum or research collection). See the Data Sources tab for the full list of institutional names. 
+Field1 = unpublished field data.
+Field2 = published field data.",categorical,,
+specimen_number,Specimen.number,Specimen accession and/or collection number (including corrections to erroneous numbers),ID,,
+sex,Sex,Sex of the individual sampled: M = Male; F = Female; U = Unknown,categorical,,
+age,Age,"0 = all biometric trait data were obtained from direct measurement of an adult specimen.  
+1 = all biometric trait data were obtained from direct measurement of an immature specimen. Note that juvenile specimens or any specimen notably less than adult size were removed from the dataset.",binary,,
+locality,Locality,"Locality at which the individual was collected or trapped-released.  Infomation presented here is based on data submitted by the measurers, with some corrections where old locality assignments have been updated. For museum specimens this is taken from the label, hence some mis-transcriptions still need correcting. Data are embargoed for 1 year to allow completion of this process.",,,
+country_wri,Country_WRI,"Country in which the individual was collected or trapped/released following boundaries deignated by the World Resources Institute, for the purposes of mapping.",categorical,,World Resources Institute (https://github.com/wri/wri-bounds accessed on 14/10/2020).
+country,Country,"Country (or other designation such as archipelago, state, dependency etc.) in which the individual was collected or trapped/released. Infomation presented here is based on data submitted by the measurers, with corrections where old country assignments have been updated. For museum specimens this information is typically transcribed from hand-written labels, hence some mis-transcriptions still need correcting. Data are embargoed for 1 year to allow completion of this process.",categorical,,
+beak_length_culmen_mm,Beak.Length_Culmen,Length from the tip of the beak to the base of the skull,continuous,mm,
+beak_length_nares_mm,Beak.Length_Nares,Length from the anterior edge of the nostrils to the tip of the beak,continuous,mm,
+beak_width_mm,Beak.Width,Width of the beak at the anterior edge of the nostrils,continuous,mm,
+beak_depth_mm,Beak.Depth,Depth of the beak at the anterior edge of the nostrils,continuous,mm,
+tarsus_length_mm,Tarsus.Length,"Length of the tarsus from the posterior notch between tibia and tarsus, to the end of the last scale of acrotarsium (at the bend of the foot)",continuous,mm,
+wing_length_mm,Wing.Length,Length from the carpal joint (bend of the wing) to the tip of the longest primary on the unflattened wing,continuous,mm,
+kipps_distance_mm,Kipps.Distance,Length from the tip of the first secondary feather to the tip of the longest primary,continuous,mm,
+secondary1_mm,Secondary1,"Length from the carpal joint (bend of the wing) to the tip of the first secondary, i.e. the outermost secondary adjacent to the innermost primary feather. Secondary1 is roughly equivalent to Wing length minus Kipp’s distance (measured in a fully folded and flat wing)",continuous,mm,
+hand_wing_index,Hand-Wing.Index,"100*DK/Lw, where DK is Kipp’s distance and Lw is wing length (i.e., Kipp’s distance corrected for wing size). Species average HWI differ from estimates in Sheard et al. (2020) because of much higher sampling of individuals in some species, as well as taxonomic effects in the BirdLife list",continuous,,
+tail_length_mm,Tail.Length,"Distance between the tip of the longest rectrix and the point at which the two central rectrices protrude from the skin, typically measured using a ruler inserted between the two central rectrices",continuous,mm,
+measurer,Measurer,Unique identifier (initials or other abbreviation) used to identify each individual measurer. See the Measurers tab for the full list of names.,categorical,,
+protocol,Protocol,"0 = biometric measurements not taken using AVONET protocol.
+1 = biometric measurements taken using AVONET protocol.",binary,,
+publication,Publication,In AVONET_Raw_Data: Citation for specimen measurements taken from published sources.,,,
