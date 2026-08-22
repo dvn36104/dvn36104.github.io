@@ -228,7 +228,7 @@ set_depths(phyla)
 phyla_age = max(l.depth for l in phyla.leaves())
 ```
 
-## 1 · A tree from Part A
+## 1 · A "tree" from Part A
 
 In Part A you worked with a **table** of amniotes: one row per species.
 This data is **hierarchical**: each species
@@ -406,9 +406,12 @@ ax.annotate("Amniota", (taxonomy.depth, taxonomy.y),
 for class_node in taxonomy.children:
     ax.annotate(class_labels[class_node.name],
                 (class_node.depth, class_node.y),
-                xytext=(6, 0), textcoords="offset points",
-                ha="left", va="center", fontsize=8,
-                color=class_colours[class_node.name], fontweight="bold")
+                xytext=(9, -11), textcoords="offset points",
+                ha="left", va="top", fontsize=8,
+                color=class_colours[class_node.name], fontweight="bold",
+                zorder=5,
+                bbox=dict(boxstyle="round,pad=0.22", facecolor="white",
+                          edgecolor="none", alpha=0.94))
 
 ax.set_xticks([0, 1, 2, 3])
 ax.set_xticklabels(["ROOT\n1 node", "CLASS\n3 nodes",
@@ -422,7 +425,7 @@ ax.set_yticks([])
 ax.grid(axis="x", color="#e8ebef", linewidth=0.8, zorder=0)
 for side in ("left", "right", "top", "bottom"):
     ax.spines[side].set_visible(False)
-ax.set_title("The hierarchy encoded by Part A's taxonomy columns", pad=42)
+ax.set_title("Three Classes of Amniote Families", pad=42)
 plt.tight_layout()
 plt.show()
 ```
@@ -626,6 +629,15 @@ ago. The big early fork near the root is mammals splitting
 from the reptile-plus-bird lineage. Reading left to right now also reads as
 deep past to present: the numbers decrease from about 319 million years ago to
 0, rather than increasing as distance from the root.
+
+::: {.callout-note title="A class is not necessarily a clade"}
+Part A records `Aves` (birds) and `Reptilia` as separate classes. On the
+phylogenetic tree, however, birds descend from within the reptile lineage:
+birds are living dinosaurs and therefore part of the reptile **clade**.
+"Reptiles" with birds removed is not a complete clade because it leaves out
+some descendants of their common ancestor. The table's mutually exclusive
+class categories and the tree's evolutionary groups are doing different jobs.
+:::
 
 ## 4 · Clades and common ancestors
 
