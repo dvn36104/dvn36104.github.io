@@ -365,7 +365,7 @@ same shell tighter). At each new shell the size *jumps*: argon is
 
 ![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
 
-### Why do the later periods stretch?
+### Lanthanides and Actinides
 
 Return to the graph of electrons in the outermost shell. Its early teeth are
 short, but the later teeth contain long, flat stretches at two outer-shell
@@ -384,42 +384,25 @@ The sub-shell capacities explain the three different period lengths:
 Those 10- and 14-element insertions are the long, flat parts of the graph. They
 also create the central design problem faced by every periodic-table layout:
 later cycles contain many more elements than the early cycles.
-
-### Why are there two detached rows?
-
 In periods 6 and 7, after the first two s-filling positions, electrons begin
-filling an f sub-shell before the d- and p-filling runs resume. A fully
+filling an f sub-shell before the d- and p-filling runs resume.
+
+A fully
 expanded table can show each period as one continuous 32-position row. The
-familiar compact table instead keeps its main grid 18 columns wide: it removes
-the f-filling sequence from between the first two columns and the d-block, then
-prints that continuation underneath.
+familiar compact table instead keeps its main grid 18 columns wide, It removes
+the f-filling sequence from between the first two columns and the d-block and
+prints that continuation underneath (Lanthanides and Actinides).
 
-There are two detached rows because period 6 contains the lanthanide sequence
-and period 7 contains the actinide sequence. They are continuations of those
-periods, not two additional periods, and they do not physically or chemically
-belong underneath the rest of the table.
-
-The f sub-shell has 14 electron places, whereas conventional detached rows
-often display 15 elements: La–Lu and Ac–Lr. The extra boundary element shows
-the connection from group 2 into the f-filling sequence and back towards group
-3; exactly which boundary elements belong in group 3 remains a matter of
-convention. Our data uses those two 15-element display rows.
-
-This is the same problem that makes some spiral tables bulge. A continuous
+A continuous
 spiral cannot remove the 14 inserted positions: its path must pass through
 them. A simple spiral can squeeze more elements around the same turn, but then
 equivalent groups no longer line up from one turn to the next. A spiral that
-preserves that alignment must give the extra path somewhere to go, bending it
-into an outward loop, bulge or peninsula. The compact grid uses two detached
-continuation rows; the Benfey spiral uses outward peninsulas.
+preserves that alignment must give the extra path somewhere to go.
 
-The familiar gap between beryllium and boron is another consequence of the
+The familiar gap between beryllium (element 4) and boron (element 5) is another consequence of the
 same unequal period lengths. Periods 2 and 3 contain no d-filling run, so the
 compact table leaves empty layout space between their s- and p-filling
-elements. Those spaces are not unknown elements. Mendeleev also left genuine
-predictive gaps elsewhere: positions for then-unknown elements later occupied
-by gallium (1875) and germanium (1886), with properties close to those he had
-predicted.
+elements.
 
 ## 3 · Alternative designs
 
@@ -535,15 +518,21 @@ what position, shape, colour and any third spatial dimension encode.
 The spiral's claim is that the element list is a **cycle with no
 breaks**.
 
-Give every period one full turn: an
+Giving every period one full turn, an
 element's angle is its *fraction of the way through its period*, and its
-radius grows steadily outward. So sodium, the 1st of 8 elements in
-period 3, sits at $\tfrac{1}{8}$ of a turn (45°), while potassium, the
+radius grows steadily outward.
+
+So sodium, the 1st of 8 elements in
+period 3, sits at $\tfrac{1}{8}$ of a turn (45°).
+
+Potassium, the
 1st of 18 in period 4, sits at $\tfrac{1}{18}$ of a turn (20°): same
-group, different angle. Only the *end* of a period means the same thing
-in every period, so shell closures will align and nothing else has to.
-Colour by **block** (which kind of
-sub-shell is filling: the four "districts" of the table):
+group, different angle.
+
+Only the *end* of a period means the same thing
+in every period, so shell closures should align.
+We can colour by **block** (which kind of
+sub-shell is filling) to see four "districts" of elements:
 
 ```{pyodide}
 PERIOD_LEN = {1: 2, 2: 8, 3: 8, 4: 18, 5: 18, 6: 32, 7: 32}
@@ -574,23 +563,72 @@ ax.set_title("The periodic spiral: one turn per period")
 plt.show()
 ```
 
-What are the strengths and weaknesses of the spiral approach?
+The sequence is unbroken, the blocks
+appear as coloured arcs, and every shell closure lands at the same angle, so the
+noble gases line up on a single ray. However, as the sodium and potassium angles showed, no other
+group lines up.
 
-**Strengths:** the sequence is unbroken: there is no gap between barium
-and lanthanum, and the f-block is just part of the winding. The blocks
-appear as coloured arcs. (The lone gold dot opening each purple arc is
-real: lanthanum and actinium each take a d electron before the f shell
-starts filling.) And every shell closure lands at the same angle, so the
-noble gases line up on a single ray.
+This is a weakness. Chemists constantly reason "down a group", and the
+spiral makes that vertical scan impossible. A smooth spiral
+cannot avoid this: a turn must hold 2, 8, 18 or 32 elements, so groups will be misaligned unless corrections to the angles are made.
 
-**Weaknesses:** as the sodium and potassium angles showed, no other
-group lines up. Chemists constantly reason "down a group", and the
-spiral makes that vertical scan impossible. Nor can a smooth spiral
-avoid this: a turn must hold 2, 8, 18 or 32 elements, so either the
-angular spacing changes between turns (our spiral, and groups misalign)
-or the d- and f-runs get pushed out of the turn into bulges and
-peninsulas (Benfey). The standard table faces the same arithmetic and
-answers with a gap and two detached rows, which is the next section.
+Make that correction directly. Give each of the 18 numbered groups one fixed
+angle. The elements in the two detached sequences have no group number in our
+data, so squeeze each 15-element sequence into the small angular sector between
+groups 2 and 3. Keep the same radial progression as before:
+
+```{pyodide}
+from matplotlib.lines import Line2D
+
+def aligned_spiral_coords(i):
+    """Fixed group angles; unnumbered f-block rows squeezed into one sector."""
+    p = period[i]
+    start = sum(PERIOD_LEN[q] for q in range(1, p))
+    frac = (Z[i] - start) / PERIOD_LEN[p]
+
+    if group[i] is not None:
+        angular_position = group[i]
+    elif 57 <= Z[i] <= 71:          # La–Lu: 15 displayed elements
+        rank = Z[i] - 57
+        angular_position = 2 + (rank + 1) / 15
+    else:                           # Ac–Lr: 15 displayed elements
+        rank = Z[i] - 89
+        angular_position = 2 + (rank + 1) / 15
+
+    theta = 2 * np.pi * angular_position / 18
+    radius_out = (p - 1) + frac
+    return theta, radius_out
+
+fig = plt.figure(figsize=(9.5, 9.5))
+ax = fig.add_subplot(projection="polar")
+aligned = [aligned_spiral_coords(i) for i in range(118)]
+aligned_theta, aligned_radius = zip(*aligned)
+
+ax.plot(aligned_theta, aligned_radius, color="#dddddd", lw=0.7, zorder=1)
+for i in range(118):
+    ax.scatter(aligned_theta[i], aligned_radius[i], s=40,
+               color=block_colours[block[i]], zorder=3)
+    ax.annotate(symbol[i], (aligned_theta[i], aligned_radius[i]),
+                fontsize=4.5, ha="center", va="center",
+                color="white", zorder=4)
+
+ax.set_xticks([]); ax.set_yticks([])
+ax.spines["polar"].set_visible(False)
+ax.legend(handles=[Line2D([], [], marker="o", ls="", color=c,
+                          label=f"{b}-block")
+                   for b, c in block_colours.items()],
+          loc="upper left", bbox_to_anchor=(-0.1, 1.05),
+          frameon=False, fontsize=9)
+ax.set_title("A group-aligned spiral: alignment creates crowding")
+plt.show()
+```
+
+Lithium, sodium and potassium now lie on one ray, as do the other numbered
+groups. The cost is visible elsewhere. The short periods leave large empty
+angular gaps, while the lanthanides and actinides are compressed into a narrow
+wedge between groups 2 and 3. Their overlapping labels are evidence of the
+layout problem, not a labelling accident. A bulged spiral gives that crowded
+sequence more circumference; here we have deliberately left it squeezed.
 
 ## 5 · Build the canonical table
 
@@ -690,7 +728,7 @@ shell can remain unchanged. Group position depends on the fuller electron
 configuration and the chemical similarities it produces, not just a count of
 outermost-shell electrons.
 
-### Your turn: the whole thing {#sec-ex-table}
+### Create the standard periodic table from the data {#sec-ex-table}
 
 Build the full canonical table, all 118 elements. You have `Z`,
 `symbol`, `period`, `group` and `category` (plus `cat_colours`, the
