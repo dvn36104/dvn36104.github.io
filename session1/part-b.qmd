@@ -750,30 +750,56 @@ family names: the same 15 living families after correcting the spelling, plus
 `Paleopropithecidae`.
 
 
-### Back to Part A's seven lineages
+### Seven living amniote lineages
 
-The amniote phylogeny figure in Part A (Rowe 2017) ends at seven living
-lineages: three mammal groups (Monotremata, Marsupialia, Placentalia) and
-four reptile groups (Testudines, Lepidosauria, Crocodilia, Aves). Each is
-a clade, so naming two families that span its deepest split is enough for
-`clade()` to recover the whole group. Colour all seven on the 956-family
-amniote tree already loaded from `amniotes_family.nwk` in Section 3 (no
-new file is needed):
+The Rowe (2017) figure in Part A shows seven living amniote lineages:
+Monotremata, Marsupialia, Placentalia, Testudines, Lepidosauria,
+Crocodilia and Aves. We will colour the same seven groups on the
+956-family tree loaded in Section 3.
+
+For groups recorded in the Part A table, collect their family names and
+pass them to `clade()`. The function returns the smallest clade containing
+those families. The table does not record Marsupialia or Placentalia as
+separate categories. In the tree, Mammalia splits into Monotremata and
+Theria, and Theria then splits into Marsupialia and Placentalia. Hominidae
+identifies the placental branch; the other branch is Marsupialia.
 
 ```{pyodide}
-lineages = [                             # listed bottom to top on the tree
-    ("Marsupialia",  ["Didelphidae", "Macropodidae"],         "#b5443c"),
-    ("Placentalia",  ["Dasypodidae", "Hominidae"],            "#9475cd"),
-    ("Monotremata",  ["Ornithorhynchidae", "Tachyglossidae"], "#c98a00"),
-    ("Lepidosauria", ["Sphenodontidae", "Viperidae"],         "#30a8b1"),
-    ("Crocodilia",   ["Alligatoridae", "Gavialidae"],         "#e66852"),
-    ("Aves",         ["Struthionidae", "Anatidae"],           "#4269d0"),
-    ("Testudines",   ["Chelidae", "Testudinidae"],            "#d96895"),
+text = open_url(DATA_URL + "amniote_species.csv").read()
+rows = [line.split(",") for line in text.strip().split("\n")[1:]]
+tip_names = {l.name for l in amniotes.leaves()}
+
+def group_clade(level, name):
+    """MRCA of every tree tip that Part A's table puts in the group."""
+    col = {"class": 0, "order": 1}[level]
+    fams = {r[2] for r in rows if r[col] == name}
+    return clade(amniotes, fams & tip_names)
+
+aves  = group_clade("class", "Aves")
+tests = group_clade("order", "Testudines")
+crocs = group_clade("order", "Crocodilia")
+lepid = group_clade("order", "Squamata")     # includes Sphenodontidae, the tuatara
+mono  = group_clade("order", "Monotremata")
+
+mam    = group_clade("class", "Mammalia")
+theria = next(c for c in mam.children if mono not in list(c.walk()))
+a, b   = theria.children                     # Marsupialia and Placentalia
+plac   = a if "Hominidae" in {l.name for l in a.leaves()} else b
+mars   = b if plac is a else a
+
+lineages = [                                 # listed bottom to top on the tree
+    (mars,  "Marsupialia",  "#b5443c"),
+    (plac,  "Placentalia",  "#9475cd"),
+    (mono,  "Monotremata",  "#c98a00"),
+    (lepid, "Lepidosauria", "#30a8b1"),
+    (crocs, "Crocodilia",   "#e66852"),
+    (aves,  "Aves",         "#4269d0"),
+    (tests, "Testudines",   "#d96895"),
 ]
 
 lineage_colours = {}
-for name, anchors, col in lineages:
-    for node in clade(amniotes, anchors).walk():
+for cl, name, col in lineages:
+    for node in cl.walk():
         lineage_colours[id(node)] = col
 
 fig, ax = plt.subplots(figsize=(9, 7))
@@ -785,18 +811,13 @@ ax.set_xticklabels(mya_labels)
 ax.set_xlim(0, root_age * 1.02)
 ax.set_xlabel("millions of years ago")
 ax.legend(handles=[plt.Line2D([], [], color=col, lw=2.5, label=name)
-                   for name, _, col in reversed(lineages)],
+                   for _, name, col in reversed(lineages)],
           loc="upper left", frameon=False, fontsize=9)
 ax.set_title("The seven living amniote lineages")
 plt.show()
 ```
 
-The seven clades tile the tree: every one of the 956 families takes
-exactly one colour, and Aves alone holds 607 of them. Monotremata and
-Crocodilia are slivers of two and three families; you have to look
-closely. The grey backbone that remains is the deep structure the Rowe
-figure drew: the splits joining the seven lineages, back to the amniote
-root ~319 Myr ago.
+The seven clades tile the tree. 
 
 Notice what is missing: there are no extinct amniote lineages here. TimeTree is
 built from DNA comparisons, so every branch must end in an organism
