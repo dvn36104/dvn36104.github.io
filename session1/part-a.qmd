@@ -1429,20 +1429,35 @@ by_age.columns = ["n_adult", "n_immature", "mean_adult", "mean_immature"]
 enough = by_age[(by_age["n_adult"] >= 5) & (by_age["n_immature"] >= 3)].copy()
 enough["ratio"] = enough["mean_immature"] / enough["mean_adult"]
 
-fig, ax = plt.subplots(figsize=(8, 3.6))
-ax.hist(enough["ratio"], bins=24, color="#4269d0")
-ax.axvline(1.0, color="#e66852", lw=1.5)
-ax.set_xlabel("immature mean wing / adult mean wing, within species")
-ax.set_ylabel("species")
-ax.set_title(f"{len(enough)} species with enough of both; red line = no difference")
-plt.show()
+ratio_chart = (
+    alt.Chart(enough.reset_index()[["ratio"]])
+    .mark_bar(color="#4269d0")
+    .encode(
+        x=alt.X("ratio:Q", bin=alt.Bin(maxbins=24),
+                title="immature mean wing / adult mean wing, within species"),
+        y=alt.Y("count():Q", title="species"),
+    )
+)
+
+no_difference = (
+    alt.Chart(pd.DataFrame({"ratio": [1.0]}))
+    .mark_rule(color="#e66852", strokeWidth=1.5)
+    .encode(x="ratio:Q")
+)
+
+(ratio_chart + no_difference).properties(
+    width=560,
+    height=200,
+    title=alt.TitleParams(
+        "Distribution of within-species wing length ratios",
+        subtitle=f"{len(enough)} species with enough measurements of both; the red line marks no difference",
+    ),
+)
 ```
 
 ```{pyodide}
-assert len(enough) == 108
-assert (enough["ratio"] < 1).sum() == 77
-print(f"✓ median ratio {enough['ratio'].median():.3f}: immature wings run about")
-print("  1.3% short, in 77 of 108 species, just as the metadata warned")
+print(f"median ratio: {enough['ratio'].median():.3f}")
+print(f"{(enough['ratio'] < 1).sum()} of {len(enough)} species have shorter immature wings")
 ```
 
 Analysis of
