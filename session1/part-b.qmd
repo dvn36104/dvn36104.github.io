@@ -1454,6 +1454,15 @@ When reading or constructing a phylogeny visualisation:
   contested: e.g. whether sponges or comb jellies split from the rest of the
   animals first.
 
+## Bonus
+
+Read Long et al. (2025), [*Earliest amniote tracks recalibrate the timeline
+of tetrapod evolution*](https://pmc.ncbi.nlm.nih.gov/articles/PMC12119326/).
+Dates on a phylogenetic tree are estimates: fossils help to date its branches,
+and new fossil evidence can revise those dates. The tracks described in this
+paper push the likely origin of crown-group amniotes back by at least 35–40
+million years.
+
 ## Sources
 
 - Kumar et al. (2022) *TimeTree 5: an expanded resource for species
