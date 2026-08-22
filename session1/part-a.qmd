@@ -1522,9 +1522,9 @@ mean_mark = wing_base.mark_circle(color="#e66852", size=55).encode(
 )
 ```
 
-Mean and median can be compared across every measured species. The diagonal
-reference line means equality. Point area encodes
-sample size.
+Mean and median can be compared across every measured species. Point area
+encodes sample size. The diagonal is the identity line, $y=x$; it is drawn by
+the code, not fitted to the data.
 
 ```{pyodide}
 identity_limits = pd.DataFrame({
@@ -1557,10 +1557,74 @@ identity_line = (alt.Chart(identity_limits).mark_line(
 )
 ```
 
-Every chart caption should name both the **grouping level** and
-the **aggregate function**.
-"Median
-individual wing length within each species" is better than "wing length by species".
+Position along the diagonal is mainly the difference in wing length between
+species. Distance from the diagonal is the difference between a species' mean
+and median. The first is much larger, so almost all points lie near $y=x$.
+
+One mark is separated from the rest. It contains five overlapping species:
+
+```{pyodide}
+species_wing.nsmallest(8, "mean")[["species", "n", "mean", "median"]]
+```
+
+All five are kiwis. Check the underlying records:
+
+```{pyodide}
+kiwi_wing = birds.loc[
+    np.isclose(birds["wing_length_mm"], 0.1),
+    ["species", "wing_length_mm"],
+]
+
+(kiwi_wing.groupby("species")["wing_length_mm"]
+ .agg(rows="count", distinct_values="nunique", minimum="min", maximum="max"))
+```
+
+[Sayol et al. (2024)](https://doi.org/10.1111/geb.13927) document that AVONET
+uses the arbitrary value 0.1 for kiwi wing and tail measurements. It is not a
+measured wing length. Recode only these documented kiwi pseudo-values as
+missing; retain their other measurements.
+
+```{pyodide}
+birds_wing_clean = birds.copy()
+kiwi_rows = birds_wing_clean["species"].str.startswith("Apteryx", na=False)
+kiwi_pseudovalue_fields = [
+    "wing_length_mm", "kipps_distance_mm", "secondary1_mm",
+    "tail_length_mm", "hand_wing_index",
+]
+
+replaced = 0
+for column in kiwi_pseudovalue_fields:
+    pseudo = kiwi_rows & np.isclose(birds_wing_clean[column], 0.1)
+    replaced += int(pseudo.sum())
+    birds_wing_clean.loc[pseudo, column] = np.nan
+
+species_wing_clean = (birds_wing_clean
+    .dropna(subset=["species", "wing_length_mm"])
+    .groupby("species")["wing_length_mm"]
+    .agg(n="count", mean="mean", median="median")
+    .reset_index())
+
+print(f"Replaced {replaced} kiwi pseudo-values with missing values.")
+print(f"Wing-length species: {len(species_wing):,} → {len(species_wing_clean):,}")
+```
+
+The raw summary, histogram and correlation matrix above include these values.
+Use the cleaned wing data for subsequent wing analysis.
+
+To compare the two aggregations directly, calculate their percentage
+difference within each species:
+
+```{pyodide}
+aggregation_difference = species_wing_clean.assign(
+    difference_pct=lambda table: 100 * (table["mean"] - table["median"])
+                                     / table["median"]
+)
+
+(aggregation_difference
+ .loc[aggregation_difference["difference_pct"].abs().nlargest(10).index,
+      ["species", "n", "mean", "median", "difference_pct"]]
+ .round(2))
+```
 
 
 
@@ -1696,8 +1760,8 @@ hummingbirds, finches and curlews genuinely sit in different places.
 ### Your turn: a different trait pair {#sec-ex-wing}
 
 Repeat the whole pipeline (**cleaning included**) for **wing length vs
-tarsus length**. Wing length has its own, different pattern of missing
-values, so start from `birds`, not from `clean`. Print n after cleaning,
+tarsus length**. Start from `birds`, recode the documented kiwi `0.1` wing
+values as missing, and then require both measurements. Print n after cleaning
 and show the species-level n in the plot title.
 
 ```{pyodide}
@@ -1717,9 +1781,14 @@ birds = pd.read_csv(open_url(DATA_URL + "avonet_individuals.csv"))
 #| exercise: ex_wing
 # `birds` is loaded: 90,371 rows, columns species, beak_length_culmen_mm,
 # tarsus_length_mm, wing_length_mm.
-# 1. Drop the rows that cannot support a wing-vs-tarsus comparison.
-# 2. Aggregate to species means.
-# 3. Scatter log10 wing against log10 tarsus at species level.
+# 1. Recode the documented kiwi 0.1 wing pseudo-values as missing.
+# 2. Drop rows that cannot support a wing-vs-tarsus comparison.
+# 3. Aggregate to species means.
+# 4. Scatter log10 wing against log10 tarsus at species level.
+
+birds_w = birds.copy()
+kiwi_wing_rows = ______
+birds_w.loc[kiwi_wing_rows, "wing_length_mm"] = np.nan
 
 clean_w = ______
 print(f"{len(birds):,} rows → {len(clean_w):,} rows")
@@ -1734,13 +1803,13 @@ plt.show()
 ```
 
 ::: {.hint exercise="ex_wing"}
-**Hint 1:** The subset to require is `["species", "wing_length_mm",
-"tarsus_length_mm"]`. Beak gaps are irrelevant to this comparison; don't
-drop rows for a column you aren't using.
+**Hint 1:** Identify the pseudo-values with
+`birds_w["species"].str.startswith("Apteryx", na=False)` and
+`np.isclose(birds_w["wing_length_mm"], 0.1)`.
 :::
 
 ::: {.hint exercise="ex_wing"}
-**Hint 2:** `birds.dropna(subset=...)` then
+**Hint 2:** Require `["species", "wing_length_mm", "tarsus_length_mm"]`, then
 `.groupby("species")[["wing_length_mm", "tarsus_length_mm"]].mean()`, then
 `ax.scatter(np.log10(...), np.log10(...), s=4, alpha=0.25)`.
 :::
@@ -1749,7 +1818,16 @@ drop rows for a column you aren't using.
 **Fully worked solution:**
 
 ```python
-clean_w = birds.dropna(subset=["species", "wing_length_mm", "tarsus_length_mm"])
+birds_w = birds.copy()
+kiwi_wing_rows = (
+    birds_w["species"].str.startswith("Apteryx", na=False)
+    & np.isclose(birds_w["wing_length_mm"], 0.1)
+)
+birds_w.loc[kiwi_wing_rows, "wing_length_mm"] = np.nan
+
+clean_w = birds_w.dropna(
+    subset=["species", "wing_length_mm", "tarsus_length_mm"]
+)
 print(f"{len(birds):,} rows → {len(clean_w):,} rows")
 
 species_w = (clean_w
@@ -1765,20 +1843,6 @@ ax.set_ylabel("log10 wing length (mm)")
 ax.set_title(f"Species means (n = {len(species_w):,})")
 plt.show()
 ```
-<!--
-Wing length is missing in only ~1,100 rows, so this cleaning keeps far more
-data than the beak comparison did: the n you report depends on the
-comparison you chose. The wing–tarsus cloud is also tighter than
-beak–tarsus: both are limb-skeleton traits that track overall body size,
-while beaks track feeding ecology.
-
-And look at the bottom of your chart: five points stranded far below the
-cloud, at log10(wing) ≈ −1. Those are the five kiwi species: flightless
-birds whose wing length is coded as **0.1 mm**, a placeholder, not a
-measurement. `dropna` cannot catch missingness that has been written down
-as a fake number. Keep that idea within reach: this is not the last
-sentinel value in this course, and the only reliable detector is looking
-at the chart. -->
 :::
 
 
