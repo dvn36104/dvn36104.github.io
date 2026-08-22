@@ -627,16 +627,23 @@ ax = fig.add_subplot(projection="polar")
 thetas, rs = zip(*(spiral_coords(i) for i in range(118)))
 ax.plot(thetas, rs, color="#dddddd", lw=0.7, zorder=1)
 for i in range(118):
-    ax.scatter(thetas[i], rs[i], s=40, color=block_colours[block[i]], zorder=3)
-    ax.annotate(symbol[i], (thetas[i], rs[i]), fontsize=4.5, ha="center",
+    edge = "#d62728" if group[i] == 18 else "none"
+    ax.scatter(thetas[i], rs[i], s=300, color=block_colours[block[i]],
+               edgecolor=edge, linewidth=2, zorder=3)
+    ax.annotate(symbol[i], (thetas[i], rs[i]), fontsize=8, ha="center",
                 va="center", color="white", zorder=4)
 ax.set_xticks([]); ax.set_yticks([])
 ax.spines["polar"].set_visible(False)
 from matplotlib.lines import Line2D
-ax.legend(handles=[Line2D([], [], marker="o", ls="", color=c, label=f"{b}-block")
-                   for b, c in block_colours.items()],
-          loc="upper left", bbox_to_anchor=(-0.1, 1.05), frameon=False, fontsize=9)
-ax.set_title("The periodic spiral: one turn per period")
+handles = [Line2D([], [], marker="o", ls="", color=c, markersize=11,
+                  label=f"{b}-block")
+           for b, c in block_colours.items()]
+handles.append(Line2D([], [], marker="o", ls="", markerfacecolor="none",
+                      markeredgecolor="#d62728", markeredgewidth=2,
+                      markersize=11, label="group 18"))
+ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(-0.1, 1.05),
+          frameon=False, fontsize=10)
+ax.set_title("The periodic spiral", fontsize=17)
 plt.show()
 ```
 
