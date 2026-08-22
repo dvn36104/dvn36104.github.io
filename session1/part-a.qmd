@@ -1104,7 +1104,7 @@ hist_data = pd.DataFrame(hist_rows)
  .resolve_scale(x="independent", y="independent"))
 ```
 
-A histogram is already an aggregate chart: continuous values are transformed
+A **histogram** is already an aggregate chart: continuous values are transformed
 into intervals with `bin`, then rows are aggregated with `count`. Changing the
 number or width of bins can reveal or conceal modes and outliers. A box plot
 would instead aggregate to quartiles and whiskers. Here, identical histogram marks
@@ -1112,9 +1112,7 @@ make shapes comparable across traits, while independent facet scales let each
 trait use its own range. That choice helps see shape, but prevents direct
 comparison of absolute magnitudes across panels.
 
-#### Violin plots: a smoothed view of distribution shape
-
-A violin plot estimates the distribution continuously rather than dividing it
+A **violin plot** estimates the distribution continuously rather than dividing it
 into histogram bins. At any vertical position, the width of the violin shows
 the estimated density of observations near that value. Wide regions contain
 concentrated values; narrow regions contain relatively few.
