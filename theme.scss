@@ -60,3 +60,12 @@ div.sourceCode pre.sourceCode > code.sourceCode {
 .exercise-cell-output pre code {
   font-size: $cell-code-font-size !important;
 }
+
+// Short reference tables should use their natural width instead of spanning
+// the full reading column.
+.compact-table table {
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}

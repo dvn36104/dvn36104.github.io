@@ -294,9 +294,7 @@ next electrons are added in three consecutive runs:
 | scandium–zinc | 3d | 10 |
 | gallium–krypton | 4p | 6 |
 
-Those run lengths were not chosen to make a table. They come from the quantum
-capacities established earlier: s has one orbital, d has five and p has three,
-with two electrons per orbital. Period 4 therefore contains
+Period 4 therefore contains
 $2 + 10 + 6 = 18$ elements. Draw that sequence as one row:
 
 ```{pyodide}
@@ -325,43 +323,38 @@ ax.set_title("Period 4 has 18 positions: 2 + 10 + 6", pad=14)
 plt.show()
 ```
 
-When the standard table stacks each period as a row (Section 5), these
+When the standard table stacks each period as a row, these
 runs become the **blocks**: the two elements of the s run form a
 two-column s-block, the ten of the d run a ten-column d-block, and the
-six of the p run a six-column p-block. Stacking equivalent positions in
-successive periods gives $2 + 10 + 6 = 18$ vertical **groups**, numbered
+six of the p run a six-column p-block. The columns then form $2 + 10 + 6 = 18$ vertical **groups**, numbered
 1–2 (s), 3–12 (d) and 13–18 (p). The table has 18 groups because period
-4 establishes 18 recurring positions, not because somebody began with an
-18-column box.
+4 establishes 18 recurring positions.
 
-The outer-electron sawtooth alone could not show all of this. Across the ten
-transition-metal positions an inner d sub-shell is filling while the outermost
-shell can remain unchanged. Group position depends on the fuller electron
-configuration and the chemical similarities it produces, not just a count of
-outermost-shell electrons.
+The numbers 1–18 are the standardised group labels. Six numbered groups also
+have IUPAC-approved collective names that chemists commonly use:
 
-Many of the groups carry standardised names, which chemists use more
-often than the numbers:
-
-| group | standardised name | first members |
+::: {.compact-table}
+| group | IUPAC-approved collective name | examples |
 |---:|---|---|
 | 1 | alkali metals | Li, Na, K |
 | 2 | alkaline earth metals | Be, Mg, Ca |
-| 3–12 | no individual names; collectively the transition metals | Sc, Ti, V, ... |
-| 13 | boron group | B, Al, Ga |
-| 14 | carbon group | C, Si, Ge |
 | 15 | pnictogens | N, P, As |
 | 16 | chalcogens | O, S, Se |
 | 17 | halogens | F, Cl, Br |
 | 18 | noble gases | He, Ne, Ar |
+:::
 
-The names for groups 1, 2 and 15 to 18 are IUPAC-approved collective
-names; "boron group" and "carbon group" are conventional labels taken
-from the top element. Two footnotes: hydrogen sits in group 1 by
-electron configuration but is not an alkali metal, and the lanthanides
-and actinides have collective names but no group number at all, a
-problem the standard table handles by detaching them entirely
-(Section 5).
+The other columns do not have IUPAC-approved collective names. They can be
+described using their first element—*the titanium group* for group 4, *the
+boron group* for group 13 and *the carbon group* for group 14—but these are
+descriptive labels rather than standardised replacements for the numbers.
+Groups 3–11 are collectively the **transition elements** in IUPAC usage. Group
+12 is part of the d-block but is usually excluded from that strict definition;
+many introductory tables nevertheless call groups 3–12 the transition metals.
+
+Hydrogen sits in group 1 by electron configuration but is not an alkali metal.
+The **lanthanoids** and **actinoids** are also IUPAC-approved collective names,
+but those two sequences are not numbered groups (see below).
 
 ### Size of atoms {#sec-ex-radius}
 
