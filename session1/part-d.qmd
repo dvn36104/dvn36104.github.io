@@ -777,23 +777,22 @@ Section 3 and see whether you still agree with yourself.
 
 {{< include _instructor-d.qmd >}}
 
-## 6 · Why the standard table won
+## 6 · Why this became the standard table
 
-The canonical table beat the spirals for reasons worth naming, because
-they are the same reasons any visualisation wins:
+The canonical table has become favored over the spiral designs for a few reasons:
 
 - **It aligns the most-used comparison.** Chemists constantly reason
-  "down a group": same outer shell, same reactions. The grid makes that
-  a straight vertical scan; the spiral makes it a hunt.
+  "down a group": same outer shell, similar reaction behaviour. The grid makes that
+  a straight vertical scan.
 - **It is rectangular.** It fits pages, posters, screens and
   blackboards; every cell has room for symbol, number, and mass. Most
-  spiral designs waste half their canvas and cramp their inner turns.
-- **Its gaps did work.** Empty grid cells are legible predictions;
-  a spiral closes seamlessly over its own ignorance.
-- **And then it won for winning.** After a century on every classroom
-  wall, familiarity itself became the strongest argument: a standard
-  everyone can read beats a design a few prefer (ask the QWERTY
-  keyboard).
+  spiral designs cramp inner turns and waste space on outer turns.
+- **Gaps are informative.** Empty grid cells were legible predictions.
+  A spiral has no natural place for a hole: if an element is missing,
+  the winding simply continues and nothing looks wrong.
+- **Familiarity.** After a century on every classroom wall, the standard
+  layout is the one everyone can already read, and a standard everyone
+  can read beats a design a few prefer (ask the QWERTY keyboard).
 
 But "won" does not mean "true". The grid's clean rows are punctured by a
 gap that means nothing physical, its f-block sits in exile, and the
