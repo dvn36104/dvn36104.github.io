@@ -131,7 +131,10 @@ print("✓ 118 elements: the data is literally just a sorted list")
 ```
 
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
-$n+l$, ties broken by $n$). Carefully review how this is produced by the code, which gives the shell arrangement for sodium (Z = 11):
+$n+l$, ties broken by $n$). Carefully review how the functions translate an
+atomic number into a sub-shell configuration and then totals for each shell.
+We will compare lithium, carbon, neon and sodium: the beginning, middle and
+end of the second shell, followed by the first electron in the third shell.
 
 ```{pyodide}
 subshells = sorted(((n, l) for n in range(1, 8) for l in range(n)),
@@ -161,30 +164,69 @@ def valence(z):
     sh = shells(z)
     return sh[max(sh)]
 
-print("sodium:", " ".join(f"{n}{L_NAMES[l]}{e}" for n, l, e in configuration(11)))
-print("sodium by shell:", shells(11))
+EXAMPLE_Z = [3, 6, 10, 11]
+
+for z in EXAMPLE_Z:
+    subshell_text = " ".join(
+        f"{n}{L_NAMES[l]}{e}" for n, l, e in configuration(z)
+    )
+    shell_text = ", ".join(str(e) for e in shells(z).values())
+    print(
+        f"{name[z - 1]:<7} ({symbol[z - 1]}, Z={z:>2}): "
+        f"{subshell_text:<17} shells {shell_text}"
+    )
 ```
 
-The shell arrangement of sodium can be pictured in a diagram:
+Draw all four with the same function and the same spatial scale:
 
 ```{pyodide}
-fig, ax = plt.subplots(figsize=(5, 5))
-ax.set_aspect("equal"); ax.axis("off")
-ax.scatter([0], [0], s=200, color="#171717", zorder=3)
-ax.annotate("Na", (0, 0), color="white", ha="center", va="center",
-            fontsize=8, zorder=4)
-for n, count in shells(11).items():
-    ax.add_patch(plt.Circle((0, 0), n, fill=False, color="#bbbbbb", lw=1))
-    ang = np.linspace(0, 2 * np.pi, count, endpoint=False) + np.pi / 2
-    ax.scatter(n * np.cos(ang), n * np.sin(ang), s=45, color="#4269d0", zorder=3)
-lim = max(shells(11)) + 0.6
-ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim)
-ax.set_title("Sodium: 2, 8, 1")
+EXAMPLE_Z = [3, 6, 10, 11]
+
+def draw_shell_diagram(ax, z, limit=3.55):
+    counts = shells(z)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    ax.set_xlim(-limit, limit)
+    ax.set_ylim(-limit, limit)
+
+    ax.scatter([0], [0], s=230, color="#171717", zorder=3)
+    ax.annotate(
+        symbol[z - 1], (0, 0), color="white",
+        ha="center", va="center", fontsize=8, fontweight="bold", zorder=4,
+    )
+
+    for n, count in counts.items():
+        ax.add_patch(
+            plt.Circle((0, 0), n, fill=False, color="#b7bcc5", lw=1.2)
+        )
+        angles = np.linspace(0, 2 * np.pi, count, endpoint=False) + np.pi / 2
+        ax.scatter(
+            n * np.cos(angles), n * np.sin(angles),
+            s=45, color="#4269d0", edgecolor="white", linewidth=0.5,
+            zorder=3,
+        )
+
+    shell_text = ", ".join(str(e) for e in counts.values())
+    ax.set_title(
+        f"{name[z - 1]} ({symbol[z - 1]}, Z={z})\n{shell_text}",
+        fontsize=11, pad=7,
+    )
+
+fig, axes = plt.subplots(2, 2, figsize=(7.5, 7.5))
+for ax, z in zip(axes.ravel(), EXAMPLE_Z):
+    draw_shell_diagram(ax, z)
+
+fig.suptitle("How an outer shell fills, closes and starts again", fontsize=15)
+plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.show()
 ```
 
-The lone outer electron places sodium in the same column as lithium
-and potassium, also with one outer-shell electron.
+Lithium begins its second shell with one outer electron; carbon has four;
+neon closes that shell with eight; and sodium's eleventh electron begins the
+third shell. Lithium and sodium therefore both have one electron in their
+outermost shell, which is why they appear in the same column of the periodic
+table. These are shell-counting diagrams, not literal pictures of electron
+orbits.
 
 ## 2 · Periodicity
 
