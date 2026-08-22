@@ -46,6 +46,7 @@ print("Environment ready.")
 # cells were run before it. The visible cells re-derive all of this.
 text = open_url(DATA_URL + "objects_universe.csv").read()
 objects = pd.read_csv(open_url(DATA_URL + "objects_universe.csv"))
+objects_full = pd.read_csv(open_url(DATA_URL + "objects_full.csv"))
 rows = objects.astype(str).values.tolist()
 names  = objects["name"].tolist()
 groups = objects["group"].tolist()
@@ -1001,11 +1002,31 @@ have not replicated?
 :::
 
 Build your own **Triangle of Everything** using Altair (or another library of your choice).
+
+So far this page has worked with a 29-object sample. For the final chart,
+the served file `objects_full.csv` adds the remaining kinds of object
+from the original figure: the neutron and the W boson on the quantum
+wall; three **photons** (gamma-ray, visible, radio) plotted at their
+effective mass $E/c^2$, which is why the whole electromagnetic spectrum
+lies exactly along the Compton line; the Planck instanton; the lightest
+primordial black hole that would survive to today (proton-sized); the
+black hole whose Hawking temperature equals the cosmic microwave
+background; and a **giant void**, an underdense region of intergalactic
+space and the least dense object in the table.
+
+```{pyodide}
+objects_full = pd.read_csv(open_url(DATA_URL + "objects_full.csv"))
+objects_full.tail(9)
+```
+
+The photons form a seventh group that appears nowhere else on this page,
+so no colour has been chosen for it. That choice is yours.
+
 Your final chart should
 include:
 
 - logarithmic mass and radius axes with readable titles and tick labels;
-- all 29 objects, labelled and coloured by group;
+- every object in `objects_full`, all 38, labelled and coloured by group;
 - the atomic-density and nuclear-density reference lines;
 - the gravity and quantum walls, with the impossible regions shaded;
 - the sub-Planckian region and the Planck-scale instanton; and
@@ -1093,5 +1114,9 @@ What is the anthropic principle?
   sphericity and all. Fundamental particles are plotted at their Compton
   wavelengths (the proton at its measured charge radius); black holes at
   their Schwarzschild radii.
+- `objects_full.csv` extends the table to 38 objects with the neutron,
+  the W boson, three photons plotted at effective mass $E/c^2$, the
+  Planck instanton, a surviving primordial black hole, the 3 K black
+  hole and a giant void, curated the same way.
 - Constants: CODATA values rounded to 4 significant figures;
   $H_0 = 70$ km/s/Mpc.
