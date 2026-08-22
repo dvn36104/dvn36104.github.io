@@ -471,13 +471,12 @@ since lineages separated, giving the *relative* ages.
 To turn relative ages into *absolute* ages (millions of years ago), the tree is calibrated
 against fossils whose age and position are known.
 
-TimeTree, the source of
-our files, aggregates thousands of such published studies into consensus
-dated trees.
+
 
 
 [TimeTree](https://timetree.org) (Kumar et al. 2022) provides data sets on relationships between species
-that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree.
+that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree. TimeTree aggregates thousands of such published studies into consensus
+dated trees.
 
 
 | File | Tips | What one tip is |
@@ -1282,6 +1281,7 @@ When reading or constructing a phylogeny visualisation:
 - **Every internal node is an inference**. Some are genuinely
   contested: e.g. whether sponges or comb jellies split from the rest of the
   animals first.
+
 ## Sources
 
 - Kumar et al. (2022) *TimeTree 5: an expanded resource for species
