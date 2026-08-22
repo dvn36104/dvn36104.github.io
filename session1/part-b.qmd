@@ -581,6 +581,7 @@ Draw the hominid mini-tree first:
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(7, 2.6))
 draw_tree(mini, ax, labels=True, fontsize=11)
+ax.margins(y=0.18)
 ax.set_xlabel("Myr since the root")
 plt.tight_layout()
 plt.show()
