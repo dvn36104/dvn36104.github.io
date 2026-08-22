@@ -756,8 +756,9 @@ The amniote phylogeny figure in Part A (Rowe 2017) ends at seven living
 lineages: three mammal groups (Monotremata, Marsupialia, Placentalia) and
 four reptile groups (Testudines, Lepidosauria, Crocodilia, Aves). Each is
 a clade, so naming two families that span its deepest split is enough for
-`clade()` to recover the whole group. Colour all seven on the dated tree
-from section 3:
+`clade()` to recover the whole group. Colour all seven on the 956-family
+amniote tree already loaded from `amniotes_family.nwk` in Section 3 (no
+new file is needed):
 
 ```{pyodide}
 lineages = [                             # listed bottom to top on the tree
