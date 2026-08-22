@@ -1132,8 +1132,12 @@ print(len(animals.leaves()), "classes remain: the animals, sponges to mammals")
 single-celled filter feeders. They are the closest living relatives of
 all animals.
 
-The plant side takes more steps. Follow the child that contains
-`Magnoliopsida` and watch the counts:
+To isolate the plant kingdom on the other side, we need to define what
+living things are counted as plants. For this purpose, we will consider
+the separation of red algae from green algae to represent the deepest
+root of the plant kingdom. A number of other groups (neither plant,
+animal, nor fungi) are dropped before reaching that split. Follow the
+child that contains `Magnoliopsida` and watch the counts:
 
 ```{pyodide}
 def side_with(node, name):
@@ -1148,14 +1152,29 @@ for step in range(6):
 plants = block
 ```
 
-Each step drops a group: the amoebae, then the euglenids, then a
-51-class block that holds the diatoms and the ciliates, then the
-glaucophytes, then the red algae, then the cryptophytes. After six steps
-32 classes remain, running from green algae to flowering plants. Whether
-the red algae dropped at step five count as plants is a judgement call;
-on this page plants means green plants.
+Steps one to four drop the amoebae, the euglenids, a 51-class block
+that holds the diatoms and the ciliates, and the glaucophytes. Step
+five is the split we chose as the root: the eight red algae classes
+separate from the green line. Step six drops one last single-celled
+group, the cryptophytes, which this tree places just inside the green
+side of that split. The 32 classes that remain run from green algae to
+flowering plants.
 
-Now colour the three kingdoms on one figure. Everything else stays grey:
+Now colour the three kingdoms on one figure.
+
+The colouring works in two steps. `paint()` takes a list of
+(clade, colour) pairs. It walks each clade from its top node down
+through every descendant and records the colour in a dictionary keyed by
+the node's `id()`. `draw_round()` then draws every branch of the tree
+and looks each node up in that dictionary. The node's colour is used for
+its radial line and for the arc that joins its children. Any node not in
+the dictionary gets the `default` colour, grey here, which is how
+everything outside the three kingdoms stays grey.
+
+The legend is built by hand. The tree is drawn as bare line segments,
+not labelled data series, so matplotlib has nothing to put in a legend
+on its own. Each `Line2D` is a stand-in: a short coloured line that
+exists only to appear in the legend next to its label.
 
 ```{pyodide}
 colors = paint([(animals, "#4269d0"), (fungi, "#e66852"), (plants, "#30a8b1")])

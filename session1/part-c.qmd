@@ -658,14 +658,7 @@ print(f"densest object:  {names[int(np.argmax(rho_all))]}, {rho_all.max():.1e} g
 print(f"fluffiest object: {names[int(np.argmin(rho_all))]}, {rho_all.min():.1e} g/cm³")
 ```
 
-The least dense object in our table is **the Universe itself**, about
-$10^{-29}\ \text{g/cm}^3$, six protons per cubic metre. That is an
-artefact of our sample: the emptiest regions in existence, the giant
-intergalactic **voids**, have matter densities around a tenth of the
-cosmic average (an average which includes them). The published figure
-plots the largest known voids; our smaller table leaves them out.
 
-#### Densities {#sec-ex-density}
 
 You have `rho_all` for all 29 objects. Rank everything by density and
 print a table from densest to least dense, with the group and the density of
@@ -1025,7 +1018,7 @@ colour-code the epochs of the Universe by the density component that
 dominated it at the time: the false vacuum energy of inflation
 ($\Omega_{\Lambda_i}$), radiation ($\Omega_r$), matter ($\Omega_m$) and
 dark energy ($\Omega_\Lambda$). We have not covered what they mean, but you
-are welcome to read the paper, work it out, and include any of them in your
+are welcome to read the paper and include any of them in your
 version if you like.
 
 You may reuse the data and Altair layers developed above, but the final
@@ -1052,7 +1045,7 @@ Canvas.
 
 
 
-## Bonus: The Fine Structure Constant and the Anthropic Principle
+## Bonus: The Fine Structure Constant 
 
 An interesting feature of nature is hidden in the objects table. The
 **fine-structure constant** $\alpha \approx 1/137$ measures the strength
@@ -1082,8 +1075,7 @@ line sits where it does because atoms have the size $\alpha$ gives them.
  The classic paper
 on this is Carr and Rees (1979),
 [*The anthropic principle and the structure of the physical
-world*](https://www.nature.com/articles/278605a0), which reconstructs
-essentially this whole diagram from a handful of dimensionless constants.
+world*](https://www.nature.com/articles/278605a0).
 
 What is the anthropic principle?
 
