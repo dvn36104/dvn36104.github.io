@@ -7,9 +7,13 @@ pyodide:
     - matplotlib
 ---
 
-The periodic table is one of the most successful data visualisation ever
-made. Its data is essentially just a **one-dimensional list**: the elements
-sorted by atomic number, 1 to 118. Turning this list into a "table" involves a
+The periodic table is one of the most successful data visualisations ever
+made, displayed on millions of classroom walls around the world. 
+
+Its underlying data is essentially just a **one-dimensional list**: the elements
+sorted by atomic number, 1 to 118. 
+
+Turning this list into a "table" involves a
 *layout choice*.
 Although one version has become canonical over the past 150 years, there are numerous alternative possible designs.
 
