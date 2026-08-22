@@ -358,7 +358,7 @@ same shell tighter). At each new shell the size *jumps*: argon is
 ## 3 · Alternative designs
 
 If the data is a cycle, should its picture be a *grid*, or should it spiral round and round?
-Chemists have proposed various layouts. Compare these four alternative
+Chemists have proposed various layouts. Compare these six alternative
 designs:
 
 **Mendeleev's own table (1869).** Periods run *down* the
@@ -384,8 +384,33 @@ close in the aufbau order, so the blocks form perfect staircase steps.
 
 ![](../images/circular-table.svg){width=60% fig-align="center"}
 
+**Jeff Moran's hexagonal spiral (1999).** Hydrogen sits at the centre rather
+than at one end of a row. The connected hexagons make the sequence continuous,
+while colour, outlines and annotations expose blocks, metal categories,
+diagonal relationships and oxidation states.
 
-What are their advantages and disadvantages? Which do you prefer?
+![Jeff Moran's hexagonal periodic table. [Source: *Laboratory News*,
+"Alternative periodic tables".](https://labnews.co.uk/alternative-periodic-tables/)](../images/jeff-moran-periodic-table.png){width=82% fig-align="center"}
+
+**James Franklin Hyde's curled-ribbon table (1975).** Hyde was an
+organosilicon chemist, and his arrangement gives carbon and silicon the centre
+of the composition. A continuous ribbon curls around them, replacing the
+standard table's separated rows with one connected path.
+
+![James Franklin Hyde's curled-ribbon periodic table, reproduced by Rezmason.
+[Source and licence: Wikimedia Commons, CC BY-SA
+4.0.](https://commons.wikimedia.org/wiki/File:The_chemical_elements_and_their_periodic_relationships.svg)](../images/hyde-curled-ribbon-periodic-table.svg){width=88% fig-align="center"}
+
+
+What are their advantages and disadvantages? Which version do you prefer, and why?
+
+::: {.callout-tip title="Find another periodic table"}
+Look beyond these six examples and find at least one other periodic-table
+design. Your search must include **three-dimensional tables** as well as flat
+ones. Record the designer and date, link to the source, and explain what the
+layout makes easier to see and what it makes harder to see. Be precise about
+what position, shape, colour and any third spatial dimension encode.
+:::
 
 ## 4 · Build the spiral
 
@@ -609,7 +634,9 @@ about what matters; the one on the wall is just the argument that won.
 - Images, all from Wikimedia Commons: Mendeleev's 1869 table (redrawn by
   NikNaks, public domain); Benfey-style element spiral by DePiep
   (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular
-  table by Cbuckley (CC BY 3.0).
+  table by Cbuckley (CC BY 3.0); and James Franklin Hyde's curled-ribbon
+  table, reproduced by Rezmason (CC BY-SA 4.0). Jeff Moran's hexagonal table
+  is credited to Moran and sourced from *Laboratory News*.
 - Category colours follow the long-standing Wikipedia convention, used
   here deliberately: this page is about *the* canonical design, and its
   colours are part of the canon. Note they are not a colour-blind-safe
