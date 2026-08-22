@@ -113,8 +113,7 @@ in the outermost shell and, for transition metals, electrons in a nearby
 incompletely filled d sub-shell. Similar valence arrangements tend to produce
 similar chemistry.
 
-The data for this page is one row per element: number, symbol, name,
-and a few properties we will meet as we need them:
+The data for this page is one row per element: number, symbol, name, and a few other element properties.
 
 ```{pyodide}
 text = open_url(DATA_URL + "elements.csv").read()
@@ -133,39 +132,25 @@ print(f"{len(Z)} elements, {name[0]} to {name[-1]}")
 
 ### Shells, sub-shells and orbitals
 
-The shell number $n$ does not describe one undivided container. A shell is
-split into **sub-shells**, and a sub-shell is split into **orbitals**. These are
-allowed electron states given by quantum mechanics, not columns invented for
-the periodic table.
+A shell is
+split into **sub-shells**, and a sub-shell is split into **orbitals**. These represent
+electron states allowed by quantum mechanics.
 
 Within shell $n$, the sub-shell quantum number $l$ can take the values from 0
 to $n-1$. The traditional labels `s`, `p`, `d` and `f` mean
-$l=0,1,2,3$. For each value of $l$, there are $2l+1$ possible orbitals. The
-Pauli exclusion principle permits two electrons of opposite spin in each
-orbital. The capacities therefore follow before we draw any table:
-
-| sub-shell | $l$ | orbitals, $2l+1$ | maximum electrons, $2(2l+1)$ |
-|---|---:|---:|---:|
-| s | 0 | 1 | 2 |
-| p | 1 | 3 | 6 |
-| d | 2 | 5 | 10 |
-| f | 3 | 7 | 14 |
+$l=0,1,2,3$. A sub-shell has $2l+1$ orbitals (so s has 1, p has 3, d has
+5, f has 7), and the Pauli exclusion principle permits two electrons of
+opposite spin in each orbital, giving sub-shell capacities of 2, 6, 10
+and 14 electrons.
 
 The first shell contains only a 1s sub-shell. The second contains 2s and 2p;
 the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as
 $3p^5$, the `3` names the shell, `p` names the sub-shell, and the superscript
-means that five electrons occupy it. The letters are traditional names from
-spectroscopy, not abbreviations for kinds of element.
+means that five electrons occupy it (the letters are traditional names from
+spectroscopy).
 
-Sub-shells do not fill in simple shell-number order. For example, 4s fills
-before 3d because 4s is initially the lower-energy state. That is why the
-filling rule in the next code cell sorts the available sub-shells by energy.
-It is also why a shell's maximum capacity $2n^2$ is not the same thing as a
-period's length: period 3 ends after 3p, while the 3d sub-shell fills during
-period 4, after 4s.
-
-Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
-$n+l$, ties broken by $n$). Carefully review how the functions translate an
+Shells fill in a fixed order (the *aufbau* order). 
+Carefully review how the functions translate an
 atomic number into a sub-shell configuration and then totals for each shell.
 We will compare lithium, carbon, neon and sodium: the beginning, middle and
 end of the second shell, followed by the first electron in the third shell.
@@ -255,19 +240,7 @@ plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.show()
 ```
 
-Lithium begins its second shell with one outer electron; carbon has four;
-neon closes that shell with eight; and sodium's eleventh electron begins the
-third shell. Lithium and sodium therefore begin successive shells in the same
-way. When we later turn the element sequence into a table, that recurrence is
-something the layout should make easy to compare.
 
-As atomic number increases, several consecutive elements often add their
-distinguishing electron to the same kind of sub-shell. Chemists call such a run
-an **electron block**: an s-block run fills an s sub-shell, a p-block run fills
-a p sub-shell, and likewise for d and f. A block is therefore a label attached
-to the one-dimensional element sequence before we choose a visual layout. It
-does not yet have a shape or a width. A grid can turn a run into a rectangle;
-a spiral can turn the same run into an arc.
 
 ## 2 · Periodicity
 
