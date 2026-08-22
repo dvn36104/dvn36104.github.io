@@ -585,6 +585,7 @@ record_chart = (
             "record_type:N",
             title=None,
             sort="-x",
+            axis=alt.Axis(labelFontSize=14, labelLimit=280),
         ),
         tooltip=[
             alt.Tooltip("record_type:N", title="Record type"),
