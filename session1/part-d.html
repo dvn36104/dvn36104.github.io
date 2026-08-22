@@ -467,6 +467,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 <li>Periods 6 and 7 also insert an f-filling run: <span class="math inline">\(2 + 14 + 10 + 6 = 32\)</span> elements.</li>
 </ul>
 <p>Those 10- and 14-element insertions are the long, flat parts of the graph. They also create the central design problem faced by every periodic-table layout: later cycles contain many more elements than the early cycles. In periods 6 and 7, after the first two s-filling positions, electrons begin filling an f sub-shell before the d- and p-filling runs resume.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/long-form-periodic-table.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Long-form periodic table, with periods 6 and 7 shown as continuous 32-element rows.</figcaption>
+</figure>
+</div>
 <p>A fully expanded table can show each period as one continuous 32-position row. The familiar compact table instead keeps its main grid 18 columns wide, It removes the f-filling sequence from between the first two columns and the d-block and prints that continuation underneath (Lanthanides and Actinides).</p>
 <p>A continuous spiral cannot remove the 14 inserted positions: its path must pass through them. A simple spiral can squeeze more elements around the same turn, but then equivalent groups no longer line up from one turn to the next. A spiral that preserves that alignment must give the extra path somewhere to go.</p>
 <p>The familiar gap between beryllium (element 4) and boron (element 5) is another consequence of the same unequal period lengths. Periods 2 and 3 contain no d-filling run, so the compact table leaves empty layout space between their s- and p-filling elements.</p>
@@ -737,7 +743,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
