@@ -1071,9 +1071,8 @@ print(f"1 / alpha = {1 / alpha:.1f}")
 
 The fine-structure constant
 is visible in the Triangle of Everything figure as the gap between the two dots: quantum mechanics
-says how small an electron can be, and $\alpha$ says how much bigger
-than that an actual atom turns out to be.
-
+says how small an electron can be, and $\alpha$ says how large
+actual atoms are in comparison.
 The atomic-density
 line sits where it does because atoms have the size $\alpha$ gives them.
  The classic paper
