@@ -24,8 +24,11 @@ RNA message and assembles a protein from it, one amino acid at a time.
 Proteins are chains built from **amino acids**: small molecules with a
 common backbone and one of 20 different side chains.
 
-![The 20 amino acids. Each shares the same backbone (the H₂N and COOH
-ends); the side chain, highlighted in orange, is what differs.](../images/amino-acid-structures.jpg){width=80% fig-align="center"}
+![The amino acids, grouped by side-chain chemistry. Each shares the
+same backbone (the NH₂ and COOH ends); the side chain is what differs.
+The chart shows 21 because it includes selenocysteine, one of the two
+rare extras discussed below. [Image: Dancojocari, Wikimedia Commons,
+CC BY-SA 3.0.](https://commons.wikimedia.org/wiki/File:Amino_Acids.svg)](../images/amino-acids-dancojocari.svg){width=95% fig-align="center"}
 
 The side chains range from tiny (glycine) to bulky and ring-shaped
 (tryptophan), and their chemistry sorts the 20 amino acids into a few
@@ -37,6 +40,10 @@ standard categories:
   asparagine, glutamine
 - **positively charged:** lysine, arginine, histidine
 - **negatively charged:** aspartate, glutamate
+
+(The boundaries vary by textbook: the chart above files glycine, proline
+and cysteine under "special cases" instead. Where to draw category
+lines is itself a design decision.)
 
 The sequence of amino acids determines how the chain folds, and the fold
 determines what the protein does.
@@ -56,27 +63,33 @@ corresponds to an amino acid or to a stop signal: 61 of them spell the
 20 amino acids (so most amino acids have several spellings), three mean
 "stop", and AUG doubles as the "start" that begins every protein.
 
-**Design question.** That is the entire dataset: 64 three-letter
-sequences, each mapped to one of 21 meanings, and every amino acid
-belonging to one of the chemical categories above. Before reading
-further, sketch how you would visualise this mapping. What does position
-encode? Where does colour go? How does a reader look up a codon quickly,
-and how do they see the categories?
-
-The standard answer that biologists converged on is the **codon chart**.
-Find one in the wild (they appear everywhere genetics is taught), study
-how its layout answers the questions above, and then build your own
-version of it, with the amino acids coloured by category.
+A standard representation for this is a **codon chart**, such as this example.
 
 ![The standard genetic code: first base picks the row, second base picks
 the column, third base picks the line within the cell. (OpenStax Biology
 2e, CC BY 4.0)](../images/codon-table.png){width=85%}
 
 The three-letter labels (Phe, Leu, Ser, ...) are the standard shorthand
-for the 20 amino acids. And notice, once you can read the chart, that
-the spellings of one amino acid are not scattered at random: they
-usually differ only in the third base, so a mutation there often changes
-nothing at all. A good design makes that pattern easy to see.
+for the 20 amino acids. You may notice that
+the spellings of one amino acid are not random: they
+usually differ only in the third base. 
+
+**Design question.** 64 three-letter
+sequences are each mapped to one of 21 meanings. Every amino acid
+belongs to one of several chemical categories above. 
+Consider how this mapping could be visualised. What should position
+encode? What should colour encode? How can a reader look up a codon quickly,
+and how do they see the categories? 
+
+Search for, and evaluate, codon visualisations. Then use python to create your own.
+
+Save and submit this image.
+
+
+
+
+
+
 
 ## Sources
 
@@ -84,6 +97,9 @@ nothing at all. A good design makes that pattern easy to see.
   licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
   available at
   [openstax.org](https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code).
+- The amino acid structures chart is by Dancojocari, [Wikimedia
+  Commons](https://commons.wikimedia.org/wiki/File:Amino_Acids.svg),
+  licensed CC BY-SA 3.0.
 - Crick, F. H. C. (1958) *On protein synthesis*, Symposia of the Society
   for Experimental Biology 12, 138-163, the original statement of the
   central dogma.
