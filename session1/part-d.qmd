@@ -108,8 +108,10 @@ nucleus (e.g. carbon is "element six").
 A neutral atom carries Z electrons. These electrons stack into **shells** around
 the nucleus that hold at most $2n^2$ electrons: 2, 8, 18, 32.
 
-Only the outermost shell interacts with other atoms, so atoms with the same outer shell
-arrangement behave alike.
+Chemical behaviour is governed mainly by the **valence electrons**: electrons
+in the outermost shell and, for transition metals, electrons in a nearby
+incompletely filled d sub-shell. Similar valence arrangements tend to produce
+similar chemistry.
 
 The data for this page is one row per element: number, symbol, name,
 and a few properties we will meet as we need them:
@@ -136,17 +138,18 @@ split into **sub-shells**, and a sub-shell is split into **orbitals**. These are
 allowed electron states given by quantum mechanics, not columns invented for
 the periodic table.
 
-Sub-shells are labelled `s`, `p`, `d` and `f`. An s sub-shell contains one
-orbital, p contains three, d contains five and f contains seven. Each orbital
-can hold two electrons, with opposite spins. The capacities therefore follow
-before we draw any table:
+Within shell $n$, the sub-shell quantum number $l$ can take the values from 0
+to $n-1$. The traditional labels `s`, `p`, `d` and `f` mean
+$l=0,1,2,3$. For each value of $l$, there are $2l+1$ possible orbitals. The
+Pauli exclusion principle permits two electrons of opposite spin in each
+orbital. The capacities therefore follow before we draw any table:
 
-| sub-shell | orbital count | calculation | maximum electrons |
+| sub-shell | $l$ | orbitals, $2l+1$ | maximum electrons, $2(2l+1)$ |
 |---|---:|---:|---:|
-| s | 1 | $1 \times 2$ | 2 |
-| p | 3 | $3 \times 2$ | 6 |
-| d | 5 | $5 \times 2$ | 10 |
-| f | 7 | $7 \times 2$ | 14 |
+| s | 0 | 1 | 2 |
+| p | 1 | 3 | 6 |
+| d | 2 | 5 | 10 |
+| f | 3 | 7 | 14 |
 
 The first shell contains only a 1s sub-shell. The second contains 2s and 2p;
 the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as
@@ -157,6 +160,9 @@ spectroscopy, not abbreviations for kinds of element.
 Sub-shells do not fill in simple shell-number order. For example, 4s fills
 before 3d because 4s is initially the lower-energy state. That is why the
 filling rule in the next code cell sorts the available sub-shells by energy.
+It is also why a shell's maximum capacity $2n^2$ is not the same thing as a
+period's length: period 3 ends after 3p, while the 3d sub-shell fills during
+period 4, after 4s.
 
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
 $n+l$, ties broken by $n$). Carefully review how the functions translate an
@@ -251,9 +257,17 @@ plt.show()
 
 Lithium begins its second shell with one outer electron; carbon has four;
 neon closes that shell with eight; and sodium's eleventh electron begins the
-third shell. Lithium and sodium therefore both have one electron in their
-outermost shell, which is why they appear in the same column of the periodic
-table.
+third shell. Lithium and sodium therefore begin successive shells in the same
+way. When we later turn the element sequence into a table, that recurrence is
+something the layout should make easy to compare.
+
+As atomic number increases, several consecutive elements often add their
+distinguishing electron to the same kind of sub-shell. Chemists call such a run
+an **electron block**: an s-block run fills an s sub-shell, a p-block run fills
+a p sub-shell, and likewise for d and f. A block is therefore a label attached
+to the one-dimensional element sequence before we choose a visual layout. It
+does not yet have a shape or a width. A grid can turn a run into a rectangle;
+a spiral can turn the same run into an arc.
 
 ## 2 · Periodicity
 
@@ -473,7 +487,7 @@ ax.set_title("The periodic spiral: one turn per period")
 plt.show()
 ```
 
-What are the strengths and weakenesses of the spiral approach?
+What are the strengths and weaknesses of the spiral approach?
 
 **Strengths:** the sequence is
 unbroken (no gap between Ba and La: the f-block is just part of the
@@ -490,14 +504,31 @@ longer works. Benfey's design (above) fixes this by distorting the
 spiral into bulges, buying back group alignment by spending the clean
 geometry. Every design pays for what it shows.
 
+The unequal period lengths create that trade-off. A turn must accommodate 2,
+8, 18 or 32 elements. Our simple spiral changes the angular spacing from one
+turn to the next, so equal positions in the chemical cycle no longer share an
+angle. A spiral that keeps those positions aligned must send the extra d- and
+f-filling runs somewhere else, bending them into outward bulges, loops or
+peninsulas. In the next section we will see the rectangular table solve the
+same problem by leaving a gap and then detaching two continuation rows.
+
 ## 5 · Build the canonical table
 
-The layout rule of the standard table is: a new row at every shell closure,
-with columns collecting equal outer-shell counts.
+Start again with the elements as a one-dimensional sequence. Cut the sequence
+after every closed shell. Each resulting segment is a **period**, and the
+periods contain 2, 8, 8, 18, 18, 32 and 32 elements. Place each period on a new
+row. The remaining design decision is where each element should sit
+horizontally.
 
-**Rows are periods, columns are groups.**
+The standard table shifts the shorter rows sideways so recurring valence
+configurations and chemical behaviour line up vertically. Each vertical set is
+called a **group**. Thus **rows are periods and columns are groups**. This is
+more precise than saying that every group has the same number of outer-shell
+electrons: that shortcut works well for the left and right sides, but not for
+all transition metals.
 
-Watch what happens with just the first 18 elements:
+The `group` field in our data records those conventional horizontal positions.
+Use it to place the first 18 elements:
 
 ```{pyodide}
 fig, ax = plt.subplots(figsize=(9.5, 2.6))
@@ -512,15 +543,110 @@ ax.set_title("Periods as rows, groups as columns, and a gap appears")
 plt.show()
 ```
 
-There it is: the strange moat between beryllium and boron. The gap
-exists because period 4 will need eighteen columns while periods 2 and 3
-only have eight members; the layout reserves space for columns that do
-not exist *yet*. That emptiness is the design's masterstroke: gaps in a
-grid are **predictions**. Mendeleev's version of this move (holes left
-under aluminium and silicon) told the world exactly what to look for,
-and gallium (1875) and germanium (1886) walked into them with almost
-exactly the predicted properties. Few charts in history have predicted
-anything; this one predicted *matter*.
+The first period has two elements; the second and third have eight each. The
+chart nevertheless reserves 18 horizontal positions. Beryllium is placed in
+position 2 and boron in position 13, leaving positions 3–12 empty. To understand
+why, continue the sequence into period 4.
+
+### Where the 18 groups come from
+
+After argon closes period 3, the next electrons are added in three consecutive
+runs:
+
+| elements | sub-shell being filled | number of available electron places |
+|---|---|---:|
+| potassium–calcium | 4s | 2 |
+| scandium–zinc | 3d | 10 |
+| gallium–krypton | 4p | 6 |
+
+Those run lengths were not chosen to make a table. They come from the quantum
+capacities established earlier: s has one orbital, d has five and p has three,
+with two electrons per orbital. Period 4 therefore contains
+$2 + 10 + 6 = 18$ elements. Draw that sequence as one row:
+
+```{pyodide}
+run_colours = {"s": "#4269d0", "d": "#c98a00", "p": "#30a8b1"}
+
+fig, ax = plt.subplots(figsize=(11, 2.2))
+for position, i in enumerate(range(18, 36), start=1):
+    kind = block[i]
+    ax.add_patch(plt.Rectangle(
+        (position - 0.46, -0.46), 0.92, 0.92,
+        facecolor=run_colours[kind], edgecolor="white", lw=1,
+    ))
+    ax.text(position, 0, symbol[i], ha="center", va="center",
+            color="white", fontsize=10, fontweight="bold")
+
+for start, end, label in [(1, 2, "4s: 2"),
+                          (3, 12, "3d: 10"),
+                          (13, 18, "4p: 6")]:
+    ax.plot([start, end], [0.72, 0.72], color="#333333", lw=1.4)
+    ax.text((start + end) / 2, 0.92, label, ha="center", va="bottom",
+            fontsize=10)
+
+ax.set_xlim(0.3, 18.7); ax.set_ylim(-0.7, 1.25)
+ax.set_aspect("equal"); ax.axis("off")
+ax.set_title("Period 4 has 18 positions: 2 + 10 + 6", pad=14)
+plt.show()
+```
+
+Only now do the **blocks** acquire widths in a rectangular layout. The two
+elements in the s-filling run make a two-column s-block; the ten in the
+d-filling run make a ten-column d-block; and the six in the p-filling run make
+a six-column p-block. Stacking equivalent positions in successive periods gives
+$2 + 10 + 6 = 18$ vertical groups: groups 1–2, 3–12 and 13–18.
+
+This explains the gap in the first chart. Lithium, sodium and potassium all
+begin an s sub-shell and align in group 1. Beryllium, magnesium and calcium
+complete it and align in group 2. Boron, aluminium and gallium begin a p
+sub-shell and align in group 13; neon, argon and krypton close it and align in
+group 18. Periods 2 and 3 contain no d-filling run, so their positions 3–12 are
+empty. The table has 18 groups because period 4 establishes 18 recurring
+positions, not because somebody began with an 18-column box.
+
+The outer-electron sawtooth alone could not show all of this. Across the ten
+transition-metal positions an inner d sub-shell is filling while the outermost
+shell can remain unchanged. Group position depends on the fuller electron
+configuration and the chemical similarities it produces, not just a count of
+outermost-shell electrons.
+
+### Why are there two detached rows?
+
+Periods 6 and 7 introduce one more run. After their first two s-filling
+positions, electrons begin filling an f sub-shell before the d- and p-filling
+runs resume. An f sub-shell has seven orbitals, so this inserts 14 electron
+places:
+
+$$2\;(s) + 14\;(f) + 10\;(d) + 6\;(p) = 32\text{ elements}. $$
+
+A fully expanded table can show each of these periods as a continuous
+32-position row. The familiar compact table keeps the main grid only 18
+columns wide. It cuts the f-filling sequence out between the first two columns
+and the d-block, then prints that continuation underneath. There are two
+detached rows because period 6 contains the lanthanide sequence and period 7
+contains the actinide sequence. They are not additional periods, and they do
+not really belong below the other elements.
+
+The f sub-shell itself has 14 electron places, whereas conventional detached
+rows often display 15 elements: La–Lu and Ac–Lr. The extra boundary element
+shows the connection from group 2 into the f-filling sequence and back towards
+group 3; exactly which boundary elements belong in group 3 remains a matter of
+convention. Our data uses those two 15-element display rows.
+
+This is the same problem that makes some spiral tables bulge. A continuous
+spiral does not remove the 14 inserted positions: it must carry its path through
+them. If it also tries to keep the later groups aligned from turn to turn, that
+extra path has to loop or project outward. The compact grid uses two detached
+continuation rows; the Benfey spiral uses outward peninsulas. Both devices make
+room for the same d- and f-filling runs while preserving comparisons between
+groups.
+
+The gap between beryllium and boron is therefore not ten unknown elements in
+period 2. It is empty layout space reserved so that boron can align with the
+later p-filling elements. Mendeleev used genuinely unknown gaps elsewhere in
+his table as predictions: the holes he left under aluminium and silicon were
+later occupied by gallium (1875) and germanium (1886), with properties close to
+those he had predicted.
 
 ### Your turn: the whole thing {#sec-ex-table}
 

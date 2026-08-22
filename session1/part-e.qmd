@@ -3,13 +3,7 @@ title: "Codons"
 engine: markdown
 ---
 
-Every living thing runs on the same information system. DNA stores the
-instructions, and proteins do the work: catalysing reactions, building
-structures, moving molecules around. The link between the two is a code,
-and the table below is the whole of it.
-
-## The central dogma
-
+Every living thing runs on an information system linking DNA to proteins.
 The flow of genetic information in a cell runs one way:
 
 $$\text{DNA} \;\xrightarrow{\ \text{transcription}\ }\; \text{RNA}
