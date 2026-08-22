@@ -351,13 +351,13 @@ ax.set_ylabel("covalent radius (pm)")
 ax.set_title("Atomic size is periodic: peaks at the alkali metals")
 plt.show()
 ```
+:::
 
 Across each period atoms *shrink* (the growing nuclear charge pulls the
 same shell tighter). At each new shell the size *jumps*: argon is
 96 pm, and one proton later potassium is 196 pm. The sawtooth pattern is the same cycle Lothar Meyer plotted as atomic volume in 1870.
 
 ![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
-:::
 
 ## 3 · Alternative designs
 
