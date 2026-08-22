@@ -1133,11 +1133,12 @@ single-celled filter feeders. They are the closest living relatives of
 all animals.
 
 To isolate the plant kingdom on the other side, we need to define what
-living things are counted as plants. For this purpose, we will consider
-the separation of red algae from green algae to represent the deepest
-root of the plant kingdom. A number of other groups (neither plant,
-animal, nor fungi) are dropped before reaching that split. Follow the
-child that contains `Magnoliopsida` and watch the counts:
+living things are counted as plants. We will use two anchors that
+everyone counts as plants: the green algae (`Chlorophyceae`) and the
+flowering plants (`Magnoliopsida`). The plant kingdom is then the
+smallest clade that contains both. Follow the child that contains
+`Magnoliopsida`, printing the names that drop off, and stop when the
+next split would separate the two anchors:
 
 ```{pyodide}
 def side_with(node, name):
@@ -1145,20 +1146,39 @@ def side_with(node, name):
         if name in {l.name for l in c.leaves()}:
             return c
 
-block = side_b
-for step in range(6):
-    block = side_with(block, "Magnoliopsida")
-    print("step", step + 1, "->", len(block.leaves()), "classes")
+block, step = side_b, 0
+while True:
+    nxt = side_with(block, "Magnoliopsida")
+    if "Chlorophyceae" not in {l.name for l in nxt.leaves()}:
+        break
+    step += 1
+    dropped = sorted({l.name for l in block.leaves()} -
+                     {l.name for l in nxt.leaves()})
+    if len(dropped) <= 8:
+        print(f"step {step}: drops {', '.join(dropped)}")
+    else:
+        print(f"step {step}: drops {len(dropped)} classes, "
+              f"e.g. {', '.join(dropped[:3])}")
+    print(f"        {len(nxt.leaves())} classes remain")
+    block = nxt
 plants = block
 ```
 
-Steps one to four drop the amoebae, the euglenids, a 51-class block
-that holds the diatoms and the ciliates, and the glaucophytes. Step
-five is the split we chose as the root: the eight red algae classes
-separate from the green line. Step six drops one last single-celled
-group, the cryptophytes, which this tree places just inside the green
-side of that split. The 32 classes that remain run from green algae to
-flowering plants.
+The loop stops by itself: one more split would put `Chlorophyceae` and
+`Magnoliopsida` on different sides, so the final 32-class block is the
+smallest clade holding both anchors.
+
+Look the dropped names up as they appear. Steps one and three shed
+amoebae and then a 51-class block that holds the diatoms and the
+ciliates; step two sheds the euglenids and step four the glaucophytes.
+Step five shows the biggest consequence of our definition: eight
+classes leave at once, and the names identify them. `Rhodellophyceae`
+carries the Greek *rhodon*, red, the same root as Rhodophyta, and
+`Bangiophyceae` and `Florideophyceae` are the two large classes of red
+algae. Red algae are not plants under our definition. Neither are the
+cryptophytes dropped at step six, a single-celled group that this tree
+places between the red algae and the green plants. Widen the definition
+to include the red algae, and both would be inside.
 
 Now colour the three kingdoms on one figure.
 
