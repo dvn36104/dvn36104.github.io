@@ -22,6 +22,8 @@ website:
             text: "Part C · The Triangle of Everything"
           - href: session1/part-d.qmd
             text: "Part D · The Periodic Spiral"
+          - href: session1/part-e.qmd
+            text: "Part E · Codons"
 
 format:
   live-html:

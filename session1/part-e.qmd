@@ -1,0 +1,66 @@
+---
+title: "Codons"
+engine: markdown
+---
+
+Every living thing runs on the same information system. DNA stores the
+instructions, and proteins do the work: catalysing reactions, building
+structures, moving molecules around. The link between the two is a code,
+and the table below is the whole of it.
+
+## The central dogma
+
+The flow of genetic information in a cell runs one way:
+
+$$\text{DNA} \;\xrightarrow{\ \text{transcription}\ }\; \text{RNA}
+\;\xrightarrow{\ \text{translation}\ }\; \text{protein}$$
+
+This is the **central dogma of molecular biology** (Crick, 1958). A gene
+is a stretch of DNA written in a four-letter alphabet of bases: A, C, G
+and T. **Transcription** copies that stretch into messenger RNA, the same
+message with the base U standing in for T. **Translation** then reads the
+RNA message and assembles a protein from it, one amino acid at a time.
+
+## Amino acids
+
+Proteins are chains built from **amino acids**: small molecules with a
+common backbone and one of 20 different side chains. The side chains
+range from tiny (glycine) to bulky and ring-shaped (tryptophan), from
+water-repelling to charged. The sequence of amino acids determines how
+the chain folds, and the fold determines what the protein does. A protein
+is typically hundreds of amino acids long, so the 20-letter alphabet
+supports an astronomical space of possible sequences.
+
+The three-letter abbreviations in the table below (Phe, Leu, Ser, ...)
+are the standard shorthand for the 20 amino acids.
+
+## The genetic code
+
+Translation reads RNA three bases at a time. Each triplet is a **codon**,
+and each codon means one amino acid, or "stop". With four bases there are
+$4^3 = 64$ possible codons for only 20 amino acids plus a stop signal, so
+the code is **redundant**: most amino acids are spelled by more than one
+codon. Leucine, serine and arginine have six spellings each; tryptophan
+and methionine have exactly one. AUG doubles as the **start** signal that
+begins every protein, and UAA, UAG and UGA are the three **stop** codons
+that end one.
+
+![The standard genetic code: 64 codons mapped to 20 amino acids, one
+start and three stops. (OpenStax Biology 2e, CC BY 4.0)](../images/codon-table.png){width=85%}
+
+Read it like a coordinate lookup: first base picks the row, second base
+picks the column, third base picks the line within the cell. The
+redundancy is not scattered at random. It is concentrated in the third
+position, where a mutation often changes nothing at all. Notice that the
+table's layout choice makes that pattern visible: whole cells of four
+codons collapsing to a single amino acid.
+
+## Sources
+
+- The codon chart is from OpenStax, *Biology 2e* (Rice University),
+  licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
+  available at
+  [openstax.org](https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code).
+- Crick, F. H. C. (1958) *On protein synthesis*, Symposia of the Society
+  for Experimental Biology 12, 138-163, the original statement of the
+  central dogma.
