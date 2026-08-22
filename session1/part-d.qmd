@@ -15,7 +15,7 @@ sorted by atomic number, 1 to 118.
 
 Turning this list into a "table" involves a
 *layout choice*.
-Although one version has become canonical over the past 150 years, there are numerous alternative possible designs.
+Although one version has become canonical over the past 150 years, there are many alternative possible designs. What makes this version special?
 
 <!--
 

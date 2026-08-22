@@ -928,7 +928,7 @@ print(f"Planck over crossing:  m_p / m_x = {m_p / m_x:.4f}")
 print(f"and the square root of 2 is      {np.sqrt(2):.4f}")
 ```
 
-::: {.callout-note title="The √2 factor"}
+::: {.callout-important title="The √2 factor"}
 The Planck mass and length are defined by dimensional analysis with all
 numerical factors dropped: $m_P = \sqrt{\hbar c/G}$,
 $\ell_P = \sqrt{\hbar G/c^3}$. But the walls actually cross where
