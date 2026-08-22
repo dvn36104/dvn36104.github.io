@@ -341,12 +341,12 @@ have IUPAC-approved collective names that chemists commonly use:
 ::: {.compact-table}
 | group | IUPAC-approved collective name | examples |
 |---:|---|---|
-| 1 | alkali metals | Li, Na, K |
-| 2 | alkaline earth metals | Be, Mg, Ca |
-| 15 | pnictogens | N, P, As |
-| 16 | chalcogens | O, S, Se |
-| 17 | halogens | F, Cl, Br |
-| 18 | noble gases | He, Ne, Ar |
+| 1 | alkali metals | lithium, sodium, potassium |
+| 2 | alkaline earth metals | beryllium, magnesium, calcium |
+| 15 | pnictogens | nitrogen, phosphorus, arsenic |
+| 16 | chalcogens | oxygen, sulfur, selenium |
+| 17 | halogens | fluorine, chlorine, bromine |
+| 18 | noble gases | helium, neon, argon |
 :::
 
 The other columns do not have IUPAC-approved collective names. They can be
@@ -889,4 +889,3 @@ about what matters, and opinions on the what makes one version the "best" versio
   table by Cbuckley (CC BY 3.0); and James Franklin Hyde's curled-ribbon
   table, reproduced by Rezmason (CC BY-SA 4.0). Jeff Moran's hexagonal table
   is credited to Moran and sourced from *Laboratory News*.
-
