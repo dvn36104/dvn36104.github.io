@@ -317,7 +317,7 @@ same shell tighter). At each new shell the size *jumps*: argon is
 
 ## 3 · Alternative designs
 
-If the data is a cycle, should its picture be a *grid*, or should it spiral?
+If the data is a cycle, should its picture be a *grid*, or should it spiral round and round?
 Chemists have proposed various layouts. Compare these four alternative
 designs:
 
@@ -350,7 +350,9 @@ What are their advantages and disadvantages? Which do you prefer?
 ## 4 · Build the spiral
 
 The spiral's claim is that the element list is a **cycle with no
-breaks**, so draw it as one. Give every period one full turn: an
+breaks**.
+
+Give every period one full turn: an
 element's angle is its *fraction of the way through its period*, and its
 radius grows steadily outward. Colour by **block** (which kind of
 sub-shell is filling: the four "districts" of the table):
@@ -391,12 +393,16 @@ for z in (2, 10, 18, 36, 54, 86, 118):
 print("✓ every noble gas sits at the end of its turn: shell closures aligned")
 ```
 
-Study what your spiral wins and loses. **Wins:** the sequence is
+What are the strengths and weakenesses of the spiral approach?
+
+**Stregnths:** the sequence is
 unbroken (no gap between Ba and La: the f-block is just part of the
 winding); the blocks appear as coloured arcs (the lone gold dot opening
 each purple arc is real chemistry showing through: lanthanum and
 actinium actually take a d electron before the f shell starts filling); every shell closure lands
-at the same angle, so the noble gases form a perfect ray. **Loses:**
+at the same angle, so the noble gases form a perfect ray.
+
+**Weaknesses:**
 almost every *other* group is misaligned: lithium and potassium sit at
 different angles because their periods have different lengths, so
 "reading down a group", the single most useful act chemists perform, no

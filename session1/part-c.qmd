@@ -245,7 +245,7 @@ wall_line_chart = alt.Chart(wall_lines).mark_line(
 ).encode(x=cosmos_x(), y=cosmos_y(), detail="wall:N")
 ```
 
-## 1 · One pair of axes for everything
+## 1 · Everything in the Universe
 
 What would a graph of everything compare?
 Mass and radius are the two properties **every physical
@@ -335,7 +335,7 @@ print(f"70 kg divided by that volume: {rho_human:.2f} g/cm³")
 
 
 
-## 2 · All 29 objects
+## 2 · 29 objects
 
 Now all 29 objects, coloured by kind. Six groups: particles (grey), life,
 worlds, stars, black holes (black, naturally), and cosmic structures.
