@@ -24,13 +24,8 @@ RNA message and assembles a protein from it, one amino acid at a time.
 Proteins are chains built from **amino acids**: small molecules with a
 common backbone and one of 20 different side chains.
 
-::: {.callout-important title="Why you may see 22 amino acids"}
-You may also see
-the count 22: two rare extras, selenocysteine and pyrrolysine, are
-installed by recoding a stop codon rather than by codons of their own,
-so they sit outside the standard table below. Pyrrolysine occurs only in
-some archaea and bacteria.
-:::
+![The 20 amino acids. Each shares the same backbone (the H₂N and COOH
+ends); the side chain, highlighted in orange, is what differs.](../images/amino-acid-structures.jpg){width=80% fig-align="center"}
 
 The side chains range from tiny (glycine) to bulky and ring-shaped
 (tryptophan), and their chemistry sorts the 20 amino acids into a few
@@ -45,6 +40,14 @@ standard categories:
 
 The sequence of amino acids determines how the chain folds, and the fold
 determines what the protein does.
+
+::: {.callout-important title="Why you may see 22 amino acids"}
+You may also see
+the count 22: two rare extras, selenocysteine and pyrrolysine, are
+installed by recoding a stop codon rather than by codons of their own,
+so they sit outside the standard table below. Pyrrolysine occurs only in
+some archaea and bacteria.
+:::
 
 Now the code itself. RNA has four letters: A, C, G and U. Translation
 reads them three at a time, and each three-letter sequence is a
