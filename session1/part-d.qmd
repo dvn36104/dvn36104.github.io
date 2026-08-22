@@ -889,9 +889,4 @@ about what matters, and opinions on the what makes one version the "best" versio
   table by Cbuckley (CC BY 3.0); and James Franklin Hyde's curled-ribbon
   table, reproduced by Rezmason (CC BY-SA 4.0). Jeff Moran's hexagonal table
   is credited to Moran and sourced from *Laboratory News*.
-- Category colours follow the long-standing Wikipedia convention, used
-  here deliberately: this page is about *the* canonical design, and its
-  colours are part of the canon. Note they are not a colour-blind-safe
-  palette; the table survives that because position and text labels, not
-  colour, carry the structure (worth noticing as a design lesson in
-  itself).
+
