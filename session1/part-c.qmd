@@ -738,7 +738,7 @@ and Higgs boson are the densest "objects" plotted. The red giant and white dwarf
 of density.
 :::
 
-## 4 · Two walls
+## 4 · Two boundaries
 
 
 
@@ -840,17 +840,19 @@ wall_line_chart = alt.Chart(wall_lines).mark_line(
 )
 
 gravity_label = alt.Chart(pd.DataFrame({
-    "radius_cm": [3e-14], "mass_g": [1e45],
+    "radius_cm": [1e-20], "mass_g": [1e40],
     "label": ["forbidden by gravity"],
 })).mark_text(
-    angle=322, color="#8a3324", fontSize=14
+    align="center", baseline="middle",
+    color="#8a3324", fontSize=14, fontWeight="bold"
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 quantum_label = alt.Chart(pd.DataFrame({
-    "radius_cm": [3e-5], "mass_g": [1e-36],
+    "radius_cm": [1e-20], "mass_g": [1e-32],
     "label": ["quantum uncertainty"],
 })).mark_text(
-    angle=38, color="#1d3f8f", fontSize=14
+    align="center", baseline="middle",
+    color="#1d3f8f", fontSize=14, fontWeight="bold"
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 (
@@ -863,7 +865,7 @@ quantum_label = alt.Chart(pd.DataFrame({
 ).properties(
     width="container",
     height=700,
-    title="29 objects",
+    title="29 objects and two boundaries",
 ).configure_axis(
     gridColor="#dddddd",
     gridOpacity=0.7,
