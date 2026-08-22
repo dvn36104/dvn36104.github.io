@@ -129,39 +129,34 @@ radius   = [float(r[7]) if r[7] else None for r in rows]
 print(f"{len(Z)} elements, {name[0]} to {name[-1]}")
 ```
 
-```{pyodide}
-assert len(Z) == 118 and Z == list(range(1, 119))
-print("✓ 118 elements: the data is literally just a sorted list")
-```
+### Shells, sub-shells and orbitals
 
-### Shells, sub-shells and blocks
+The shell number $n$ does not describe one undivided container. A shell is
+split into **sub-shells**, and a sub-shell is split into **orbitals**. These are
+allowed electron states given by quantum mechanics, not columns invented for
+the periodic table.
 
-A shell is not one undivided container. Each shell is divided into
-**sub-shells**, and each sub-shell contains one or more **orbitals**. An orbital
-can hold at most two electrons. The four sub-shell labels used here are `s`,
-`p`, `d` and `f`:
+Sub-shells are labelled `s`, `p`, `d` and `f`. An s sub-shell contains one
+orbital, p contains three, d contains five and f contains seven. Each orbital
+can hold two electrons, with opposite spins. The capacities therefore follow
+before we draw any table:
 
-| sub-shell | number of orbitals | maximum electrons | corresponding table block |
-|---|---:|---:|---|
-| s | 1 | 2 | the two left-hand columns |
-| p | 3 | 6 | the six right-hand columns |
-| d | 5 | 10 | the ten middle columns |
-| f | 7 | 14 | the two usually detached rows |
+| sub-shell | orbital count | calculation | maximum electrons |
+|---|---:|---:|---:|
+| s | 1 | $1 \times 2$ | 2 |
+| p | 3 | $3 \times 2$ | 6 |
+| d | 5 | $5 \times 2$ | 10 |
+| f | 7 | $7 \times 2$ | 14 |
 
-The letter is preceded by the shell number and followed by the number of
-electrons occupying that sub-shell. Thus $3p^5$ means five electrons in the
-p sub-shell of shell 3. The letters are traditional labels inherited from
-spectroscopy; they are names, not abbreviations for four kinds of element.
+The first shell contains only a 1s sub-shell. The second contains 2s and 2p;
+the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as
+$3p^5$, the `3` names the shell, `p` names the sub-shell, and the superscript
+means that five electrons occupy it. The letters are traditional names from
+spectroscopy, not abbreviations for kinds of element.
 
-A **block** is a region of the periodic table containing elements for which
-that type of sub-shell is being filled. Sodium's distinguishing electron goes
-into $3s$, so sodium is in the s-block. For chlorine it goes into $3p$, for
-iron into $3d$, and for neodymium into $4f$, placing them in the p-, d- and
-f-blocks respectively. As atomic number increases, successive elements filling
-the same kind of sub-shell form a contiguous run, which becomes a rectangular
-block in the standard layout. Helium is the conspicuous layout exception: its
-configuration is $1s^2$, but it is placed over the noble gases because its
-closed shell gives it their chemical behaviour.
+Sub-shells do not fill in simple shell-number order. For example, 4s fills
+before 3d because 4s is initially the lower-energy state. That is why the
+filling rule in the next code cell sorts the available sub-shells by energy.
 
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
 $n+l$, ties broken by $n$). Carefully review how the functions translate an
@@ -294,45 +289,9 @@ flat stretches at 2 between the teeth are the transition metals and the
 lanthanide and actinide series, where electrons fill inner subshells
 while the outermost shell holds steady.
 
-The sawtooth is the periodic law. Every **row** of any periodic table is
-a "tooth"; every **column** collects atoms caught at the same point of the
-cycle: the **groups**.
-
-Group 1 (one outer electron) are the reactive
-alkali metals; group 18 (closed shell) are the noble gases that react
-with almost nothing.
-
-### Why are there 18 groups?
-
-The number 18 comes from the widths of the three blocks that form the main
-table. A sub-shell contains a fixed number of orbitals, and each orbital can
-hold two electrons:
-
-| block | orbitals in the sub-shell | electron capacity | columns in the main table |
-|---|---:|---:|---:|
-| s | 1 | 2 | groups 1–2 |
-| d | 5 | 10 | groups 3–12 |
-| p | 3 | 6 | groups 13–18 |
-
-So the full-width part of the table has $2 + 10 + 6 = 18$ column positions.
-Period 4 makes this visible: potassium and calcium fill the two positions of
-the 4s sub-shell; scandium through zinc fill the ten positions of 3d; and
-gallium through krypton fill the six positions of 4p. Elements occupying the
-same position in successive cycles align vertically, producing the 18 groups.
-
-This is also why the outer-electron sawtooth above is not, by itself, a full
-explanation of every group number. Across the ten transition-metal groups, an
-inner d sub-shell is filling while the outermost shell can remain unchanged.
-Group position therefore depends on the electron configuration, not simply on
-counting the electrons in the outermost shell.
-
-What about the f-block? An f sub-shell has seven orbitals and therefore 14
-positions. In periods 6 and 7 those positions occur between the s-block and
-the d-block, making each complete period $2 + 14 + 10 + 6 = 32$ elements long.
-The conventional table moves those 14 positions into the two detached rows so
-that the main grid remains 18 columns wide. They are not numbered as 14 extra
-IUPAC groups; a 32-column table can put them back into the sequence without
-changing the group numbers 1–18.
+The sawtooth is the periodic law. The sequence closes a shell and begins again.
+Later we will cut that sequence at each closure, stack the resulting periods as
+rows, and see how recurring electron arrangements become vertical groups.
 
 
 ### Size of atoms {#sec-ex-radius}
@@ -512,13 +471,6 @@ ax.legend(handles=[Line2D([], [], marker="o", ls="", color=c, label=f"{b}-block"
           loc="upper left", bbox_to_anchor=(-0.1, 1.05), frameon=False, fontsize=9)
 ax.set_title("The periodic spiral: one turn per period")
 plt.show()
-```
-
-```{pyodide}
-for z in (2, 10, 18, 36, 54, 86, 118):
-    th, _ = spiral_coords(z - 1)
-    assert abs(th - 2 * np.pi) < 1e-9
-print("✓ every noble gas sits at the end of its turn: shell closures aligned")
 ```
 
 What are the strengths and weakenesses of the spiral approach?
