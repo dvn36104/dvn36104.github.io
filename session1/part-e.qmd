@@ -19,7 +19,7 @@ message with the base U standing in for T.
 **Translation** then reads the
 RNA message and assembles a protein from it, one amino acid at a time.
 
-## Amino acids
+## Amino acids and the genetic code
 
 Proteins are chains built from **amino acids**: small molecules with a
 common backbone and one of 20 different side chains.
@@ -32,37 +32,48 @@ so they sit outside the standard table below. Pyrrolysine occurs only in
 some archaea and bacteria.
 :::
 
-The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), from
-water-repelling to charged.
+The side chains range from tiny (glycine) to bulky and ring-shaped
+(tryptophan), and their chemistry sorts the 20 amino acids into a few
+standard categories:
 
-Sequences of amino acids determines how
-the chain folds, and the fold determines what the protein does. A protein
-is typically hundreds of amino acids long, so the 20-letter alphabet
-supports an astronomical space of possible sequences.
+- **nonpolar (hydrophobic):** glycine, alanine, valine, leucine,
+  isoleucine, proline, methionine, phenylalanine, tryptophan
+- **polar, uncharged:** serine, threonine, cysteine, tyrosine,
+  asparagine, glutamine
+- **positively charged:** lysine, arginine, histidine
+- **negatively charged:** aspartate, glutamate
 
-The three-letter abbreviations in the table below (Phe, Leu, Ser, ...)
-are the standard shorthand for the 20 amino acids.
+The sequence of amino acids determines how the chain folds, and the fold
+determines what the protein does.
 
-## The genetic code
+Now the code itself. RNA has four letters: A, C, G and U. Translation
+reads them three at a time, and each three-letter sequence is a
+**codon**. There are $4^3 = 64$ possible codons, and each one
+corresponds to an amino acid or to a stop signal: 61 of them spell the
+20 amino acids (so most amino acids have several spellings), three mean
+"stop", and AUG doubles as the "start" that begins every protein.
 
-Translation reads RNA three bases at a time. Each triplet is a **codon**,
-and each codon means one amino acid, or "stop". With four bases there are
-$4^3 = 64$ possible codons for only 20 amino acids plus a stop signal, so
-the code is **redundant**: most amino acids are spelled by more than one
-codon. Leucine, serine and arginine have six spellings each; tryptophan
-and methionine have exactly one. AUG doubles as the **start** signal that
-begins every protein, and UAA, UAG and UGA are the three **stop** codons
-that end one.
+**Design question.** That is the entire dataset: 64 three-letter
+sequences, each mapped to one of 21 meanings, and every amino acid
+belonging to one of the chemical categories above. Before reading
+further, sketch how you would visualise this mapping. What does position
+encode? Where does colour go? How does a reader look up a codon quickly,
+and how do they see the categories?
 
-![The standard genetic code: 64 codons mapped to 20 amino acids, one
-start and three stops. (OpenStax Biology 2e, CC BY 4.0)](../images/codon-table.png){width=85%}
+The standard answer that biologists converged on is the **codon chart**.
+Find one in the wild (they appear everywhere genetics is taught), study
+how its layout answers the questions above, and then build your own
+version of it, with the amino acids coloured by category.
 
-Read it like a coordinate lookup: first base picks the row, second base
-picks the column, third base picks the line within the cell. The
-redundancy is not scattered at random. It is concentrated in the third
-position, where a mutation often changes nothing at all. Notice that the
-table's layout choice makes that pattern visible: whole cells of four
-codons collapsing to a single amino acid.
+![The standard genetic code: first base picks the row, second base picks
+the column, third base picks the line within the cell. (OpenStax Biology
+2e, CC BY 4.0)](../images/codon-table.png){width=85%}
+
+The three-letter labels (Phe, Leu, Ser, ...) are the standard shorthand
+for the 20 amino acids. And notice, once you can read the chart, that
+the spellings of one amino acid are not scattered at random: they
+usually differ only in the third base, so a mutation there often changes
+nothing at all. A good design makes that pattern easy to see.
 
 ## Sources
 

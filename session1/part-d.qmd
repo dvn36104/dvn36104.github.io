@@ -584,7 +584,7 @@ figure-eight; the f-block is the detached double loop at the top.
 What are their advantages and disadvantages? Which version do you prefer, and why?
 
 ::: {.callout-tip title="Find another periodic ‘table’"}
-Look beyond these six examples and find at least one other periodic-table
+Look beyond these six examples and find at least one other periodic table
 design. Consider what the
 layout makes easier to see and what it makes harder to see. Be precise about
 what position, shape, colour and any third spatial dimension encode.
@@ -729,7 +729,9 @@ plt.show()
 Lithium, sodium and potassium now lie on one ray, as do the other numbered
 groups. The groups are aligned, but at the cost of the shorter periods leaving large empty
 angular gaps, while the lanthanides and actinides are compressed into a narrow
-wedge (this is why other spiral designs introduce bulges for these elements).
+wedge. 
+
+This is why other spiral designs introduce bulges (or "peninsulas") for these elements. Can you think of other ways that this problem could be addressed?
 
 ## 5 · Build the canonical table
 
@@ -772,7 +774,7 @@ Positions 3–12 between them stay empty; this gap is the space reserved for the
 
 Build the full canonical table, all 118 elements. You have `Z`,
 `symbol`, `period`, `group` and `category` (plus `cat_colours`, the
-conventional colour for each category). Two things need decisions:
+conventional colour for each category). The table will include:
 
 1. **Main grid:** elements with a `group` go at column `group`, row
    `period`, exactly like the 18-element version.
@@ -849,6 +851,8 @@ hydrogen alone at top-left, helium at top-right above the noble-gas
 column, and the colour regions forming solid blocks.
 
 {{< include _instructor-d.qmd >}}
+
+You do not need to submit your period table; instead submit the alternative design (different from the six included here) that you found for Section 3.
 
 ## 6 · Why this became the standard table
 
