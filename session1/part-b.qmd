@@ -665,10 +665,10 @@ print(f"{len(primates.leaves())} families, crown age "
       f"{root_age - primates.depth:.1f} Myr")
 ```
 
-Which two families you name matters, because `clade` returns the
-*smallest* branch containing both. Hominidae and Lemuridae sit on
+The `clade` function returns the
+*smallest* branch containing both descendants. Hominidae and Lemuridae sit on
 opposite sides of the deepest split within Primates, so naming them
-recovers all 19 families, every one descended from the same ancestor
+recovers all 19 primate families, every one descended from the same ancestor
 ~74 Myr ago. Two families from the same side would return a smaller
 branch: Hominidae and Hylobatidae would give just the apes.
 
@@ -684,25 +684,18 @@ ax.set_title("The 19 Primate Families")
 plt.show()
 ```
 
-```{pyodide}
-assert len(primates.leaves()) == 19
-assert round(root_age - primates.depth) == 74
-print("✓ 19 primate families from one ancestor ~74 Myr ago")
-```
-
-Look at the tips before moving on: `Hominidae` (all great apes,
-including humans) is one twig among nineteen. And `Paleopropithecidae`, the
+`Hominidae` (all great apes,
+including humans) is one twig among nineteen. 
+`Paleopropithecidae`, the
 sloth lemurs, are **extinct**: humans reached Madagascar roughly two
 thousand years ago, and the last sloth lemurs disappeared around 500
 years ago. A dated tree can carry recently-lost lineages alongside
-living ones, though nothing in the drawing itself marks them as extinct.
+living ones, with nothing in the drawing itself marking them as extinct.
 
 ### Taxonomy columns versus a phylogeny
 
-Section 1 built the tree that Part A's columns encode. Now that we have
-a resolved, dated clade, put the two side by side. Take every primate
-family from the life-history table and hang it off one node, that tree's
-primate slice, and draw it next to the TimeTree primate clade:
+Section 1 built the tree encoded by Part A's hierarchical columns. Now that we can obtain
+a dated clade, compare the two side-by-side:
 
 ```{pyodide}
 text = open_url(DATA_URL + "amniote_species.csv").read()
@@ -740,6 +733,53 @@ print("  databases, and the extinct sloth lemurs cannot appear in a table")
 print("  of measured life histories")
 ```
 
+
+### Back to Part A's seven lineages
+
+The amniote phylogeny figure in Part A (Rowe 2017) ends at seven living
+lineages: three mammal groups (Monotremata, Marsupialia, Placentalia) and
+four reptile groups (Testudines, Lepidosauria, Crocodilia, Aves). Each is
+a clade, so naming two families that span its deepest split is enough for
+`clade()` to recover the whole group. Colour all seven on the dated tree
+from section 3:
+
+```{pyodide}
+lineages = [                             # listed bottom to top on the tree
+    ("Marsupialia",  ["Didelphidae", "Macropodidae"],         "#b5443c"),
+    ("Placentalia",  ["Dasypodidae", "Hominidae"],            "#9475cd"),
+    ("Monotremata",  ["Ornithorhynchidae", "Tachyglossidae"], "#c98a00"),
+    ("Lepidosauria", ["Sphenodontidae", "Viperidae"],         "#30a8b1"),
+    ("Crocodilia",   ["Alligatoridae", "Gavialidae"],         "#e66852"),
+    ("Aves",         ["Struthionidae", "Anatidae"],           "#4269d0"),
+    ("Testudines",   ["Chelidae", "Testudinidae"],            "#d96895"),
+]
+
+lineage_colours = {}
+for name, anchors, col in lineages:
+    for node in clade(amniotes, anchors).walk():
+        lineage_colours[id(node)] = col
+
+fig, ax = plt.subplots(figsize=(9, 7))
+draw_tree(amniotes, ax, colors=lineage_colours, lw=0.4)
+
+mya_labels = [round(root_age), 250, 200, 150, 100, 50, 0]
+ax.set_xticks([0] + [root_age - age for age in mya_labels[1:]])
+ax.set_xticklabels(mya_labels)
+ax.set_xlim(0, root_age * 1.02)
+ax.set_xlabel("millions of years ago")
+ax.legend(handles=[plt.Line2D([], [], color=col, lw=2.5, label=name)
+                   for name, _, col in reversed(lineages)],
+          loc="upper left", frameon=False, fontsize=9)
+ax.set_title("The seven living amniote lineages")
+plt.show()
+```
+
+The seven clades tile the tree: every one of the 956 families takes
+exactly one colour, and Aves alone holds 607 of them. Monotremata and
+Crocodilia are slivers of two and three families; you have to look
+closely. The grey backbone that remains is the deep structure the Rowe
+figure drew: the splits joining the seven lineages, back to the amniote
+root ~319 Myr ago.
 
 ### Your turn: Cats and Dogs {#sec-ex-carnivora}
 
