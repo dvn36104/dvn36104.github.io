@@ -134,6 +134,35 @@ assert len(Z) == 118 and Z == list(range(1, 119))
 print("✓ 118 elements: the data is literally just a sorted list")
 ```
 
+### Shells, sub-shells and blocks
+
+A shell is not one undivided container. Each shell is divided into
+**sub-shells**, and each sub-shell contains one or more **orbitals**. An orbital
+can hold at most two electrons. The four sub-shell labels used here are `s`,
+`p`, `d` and `f`:
+
+| sub-shell | number of orbitals | maximum electrons | corresponding table block |
+|---|---:|---:|---|
+| s | 1 | 2 | the two left-hand columns |
+| p | 3 | 6 | the six right-hand columns |
+| d | 5 | 10 | the ten middle columns |
+| f | 7 | 14 | the two usually detached rows |
+
+The letter is preceded by the shell number and followed by the number of
+electrons occupying that sub-shell. Thus $3p^5$ means five electrons in the
+p sub-shell of shell 3. The letters are traditional labels inherited from
+spectroscopy; they are names, not abbreviations for four kinds of element.
+
+A **block** is a region of the periodic table containing elements for which
+that type of sub-shell is being filled. Sodium's distinguishing electron goes
+into $3s$, so sodium is in the s-block. For chlorine it goes into $3p$, for
+iron into $3d$, and for neodymium into $4f$, placing them in the p-, d- and
+f-blocks respectively. As atomic number increases, successive elements filling
+the same kind of sub-shell form a contiguous run, which becomes a rectangular
+block in the standard layout. Helium is the conspicuous layout exception: its
+configuration is $1s^2$, but it is placed over the noble gases because its
+closed shell gives it their chemical behaviour.
+
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
 $n+l$, ties broken by $n$). Carefully review how the functions translate an
 atomic number into a sub-shell configuration and then totals for each shell.
@@ -275,17 +304,11 @@ with almost nothing.
 
 ### Why are there 18 groups?
 
-The number 18 comes from the widths of the three blocks that form the main
-table. A sub-shell contains a fixed number of orbitals, and each orbital can
-hold two electrons:
-
-| block | orbitals in the sub-shell | electron capacity | columns in the main table |
-|---|---:|---:|---:|
-| s | 1 | 2 | groups 1–2 |
-| d | 5 | 10 | groups 3–12 |
-| p | 3 | 6 | groups 13–18 |
-
-So the full-width part of the table has $2 + 10 + 6 = 18$ column positions.
+As a sub-shell fills, each possible electron count occupies one successive
+position in its block. The s-block is therefore two columns wide, the d-block
+is ten columns wide and the p-block is six columns wide. These are the three
+blocks included across the full-width main grid, so it has
+$2 + 10 + 6 = 18$ column positions: groups 1–2, 3–12 and 13–18 respectively.
 Period 4 makes this visible: potassium and calcium fill the two positions of
 the 4s sub-shell; scandium through zinc fill the ten positions of 3d; and
 gallium through krypton fill the six positions of 4p. Elements occupying the
@@ -441,8 +464,7 @@ What are their advantages and disadvantages? Which version do you prefer, and wh
 
 ::: {.callout-tip title="Find another periodic table"}
 Look beyond these six examples and find at least one other periodic-table
-design. Your search must include **three-dimensional tables** as well as flat
-ones. Record the designer and date, link to the source, and explain what the
+design. Consider what the
 layout makes easier to see and what it makes harder to see. Be precise about
 what position, shape, colour and any third spatial dimension encode.
 :::
@@ -495,7 +517,7 @@ print("✓ every noble gas sits at the end of its turn: shell closures aligned")
 
 What are the strengths and weakenesses of the spiral approach?
 
-**Stregnths:** the sequence is
+**Strengths:** the sequence is
 unbroken (no gap between Ba and La: the f-block is just part of the
 winding); the blocks appear as coloured arcs (the lone gold dot opening
 each purple arc is real chemistry showing through: lanthanum and
