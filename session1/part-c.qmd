@@ -218,7 +218,7 @@ density_label_data = pd.DataFrame({
 atomic_density_label = alt.Chart(
     density_label_data.query("label == 'atomic density'")
 ).mark_text(
-    align="right", dx=-8, dy=15,
+    align="left", dx=8, dy=15,
     color=DENSITY_COLOURS["atomic density"], fontSize=13,
     fontWeight="bold",
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
@@ -609,7 +609,7 @@ density_label_data = pd.DataFrame({
 atomic_density_label = alt.Chart(
     density_label_data.query("label == 'atomic density'")
 ).mark_text(
-    align="right", dx=-8, dy=15,
+    align="left", dx=8, dy=15,
     color=DENSITY_COLOURS["atomic density"], fontSize=13,
     fontWeight="bold",
 ).encode(
@@ -665,7 +665,7 @@ print(f"fluffiest object: {names[int(np.argmin(rho_all))]}")
 The least dense thing in the Universe is (obviously?) **the
 Universe itself**, about $10^{-29}\ \text{g/cm}^3$, six protons per cubic metre.
 
-### Densities {#sec-ex-density}
+#### Densities {#sec-ex-density}
 
 You have `rho_all` for all 29 objects. Rank everything by density and
 print a table from densest to least dense, with the group and the density of
