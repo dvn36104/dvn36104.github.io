@@ -206,6 +206,20 @@ window.Quarto = {
 <section id="amino-acids-and-the-genetic-code" class="level2">
 <h2 class="anchored" data-anchor-id="amino-acids-and-the-genetic-code">Amino acids and the genetic code</h2>
 <p>Proteins are chains built from <strong>amino acids</strong>: small molecules with a common backbone and one of 20 different side chains.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/amino-acid-structures.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>The 20 amino acids. Each shares the same backbone (the H₂N and COOH ends); the side chain, highlighted in orange, is what differs.</figcaption>
+</figure>
+</div>
+<p>The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), and their chemistry sorts the 20 amino acids into a few standard categories:</p>
+<ul>
+<li><strong>nonpolar (hydrophobic):</strong> glycine, alanine, valine, leucine, isoleucine, proline, methionine, phenylalanine, tryptophan</li>
+<li><strong>polar, uncharged:</strong> serine, threonine, cysteine, tyrosine, asparagine, glutamine</li>
+<li><strong>positively charged:</strong> lysine, arginine, histidine</li>
+<li><strong>negatively charged:</strong> aspartate, glutamate</li>
+</ul>
+<p>The sequence of amino acids determines how the chain folds, and the fold determines what the protein does.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Why you may see 22 amino acids">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -219,14 +233,6 @@ window.Quarto = {
 <p>You may also see the count 22: two rare extras, selenocysteine and pyrrolysine, are installed by recoding a stop codon rather than by codons of their own, so they sit outside the standard table below. Pyrrolysine occurs only in some archaea and bacteria.</p>
 </div>
 </div>
-<p>The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), and their chemistry sorts the 20 amino acids into a few standard categories:</p>
-<ul>
-<li><strong>nonpolar (hydrophobic):</strong> glycine, alanine, valine, leucine, isoleucine, proline, methionine, phenylalanine, tryptophan</li>
-<li><strong>polar, uncharged:</strong> serine, threonine, cysteine, tyrosine, asparagine, glutamine</li>
-<li><strong>positively charged:</strong> lysine, arginine, histidine</li>
-<li><strong>negatively charged:</strong> aspartate, glutamate</li>
-</ul>
-<p>The sequence of amino acids determines how the chain folds, and the fold determines what the protein does.</p>
 <p>Now the code itself. RNA has four letters: A, C, G and U. Translation reads them three at a time, and each three-letter sequence is a <strong>codon</strong>. There are <span class="math inline">\(4^3 = 64\)</span> possible codons, and each one corresponds to an amino acid or to a stop signal: 61 of them spell the 20 amino acids (so most amino acids have several spellings), three mean “stop”, and AUG doubles as the “start” that begins every protein.</p>
 <p><strong>Design question.</strong> That is the entire dataset: 64 three-letter sequences, each mapped to one of 21 meanings, and every amino acid belonging to one of the chemical categories above. Before reading further, sketch how you would visualise this mapping. What does position encode? Where does colour go? How does a reader look up a codon quickly, and how do they see the categories?</p>
 <p>The standard answer that biologists converged on is the <strong>codon chart</strong>. Find one in the wild (they appear everywhere genetics is taught), study how its layout answers the questions above, and then build your own version of it, with the amino acids coloured by category.</p>
