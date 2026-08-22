@@ -281,6 +281,53 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihaKSA9PSAxMTggYW5kIFogPT0gbGlzdChyYW5nZSgxLCAxMTkpKVxucHJpbnQoXCLinJMgMTE4IGVsZW1lbnRzOiB0aGUgZGF0YSBpcyBsaXRlcmFsbHkganVzdCBhIHNvcnRlZCBsaXN0XCIpIn0=
 </script>
 </div>
+<section id="shells-sub-shells-and-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="shells-sub-shells-and-blocks">Shells, sub-shells and blocks</h3>
+<p>A shell is not one undivided container. Each shell is divided into <strong>sub-shells</strong>, and each sub-shell contains one or more <strong>orbitals</strong>. An orbital can hold at most two electrons. The four sub-shell labels used here are <code>s</code>, <code>p</code>, <code>d</code> and <code>f</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>sub-shell</th>
+<th style="text-align: right;">number of orbitals</th>
+<th style="text-align: right;">maximum electrons</th>
+<th>corresponding table block</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>s</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td>the two left-hand columns</td>
+</tr>
+<tr class="even">
+<td>p</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td>the six right-hand columns</td>
+</tr>
+<tr class="odd">
+<td>d</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">10</td>
+<td>the ten middle columns</td>
+</tr>
+<tr class="even">
+<td>f</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">14</td>
+<td>the two usually detached rows</td>
+</tr>
+</tbody>
+</table>
+<p>The letter is preceded by the shell number and followed by the number of electrons occupying that sub-shell. Thus <span class="math inline">\(3p^5\)</span> means five electrons in the p sub-shell of shell 3. The letters are traditional labels inherited from spectroscopy; they are names, not abbreviations for four kinds of element.</p>
+<p>A <strong>block</strong> is a region of the periodic table containing elements for which that type of sub-shell is being filled. Sodium’s distinguishing electron goes into <span class="math inline">\(3s\)</span>, so sodium is in the s-block. For chlorine it goes into <span class="math inline">\(3p\)</span>, for iron into <span class="math inline">\(3d\)</span>, and for neodymium into <span class="math inline">\(4f\)</span>, placing them in the p-, d- and f-blocks respectively. As atomic number increases, successive elements filling the same kind of sub-shell form a contiguous run, which becomes a rectangular block in the standard layout. Helium is the conspicuous layout exception: its configuration is <span class="math inline">\(1s^2\)</span>, but it is placed over the noble gases because its closed shell gives it their chemical behaviour.</p>
 <p>Shells fill in a fixed order (the <em>aufbau</em> order: sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Carefully review how the functions translate an atomic number into a sub-shell configuration and then totals for each shell. We will compare lithium, carbon, neon and sodium: the beginning, middle and end of the second shell, followed by the first electron in the third shell.</p>
 <div>
 <div id="pyodide-5" class="exercise-cell">
@@ -301,6 +348,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRVhBTVBMRV9aID0gWzMsIDYs
 </div>
 <p>Lithium begins its second shell with one outer electron; carbon has four; neon closes that shell with eight; and sodium’s eleventh electron begins the third shell. Lithium and sodium therefore both have one electron in their outermost shell, which is why they appear in the same column of the periodic table.</p>
 </section>
+</section>
 <section id="periodicity" class="level2">
 <h2 class="anchored" data-anchor-id="periodicity">2 · Periodicity</h2>
 <p>As Z is increased, the outer shell fills, closes, and starts again:</p>
@@ -317,44 +365,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoienogPSBsaXN0KHJhbmdlKDEs
 <p>Group 1 (one outer electron) are the reactive alkali metals; group 18 (closed shell) are the noble gases that react with almost nothing.</p>
 <section id="why-are-there-18-groups" class="level3">
 <h3 class="anchored" data-anchor-id="why-are-there-18-groups">Why are there 18 groups?</h3>
-<p>The number 18 comes from the widths of the three blocks that form the main table. A sub-shell contains a fixed number of orbitals, and each orbital can hold two electrons:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>block</th>
-<th style="text-align: right;">orbitals in the sub-shell</th>
-<th style="text-align: right;">electron capacity</th>
-<th style="text-align: right;">columns in the main table</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>s</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">groups 1–2</td>
-</tr>
-<tr class="even">
-<td>d</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">groups 3–12</td>
-</tr>
-<tr class="odd">
-<td>p</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">groups 13–18</td>
-</tr>
-</tbody>
-</table>
-<p>So the full-width part of the table has <span class="math inline">\(2 + 10 + 6 = 18\)</span> column positions. Period 4 makes this visible: potassium and calcium fill the two positions of the 4s sub-shell; scandium through zinc fill the ten positions of 3d; and gallium through krypton fill the six positions of 4p. Elements occupying the same position in successive cycles align vertically, producing the 18 groups.</p>
+<p>As a sub-shell fills, each possible electron count occupies one successive position in its block. The s-block is therefore two columns wide, the d-block is ten columns wide and the p-block is six columns wide. These are the three blocks included across the full-width main grid, so it has <span class="math inline">\(2 + 10 + 6 = 18\)</span> column positions: groups 1–2, 3–12 and 13–18 respectively. Period 4 makes this visible: potassium and calcium fill the two positions of the 4s sub-shell; scandium through zinc fill the ten positions of 3d; and gallium through krypton fill the six positions of 4p. Elements occupying the same position in successive cycles align vertically, producing the 18 groups.</p>
 <p>This is also why the outer-electron sawtooth above is not, by itself, a full explanation of every group number. Across the ten transition-metal groups, an inner d sub-shell is filling while the outermost shell can remain unchanged. Group position therefore depends on the electron configuration, not simply on counting the electrons in the outermost shell.</p>
 <p>What about the f-block? An f sub-shell has seven orbitals and therefore 14 positions. In periods 6 and 7 those positions occur between the s-block and the d-block, making each complete period <span class="math inline">\(2 + 14 + 10 + 6 = 32\)</span> elements long. The conventional table moves those 14 positions into the two detached rows so that the main grid remains 18 columns wide. They are not numbered as 14 extra IUPAC groups; a 32-column table can put them back into the sequence without changing the group numbers 1–18.</p>
 </section>
@@ -459,7 +470,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNv
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Look beyond these six examples and find at least one other periodic-table design. Your search must include <strong>three-dimensional tables</strong> as well as flat ones. Record the designer and date, link to the source, and explain what the layout makes easier to see and what it makes harder to see. Be precise about what position, shape, colour and any third spatial dimension encode.</p>
+<p>Look beyond these six examples and find at least one other periodic-table design. Consider what the layout makes easier to see and what it makes harder to see. Be precise about what position, shape, colour and any third spatial dimension encode.</p>
 </div>
 </div>
 </section>
@@ -484,7 +495,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIHogaW4gKDIsIDEwLCAx
 </script>
 </div>
 <p>What are the strengths and weakenesses of the spiral approach?</p>
-<p><strong>Stregnths:</strong> the sequence is unbroken (no gap between Ba and La: the f-block is just part of the winding); the blocks appear as coloured arcs (the lone gold dot opening each purple arc is real chemistry showing through: lanthanum and actinium actually take a d electron before the f shell starts filling); every shell closure lands at the same angle, so the noble gases form a perfect ray.</p>
+<p><strong>Strengths:</strong> the sequence is unbroken (no gap between Ba and La: the f-block is just part of the winding); the blocks appear as coloured arcs (the lone gold dot opening each purple arc is real chemistry showing through: lanthanum and actinium actually take a d electron before the f shell starts filling); every shell closure lands at the same angle, so the noble gases form a perfect ray.</p>
 <p><strong>Weaknesses:</strong> almost every <em>other</em> group is misaligned: lithium and potassium sit at different angles because their periods have different lengths, so “reading down a group”, the single most useful act chemists perform, no longer works. Benfey’s design (above) fixes this by distorting the spiral into bulges, buying back group alignment by spending the clean geometry. Every design pays for what it shows.</p>
 </section>
 <section id="build-the-canonical-table" class="level2">
