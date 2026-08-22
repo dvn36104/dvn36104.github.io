@@ -371,43 +371,42 @@ If the data is a cycle, should its picture be a *grid*, or should it spiral roun
 Chemists have proposed various layouts. Compare these six alternative
 designs.
 
-One thing to track through all six: the **blocks**. An element's block
-(s, p, d or f) names the sub-shell that its last-added electron entered,
-so the s-block is columns 1 and 2 of the standard table, the p-block is
+One thing to compare across designs is the representation of **blocks**. 
+An element's block
+(s, p, d or f) names the sub-shell that its last-added electron entered.
+The s-block is columns 1 and 2 of the standard table, the p-block is
 columns 13 to 18, the d-block is the transition metals, and the f-block
-is the two detached rows. Every design below has to put the blocks
-*somewhere*, and where they end up is one of the sharpest ways to compare
-the layouts.
+is the two detached rows. 
 
 **Mendeleev's own table (1869).** Periods run *down* the
 columns. Groups run across the rows, transposed from the modern
 convention. Gaps are deliberately left for elements Mendeleev predicted must
 exist (gallium, scandium, germanium).
 
-*Blocks:* not represented, and they could not be: the table predates the
+*Blocks* are not represented as the table predates the
 discovery of the electron by nearly three decades. Rows collect elements
 by valence and chemical similarity, which mixes the future blocks
 together: boron and aluminium (p-block) share their row with the
-predicted eka-boron, which turned out to be scandium (d-block). The
+predicted eka-boron, which turned out to be scandium (d-block). 
+
+<!-- The
 blocks are present only as strain: the doubled cell Ni=Co, the question
 marks, and the handful of awkward rare earths (Ce, La, Di) that would
 one day become the f-block. "Di", didymium, was later found to be two
-elements, praseodymium and neodymium.
+elements, praseodymium and neodymium. -->
 
 ![](../images/mendeleev-1869.svg){width=45% fig-align="center"}
 
 **Benfey's spiral (1964).** The list winds continuously outward from
 hydrogen.
 
-*Blocks:* by topology. The s- and p-blocks stay on the compact central
+*Blocks* are represenrted by topology. The s- and p-blocks stay on the compact central
 winding, where the groups line up as rays. The d-block leaves the spiral
-after the alkaline earths as a bulging peninsula (labelled "transition
-metals") and rejoins it before gallium; the f-block is a second,
-farther-out peninsula; and the design even reserves an empty third arm,
+after the alkaline earths as a bulging peninsula labelled "transition
+metals"; the f-block is a second,
+farther-out peninsula. The design even reserves an empty third arm,
 the "superactinides", for a predicted g-block that no synthesised
-element has yet reached. An element's block is encoded by *which lobe of
-the plane it sits on*, while the unbroken winding preserves the sequence
-of Z through every excursion.
+element has yet reached. 
 
 
 ![](../images/benfey-spiral.svg){width=75% fig-align="center"}
@@ -415,12 +414,11 @@ of Z through every excursion.
 **Janet's left-step table (1928).** Rows end where shells *actually*
 close in the aufbau order, so the blocks form perfect staircase steps.
 
-*Blocks:* as the layout's organising principle. The table is exactly
+*Blocks* are the layout's organising principle. The table is exactly
 four contiguous rectangles, f (14 columns), d (10), p (6) and s (2),
 placed left to right in that order; the column brackets in the image
 label them directly. Each row is one step of the aufbau order and always
-ends in the s rectangle, which is why helium sits above beryllium rather
-than with the noble gases. No other design, the standard table included,
+ends in the s rectangle. No other design, the standard table included,
 renders each block as a single perfect rectangle.
 
 
@@ -428,14 +426,13 @@ renders each block as a single perfect rectangle.
 
 **A circular table.** Periodicity explicitly represented with concentric rings.
 
-*Blocks:* not encoded. Rings are periods, and colour just repeats the
+*Blocks* are not encoded. Rings are periods, and colour repeats the
 ring, so block membership must be inferred from angular position exactly
 as it is inferred from column position in the standard table. The
 d-block elements are simply the extra sectors that widen rings four to
-seven. The one block the design does make visible, it makes visible by
-exile: the f-block is amputated into detached arcs outside the circle,
-the same move as the standard table's footnote rows, with placeholder
-cells ("L", "A") marking where the arcs belong.
+seven. The one block the design does make visible is the f-block,
+represented in detached arcs outside the circle,
+the same move as the standard table's footnote rows.
 
 ![](../images/circular-table.svg){width=60% fig-align="center"}
 
@@ -444,15 +441,12 @@ than at one end of a row. The connected hexagons make the sequence continuous,
 while colour, outlines and annotations expose blocks, metal categories,
 diagonal relationships and oxidation states.
 
-*Blocks:* as a dedicated visual channel. The spiral scatters each block
+*Blocks* are a dedicated visual channel. The spiral scatters each block
 across the plane, so position cannot carry the information; instead each
 hexagon's *outline colour* encodes its block (the legend's "s bloc",
 "p bloc", "d bloc", "f bloc"), while the *fill* colour independently
-encodes metal category. Follow the red outlines and you trace the
-p-block through the spiral; follow the magenta ones and you get the
-f-block. It is the only design of the six that spends a separate
-encoding channel on blocks rather than deriving them from geometry.
-
+encodes metal category. 
+ 
 ![Jeff Moran's hexagonal periodic table. [Source: *Laboratory News*,
 "Alternative periodic tables".](https://labnews.co.uk/alternative-periodic-tables/)](../images/jeff-moran-periodic-table.png){width=82% fig-align="center"}
 
@@ -461,16 +455,10 @@ organosilicon chemist, and his arrangement gives carbon and silicon the centre
 of the composition. A continuous ribbon curls around them, replacing the
 standard table's separated rows with one connected path.
 
-*Blocks:* as separate whorls of the one ribbon, each labelled with its
+*Blocks* are separate whorls of the one ribbon, each labelled with its
 electron configuration. The s- and p-block elements spiral around the
 carbon-silicon centre; the d-block is the entire left lobe of the
-figure-eight; the f-block is the detached double loop at the top, its
-rings labelled $4f^{1\text{-}14}\,5d^{0\text{-}1}\,6s^2$ (lanthanides)
-and $5f^{1\text{-}14}\,6d^{0\text{-}2}\,7s^2$ (actinides). Hyde also
-writes the outer-electron configuration on each arm of the ribbon
-([IIA] $s^2$, [IB] $d^{10}s^1$, [VIB] $s^2p^4$, ...), so block identity
-is printed on the layout itself rather than left to be inferred from
-position.
+figure-eight; the f-block is the detached double loop at the top.
 
 ![James Franklin Hyde's curled-ribbon periodic table, reproduced by Rezmason.
 [Source and licence: Wikimedia Commons, CC BY-SA
@@ -493,7 +481,12 @@ breaks**.
 
 Give every period one full turn: an
 element's angle is its *fraction of the way through its period*, and its
-radius grows steadily outward. Colour by **block** (which kind of
+radius grows steadily outward. So sodium, the 1st of 8 elements in
+period 3, sits at $\tfrac{1}{8}$ of a turn (45°), while potassium, the
+1st of 18 in period 4, sits at $\tfrac{1}{18}$ of a turn (20°): same
+group, different angle. Only the *end* of a period means the same thing
+in every period, so shell closures will align and nothing else has to.
+Colour by **block** (which kind of
 sub-shell is filling: the four "districts" of the table):
 
 ```{pyodide}
