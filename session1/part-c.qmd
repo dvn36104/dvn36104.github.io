@@ -1044,6 +1044,10 @@ Altair layers are combined with `+`. The earlier cells created
 region, the Planck-scale point and your final annotations.
 :::
 
+**Save your final chart.** An Altair chart has a menu button (the three
+dots at its top right); use *Save as PNG*. A Matplotlib figure can be
+right-clicked and saved as an image. Submit the file through Canvas.
+
 {{< include _instructor-c.qmd >}}
 
 

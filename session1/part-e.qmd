@@ -1,6 +1,10 @@
 ---
 title: "Codons"
 engine: markdown
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
 ---
 
 Every living thing runs on an information system linking DNA to proteins.
@@ -80,6 +84,10 @@ encode? What should colour encode? How can a reader look up a codon quickly,
 and how do they see the categories? 
 
 Search for, and evaluate, codon visualisations. Then use python to create your own.
+
+```{pyodide}
+
+```
 
 Save and submit this image.
 

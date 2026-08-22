@@ -12,7 +12,16 @@ Where a page has an exercise, attempt it before using the hints. Check the solut
 
 Your work here is **not saved** when you close the tab.
 
-Submit exercise files through canvas.
+Submit through Canvas:
+
+- **Part A**: the final chart of your amniote investigation, with panels
+  at different levels of aggregation.
+- **Part B**: your tree-of-life figure. The download cell at the end of
+  the page saves it as a PNG.
+- **Part C**: your Triangle of Everything chart.
+- **Part D**: the alternative periodic-table design you found, different
+  from the six shown on the page. Not the table you built.
+- **Part E**: your codon chart.
 
 ## Session 1
 
