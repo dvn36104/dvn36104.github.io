@@ -350,11 +350,11 @@ have IUPAC-approved collective names that chemists commonly use:
 :::
 
 The other columns do not have IUPAC-approved collective names. They can be
-described using their first element—*the titanium group* for group 4, *the
-boron group* for group 13 and *the carbon group* for group 14—but these are
-descriptive labels rather than standardised replacements for the numbers.
+described using their first element (e.g. *the titanium group* for group 4, *the
+boron group* for group 13 and *the carbon group* for group 14). These are
+descriptive labels rather than standardised categories.
 
-Hydrogen sits in group 1 by electron configuration but is not an alkali metal.
+Hydrogen sits in group 1 by electron configuration, but it is not an alkali metal.
 The **lanthanoids** and **actinoids** are also IUPAC-approved collective names,
 but those two sequences are not numbered groups (see below).
 
@@ -442,7 +442,7 @@ same shell tighter). At each new shell the size *jumps*: argon is
 
 ![Lothar Meyer's 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.](../images/lothar-meyer-atomic-volume.webp){width=85% fig-align="center"}
 
-### Lanthanides and Actinides
+### Lanthanoids and Actinoids
 
 Return to the graph of electrons in the outermost shell. Its early teeth are
 short, but the later teeth contain long, flat stretches at two outer-shell

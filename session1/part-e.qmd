@@ -22,13 +22,20 @@ RNA message and assembles a protein from it, one amino acid at a time.
 ## Amino acids
 
 Proteins are chains built from **amino acids**: small molecules with a
-common backbone and one of 20 different side chains. (You may also see
+common backbone and one of 20 different side chains.
+
+::: {.callout-important title="Why you may see 22 amino acids"}
+You may also see
 the count 22: two rare extras, selenocysteine and pyrrolysine, are
 installed by recoding a stop codon rather than by codons of their own,
 so they sit outside the standard table below. Pyrrolysine occurs only in
-some archaea and bacteria.) The side chains
-range from tiny (glycine) to bulky and ring-shaped (tryptophan), from
-water-repelling to charged. The sequence of amino acids determines how
+some archaea and bacteria.
+:::
+
+The side chains range from tiny (glycine) to bulky and ring-shaped (tryptophan), from
+water-repelling to charged.
+
+Sequences of amino acids determines how
 the chain folds, and the fold determines what the protein does. A protein
 is typically hundreds of amino acids long, so the 20-letter alphabet
 supports an astronomical space of possible sequences.
