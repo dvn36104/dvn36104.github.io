@@ -528,8 +528,8 @@ object is represented by a characteristic radius and an average density.
 
 
 At a
-fixed density, doubling the radius multiplies the volume—and therefore the
-mass—by $2^3 = 8$.
+fixed density, doubling the radius multiplies the volume, and therefore the
+mass, by $2^3 = 8$.
 
 Taking logs gives $\log m = 3\log r + \text{constant}$. A constant-density
 relationship therefore appears as a straight line with **slope 3 on the log–log chart**.
@@ -542,7 +542,7 @@ water, flesh, rock and many solids and liquids often
 has an average density near $\rho \approx 1\ \text{g/cm}^3$. Its mass is spread
 over the full volume occupied by atoms, including the space between
 nucleus and electrons. Several familiar
-condensed objects —-- viruses, animals, asteroids, planets and the Sun —-- fall near
+condensed objects (viruses, animals, asteroids, planets and the Sun) fall near
 the atomic-density line.
 
 **Nuclear density** is about $2.3 \times 10^{14}\ \text{g/cm}^3$: fourteen
