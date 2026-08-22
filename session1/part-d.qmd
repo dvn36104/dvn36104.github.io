@@ -464,6 +464,9 @@ later cycles contain many more elements than the early cycles.
 In periods 6 and 7, after the first two s-filling positions, electrons begin
 filling an f sub-shell before the d- and p-filling runs resume.
 
+![Long-form periodic table, with periods 6 and 7 shown as continuous
+32-element rows.](../images/long-form-periodic-table.svg){width=100% fig-align="center"}
+
 A fully
 expanded table can show each period as one continuous 32-position row. The
 familiar compact table instead keeps its main grid 18 columns wide, It removes
