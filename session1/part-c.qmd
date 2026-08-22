@@ -61,6 +61,12 @@ group_colours = {
     "cosmic structures": "#C0448F",
 }
 
+# Reserved for reference lines: neither colour appears in the object palette.
+DENSITY_COLOURS = {
+    "atomic density":  "#6F2DA8",
+    "nuclear density": "#B2182B",
+}
+
 LABEL_PLACEMENTS = {
     "top quark":           ("right", -8, -11),
     "Higgs boson":         ("right", -8,  11),
@@ -137,7 +143,8 @@ def object_layers(table=objects, show_legend=True, point_size=55):
     ):
         label_layers.append(
             alt.Chart(label_group).mark_text(
-                align=align, dx=dx, dy=dy, fontSize=11
+                align=align, dx=dx, dy=dy, fontSize=11,
+                stroke="white", strokeWidth=3
             ).encode(
                 x=cosmos_x(), y=cosmos_y(), text="name:N",
                 color=group_colour(False),
@@ -175,40 +182,47 @@ density_lines = pd.concat([
     for rho, label in [(1.0, "atomic density"),
                        (2.3e14, "nuclear density")]
 ], ignore_index=True)
-density_line_chart = alt.Chart(density_lines).mark_line(
-    strokeDash=[7, 5], strokeWidth=1.5, clip=True
-).encode(
+density_line_base = alt.Chart(density_lines).encode(
     x=cosmos_x(),
     y=cosmos_y(),
-    detail="density:N",
-    color=alt.Color(
-        "density:N",
-        scale=alt.Scale(
-            domain=["atomic density", "nuclear density"],
-            range=["#006D77", "#9B2226"],
-        ),
-        legend=None,
-    ),
 )
 
+atomic_density_line = density_line_base.transform_filter(
+    alt.datum.density == "atomic density"
+).mark_line(
+    color=DENSITY_COLOURS["atomic density"],
+    strokeDash=[8, 5], strokeWidth=2, clip=True,
+)
+
+nuclear_density_line = density_line_base.transform_filter(
+    alt.datum.density == "nuclear density"
+).mark_line(
+    color=DENSITY_COLOURS["nuclear density"],
+    strokeDash=[3, 3], strokeWidth=2, clip=True,
+)
+
+density_line_chart = atomic_density_line + nuclear_density_line
+
 density_label_data = pd.DataFrame({
-    "radius_cm": [2e14, 2e2],
-    "mass_g": [mass_at_density(1, 2e14),
-               mass_at_density(2.3e14, 2e2)],
+    "radius_cm": [3e18, 1e11],
+    "mass_g": [mass_at_density(1, 3e18),
+               mass_at_density(2.3e14, 1e11)],
     "label": ["atomic density", "nuclear density"],
 })
 atomic_density_label = alt.Chart(
     density_label_data.query("label == 'atomic density'")
 ).mark_text(
-    angle=297, align="left", dx=8, dy=18,
-    color="#006D77", fontSize=13
+    align="right", dx=-8, dy=15,
+    color=DENSITY_COLOURS["atomic density"], fontSize=13,
+    fontWeight="bold", stroke="white", strokeWidth=3,
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 nuclear_density_label = alt.Chart(
     density_label_data.query("label == 'nuclear density'")
 ).mark_text(
-    angle=297, align="left", dx=8, dy=-18,
-    color="#9B2226", fontSize=13
+    align="right", dx=-8, dy=14,
+    color=DENSITY_COLOURS["nuclear density"], fontSize=13,
+    fontWeight="bold", stroke="white", strokeWidth=3,
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 density_labels = atomic_density_label + nuclear_density_label
@@ -313,7 +327,13 @@ familiar_labels = familiar_base.mark_text(
     width=720,
     height=420,
     title="Five familiar objects: 37 orders of magnitude in mass",
-).configure_axis(gridColor="#dddddd", gridOpacity=0.7)
+).configure_axis(
+    gridColor="#dddddd", gridOpacity=0.7
+).configure_title(
+    fontSize=20,
+    anchor="middle",
+    offset=16,
+)
 ```
 
 Notice that they fall roughly on a straight line.
@@ -333,7 +353,16 @@ print(f"volume of a sphere with radius 50 cm: {sphere_volume_litres:.0f} litres"
 print(f"70 kg divided by that volume: {rho_human:.2f} g/cm³")
 ```
 
-
+::: {.callout-important title="Approximate Magnitude"}
+A 70 kg human has a volume of roughly 70 litres because the human body is
+close to the density of water. The calculation gives 524 litres only because
+we forced the 50 cm characteristic size into a formula for a sphere. The
+result does **not** show that humans have a density of 0.13 g/cm³.
+Radius is a geometric measurement for a
+planet or star, but an approximate characteristic size for an irregular object
+such as a flea, human or whale. The chart is designed for comparisons across
+many orders of magnitude, not precise estimates of each object's density.
+:::
 
 ## 2 · 29 objects
 
@@ -426,7 +455,8 @@ def object_layers(table=objects, show_legend=True, point_size=55):
     ):
         label_layers.append(
             alt.Chart(label_group).mark_text(
-                align=align, dx=dx, dy=dy, fontSize=11
+                align=align, dx=dx, dy=dy, fontSize=11,
+                stroke="white", strokeWidth=3
             ).encode(
                 x=cosmos_x(), y=cosmos_y(), text="name:N",
                 color=group_colour(False),
@@ -448,7 +478,7 @@ object_layers(point_size=75).properties(
     titlePadding=14,
 ).configure_title(
     fontSize=20,
-    anchor="start",
+    anchor="middle",
     offset=16,
 )
 ```
@@ -481,16 +511,7 @@ $$m = \frac{4}{3}\pi \rho r^3.$$
 This is exact for a uniform sphere and an approximation when an irregular
 object is represented by a characteristic radius and an average density.
 
-::: {.callout-important title="Approximate Magnitude"}
-A 70 kg human has a volume of roughly 70 litres because the human body is
-close to the density of water. The calculation gives 524 litres only because
-we forced the 50 cm characteristic size into a formula for a sphere. The
-result does **not** show that humans have a density of 0.13 g/cm³.
-Radius is a geometric measurement for a
-planet or star, but an approximate characteristic size for an irregular object
-such as a flea, human or whale. The chart is designed for comparisons across
-many orders of magnitude, not precise estimates of each object's density.
-:::
+
 
 
 
@@ -538,34 +559,47 @@ density_lines = pd.concat([
                        (2.3e14, "nuclear density")]
 ], ignore_index=True)
 
-density_line_chart = alt.Chart(density_lines).mark_line(
-    strokeDash=[7, 5], strokeWidth=1.5, clip=True
-).encode(
+# These line colours are deliberately absent from `group_colours`, so the
+# reference lines and the six object groups cannot be mistaken for each other.
+DENSITY_COLOURS = {
+    "atomic density":  "#6F2DA8",
+    "nuclear density": "#B2182B",
+}
+
+density_line_base = alt.Chart(density_lines).encode(
     x=cosmos_x(),
     y=cosmos_y(),
-    detail="density:N",
-    color=alt.Color(
-        "density:N",
-        scale=alt.Scale(
-            domain=["atomic density", "nuclear density"],
-            range=["#006D77", "#9B2226"],
-        ),
-        legend=None,
-    ),
 )
 
+atomic_density_line = density_line_base.transform_filter(
+    alt.datum.density == "atomic density"
+).mark_line(
+    color=DENSITY_COLOURS["atomic density"],
+    strokeDash=[8, 5], strokeWidth=2, clip=True,
+)
+
+nuclear_density_line = density_line_base.transform_filter(
+    alt.datum.density == "nuclear density"
+).mark_line(
+    color=DENSITY_COLOURS["nuclear density"],
+    strokeDash=[3, 3], strokeWidth=2, clip=True,
+)
+
+density_line_chart = atomic_density_line + nuclear_density_line
+
 density_label_data = pd.DataFrame({
-    "radius_cm": [2e14, 2e2],
-    "mass_g": [mass_at_density(1, 2e14),
-               mass_at_density(2.3e14, 2e2)],
+    "radius_cm": [3e18, 1e11],
+    "mass_g": [mass_at_density(1, 3e18),
+               mass_at_density(2.3e14, 1e11)],
     "label": ["atomic density", "nuclear density"],
 })
 
 atomic_density_label = alt.Chart(
     density_label_data.query("label == 'atomic density'")
 ).mark_text(
-    angle=297, align="left", dx=8, dy=18,
-    color="#006D77", fontSize=13
+    align="right", dx=-8, dy=15,
+    color=DENSITY_COLOURS["atomic density"], fontSize=13,
+    fontWeight="bold", stroke="white", strokeWidth=3,
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
@@ -573,8 +607,9 @@ atomic_density_label = alt.Chart(
 nuclear_density_label = alt.Chart(
     density_label_data.query("label == 'nuclear density'")
 ).mark_text(
-    angle=297, align="left", dx=8, dy=-18,
-    color="#9B2226", fontSize=13
+    align="right", dx=-8, dy=14,
+    color=DENSITY_COLOURS["nuclear density"], fontSize=13,
+    fontWeight="bold", stroke="white", strokeWidth=3,
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
@@ -594,7 +629,7 @@ density_labels = atomic_density_label + nuclear_density_label
     titlePadding=14,
 ).configure_title(
     fontSize=20,
-    anchor="start",
+    anchor="middle",
     offset=16,
 )
 ```
@@ -826,7 +861,7 @@ quantum_label = alt.Chart(pd.DataFrame({
     titlePadding=14,
 ).configure_title(
     fontSize=20,
-    anchor="start",
+    anchor="middle",
     offset=16,
 )
 ```

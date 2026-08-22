@@ -131,7 +131,7 @@ print("✓ 118 elements: the data is literally just a sorted list")
 ```
 
 Shells fill in a fixed order (the *aufbau* order: sub-shells sorted by
-$n+l$, ties broken by $n$). Carefully review how this is produced by the code:
+$n+l$, ties broken by $n$). Carefully review how this is produced by the code, which gives the shell arrangement for sodium (Z = 11):
 
 ```{pyodide}
 subshells = sorted(((n, l) for n in range(1, 8) for l in range(n)),
