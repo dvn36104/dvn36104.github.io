@@ -618,7 +618,7 @@ ax.set_xticks(depth_ticks)
 ax.set_xticklabels(mya_labels)
 ax.set_xlim(0, root_age * 1.02)
 ax.set_xlabel("millions of years ago")
-ax.set_title(f"All amniotes at family level: {len(amniotes.leaves())} tips, one ancestor")
+ax.set_title(f"{len(amniotes.leaves())} Amniote Families")
 plt.show()
 ```
 
