@@ -31,7 +31,7 @@ rare extras discussed below. [Image: Dancojocari, Wikimedia Commons,
 CC BY-SA 3.0.](https://commons.wikimedia.org/wiki/File:Amino_Acids.svg)](../images/amino-acids-dancojocari.svg){width=95% fig-align="center"}
 
 The side chains range from tiny (glycine) to bulky and ring-shaped
-(tryptophan), and their chemistry sorts the 20 amino acids into a few
+(tryptophan). Their chemistry sorts the 20 amino acids into a few
 standard categories:
 
 - **nonpolar (hydrophobic):** glycine, alanine, valine, leucine,
@@ -40,10 +40,6 @@ standard categories:
   asparagine, glutamine
 - **positively charged:** lysine, arginine, histidine
 - **negatively charged:** aspartate, glutamate
-
-(The boundaries vary by textbook: the chart above files glycine, proline
-and cysteine under "special cases" instead. Where to draw category
-lines is itself a design decision.)
 
 The sequence of amino acids determines how the chain folds, and the fold
 determines what the protein does.
@@ -59,8 +55,10 @@ some archaea and bacteria.
 Now the code itself. RNA has four letters: A, C, G and U. Translation
 reads them three at a time, and each three-letter sequence is a
 **codon**. There are $4^3 = 64$ possible codons, and each one
-corresponds to an amino acid or to a stop signal: 61 of them spell the
-20 amino acids (so most amino acids have several spellings), three mean
+corresponds to an amino acid or to a stop signal.
+
+61 codons spell the
+20 amino acids, so most amino acids have several spellings. Three mean
 "stop", and AUG doubles as the "start" that begins every protein.
 
 A standard representation for this is a **codon chart**, such as this example.
@@ -97,9 +95,6 @@ Save and submit this image.
   licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
   available at
   [openstax.org](https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code).
-- The amino acid structures chart is by Dancojocari, [Wikimedia
-  Commons](https://commons.wikimedia.org/wiki/File:Amino_Acids.svg),
-  licensed CC BY-SA 3.0.
 - Crick, F. H. C. (1958) *On protein synthesis*, Symposia of the Society
   for Experimental Biology 12, 138-163, the original statement of the
   central dogma.
