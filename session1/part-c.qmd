@@ -106,7 +106,10 @@ def cosmos_y(field="mass_g"):
     )
 
 def group_colour(show_legend=True):
-    legend = alt.Legend(title="Object group") if show_legend else None
+    legend = alt.Legend(
+        title="Object group", orient="bottom",
+        direction="horizontal", columns=3,
+    ) if show_legend else None
     return alt.Color(
         "group:N",
         scale=alt.Scale(domain=GROUP_DOMAIN, range=GROUP_RANGE),
@@ -141,15 +144,18 @@ def object_layers(table=objects, show_legend=True, point_size=55):
     for (align, dx, dy), label_group in label_table.groupby(
         ["label_align", "label_dx", "label_dy"], sort=False
     ):
-        label_layers.append(
-            alt.Chart(label_group).mark_text(
-                align=align, dx=dx, dy=dy, fontSize=11,
-                stroke="white", strokeWidth=3
-            ).encode(
-                x=cosmos_x(), y=cosmos_y(), text="name:N",
-                color=group_colour(False),
-            )
+        label_base = alt.Chart(label_group).encode(
+            x=cosmos_x(), y=cosmos_y(), text="name:N"
         )
+        label_layers.extend([
+            label_base.mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11,
+                color="white", stroke="white", strokeWidth=3,
+            ),
+            label_base.mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11,
+            ).encode(color=group_colour(False)),
+        ])
 
     return alt.layer(points, *label_layers)
 
@@ -214,7 +220,7 @@ atomic_density_label = alt.Chart(
 ).mark_text(
     align="right", dx=-8, dy=15,
     color=DENSITY_COLOURS["atomic density"], fontSize=13,
-    fontWeight="bold", stroke="white", strokeWidth=3,
+    fontWeight="bold",
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 nuclear_density_label = alt.Chart(
@@ -222,7 +228,7 @@ nuclear_density_label = alt.Chart(
 ).mark_text(
     align="right", dx=-8, dy=14,
     color=DENSITY_COLOURS["nuclear density"], fontSize=13,
-    fontWeight="bold", stroke="white", strokeWidth=3,
+    fontWeight="bold",
 ).encode(x=cosmos_x(), y=cosmos_y(), text="label:N")
 
 density_labels = atomic_density_label + nuclear_density_label
@@ -324,7 +330,7 @@ familiar_labels = familiar_base.mark_text(
 ).encode(text="name:N")
 
 (familiar_points + familiar_labels).properties(
-    width=720,
+    width="container",
     height=420,
     title="Five familiar objects: 37 orders of magnitude in mass",
 ).configure_axis(
@@ -418,7 +424,10 @@ def cosmos_y(field="mass_g"):
     )
 
 def group_colour(show_legend=True):
-    legend = alt.Legend(title="Object group") if show_legend else None
+    legend = alt.Legend(
+        title="Object group", orient="bottom",
+        direction="horizontal", columns=3,
+    ) if show_legend else None
     return alt.Color(
         "group:N",
         scale=alt.Scale(domain=GROUP_DOMAIN, range=GROUP_RANGE),
@@ -453,20 +462,23 @@ def object_layers(table=objects, show_legend=True, point_size=55):
     for (align, dx, dy), label_group in label_table.groupby(
         ["label_align", "label_dx", "label_dy"], sort=False
     ):
-        label_layers.append(
-            alt.Chart(label_group).mark_text(
-                align=align, dx=dx, dy=dy, fontSize=11,
-                stroke="white", strokeWidth=3
-            ).encode(
-                x=cosmos_x(), y=cosmos_y(), text="name:N",
-                color=group_colour(False),
-            )
+        label_base = alt.Chart(label_group).encode(
+            x=cosmos_x(), y=cosmos_y(), text="name:N"
         )
+        label_layers.extend([
+            label_base.mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11,
+                color="white", stroke="white", strokeWidth=3,
+            ),
+            label_base.mark_text(
+                align=align, dx=dx, dy=dy, fontSize=11,
+            ).encode(color=group_colour(False)),
+        ])
 
     return alt.layer(points, *label_layers)
 
 object_layers(point_size=75).properties(
-    width=780,
+    width="container",
     height=700,
     title="29 objects",
 ).configure_axis(
@@ -599,7 +611,7 @@ atomic_density_label = alt.Chart(
 ).mark_text(
     align="right", dx=-8, dy=15,
     color=DENSITY_COLOURS["atomic density"], fontSize=13,
-    fontWeight="bold", stroke="white", strokeWidth=3,
+    fontWeight="bold",
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
@@ -609,7 +621,7 @@ nuclear_density_label = alt.Chart(
 ).mark_text(
     align="right", dx=-8, dy=14,
     color=DENSITY_COLOURS["nuclear density"], fontSize=13,
-    fontWeight="bold", stroke="white", strokeWidth=3,
+    fontWeight="bold",
 ).encode(
     x=cosmos_x(), y=cosmos_y(), text="label:N"
 )
@@ -617,7 +629,7 @@ nuclear_density_label = alt.Chart(
 density_labels = atomic_density_label + nuclear_density_label
 
 (density_line_chart + object_layers(point_size=75) + density_labels).properties(
-    width=780,
+    width="container",
     height=700,
     title="29 objects",
 ).configure_axis(
@@ -849,7 +861,7 @@ quantum_label = alt.Chart(pd.DataFrame({
     + gravity_label
     + quantum_label
 ).properties(
-    width=780,
+    width="container",
     height=700,
     title="29 objects",
 ).configure_axis(
