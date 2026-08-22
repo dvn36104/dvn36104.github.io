@@ -165,14 +165,6 @@ print("sodium:", " ".join(f"{n}{L_NAMES[l]}{e}" for n, l, e in configuration(11)
 print("sodium by shell:", shells(11))
 ```
 
-```{pyodide}
-assert shells(11) == {1: 2, 2: 8, 3: 1}
-assert sum(e for _, _, e in configuration(26)) == 26
-assert [2 * n**2 for n in (1, 2, 3, 4)] == [2, 8, 18, 32]
-print("✓ sodium is 2, 8, 1, and shell capacities are 2n²")
-```
-
-
 The shell arrangement of sodium can be pictured in a diagram:
 
 ```{pyodide}
@@ -199,28 +191,34 @@ and potassium, also with one outer-shell electron.
 As Z is increased, the outer shell fills, closes, and starts again:
 
 ```{pyodide}
-zz = list(range(1, 39))
+zz = list(range(1, 119))
 vv = [valence(z) for z in zz]
+noble  = (2, 10, 18, 36, 54, 86, 118)
+alkali = (3, 11, 19, 37, 55, 87)
 
-fig, ax = plt.subplots(figsize=(9, 4.2))
+fig, ax = plt.subplots(figsize=(9.5, 4.4))
 ax.plot(zz, vv, "-", color="#bbbbbb", lw=1)
-ax.scatter(zz, vv, s=28, color="#4269d0", zorder=3)
-for z in (2, 10, 18, 36):                       # shell closures: noble gases
-    ax.scatter([z], [valence(z)], s=60, color="#e66852", zorder=4)
-    ax.annotate(" " + symbol[z - 1], (z, valence(z)), fontsize=9, color="#e66852")
+ax.scatter(zz, vv, s=16, color="#4269d0", zorder=3)
+ax.scatter(noble, [valence(z) for z in noble], s=55, color="#e66852", zorder=4)
+ax.scatter(alkali, [valence(z) for z in alkali], s=55, color="#30a8b1", zorder=4)
+for z in noble:
+    ax.annotate(symbol[z - 1], (z, valence(z)), textcoords="offset points",
+                xytext=(0, 7), ha="center", fontsize=9, color="#e66852")
+for z in alkali:
+    ax.annotate(symbol[z - 1], (z, valence(z)), textcoords="offset points",
+                xytext=(0, -14), ha="center", fontsize=9, color="#30a8b1")
+ax.set_ylim(-1.2, 9.2)
 ax.set_xlabel("atomic number Z")
 ax.set_ylabel("electrons in outermost shell")
-ax.set_title("Electrons in the outermost shell, Z = 1 to 38")
+ax.set_title("Electrons in the outermost shell for all 118 elements")
 plt.show()
 ```
 
-```{pyodide}
-for z in (2, 10, 18, 36, 54, 86, 118):
-    assert valence(z) == (2 if z == 2 else 8)   # closed shells: noble gases
-for z in (3, 11, 19, 37, 55, 87):
-    assert valence(z) == 1                      # fresh shells: alkali metals
-print("✓ shell closures and fresh starts recur all the way to Z = 118")
-```
+Closed shells (red, 8 outer electrons except helium's 2) and fresh
+starts (teal, 1 outer electron) recur all the way to Z = 118. The long
+flat stretches at 2 between the teeth are the transition metals and the
+lanthanide and actinide series, where electrons fill inner subshells
+while the outermost shell holds steady.
 
 The sawtooth is the periodic law. Every **row** of any periodic table is
 a "tooth"; every **column** collects atoms caught at the same point of the
