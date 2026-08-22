@@ -597,12 +597,6 @@ root_age = max(l.depth for l in amniotes.leaves())
 print(f"{len(amniotes.leaves())} families, root {root_age:.1f} Myr ago")
 ```
 
-```{pyodide}
-assert len(amniotes.leaves()) == 956
-assert round(root_age) == 319
-print("✓ 956 amniote families; the amniote common ancestor lived ~319 Myr ago")
-```
-
 The mini-tree used **Myr since the root**, which matches the stored branch
 depths but is not the most natural way to read historical dates. For this
 larger tree, label the axis in **millions of years ago**: about 319 at the root,
@@ -717,7 +711,10 @@ axes[0].set_title(f"Part A's taxonomy: {len(primate_families)} families, one nod
 axes[0].set_xticks([])
 draw_tree(primates, axes[1], labels=True, fontsize=9, default="#4269d0")
 axes[1].set_title("TimeTree: the same clade, resolved and dated")
-axes[1].set_xlabel("Myr since the amniote root")
+ticks = range(0, 80, 20)
+axes[1].set_xticks([root_age - t for t in ticks])
+axes[1].set_xticklabels([str(t) for t in ticks])
+axes[1].set_xlabel("Myr ago")
 plt.tight_layout()
 plt.show()
 ```
@@ -725,16 +722,20 @@ plt.show()
 The right tree makes claims that the left tree cannot make. For example, the claim that apes split from monkeys before
 either split from lemurs. Every split has a date.
 
+The two sources do not even agree on the families themselves. Compare
+the name sets directly:
+
 ```{pyodide}
 tree_names = {l.name.split("-")[0] for l in primates.leaves()}
-assert len(primate_families) == 15
-assert "Indridae" in primate_families and "Indriidae" in tree_names
-assert "Paleopropithecidae" in tree_names and "Paleopropithecidae" not in primate_families
-print("✓ 15 families in the table, 16 in the tree, and the mismatches teach:")
-print("  Indridae vs Indriidae is the same family spelled two ways by two")
-print("  databases, and the extinct sloth lemurs cannot appear in a table")
-print("  of measured life histories")
+
+print(f"{len(primate_families)} families in the table, {len(tree_names)} in the tree")
+print("only in the table:", sorted(set(primate_families) - tree_names))
+print("only in the tree: ", sorted(tree_names - set(primate_families)))
 ```
+
+Indridae and Indriidae are the same family spelled two ways by two
+databases. Paleopropithecidae, the extinct sloth lemurs, cannot appear
+in a table of measured life histories.
 
 
 ### Back to Part A's seven lineages
