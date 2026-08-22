@@ -268,7 +268,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 <p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus (e.g.&nbsp;carbon is “element six”).</p>
 <p>A neutral atom carries Z electrons. These electrons stack into <strong>shells</strong> around the nucleus that hold at most <span class="math inline">\(2n^2\)</span> electrons: 2, 8, 18, 32.</p>
 <p>Chemical behaviour is governed mainly by the <strong>valence electrons</strong>: electrons in the outermost shell and, for transition metals, electrons in a nearby incompletely filled d sub-shell. Similar valence arrangements tend to produce similar chemistry.</p>
-<p>The data for this page is one row per element: number, symbol, name, and a few properties we will meet as we need them:</p>
+<p>The data for this page is one row per element: number, symbol, name, and a few other element properties.</p>
 <div>
 <div id="pyodide-3" class="exercise-cell">
 
@@ -279,47 +279,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERB
 </div>
 <section id="shells-sub-shells-and-orbitals" class="level3">
 <h3 class="anchored" data-anchor-id="shells-sub-shells-and-orbitals">Shells, sub-shells and orbitals</h3>
-<p>The shell number <span class="math inline">\(n\)</span> does not describe one undivided container. A shell is split into <strong>sub-shells</strong>, and a sub-shell is split into <strong>orbitals</strong>. These are allowed electron states given by quantum mechanics, not columns invented for the periodic table.</p>
-<p>Within shell <span class="math inline">\(n\)</span>, the sub-shell quantum number <span class="math inline">\(l\)</span> can take the values from 0 to <span class="math inline">\(n-1\)</span>. The traditional labels <code>s</code>, <code>p</code>, <code>d</code> and <code>f</code> mean <span class="math inline">\(l=0,1,2,3\)</span>. For each value of <span class="math inline">\(l\)</span>, there are <span class="math inline">\(2l+1\)</span> possible orbitals. The Pauli exclusion principle permits two electrons of opposite spin in each orbital. The capacities therefore follow before we draw any table:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>sub-shell</th>
-<th style="text-align: right;"><span class="math inline">\(l\)</span></th>
-<th style="text-align: right;">orbitals, <span class="math inline">\(2l+1\)</span></th>
-<th style="text-align: right;">maximum electrons, <span class="math inline">\(2(2l+1)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>s</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td>p</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="odd">
-<td>d</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="even">
-<td>f</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">14</td>
-</tr>
-</tbody>
-</table>
-<p>The first shell contains only a 1s sub-shell. The second contains 2s and 2p; the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as <span class="math inline">\(3p^5\)</span>, the <code>3</code> names the shell, <code>p</code> names the sub-shell, and the superscript means that five electrons occupy it. The letters are traditional names from spectroscopy, not abbreviations for kinds of element.</p>
-<p>Sub-shells do not fill in simple shell-number order. For example, 4s fills before 3d because 4s is initially the lower-energy state. That is why the filling rule in the next code cell sorts the available sub-shells by energy. It is also why a shell’s maximum capacity <span class="math inline">\(2n^2\)</span> is not the same thing as a period’s length: period 3 ends after 3p, while the 3d sub-shell fills during period 4, after 4s.</p>
-<p>Shells fill in a fixed order (the <em>aufbau</em> order: sub-shells sorted by <span class="math inline">\(n+l\)</span>, ties broken by <span class="math inline">\(n\)</span>). Carefully review how the functions translate an atomic number into a sub-shell configuration and then totals for each shell. We will compare lithium, carbon, neon and sodium: the beginning, middle and end of the second shell, followed by the first electron in the third shell.</p>
+<p>A shell is split into <strong>sub-shells</strong>, and a sub-shell is split into <strong>orbitals</strong>. These represent electron states allowed by quantum mechanics.</p>
+<p>Within shell <span class="math inline">\(n\)</span>, the sub-shell quantum number <span class="math inline">\(l\)</span> can take the values from 0 to <span class="math inline">\(n-1\)</span>. The traditional labels <code>s</code>, <code>p</code>, <code>d</code> and <code>f</code> mean <span class="math inline">\(l=0,1,2,3\)</span>. A sub-shell has <span class="math inline">\(2l+1\)</span> orbitals (so s has 1, p has 3, d has 5, f has 7), and the Pauli exclusion principle permits two electrons of opposite spin in each orbital, giving sub-shell capacities of 2, 6, 10 and 14 electrons.</p>
+<p>The first shell contains only a 1s sub-shell. The second contains 2s and 2p; the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as <span class="math inline">\(3p^5\)</span>, the <code>3</code> names the shell, <code>p</code> names the sub-shell, and the superscript means that five electrons occupy it (the letters are traditional names from spectroscopy).</p>
+<p>Shells fill in a fixed order (the <em>aufbau</em> order). Carefully review how the functions translate an atomic number into a sub-shell configuration and then totals for each shell. We will compare lithium, carbon, neon and sodium: the beginning, middle and end of the second shell, followed by the first electron in the third shell.</p>
 <div>
 <div id="pyodide-4" class="exercise-cell">
 
@@ -337,8 +300,6 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3Vic2hlbGxzID0gc29ydGVk
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRVhBTVBMRV9aID0gWzMsIDYsIDEwLCAxMV1cblxuZGVmIGRyYXdfc2hlbGxfZGlhZ3JhbShheCwgeiwgbGltaXQ9My41NSk6XG4gICAgY291bnRzID0gc2hlbGxzKHopXG4gICAgYXguc2V0X2FzcGVjdChcImVxdWFsXCIpXG4gICAgYXguYXhpcyhcIm9mZlwiKVxuICAgIGF4LnNldF94bGltKC1saW1pdCwgbGltaXQpXG4gICAgYXguc2V0X3lsaW0oLWxpbWl0LCBsaW1pdClcblxuICAgIGF4LnNjYXR0ZXIoWzBdLCBbMF0sIHM9MjMwLCBjb2xvcj1cIiMxNzE3MTdcIiwgem9yZGVyPTMpXG4gICAgYXguYW5ub3RhdGUoXG4gICAgICAgIHN5bWJvbFt6IC0gMV0sICgwLCAwKSwgY29sb3I9XCJ3aGl0ZVwiLFxuICAgICAgICBoYT1cImNlbnRlclwiLCB2YT1cImNlbnRlclwiLCBmb250c2l6ZT04LCBmb250d2VpZ2h0PVwiYm9sZFwiLCB6b3JkZXI9NCxcbiAgICApXG5cbiAgICBmb3IgbiwgY291bnQgaW4gY291bnRzLml0ZW1zKCk6XG4gICAgICAgIGF4LmFkZF9wYXRjaChcbiAgICAgICAgICAgIHBsdC5DaXJjbGUoKDAsIDApLCBuLCBmaWxsPUZhbHNlLCBjb2xvcj1cIiNiN2JjYzVcIiwgbHc9MS4yKVxuICAgICAgICApXG4gICAgICAgIGFuZ2xlcyA9IG5wLmxpbnNwYWNlKDAsIDIgKiBucC5waSwgY291bnQsIGVuZHBvaW50PUZhbHNlKSArIG5wLnBpIC8gMlxuICAgICAgICBheC5zY2F0dGVyKFxuICAgICAgICAgICAgbiAqIG5wLmNvcyhhbmdsZXMpLCBuICogbnAuc2luKGFuZ2xlcyksXG4gICAgICAgICAgICBzPTQ1LCBjb2xvcj1cIiM0MjY5ZDBcIiwgZWRnZWNvbG9yPVwid2hpdGVcIiwgbGluZXdpZHRoPTAuNSxcbiAgICAgICAgICAgIHpvcmRlcj0zLFxuICAgICAgICApXG5cbiAgICBzaGVsbF90ZXh0ID0gXCIsIFwiLmpvaW4oc3RyKGUpIGZvciBlIGluIGNvdW50cy52YWx1ZXMoKSlcbiAgICBheC5zZXRfdGl0bGUoXG4gICAgICAgIGZcIntuYW1lW3ogLSAxXX0gKHtzeW1ib2xbeiAtIDFdfSwgWj17en0pXFxue3NoZWxsX3RleHR9XCIsXG4gICAgICAgIGZvbnRzaXplPTExLCBwYWQ9NyxcbiAgICApXG5cbmZpZywgYXhlcyA9IHBsdC5zdWJwbG90cygyLCAyLCBmaWdzaXplPSg3LjUsIDcuNSkpXG5mb3IgYXgsIHogaW4gemlwKGF4ZXMucmF2ZWwoKSwgRVhBTVBMRV9aKTpcbiAgICBkcmF3X3NoZWxsX2RpYWdyYW0oYXgsIHopXG5cbmZpZy5zdXB0aXRsZShcIkhvdyBhbiBvdXRlciBzaGVsbCBmaWxscywgY2xvc2VzIGFuZCBzdGFydHMgYWdhaW5cIiwgZm9udHNpemU9MTUpXG5wbHQudGlnaHRfbGF5b3V0KHJlY3Q9WzAsIDAsIDEsIDAuOTZdKVxucGx0LnNob3coKSJ9
 </script>
 </div>
-<p>Lithium begins its second shell with one outer electron; carbon has four; neon closes that shell with eight; and sodium’s eleventh electron begins the third shell. Lithium and sodium therefore begin successive shells in the same way. When we later turn the element sequence into a table, that recurrence is something the layout should make easy to compare.</p>
-<p>As atomic number increases, several consecutive elements often add their distinguishing electron to the same kind of sub-shell. Chemists call such a run an <strong>electron block</strong>: an s-block run fills an s sub-shell, a p-block run fills a p sub-shell, and likewise for d and f.&nbsp;A block is therefore a label attached to the one-dimensional element sequence before we choose a visual layout. It does not yet have a shape or a width. A grid can turn a run into a rectangle; a spiral can turn the same run into an arc.</p>
 </section>
 </section>
 <section id="periodicity" class="level2">
