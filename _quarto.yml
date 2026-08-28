@@ -4,7 +4,7 @@ project:
   resources:
     - data/
   render:
-    - "*.qmd"
+    - "index.qmd"
     - "session1/*.qmd"
 
 website:

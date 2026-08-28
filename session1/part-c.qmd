@@ -1008,8 +1008,7 @@ the served file `objects_full.csv` adds the remaining kinds of object
 from the original figure: the neutron and the W boson on the quantum
 wall; three **photons** (gamma-ray, visible, radio) plotted at their
 effective mass $E/c^2$, which is why the whole electromagnetic spectrum
-lies exactly along the Compton line; the Planck instanton; the lightest
-primordial black hole that would survive to today (proton-sized); the
+lies exactly along the Compton line; the Planck instanton; the
 black hole whose Hawking temperature equals the cosmic microwave
 background; and a **giant void**, an underdense region of intergalactic
 space and the least dense object in the table.
@@ -1018,9 +1017,6 @@ space and the least dense object in the table.
 objects_full = pd.read_csv(open_url(DATA_URL + "objects_full.csv"))
 objects_full.tail(9)
 ```
-
-The photons form a seventh group that appears nowhere else on this page,
-so no colour has been chosen for it. That choice is yours.
 
 Your final chart should
 include:
