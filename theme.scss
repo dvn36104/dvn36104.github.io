@@ -29,6 +29,14 @@ div.sourceCode, pre.sourceCode {
   font-size: 0.85rem;
 }
 
+figcaption,
+.figure-caption {
+  color: #5a5f63;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  margin-top: 0.4rem;
+}
+
 // compact, consistent type in static Python blocks, live editors and text outputs
 $cell-code-font-size: 0.65rem;
 
