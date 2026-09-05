@@ -228,7 +228,7 @@
     "href": "index.html#session-2",
     "title": "Asynchronous sessions",
     "section": "Session 2",
-    "text": "Session 2\n\nPart A · The Spectral Locus\nPart B · Embeddings\nPart C · Streamlit 1\nPart D · Stars\nPart E · Streamlit 2\n\nSubmit through Canvas (assignment link to come):\n\nPart A: the image of your gamut-comparison chart: the four screen gamuts drawn over the filled spectral locus.\nPart B: the image of your pair-arrow chart from the “Find your own pattern” section, with your relation named in the chart title.\nPart C: the URL of your deployed Streamlit app, as a plain text file.\nPart D: the URL of your deployed star app, as a plain text file.\nPart E: the URL of your deployed multipage app, as a plain text file.\n\nSessions 1 and 2 are complete. Session 3 will appear here when it is released."
+    "text": "Session 2\n\nPart A · The Spectral Locus\nPart B · Embeddings\nPart C · Streamlit 1\nPart D · Stars\nPart E · Streamlit 2\n\nSubmit through Canvas:\n\nPart A: the image of your gamut-comparison chart: the four screen gamuts drawn over the filled spectral locus.\nPart B: the image of your pair-arrow chart from the “Find your own pattern” section, with your relation named in the chart title.\nPart C: the URL of your deployed Streamlit app, as a plain text file.\nPart D: the URL of your deployed star app, as a plain text file.\nPart E: the URL of your deployed multipage app, as a plain text file.\n\nSessions 1 and 2 are complete. Session 3 will appear here when it is released."
   },
   {
     "objectID": "session1/part-a.html",
