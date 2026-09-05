@@ -230,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Submit through <a href="https://canvas.uts.edu.au/courses/41964/assignments/293939">Canvas</a>:</p>
 <ul>
 <li><strong>Part A</strong>: the image of your gamut-comparison chart: the four screen gamuts drawn over the filled spectral locus.</li>
-<li><strong>Part B</strong>: the image of your pair-arrow chart from the “Find your own pattern” section, with your relation named in the chart title.</li>
+<li><strong>Part B</strong>: the image of your pair-arrow chart from the “Find your own pattern” section, your relation named in the title.</li>
 <li><strong>Part C</strong>: the URL of your deployed Streamlit app, as a plain text file.</li>
 <li><strong>Part D</strong>: the URL of your deployed star app, as a plain text file.</li>
 <li><strong>Part E</strong>: the URL of your deployed multipage app, as a plain text file.</li>
@@ -339,7 +339,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
