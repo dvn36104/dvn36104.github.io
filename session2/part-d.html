@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Stars – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#the-colour-of-a-star" id="toc-the-colour-of-a-star" class="nav-link active" data-scroll-target="#the-colour-of-a-star">1 · The colour of a star</a></li>
+  <li><a href="#the-planckian-locus" id="toc-the-planckian-locus" class="nav-link" data-scroll-target="#the-planckian-locus">2 · The Planckian locus</a></li>
+  <li><a href="#a-star-catalogue" id="toc-a-star-catalogue" class="nav-link" data-scroll-target="#a-star-catalogue">3 · A star catalogue</a></li>
+  <li><a href="#distance-radius-and-mass" id="toc-distance-radius-and-mass" class="nav-link" data-scroll-target="#distance-radius-and-mass">4 · Distance, radius, and mass</a></li>
+  <li><a href="#the-main-sequence" id="toc-the-main-sequence" class="nav-link" data-scroll-target="#the-main-sequence">5 · The Main Sequence</a></li>
+  <li><a href="#age" id="toc-age" class="nav-link" data-scroll-target="#age">6 · Age</a></li>
+  <li><a href="#metallicity" id="toc-metallicity" class="nav-link" data-scroll-target="#metallicity">7 · Metallicity</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Stars</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.slider-right {
+  position: relative;
+}
+
+.slider-right form {
+  position: absolute;
+  top: 70px;
+  left: 700px;
+  display: flex !important;
+  margin: 0;
+  padding: 0;
+}
+
+.slider-right .vega-bind {
+  margin: 0;
+  color: #4a463c;
+  font-size: 0.78rem;
+}
+
+.slider-right .vega-bind > label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slider-right input[type="range"] {
+  width: 24px;
+  height: 320px;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  appearance: slider-vertical;
+}
+
+@media (max-width: 950px) {
+  .slider-right form {
+    position: static;
+    margin: 0.5rem 0 0;
+  }
+}
+
+.sliders-side {
+  position: relative;
+}
+
+.sliders-side form {
+  position: absolute;
+  left: 345px;
+  top: 55px;
+  display: flex !important;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.sliders-side .vega-bind {
+  margin: 0;
+  color: #4a463c;
+  font-size: 0.8rem;
+}
+
+.sliders-side .vega-bind-name {
+  white-space: pre-line;
+  text-align: center;
+}
+
+.sliders-side .vega-bind > label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sliders-side .vega-bind input[type="range"] + label {
+  display: none;
+}
+
+.sliders-side input[type="range"] {
+  width: 24px;
+  height: 200px;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  appearance: slider-vertical;
+}
+
+@media (max-width: 950px) {
+  .sliders-side form {
+    position: static;
+    margin: 0.5rem 0 0;
+  }
+}
+</style>
+<p>This exercise will explore stars and their colour, building a small interactive streamlit app.</p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgcGFuZGFzIGFzIHBkXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5pbXBvcnQgYWx0YWlyIGFzIGFsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5cbkRBVEFfVVJMID0ganMubG9jYXRpb24uaHJlZi5zcGxpdChcInNpdGVfbGlicy9cIilbMF0gKyBcImRhdGEvXCJcblxucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XG4gICAgXCJheGVzLnNwaW5lcy50b3BcIjogRmFsc2UsIFwiYXhlcy5zcGluZXMucmlnaHRcIjogRmFsc2UsXG4gICAgXCJheGVzLmdyaWRcIjogVHJ1ZSwgXCJncmlkLmFscGhhXCI6IDAuMjIsIFwiZm9udC5zaXplXCI6IDExLFxufSlcblxuaW1wb3J0IHdhcm5pbmdzXG53aXRoIHdhcm5pbmdzLmNhdGNoX3dhcm5pbmdzKCk6XG4gICAgd2FybmluZ3Muc2ltcGxlZmlsdGVyKFwiaWdub3JlXCIpXG4gICAgYWx0LnRoZW1lcy5yZWdpc3RlcihcImNvdXJzZVwiLCBsYW1iZGE6IHtcbiAgICAgICAgXCJjb25maWdcIjoge1xuICAgICAgICAgICAgXCJ0aXRsZVwiOiB7XCJmb250U2l6ZVwiOiAxOSwgXCJzdWJ0aXRsZUZvbnRTaXplXCI6IDEzfSxcbiAgICAgICAgICAgIFwiYXhpc1wiOiB7XCJ0aXRsZUZvbnRTaXplXCI6IDE0LCBcImxhYmVsRm9udFNpemVcIjogMTIuNX0sXG4gICAgICAgIH19KVxuICAgIGFsdC50aGVtZXMuZW5hYmxlKFwiY291cnNlXCIpXG5cbmFsdC5kYXRhX3RyYW5zZm9ybWVycy5kaXNhYmxlX21heF9yb3dzKClcblxucHJpbnQoXCJFbnZpcm9ubWVudCByZWFkeS5cIikifQ==
+</script>
+</div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiIyBIaWRkZW4gc3RhdGUgY2VsbC4gUHJlLWRlZmluZSBoZXJlIGV2ZXJ5IG5hbWUgdGhhdCBsYXRlciBjZWxscyB1c2UsIHNvXG4jIGVhY2ggY2VsbCB3b3JrcyBubyBtYXR0ZXIgd2hpY2ggY2VsbHMgd2VyZSBydW4gYmVmb3JlIGl0LlxuY2llID0gcGQucmVhZF9jc3YoXG4gICAgb3Blbl91cmwoREFUQV9VUkwgKyBcIkNJRV94eXpfMTkzMV8yZGVnLmNzdlwiKSxcbiAgICBoZWFkZXI9Tm9uZSwgbmFtZXM9W1wid2F2ZWxlbmd0aFwiLCBcInhiYXJcIiwgXCJ5YmFyXCIsIFwiemJhclwiXSxcbikucXVlcnkoXCIzODAgPD0gd2F2ZWxlbmd0aCA8PSA3MDBcIilcbmNpZV93bCA9IGNpZVtcIndhdmVsZW5ndGhcIl0udG9fbnVtcHkoKVxuY2llX2JhciA9IGNpZVtbXCJ4YmFyXCIsIFwieWJhclwiLCBcInpiYXJcIl1dLnRvX251bXB5KClcblxuZGVmIHBsYW5jayh3bF9ubSwgVCk6XG4gICAgd2wgPSB3bF9ubSAqIDFlLTlcbiAgICBjMiA9IDEuNDM4Nzc2ODc3ZS0yXG4gICAgdiA9IDEgLyAod2wqKjUgKiBucC5leHBtMShjMiAvICh3bCAqIFQpKSlcbiAgICByZXR1cm4gdiAvIHYubWF4KClcblxuZGVmIGJiX3JnYihUKTpcbiAgICAjIEFwcHJveGltYXRlIHNSR0IgY29sb3VyIG9mIGEgYmxhY2sgYm9keSBhdCB0ZW1wZXJhdHVyZSBULlxuICAgIFhZWiA9IGNpZV9iYXIuVCBAIHBsYW5jayhjaWVfd2wsIFQpXG4gICAgWFlaID0gWFlaIC8gWFlaWzFdXG4gICAgTSA9IG5wLmFycmF5KFtbIDMuMjQwNiwgLTEuNTM3MiwgLTAuNDk4Nl0sXG4gICAgICAgICAgICAgICAgICBbLTAuOTY4OSwgIDEuODc1OCwgIDAuMDQxNV0sXG4gICAgICAgICAgICAgICAgICBbIDAuMDU1NywgLTAuMjA0MCwgIDEuMDU3MF1dKVxuICAgIHJnYiA9IG5wLmNsaXAoTSBAIFhZWiwgMCwgTm9uZSlcbiAgICByZ2IgPSByZ2IgLyByZ2IubWF4KClcbiAgICByZ2IgPSAxLjA1NSAqIHJnYiAqKiAoMSAvIDIuNCkgLSAwLjA1NSAgICMgdGhlIGRpc3BsYXkgZ2FtbWFcbiAgICByZXR1cm4gdHVwbGUobnAuY2xpcChyZ2IsIDAsIDEpKVxuXG5TVU5fVCA9IDU3NzIuMFxuXG5kZWYgc3BlY3RyYWxfY2xhc3MoVCk6XG4gICAgZm9yIGxldHRlciwgbG93IGluIFsoXCJPXCIsIDMwMDAwKSwgKFwiQlwiLCAxMDAwMCksIChcIkFcIiwgNzUwMCksXG4gICAgICAgICAgICAgICAgICAgICAgICAoXCJGXCIsIDYwMDApLCAoXCJHXCIsIDUyMDApLCAoXCJLXCIsIDM3MDApXTpcbiAgICAgICAgaWYgVCA+PSBsb3c6XG4gICAgICAgICAgICByZXR1cm4gbGV0dGVyXG4gICAgcmV0dXJuIFwiTVwiXG5cbmRlZiBzdGFyX25vdyhtYXNzLCBaLCBhZ2UpOlxuICAgICMgU2NoZW1hdGljIHN0ZWxsYXIgZXZvbHV0aW9uLiBtYXNzIGluIHN1bnMsIFogaGVhdnktZWxlbWVudCBtYXNzXG4gICAgIyBmcmFjdGlvbiwgYWdlIGluIEd5ci4gRXZlcnkgcmVsYXRpb24gaXMgYSBydWxlIG9mIHRodW1iLlxuICAgIG5vdGVzID0gW11cbiAgICB6ciA9IG1heChaLCAxZS01KSAvIDAuMDJcbiAgICBpZiBhZ2UgPiAxMy44OlxuICAgICAgICBub3Rlcy5hcHBlbmQoXCJvbGRlciB0aGFuIHRoZSB1bml2ZXJzZTogYSBmb3JlY2FzdCwgc2luY2Ugbm8gc3VjaCBvYmplY3QgZXhpc3RzIHlldFwiKVxuICAgIGlmIG1hc3MgPCAwLjAxMzpcbiAgICAgICAgcmV0dXJuIGRpY3QocGhhc2U9XCJwbGFuZXRcIiwgVD0zMDAsIEw9MWUtOSwgUj0wLjAwMSxcbiAgICAgICAgICAgICAgICAgICAgbm90ZXM9bm90ZXMgKyBbXCJ0b28gbGlnaHQgZm9yIGFueSBmdXNpb25cIl0pXG4gICAgaWYgbWFzcyA8IDAuMDg6XG4gICAgICAgIFQgPSBtaW4oMjYwMCAqICgwLjUgLyBtYXgoYWdlLCAwLjAxKSkqKjAuMTUsIDI4MDApXG4gICAgICAgIHJldHVybiBkaWN0KHBoYXNlPVwiYnJvd24gZHdhcmZcIiwgVD1ULCBMPTFlLTQgKiBtYXNzIC8gMC4wNSwgUj0wLjEsXG4gICAgICAgICAgICAgICAgICAgIG5vdGVzPW5vdGVzICsgW1wiZnVzZXMgbm8gb3JkaW5hcnkgaHlkcm9nZW47IGNvb2xzIGZvcmV2ZXJcIl0pXG4gICAgTCA9IG1hc3MqKjMuNSAqIHpyKiotMC4xXG4gICAgUiA9IG1hc3MqKjAuOCAgICAgICAgICAgICMgdGhlIHRhdWdodCByZWxhdGlvbiwgZ29vZCB0byB0ZW5zIG9mIHBlcmNlbnRcbiAgICBUID0gU1VOX1QgKiAoTCAvIFIqKjIpKiowLjI1XG4gICAgdF9wcmUgPSAwLjAzICogbWFzcyoqLTEuNVxuICAgIHRfbXMgPSAoMTAuMCAqIG1hc3MqKi0yLjUgKiAoMSArIDIuNSAqIG5wLmV4cCgtbWFzcyAvIDAuMTIpKVxuICAgICAgICAgICAgKyAwLjAwMjUpICAgIyBFZGRpbmd0b24gZmxvb3I7IGNvbnZlY3RpdmUgc3RyZXRjaCBhdCBsb3cgbWFzc1xuICAgIGlmIGFnZSA8IHRfcHJlOlxuICAgICAgICAjIDN4IHRoZSBtYWluLXNlcXVlbmNlIHJhZGl1czogYSBjcnVkZSBzdGFuZC1pbiBmb3IgdGhlXG4gICAgICAgICMgY29udHJhY3RpbmcgY2xvdWQ7IHJlYWwgcHJvdG9zdGFycyB2YXJ5IHdpbGRseVxuICAgICAgICByZXR1cm4gZGljdChwaGFzZT1cInByb3Rvc3RhclwiLCBUPTAuNzUgKiBULCBMPTIgKiBMLCBSPTMgKiBSLFxuICAgICAgICAgICAgICAgICAgICBub3Rlcz1ub3RlcyArIFtcInN0aWxsIGNvbnRyYWN0aW5nIG9udG8gdGhlIG1haW4gc2VxdWVuY2VcIl0pXG4gICAgaWYgYWdlIDwgdF9tczpcbiAgICAgICAgY2xzID0gc3BlY3RyYWxfY2xhc3MoVClcbiAgICAgICAgZXh0cmEgPSBbXCJpdHMgbWFpbiBzZXF1ZW5jZSBvdXRsaXZlcyB0aGUgdW5pdmVyc2UgbWFueSB0aW1lcyBvdmVyXCJdIGlmIHRfbXMgPiAxMy44IGVsc2UgW11cbiAgICAgICAgcmV0dXJuIGRpY3QocGhhc2U9ZlwibWFpbiBzZXF1ZW5jZSwgY2xhc3Mge2Nsc31cIiwgVD1ULCBMPUwsIFI9UixcbiAgICAgICAgICAgICAgICAgICAgbm90ZXM9bm90ZXMgKyBbZlwibWFpbi1zZXF1ZW5jZSBsaWZldGltZSB7dF9tczouMmd9IEd5clwiXSArIGV4dHJhKVxuICAgIGlmIGFnZSA8IDEuMTUgKiB0X21zIGFuZCAwLjI1IDw9IG1hc3MgPCA4OlxuICAgICAgICAjIGEgcmFtcCBpbmZsYXRpbmcgdGhlIHJhZGl1cyB0b3dhcmQgfjEwMCBzdW5zIGFjcm9zcyB0aGUgZ2lhbnRcbiAgICAgICAgIyBwaGFzZTogdGhlIG1vc3QgaW52ZW50ZWQgcnVsZSBoZXJlLiBSZWFsIGdpYW50cyBzcGFuIH4xMCB0b1xuICAgICAgICAjIHNldmVyYWwgaHVuZHJlZCBzb2xhciByYWRpaSBhbmQgZ3JvdyBvbiBubyBuZWF0IHNjaGVkdWxlLlxuICAgICAgICBSZyA9IG1heChSICogMTAwICogKGFnZSAtIHRfbXMgKyAwLjAyKSAvICgwLjE1ICogdF9tcyArIDAuMDIpLCAxMClcbiAgICAgICAgVGcgPSAzOTAwLjBcbiAgICAgICAgcmV0dXJuIGRpY3QocGhhc2U9XCJyZWQgZ2lhbnRcIiwgVD1UZywgTD0oUmcqKjIpICogKFRnIC8gU1VOX1QpKio0LCBSPVJnLFxuICAgICAgICAgICAgICAgICAgICBub3Rlcz1ub3RlcyArIFtcImh5ZHJvZ2VuIHNoZWxsIGJ1cm5pbmc7IHRoZSBTdW4gcmVhY2hlcyB0aGlzIGF0IGFib3V0IDEyIEd5clwiXSlcbiAgICBpZiBhZ2UgPCAxLjE1ICogdF9tczpcbiAgICAgICAgIyBtYXNzID49IDg6IHRoZSBzdXBlcmdpYW50IGZpbmFsZSwgYmx1ZSB0aGVuIHJlZC4gUmlnZWwtbGlrZVxuICAgICAgICAjIHNpemVzIGVhcmx5ICh0ZW5zIG9mIHNvbGFyIHJhZGlpIGF0IH4xMiwwMDAgSyksIEJldGVsZ2V1c2UtXG4gICAgICAgICMgbGlrZSBsYXRlciAoaHVuZHJlZHMgb2Ygc29sYXIgcmFkaWkgYXQgfjMsNTAwIEspLlxuICAgICAgICBmcmFjID0gKGFnZSAtIHRfbXMpIC8gKDAuMTUgKiB0X21zKVxuICAgICAgICBpZiBmcmFjIDwgMC40OlxuICAgICAgICAgICAgVHNnLCBSc2csIG5hbWUgPSAxMjAwMC4wLCAzMCArIDEyMCAqIGZyYWMsIFwiYmx1ZSBzdXBlcmdpYW50XCJcbiAgICAgICAgZWxzZTpcbiAgICAgICAgICAgIFRzZywgUnNnLCBuYW1lID0gMzUwMC4wLCBtaW4oMjAwICsgOTAwICogZnJhYywgOTAwKSwgXCJyZWQgc3VwZXJnaWFudFwiXG4gICAgICAgIHJldHVybiBkaWN0KHBoYXNlPW5hbWUsIFQ9VHNnLCBMPShSc2cqKjIpICogKFRzZyAvIFNVTl9UKSoqNCwgUj1Sc2csXG4gICAgICAgICAgICAgICAgICAgIG5vdGVzPW5vdGVzICsgW1wiYnVybmluZyBoZWF2aWVyIGFuZCBoZWF2aWVyIGVsZW1lbnRzOyBjbG9zZSB0byBjb3JlIGNvbGxhcHNlXCJdKVxuICAgIGlmIG1hc3MgPCA4OlxuICAgICAgICB0X2Nvb2wgPSBtYXgoYWdlIC0gMS4xNSAqIHRfbXMsIDAuMDAxKVxuICAgICAgICBUd2QgPSBmbG9hdChucC5jbGlwKDYwMDAwLjAgKiAoMC4wMSAvIHRfY29vbCkqKjAuMywgMzUwMCwgMTUwMDAwKSlcbiAgICAgICAgd2RfbWFzcyA9IDAuNSArIDAuMSAqIG1hc3NcbiAgICAgICAgZXh0cmEgPSBbXCJwbGFuZXRhcnkgbmVidWxhIHN0aWxsIGdsb3dpbmcgYXJvdW5kIGl0XCJdIGlmIHRfY29vbCA8IDAuMDMgZWxzZSBbXVxuICAgICAgICAjIFIgZml4ZWQgYXQgMC4wMDkgc3VucyAoRWFydGgtc2l6ZWQpOiB0aGUgcmlnaHQgYmFsbHBhcmssXG4gICAgICAgICMgdGhvdWdoIHJlYWwgd2hpdGUgZHdhcmZzIHNocmluayBhcyB0aGVpciBtYXNzIGdyb3dzXG4gICAgICAgIHJldHVybiBkaWN0KHBoYXNlPWZcIndoaXRlIGR3YXJmLCB7d2RfbWFzczouMWZ9IHN1bnMgcmVtYWluaW5nXCIsIFQ9VHdkLFxuICAgICAgICAgICAgICAgICAgICBMPSgwLjAwOSoqMikgKiAoVHdkIC8gU1VOX1QpKio0LCBSPTAuMDA5LFxuICAgICAgICAgICAgICAgICAgICBub3Rlcz1ub3RlcyArIGV4dHJhICsgW1wiRWFydGgtc2l6ZWQ7IGNvb2xpbmcgZm9yZXZlclwiXSlcbiAgICBpZiAxNDAgPD0gbWFzcyA8PSAyNjAgYW5kIFogPCAwLjAwMTpcbiAgICAgICAgcmV0dXJuIGRpY3QocGhhc2U9XCJwYWlyLWluc3RhYmlsaXR5IHN1cGVybm92YVwiLCBUPU5vbmUsIEw9Tm9uZSwgUj1Ob25lLFxuICAgICAgICAgICAgICAgICAgICBub3Rlcz1ub3RlcyArIFtcInRoZSBzdGFyIGJsZXcgaXRzZWxmIGFwYXJ0IGNvbXBsZXRlbHk7IG5vIHJlbW5hbnQgYXQgYWxsXCJdKVxuICAgIGlmIG1hc3MgPCAxOCArIDcgKiB6cjpcbiAgICAgICAgIyBSIGZpeGVkIGF0IDEuN2UtNSBzdW5zID0gMTIga20sIHRoZSBtZWFzdXJlZCB2YWx1ZVxuICAgICAgICByZXR1cm4gZGljdChwaGFzZT1cIm5ldXRyb24gc3RhclwiLCBUPTFlNiwgTD1Ob25lLCBSPTEuN2UtNSxcbiAgICAgICAgICAgICAgICAgICAgbm90ZXM9bm90ZXMgKyBbXCJjb3JlLWNvbGxhcHNlIHN1cGVybm92YSwgdGhlbiBhIDEyIGttIGJhbGwgb2YgbmV1dHJvbnNcIl0pXG4gICAgIyBSIGhlcmUgaXMgdGhlIHRydWUgU2Nod2FyenNjaGlsZCByYWRpdXMsIDJHTS9jXjIgPSA0LjJlLTYgc3Vuc1xuICAgICMgcGVyIDEwIHNvbGFyIG1hc3NlczogdGhlIG9uZSByaWdvcm91cyByYWRpdXMgaW4gdGhlIG1vZGVsXG4gICAgcmV0dXJuIGRpY3QocGhhc2U9XCJibGFjayBob2xlXCIsIFQ9Tm9uZSwgTD1Ob25lLCBSPTQuMmUtNiAqIG1hc3MgLyAxMCxcbiAgICAgICAgICAgICAgICBub3Rlcz1ub3RlcyArIFtcImNvcmUtY29sbGFwc2U7IHRoZSBjb3JlIGZlbGwgdGhyb3VnaCBpdHMgb3duIGhvcml6b25cIl0pXG5cbnN0YXJzID0gcGQucmVhZF9qc29uKG9wZW5fdXJsKERBVEFfVVJMICsgXCJzdGFyc19tYWc5NS5qc29uXCIpKVxuaHlnID0gcGQucmVhZF9jc3Yob3Blbl91cmwoREFUQV9VUkwgKyBcImh5Z19zdGFycy5jc3ZcIikpXG5cblNLWSwgTkFWWSA9IFwiIzRmYzNmN1wiLCBcIiMyNTJmNmJcIlxuXG5fc3RlcCA9IDAuMDVcbl9lZGdlcyA9IG5wLmFyYW5nZSgtMi41LCAxMSArIF9zdGVwLCBfc3RlcClcbl9jbnQsIF8gPSBucC5oaXN0b2dyYW0oc3RhcnNbXCJ2bWFnXCJdLnRvX251bXB5KCksIGJpbnM9X2VkZ2VzKVxuX2t4ID0gbnAuYXJhbmdlKC0xLjAsIDEuMCArIF9zdGVwLCBfc3RlcClcbl9rZXJuID0gbnAuZXhwKC0wLjUgKiAoX2t4IC8gMC4yNSkgKiogMilcbmRlbnMgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFnbml0dWRlXCI6IF9lZGdlc1s6LTFdICsgX3N0ZXAgLyAyLFxuICAgIFwiZGVuc2l0eVwiOiBucC5jb252b2x2ZShfY250LCBfa2VybiAvIF9rZXJuLnN1bSgpLCBtb2RlPVwic2FtZVwiKVxuICAgICAgICAgICAgICAgLyAobGVuKHN0YXJzKSAqIF9zdGVwKSxcbn0pXG5kZW5zW1wic2lkZVwiXSA9IG5wLndoZXJlKGRlbnNbXCJtYWduaXR1ZGVcIl0gPD0gNi41LCBcInZpc2libGVcIiwgXCJpbnZpc2libGVcIilcblxuZGVmIG5vdGUodGV4dCwgY29sb3VyLCB4X3B4LCB5X3B4LCBzaXplPTEzLCBib2xkPUZhbHNlLCByaWdodD1GYWxzZSk6XG4gICAgcmV0dXJuIGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1widFwiOiBbdGV4dF19KSkubWFya190ZXh0KFxuICAgICAgICBhbGlnbj1cInJpZ2h0XCIgaWYgcmlnaHQgZWxzZSBcImxlZnRcIiwgZm9udFNpemU9c2l6ZSwgY29sb3I9Y29sb3VyLFxuICAgICAgICBmb250V2VpZ2h0PVwiYm9sZFwiIGlmIGJvbGQgZWxzZSBcIm5vcm1hbFwiKS5lbmNvZGUoXG4gICAgICAgIHg9YWx0LnZhbHVlKHhfcHgpLCB5PWFsdC52YWx1ZSh5X3B4KSwgdGV4dD1cInQ6TlwiKVxuXG5kZWYgZGVzY3JpYmVfc3RhcihtYXNzLCBaLCBhZ2UpOlxuICAgIGQgPSBzdGFyX25vdyhtYXNzLCBaLCBhZ2UpXG4gICAgcHJpbnQoZlwibWFzcyB7bWFzc30gc3VucyDCtyBtZXRhbGxpY2l0eSB7Wn0gwrcgYWdlIHthZ2V9IEd5clwiKVxuICAgIHByaW50KFwiLT5cIiwgZFtcInBoYXNlXCJdLnVwcGVyKCkpXG4gICAgaWYgZFtcIlRcIl06IHByaW50KGZcIiAgIHN1cmZhY2UgdGVtcGVyYXR1cmUge2RbJ1QnXTosLjBmfSBLXCIpXG4gICAgaWYgZFtcIkxcIl06IHByaW50KGZcIiAgIGx1bWlub3NpdHkge2RbJ0wnXTouM2d9IHN1bnNcIilcbiAgICBpZiBkW1wiUlwiXTogcHJpbnQoZlwiICAgcmFkaXVzIHtkWydSJ106LjNnfSBzdW5zXCIpXG4gICAgZm9yIG4gaW4gZFtcIm5vdGVzXCJdOlxuICAgICAgICBwcmludChcIiAgIFwiICsgbilcblxuICAgIGZpZywgKGF4MSwgYXgyKSA9IHBsdC5zdWJwbG90cygxLCAyLCBmaWdzaXplPSgxMCwgNC42KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ3JpZHNwZWNfa3c9e1wid2lkdGhfcmF0aW9zXCI6IFsxLjE1LCAxXX0pXG4gICAgbXMgPSBucC5nZW9tc3BhY2UoMC4wOCwgNjAsIDYwKVxuICAgIExtcyA9IG1zKiozLjVcbiAgICBUbXMgPSBTVU5fVCAqIChMbXMgLyAobXMqKjAuOCkqKjIpKiowLjI1XG4gICAgYXgxLnBsb3QoVG1zLCBMbXMsIGNvbG9yPVwiI2M4YzhjOFwiLCBsdz01LCBzb2xpZF9jYXBzdHlsZT1cInJvdW5kXCIsIHpvcmRlcj0xKVxuICAgIGF4MS50ZXh0KDkwMDAsIDNlLTMsIFwibWFpbiBzZXF1ZW5jZVwiLCBjb2xvcj1cIiM5YWExYThcIiwgcm90YXRpb249MzMpXG4gICAgYXgxLnRleHQoNDMwMCwgNGUyLCBcImdpYW50c1wiLCBjb2xvcj1cIiM5YWExYThcIilcbiAgICBheDEudGV4dCgyMDAwMCwgM2UtNCwgXCJ3aGl0ZSBkd2FyZnNcIiwgY29sb3I9XCIjOWFhMWE4XCIpXG4gICAgaWYgZFtcIlRcIl0gYW5kIGRbXCJMXCJdOlxuICAgICAgICBheDEuc2NhdHRlcihbZFtcIlRcIl1dLCBbZFtcIkxcIl1dLCBzPTE3MCwgY29sb3I9YmJfcmdiKGRbXCJUXCJdKSxcbiAgICAgICAgICAgICAgICAgICAgZWRnZWNvbG9yPVwiIzQ0NDQ0NFwiLCB6b3JkZXI9MylcbiAgICBlbHNlOlxuICAgICAgICBheDEudGV4dCg2MDAwLCAxZTUsIFwib2ZmIHRoaXMgY2hhcnRcIiwgaGE9XCJjZW50ZXJcIiwgZm9udHNpemU9MTEpXG4gICAgYXgxLnNldF94c2NhbGUoXCJsb2dcIik7IGF4MS5zZXRfeXNjYWxlKFwibG9nXCIpXG4gICAgYXgxLnNldF94bGltKDQ1MDAwLCAyMzAwKTsgYXgxLnNldF95bGltKDFlLTUsIDFlNilcbiAgICBheDEuc2V0X3hsYWJlbChcInN1cmZhY2UgdGVtcGVyYXR1cmUgKEspLCBob3Qgb24gdGhlIGxlZnRcIilcbiAgICBheDEuc2V0X3lsYWJlbChcImx1bWlub3NpdHkgKHN1bnMpXCIpXG5cbiAgICBheDIuc2V0X3hsaW0oLTEsIDEpOyBheDIuc2V0X3lsaW0oLTEsIDEpXG4gICAgYXgyLnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXgyLmF4aXMoXCJvZmZcIilcbiAgICBwaCA9IGRbXCJwaGFzZVwiXVxuICAgIGlmIFwiYmxhY2sgaG9sZVwiIGluIHBoOlxuICAgICAgICBheDIuYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCAwLjMwLCBjb2xvcj1cImJsYWNrXCIsIHpvcmRlcj0zKSlcbiAgICAgICAgYXgyLmFkZF9wYXRjaChwbHQuQ2lyY2xlKCgwLCAwKSwgMC4zNCwgZmlsbD1GYWxzZSwgY29sb3I9XCIjRTA3MDAwXCIsIGx3PTMpKVxuICAgICAgICBsYWJlbCA9IFwiZXZlbnQgaG9yaXpvbiBhbmQgZ2xvd2luZyBkaXNjXCJcbiAgICBlbGlmIFwicGFpci1pbnN0YWJpbGl0eVwiIGluIHBoOlxuICAgICAgICBybmcgPSBucC5yYW5kb20uZGVmYXVsdF9ybmcoNClcbiAgICAgICAgcHRzID0gcm5nLm5vcm1hbCgwLCAwLjQ1LCAoMTIwLCAyKSlcbiAgICAgICAgYXgyLnNjYXR0ZXIocHRzWzosIDBdLCBwdHNbOiwgMV0sIHM9NiwgY29sb3I9XCIjRTA3MDAwXCIpXG4gICAgICAgIGxhYmVsID0gXCJkZWJyaXMsIGV4cGFuZGluZ1wiXG4gICAgZWxpZiBcIm5ldXRyb24gc3RhclwiIGluIHBoOlxuICAgICAgICBheDIuYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCAwLjA1LCBjb2xvcj1cIiNDREU3RkZcIikpXG4gICAgICAgIGxhYmVsID0gXCIxMiBrbSBhY3Jvc3MsIGRyYXduIGZhciB0b28gbGFyZ2VcIlxuICAgIGVsc2U6XG4gICAgICAgIHIgPSBmbG9hdChucC5jbGlwKDAuMDYgKyAwLjEwICogKG5wLmxvZzEwKG1heChkW1wiUlwiXSwgMWUtMykpICsgMyksXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDAuMDMsIDAuODUpKVxuICAgICAgICBheDIuYWRkX3BhdGNoKHBsdC5DaXJjbGUoKDAsIDApLCByLCBjb2xvcj1iYl9yZ2IoZFtcIlRcIl0pLCB6b3JkZXI9MykpXG4gICAgICAgIGxhYmVsID0gZlwicmFkaXVzIHtkWydSJ106LjNnfSBzdW5zLCBkcmF3biB0byBsb2cgc2NhbGVcIlxuICAgIGF4Mi5zZXRfdGl0bGUocGgsIGZvbnRzaXplPTEyKVxuICAgIGF4Mi50ZXh0KDAsIC0wLjkyLCBsYWJlbCwgaGE9XCJjZW50ZXJcIiwgZm9udHNpemU9OSwgY29sb3I9XCIjNUE1RjYzXCIpXG4gICAgcGx0LnNob3coKSJ9
+</script>
+</div>
+<section id="the-colour-of-a-star" class="level2">
+<h2 class="anchored" data-anchor-id="the-colour-of-a-star">1 · The colour of a star</h2>
+<p>Planck’s law, named after Max Planck, gives the spectrum radiated by a <strong>black body</strong>: an idealised object that absorbs all light falling on it, so everything it emits comes from its own heat:</p>
+<p><span class="math display">\[B_\lambda(T)=\frac{2hc^2}{\lambda^5}\,
+\frac{1}{e^{hc/(\lambda k T)}-1}.\]</span></p>
+<p><span class="math inline">\(B_\lambda\)</span> is the emitted power per unit wavelength, <span class="math inline">\(\lambda\)</span> is the wavelength, <span class="math inline">\(T\)</span> is the temperature in kelvin (the only free variable in the equation), <span class="math inline">\(h\)</span> is Planck’s constant (which sets the energy carried by a photon of a given wavelength), <span class="math inline">\(c\)</span> is the speed of light and <span class="math inline">\(k\)</span> is Boltzmann’s constant (which converts temperature into energy). A star’s surface radiates close to this law, so temperature fixes the shape of a star’s spectrum. The following plots the spectra of stars radiating at four different temperatures:</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHBsYW5jayh3bF9ubSwgVCk6XG4gICAgd2wgPSB3bF9ubSAqIDFlLTlcbiAgICBjMiA9IDEuNDM4Nzc2ODc3ZS0yXG4gICAgdiA9IDEgLyAod2wqKjUgKiBucC5leHBtMShjMiAvICh3bCAqIFQpKSlcbiAgICByZXR1cm4gdiAvIHYubWF4KClcblxud2wgPSBucC5saW5zcGFjZSgxMDAsIDIwMDAsIDYwMClcbmxpbmVfY29sb3VycyA9IHtcIjMsMDAwIEtcIjogXCIjN2YxMDEwXCIsIFwiNSw3NzIgS1wiOiBcIiNiODNhMDBcIixcbiAgICAgICAgICAgICAgICBcIjEwLDAwMCBLXCI6IFwiI2RlN2QwMFwiLCBcIjIwLDAwMCBLXCI6IFwiI2UzYjUwNVwifVxuc3BlY3RyYSA9IHBkLmNvbmNhdChbXG4gICAgcGQuRGF0YUZyYW1lKHtcIndhdmVsZW5ndGhcIjogd2wsIFwicG93ZXJcIjogcGxhbmNrKHdsLCBUKSxcbiAgICAgICAgICAgICAgICAgIFwidGVtcGVyYXR1cmVcIjogZlwie1Q6LH0gS1wifSlcbiAgICBmb3IgVCBpbiBbMzAwMCwgNTc3MiwgMTAwMDAsIDIwMDAwXVxuXSlcblxuIyByYWluYm93IHN0cmlwIHVuZGVyIHRoZSBheGlzOiBlYWNoIHB1cmUgd2F2ZWxlbmd0aCB0aHJvdWdoIHRoZVxuIyBDSUUtdG8tc1JHQiBjb252ZXJzaW9uICh3YXZlbGVuZ3RocyBwYXN0IDcwMCBubSByZXVzZSB0aGUgNzAwIG5tIGh1ZSlcblJHQl9NID0gbnAuYXJyYXkoW1sgMy4yNDA2LCAtMS41MzcyLCAtMC40OTg2XSxcbiAgICAgICAgICAgICAgICAgIFstMC45Njg5LCAgMS44NzU4LCAgMC4wNDE1XSxcbiAgICAgICAgICAgICAgICAgIFsgMC4wNTU3LCAtMC4yMDQwLCAgMS4wNTcwXV0pXG5yYWluID0gW11cbmZvciB3IGluIG5wLmFyYW5nZSgzODAsIDc4MCwgNSk6XG4gICAgYyA9IG5wLmNsaXAoUkdCX00gQCBjaWVfYmFyW25wLmFyZ21pbihucC5hYnMoY2llX3dsIC0gbWluKHcsIDcwMCkpKV0sXG4gICAgICAgICAgICAgICAgMCwgTm9uZSlcbiAgICBjID0gbnAuY2xpcCgxLjA1NSAqIChjIC8gYy5tYXgoKSkgKiogKDEgLyAyLjQpIC0gMC4wNTUsIDAsIDEpXG4gICAgcmFpbi5hcHBlbmQoZGljdChcbiAgICAgICAgd2F2ZWxlbmd0aD13LCB3bDI9dyArIDUsIHBvd2VyPS0wLjA5LCBwMj0tMC4wMyxcbiAgICAgICAgY29sb3VyPWZcInJnYih7aW50KGNbMF0qMjU1KX0se2ludChjWzFdKjI1NSl9LHtpbnQoY1syXSoyNTUpfSlcIikpXG5yYWluID0gcGQuRGF0YUZyYW1lKHJhaW4pXG5cblhfVElUTEUsIFlfVElUTEUgPSBcIndhdmVsZW5ndGggKG5tKVwiLCBcInJlbGF0aXZlIHBvd2VyLCBlYWNoIGN1cnZlIHNjYWxlZCB0byAxXCJcbnhzY2FsZSA9IGFsdC5TY2FsZShkb21haW49WzEwMCwgMjAwMF0sIG5pY2U9RmFsc2UsIHplcm89RmFsc2UpXG55c2NhbGUgPSBhbHQuU2NhbGUoZG9tYWluPVstMC4wOSwgMS4xMl0sIG5pY2U9RmFsc2UsIHplcm89RmFsc2UpXG5cbmJhbmQgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKHtcIndhdmVsZW5ndGhcIjogWzM4MF0sIFwid2wyXCI6IFs3ODBdfSlcbiAgICAgICAgICAgICAgICAgKS5tYXJrX3JlY3QoY29sb3I9XCIjZGJlOWY2XCIsIG9wYWNpdHk9MC42KS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIndhdmVsZW5ndGg6UVwiLCB0aXRsZT1YX1RJVExFLCBzY2FsZT14c2NhbGUpLCB4Mj1cIndsMjpRXCIpXG5cbnJhaW5ib3cgPSBhbHQuQ2hhcnQocmFpbikubWFya19yZWN0KCkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9WF9USVRMRSwgc2NhbGU9eHNjYWxlKSwgeDI9XCJ3bDI6UVwiLFxuICAgIHk9YWx0LlkoXCJwb3dlcjpRXCIsIHRpdGxlPVlfVElUTEUsIHNjYWxlPXlzY2FsZSksIHkyPVwicDI6UVwiLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImNvbG91cjpOXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSlcblxubGluZXMgPSBhbHQuQ2hhcnQoc3BlY3RyYSkubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9WF9USVRMRSwgc2NhbGU9eHNjYWxlKSxcbiAgICB5PWFsdC5ZKFwicG93ZXI6UVwiLCB0aXRsZT1ZX1RJVExFLCBzY2FsZT15c2NhbGUsXG4gICAgICAgICAgICBheGlzPWFsdC5BeGlzKHZhbHVlcz1bMCwgMC4yNSwgMC41LCAwLjc1LCAxXSkpLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcInRlbXBlcmF0dXJlOk5cIiwgdGl0bGU9Tm9uZSxcbiAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1saXN0KGxpbmVfY29sb3VycyksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByYW5nZT1saXN0KGxpbmVfY29sb3Vycy52YWx1ZXMoKSkpKSxcbilcblxubGFiZWwgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKFxuICAgIHtcIndhdmVsZW5ndGhcIjogWzU4MF0sIFwicG93ZXJcIjogWzEuMDddLCBcIm5vdGVcIjogW1widmlzaWJsZVwiXX0pXG4gICAgKS5tYXJrX3RleHQoY29sb3I9XCIjNWI3ZmE2XCIsIGZvbnRTaXplPTExKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIndhdmVsZW5ndGg6UVwiLCB0aXRsZT1YX1RJVExFLCBzY2FsZT14c2NhbGUpLFxuICAgIHk9YWx0LlkoXCJwb3dlcjpRXCIsIHRpdGxlPVlfVElUTEUsIHNjYWxlPXlzY2FsZSksIHRleHQ9XCJub3RlOk5cIilcblxuYWx0LmxheWVyKGJhbmQsIHJhaW5ib3csIGxpbmVzLCBsYWJlbCkucmVzb2x2ZV9zY2FsZShcbiAgICBjb2xvcj1cImluZGVwZW5kZW50XCIpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NjQwLCBoZWlnaHQ9MzEwLCB0aXRsZT1cIkJsYWNrIEJvZHkgU3BlY3RyYVwiKSJ9
+</script>
+</div>
+<p>Hotter surfaces push their peak toward shorter wavelengths. A 3,000 K surface peaks in the infrared, with light entering the visible band from the red end. A 20,000 K surface peaks in the ultraviolet and floods the visible band from the blue end. Real stars cover roughly 2,300 K (the coolest red dwarfs) to 50,000 K (the hottest blue O-type stars). The Sun is 5,772 K, intermediate on a logarithmic temperature scale.</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBUZW1wZXJhdHVyZSBiZWNvbWVzIGNvbG91ciBieSB0aGUgbWVhbnMgZGVzY3JpYmVkIGluIFBhcnQgQTogdGhlXG4jIGNvbG91ci1tYXRjaGluZyBmdW5jdGlvbnMgKGNpZV93bCBhbmQgY2llX2JhciwgbG9hZGVkIGluIHRoaXNcbiMgcGFnZSdzIHNldHVwKSB0dXJuIGEgc3BlY3RydW0gaW50byBYWVogdmFsdWVzLCBhbmQgYSBtYXRyaXggdHVybnNcbiMgWFlaIGludG8gbGluZWFyIHNSR0IuIFRoZSBsYXN0IHN0ZXAgYXBwbGllcyB0aGUgZGlzcGxheSBnYW1tYSxcbiMgYmVjYXVzZSBzY3JlZW5zIGFzc3VtZSBpbmNvbWluZyBSR0IgdmFsdWVzIGFyZSBhbHJlYWR5XG4jIGdhbW1hLWVuY29kZWQgYW5kIGRlY29kZSB0aGVtIG9uIHRoZSB3YXkgdG8gbGlnaHQ7IHRoZSBudW1iZXJzXG4jIGhlcmUgYXJlIGxpbmVhciBsaWdodCB1bnRpbCB0aGF0IGxpbmUsIGFuZCB3aXRob3V0IGl0IGV2ZXJ5XG4jIG1pZC1yYW5nZSBjb2xvdXIgd291bGQgZGlzcGxheSB0b28gZGFyay5cbmRlZiBiYl9yZ2IoVCk6XG4gICAgIyBBcHByb3hpbWF0ZSBzUkdCIGNvbG91ciBvZiBhIGJsYWNrIGJvZHkgYXQgdGVtcGVyYXR1cmUgVC5cbiAgICBYWVogPSBjaWVfYmFyLlQgQCBwbGFuY2soY2llX3dsLCBUKSAgICMgc3BlY3RydW0gLT4gWFlaIHRyaXN0aW11bHVzXG4gICAgWFlaID0gWFlaIC8gWFlaWzFdXG4gICAgTSA9IG5wLmFycmF5KFtbIDMuMjQwNiwgLTEuNTM3MiwgLTAuNDk4Nl0sXG4gICAgICAgICAgICAgICAgICBbLTAuOTY4OSwgIDEuODc1OCwgIDAuMDQxNV0sXG4gICAgICAgICAgICAgICAgICBbIDAuMDU1NywgLTAuMjA0MCwgIDEuMDU3MF1dKVxuICAgIHJnYiA9IG5wLmNsaXAoTSBAIFhZWiwgMCwgTm9uZSkgICAgICAgIyBYWVogLT4gbGluZWFyIHNSR0JcbiAgICByZ2IgPSByZ2IgLyByZ2IubWF4KClcbiAgICByZ2IgPSAxLjA1NSAqIHJnYiAqKiAoMSAvIDIuNCkgLSAwLjA1NSAgICMgdGhlIGRpc3BsYXkgZ2FtbWFcbiAgICByZXR1cm4gdHVwbGUobnAuY2xpcChyZ2IsIDAsIDEpKVxuXG5lZGdlcyA9IG5wLmdlb21zcGFjZSgxNTAwLCA0MDAwMCwgMjkpXG5zdHJpcCA9IFtdXG5mb3IgbG8sIGhpIGluIHppcChlZGdlc1s6LTFdLCBlZGdlc1sxOl0pOlxuICAgIHIsIGcsIGIgPSAoaW50KHJvdW5kKDI1NSAqIGMpKSBmb3IgYyBpbiBiYl9yZ2IoKGxvICogaGkpICoqIDAuNSkpXG4gICAgc3RyaXAuYXBwZW5kKGRpY3QobG89bG8sIGhpPWhpLCBjb2xvdXI9ZlwicmdiKHtyfSx7Z30se2J9KVwiKSlcbnN0cmlwID0gcGQuRGF0YUZyYW1lKHN0cmlwKVxuXG5UX1RJVExFID0gXCJzdXJmYWNlIHRlbXBlcmF0dXJlIChLKSwgbG9nIHNjYWxlXCJcbnhzY2FsZSA9IGFsdC5TY2FsZSh0eXBlPVwibG9nXCIsIGRvbWFpbj1bMTUwMCwgNDAwMDBdLCBuaWNlPUZhbHNlKVxueGF4aXMgPSBhbHQuQXhpcyh2YWx1ZXM9WzE1MDAsIDI1MDAsIDUwMDAsIDEwMDAwLCAyMDAwMCwgNDAwMDBdLFxuICAgICAgICAgICAgICAgICBmb3JtYXQ9XCIsXCIsIHRpdGxlUGFkZGluZz0xMilcblxucmliYm9uID0gYWx0LkNoYXJ0KHN0cmlwKS5tYXJrX3JlY3QoKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcImxvOlFcIiwgdGl0bGU9VF9USVRMRSwgc2NhbGU9eHNjYWxlLCBheGlzPXhheGlzKSxcbiAgICB4Mj1cImhpOlFcIixcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSkpXG5cbiMgc3BlY3RyYWwtY2xhc3MgYm91bmRhcmllczsgbGV0dGVycyBzaXQgYXQgZWFjaCBjbGFzcydzIGNlbnRyZVxuYm91bmRzID0gcGQuRGF0YUZyYW1lKFxuICAgIHtcIlRcIjogWzIzMDAsIDM3MDAsIDUyMDAsIDYwMDAsIDc1MDAsIDEwMDAwLCAzMDAwMF19KVxuY2xhc3NlcyA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJUXCI6IFsyOTE3LCA0Mzg3LCA1NTg2LCA2NzA4LCA4NjYwLCAxNzMyMSwgMzQ2NDFdLFxuICAgIFwiY2xzXCI6IFtcIk1cIiwgXCJLXCIsIFwiR1wiLCBcIkZcIiwgXCJBXCIsIFwiQlwiLCBcIk9cIl19KVxuXG5ydWxlcyA9IGFsdC5DaGFydChib3VuZHMpLm1hcmtfcnVsZShcbiAgICBjb2xvcj1cIiMzMzMzMzNcIiwgb3BhY2l0eT0wLjYpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiVDpRXCIsIHRpdGxlPVRfVElUTEUsIHNjYWxlPXhzY2FsZSwgYXhpcz14YXhpcykpXG5sZXR0ZXJzID0gYWx0LkNoYXJ0KGNsYXNzZXMpLm1hcmtfdGV4dChcbiAgICB5PS04LCBmb250U2l6ZT0xMSwgZm9udFdlaWdodD1cImJvbGRcIiwgY29sb3I9XCIjNDQ0NDQ0XCIpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiVDpRXCIsIHRpdGxlPVRfVElUTEUsIHNjYWxlPXhzY2FsZSwgYXhpcz14YXhpcyksXG4gICAgdGV4dD1cImNsczpOXCIpXG5cbiMgTCwgdGhlIGJyb3duLWR3YXJmIGNsYXNzLCBzaXRzIGJlbG93IE0gYXQgdGhlIHN0cmlwJ3MgbGVmdCBlZGdlXG5sX2xldHRlciA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1wiVFwiOiBbMTg1N10sIFwiY2xzXCI6IFtcIkxcIl19KVxuICAgICAgICAgICAgICAgICAgICAgKS5tYXJrX3RleHQoXG4gICAgeT0tOCwgZm9udFNpemU9MTEsIGZvbnRXZWlnaHQ9XCJib2xkXCIsIGNvbG9yPVwiIzZiM2YxZFwiKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIlQ6UVwiLCB0aXRsZT1UX1RJVExFLCBzY2FsZT14c2NhbGUsIGF4aXM9eGF4aXMpLFxuICAgIHRleHQ9XCJjbHM6TlwiKVxuXG5zdW4gPSBwZC5EYXRhRnJhbWUoe1wiVFwiOiBbNTc3Ml0sIFwibGFiZWxcIjogW1wiU3VuXCJdfSlcbnN1bl9kb3QgPSBhbHQuQ2hhcnQoc3VuKS5tYXJrX2NpcmNsZShcbiAgICB5PTIwLCBzaXplPTI4LCBjb2xvcj1cIiNCODg2MEJcIiwgb3BhY2l0eT0xKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIlQ6UVwiLCB0aXRsZT1UX1RJVExFLCBzY2FsZT14c2NhbGUsIGF4aXM9eGF4aXMpKVxuc3VuX3RleHQgPSBhbHQuQ2hhcnQoc3VuKS5tYXJrX3RleHQoXG4gICAgeT0zOCwgZm9udFNpemU9OSwgY29sb3I9XCIjQjg4NjBCXCIpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiVDpRXCIsIHRpdGxlPVRfVElUTEUsIHNjYWxlPXhzY2FsZSwgYXhpcz14YXhpcyksXG4gICAgdGV4dD1cImxhYmVsOk5cIilcblxuYWx0LmxheWVyKHJpYmJvbiwgcnVsZXMsIGxldHRlcnMsIGxfbGV0dGVyLCBzdW5fZG90LCBzdW5fdGV4dFxuICAgICAgICAgICkucHJvcGVydGllcyhcbiAgICB3aWR0aD1cImNvbnRhaW5lclwiLCBoZWlnaHQ9NTUsXG4gICAgdGl0bGU9YWx0LlRpdGxlKFxuICAgICAgICBcIkJsYWNrLWJvZHkgY29sb3VyIGJ5IHRlbXBlcmF0dXJlLCB3aXRoIHNwZWN0cmFsIGNsYXNzZXNcIixcbiAgICAgICAgb2Zmc2V0PTI4KSkifQ==
+</script>
+</div>
+<div class="figure-caption">
+<p>The L class represents brown dwarfs, objects which glow faintly but are too light to ignite hydrogen and become stars.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What colour is the sun?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What colour is the sun?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Sun is catalogued as a yellow dwarf, yet seen from space it is essentially white. It looks yellow from the surface of the Earth because the atmosphere scatters short wavelengths out of the direct beam far more strongly than long ones (this is Rayleigh scattering, the same effect that causes the daytime sky to appear blue). Shifted by this effect toward longer wavelengths, direct sunlight appears yellow. Near the horizon, where the air path is longer, the colour shifts further toward orange-red (sunrise/sunset).</p>
+</div>
+</div>
+<p>Astronomers sort stars into <strong>spectral classes</strong>, labelled by letters and ordered hot to cool: O, B, A, F, G, K, M.</p>
+<div class="compact-table">
+<table>
+<thead>
+<tr>
+<th>
+class
+</th>
+<th>
+surface temperature
+</th>
+<th>
+traditional name
+</th>
+<th>
+true colour
+</th>
+<th>
+example
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color:#A0BAFF">
+<td>
+O
+</td>
+<td>
+above 30,000 K
+</td>
+<td>
+blue
+</td>
+<td>
+blue-white
+</td>
+<td>
+Alnitak
+</td>
+</tr>
+<tr style="background-color:#B5C9FF">
+<td>
+B
+</td>
+<td>
+10,000 to 30,000 K
+</td>
+<td>
+blue-white
+</td>
+<td>
+blue-white
+</td>
+<td>
+Rigel
+</td>
+</tr>
+<tr style="background-color:#DCE3FF">
+<td>
+A
+</td>
+<td>
+7,500 to 10,000 K
+</td>
+<td>
+white
+</td>
+<td>
+“cool” white
+</td>
+<td>
+Sirius
+</td>
+</tr>
+<tr style="background-color:#FDF8FF">
+<td>
+F
+</td>
+<td>
+6,000 to 7,500 K
+</td>
+<td>
+yellow-white
+</td>
+<td>
+white
+</td>
+<td>
+Procyon
+</td>
+</tr>
+<tr style="background-color:#FFEFE5">
+<td>
+G
+</td>
+<td>
+5,200 to 6,000 K
+</td>
+<td>
+yellow
+</td>
+<td>
+“warm” white
+</td>
+<td>
+the Sun
+</td>
+</tr>
+<tr style="background-color:#FFDCB8">
+<td>
+K
+</td>
+<td>
+3,700 to 5,200 K
+</td>
+<td>
+orange
+</td>
+<td>
+pale orange
+</td>
+<td>
+Arcturus
+</td>
+</tr>
+<tr style="background-color:#FFBB74">
+<td>
+M
+</td>
+<td>
+below 3,700 K
+</td>
+<td>
+red
+</td>
+<td>
+orange
+</td>
+<td>
+Betelgeuse
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The Sun belongs to class G. Traditional names are slightly “redder” than the black body actually looks, partly for contrast and partly because the Earth’s atmosphere warms the tint of stars as they appear.</p>
+</section>
+<section id="the-planckian-locus" class="level2">
+<h2 class="anchored" data-anchor-id="the-planckian-locus">2 · The Planckian locus</h2>
+<p>Part A introduced the spectral locus: a shape enclosing every visible chromaticity, with pure chromatic wavelengths on the rim. A black body at a given temperature has one spectrum, so it corresponds to a single point on that diagram. Adjusting the black body temperature moves this point over a curve known as the <strong>Planckian locus</strong>, which traces the previous strip of colours as a path. The slider moves a marker along the curve.</p>
+<div class="slider-right">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2wgPSBjaWVfYmFyIC8gY2llX2Jhci5zdW0oYXhpcz0xLCBrZWVwZGltcz1UcnVlKSAgICMgc3BlY3RyYWwgbG9jdXNcblxudGVtcHMgPSBucC5nZW9tc3BhY2UoMTUwMCwgNDAwMDAsIDYwMClcbmxvY3VzID0gW11cbmZvciBUIGluIHRlbXBzOlxuICAgIFhZWiA9IGNpZV9iYXIuVCBAIHBsYW5jayhjaWVfd2wsIFQpXG4gICAgbG9jdXMuYXBwZW5kKFhZWls6Ml0gLyBYWVouc3VtKCkpXG5sb2N1cyA9IG5wLmFycmF5KGxvY3VzKVxuXG5kZWYgcmdiX3N0cihUKTpcbiAgICByLCBnLCBiID0gKGludChyb3VuZCgyNTUgKiBjKSkgZm9yIGMgaW4gYmJfcmdiKFQpKVxuICAgIHJldHVybiBmXCJyZ2Ioe3J9LHtnfSx7Yn0pXCJcblxuIyB0aGUgbG9jdXMgYXMgYSBzdHJpbmcgb2YgcG9pbnRzLCBlYWNoIHdlYXJpbmcgaXRzIG93biBjb2xvdXJcbmxvY3VzX2RmID0gcGQuRGF0YUZyYW1lKHtcInhcIjogbG9jdXNbOiwgMF0sIFwieVwiOiBsb2N1c1s6LCAxXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICBcImNvbG91clwiOiBbcmdiX3N0cihUKSBmb3IgVCBpbiB0ZW1wc119KVxuXG4jIGEgZmluZXIgZ3JpZCBmb3IgdGhlIHNsaWRlciBtYXJrZXIsIG9uZSByb3cgcGVyIHNsaWRlciBzdG9wXG5ncmlkID0gW11cbmZvciBUIGluIG5wLmFyYW5nZSgxNTAwLCA0MDAwMSwgMTAwKTpcbiAgICBYWVogPSBjaWVfYmFyLlQgQCBwbGFuY2soY2llX3dsLCBUKVxuICAgIHgsIHkgPSBYWVpbOjJdIC8gWFlaLnN1bSgpXG4gICAgZ3JpZC5hcHBlbmQoZGljdChUPWludChUKSwgeD14LCB5PXksIGNvbG91cj1yZ2Jfc3RyKFQpLFxuICAgICAgICAgICAgICAgICAgICAgbGFiZWw9Zlwie1Q6LC4wZn0gS1wiKSlcbmdyaWQgPSBwZC5EYXRhRnJhbWUoZ3JpZClcblxuVF9zbGlkZXIgPSBhbHQucGFyYW0oXG4gICAgdmFsdWU9NTgwMCxcbiAgICBiaW5kPWFsdC5iaW5kaW5nX3JhbmdlKG1pbj0xNTAwLCBtYXg9NDAwMDAsIHN0ZXA9MTAwLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZT1cInRlbXBlcmF0dXJlIChLKSAgXCIpKVxuXG54eSA9IGRpY3QoXG4gICAgeD1hbHQuWChcIng6UVwiLCBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVswLCAwLjc1XSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJ5OlFcIiwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMC44NV0sIG5pY2U9RmFsc2UpKSxcbilcbnJpbV9kZiA9IHBkLkRhdGFGcmFtZSh7XCJ4XCI6IHNsWzosIDBdLCBcInlcIjogc2xbOiwgMV0sIFwiaVwiOiByYW5nZShsZW4oc2wpKX0pXG5yaW5nX2RmID0gcGQuY29uY2F0KFtyaW1fZGYsIHJpbV9kZi5pbG9jW1swXV1dLCBpZ25vcmVfaW5kZXg9VHJ1ZSlcbnJpbmdfZGZbXCJpXCJdID0gcmFuZ2UobGVuKHJpbmdfZGYpKVxuaW50ZXJpb3IgPSBhbHQuQ2hhcnQocmluZ19kZikubWFya19saW5lKHN0cm9rZVdpZHRoPTAsXG4gICAgZmlsbD1cIiNlMGUyZTVcIikuZW5jb2RlKG9yZGVyPVwiaTpRXCIsICoqeHkpXG5yaW0gPSBhbHQuQ2hhcnQocmltX2RmKS5tYXJrX2xpbmUoY29sb3I9XCIjODg4ODg4XCIpLmVuY29kZShcbiAgICBvcmRlcj1cImk6UVwiLCAqKnh5KVxucHVycGxlcyA9IGFsdC5DaGFydChyaW1fZGYuaWxvY1tbMCwgLTFdXSkubWFya19saW5lKFxuICAgIGNvbG9yPVwiIzg4ODg4OFwiLCBzdHJva2VEYXNoPVs2LCA0XSkuZW5jb2RlKG9yZGVyPVwiaTpRXCIsICoqeHkpXG5jdXJ2ZSA9IGFsdC5DaGFydChsb2N1c19kZikubWFya19jaXJjbGUoc2l6ZT03MCwgb3BhY2l0eT0xKS5lbmNvZGUoXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiY29sb3VyOk5cIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpLCAqKnh5KVxuZG90ID0gYWx0LkNoYXJ0KGdyaWQpLmFkZF9wYXJhbXMoVF9zbGlkZXIpLnRyYW5zZm9ybV9maWx0ZXIoXG4gICAgYWx0LmRhdHVtLlQgPT0gVF9zbGlkZXIpLm1hcmtfcG9pbnQoXG4gICAgc2l6ZT0yNjAsIGZpbGxlZD1UcnVlLCBzdHJva2U9XCIjMzMzMzMzXCIsIHN0cm9rZVdpZHRoPTEuNSxcbiAgICBvcGFjaXR5PTEpLmVuY29kZShcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSksICoqeHkpXG5yZWFkb3V0ID0gYWx0LkNoYXJ0KGdyaWQpLnRyYW5zZm9ybV9maWx0ZXIoXG4gICAgYWx0LmRhdHVtLlQgPT0gVF9zbGlkZXIpLm1hcmtfdGV4dChcbiAgICBhbGlnbj1cImxlZnRcIiwgZHg9MTIsIGR5PS0xMCwgZm9udFNpemU9MTEpLmVuY29kZShcbiAgICB0ZXh0PVwibGFiZWw6TlwiLCAqKnh5KVxuXG5hbHQubGF5ZXIoaW50ZXJpb3IsIHJpbSwgcHVycGxlcywgY3VydmUsIGRvdCwgcmVhZG91dCkucHJvcGVydGllcyhcbiAgICB3aWR0aD02MjAsIGhlaWdodD00MzAsXG4gICAgdGl0bGU9XCJ0aGUgUGxhbmNraWFuIGxvY3VzIGluc2lkZSB0aGUgc3BlY3RyYWwgbG9jdXNcIikifQ==
+</script>
+</div>
+</div>
+<p>The curve starts deep in the red, passes through orange and white near the Sun’s 5,772 K, and bends into pale blue. Push the slider from 10,000 K up to 40,000 K and the marker barely moves: every very hot star looks a similar shade of blue-white. Almost all the colour variation occurs in the lower ranges of temperature. What does this fact suggest about the scale being used on the temperature slider?</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Why are stars red and blue, but never green?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why are stars red and blue, but never green?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A black body radiates across the whole visible band at once. A star whose spectrum peaks in the green (like our Sun’s does), near 500 nm, still creates red and blue light beside it; the eye sums the mixture of wavelengths and perceives white. Cooling tints the mixture red while heating tints it blue. No temperature removes both short and long wavelengths in favour of medium wavelengths, which is what a green-perceived mixture would require.</p>
+<p>Nor is there any temperature that would yield the opposite mixture of wavelengths (which would be perceived as purple or pink). The Planckian locus crosses the white centre of the chromaticity diagram and never bends toward the green edge or the line of purples.</p>
+<p>As a corrollary, the discovery of an “impossible” star coloured with a hue not found on the Planckian locus — if this ever were to happen — could be plausibly recognised as an extraterrestrial <a href="https://en.wikipedia.org/wiki/Technosignature">technosignature</a>.</p>
+</div>
+</div>
+<p>The Planckian locus is also the basis of everyday lighting. A bulb sold as “warm white 2,700 K” matches the black body at 2,700 K; an office tube at 5,000 K sits further along the curve. A screen’s default white point, called D65, sits near 6,500 K. <strong>Note the backwards vocabulary.</strong> Red-end lighting is called “warm” and blue-end lighting is called “cool” even though this is the <em>reverse</em> of the actual temperatures that generate these tints!</p>
+</section>
+<section id="a-star-catalogue" class="level2">
+<h2 class="anchored" data-anchor-id="a-star-catalogue">3 · A star catalogue</h2>
+<p>Between 1989 and 1993 the European Space Agency satellite <strong>Hipparcos</strong> measured the positions, brightnesses and colours of every star it could see. The page serves the complete catalogue down to visual magnitude 9.5: 98,653 stars, one row each.</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3RhcnMgPSBwZC5yZWFkX2pzb24ob3Blbl91cmwoREFUQV9VUkwgKyBcInN0YXJzX21hZzk1Lmpzb25cIikpXG5wcmludChzdGFycy5zaGFwZSlcbnN0YXJzLmhlYWQoKSJ9
+</script>
+</div>
+<p>The twelve columns: <code>HIP</code> is the star’s number in the Hipparcos catalogue; <code>ecl_lon</code> and <code>ecl_lat</code> place it on the sky in ecliptic coordinates; <code>color_r</code>, <code>color_g</code>, <code>color_b</code> hold a ready-made display colour for the map below (note that these colours are deliberately saturated to be more differentiable, which is why they do not match the shades compared earlier); <code>plx</code> and <code>e_plx</code> are the measured parallax and its standard error, in milliarcseconds; <code>pmra</code> and <code>pmde</code> are the star’s annual drift across the sky, in milliarcseconds per year.</p>
+<section id="magnitude" class="level3">
+<h3 class="anchored" data-anchor-id="magnitude">Magnitude</h3>
+<p><code>vmag</code> is apparent brightness on the magnitude scale: <em>smaller numbers mean brighter</em>. A dark sky allows people to see stars up to roughly magnitude 6.5 with the naked eye; stars “above” this magnitude (up to a maximum of 9.5) are invisible without a telescope. Dim stars outnumber bright stars; the counts grow fast as the limit increases (roughly tripling with each unit).</p>
+<p>We can see this distribution using a histogram. Both panels share the same half-magnitude bins, split in colour at magnitude 6.5, the naked-eye limit. The left panel counts on a linear axis, the right on a logarithmic one.</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY291bnRzID0gc3RhcnNbXCJ2bWFnXCJdLnZhbHVlX2NvdW50cyhiaW5zPW5wLmFyYW5nZSgtMiwgMTAuNSwgMC41KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNvcnQ9RmFsc2UpXG5oaXN0ID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcImxvXCI6IFtiLmxlZnQgZm9yIGIgaW4gY291bnRzLmluZGV4XSxcbiAgICBcImhpXCI6IFtiLnJpZ2h0IGZvciBiIGluIGNvdW50cy5pbmRleF0sXG4gICAgXCJzdGFyc1wiOiBjb3VudHMudmFsdWVzLFxufSlcbmhpc3RbXCJ2aXNpYmxlXCJdID0gbnAud2hlcmUoaGlzdFtcImhpXCJdIDw9IDYuNSwgXCJ2aXNpYmxlXCIsIFwiaW52aXNpYmxlXCIpXG5cblNLWSwgTkFWWSA9IFwiIzRmYzNmN1wiLCBcIiMyNTJmNmJcIlxuXG5kZWYgbm90ZSh0ZXh0LCBjb2xvdXIsIHhfcHgsIHlfcHgsIHNpemU9MTMsIGJvbGQ9RmFsc2UsIHJpZ2h0PUZhbHNlKTpcbiAgICByZXR1cm4gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ0XCI6IFt0ZXh0XX0pKS5tYXJrX3RleHQoXG4gICAgICAgIGFsaWduPVwicmlnaHRcIiBpZiByaWdodCBlbHNlIFwibGVmdFwiLCBmb250U2l6ZT1zaXplLCBjb2xvcj1jb2xvdXIsXG4gICAgICAgIGZvbnRXZWlnaHQ9XCJib2xkXCIgaWYgYm9sZCBlbHNlIFwibm9ybWFsXCIpLmVuY29kZShcbiAgICAgICAgeD1hbHQudmFsdWUoeF9weCksIHk9YWx0LnZhbHVlKHlfcHgpLCB0ZXh0PVwidDpOXCIpXG5cbmRlZiBtYWdfcGFuZWwoZGYsIGxvZyk6XG4gICAgIyBiYXJzIG9uIGEgbG9nIHNjYWxlIGhhdmUgbm8gemVybyB0byBncm93IGZyb20sIHNvIGdpdmUgdGhlbSBhblxuICAgICMgZXhwbGljaXQgZmxvb3IgKHkyID0gYmFzZSkgYW5kIGxlYXZlIGhlYWRyb29tIGZvciB0aGUgbGFiZWxzXG4gICAgaWYgbG9nOlxuICAgICAgICB5c2NhbGUgPSBhbHQuU2NhbGUodHlwZT1cImxvZ1wiLCBuaWNlPUZhbHNlLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9tYWluPVswLjUsIGZsb2F0KGRmW1wic3RhcnNcIl0ubWF4KCkpICogOF0pXG4gICAgZWxzZTpcbiAgICAgICAgeXNjYWxlID0gYWx0LlNjYWxlKG5pY2U9RmFsc2UsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICBkb21haW49WzAsIGZsb2F0KGRmW1wic3RhcnNcIl0ubWF4KCkpICogMS4zNV0pXG4gICAgYmFycyA9IGFsdC5DaGFydChkZi5hc3NpZ24oYmFzZT0wLjUpKS5tYXJrX2JhcihcbiAgICAgICAgc3Ryb2tlPVwiI2ZmZmZmZlwiLCBzdHJva2VXaWR0aD0wLjUpLmVuY29kZShcbiAgICAgICAgeD1hbHQuWChcImxvOlFcIiwgYmluPVwiYmlubmVkXCIsIHRpdGxlPVwiYXBwYXJlbnQgbWFnbml0dWRlXCIsXG4gICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bLTIsIDEwXSwgbmljZT1GYWxzZSksXG4gICAgICAgICAgICAgICAgYXhpcz1hbHQuQXhpcyh2YWx1ZXM9bGlzdChyYW5nZSgtMiwgMTEpKSkpLFxuICAgICAgICB4Mj1hbHQuWDIoXCJoaVwiKSxcbiAgICAgICAgeT1hbHQuWShcInN0YXJzOlFcIiwgc2NhbGU9eXNjYWxlLFxuICAgICAgICAgICAgICAgIHRpdGxlPVwic3RhcnMgcGVyIGhhbGYtbWFnbml0dWRlIGJpblwiXG4gICAgICAgICAgICAgICAgICAgICAgKyAoXCIsIGxvZyBzY2FsZVwiIGlmIGxvZyBlbHNlIFwiXCIpKSxcbiAgICAgICAgY29sb3I9YWx0LkNvbG9yKFwidmlzaWJsZTpOXCIsIGxlZ2VuZD1Ob25lLFxuICAgICAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bXCJ2aXNpYmxlXCIsIFwiaW52aXNpYmxlXCJdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJhbmdlPVtTS1ksIE5BVlldKSksXG4gICAgICAgICoqKHtcInkyXCI6IGFsdC5ZMihcImJhc2VcIil9IGlmIGxvZyBlbHNlIHt9KSxcbiAgICApXG4gICAgcmV0dXJuIGFsdC5sYXllcihcbiAgICAgICAgYmFycyxcbiAgICAgICAgbm90ZShcImxvZ2FyaXRobWljIGF4aXNcIiBpZiBsb2cgZWxzZSBcImxpbmVhciBheGlzXCIsXG4gICAgICAgICAgICAgXCIjNDQ0NDQ0XCIsIDgsIDE2LCBzaXplPTE2LCBib2xkPVRydWUpLFxuICAgICAgICBub3RlKFwidmlzaWJsZSB0byBuYWtlZCBleWVcIiwgXCIjMWU4OGU1XCIsIDgsXG4gICAgICAgICAgICAgMTQwIGlmIGxvZyBlbHNlIDE5NSwgYm9sZD1UcnVlKSxcbiAgICAgICAgbm90ZShcImludmlzaWJsZSB0byB0aGUgbmFrZWQgZXllXCIsIE5BVlksIDMyMixcbiAgICAgICAgICAgICAzMiBpZiBsb2cgZWxzZSA1MCwgcmlnaHQ9VHJ1ZSwgYm9sZD1UcnVlKSxcbiAgICApLnByb3BlcnRpZXMod2lkdGg9MzMwLCBoZWlnaHQ9MjUwKVxuXG5hbHQuaGNvbmNhdChcbiAgICBtYWdfcGFuZWwoaGlzdCwgRmFsc2UpLFxuICAgIG1hZ19wYW5lbChoaXN0W2hpc3RbXCJzdGFyc1wiXSA+IDBdLCBUcnVlKSxcbikucHJvcGVydGllcyh0aXRsZT1hbHQuVGl0bGUoXCJTdGFycyBieSBhcHBhcmVudCBtYWduaXR1ZGVcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3VidGl0bGU9XCJIaXBwYXJjb3MgY2F0YWxvZ3VlXCIpKSJ9
+</script>
+</div>
+<p>A <strong>density plot</strong> is an alternative to the histogram, normalising so the area under the curve equals one, then smoothing the bin edges away by convolving it with a small Gaussian kernel:</p>
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidiA9IHN0YXJzW1widm1hZ1wiXS50b19udW1weSgpXG5zdGVwID0gMC4wNVxuZWRnZXMgPSBucC5hcmFuZ2UoLTIuNSwgMTEgKyBzdGVwLCBzdGVwKVxuY250LCBfID0gbnAuaGlzdG9ncmFtKHYsIGJpbnM9ZWRnZXMpXG5jZW50cmVzID0gZWRnZXNbOi0xXSArIHN0ZXAgLyAyXG5cbmJ3ID0gMC4yNSAgICAgICAgICAgICAgICAgICAgICAjIGtlcm5lbCBiYW5kd2lkdGgsIGluIG1hZ25pdHVkZXNcbmt4ID0gbnAuYXJhbmdlKC00ICogYncsIDQgKiBidyArIHN0ZXAsIHN0ZXApXG5rZXJuZWwgPSBucC5leHAoLTAuNSAqIChreCAvIGJ3KSAqKiAyKVxua2VybmVsID0ga2VybmVsIC8ga2VybmVsLnN1bSgpXG5kZW5zaXR5ID0gbnAuY29udm9sdmUoY250LCBrZXJuZWwsIG1vZGU9XCJzYW1lXCIpIC8gKGxlbih2KSAqIHN0ZXApXG5cbmRlbnMgPSBwZC5EYXRhRnJhbWUoe1wibWFnbml0dWRlXCI6IGNlbnRyZXMsIFwiZGVuc2l0eVwiOiBkZW5zaXR5fSlcbmRlbnNbXCJzaWRlXCJdID0gbnAud2hlcmUoZGVuc1tcIm1hZ25pdHVkZVwiXSA8PSA2LjUsIFwidmlzaWJsZVwiLCBcImludmlzaWJsZVwiKVxuXG4jIHR3byBzZXBhcmF0ZSBzaW5nbGUtY29sb3VyIGFyZWFzIHNoYXJpbmcgYW4gZXhhY3QgcG9pbnQgYXQgNi41LFxuIyBzbyB0aGUgY29sb3VyIGJvdW5kYXJ5IGlzIGEgdHJ1ZSB2ZXJ0aWNhbCBlZGdlXG5ib3VuZGFyeSA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJtYWduaXR1ZGVcIjogWzYuNV0sXG4gICAgXCJkZW5zaXR5XCI6IFtucC5pbnRlcnAoNi41LCBkZW5zW1wibWFnbml0dWRlXCJdLCBkZW5zW1wiZGVuc2l0eVwiXSldLFxufSlcbk1BR19YID0gYWx0LlgoXCJtYWduaXR1ZGU6UVwiLCB0aXRsZT1cImFwcGFyZW50IG1hZ25pdHVkZVwiLFxuICAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVstMi41LCAxMV0sIG5pY2U9RmFsc2UpKVxuREVOU19ZID0gYWx0LlkoXCJkZW5zaXR5OlFcIiwgdGl0bGU9XCJkZW5zaXR5IChmcmFjdGlvbiBwZXIgbWFnbml0dWRlKVwiLFxuICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgZmxvYXQoZGVuc2l0eS5tYXgoKSkgKiAxLjNdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5pY2U9RmFsc2UpKVxuXG5za3lfZGYgPSBwZC5jb25jYXQoW2RlbnNbZGVuc1tcIm1hZ25pdHVkZVwiXSA8IDYuNV0sIGJvdW5kYXJ5XSlcbm5hdnlfZGYgPSBwZC5jb25jYXQoW2JvdW5kYXJ5LCBkZW5zW2RlbnNbXCJtYWduaXR1ZGVcIl0gPiA2LjVdXSlcbnNreV9hcmVhID0gYWx0LkNoYXJ0KHNreV9kZikubWFya19hcmVhKFxuICAgIG9wYWNpdHk9MC44NSwgY29sb3I9U0tZKS5lbmNvZGUoeD1NQUdfWCwgeT1ERU5TX1kpXG5uYXZ5X2FyZWEgPSBhbHQuQ2hhcnQobmF2eV9kZikubWFya19hcmVhKFxuICAgIG9wYWNpdHk9MC44NSwgY29sb3I9TkFWWSkuZW5jb2RlKHg9TUFHX1gsIHk9REVOU19ZKVxuc2t5X2xpbmUgPSBhbHQuQ2hhcnQoc2t5X2RmKS5tYXJrX2xpbmUoXG4gICAgc3Ryb2tlV2lkdGg9Mi41LCBjb2xvcj1TS1kpLmVuY29kZSh4PU1BR19YLCB5PURFTlNfWSlcbm5hdnlfbGluZSA9IGFsdC5DaGFydChuYXZ5X2RmKS5tYXJrX2xpbmUoXG4gICAgc3Ryb2tlV2lkdGg9Mi41LCBjb2xvcj1OQVZZKS5lbmNvZGUoeD1NQUdfWCwgeT1ERU5TX1kpXG5cbmFsdC5sYXllcihcbiAgICBza3lfYXJlYSxcbiAgICBuYXZ5X2FyZWEsXG4gICAgc2t5X2xpbmUsXG4gICAgbmF2eV9saW5lLFxuICAgIG5vdGUoXCJ2aXNpYmxlIHRvIG5ha2VkIGV5ZVwiLCBcIiMxZTg4ZTVcIiwgMjIwLCAyMDUsIGJvbGQ9VHJ1ZSksXG4gICAgbm90ZShcImludmlzaWJsZSB0byB0aGUgbmFrZWQgZXllXCIsIE5BVlksIDY1MiwgMzAsXG4gICAgICAgICByaWdodD1UcnVlLCBib2xkPVRydWUpLFxuKS5wcm9wZXJ0aWVzKHdpZHRoPTY2MCwgaGVpZ2h0PTI1MCxcbiAgICAgICAgICAgICB0aXRsZT1hbHQuVGl0bGUoXCJEZW5zaXR5IG9mIHN0YXJzIGJ5IGFwcGFyZW50IG1hZ25pdHVkZVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdWJ0aXRsZT1cIkhpcHBhcmNvcyBjYXRhbG9ndWVcIikpIn0=
+</script>
+</div>
+<p>The area under any stretch of the distribution curve is the fraction of stars in that magnitude range, and the whole shape encloses exactly one. This holds only on a linear vertical axis. A logarithmic axis would stretch the flat bright-end tail into view, at the cost of distorting the relative proportions as suggested by area.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Draw a <strong>violin plot</strong> and a <strong>box plot</strong> as alternatives to the density plot. Which of the three do you prefer, and why?</p>
+</div>
+</div>
+<p>A related question asks: “how many stars are this bright or brighter”. Summing histogram bins from the left to the right and dividing by the total generates a <strong>cumulative distribution</strong>. The height of this cumulative distribution for a given magnitude will be the fraction of the catalogue <em>at that magnitude or brighter</em> or brighter (on the backwards magnitude scale “brighter” means a smaller magnitude number).</p>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidiA9IG5wLnNvcnQoc3RhcnNbXCJ2bWFnXCJdLnRvX251bXB5KCkpXG5ncmlkID0gbnAuYXJhbmdlKC0yLjUsIDkuNTUsIDAuMDUpXG5jZGYgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFnbml0dWRlXCI6IGdyaWQsXG4gICAgXCJmcmFjdGlvblwiOiBucC5zZWFyY2hzb3J0ZWQodiwgZ3JpZCwgc2lkZT1cInJpZ2h0XCIpIC8gbGVuKHYpLFxufSlcbmNkZltcInNpZGVcIl0gPSBucC53aGVyZShjZGZbXCJtYWduaXR1ZGVcIl0gPD0gNi41LCBcInZpc2libGVcIiwgXCJpbnZpc2libGVcIilcblxuZnJhY192aXNpYmxlID0gZmxvYXQoKHYgPD0gNi41KS5tZWFuKCkpXG5wb2ludCA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJtYWduaXR1ZGVcIjogWzYuNV0sIFwiZnJhY3Rpb25cIjogW2ZyYWNfdmlzaWJsZV0sXG4gICAgXCJsYWJlbFwiOiBbZlwie2ZyYWNfdmlzaWJsZTouMCV9IG9mIHRoZSBjYXRhbG9ndWVcIlxuICAgICAgICAgICAgICBcIiBpcyBuYWtlZC1leWUgdmlzaWJsZVwiXSxcbn0pXG5cbiMgYXQgYW55IGN1dG9mZiB0aGUgYWNjdW11bGF0ZWQgcGlsZSBhbHdheXMgY29udGFpbnMgZXZlcnkgdmlzaWJsZVxuIyBzdGFyLCBzbyB0aGUgdmlzaWJsZSBzaGFyZSBpcyB0aGUgQk9UVE9NIEJBTkQgb2YgdGhlIGZpbGwsIGNhcHBlZFxuIyBhdCA5JTsgdGhlIGNvbG91ciBib3VuZGFyeSBoZXJlIGlzIGhvcml6b250YWwsIG5vdCB2ZXJ0aWNhbFxuY2RmW1widmlzX3BhcnRcIl0gPSBucC5taW5pbXVtKGNkZltcImZyYWN0aW9uXCJdLCBmcmFjX3Zpc2libGUpXG5cbk1BR19YID0gYWx0LlgoXCJtYWduaXR1ZGU6UVwiLCB0aXRsZT1cImFwcGFyZW50IG1hZ25pdHVkZVwiLFxuICAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVstMi41LCA5LjVdLCBuaWNlPUZhbHNlKSlcbkZSQUNfWSA9IGFsdC5ZKFwidmlzX3BhcnQ6UVwiLFxuICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMV0sIG5pY2U9RmFsc2UpLFxuICAgICAgICAgICAgICAgdGl0bGU9XCJmcmFjdGlvbiBvZiBzdGFycyBhdCB0aGlzIG1hZ25pdHVkZSBvciBicmlnaHRlclwiKVxuU0lERV9DID0gYWx0LkNvbG9yKFwic2lkZTpOXCIsIGxlZ2VuZD1Ob25lLFxuICAgICAgICAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49W1widmlzaWJsZVwiLCBcImludmlzaWJsZVwiXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmFuZ2U9W1NLWSwgTkFWWV0pKVxuXG5za3lfZmlsbCA9IGFsdC5DaGFydChjZGYpLm1hcmtfYXJlYShvcGFjaXR5PTAuODUsIGNvbG9yPVNLWSkuZW5jb2RlKFxuICAgIHg9TUFHX1gsIHk9RlJBQ19ZKVxubmF2eV9maWxsID0gYWx0LkNoYXJ0KGNkZikubWFya19hcmVhKG9wYWNpdHk9MC44NSwgY29sb3I9TkFWWSkuZW5jb2RlKFxuICAgIHg9TUFHX1gsIHk9RlJBQ19ZLCB5Mj1hbHQuWTIoXCJmcmFjdGlvblwiKSlcbnRyYWNlID0gYWx0LkNoYXJ0KGNkZikubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSkuZW5jb2RlKFxuICAgIHg9TUFHX1gsIHk9XCJmcmFjdGlvbjpRXCIsIGNvbG9yPVNJREVfQylcbmRvdCA9IGFsdC5DaGFydChwb2ludCkubWFya19jaXJjbGUoXG4gICAgc2l6ZT03MCwgY29sb3I9XCIjMWU4OGU1XCIsIG9wYWNpdHk9MSkuZW5jb2RlKFxuICAgIHg9XCJtYWduaXR1ZGU6UVwiLCB5PVwiZnJhY3Rpb246UVwiKVxuZG90X2xhYmVsID0gYWx0LkNoYXJ0KHBvaW50KS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJyaWdodFwiLCBkeD0tMTAsIGR5PS02LCBmb250U2l6ZT0xNCwgY29sb3I9XCIjMWU4OGU1XCIpLmVuY29kZShcbiAgICB4PVwibWFnbml0dWRlOlFcIiwgeT1cImZyYWN0aW9uOlFcIiwgdGV4dD1cImxhYmVsOk5cIilcblxuYWx0LmxheWVyKFxuICAgIHNreV9maWxsLCBuYXZ5X2ZpbGwsIHRyYWNlLCBkb3QsIGRvdF9sYWJlbCxcbiAgICBub3RlKFwiaW52aXNpYmxlIHRvIHRoZSBuYWtlZCBleWVcIiwgTkFWWSwgNTg1LCAxMDAsXG4gICAgICAgICByaWdodD1UcnVlLCBib2xkPVRydWUpLFxuKS5wcm9wZXJ0aWVzKHdpZHRoPTY2MCwgaGVpZ2h0PTI1MCxcbiAgICB0aXRsZT1hbHQuVGl0bGUoXCJDdW11bGF0aXZlIGRpc3RyaWJ1dGlvbiBvZiBhcHBhcmVudCBtYWduaXR1ZGVcIixcbiAgICAgICAgICAgICAgICAgICAgc3VidGl0bGU9XCJIaXBwYXJjb3MgY2F0YWxvZ3VlXCIpKSJ9
+</script>
+</div>
+<p>A cumulative distribution function always starts at zero and climbs to one (i.e.&nbsp;100%) monotonically.</p>
+<p>Note the difference in colour boundaries; in the density plot the boundary is vertical, because a star’s position on the magnitude axis decides which group it belongs to. In the cumulative plot the boundary is horizontal, because the cumulative total past 6.5 includes both kinds (everything stacked above the horizontal boundary arrived from fainter, invisible stars).</p>
+<p>The stars from the catalogue can be plotted in their latitude and longitude positions. Keeping in mind the information conveyed by these visualisations, compare how the time taken to generate the chart varies with the <code>limit</code> setting, which filters stars according to a magnitude threshold.</p>
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGltaXQgPSA2LjUgICAgICAjIHRyeSAzLCA2LjUsIDkuNVxuXG5zdWJzZXQgPSBzdGFyc1tzdGFyc1tcInZtYWdcIl0gPCBsaW1pdF1cbnByaW50KGZcIntsZW4oc3Vic2V0KTosfSBvZiB7bGVuKHN0YXJzKTosfSBzdGFyc1wiKVxuXG4jIEFsdGFpciByZWZ1c2VzIG1vcmUgdGhhbiA1LDAwMCByb3dzIGJ5IGRlZmF1bHQgYXMgYSBndWFyZCBhZ2FpbnN0XG4jIGJsb2F0ZWQgY2hhcnRzOyB0aGUgZnVsbCBjYXRhbG9ndWUgaXMgYSBkZWxpYmVyYXRlIGV4Y2VwdGlvblxuYWx0LmRhdGFfdHJhbnNmb3JtZXJzLmRpc2FibGVfbWF4X3Jvd3MoKVxuXG5za3kgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwibG9uXCI6IHN1YnNldFtcImVjbF9sb25cIl0sXG4gICAgXCJsYXRcIjogc3Vic2V0W1wiZWNsX2xhdFwiXSxcbiAgICBcInNcIjogbnAuY2xpcCgobGltaXQgKyAwLjggLSBzdWJzZXRbXCJ2bWFnXCJdKSAqKiAyLjIsIDAuNSwgNjApLFxuICAgIFwiY29sb3VyXCI6IFtmXCJyZ2Ioe2ludChyKjI1NSl9LHtpbnQoZyoyNTUpfSx7aW50KGIqMjU1KX0pXCJcbiAgICAgICAgICAgICAgIGZvciByLCBnLCBiIGluIHppcChzdWJzZXRbXCJjb2xvcl9yXCJdLCBzdWJzZXRbXCJjb2xvcl9nXCJdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN1YnNldFtcImNvbG9yX2JcIl0pXSxcbn0pXG5cbnN0YXIgPSAoXCJNIDAgLTEgTCAwLjI1IC0wLjI1IEwgMSAwIEwgMC4yNSAwLjI1IFwiXG4gICAgICAgIFwiTCAwIDEgTCAtMC4yNSAwLjI1IEwgLTEgMCBMIC0wLjI1IC0wLjI1IFpcIilcblxuYWx0LkNoYXJ0KHNreSkubWFya19wb2ludChmaWxsZWQ9VHJ1ZSwgb3BhY2l0eT0xKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcImxvbjpRXCIsIHRpdGxlPVwiZWNsaXB0aWMgbG9uZ2l0dWRlIChkZWdyZWVzKVwiLFxuICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMzYwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJsYXQ6UVwiLCB0aXRsZT1cImVjbGlwdGljIGxhdGl0dWRlIChkZWdyZWVzKVwiLFxuICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bLTkwLCA5MF0sIG5pY2U9RmFsc2UpKSxcbiAgICBzaXplPWFsdC5TaXplKFwiczpRXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSksXG4pLnByb3BlcnRpZXMod2lkdGg9NjYwLCBoZWlnaHQ9MzMwLFxuICAgICAgICAgICAgIHRpdGxlPWZcInRoZSBza3kgdG8gbWFnbml0dWRlIHtsaW1pdH1cIixcbikuY29uZmlndXJlX3ZpZXcoZmlsbD1cImJsYWNrXCIpLmNvbmZpZ3VyZV9heGlzKGdyaWQ9RmFsc2UpIn0=
+</script>
+</div>
+<div class="figure-caption">
+<p>The Milky Way is visible as a dense band of stars that curves across the sky with the ecliptic, creating a U-shape.</p>
+</div>
+<p>Vary that <code>limit</code> setting before you proceed!</p>
+<p>In this plot, <strong>position</strong> takes <code>ecl_lon</code> and <code>ecl_lat</code>; <strong>size</strong> takes <code>vmag</code>; while <strong>colour</strong> takes <code>color_r</code>, <code>color_g</code> and <code>color_b</code> as RGB values. The <strong>shape</strong> was left at its default, a circle. While the shape in this instance does not encode any data, the fact that this is a literal plot of stars suggests that a star shape of the four-pointed <strong>diffraction-spike</strong> kind (rather than the five-pointed cartoon variety) might be more appropriate than the default circle.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Make it look (a little) better">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Make it look (a little) better
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The cell above already defines <code>star</code>, a four-pointed outline written as an SVG path. Change <code>mark_point(filled=True, opacity=1)</code> to <code>mark_point(filled=True, opacity=1, shape=star)</code> to see whether it looks better (the difference will only be obvious for the larger stars).</p>
+</div>
+</div>
+<p><em>Apparent</em> magnitude should not be confused with <em>actual</em> magnitude! The variable <code>vmag</code> records brightness <em>as seen from Earth</em>, which is determined by two factors; how much light the star puts out, and its distance from our solar system (brightness falls with the square of distance). Sirius looks brightest in the night sky at 2.6 parsecs; Rigel looks fainter from a hundred times further away while shining thousands of times harder.</p>
+</section>
+<section id="temperature" class="level3">
+<h3 class="anchored" data-anchor-id="temperature">Temperature</h3>
+<p><code>bv_color</code> is the B minus V colour index: the star’s magnitude through a blue filter minus its magnitude through a yellow-green one. A hot blue star is brighter in B and gets a smaller or negative index value, while a cool star gets a large value. B minus V is an approximation for surface temperature that runs in reverse: (the index falling as the temperature rises).</p>
+<p>Spectral classes themselves are defined by neither colour nor temperature. The Morgan-Keenan system classifies a star by the absorption lines in its spectrum, anchored to designated standard stars. Colour and temperature are calibrations laid on top of that: for each class, astronomers measure the mean B minus V of nearby unreddened stars and infer the effective temperature from models. The class boundaries used below are calibrations based on Pecaut and Mamajek (2013).</p>
+<p>Below is the density of this index across the whole catalogue, with spectral class boundaries drawn as dividing lines and each region filled with its class colour:</p>
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYnYgPSBzdGFyc1tcImJ2X2NvbG9yXCJdLnRvX251bXB5KClcbnN0ZXAgPSAwLjAyXG5iaW5zID0gbnAuYXJhbmdlKC0wLjUsIDIuNSArIHN0ZXAsIHN0ZXApXG5jbnQsIF8gPSBucC5oaXN0b2dyYW0oYnYsIGJpbnM9YmlucylcbmNlbnRyZXMgPSBiaW5zWzotMV0gKyBzdGVwIC8gMlxuYncgPSAwLjA2XG5reCA9IG5wLmFyYW5nZSgtNCAqIGJ3LCA0ICogYncgKyBzdGVwLCBzdGVwKVxua2VybiA9IG5wLmV4cCgtMC41ICogKGt4IC8gYncpICoqIDIpXG5rZXJuID0ga2VybiAvIGtlcm4uc3VtKClcbmQgPSBucC5jb252b2x2ZShjbnQsIGtlcm4sIG1vZGU9XCJzYW1lXCIpIC8gKGxlbihidikgKiBzdGVwKVxuYnZkID0gcGQuRGF0YUZyYW1lKHtcImJ2XCI6IGNlbnRyZXMsIFwiZGVuc2l0eVwiOiBkfSlcblxuIyBpbnRyaW5zaWMgQi1WIG9mIEIwViwgQTBWLCBGMFYsIEcwViwgSzBWLCBNMFYgZHdhcmZzXG4jIChQZWNhdXQgYW5kIE1hbWFqZWsgMjAxMywgbWVhbiBkd2FyZiBzZXF1ZW5jZSlcbkNMU19FREdFUyA9IFstMC4zMCwgMC4wMCwgMC4zMCwgMC42MCwgMC44MiwgMS40Ml1cbkNMUyA9IFtcIk9cIiwgXCJCXCIsIFwiQVwiLCBcIkZcIiwgXCJHXCIsIFwiS1wiLCBcIk1cIl1cbkNMU19UID0gWzM1MDAwLCAxNTAwMCwgODUwMCwgNjYwMCwgNTYwMCwgNDQwMCwgMzEwMF1cblxuZGVmIHJnYl9zdHIoVCk6XG4gICAgciwgZywgYiA9IChpbnQocm91bmQoMjU1ICogYykpIGZvciBjIGluIGJiX3JnYihUKSlcbiAgICByZXR1cm4gZlwicmdiKHtyfSx7Z30se2J9KVwiXG5cbkJWX1ggPSBhbHQuWChcImJ2OlFcIiwgdGl0bGU9XCJjb2xvdXIgaW5kZXggQi1WLCBibHVlIGxlZnRcIixcbiAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVstMC41LCAyLjVdLCBuaWNlPUZhbHNlKSlcbkJWX1kgPSBhbHQuWShcImRlbnNpdHk6UVwiLCB0aXRsZT1cImRlbnNpdHkgKGZyYWN0aW9uIHBlciB1bml0IEItVilcIixcbiAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVswLCBmbG9hdChkLm1heCgpKSAqIDEuMjVdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuaWNlPUZhbHNlKSlcblxuIyBvbmUgc2luZ2xlLWNvbG91ciBhcmVhIHBlciBjbGFzcywgc2hhcmluZyBleGFjdCBib3VuZGFyeSBwb2ludHNcbiMgc28gZXZlcnkgY29sb3VyIGJvdW5kYXJ5IGlzIGEgdHJ1ZSB2ZXJ0aWNhbCBlZGdlXG5zZWdfZWRnZXMgPSBbLTAuNV0gKyBDTFNfRURHRVMgKyBbMi41XVxuc2VnbWVudHMgPSBbXVxuZm9yIGsgaW4gcmFuZ2UoNyk6XG4gICAgbG8sIGhpID0gc2VnX2VkZ2VzW2tdLCBzZWdfZWRnZXNbayArIDFdXG4gICAgZW5kcyA9IHBkLkRhdGFGcmFtZSh7XG4gICAgICAgIFwiYnZcIjogW2xvLCBoaV0sXG4gICAgICAgIFwiZGVuc2l0eVwiOiBucC5pbnRlcnAoW2xvLCBoaV0sIGJ2ZFtcImJ2XCJdLCBidmRbXCJkZW5zaXR5XCJdKSxcbiAgICB9KVxuICAgIHNlZyA9IHBkLmNvbmNhdChbZW5kcy5pbG9jW1swXV0sXG4gICAgICAgICAgICAgICAgICAgICBidmRbKGJ2ZFtcImJ2XCJdID4gbG8pICYgKGJ2ZFtcImJ2XCJdIDwgaGkpXSxcbiAgICAgICAgICAgICAgICAgICAgIGVuZHMuaWxvY1tbMV1dXSlcbiAgICBzZWdtZW50cy5hcHBlbmQoYWx0LkNoYXJ0KHNlZykubWFya19hcmVhKFxuICAgICAgICBvcGFjaXR5PTAuOSwgY29sb3I9cmdiX3N0cihDTFNfVFtrXSkpLmVuY29kZSh4PUJWX1gsIHk9QlZfWSkpXG5cbm91dGxpbmUgPSBhbHQuQ2hhcnQoYnZkKS5tYXJrX2xpbmUoXG4gICAgc3Ryb2tlV2lkdGg9MiwgY29sb3I9XCIjNTU1NTU1XCIpLmVuY29kZSh4PUJWX1gsIHk9QlZfWSlcbnJ1bGVzID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJidlwiOiBDTFNfRURHRVN9KSkubWFya19ydWxlKFxuICAgIGNvbG9yPVwiIzk5OTk5OVwiLCBzdHJva2VEYXNoPVszLCAzXSkuZW5jb2RlKHg9QlZfWClcbm1pZHMgPSBbKGEgKyBiKSAvIDIgZm9yIGEsIGIgaW4gemlwKHNlZ19lZGdlc1s6LTFdLCBzZWdfZWRnZXNbMTpdKV1cbmxldHRlcnMgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKHtcImJ2XCI6IG1pZHMsIFwiY2xzXCI6IENMU30pKS5tYXJrX3RleHQoXG4gICAgeT0xNiwgZm9udFNpemU9MTMsIGZvbnRXZWlnaHQ9XCJib2xkXCIsIGNvbG9yPVwiIzQ0NDQ0NFwiKS5lbmNvZGUoXG4gICAgeD1CVl9YLCB0ZXh0PVwiY2xzOk5cIilcblxuYWx0LmxheWVyKCpzZWdtZW50cywgb3V0bGluZSwgcnVsZXMsIGxldHRlcnMpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NjYwLCBoZWlnaHQ9MjUwLFxuICAgIHRpdGxlPVwiZGlzdHJpYnV0aW9uIG9mIGNvbG91ciBpbmRleCwgZGl2aWRlZCBpbnRvIHNwZWN0cmFsIGNsYXNzZXNcIikifQ==
+</script>
+</div>
+<p><strong>Class M</strong> (red) stars make up roughly seventy percent of the galaxy’s stars, but only a small share of the stars in this catalogue. This is because the vast majority of M stars are <strong>red dwarfs</strong> that shine so faintly that a brightness-limited catalogue misses nearly all of them. The large population of red dwarf stars suggests a relatonship should exist between star magnitude and star temperature. Does the Hipparcos catalogue show a relationship between (apparent) magnitude as indicated by <code>vmag</code> and the temperature as indicated by <code>bv_colour</code>?</p>
+<p>A scatter plot is the obvious chart type for plotting this relationship. The following plot using the colour index (as a proxy for temperature) as the x-axis, with apparent magnitude the y-axis. Both axes are reversed; this is because larger values of <code>bv_colour</code> correspond to cooler stars, and larger values of <code>vmag</code> correspond to smaller/dimmer stars. We can also colour the observations according to the RGB values; these are imputed from the B minus V index (as can be seen from the vertical bands of colour that appear), but are saturated relative to the stars’ actual colours.</p>
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWx0LmRhdGFfdHJhbnNmb3JtZXJzLmRpc2FibGVfbWF4X3Jvd3MoKVxuXG5zbWVhciA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJidlwiOiBzdGFyc1tcImJ2X2NvbG9yXCJdLFxuICAgIFwidm1hZ1wiOiBzdGFyc1tcInZtYWdcIl0sXG4gICAgXCJjb2xvdXJcIjogW2ZcInJnYih7aW50KHIqMjU1KX0se2ludChnKjI1NSl9LHtpbnQoYioyNTUpfSlcIlxuICAgICAgICAgICAgICAgZm9yIHIsIGcsIGIgaW4gemlwKHN0YXJzW1wiY29sb3JfclwiXSwgc3RhcnNbXCJjb2xvcl9nXCJdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0YXJzW1wiY29sb3JfYlwiXSldLFxufSlcblxuYWx0LkNoYXJ0KHNtZWFyKS5tYXJrX2NpcmNsZShzaXplPTUsIG9wYWNpdHk9MC40LCBjbGlwPVRydWUpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiYnY6UVwiLCB0aXRsZT1cImNvbG91ciBpbmRleCBCLVZcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzIuMywgLTAuNF0sIG5pY2U9RmFsc2UpKSxcbiAgICB5PWFsdC5ZKFwidm1hZzpRXCIsIHRpdGxlPVwiYXBwYXJlbnQgbWFnbml0dWRlXCIsXG4gICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVsxMCwgLTJdLCBuaWNlPUZhbHNlKSksXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiY29sb3VyOk5cIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpLFxuKS5wcm9wZXJ0aWVzKHdpZHRoPTYyMCwgaGVpZ2h0PTQzMCxcbiAgICAgICAgICAgICB0aXRsZT1hbHQuVGl0bGUoXCJTdGFyIGNvbG91ciB2cyBhcHBhcmVudCBtYWduaXR1ZGVcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3VidGl0bGU9XCJIaXBwYXJjb3MgY2F0YWxvZ3VlXCIpLFxuKS5jb25maWd1cmVfdmlldyhmaWxsPVwiYmxhY2tcIikuY29uZmlndXJlX2F4aXMoZ3JpZD1GYWxzZSkifQ==
+</script>
+</div>
+<p>The visualisation does not reveal a strong correlation between apparent magnitude and colour. This is firstly because apparent magnitude is an inadequate proxy measure for actual magnitude, and secondly because many red dwarf stars are too faint to be included in the catalogue.</p>
+</section>
+</section>
+<section id="distance-radius-and-mass" class="level2">
+<h2 class="anchored" data-anchor-id="distance-radius-and-mass">4 · Distance, radius, and mass</h2>
+<p>As <code>vmag</code> cannot distinguish between a nearby dim star and a distant bright one, we need additional data — specifically <em>distance</em> — to establish the actual relationship between temperature and magnitude.</p>
+<p>Hipparcos does not include a distance field, but does include measures of <a href="https://en.wikipedia.org/wiki/Parallax">parallax</a>. As Earth circles the Sun, a nearby star appears to shift against the far background. The size of that annual shifts indicate the distance; one arcsecond of parallax defines one parsec (3.26 light years).</p>
+<p>Distance in parsecs is 1000 divided by the parallax. The Hipparcos <code>plx</code> is the parallax in milliarcseconds and <code>e_plx</code> its standard error; measurements are often highly imprecise. With a distance measure, apparent magnitude can be converted to <strong>absolute magnitude</strong>; the brightness a star would show from a standard 10 parsecs:</p>
+<p><span class="math display">\[M = m - 5\log_{10}(d / 10\,\mathrm{pc}).\]</span></p>
+<p>Rather than size, absolute magnitude is a measure of <strong>luminosity</strong>; the star’s total power output. A stars luminosity is a function of its surface area and its surface temperature, related by the the <a href="https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law">Stefan-Boltzmann law</a>. Dividing the luminosity (total power) by the power emitted per square metre at its temperature yields an estimate of the star’s surface area, from which its <strong>radius</strong> can be estimated.</p>
+<p>Smaller high-mass stars can be hotter and brighter than larger low-mass stars. Radius indicates size, but not <strong>mass</strong>. An approximate relationship has been calibrated between luminosity and mass based on measurements of the orbital periods of binary star systems. For regular stars, luminosity is estimated to increase roughly as mass to the power 3.5. A star’s temperature and luminosity can thereby furnish estimates of its mass and radius. These are the axes used by the <em>Triangle of Everything</em> visualisation from the <a href="../session1/part-c.html">previous session</a>.</p>
+</section>
+<section id="the-main-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="the-main-sequence">5 · The Main Sequence</h2>
+<p>The Hipparcos star catalogue was merged with two others — Yale and Gliese — in the <strong>HYG</strong> catalogue (the name an acronym of its sources). HYG comes with pre-calculated and pre-cleaned columns for distance and absolute magnitude; respectively <code>dist</code> and <code>absmag</code>.</p>
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaHlnID0gcGQucmVhZF9jc3Yob3Blbl91cmwoREFUQV9VUkwgKyBcImh5Z19zdGFycy5jc3ZcIikpXG5wcmludChoeWcuc2hhcGUpXG5oeWdbaHlnW1wicHJvcGVyXCJdLm5vdG5hKCldLmhlYWQoOCkifQ==
+</script>
+</div>
+<p>The columns: <code>proper</code> is the star’s traditional name, which only a few thousand stars have, so the cell above filters to named rows (the unfiltered table is mostly blank there). <code>dist</code> is the distance in parsecs (the Sun’s is zero). <code>mag</code> is apparent magnitude (the same scale as <code>vmag</code> in the Hipparcos table), and <code>absmag</code> is the absolute magnitude computed from <code>mag</code> and <code>dist</code> by the formula above. <code>ci</code> is the B minus V colour index (the same quantity as <code>bv_color</code>). Can you guess what <code>con</code> is?</p>
+<p>We will use this data set to generate the canonical chart of stellar astronomy, the <strong>Hertzsprung-Russell diagram</strong> of absolute magnitude against colour/temperature. The chart will colour each star by its physical hue. As HYG stores no display colours, these will be derived from the <code>ci</code> (B minus V) index variable. This variable can be converted to a temperature through an empirical black-body formula fitted by Ballesteros (2012):</p>
+<p><span class="math display">\[T = 4600\left(\frac{1}{0.92\,(B{-}V) + 1.7}
+    + \frac{1}{0.92\,(B{-}V) + 0.62}\right)\ \mathrm{K}.\]</span></p>
+<p>This temperature is then converted to a colour through <code>bb_rgb</code> as discussed above. Converting 107,860 stars one at a time would be slow, so the cell rounds the B minus V range into 48 narrow bins, giving every star a common bin colour. This produces a smooth gradient unlike the discrete visible colour-bands revealed by the Hipparcos saturated RGB values.</p>
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWx0LmRhdGFfdHJhbnNmb3JtZXJzLmRpc2FibGVfbWF4X3Jvd3MoKVxuXG5kZWYgY2lfdGVtcChjaSk6XG4gICAgIyBCYWxsZXN0ZXJvcyAoMjAxMik6IGJsYWNrLWJvZHkgdGVtcGVyYXR1cmUgZnJvbSBCLVZcbiAgICByZXR1cm4gNDYwMCAqICgxIC8gKDAuOTIgKiBjaSArIDEuNykgKyAxIC8gKDAuOTIgKiBjaSArIDAuNjIpKVxuXG4jIEhZRyBoYXMgbm8gcmVhZHktbWFkZSBkaXNwbGF5IGNvbG91cnMsIHNvIGRlcml2ZSB0aGVtIGZyb20gY2k6XG4jIDQ4IGNvbG91ciBiaW5zIGtlZXAgdGhlIGNvbnZlcnNpb24gY2hlYXAgZm9yIDEwNyw4NjAgc3RhcnNcbmJpbl9lZGdlcyA9IG5wLmxpbnNwYWNlKC0wLjQsIDIuMywgNDkpXG5iaW5fbWlkcyA9IChiaW5fZWRnZXNbOi0xXSArIGJpbl9lZGdlc1sxOl0pIC8gMlxucGFsZXR0ZSA9IFtmXCJyZ2Ioe2ludChyKjI1NSl9LHtpbnQoZyoyNTUpfSx7aW50KGIqMjU1KX0pXCJcbiAgICAgICAgICAgZm9yIHIsIGcsIGIgaW4gKGJiX3JnYihjaV90ZW1wKGMpKSBmb3IgYyBpbiBiaW5fbWlkcyldXG53aGljaCA9IG5wLmNsaXAobnAuZGlnaXRpemUoaHlnW1wiY2lcIl0sIGJpbl9lZGdlcykgLSAxLCAwLCA0NylcblxuaHIgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwiY2lcIjogaHlnW1wiY2lcIl0sIFwiYWJzbWFnXCI6IGh5Z1tcImFic21hZ1wiXSxcbiAgICBcImNvbG91clwiOiBbcGFsZXR0ZVtpXSBmb3IgaSBpbiB3aGljaF0sXG59KVxuXG5wdHMgPSBhbHQuQ2hhcnQoaHIpLm1hcmtfY2lyY2xlKHNpemU9NCwgb3BhY2l0eT0wLjM1LCBjbGlwPVRydWUpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiY2k6UVwiLCB0aXRsZT1cImNvbG91ciBpbmRleCBCLVZcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49Wy0wLjQsIDIuM10sIG5pY2U9RmFsc2UpKSxcbiAgICB5PWFsdC5ZKFwiYWJzbWFnOlFcIiwgdGl0bGU9XCJhYnNvbHV0ZSBtYWduaXR1ZGVcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzE5LCAtOV0sIG5pY2U9RmFsc2UpKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSksXG4pXG5cbnN1bl9kZiA9IHBkLkRhdGFGcmFtZSh7XCJjaVwiOiBbaHlnLmlsb2NbMF1bXCJjaVwiXV0sXG4gICAgICAgICAgICAgICAgICAgICAgIFwiYWJzbWFnXCI6IFtoeWcuaWxvY1swXVtcImFic21hZ1wiXV0sXG4gICAgICAgICAgICAgICAgICAgICAgIFwibGFiZWxcIjogW1wiU3VuXCJdfSlcbnN1bl9kb3QgPSBhbHQuQ2hhcnQoc3VuX2RmKS5tYXJrX3BvaW50KFxuICAgIHNpemU9OTAsIGZpbGxlZD1UcnVlLCBjb2xvcj1cIiNFMDcwMDBcIiwgc3Ryb2tlPVwiI2ZmZmZmZlwiLFxuICAgIHN0cm9rZVdpZHRoPTEsIG9wYWNpdHk9MSkuZW5jb2RlKHg9XCJjaTpRXCIsIHk9XCJhYnNtYWc6UVwiKVxuc3VuX2xhYiA9IGFsdC5DaGFydChzdW5fZGYpLm1hcmtfdGV4dChcbiAgICBhbGlnbj1cImNlbnRlclwiLCBkeT0tMTQsIGZvbnRTaXplPTExLCBjb2xvcj1cIiNFMDcwMDBcIikuZW5jb2RlKFxuICAgIHg9XCJjaTpRXCIsIHk9XCJhYnNtYWc6UVwiLCB0ZXh0PVwibGFiZWw6TlwiKVxuXG5hbHQubGF5ZXIocHRzLCBzdW5fZG90LCBzdW5fbGFiKS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTYyMCwgaGVpZ2h0PTQ3MCxcbiAgICB0aXRsZT1hbHQuVGl0bGUoXCJIZXJ0enNwcnVuZy1SdXNzZWxsIGRpYWdyYW1cIixcbiAgICAgICAgICAgICAgICAgICAgc3VidGl0bGU9XCJIWUcgY2F0YWxvZ3VlXCIpLFxuKS5jb25maWd1cmVfdmlldyhmaWxsPVwiYmxhY2tcIikuY29uZmlndXJlX2F4aXMoZ3JpZD1GYWxzZSkifQ==
+</script>
+</div>
+<p>The diagram shows a strong correlation between temperature and absolute magnitude driven by the diagonal band that runs from the upper left to the lower right: hotter stars shine brighter. This diagonal band is the <strong>main sequence</strong>: the population of “normal” stars (including the Sun) that fuse hydrogen in their cores.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="The HR Diagram">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The HR Diagram
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Hertzsprung-Russell diagram is over a century old and has become one of the most recognisable scientific visualisations. Run a <a href="https://www.google.com/search?q=Hertzsprung-Russell+diagram&amp;udm=2">Google image search</a> for it and browse the variants: axes in temperature, colour index or spectral class; luminosity or absolute magnitude; point clouds, density shading, evolutionary tracks. Consider the strengths and weaknesses of these design decisions.</p>
+<p>Notice one strange feature shared by nearly all of them. The temperature-brightness relationship is <em>positive</em>, yet the main sequence slopes <em>downward</em>, because the temperature axis runs backwards! The measured colour index increases as stars get cooler, so hot sits on the left and cool on the right. This is a relic; the first such diagrams — drawn before colour was understood as temperature — ordered stars by their spectral class letters. Even after the x axis became understood as temperature, the original orientation has remained as a convention.</p>
+</div>
+</div>
+<section id="stellar-lifecycle" class="level3">
+<h3 class="anchored" data-anchor-id="stellar-lifecycle">Stellar lifecycle</h3>
+<p>Stars generally spend about ninety percent of their lifetime as main sequence stars, with their position along the band is essentially determined by its mass at “birth”; more massive stars are hotter, brighter; less massive stars are cooler and dimmer. This also determines the length of their lifetimes as stars, with the hottest stars burning through their hydrogen orders of magnitude faster than the coolest stars.</p>
+<p>A star begins its “death” when hydrogen in the core is depleted. The spent core contracts while the surface cools and the outer layers swell enormously, becoming brighter and redder. On the HR diagram, star moves from the the main sequence diagonal into the distinct group of lower-temperature <strong>giants</strong> in the upper right. Sun-like stars eventually lose these outer layers, becoming a small white dwarf (these appear in the lower left of the HR diagram).</p>
+<p>More massive stars undergo core collapse and explode in a <strong>supernova</strong>, leaving behind a neutron star or a black hole. Neither of these appear on the HR diagram — neutron stars are too dim, and black holes emit no light at all — however they do feature in the Triangle of Everything, where black holes are represented by the Schwarzchild wall.</p>
+</section>
+<section id="radius-vs-mass" class="level3">
+<h3 class="anchored" data-anchor-id="radius-vs-mass">Radius vs mass</h3>
+<p>Can we combine the HR diagram with the objects from the Triangle’s “star” category in a plot of star radius against mass?</p>
+<p>The previous section described how to derive mass and radius from luminosity and temperature. Doing this for all stars and plotting on the Triangle’s axis, together with the Triangle’s “star” category objects, yields the following visualisation:</p>
+<div>
+<div id="pyodide-15" class="exercise-cell">
+
+</div>
+<script type="pyodide-15-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWx0LmRhdGFfdHJhbnNmb3JtZXJzLmRpc2FibGVfbWF4X3Jvd3MoKVxuXG5kZWYgY2lfdGVtcChjaSk6XG4gICAgcmV0dXJuIDQ2MDAgKiAoMSAvICgwLjkyICogY2kgKyAxLjcpICsgMSAvICgwLjkyICogY2kgKyAwLjYyKSlcblxuIyB0aGUgdHdvIGxhZGRlcnMgb2Ygc2VjdGlvbiA0LCBydW4gb24gZXZlcnkgSFlHIHJvd1xuTCA9IDEwICoqICgoNC44MyAtIGh5Z1tcImFic21hZ1wiXSkgLyAyLjUpICAgICAgIyBsdW1pbm9zaXR5LCBzdW5zXG5UID0gY2lfdGVtcChoeWdbXCJjaVwiXS5jbGlwKC0wLjQsIDUuNSkpICAgICAgICAjIHRlbXBlcmF0dXJlLCBLXG5SID0gbnAuc3FydChMKSAqIChTVU5fVCAvIFQpICoqIDIgICAgICAgICAgICAgIyByYWRpdXMsIHN1bnNcbm1hc3MgPSBMICoqICgxIC8gMy41KSAgICAgICMgbWFzcywgc3VucywgYnkgdGhlIG1haW4tc2VxdWVuY2UgcmVsYXRpb25cblxuIyBzYW1lIGNvbG91cnMgYXMgdGhlIEhSIGRpYWdyYW0gYWJvdmVcbmJpbl9lZGdlcyA9IG5wLmxpbnNwYWNlKC0wLjQsIDIuMywgNDkpXG5iaW5fbWlkcyA9IChiaW5fZWRnZXNbOi0xXSArIGJpbl9lZGdlc1sxOl0pIC8gMlxucGFsZXR0ZSA9IFtmXCJyZ2Ioe2ludChyKjI1NSl9LHtpbnQoZyoyNTUpfSx7aW50KGIqMjU1KX0pXCJcbiAgICAgICAgICAgZm9yIHIsIGcsIGIgaW4gKGJiX3JnYihjaV90ZW1wKGMpKSBmb3IgYyBpbiBiaW5fbWlkcyldXG53aGljaCA9IG5wLmNsaXAobnAuZGlnaXRpemUoaHlnW1wiY2lcIl0sIGJpbl9lZGdlcykgLSAxLCAwLCA0NylcblxudG9lX3N0YXJzID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcIm1hc3NcIjogbWFzcywgXCJyYWRpdXNcIjogUixcbiAgICBcImNvbG91clwiOiBbcGFsZXR0ZVtpXSBmb3IgaSBpbiB3aGljaF0sXG59KVxuXG4jIHRoZSBUcmlhbmdsZSdzIG93biBmaXZlIHN0YXIgb2JqZWN0cywgY29udmVydGVkIGZyb20gZ3JhbXMgYW5kXG4jIGNlbnRpbWV0cmVzIHRvIHNvbGFyIHVuaXRzXG50b2UgPSBwZC5yZWFkX2NzdihvcGVuX3VybChEQVRBX1VSTCArIFwib2JqZWN0c19mdWxsLmNzdlwiKSlcbnRvZSA9IHRvZVt0b2VbXCJncm91cFwiXSA9PSBcInN0YXJzXCJdLmNvcHkoKVxudG9lW1wibWFzc1wiXSA9IHRvZVtcIm1hc3NfZ1wiXSAvIDEuOTg5ZTMzXG50b2VbXCJyYWRpdXNcIl0gPSB0b2VbXCJyYWRpdXNfY21cIl0gLyA2Ljk1N2UxMFxuXG5NQVNTX1ggPSBhbHQuWChcIm1hc3M6UVwiLCB0aXRsZT1cIm1hc3MgKHN1bnMpLCBsb2cgc2NhbGVcIixcbiAgICAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZSh0eXBlPVwibG9nXCIsIGRvbWFpbj1bMC4wMDgsIDMwXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuaWNlPUZhbHNlKSxcbiAgICAgICAgICAgICAgIGF4aXM9YWx0LkF4aXModmFsdWVzPVswLjAxLCAwLjEsIDEsIDEwXSkpXG5SQURfWSA9IGFsdC5ZKFwicmFkaXVzOlFcIiwgdGl0bGU9XCJyYWRpdXMgKHN1bnMpLCBsb2cgc2NhbGVcIixcbiAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHR5cGU9XCJsb2dcIiwgZG9tYWluPVs1ZS02LCAzMDBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmljZT1GYWxzZSksXG4gICAgICAgICAgICAgIGF4aXM9YWx0LkF4aXModmFsdWVzPVsxZS01LCAxZS00LCAxZS0zLCAxZS0yLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMC4xLCAxLCAxMCwgMTAwXSkpXG5cbiMgbGluZXMgb2YgZXF1YWwgZGVuc2l0eTogbWFzcyBwZXIgdm9sdW1lIGNvbnN0YW50LCBzbyByYWRpdXNcbiMgZ3Jvd3MgYXMgdGhlIGN1YmUgcm9vdCBvZiBtYXNzIChzdHJhaWdodCBsaW5lcyBvbiBsb2ctbG9nIGF4ZXMpXG5ERU5TID0gWygxLjAsIFwiZGVuc2l0eSBvZiB3YXRlclwiKSxcbiAgICAgICAgKDFlNiwgXCJ3aGl0ZSBkd2FyZiBkZW5zaXR5XCIpLFxuICAgICAgICAoMmUxNCwgXCJudWNsZWFyIGRlbnNpdHlcIildXG5NZ3JpZCA9IG5wLmdlb21zcGFjZSgwLjAwOCwgMzAsIDQwKVxuaXNvID0gcGQuY29uY2F0KFtcbiAgICBwZC5EYXRhRnJhbWUoe1xuICAgICAgICBcIm1hc3NcIjogTWdyaWQsXG4gICAgICAgIFwicmFkaXVzXCI6ICgzICogTWdyaWQgKiAxLjk4OWUzM1xuICAgICAgICAgICAgICAgICAgIC8gKDQgKiBucC5waSAqIHJobykpICoqICgxIC8gMykgLyA2Ljk1N2UxMCxcbiAgICAgICAgXCJsYWJcIjogbGFiLFxuICAgIH0pXG4gICAgZm9yIHJobywgbGFiIGluIERFTlNdKVxuaXNvID0gaXNvWyhpc29bXCJyYWRpdXNcIl0gPiA1ZS02KSAmIChpc29bXCJyYWRpdXNcIl0gPCAzMDApXVxuXG5pc29fbGluZXMgPSBhbHQuQ2hhcnQoaXNvKS5tYXJrX2xpbmUoXG4gICAgY29sb3I9XCIjMmE5ZDhmXCIsIHN0cm9rZVdpZHRoPTMuNSwgb3BhY2l0eT0wLjQ1LFxuICAgIHN0cm9rZURhc2g9WzUsIDRdKS5lbmNvZGUoXG4gICAgeD1NQVNTX1gsIHk9UkFEX1ksIGRldGFpbD1cImxhYjpOXCIpXG5cbmRlZiBpc29fcihtLCByaG8pOlxuICAgIHJldHVybiAoMyAqIG0gKiAxLjk4OWUzMyAvICg0ICogbnAucGkgKiByaG8pKSAqKiAoMSAvIDMpIC8gNi45NTdlMTBcblxuaXNvX2xhYl9yaWdodCA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFzc1wiOiBbMjIsIDIyXSxcbiAgICBcInJhZGl1c1wiOiBbaXNvX3IoMjIsIDEuMCksIGlzb19yKDIyLCAxZTYpXSxcbiAgICBcImxhYlwiOiBbXCJkZW5zaXR5IG9mIHdhdGVyXCIsIFwid2hpdGUgZHdhcmYgZGVuc2l0eVwiXSxcbn0pKS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJyaWdodFwiLCBkeD0tNCwgZHk9LTksIGZvbnRTaXplPTExLCBjb2xvcj1cIiM4YThmOThcIikuZW5jb2RlKFxuICAgIHg9TUFTU19YLCB5PVJBRF9ZLCB0ZXh0PVwibGFiOk5cIilcbmlzb19sYWJfbGVmdCA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFzc1wiOiBbMC4wNV0sIFwicmFkaXVzXCI6IFtpc29fcigwLjA1LCAyZTE0KV0sXG4gICAgXCJsYWJcIjogW1wibnVjbGVhciBkZW5zaXR5XCJdLFxufSkpLm1hcmtfdGV4dChcbiAgICBhbGlnbj1cImxlZnRcIiwgZHg9NCwgZHk9LTE2LCBmb250U2l6ZT0xMSwgY29sb3I9XCIjOGE4Zjk4XCIpLmVuY29kZShcbiAgICB4PU1BU1NfWCwgeT1SQURfWSwgdGV4dD1cImxhYjpOXCIpXG5cbiMgdGhlIFNjaHdhcnpzY2hpbGQgd2FsbDogUiA9IDJHTS9jXjIsIG9yIDQuMjVlLTYgc29sYXIgcmFkaWkgcGVyXG4jIHNvbGFyIG1hc3M7IHNxdWVlemUgYW55IG1hc3MgaW5zaWRlIHRoaXMgbGluZSBhbmQgaXQgaXMgYSBibGFjayBob2xlXG5zY2ggPSBwZC5EYXRhRnJhbWUoe1wibWFzc1wiOiBucC5nZW9tc3BhY2UoMC4wMDgsIDMwLCAzMCl9KVxuc2NoW1wicmFkaXVzXCJdID0gNC4yNWUtNiAqIHNjaFtcIm1hc3NcIl1cbnNjaCA9IHNjaFtzY2hbXCJyYWRpdXNcIl0gPiA1ZS02XVxuc2NoX2xpbmUgPSBhbHQuQ2hhcnQoc2NoKS5tYXJrX2xpbmUoXG4gICAgY29sb3I9XCIjZTUzOTM1XCIsIHN0cm9rZVdpZHRoPTEuNSkuZW5jb2RlKHg9TUFTU19YLCB5PVJBRF9ZKVxuc2NoX2xhYiA9IGFsdC5DaGFydChzY2gudGFpbCgxKSkubWFya190ZXh0KFxuICAgIGFsaWduPVwicmlnaHRcIiwgZHg9LTQsIGR5PS05LCBmb250U2l6ZT0xMSwgY29sb3I9XCIjZTUzOTM1XCIsXG4gICAgdGV4dD1cIlNjaHdhcnpzY2hpbGQgd2FsbDogYmxhY2sgaG9sZXNcIikuZW5jb2RlKHg9TUFTU19YLCB5PVJBRF9ZKVxuXG5jbG91ZCA9IGFsdC5DaGFydCh0b2Vfc3RhcnMpLm1hcmtfY2lyY2xlKFxuICAgIHNpemU9NSwgb3BhY2l0eT0wLjM1LCBjbGlwPVRydWUpLmVuY29kZShcbiAgICB4PU1BU1NfWCwgeT1SQURfWSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSkpXG50b2VfZG90cyA9IGFsdC5DaGFydCh0b2UpLm1hcmtfcG9pbnQoXG4gICAgc2l6ZT0xMDAsIGZpbGxlZD1UcnVlLCBjb2xvcj1cIiNEQUE1MjBcIiwgc3Ryb2tlPVwiI2ZmZmZmZlwiLFxuICAgIHN0cm9rZVdpZHRoPTEsIG9wYWNpdHk9MSkuZW5jb2RlKHg9TUFTU19YLCB5PVJBRF9ZKVxudG9lX2xhYmVscyA9IGFsdC5DaGFydCh0b2VbdG9lW1wibmFtZVwiXSAhPSBcIlN1blwiXSkubWFya190ZXh0KFxuICAgIGFsaWduPVwibGVmdFwiLCBkeD0xMCwgZm9udFNpemU9MTIsIGNvbG9yPVwiI2Y1ZjJlYVwiKS5lbmNvZGUoXG4gICAgeD1NQVNTX1gsIHk9UkFEX1ksIHRleHQ9XCJuYW1lOk5cIilcbnN1bl9sYWJlbCA9IGFsdC5DaGFydCh0b2VbdG9lW1wibmFtZVwiXSA9PSBcIlN1blwiXSkubWFya190ZXh0KFxuICAgIGFsaWduPVwicmlnaHRcIiwgZHg9LTEwLCBkeT0tMTIsIGZvbnRTaXplPTEyLFxuICAgIGNvbG9yPVwiI2Y1ZjJlYVwiKS5lbmNvZGUoeD1NQVNTX1gsIHk9UkFEX1ksIHRleHQ9XCJuYW1lOk5cIilcblxuYWx0LmxheWVyKGlzb19saW5lcywgaXNvX2xhYl9yaWdodCwgaXNvX2xhYl9sZWZ0LCBzY2hfbGluZSwgc2NoX2xhYixcbiAgICAgICAgICBjbG91ZCwgdG9lX2RvdHMsIHRvZV9sYWJlbHMsIHN1bl9sYWJlbCkucHJvcGVydGllcyhcbiAgICB3aWR0aD02MjAsIGhlaWdodD00ODAsXG4gICAgdGl0bGU9YWx0LlRpdGxlKFwiTWFzcyBhZ2FpbnN0IHJhZGl1c1wiLFxuICAgICAgICAgICAgICAgICAgICBzdWJ0aXRsZT1cIkhZRyBjYXRhbG9ndWUgYW5kIHRoZSBUcmlhbmdsZVwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiIG9mIEV2ZXJ5dGhpbmcncyBzdGFyIG9iamVjdHNcIiksXG4pLmNvbmZpZ3VyZV92aWV3KGZpbGw9XCJibGFja1wiKS5jb25maWd1cmVfYXhpcyhcbiAgICBncmlkPVRydWUsIGdyaWRDb2xvcj1cIiMyYjMwM2JcIikifQ==
+</script>
+</div>
+<p>We can recognise a reversed, stretched version of the pattern from the HR diagram. The sun appears to be properly placed, however there is a problem: the Triangle’s <strong>red giant</strong> and <strong>white dwarf</strong> objects are far away from their HR giant and dwarf counterparts. This is because conversion from luminosity to mass <em>is only valid for main sequence stars</em>. Applying the same conversion to giants and dwarfs yields erroneous mass estimates, which should not be included in the visualisation.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fix the chart by excluding the stars whose mass estimate is invalid. In the cell above, after <code>mass</code> is computed, add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>M_ms <span class="op">=</span> (T <span class="op">/</span> SUN_T) <span class="op">**</span> (<span class="dv">1</span> <span class="op">/</span> <span class="fl">0.475</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>absmag_ms <span class="op">=</span> <span class="fl">4.83</span> <span class="op">-</span> <span class="fl">2.5</span> <span class="op">*</span> np.log10(M_ms <span class="op">**</span> <span class="fl">3.5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>on_ms <span class="op">=</span> (hyg[<span class="st">"absmag"</span>] <span class="op">-</span> absmag_ms).<span class="bu">abs</span>() <span class="op">&lt;</span> <span class="fl">1.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first two lines compute the absolute magnitude a main-sequence star of each temperature should have; the third keeps only the stars within 1.5 magnitudes of that expectation. Then make <code>toe_stars</code> use only the kept rows (<code>mass[on_ms]</code>, <code>R[on_ms]</code>, and <code>np.array([palette[i] for i in which])[on_ms.to_numpy()]</code> for the colours) and rerun the cell. The giant and white dwarf branches disappear.</p>
+</div>
+</div>
+<p>In the case of those main sequence stars for which mass can be reliably estimated from luminosity, radius can be reliably estimated from mass using an exponent of 0.8. The exponent is relatively close to one since radius needs to grow with mass to maintain an equilibrium between the inward gravity pressure and outward radiation pressure. The exponent’s difference from one is reflected in the difference between the slope formed by the main sequence stars in mass-radius space and the lines of constant density.</p>
+</section>
+</section>
+<section id="age" class="level2">
+<h2 class="anchored" data-anchor-id="age">6 · Age</h2>
+<p>A simple model defines a star’s life stage by its <strong>mass</strong> at birth and its current <strong>age</strong>. Mass fixes the main-sequence properties of luminosity and radius. Mass also determines how quickly a star will form; for mass <span class="math inline">\(M\)</span>, contraction time is approximately <span class="math inline">\(0.03\,M^{-1.5}\)</span> billion years. Before the contraction time, the star is a <strong>protostar</strong>.</p>
+<p>A star will remain on the main sequence from contraction until approximately <span class="math inline">\(10\,M^{-2.5}\)</span> billion years, with a floor of about three million years. Below about a third of a sun a second correction stretches the other end: such stars are fully convective, mix all their hydrogen through the core, and burn nearly the whole supply instead of the central tenth, roughly doubling the lifetime by a tenth of a sun. Up to fifteen percent past that lifetime, it will be <strong>giant</strong> (for stars above eight suns, a <strong>supergiant</strong>, blue first and red later), after which it will become a <strong>remnant</strong>. Mass also determines the type of remnant a star will become (white dwarf, neutron star, or black hole).</p>
+<p>A chart showing these boundaries is called a <strong>phase plane</strong> (or phase diagram). Axes are the model’s <em>numeric inputs</em> — in this case mass and age — and the plane is divided into regions where each region represents a <em>categorical output</em> — in this case, the stage of star life.</p>
+<div>
+<div id="pyodide-16" class="exercise-cell">
+
+</div>
+<script type="pyodide-16-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBpbmNsdWRlIHRoZSBleGFjdCByZW1uYW50IGJvdW5kYXJpZXMgc28gYWRqYWNlbnQgcmVnaW9ucyBzaGFyZSBhblxuIyBlZGdlIHBvaW50IGluc3RlYWQgb2YgbGVhdmluZyBhIGdhcFxuY2xzX2VkZ2VfVCA9IFszNzAwLCA1MjAwLCA2MDAwLCA3NTAwLCAxMDAwMCwgMzAwMDBdXG5jbHNfZWRnZV9NID0gWyh0IC8gU1VOX1QpICoqICgxIC8gMC40NzUpIGZvciB0IGluIGNsc19lZGdlX1RdXG5NbCA9IG5wLnVuaXF1ZShucC5jb25jYXRlbmF0ZShbbnAuZ2VvbXNwYWNlKDAuMSwgMzAwLCAxNjApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFswLjI1LCA4LjAsIDI1LjBdLCBjbHNfZWRnZV9NXSkpXG50X3ByZSA9IDAuMDMgKiBNbCAqKiAtMS41XG50X21zID0gKDEwLjAgKiBNbCAqKiAtMi41ICogKDEgKyAyLjUgKiBucC5leHAoLU1sIC8gMC4xMikpXG4gICAgICAgICsgMC4wMDI1KSAgICMgRWRkaW5ndG9uIGZsb29yOyBjb252ZWN0aXZlIHN0cmV0Y2ggYXQgbG93IG1hc3NcbnRfZyA9IDEuMTUgKiB0X21zXG5ZMCA9IDFlLTRcblkxID0gMS4xNSAqICgxMC4wICogMC4xICoqIC0yLjUgKiAoMSArIDIuNSAqIG5wLmV4cCgtMC4xIC8gMC4xMikpXG4gICAgICAgICAgICAgKyAwLjAwMjUpICAgIyB0b3Agb2YgYXhpczogdGhlIGJvdW5kYXJ5IGF0IDAuMSBzdW5zXG5cbmRlZiByZWdpb24obG8sIGhpLCBrZWVwPU5vbmUpOlxuICAgIGRmID0gcGQuRGF0YUZyYW1lKHtcIm1hc3NcIjogTWwsIFwibG9cIjogbnAuY2xpcChsbywgWTAsIFkxKSxcbiAgICAgICAgICAgICAgICAgICAgICAgXCJoaVwiOiBucC5jbGlwKGhpLCBZMCwgWTEpfSlcbiAgICBpZiBrZWVwIGlzIG5vdCBOb25lOlxuICAgICAgICBkZiA9IGRmW2tlZXBdXG4gICAgcmV0dXJuIGRmW2RmW1wiaGlcIl0gPiBkZltcImxvXCJdXVxuXG5TVEFHRV9YID0gYWx0LlgoXCJtYXNzOlFcIiwgdGl0bGU9XCJtYXNzIChzdW5zKSwgbG9nIHNjYWxlXCIsXG4gICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHR5cGU9XCJsb2dcIiwgZG9tYWluPVswLjEsIDMwMF0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5pY2U9RmFsc2UpLFxuICAgICAgICAgICAgICAgIGF4aXM9YWx0LkF4aXModmFsdWVzPVswLjEsIDEsIDEwLCAxMDBdKSlcblNUQUdFX1kgPSBhbHQuWShcImxvOlFcIiwgdGl0bGU9XCJhZ2UgKGJpbGxpb24geWVhcnMpLCBsb2cgc2NhbGVcIixcbiAgICAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUodHlwZT1cImxvZ1wiLCBkb21haW49W1kwLCBZMV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5pY2U9RmFsc2UpLFxuICAgICAgICAgICAgICAgIGF4aXM9YWx0LkF4aXModmFsdWVzPVsxZS0zLCAxZS0yLCAwLjEsIDEsIDEwLCAxMDAsIDEwMDBdKSlcblxuZmxvb3IgPSBucC5mdWxsX2xpa2UoTWwsIFkwKVxuY2VpbGluZyA9IG5wLmZ1bGxfbGlrZShNbCwgWTEpXG4jIHRoZSBtYWluIHNlcXVlbmNlLCBzcGxpdCBieSBzcGVjdHJhbCBjbGFzczogb24gdGhlIG1haW4gc2VxdWVuY2VcbiMgVCA9IFNVTl9UICogTV4wLjQ3NSwgc28gZXZlcnkgT0JBRkdLTSBib3VuZGFyeSBpcyBhIGZpeGVkIG1hc3NcbkNMU19UID0ge1wiTVwiOiAzMDUwLCBcIktcIjogNDQwMCwgXCJHXCI6IDU1MDAsIFwiRlwiOiA2NzUwLCBcIkFcIjogODcwMCxcbiAgICAgICAgIFwiQlwiOiAxNzAwMCwgXCJPXCI6IDQwMDAwfVxuY2xzX2JvdW5kcyA9IFswLjFdICsgY2xzX2VkZ2VfTSArIFszMDAuMF1cblxuZGVmIGNsc19jb2xvdXIoVCk6XG4gICAgciwgZywgYiA9IChpbnQocm91bmQoMjU1ICogYykpIGZvciBjIGluIGJiX3JnYihUKSlcbiAgICByZXR1cm4gZlwicmdiKHtyfSx7Z30se2J9KVwiXG5cbm1zX3N0cmlwZXMgPSBbXG4gICAgKHJlZ2lvbih0X3ByZSwgdF9tcywgKE1sID49IGxvKSAmIChNbCA8PSBoaSkpLFxuICAgICBjbHNfY29sb3VyKENMU19UW25dKSlcbiAgICBmb3IgbiwgbG8sIGhpIGluIHppcChcIk1LR0ZBQk9cIiwgY2xzX2JvdW5kc1s6LTFdLCBjbHNfYm91bmRzWzE6XSlcbl1cblxuc3RhZ2VzID0gW1xuICAgIChyZWdpb24oZmxvb3IsIHRfcHJlKSwgXCIjNGEzMTE4XCIpLCAgICAgICAgICAgICAgICAgICAgICAgICMgcHJvdG9zdGFyXG4gICAgKm1zX3N0cmlwZXMsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgbWFpbiBzZXF1ZW5jZVxuICAgIChyZWdpb24odF9tcywgdF9nLCBNbCA+PSAwLjI1KSwgXCIjYzczYjI1XCIpLCAgICAgICAgICAgICAgICMgZ2lhbnRcbiAgICAjIGJlbG93IDAuMjUgc3VucyBhIHN0YXIgaXMgZnVsbHkgY29udmVjdGl2ZSwgbmV2ZXIgYmVjb21lcyBhXG4gICAgIyBnaWFudCwgYW5kIHBhc3NlcyBzdHJhaWdodCBmcm9tIHRoZSBtYWluIHNlcXVlbmNlIHRvIHdoaXRlIGR3YXJmXG4gICAgKHJlZ2lvbih0X21zLCBjZWlsaW5nLCBNbCA8PSAwLjI1KSwgXCIjYjdhZWM0XCIpLFxuICAgIChyZWdpb24odF9nLCBjZWlsaW5nLCAoTWwgPj0gMC4yNSkgJiAoTWwgPD0gOCkpLCBcIiNiN2FlYzRcIiksICAjIHdoaXRlIGR3YXJmXG4gICAgKHJlZ2lvbih0X2csIGNlaWxpbmcsIChNbCA+PSA4KSAmIChNbCA8PSAyNSkpLCBcIiM3Zjc1OTBcIiksICAjIG5ldXRyb24gc3RhclxuICAgIChyZWdpb24odF9nLCBjZWlsaW5nLCBNbCA+PSAyNSksIFwiIzRhNDI1NlwiKSwgICAgICAgICAgICAgICMgYmxhY2sgaG9sZVxuXVxuYXJlYXMgPSBbYWx0LkNoYXJ0KGRmKS5tYXJrX2FyZWEob3BhY2l0eT0xLCBjb2xvcj1jb2wpLmVuY29kZShcbiAgICAgICAgICAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSwgeTI9YWx0LlkyKFwiaGlcIikpXG4gICAgICAgICBmb3IgZGYsIGNvbCBpbiBzdGFnZXNdXG5cbnN0YWdlX2xhYmVscyA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFzc1wiOiBbMC43LCAyLjUsIDgwXSxcbiAgICBcImxvXCI6ICAgWzEuMmUtMywgNTAuMCwgMC4xXSxcbiAgICBcInRcIjogICAgW1wicHJvdG9zdGFyc1wiLCBcIndoaXRlIGR3YXJmc1wiLCBcImJsYWNrIGhvbGVzXCJdLFxuICAgIFwiY1wiOiAgICBbXCIjZjVmMmVhXCIsIFwiIzI2MzIzY1wiLCBcIiNmNWYyZWFcIl0sXG59KSkubWFya190ZXh0KGZvbnRTaXplPTE1KS5lbmNvZGUoXG4gICAgeD1TVEFHRV9YLCB5PVNUQUdFX1ksIHRleHQ9XCJ0Ok5cIixcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjOk5cIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpKVxuXG4jIHNsYW50ZWQgcGFyYWxsZWwgdG8gdGhlIGdpYW50IGJhbmQsIGp1c3QgYWJvdmUgaXRcbmdpYW50c19sYWJlbCA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoXG4gICAge1wibWFzc1wiOiBbMC40MF0sIFwibG9cIjogWzIwNS4wXSwgXCJ0XCI6IFtcImdpYW50c1wiXX0pKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTUsIGFuZ2xlPTQ5LCBjb2xvcj1cIiNjNzNiMjVcIikuZW5jb2RlKFxuICAgIHg9U1RBR0VfWCwgeT1TVEFHRV9ZLCB0ZXh0PVwidDpOXCIpXG5cbiMgdGhlIHN1cGVybm92YSBlZGdlOiBhdCA4IHN1bnMgYW5kIGFib3ZlLCB0aGUgZ2lhbnQgcGhhc2UgZW5kcyBpbiBhblxuIyBleHBsb3Npb24sIHNvIHRoYXQgb25lIGJvdW5kYXJ5IGlzIGRyYXduIGFzIGEgbGluZSBvZiBpdHMgb3duXG5zbl9rZWVwID0gKE1sID49IDgpICYgKHRfZyA+PSBZMClcbnNuID0gcGQuRGF0YUZyYW1lKHtcIm1hc3NcIjogTWxbc25fa2VlcF0sIFwibG9cIjogdF9nW3NuX2tlZXBdfSlcbnNuX2xpbmUgPSBhbHQuQ2hhcnQoc24pLm1hcmtfbGluZShcbiAgICBjb2xvcj1cIiNjY2ZmMDBcIiwgc3Ryb2tlV2lkdGg9MC43NSkuZW5jb2RlKHg9U1RBR0VfWCwgeT1TVEFHRV9ZKVxuc25fbGFiID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZShcbiAgICB7XCJtYXNzXCI6IFsxM10sIFwibG9cIjogWzAuMDM4XSwgXCJ0XCI6IFtcInN1cGVybm92YVwiXX0pKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTQsIGFuZ2xlPTQ0LFxuICAgIGNvbG9yPVwiI2NjZmYwMFwiKS5lbmNvZGUoeD1TVEFHRV9YLCB5PVNUQUdFX1ksIHRleHQ9XCJ0Ok5cIilcblxuIyBSMTM2YTEsIHRoZSBtb3N0IG1hc3NpdmUgc3RhciBrbm93biAofjIwMCBzdW5zKSwgbWFya2VkIHdpdGhpbiB0aGVcbiMgbWFpbi1zZXF1ZW5jZSBPIHN0cmlwZSBvbmx5XG5yMTM2ID0gcGQuRGF0YUZyYW1lKHtcIm1hc3NcIjogWzIwMC4wXSwgXCJsb1wiOiBbWTBdLFxuICAgICAgICAgICAgICAgICAgICAgXCJoaVwiOiBbMTAuMCAqIDIwMC4wICoqIC0yLjUgKyAwLjAwMjVdfSlcbnIxMzZfbGluZSA9IGFsdC5DaGFydChyMTM2KS5tYXJrX3J1bGUoXG4gICAgY29sb3I9XCIjMWEzYThmXCIsIHN0cm9rZVdpZHRoPTEuNSwgc3Ryb2tlRGFzaD1bMiwgM10pLmVuY29kZShcbiAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSwgeTI9YWx0LlkyKFwiaGlcIikpXG5yMTM2X2xhYiA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoXG4gICAge1wibWFzc1wiOiBbMjAwLjBdLCBcImxvXCI6IFs2ZS00XX0pKS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJyaWdodFwiLCBkeD0tNiwgZm9udFNpemU9MTEuNSwgY29sb3I9XCIjMWEzYThmXCIpLmVuY29kZShcbiAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSxcbiAgICB0ZXh0PWFsdC52YWx1ZShbXCJtb3N0IG1hc3NpdmVcIiwgXCJvYnNlcnZlZCBzdGFyXCIsIFwiKFIxMzZhMSlcIl0pKVxuXG4jIHNsYW50ZWQgYWxvbmcgdGhlIGJhbmQsIHVuZGVyIHRoZSBLIEcgRiBBIGxldHRlcnNcbm1zX2xhYmVsID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZShcbiAgICB7XCJtYXNzXCI6IFsxLjFdLCBcImxvXCI6IFswLjEzXSwgXCJ0XCI6IFtcIm1haW4gc2VxdWVuY2VcIl19KSkubWFya190ZXh0KFxuICAgIGZvbnRTaXplPTE3LCBhbmdsZT00MywgY29sb3I9XCIjNWE2MTZiXCIpLmVuY29kZShcbiAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSwgdGV4dD1cInQ6TlwiKVxuXG4jIGNlbnRyZWQgaW4gdGhlIDgtMjUgc3VuIGJhbmQsIGJyb2tlbiBvdmVyIHR3byBsaW5lc1xubnNfbGFiZWwgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKFxuICAgIHtcIm1hc3NcIjogWzE0LjFdLCBcImxvXCI6IFswLjQ3XX0pKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTUsIGNvbG9yPVwiI2Y1ZjJlYVwiKS5lbmNvZGUoXG4gICAgeD1TVEFHRV9YLCB5PVNUQUdFX1ksIHRleHQ9YWx0LnZhbHVlKFtcIm5ldXRyb25cIiwgXCJzdGFyc1wiXSkpXG5cbnVuaV9ydWxlID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJsb1wiOiBbMTMuOF19KSkubWFya19ydWxlKFxuICAgIGNvbG9yPVwiIzhhMmJlMlwiLCBzdHJva2VXaWR0aD0yLjUsIHN0cm9rZURhc2g9WzYsIDRdLFxuICAgIG9wYWNpdHk9MC44KS5lbmNvZGUoeT1TVEFHRV9ZKVxudW5pX2xhYiA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoXG4gICAge1wibWFzc1wiOiBbMC4xMDVdLCBcImxvXCI6IFsxMy44XSxcbiAgICAgXCJ0XCI6IFtcImFnZSBvZiB0aGUgdW5pdmVyc2VcIl19KSkubWFya190ZXh0KFxuICAgIGFsaWduPVwibGVmdFwiLCBkeT0tOSwgZm9udFNpemU9MTEuNSwgY29sb3I9XCIjOGEyYmUyXCIpLmVuY29kZShcbiAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSwgdGV4dD1cInQ6TlwiKVxuXG4jIG9uZSBsZXR0ZXIgcGVyIHNwZWN0cmFsLWNsYXNzIHN0cmlwZSwgbWlkd2F5IHVwIHRoZSBiYW5kXG5jbHNfbWlkID0gW2Zsb2F0KG5wLnNxcnQobG8gKiBoaSkpXG4gICAgICAgICAgIGZvciBsbywgaGkgaW4gemlwKGNsc19ib3VuZHNbOi0xXSwgY2xzX2JvdW5kc1sxOl0pXVxuY2xzX2xvID0gbGlzdChucC5jbGlwKFswLjU0OCAqIG0gKiogLTIgZm9yIG0gaW4gY2xzX21pZF0sXG4gICAgICAgICAgICAgICAgICAgICAgMS41ZS00LCBOb25lKSlcbmNsc19sb1swXSA9IDEuOCAgICAgICAgICAgICMga2VlcCBNIGNsZWFyIG9mIHRoZSB1bml2ZXJzZSBsaW5lXG5jbHNfbWlkWy0xXSA9IDQwLjAgICAgICAgICAjIHRoZSBPIHN0cmlwZSBpcyBvbmx5IHZpc2libGUgbmVhciBpdHNcbmNsc19sb1stMV0gPSAzLjRlLTQgICAgICAgICMgbGVmdCBlbmQsIHNvIHRoZSBsZXR0ZXIgc2l0cyB0aGVyZVxuY2xzX2xhYmVscyA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwibWFzc1wiOiBjbHNfbWlkLFxuICAgIFwibG9cIjogY2xzX2xvLFxuICAgIFwidFwiOiBsaXN0KFwiTUtHRkFCT1wiKSxcbn0pKS5tYXJrX3RleHQoZm9udFNpemU9MTIsIGZvbnRXZWlnaHQ9NjAwLCBjb2xvcj1cIiMyNjMyM2NcIikuZW5jb2RlKFxuICAgIHg9U1RBR0VfWCwgeT1TVEFHRV9ZLCB0ZXh0PVwidDpOXCIpXG5cbnN1bl9kZiA9IHBkLkRhdGFGcmFtZSh7XCJtYXNzXCI6IFsxLjBdLCBcImxvXCI6IFs0LjZdLCBcInRcIjogW1wiU3VuXCJdfSlcbnN1bl9wdCA9IGFsdC5DaGFydChzdW5fZGYpLm1hcmtfY2lyY2xlKFxuICAgIHNpemU9NzAsIGNvbG9yPVwiIzFlN2QzMlwiLCBvcGFjaXR5PTEpLmVuY29kZSh4PVNUQUdFX1gsIHk9U1RBR0VfWSlcbnN1bl90eHQgPSBhbHQuQ2hhcnQoc3VuX2RmKS5tYXJrX3RleHQoXG4gICAgZHk9MTUsIGZvbnRTaXplPTE0LCBmb250V2VpZ2h0PTcwMCwgY29sb3I9XCIjMWU3ZDMyXCIpLmVuY29kZShcbiAgICB4PVNUQUdFX1gsIHk9U1RBR0VfWSwgdGV4dD1cInQ6TlwiKVxuXG5hbHQubGF5ZXIoKmFyZWFzLCBzbl9saW5lLCBzbl9sYWIsIHVuaV9ydWxlLCB1bmlfbGFiLCBjbHNfbGFiZWxzLFxuICAgICAgICAgIHN0YWdlX2xhYmVscywgZ2lhbnRzX2xhYmVsLCBtc19sYWJlbCwgbnNfbGFiZWwsXG4gICAgICAgICAgcjEzNl9saW5lLCByMTM2X2xhYiwgc3VuX3B0LCBzdW5fdHh0KS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTUyMCwgaGVpZ2h0PTUyMCxcbiAgICB0aXRsZT1cIlN0ZWxsYXIgbWFzcy1hZ2UgcGhhc2UgcGxhbmVcIixcbikuY29uZmlndXJlX3ZpZXcoZmlsbD1cImJsYWNrXCIpLmNvbmZpZ3VyZV9heGlzKFxuICAgIGdyaWQ9VHJ1ZSwgZ3JpZENvbG9yPVwiIzJiMzAzYlwiKSJ9
+</script>
+</div>
+<p>The main-sequence lifetime runs from a few million years at sixty suns to more than a trillion years at a fifth of a sun, nearly a million times longer. The age of the universe is usually estimated around 13.7 billion years, which means that even the oldest red dwarf today is still fairly close to the beginning of its life; no red dwarf has yet had anywhere near enough time to burn out. On linear axes every boundary would lie crushed against the edges; a logarithmic turns the power laws into straight lines whose slopes are the exponents (minus 1.5 and minus 2.5).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="When will the last star die?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>When will the last star die?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The universe is currently in its starry <strong>Stelliferous Era</strong>, but is believed to have long passed its “cosmic noon” or period of peak star formation. Physics predicts that all stars will eventually die without new ones being formed, leaving behind a dark, cold “ghost universe” populated only by white dwarfs, neutron stars, and black holes.</p>
+<p>Does the phase plane give you enough information to estimate how far into the future this will be?</p>
+<p>(If this question interests you, watch <em><a href="https://www.youtube.com/watch?v=uD4izuDMUQA">Timelapse of the Future: a Journey to the End of Time</a></em>.)</p>
+</div>
+</div>
+<p>Stars formed from the collision of smaller stars can reach an extremely high mass not attainable by naturally forming stars. These stars’ luminosity is near the <a href="https://en.wikipedia.org/wiki/Eddington_luminosity">Eddington limit</a>, causing them to burn out on a similar schedule of roughly three million years.</p>
+<p>The next visualisaiton uses logarithmic interactive sliders for mass and age (this means each increment is multiplicative rather than additive). Moving the sliders changes the star’s colour and phase.</p>
+<div class="sliders-side">
+<div>
+<div id="pyodide-17" class="exercise-cell">
+
+</div>
+<script type="pyodide-17-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBzdGFyX25vdyBjb21lcyBmcm9tIHRoaXMgcGFnZSdzIHNldHVwOyBtZXRhbGxpY2l0eSBpcyBoZWxkIGF0IHRoZVxuIyBTdW4ncyAwLjAyIGZvciBub3cuIEJvdGggc2xpZGVycyBzdGVwIGluIGxvZzEwLlxuYWx0LmRhdGFfdHJhbnNmb3JtZXJzLmRpc2FibGVfbWF4X3Jvd3MoKVxubG1zID0gW3JvdW5kKC0xLjAgKyAwLjA1ICogaywgMikgZm9yIGsgaW4gcmFuZ2UoNzApXSAgICMgbWFzcyAwLjEgdG8gMjgyXG5sYXMgPSBbcm91bmQoLTQuMCArIDAuMDYgKiBrLCAyKSBmb3IgayBpbiByYW5nZSgxMjcpXSAgIyBhZ2UgMWUtNCB0byAzNjMxXG5cbm1lbW8gPSB7fVxucm93cyA9IFtdXG5mb3IgbG0gaW4gbG1zOlxuICAgIGZvciBsYSBpbiBsYXM6XG4gICAgICAgIG0gPSAxMCAqKiBsbVxuICAgICAgICBhID0gMTAgKiogbGFcbiAgICAgICAgZCA9IHN0YXJfbm93KG0sIDAuMDIsIGEpXG4gICAgICAgIFRxID0gTm9uZSBpZiBkW1wiVFwiXSBpcyBOb25lIGVsc2UgaW50KHJvdW5kKGRbXCJUXCJdIC8gNTApICogNTApXG4gICAgICAgIGlmIFRxIG5vdCBpbiBtZW1vOlxuICAgICAgICAgICAgaWYgVHEgaXMgTm9uZTpcbiAgICAgICAgICAgICAgICBtZW1vW1RxXSA9IFwicmdiKDI1LDI1LDI1KVwiXG4gICAgICAgICAgICBlbHNlOlxuICAgICAgICAgICAgICAgIHIsIGcsIGIgPSAoaW50KHJvdW5kKDI1NSAqIGMpKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgZm9yIGMgaW4gYmJfcmdiKG1heChUcSwgMTAwMCkpKVxuICAgICAgICAgICAgICAgIG1lbW9bVHFdID0gZlwicmdiKHtyfSx7Z30se2J9KVwiXG4gICAgICAgICMgbGluZWFyIHNjYWxlLCByZS16b29tZWQgcGVyIHN0YXI6IHRoZSBsYXJnZXIgb2YgdGhlIHN0YXJcbiAgICAgICAgIyBhbmQgdGhlIFN1biBpcyBkcmF3biBhdCAxODAgcHggYW5kIHRoZSBvdGhlciB0byB0cnVlIHNjYWxlXG4gICAgICAgICMgYWdhaW5zdCBpdCwgd2l0aCBhIDMgcHggZmxvb3Igc28gbmVpdGhlciBldmVyIHZhbmlzaGVzXG4gICAgICAgIGJpZyA9IG1heChkW1wiUlwiXSwgMS4wKVxuICAgICAgICBweCA9IGZsb2F0KG5wLmNsaXAoMTgwLjAgKiBkW1wiUlwiXSAvIGJpZywgMywgMjQwKSlcbiAgICAgICAgc3VuX3B4ID0gZmxvYXQobnAuY2xpcCgxODAuMCAvIGJpZywgMywgMjQwKSlcbiAgICAgICAgIyB0aGUgZmlyc3QgYWdlIHN0ZXAgcGFzdCB0aGUgZ2lhbnQgcGhhc2Ugb2YgYSBoZWF2eSBzdGFyIGlzXG4gICAgICAgICMgdGhlIHN1cGVybm92YSBpdHNlbGY6IGZsYXNoIHRoZSBwYW5lbCB3aGl0ZSBmb3IgdGhhdCBzdGVwXG4gICAgICAgIHRfZ19tID0gMS4xNSAqICgxMC4wICogbSAqKiAtMi41XG4gICAgICAgICAgICAgICAgICAgICAgICAqICgxICsgMi41ICogbnAuZXhwKC1tIC8gMC4xMikpICsgMC4wMDI1KVxuICAgICAgICBib29tID0gbSA+PSA4IGFuZCBhID4gdF9nX20gYW5kIGEgKiAxMCAqKiAtMC4wNiA8PSB0X2dfbVxuICAgICAgICByb3dzLmFwcGVuZChkaWN0KGxtPWxtLCBsYT1sYSwgY29sb3VyPW1lbW9bVHFdLFxuICAgICAgICAgICAgICAgICAgICAgICAgIHNpemU9cHggKiogMiwgc3Vuc2l6ZT1zdW5fcHggKiogMixcbiAgICAgICAgICAgICAgICAgICAgICAgICBwaGFzZT1cInN1cGVybm92YVwiIGlmIGJvb20gZWxzZSBkW1wicGhhc2VcIl0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgc2VsPWZcIm1hc3Mge206LjJnfSBzdW5zLCBhZ2Uge2E6LjJnfSBHeXJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICB0ZW1wPWZcIntkWydUJ106LC4wZn0gS1wiIGlmIGRbXCJUXCJdIGVsc2UgXCJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICByYWQ9Zlwie2RbJ1InXTouM2d9IHNvbGFyIHJhZGlpXCIgaWYgZFtcIlJcIl0gZWxzZSBcIlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgIGJnPVwiI2ZmZmZmZlwiIGlmIGJvb20gZWxzZSBcIiMwMDAwMDBcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICBpbms9XCIjMWMxYzE4XCIgaWYgYm9vbSBlbHNlIFwiI2Y1ZjJlYVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgIGRpbT1cIiM1NTUwNGFcIiBpZiBib29tIGVsc2UgXCIjOWFhMWE4XCIpKVxuZ3JpZCA9IHBkLkRhdGFGcmFtZShyb3dzKVxuXG5tX3NlbCA9IGFsdC5wYXJhbShuYW1lPVwibV9zZWxcIiwgdmFsdWU9MC4wLCBiaW5kPWFsdC5iaW5kaW5nX3JhbmdlKFxuICAgIG1pbj0tMS4wLCBtYXg9Mi40NSwgc3RlcD0wLjA1LCBuYW1lPVwibWFzc1xcbihsb2cxMClcIikpXG5hX3NlbCA9IGFsdC5wYXJhbShuYW1lPVwiYV9zZWxcIiwgdmFsdWU9MC42OCwgYmluZD1hbHQuYmluZGluZ19yYW5nZShcbiAgICBtaW49LTQuMCwgbWF4PTMuNTYsIHN0ZXA9MC4wNiwgbmFtZT1cImFnZVxcbihsb2cxMClcIikpXG5waWNrID0gKFwiYWJzKGRhdHVtLmxtIC0gbV9zZWwpIDwgMC4wMlwiXG4gICAgICAgIFwiICYmIGFicyhkYXR1bS5sYSAtIGFfc2VsKSA8IDAuMDJcIilcblxuYmFja2Ryb3AgPSBhbHQuQ2hhcnQoZ3JpZCkudHJhbnNmb3JtX2ZpbHRlcihwaWNrKS5tYXJrX3JlY3QoXG4gICAgeD0wLCB4Mj0zMDAsIHk9MCwgeTI9MzEwKS5lbmNvZGUoXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiYmc6TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSkpXG5kaXNjID0gYWx0LkNoYXJ0KGdyaWQpLmFkZF9wYXJhbXMobV9zZWwsIGFfc2VsKS50cmFuc2Zvcm1fZmlsdGVyKFxuICAgIHBpY2spLm1hcmtfY2lyY2xlKG9wYWNpdHk9MSkuZW5jb2RlKFxuICAgIHg9YWx0LnZhbHVlKDE1MCksIHk9YWx0LnZhbHVlKDEzMCksXG4gICAgc2l6ZT1hbHQuU2l6ZShcInNpemU6UVwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSksXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiY29sb3VyOk5cIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpKVxuIyBhIGdvbGQgcmluZyBmaXhlZCBhdCB0aGUgU3VuJ3MgY3VycmVudCBzaXplLCBhcyBhIHBvaW50IG9mIGNvbXBhcmlzb25cbiMgYSBnb2xkIHJpbmcgYXQgdGhlIFN1bidzIHNpemUgb24gdGhlIGN1cnJlbnQgem9vbSwgYWx3YXlzIG9uIHRvcFxuc3VuX3JpbmcgPSBhbHQuQ2hhcnQoZ3JpZCkudHJhbnNmb3JtX2ZpbHRlcihwaWNrKS5tYXJrX3BvaW50KFxuICAgIHNoYXBlPVwiY2lyY2xlXCIsIGZpbGxlZD1GYWxzZSxcbiAgICBjb2xvcj1cIiNEQUE1MjBcIiwgc3Ryb2tlV2lkdGg9MS41LCBvcGFjaXR5PTEpLmVuY29kZShcbiAgICB4PWFsdC52YWx1ZSgxNTApLCB5PWFsdC52YWx1ZSgxMzApLFxuICAgIHNpemU9YWx0LlNpemUoXCJzdW5zaXplOlFcIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpKVxuc2VsX3RleHQgPSBhbHQuQ2hhcnQoZ3JpZCkudHJhbnNmb3JtX2ZpbHRlcihwaWNrKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTIpLmVuY29kZShcbiAgICB4PWFsdC52YWx1ZSgxNTApLCB5PWFsdC52YWx1ZSgxOCksIHRleHQ9XCJzZWw6TlwiLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImRpbTpOXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSlcbnBoYXNlX3RleHQgPSBhbHQuQ2hhcnQoZ3JpZCkudHJhbnNmb3JtX2ZpbHRlcihwaWNrKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTQpLmVuY29kZShcbiAgICB4PWFsdC52YWx1ZSgxNTApLCB5PWFsdC52YWx1ZSgyNTgpLCB0ZXh0PVwicGhhc2U6TlwiLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImluazpOXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSlcbnRlbXBfdGV4dCA9IGFsdC5DaGFydChncmlkKS50cmFuc2Zvcm1fZmlsdGVyKHBpY2spLm1hcmtfdGV4dChcbiAgICBmb250U2l6ZT0xMikuZW5jb2RlKFxuICAgIHg9YWx0LnZhbHVlKDE1MCksIHk9YWx0LnZhbHVlKDI4MCksIHRleHQ9XCJ0ZW1wOk5cIixcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJkaW06TlwiLCBzY2FsZT1Ob25lLCBsZWdlbmQ9Tm9uZSkpXG5yYWRfdGV4dCA9IGFsdC5DaGFydChncmlkKS50cmFuc2Zvcm1fZmlsdGVyKHBpY2spLm1hcmtfdGV4dChcbiAgICBmb250U2l6ZT0xMiwgY29sb3I9XCIjREFBNTIwXCIpLmVuY29kZShcbiAgICB4PWFsdC52YWx1ZSgxNTApLCB5PWFsdC52YWx1ZSgyOTgpLCB0ZXh0PVwicmFkOk5cIilcblxuYWx0LmxheWVyKGJhY2tkcm9wLCBkaXNjLCBzdW5fcmluZywgc2VsX3RleHQsIHBoYXNlX3RleHQsIHRlbXBfdGV4dCxcbiAgICAgICAgICByYWRfdGV4dCkucHJvcGVydGllcyhcbiAgICB3aWR0aD0zMDAsIGhlaWdodD0zMTAsXG4gICAgdGl0bGU9XCJTdGFyIGNvbG91ciBmcm9tIG1hc3MgYW5kIGFnZVwiLFxuKS5jb25maWd1cmVfdmlldyhmaWxsPVwiYmxhY2tcIikuY29uZmlndXJlX2F4aXMoZ3JpZD1GYWxzZSkifQ==
+</script>
+</div>
+</div>
+<section id="a-mini-browser-app" class="level3">
+<h3 class="anchored" data-anchor-id="a-mini-browser-app">A mini browser app</h3>
+<p>The same two sliders make a small <strong>Streamlit</strong> app, the tool from Part C. The starter is <a href="star_app.py">star_app.py</a>.</p>
+<ol type="1">
+<li>Download <a href="star_app.py">star_app.py</a> and save it next to your Part C work.</li>
+<li>Run <code>streamlit run star_app.py</code>. A browser window opens with a mass slider and an age slider, the portrait of the star on the left, and the phase plane on the right with your star marked on it. The sliders drive both panels at once.</li>
+<li>Dial up the Sun (mass 1, age 4.6), then push its age past 10 billion years. Then raise the mass past eight suns and watch the endings change: supernova, then neutron star, and heavier still, black hole.</li>
+</ol>
+</section>
+</section>
+<section id="metallicity" class="level2">
+<h2 class="anchored" data-anchor-id="metallicity">7 · Metallicity</h2>
+<p>The two-variable model with age and mass is a simplification. A third variable, <strong>metallicity</strong>, also affects a star’s lifecycle. This is the mass fraction of a star made of anything heavier than helium (astronomers call all such elements metals, including non-metal elements like carbon and oxygen). The Sun’s metallicity is about 0.02.</p>
+<p>The Big Bang produced almost pure hydrogen and helium, so the first stars formed with essentially no metals. The elements heavier than helium were forged by the nuclear fusion inside stars, which builds heavier elements up from lighter ones, in a process that ends with iron (atomic numnber 26). Heavier elements, such as <strong>gold</strong>, are only created in the supernova explosions of stars much heavier than our sun.</p>
+<p>The first generation of stars scattered “metals” into the interstellar gases that would later condense and ignite into the next generation of stars, now able to contain elements other than just hydrogen and helium. Later population of stars formed from richer gases would have higher metalliciites. At 0.02, the Sun (a later population star) is metal rich compared to older stars.</p>
+<p>Metallicity affects luminosity. <span class="math inline">\(L = M^{3.5}\, z^{-0.1}\)</span>, where <span class="math inline">\(z = Z / 0.02\)</span> for metallicity relative to the Sun. This means that metal-poor stars are slightly brighter and hotter at the same mass.</p>
+<p>Metallicity also affects the remnant boundary; metal-rich stars shed more of their mass in winds before dying, meaning that a higher birth mass is needed for the star’s supernova to leave a black hole. The model puts the boundary at <span class="math inline">\(18 + 7z\)</span> suns; eighteen for metal-poor stars rising to twenty-five for stars with the Sun’s metallicity.</p>
+<p>The phase plane drawn in the previous section implicitly uses the sun’s metallicity of 0.2 for luminosity and the remnant boundary. Allowing metallicity to fall below 0.001 introduces a <strong>pair-instability window</strong>: a star with mass between 140 and 260 suns and near-zero metallicity will blow itself apart completely, leaving no remnant.</p>
+<!-- 
+| birth mass (suns) | story |
+|---|---|
+| below 0.013 | planet; no fusion of any kind |
+| 0.013 to 0.08 | brown dwarf; cools forever |
+| 0.08 to 8 | dwarf, then red giant, then white dwarf |
+| 8 to about 25 | supernova, leaving a neutron star |
+| above about 25 | supernova or collapse, leaving a black hole |
+| 140 to 260, metallicity below 0.001 | pair-instability supernova; no remnant | -->
+<p>The phase plane below adds metallicity as a slider, and every boundary the model ties to metallicity moves with it. Metal-poor stars are brighter at the same mass, so they burn out sooner: all the lifetime boundaries slide down as <span class="math inline">\(z^{0.1}\)</span>, and the hotter surfaces shift the spectral-class stripes as well. On the remnant side, the neutron-star region widens as metallicity falls, and below 0.001 the pair-instability window opens: a hole in the black-hole region where nothing at all remains.</p>
+<div>
+<div id="pyodide-18" class="exercise-cell">
+
+</div>
+<script type="pyodide-18-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyB0aGUgcGhhc2UgcGxhbmUgd2l0aCBtZXRhbGxpY2l0eSBhcyBhIHRoaXJkIGlucHV0LiBFdmVyeXRoaW5nIHRoZVxuIyBtb2RlbCB0aWVzIHRvIFogbW92ZXM6IEwgPSBNXjMuNSB6Xi0wLjEgbWFrZXMgbWV0YWwtcG9vciBzdGFyc1xuIyBicmlnaHRlciwgc28gbGlmZXRpbWVzIHNjYWxlIGFzIHpeMC4xIGFuZCB0aGUgY2xhc3MgYm91bmRhcmllcyBhc1xuIyB6XjAuMDU7IHRoZSByZW1uYW50IGJvdW5kYXJ5IHN3ZWVwcyBhcyAxOCArIDd6OyBhbmQgdGhlXG4jIHBhaXItaW5zdGFiaWxpdHkgd2luZG93IG9wZW5zIGJlbG93IFogPSAwLjAwMS4gT25lIHNldCBvZiByb3dzIGlzXG4jIHByZWNvbXB1dGVkIHBlciBzbGlkZXIgc3RvcCBhbmQgZmlsdGVyZWQgbGl2ZS5cblkweiA9IDFlLTRcblkxeiA9IDEuMTUgKiAoMTAuMCAqIDAuMSAqKiAtMi41ICogKDEgKyAyLjUgKiBucC5leHAoLTAuMSAvIDAuMTIpKVxuICAgICAgICAgICAgICArIDAuMDAyNSlcbmNsc19lZGdlX1R6ID0gWzM3MDAsIDUyMDAsIDYwMDAsIDc1MDAsIDEwMDAwLCAzMDAwMF1cbkNMU19UeiA9IHtcIk1cIjogMzA1MCwgXCJLXCI6IDQ0MDAsIFwiR1wiOiA1NTAwLCBcIkZcIjogNjc1MCwgXCJBXCI6IDg3MDAsXG4gICAgICAgICAgXCJCXCI6IDE3MDAwLCBcIk9cIjogNDAwMDB9XG5cbmRlZiB6Y29sKFQpOlxuICAgIHIsIGcsIGIgPSAoaW50KHJvdW5kKDI1NSAqIGMpKSBmb3IgYyBpbiBiYl9yZ2IoVCkpXG4gICAgcmV0dXJuIGZcInJnYih7cn0se2d9LHtifSlcIlxuXG5NZyA9IG5wLmdlb21zcGFjZSgwLjEsIDMwMCwgOTApXG5senMgPSBbcm91bmQoLTUuMCArIDAuMTUgKiBrLCAyKSBmb3IgayBpbiByYW5nZSgyNSldXG5cbmFyZWFfcm93cywgbGluZV9yb3dzLCBsZXR0ZXJfcm93cywgZ2FwX3Jvd3MgPSBbXSwgW10sIFtdLCBbXVxuZm9yIGx6IGluIGx6czpcbiAgICB6cl8gPSAxMC4wICoqIGx6IC8gMC4wMlxuICAgIHp0ID0genJfICoqIDAuMVxuXG4gICAgZGVmIHRpbWVzKG0pOlxuICAgICAgICB0bXMgPSAoMTAuMCAqIG0gKiogLTIuNSAqIHp0XG4gICAgICAgICAgICAgICAqICgxICsgMi41ICogbnAuZXhwKC1tIC8gMC4xMikpICsgMC4wMDI1KVxuICAgICAgICByZXR1cm4gMC4wMyAqIG0gKiogLTEuNSAqIHp0LCB0bXMsIDEuMTUgKiB0bXNcblxuICAgIGRlZiBiYW5kKHNlZywgbTAsIG0xLCBsb19vZiwgaGlfb2YsIGNvbCk6XG4gICAgICAgIG1tID0gbnAudW5pcXVlKG5wLmNvbmNhdGVuYXRlKFxuICAgICAgICAgICAgW01nWyhNZyA+PSBtMCkgJiAoTWcgPD0gbTEpXSwgW20wLCBtMV1dKSlcbiAgICAgICAgdHAsIHRtLCB0Z18gPSB0aW1lcyhtbSlcbiAgICAgICAgcGlja19hcnIgPSB7XCJmbG9vclwiOiBucC5mdWxsX2xpa2UobW0sIFkweiksIFwicHJlXCI6IHRwLFxuICAgICAgICAgICAgICAgICAgICBcIm1zXCI6IHRtLCBcImdcIjogdGdfLFxuICAgICAgICAgICAgICAgICAgICBcImNlaWxcIjogbnAuZnVsbF9saWtlKG1tLCBZMXopfVxuICAgICAgICBsbyA9IG5wLmNsaXAocGlja19hcnJbbG9fb2ZdLCBZMHosIFkxeilcbiAgICAgICAgaGkgPSBucC5jbGlwKHBpY2tfYXJyW2hpX29mXSwgWTB6LCBZMXopXG4gICAgICAgIG9rID0gaGkgPiBsb1xuICAgICAgICBmb3IgbSwgbCwgaCBpbiB6aXAobW1bb2tdLCBsb1tva10sIGhpW29rXSk6XG4gICAgICAgICAgICBhcmVhX3Jvd3MuYXBwZW5kKGRpY3QobHo9bHosIHNlZz1zZWcsIG1hc3M9bSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsbz1sLCBoaT1oLCBjb2xvdXI9Y29sKSlcblxuICAgIGJhbmQoXCJwcm90b1wiLCAwLjEsIDMwMC4wLCBcImZsb29yXCIsIFwicHJlXCIsIFwiIzRhMzExOFwiKVxuICAgIGVNID0gWyh0IC8gU1VOX1QpICoqICgxIC8gMC40NzUpICogenJfICoqICgwLjAyNSAvIDAuNDc1KVxuICAgICAgICAgIGZvciB0IGluIGNsc19lZGdlX1R6XVxuICAgIHpiX3ogPSBbMC4xXSArIFtmbG9hdChucC5jbGlwKGUsIDAuMSwgMzAwLjApKSBmb3IgZSBpbiBlTV0gKyBbMzAwLjBdXG4gICAgZm9yIGssIG4gaW4gZW51bWVyYXRlKFwiTUtHRkFCT1wiKTpcbiAgICAgICAgaWYgemJfeltrICsgMV0gPiB6Yl96W2tdOlxuICAgICAgICAgICAgYmFuZChcIm1zXCIgKyBuLCB6Yl96W2tdLCB6Yl96W2sgKyAxXSwgXCJwcmVcIiwgXCJtc1wiLFxuICAgICAgICAgICAgICAgICB6Y29sKENMU19UeltuXSkpXG4gICAgYmFuZChcImdpYW50XCIsIDAuMjUsIDMwMC4wLCBcIm1zXCIsIFwiZ1wiLCBcIiNjNzNiMjVcIilcbiAgICBiYW5kKFwid2Rsb3dcIiwgMC4xLCAwLjI1LCBcIm1zXCIsIFwiY2VpbFwiLCBcIiNiN2FlYzRcIilcbiAgICBiYW5kKFwid2RcIiwgMC4yNSwgOC4wLCBcImdcIiwgXCJjZWlsXCIsIFwiI2I3YWVjNFwiKVxuICAgIGIgPSAxOCArIDcgKiB6cl9cbiAgICBiYW5kKFwibnNcIiwgOC4wLCBiLCBcImdcIiwgXCJjZWlsXCIsIFwiIzdmNzU5MFwiKVxuICAgIGlmIDEwLjAgKiogbHogPCAwLjAwMTpcbiAgICAgICAgYmFuZChcImJoMVwiLCBiLCAxNDAuMCwgXCJnXCIsIFwiY2VpbFwiLCBcIiM0YTQyNTZcIilcbiAgICAgICAgYmFuZChcImdhcFwiLCAxNDAuMCwgMjYwLjAsIFwiZ1wiLCBcImNlaWxcIiwgXCIjMTQxNDE0XCIpXG4gICAgICAgIGJhbmQoXCJiaDJcIiwgMjYwLjAsIDMwMC4wLCBcImdcIiwgXCJjZWlsXCIsIFwiIzRhNDI1NlwiKVxuICAgICAgICBnYXBfcm93cy5hcHBlbmQoZGljdChsej1seiwgbWFzcz0xOTEuMCwgbG89MS4wKSlcbiAgICBlbHNlOlxuICAgICAgICBiYW5kKFwiYmhcIiwgYiwgMzAwLjAsIFwiZ1wiLCBcImNlaWxcIiwgXCIjNGE0MjU2XCIpXG5cbiAgICBtbXNuID0gTWdbTWcgPj0gOF1cbiAgICBfLCBfLCB0Z3NuID0gdGltZXMobW1zbilcbiAgICBmb3IgbSwgbCBpbiB6aXAobW1zbiwgbnAuY2xpcCh0Z3NuLCBZMHosIFkxeikpOlxuICAgICAgICBsaW5lX3Jvd3MuYXBwZW5kKGRpY3QobHo9bHosIG1hc3M9bSwgbG89bCkpXG5cbiAgICBmb3IgaywgbiBpbiBlbnVtZXJhdGUoXCJNS0dGQUJPXCIpOlxuICAgICAgICBsb19tLCBoaV9tID0gemJfeltrXSwgemJfeltrICsgMV1cbiAgICAgICAgaWYgaGlfbSA8PSBsb19tOlxuICAgICAgICAgICAgY29udGludWVcbiAgICAgICAgbV9taWQgPSBmbG9hdChucC5zcXJ0KGxvX20gKiBoaV9tKSlcbiAgICAgICAgaWYgbiA9PSBcIk9cIjpcbiAgICAgICAgICAgIG1fbWlkID0gbG9fbSAqIDEuMzVcbiAgICAgICAgbCA9IGZsb2F0KG5wLmNsaXAoMC41NDggKiBtX21pZCAqKiAtMiAqIHp0LCAxLjVlLTQsIE5vbmUpKVxuICAgICAgICBpZiBuID09IFwiTVwiOlxuICAgICAgICAgICAgbCA9IDEuOFxuICAgICAgICBpZiBuID09IFwiT1wiOlxuICAgICAgICAgICAgbCA9IGZsb2F0KG5wLmNsaXAoMy40ZS00ICogenQsIDEuMmUtNCwgTm9uZSkpXG4gICAgICAgIGxldHRlcl9yb3dzLmFwcGVuZChkaWN0KGx6PWx6LCBtYXNzPW1fbWlkLCBsbz1sLCB0PW4pKVxuXG5hcmVhc19kZiA9IHBkLkRhdGFGcmFtZShhcmVhX3Jvd3MpXG5saW5lc19kZiA9IHBkLkRhdGFGcmFtZShsaW5lX3Jvd3MpXG5sZXR0ZXJzX2RmID0gcGQuRGF0YUZyYW1lKGxldHRlcl9yb3dzKVxuZ2Fwc19kZiA9IHBkLkRhdGFGcmFtZShnYXBfcm93cylcblxuWlggPSBhbHQuWChcIm1hc3M6UVwiLCB0aXRsZT1cIm1hc3MgKHN1bnMpLCBsb2cgc2NhbGVcIixcbiAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKHR5cGU9XCJsb2dcIiwgZG9tYWluPVswLjEsIDMwMF0sIG5pY2U9RmFsc2UpLFxuICAgICAgICAgICBheGlzPWFsdC5BeGlzKHZhbHVlcz1bMC4xLCAxLCAxMCwgMTAwXSkpXG5aWSA9IGFsdC5ZKFwibG86UVwiLCB0aXRsZT1cImFnZSAoYmlsbGlvbiB5ZWFycyksIGxvZyBzY2FsZVwiLFxuICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUodHlwZT1cImxvZ1wiLCBkb21haW49W1kweiwgWTF6XSwgbmljZT1GYWxzZSksXG4gICAgICAgICAgIGF4aXM9YWx0LkF4aXModmFsdWVzPVsxZS0zLCAxZS0yLCAwLjEsIDEsIDEwLCAxMDAsIDEwMDBdKSlcblxuel9zZWwgPSBhbHQucGFyYW0obmFtZT1cInpfc2VsXCIsIHZhbHVlPS0xLjcsIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UoXG4gICAgbWluPS01LjAsIG1heD0tMS40LCBzdGVwPTAuMTUsIG5hbWU9XCJtZXRhbGxpY2l0eSAobG9nMTAgWikgIFwiKSlcbnBpY2t6ID0gXCJhYnMoZGF0dW0ubHogLSB6X3NlbCkgPCAwLjA3XCJcblxuel9hcmVhcyA9IGFsdC5DaGFydChhcmVhc19kZikuYWRkX3BhcmFtcyh6X3NlbCkudHJhbnNmb3JtX2ZpbHRlcihcbiAgICBwaWNreikubWFya19hcmVhKG9wYWNpdHk9MSkuZW5jb2RlKFxuICAgIHg9WlgsIHk9WlksIHkyPWFsdC5ZMihcImhpXCIpLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImNvbG91cjpOXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSxcbiAgICBkZXRhaWw9XCJzZWc6TlwiKVxuel9zbiA9IGFsdC5DaGFydChsaW5lc19kZikudHJhbnNmb3JtX2ZpbHRlcihwaWNreikubWFya19saW5lKFxuICAgIGNvbG9yPVwiI2NjZmYwMFwiLCBzdHJva2VXaWR0aD0wLjc1KS5lbmNvZGUoeD1aWCwgeT1aWSlcbnpfbGV0dGVycyA9IGFsdC5DaGFydChsZXR0ZXJzX2RmKS50cmFuc2Zvcm1fZmlsdGVyKHBpY2t6KS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTIsIGZvbnRXZWlnaHQ9NjAwLCBjb2xvcj1cIiMyNjMyM2NcIikuZW5jb2RlKFxuICAgIHg9WlgsIHk9WlksIHRleHQ9XCJ0Ok5cIilcbnpfZ2FwX2xhYiA9IGFsdC5DaGFydChnYXBzX2RmKS50cmFuc2Zvcm1fZmlsdGVyKHBpY2t6KS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTMsIGFuZ2xlPTkwLCBjb2xvcj1cIiNmNWYyZWFcIikuZW5jb2RlKFxuICAgIHg9WlgsIHk9WlksIHRleHQ9YWx0LnZhbHVlKFwibm8gcmVtbmFudFwiKSlcbnVuaV96ID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJsb1wiOiBbMTMuOF19KSkubWFya19ydWxlKFxuICAgIGNvbG9yPVwiIzhhMmJlMlwiLCBzdHJva2VXaWR0aD0yLjUsIHN0cm9rZURhc2g9WzYsIDRdLFxuICAgIG9wYWNpdHk9MC44KS5lbmNvZGUoeT1aWSlcbnpfbnNfbGFiID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZShcbiAgICB7XCJtYXNzXCI6IFsxMi4wXSwgXCJsb1wiOiBbMC40N119KSkubWFya190ZXh0KFxuICAgIGZvbnRTaXplPTE0LCBjb2xvcj1cIiNmNWYyZWFcIikuZW5jb2RlKFxuICAgIHg9WlgsIHk9WlksIHRleHQ9YWx0LnZhbHVlKFtcIm5ldXRyb25cIiwgXCJzdGFyc1wiXSkpXG56X2JoX2xhYiA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoXG4gICAge1wibWFzc1wiOiBbODAuMF0sIFwibG9cIjogWzAuMV0sIFwidFwiOiBbXCJibGFjayBob2xlc1wiXX0pKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTQsIGNvbG9yPVwiI2Y1ZjJlYVwiKS5lbmNvZGUoeD1aWCwgeT1aWSwgdGV4dD1cInQ6TlwiKVxuel9zdGFnZV9sYWJzID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XG4gICAgXCJtYXNzXCI6IFswLjcsIDIuNV0sXG4gICAgXCJsb1wiOiAgIFsxLjJlLTMsIDUwLjBdLFxuICAgIFwidFwiOiAgICBbXCJwcm90b3N0YXJzXCIsIFwid2hpdGUgZHdhcmZzXCJdLFxuICAgIFwiY1wiOiAgICBbXCIjZjVmMmVhXCIsIFwiIzI2MzIzY1wiXSxcbn0pKS5tYXJrX3RleHQoZm9udFNpemU9MTUpLmVuY29kZShcbiAgICB4PVpYLCB5PVpZLCB0ZXh0PVwidDpOXCIsXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiYzpOXCIsIHNjYWxlPU5vbmUsIGxlZ2VuZD1Ob25lKSlcbnpfbXNfbGFiID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZShcbiAgICB7XCJtYXNzXCI6IFsxLjFdLCBcImxvXCI6IFswLjEzXSwgXCJ0XCI6IFtcIm1haW4gc2VxdWVuY2VcIl19KSkubWFya190ZXh0KFxuICAgIGZvbnRTaXplPTE3LCBhbmdsZT00MywgY29sb3I9XCIjNWE2MTZiXCIpLmVuY29kZShcbiAgICB4PVpYLCB5PVpZLCB0ZXh0PVwidDpOXCIpXG5cbmFsdC5sYXllcih6X2FyZWFzLCB6X3NuLCB1bmlfeiwgel9nYXBfbGFiLCB6X2xldHRlcnMsXG4gICAgICAgICAgel9uc19sYWIsIHpfYmhfbGFiLCB6X3N0YWdlX2xhYnMsIHpfbXNfbGFiKS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTUyMCwgaGVpZ2h0PTUyMCxcbiAgICB0aXRsZT1cIlN0ZWxsYXIgcGhhc2UgcGxhbmUgdmFyaWVzIHdpdGggbWV0YWxsaWNpdHlcIixcbikuY29uZmlndXJlX3ZpZXcoZmlsbD1cImJsYWNrXCIpLmNvbmZpZ3VyZV9heGlzKFxuICAgIGdyaWQ9VHJ1ZSwgZ3JpZENvbG9yPVwiIzJiMzAzYlwiKSJ9
+</script>
+</div>
+<section id="exercise" class="level3">
+<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<p>Add metallicity to your app and replace the phase plane on the right panel with the HR diagram.</p>
+<ol type="1">
+<li>Replace the constant <code>Z</code> in the starter with a slider, matching the two existing ones: <code>lz = mid.slider("log10 metallicity", -4.0, -1.4, -1.7, step=0.05)</code> and <code>Z = 10 ** lz</code>. Nothing else is needed to make the physics respond, because the marked lines already use <code>zr</code>. Check it worked: lowering the metallicity should brighten the star slightly and drop the neutron-star/black-hole boundary from 25 toward 18 suns.</li>
+<li>Add the pair-instability branch: between 140 and 260 suns with <code>Z &lt; 0.001</code>, the star blows apart and leaves no remnant.</li>
+<li>Replace the right panel’s phase plane with the <strong>HR diagram</strong>: surface temperature on the horizontal axis, logarithmic and reversed so hot sits on the left, and luminosity on the vertical axis, logarithmic. Draw the main-sequence band the same way the phase plane sweeps <code>Ml</code>: for an array of masses, <code>L = ms ** 3.5</code> and <code>T = SUN_T * ms ** 0.475</code> (the 0.475 from section 3), plotted as a thick line. Plot your star at its phase-adjusted values, which the starter already computes as <code>T_show</code> and <code>L_show</code>. Two hints: a log axis reverses when <code>set_xlim</code> is given its limits in descending order, and limits of <code>xlim(250000, 1800)</code> with <code>ylim(1e-6, 1e11)</code> fit every phase, including the supernova’s five billion suns. Phases with no light to plot, the neutron star and the black hole, can disappear from the chart instead.</li>
+<li>Deploy the app the way you deployed your Part C tutorial app: push it to a public GitHub repository and deploy through Streamlit Community Cloud.</li>
+</ol>
+<p>Submit the URL of your deployed app as a plain text file through Canvas.</p>
+</section>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li>Planck, M. (1900), on the law of energy distribution in the normal spectrum.</li>
+<li>CIE (2019), CIE 1931 colour-matching functions, 2 degree observer.</li>
+<li>Ballesteros, F. (2012), <em>New insights into black bodies</em>, EPL 97, 34008: the empirical colour-to-temperature formula used to paint the HR diagram.</li>
+<li>Pecaut, M. and Mamajek, E. (2013), <em>Intrinsic Colors, Temperatures, and Bolometric Corrections of Pre-main-sequence Stars</em>, ApJS 208, 9: the spectral-class boundary colours come from its companion table, <em>A Modern Mean Dwarf Stellar Color and Effective Temperature Sequence</em>, maintained online by Mamajek.</li>
+<li>Carroll, B. and Ostlie, D., <em>An Introduction to Modern Astrophysics</em>: the source of the scaling relations approximated here.</li>
+<li>Heger, A. and colleagues (2003), <em>How Massive Single Stars End Their Life</em>: the fate map by mass and metallicity that section 7 sketches.</li>
+<li>ESA (1997), <em>The Hipparcos Catalogue</em>, served complete to magnitude 9.5 with positions, magnitudes and colours.</li>
+<li>Astronexus HYG database v4.1 (CC BY-SA 4.0), served as the 107,860 stars with measured distances, six columns each.</li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJwYW5kYXMiLCJtYXRwbG90bGliIiwiYWx0YWlyIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTE4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE3IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE3LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTctY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE1IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE1LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTExIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTExLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMiA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMi1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjJcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIyXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJfcHlvZGlkZV92YWx1ZV8xID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0xLWNvbnRlbnRzXCIsXG4gICAgZWNobzogdHJ1ZSxcbiAgICBvdXRwdXQ6IHRydWVcbiAgfSwgYmxvY2suYXR0cik7XG5cbiAgLy8gRXZhbHVhdGUgdGhlIHByb3ZpZGVkIFB5dGhvbiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHB5b2RpZGVPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMVwiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjFcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session2";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

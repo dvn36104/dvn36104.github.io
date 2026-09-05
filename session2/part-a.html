@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Spectral Locus – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#spectra" id="toc-spectra" class="nav-link active" data-scroll-target="#spectra">1 · Spectra</a></li>
+  <li><a href="#trichromacy" id="toc-trichromacy" class="nav-link" data-scroll-target="#trichromacy">2 · Trichromacy</a></li>
+  <li><a href="#luminance" id="toc-luminance" class="nav-link" data-scroll-target="#luminance">3 · Luminance</a></li>
+  <li><a href="#metamerism" id="toc-metamerism" class="nav-link" data-scroll-target="#metamerism">4 · Metamerism</a></li>
+  <li><a href="#chromaticity" id="toc-chromaticity" class="nav-link" data-scroll-target="#chromaticity">5 · Chromaticity</a></li>
+  <li><a href="#gamut" id="toc-gamut" class="nav-link" data-scroll-target="#gamut">6 · Gamut</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">7 · Summary</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Spectral Locus</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.quarto-figure figcaption,
+figure figcaption {
+  text-align: center !important;
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.figure-caption {
+  position: relative;
+  max-width: 30rem;
+  margin-left: 4.25rem;
+  margin-right: auto;
+  text-align: center !important;
+}
+
+@media (max-width: 700px) {
+  .figure-caption {
+    margin-left: auto;
+  }
+}
+
+.cell-output-container-pyodide > .cell-output-pyodide,
+.cell-output-container-pyodide .cell-output-display {
+  text-align: center;
+}
+
+.cell-output-container-pyodide .cell-output-pyodide:has(.vega-embed) {
+  text-align: center !important;
+}
+
+.cell-output-container-pyodide .cell-output-display img,
+.cell-output-container-pyodide .cell-output-display canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.colour-match-control {
+  position: relative;
+}
+
+.colour-match-control form {
+  position: absolute;
+  top: 32px;
+  left: 500px;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around;
+  align-items: center;
+  width: 170px;
+  height: 290px;
+  margin: 0;
+  padding: 0.8rem 0.6rem;
+}
+
+.colour-match-control .vega-bind {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.colour-match-control .vega-bind > label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.colour-match-control input[type="range"] {
+  width: 24px;
+  height: 210px;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  appearance: slider-vertical;
+}
+
+@media (max-width: 850px) {
+  .colour-match-control form {
+    position: static;
+    width: 170px;
+    height: 260px;
+    margin: 0.75rem 0 0;
+  }
+}
+
+.spectral-mixture-control {
+  position: relative;
+}
+
+.spectral-mixture-control form {
+  position: static;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem;
+  width: 620px;
+  max-width: 100%;
+  margin: 0.65rem auto 0;
+  padding: 0;
+}
+
+.spectral-mixture-control .vega-bind {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.2rem;
+  margin: 0;
+  color: #4a463c;
+  font-size: 0.78rem;
+}
+
+.spectral-mixture-control .vega-bind .vega-bind-name,
+.spectral-mixture-control .vega-bind input[type="range"] + label {
+  display: none;
+}
+
+.spectral-mixture-control input[type="range"] {
+  width: 100%;
+  height: 20px;
+  writing-mode: horizontal-tb;
+  direction: ltr;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.spectral-mixture-control input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #625e56;
+  border-radius: 999px;
+  background: linear-gradient(to right, #6d00a8 0%, #2536dd 18%,
+    #00a8d5 34%, #40b83e 50%, #e5dc24 67%, #f08a24 83%, #b9152b 100%);
+}
+
+.spectral-mixture-control input[type="range"]::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #232028;
+  border-radius: 50%;
+  background: white;
+}
+
+.spectral-mixture-control input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #625e56;
+  border-radius: 999px;
+  background: linear-gradient(to right, #6d00a8 0%, #2536dd 18%,
+    #00a8d5 34%, #40b83e 50%, #e5dc24 67%, #f08a24 83%, #b9152b 100%);
+}
+
+.spectral-mixture-control input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #232028;
+  border-radius: 50%;
+  background: white;
+}
+
+@media (max-width: 850px) {
+  .spectral-mixture-control form {
+    width: min(620px, 100%);
+  }
+}
+
+.matching-sim-control form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end;
+  gap: 0.55rem;
+  width: 611px;
+  max-width: 100%;
+  margin: 0.65rem auto 0;
+  padding: 0;
+}
+
+.matching-sim-control .vega-bind {
+  margin: 0;
+}
+
+.matching-sim-control .vega-bind > label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.matching-sim-control .vega-bind .vega-bind-name,
+.matching-sim-control .vega-bind input[type="range"] ~ label,
+.matching-sim-control .vega-bind input[type="range"] ~ span {
+  display: none !important;
+}
+
+/* Fixed widths: value-per-pixel is equal on all three, so the red
+   slider is 1.3x as long (range -0.3 to 1) with right ends aligned. */
+.matching-sim-control input[type="range"] {
+  width: 470px;
+  max-width: 76.9%;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.matching-sim-control .vega-bind:nth-of-type(1) input[type="range"] {
+  width: 611px;
+  max-width: 100%;
+}
+
+.matching-sim-control input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #625e56;
+  border-radius: 999px;
+}
+
+.matching-sim-control input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #625e56;
+  border-radius: 999px;
+}
+
+.matching-sim-control input[type="range"]::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #232028;
+  border-radius: 50%;
+  background: white;
+}
+
+.matching-sim-control input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #232028;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Track colours: red lamp (dark zone marks the negative range), green, blue. */
+.matching-sim-control .vega-bind:nth-of-type(1) input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #171717 0%, #2c1616 23%, #d81b1b 100%);
+}
+.matching-sim-control .vega-bind:nth-of-type(1) input[type="range"]::-moz-range-track {
+  background: linear-gradient(to right, #171717 0%, #2c1616 23%, #d81b1b 100%);
+}
+.matching-sim-control .vega-bind:nth-of-type(2) input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #171717 0%, #1f9d3a 100%);
+}
+.matching-sim-control .vega-bind:nth-of-type(2) input[type="range"]::-moz-range-track {
+  background: linear-gradient(to right, #171717 0%, #1f9d3a 100%);
+}
+.matching-sim-control .vega-bind:nth-of-type(3) input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #171717 0%, #2b50d8 100%);
+}
+.matching-sim-control .vega-bind:nth-of-type(3) input[type="range"]::-moz-range-track {
+  background: linear-gradient(to right, #171717 0%, #2b50d8 100%);
+}
+</style>
+<p>This section introduces the spectral locus of visible colours.</p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgcGFuZGFzIGFzIHBkXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5pbXBvcnQgYWx0YWlyIGFzIGFsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5cbkRBVEFfVVJMID0ganMubG9jYXRpb24uaHJlZi5zcGxpdChcInNpdGVfbGlicy9cIilbMF0gKyBcImRhdGEvXCJcblxucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XG4gICAgXCJmaWd1cmUuZmlnc2l6ZVwiOiAoOSwgNC42KSxcbiAgICBcImF4ZXMuc3BpbmVzLnRvcFwiOiBGYWxzZSwgXCJheGVzLnNwaW5lcy5yaWdodFwiOiBGYWxzZSxcbiAgICBcImF4ZXMudGl0bGV3ZWlnaHRcIjogXCJib2xkXCIsXG4gICAgXCJheGVzLmdyaWRcIjogVHJ1ZSwgXCJncmlkLmFscGhhXCI6IDAuMjIsIFwiZm9udC5zaXplXCI6IDExLFxufSlcblxuaW1wb3J0IHdhcm5pbmdzXG53aXRoIHdhcm5pbmdzLmNhdGNoX3dhcm5pbmdzKCk6XG4gICAgd2FybmluZ3Muc2ltcGxlZmlsdGVyKFwiaWdub3JlXCIpXG4gICAgYWx0LnRoZW1lcy5yZWdpc3RlcihcImNvdXJzZVwiLCBsYW1iZGE6IHtcbiAgICAgICAgXCJjb25maWdcIjoge1widGl0bGVcIjoge1wiZm9udFNpemVcIjogMTcsIFwic3VidGl0bGVGb250U2l6ZVwiOiAxMn19fSlcbiAgICBhbHQudGhlbWVzLmVuYWJsZShcImNvdXJzZVwiKVxuXG5wcmludChcIkVudmlyb25tZW50IHJlYWR5LlwiKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiIyBIaWRkZW4gc3RhdGUgY2VsbDogcHJlLWRlZmluZSBldmVyeSBuYW1lIHRoZSBwYWdlIHVzZXMsIHNvIGVhY2ggY2VsbFxuIyB3b3JrcyBubyBtYXR0ZXIgd2hpY2ggY2VsbHMgd2VyZSBydW4gYmVmb3JlIGl0LlxuZGVmIGdhdXNzaWFuKHgsIGNlbnRyZSwgd2lkdGgpOlxuICAgIHJldHVybiBucC5leHAoLTAuNSAqICgoeCAtIGNlbnRyZSkgLyB3aWR0aCkgKiogMilcblxuZGVmIHBsYW5jayh3YXZlbGVuZ3RoX25tLCB0ZW1wZXJhdHVyZSk6XG4gICAgIyBHaXZlcyB0aGUgc3BlY3RydW0gcmFkaWF0ZWQgYnkgYSBibGFjayBib2R5IGFzIGEgZnVuY3Rpb24gb2YgdGVtcGVyYXR1cmUgKHNlZSBQYXJ0IEMpLlxuICAgIHdhdmVsZW5ndGhfbSA9IHdhdmVsZW5ndGhfbm0gKiAxZS05XG4gICAgYzIgPSAxLjQzODc3Njg3N2UtMlxuICAgIHZhbHVlcyA9IDEgLyAod2F2ZWxlbmd0aF9tKio1ICogbnAuZXhwbTEoYzIgLyAod2F2ZWxlbmd0aF9tICogdGVtcGVyYXR1cmUpKSlcbiAgICByZXR1cm4gdmFsdWVzIC8gdmFsdWVzLm1heCgpXG5cbndhdmVsZW5ndGhzID0gbnAuYXJhbmdlKDM4MCwgNzgxKVxuc3BlY3RyYSA9IHtcbiAgICBcImRheWxpZ2h0LCA1ODAwIEtcIjogcGxhbmNrKHdhdmVsZW5ndGhzLCA1ODAwKSxcbiAgICBcImNhbmRsZSwgMTgwMCBLXCI6IHBsYW5jayh3YXZlbGVuZ3RocywgMTgwMCksXG4gICAgXCJMQ0QgZGlzcGxheVwiOiAoXG4gICAgICAgIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA0NTAsIDkpXG4gICAgICAgICsgMC41OCAqIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA1MzUsIDMwKVxuICAgICAgICArIDAuNjUgKiBnYXVzc2lhbih3YXZlbGVuZ3RocywgNjEyLCAyNSlcbiAgICApLFxufVxuc3BlY3RyYVtcIkxDRCBkaXNwbGF5XCJdIC89IHNwZWN0cmFbXCJMQ0QgZGlzcGxheVwiXS5tYXgoKVxuXG5pbGx1bWluYW50ID0gcGxhbmNrKHdhdmVsZW5ndGhzLCA1MjAwKVxucmVmbGVjdGFuY2UgPSAwLjA2ICsgMC44MCAvICgxICsgbnAuZXhwKC0od2F2ZWxlbmd0aHMgLSA1ODUpIC8gMTMpKVxucmVjZWl2ZWQgPSBpbGx1bWluYW50ICogcmVmbGVjdGFuY2VcblxuZGVmIGNvbmVfc2Vuc2l0aXZpdGllcyh3YXZlbGVuZ3Rocyk6XG4gICAgIyBTY2hlbWF0aWMgdGVhY2hpbmcgY3VydmVzLlxuICAgIHJldHVybiBucC5jb2x1bW5fc3RhY2soW1xuICAgICAgICBnYXVzc2lhbih3YXZlbGVuZ3RocywgNDQ1LCAzMiksXG4gICAgICAgIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA1MzUsIDQzKSxcbiAgICAgICAgZ2F1c3NpYW4od2F2ZWxlbmd0aHMsIDU2NSwgNDgpLFxuICAgIF0pXG5cbmNvbmVzID0gY29uZV9zZW5zaXRpdml0aWVzKHdhdmVsZW5ndGhzKVxuXG5kZWYgY29uZV9yZXNwb25zZShzcGVjdHJ1bSk6XG4gICAgcmV0dXJuIG5wLnRyYXBlem9pZChzcGVjdHJ1bVs6LCBOb25lXSAqIGNvbmVzLCB3YXZlbGVuZ3RocywgYXhpcz0wKVxuXG5jaWVfYWxsID0gcGQucmVhZF9jc3YoXG4gICAgb3Blbl91cmwoREFUQV9VUkwgKyBcIkNJRV94eXpfMTkzMV8yZGVnLmNzdlwiKSxcbiAgICBoZWFkZXI9Tm9uZSxcbiAgICBuYW1lcz1bXCJ3YXZlbGVuZ3RoXCIsIFwieGJhclwiLCBcInliYXJcIiwgXCJ6YmFyXCJdLFxuKVxuY2llX3Zpc2libGUgPSBjaWVfYWxsLnF1ZXJ5KFwiMzgwIDw9IHdhdmVsZW5ndGggPD0gNzgwXCIpLmNvcHkoKVxuY2llID0gY2llX3Zpc2libGUucXVlcnkoXCJ3YXZlbGVuZ3RoIDw9IDcwMFwiKS5jb3B5KClcbmNpZV93YXZlbGVuZ3RocyA9IGNpZVtcIndhdmVsZW5ndGhcIl0udG9fbnVtcHkoKVxuY2llX3h5eiA9IGNpZVtbXCJ4YmFyXCIsIFwieWJhclwiLCBcInpiYXJcIl1dLnRvX251bXB5KClcbnJlc3BvbnNlX21hdHJpeCA9IGNpZV94eXouVFxuXG50b3RhbHMgPSBjaWVfeHl6LnN1bShheGlzPTEpXG5zcGVjdHJhbF94eSA9IGNpZV94eXpbOiwgOjJdIC8gdG90YWxzWzosIE5vbmVdXG5cbkdBTVVUUyA9IHtcbiAgICBcInNSR0IgLyBSZWMuNzA5XCI6IG5wLmFycmF5KFtbMC42NDAsIDAuMzMwXSwgWzAuMzAwLCAwLjYwMF0sIFswLjE1MCwgMC4wNjBdXSksXG4gICAgXCJEaXNwbGF5IFAzXCI6IG5wLmFycmF5KFtbMC42ODAsIDAuMzIwXSwgWzAuMjY1LCAwLjY5MF0sIFswLjE1MCwgMC4wNjBdXSksXG4gICAgXCJSZWMuMjAyMFwiOiBucC5hcnJheShbWzAuNzA4LCAwLjI5Ml0sIFswLjE3MCwgMC43OTddLCBbMC4xMzEsIDAuMDQ2XV0pLFxufVxuXG5DT05FX0NPTE9VUlMgPSB7XCJTXCI6IFwiIzVCNEJDRVwiLCBcIk1cIjogXCIjMDBBODc4XCIsIFwiTFwiOiBcIiNFNDRCMzVcIn1cblxuWFlaX1RPX0xJTkVBUl9TUkdCID0gbnAuYXJyYXkoW1xuICAgIFsgMy4yNDA2LCAtMS41MzcyLCAtMC40OTg2XSxcbiAgICBbLTAuOTY4OSwgIDEuODc1OCwgIDAuMDQxNV0sXG4gICAgWyAwLjA1NTcsIC0wLjIwNDAsICAxLjA1NzBdLFxuXSlcblxuQ0lFX1JHQl9NID0gKDEgLyAwLjE3Njk3KSAqIG5wLmFycmF5KFtcbiAgICBbMC40OSwgMC4zMSwgMC4yMF0sXG4gICAgWzAuMTc2OTcsIDAuODEyNDAsIDAuMDEwNjNdLFxuICAgIFswLjAsIDAuMDEsIDAuOTldLFxuXSlcbnJnYl9iYXIgPSBucC5saW5hbGcuc29sdmUoQ0lFX1JHQl9NLCBjaWVfeHl6LlQpLlRcbk1BVENIX1NDQUxFID0gMSAvIHJnYl9iYXIubWF4KClcbnJnYl9iYXIgPSBNQVRDSF9TQ0FMRSAqIHJnYl9iYXJcbk1BVENIX1RBUkdFVFMgPSBbNDMwLCA0NDAsIDQ1MCwgNDYwLCA0NzAsIDQ5MCxcbiAgICAgICAgICAgICAgICAgNTMwLCA1NTUsIDU4MCwgNTk1LCA2MTAsIDYzMCwgNjUwXVxuXG5kZWYgeHl6X3RvX3NyZ2IoeHl6KTpcbiAgICByZ2IgPSBucC5jbGlwKFhZWl9UT19MSU5FQVJfU1JHQiBAIHh5eiwgMCwgTm9uZSlcbiAgICBpZiByZ2IubWF4KCkgPiAwOlxuICAgICAgICByZ2IgPSByZ2IgLyByZ2IubWF4KClcbiAgICByZ2IgPSBucC53aGVyZShcbiAgICAgICAgcmdiIDw9IDAuMDAzMTMwOCxcbiAgICAgICAgMTIuOTIgKiByZ2IsXG4gICAgICAgIDEuMDU1ICogbnAucG93ZXIocmdiLCAxIC8gMi40KSAtIDAuMDU1LFxuICAgIClcbiAgICByZXR1cm4gbnAucmludCgyNTUgKiBucC5jbGlwKHJnYiwgMCwgMSkpLmFzdHlwZShpbnQpXG5cbmRlZiByZ2JfdG9faGV4KHJnYik6XG4gICAgcmV0dXJuIFwiI3s6MDJYfXs6MDJYfXs6MDJYfVwiLmZvcm1hdCgqcmdiKVxuXG5TUEVDVFJBTF9SR0IgPSB7XG4gICAgaW50KHdsKTogeHl6X3RvX3NyZ2IoeHl6KVxuICAgIGZvciB3bCwgeHl6IGluIHppcChcbiAgICAgICAgY2llX3Zpc2libGVbXCJ3YXZlbGVuZ3RoXCJdLFxuICAgICAgICBjaWVfdmlzaWJsZVtbXCJ4YmFyXCIsIFwieWJhclwiLCBcInpiYXJcIl1dLnRvX251bXB5KCksXG4gICAgKVxufVxuU1BFQ1RSQUxfSEVYID0ge3dsOiByZ2JfdG9faGV4KHJnYilcbiAgICAgICAgICAgICAgICBmb3Igd2wsIHJnYiBpbiBTUEVDVFJBTF9SR0IuaXRlbXMoKX1cblxuZGVmIHRpZHkod2wsIHNlcmllcyk6XG4gICAgcmV0dXJuIHBkLmNvbmNhdChbXG4gICAgICAgIHBkLkRhdGFGcmFtZSh7XCJ3YXZlbGVuZ3RoXCI6IHdsLCBcInZhbHVlXCI6IHYsIFwic2VyaWVzXCI6IGt9KVxuICAgICAgICBmb3IgaywgdiBpbiBzZXJpZXMuaXRlbXMoKVxuICAgIF0sIGlnbm9yZV9pbmRleD1UcnVlKVxuXG5kZWYgd2F2ZWxlbmd0aF9oZXgod2wpOlxuICAgICMgQXBwcm94aW1hdGUgZGlzcGxheSBjb2xvdXIgb2YgYSBtb25vY2hyb21hdGljIGxpZ2h0IChCcnV0b24pLlxuICAgIGlmIHdsIDwgNDQwOiAgIHIsIGcsIGIgPSAoNDQwIC0gd2wpIC8gNjAsIDAuMCwgMS4wXG4gICAgZWxpZiB3bCA8IDQ5MDogciwgZywgYiA9IDAuMCwgKHdsIC0gNDQwKSAvIDUwLCAxLjBcbiAgICBlbGlmIHdsIDwgNTEwOiByLCBnLCBiID0gMC4wLCAxLjAsICg1MTAgLSB3bCkgLyAyMFxuICAgIGVsaWYgd2wgPCA1ODA6IHIsIGcsIGIgPSAod2wgLSA1MTApIC8gNzAsIDEuMCwgMC4wXG4gICAgZWxpZiB3bCA8IDY0NTogciwgZywgYiA9IDEuMCwgKDY0NSAtIHdsKSAvIDY1LCAwLjBcbiAgICBlbHNlOiAgICAgICAgICByLCBnLCBiID0gMS4wLCAwLjAsIDAuMFxuICAgIGlmIHdsIDwgNDIwOiAgIGZhZGUgPSAwLjMgKyAwLjcgKiAod2wgLSAzODApIC8gNDBcbiAgICBlbGlmIHdsID4gNjQ1OiBmYWRlID0gbWF4KDAuMCwgMC4zICsgMC43ICogKDcwMCAtIHdsKSAvIDU1KVxuICAgIGVsc2U6ICAgICAgICAgIGZhZGUgPSAxLjBcbiAgICB0bzI1NSA9IGxhbWJkYSB2OiBpbnQoMjU1ICogKGZhZGUgKiB2KSAqKiAwLjgpXG4gICAgcmV0dXJuIGZcIiN7dG8yNTUocik6MDJ4fXt0bzI1NShnKTowMnh9e3RvMjU1KGIpOjAyeH1cIlxuXG5kZWYgc3BlY3RydW1fYmFuZCh3aWR0aF9weCwgbG89MzgwLCBoaT03OTApOlxuICAgICMgQSBzZXBhcmF0ZSwgdGhpbiB3YXZlbGVuZ3RoIHN0cmlwIHBsYWNlZCBiZWxvdyBhIGNoYXJ0IGFuZCBpdHMgeC1heGlzLlxuICAgIHdsID0gbnAuYXJhbmdlKGxvLCBoaSAtIDEsIDIpXG4gICAgYmFuZCA9IHBkLkRhdGFGcmFtZSh7XCJ3YXZlbGVuZ3RoXCI6IHdsLCBcIndsMlwiOiB3bCArIDIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgXCJjb2xvdXJcIjogW3dhdmVsZW5ndGhfaGV4KHcpIGZvciB3IGluIHdsXX0pXG4gICAgcmV0dXJuIGFsdC5DaGFydChiYW5kKS5tYXJrX3JlY3QoKS5lbmNvZGUoXG4gICAgICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIixcbiAgICAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVtsbywgaGldLCBuaWNlPUZhbHNlKSwgYXhpcz1Ob25lKSxcbiAgICAgICAgeDI9XCJ3bDI6UVwiLFxuICAgICAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKSxcbiAgICApLnByb3BlcnRpZXMod2lkdGg9d2lkdGhfcHgsIGhlaWdodD00KVxuXG5sb2N1c19kZiA9IHBkLkRhdGFGcmFtZSh7XCJ4XCI6IHNwZWN0cmFsX3h5WzosIDBdLCBcInlcIjogc3BlY3RyYWxfeHlbOiwgMV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgXCJ3YXZlbGVuZ3RoXCI6IGNpZV93YXZlbGVuZ3Roc30pXG5sb2N1c19kZltcImNvbG91clwiXSA9IFt3YXZlbGVuZ3RoX2hleCh3KSBmb3IgdyBpbiBsb2N1c19kZltcIndhdmVsZW5ndGhcIl1dXG5cblggPSBhbHQuWChcIng6UVwiLCBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVswLCAwLjhdLCBuaWNlPUZhbHNlKSwgdGl0bGU9XCJ4XCIpXG5ZID0gYWx0LlkoXCJ5OlFcIiwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMC45XSwgbmljZT1GYWxzZSksIHRpdGxlPVwieVwiKVxuU1gsIFNZID0gWCwgWSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiZGVmIGNvdXJzZV90aGVtZSgpOlxuICAgIHJldHVybiB7XG4gICAgICAgIFwiY29uZmlnXCI6IHtcbiAgICAgICAgICAgIFwidmlld1wiOiB7XCJzdHJva2VcIjogTm9uZX0sXG4gICAgICAgICAgICBcImJhY2tncm91bmRcIjogXCJ0cmFuc3BhcmVudFwiLFxuICAgICAgICAgICAgXCJmb250XCI6IFwiU291cmNlIFNhbnMgUHJvLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmXCIsXG4gICAgICAgICAgICBcImF4aXNcIjoge1wiZ3JpZENvbG9yXCI6IFwiI2U4ZTJkNlwiLCBcImRvbWFpbkNvbG9yXCI6IFwiI2I5YjJhNFwiLFxuICAgICAgICAgICAgICAgICAgICAgXCJ0aWNrQ29sb3JcIjogXCIjYjliMmE0XCIsIFwibGFiZWxDb2xvclwiOiBcIiM0YTQ2M2NcIixcbiAgICAgICAgICAgICAgICAgICAgIFwidGl0bGVDb2xvclwiOiBcIiMyYjJhMjZcIiwgXCJsYWJlbEZvbnRTaXplXCI6IDEzLjUsXG4gICAgICAgICAgICAgICAgICAgICBcInRpdGxlRm9udFNpemVcIjogMTQuNSwgXCJ0aXRsZUZvbnRXZWlnaHRcIjogNjAwfSxcbiAgICAgICAgICAgIFwibGVnZW5kXCI6IHtcImxhYmVsQ29sb3JcIjogXCIjNGE0NjNjXCIsIFwidGl0bGVDb2xvclwiOiBcIiMyYjJhMjZcIixcbiAgICAgICAgICAgICAgICAgICAgICAgXCJsYWJlbEZvbnRTaXplXCI6IDEyLCBcInRpdGxlRm9udFNpemVcIjogMTJ9LFxuICAgICAgICAgICAgXCJ0aXRsZVwiOiB7XCJhbmNob3JcIjogXCJzdGFydFwiLCBcImZvbnRTaXplXCI6IDE1LCBcImZvbnRXZWlnaHRcIjogNjAwLFxuICAgICAgICAgICAgICAgICAgICAgIFwiY29sb3JcIjogXCIjMjMyMDI4XCIsIFwib2Zmc2V0XCI6IDEyfSxcbiAgICAgICAgICAgIFwiYmFyXCI6IHtcImNvbG9yXCI6IFwiIzQyNjlkMFwifSxcbiAgICAgICAgICAgIFwicmFuZ2VcIjoge1wiY2F0ZWdvcnlcIjogW1wiIzQyNjlkMFwiLCBcIiNlNjY4NTJcIiwgXCIjMzBhOGIxXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiI2M5OGEwMFwiLCBcIiM5NDc1Y2RcIiwgXCIjOGE4YThhXCJdfSxcbiAgICAgICAgfVxuICAgIH1cblxudHJ5OlxuICAgIGFsdC50aGVtZXMucmVnaXN0ZXIoXCJjb3Vyc2VcIiwgY291cnNlX3RoZW1lKVxuICAgIGFsdC50aGVtZXMuZW5hYmxlKFwiY291cnNlXCIpXG5leGNlcHQgRXhjZXB0aW9uOlxuICAgIHBhc3NcbmFsdC5kYXRhX3RyYW5zZm9ybWVycy5lbmFibGUoXCJkZWZhdWx0XCIsIG1heF9yb3dzPTEyXzAwMCkifQ==
+</script>
+</div>
+<section id="spectra" class="level2">
+<h2 class="anchored" data-anchor-id="spectra">1 · Spectra</h2>
+<p>Human vision responds to only a limited interval of the electromagnetic spectrum, conventionally approximated as <strong>380 to 780 nanometres</strong> (nm). Shorter wavelengths are ultraviolet (UV), while longer wavelengths are infrared (IR). The detectable range varies among animals. Many birds, reptiles, fish and insects detect ultraviolet wavelengths that humans cannot see, so what counts as visible depends on the visual system.</p>
+<p><strong>Radiant power</strong> is the rate at which light carries energy. It is measured in watts (W), where one watt is one joule per second. A source’s <strong>spectral power distribution</strong> <span class="math inline">\(P_\lambda(\lambda)\)</span> describes how that power is distributed across wavelengths. Its unit is watts per nanometre (W/nm), and the area over a wavelength interval gives the radiant power within that interval:</p>
+<p><span class="math display">\[\Phi_e=\int_{\lambda_1}^{\lambda_2}P_\lambda(\lambda)\,d\lambda.\]</span></p>
+<p>The curves below compare spectral shapes rather than absolute power. Each has been divided by its highest value within the displayed 380–780 nm interval, so the vertical axis has a peak of one and no physical unit.</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGdhdXNzaWFuKHgsIGNlbnRyZSwgd2lkdGgpOlxuICAgIHJldHVybiBucC5leHAoLTAuNSAqICgoeCAtIGNlbnRyZSkgLyB3aWR0aCkgKiogMilcblxuZGVmIHBsYW5jayh3YXZlbGVuZ3RoX25tLCB0ZW1wZXJhdHVyZSk6XG4gICAgIyBHaXZlcyB0aGUgc3BlY3RydW0gcmFkaWF0ZWQgYnkgYSBibGFjayBib2R5IGFzIGEgZnVuY3Rpb24gb2YgdGVtcGVyYXR1cmUgKHNlZSBQYXJ0IEMpLlxuICAgIHdhdmVsZW5ndGhfbSA9IHdhdmVsZW5ndGhfbm0gKiAxZS05XG4gICAgYzIgPSAxLjQzODc3Njg3N2UtMlxuICAgIHZhbHVlcyA9IDEgLyAod2F2ZWxlbmd0aF9tKio1ICogbnAuZXhwbTEoYzIgLyAod2F2ZWxlbmd0aF9tICogdGVtcGVyYXR1cmUpKSlcbiAgICByZXR1cm4gdmFsdWVzIC8gdmFsdWVzLm1heCgpXG5cbndhdmVsZW5ndGhzID0gbnAuYXJhbmdlKDM4MCwgNzgxKVxuc3BlY3RyYSA9IHtcbiAgICBcImRheWxpZ2h0LCA1ODAwIEtcIjogcGxhbmNrKHdhdmVsZW5ndGhzLCA1ODAwKSxcbiAgICBcImNhbmRsZSwgMTgwMCBLXCI6IHBsYW5jayh3YXZlbGVuZ3RocywgMTgwMCksXG4gICAgXCJMQ0QgZGlzcGxheVwiOiAoXG4gICAgICAgIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA0NTAsIDkpXG4gICAgICAgICsgMC41OCAqIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA1MzUsIDMwKVxuICAgICAgICArIDAuNjUgKiBnYXVzc2lhbih3YXZlbGVuZ3RocywgNjEyLCAyNSlcbiAgICApLFxufVxuc3BlY3RyYVtcIkxDRCBkaXNwbGF5XCJdIC89IHNwZWN0cmFbXCJMQ0QgZGlzcGxheVwiXS5tYXgoKVxuXG5yZWNpcGVzID0gdGlkeSh3YXZlbGVuZ3Rocywgc3BlY3RyYSlcbnNvdXJjZV9zaGFkZXMgPSBhbHQuU2NhbGUoXG4gICAgZG9tYWluPVtcImRheWxpZ2h0LCA1ODAwIEtcIiwgXCJjYW5kbGUsIDE4MDAgS1wiLCBcIkxDRCBkaXNwbGF5XCJdLFxuICAgIHJhbmdlPVtcIiM0YTcwOGNcIiwgXCIjY2Y3ZDJmXCIsIFwiIzk0NzVjZFwiXSxcbilcbmxpbmUgPSBhbHQuQ2hhcnQocmVjaXBlcykubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9XCJ3YXZlbGVuZ3RoIChubSlcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzM4MCwgNzkwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJ2YWx1ZTpRXCIsIHRpdGxlPVwicmVsYXRpdmUgc3BlY3RyYWwgcG93ZXJcIiksXG4gICAgY29sb3I9YWx0LkNvbG9yKFwic2VyaWVzOk5cIiwgbGVnZW5kPU5vbmUsIHNjYWxlPXNvdXJjZV9zaGFkZXMpLFxuKVxuZW5kcyA9IGFsdC5DaGFydChyZWNpcGVzW3JlY2lwZXNbXCJ3YXZlbGVuZ3RoXCJdID09IDc4MF0pLm1hcmtfdGV4dChcbiAgICBhbGlnbj1cImxlZnRcIiwgZHg9NiwgZm9udFNpemU9MTIsIGZvbnRXZWlnaHQ9NjAwKS5lbmNvZGUoXG4gICAgeD1cIndhdmVsZW5ndGg6UVwiLCB5PVwidmFsdWU6UVwiLCB0ZXh0PVwic2VyaWVzOk5cIixcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJzZXJpZXM6TlwiLCBsZWdlbmQ9Tm9uZSwgc2NhbGU9c291cmNlX3NoYWRlcykpXG5cbnNwZWN0cmFfcGFuZWwgPSAobGluZSArIGVuZHMpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NTIwLCBoZWlnaHQ9MjgwLCB0aXRsZT1cIlNwZWN0cmEgb2YgdGhyZWUgbGlnaHQgc291cmNlc1wiKVxuXG5hbHQudmNvbmNhdChcbiAgICBzcGVjdHJhX3BhbmVsLFxuICAgIHNwZWN0cnVtX2JhbmQoNTIwKSxcbiAgICBzcGFjaW5nPTksXG4pLnJlc29sdmVfc2NhbGUoeD1cInNoYXJlZFwiKSJ9
+</script>
+</div>
+<div class="figure-caption">
+<p>The graph stops at 780 nm. For a candle at 1,800 K, the curve continues through the infrared and reaches its maximum near 1,600 nm before falling. Most of its radiant power becomes heat when its infrared radiation is absorbed.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Why does the LCD curve have three peaks?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why does the LCD curve have three peaks?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sunlight, a candle and a display pixel can all look pale or white while having quite different spectral power distributions. The liquid-crystal display (LCD) curve has this shape because a white pixel turns on all three subpixels. The narrow blue peak comes from the blue light-emitting diode (LED) in the backlight. A coating inside the display absorbs part of that blue light and re-emits it spread across the green-to-red range, and the green and red subpixel filters cut that spread into the two separate humps. This curve is illustrative (peaks vary between displays).</p>
+</div>
+</div>
+<p>The spectrum reaching the eye depends on both the illumination and the surface:</p>
+<p><span class="math display">\[P_{\text{eye}}(\lambda)
+= P_{\text{illuminant}}(\lambda)\,R_{\text{surface}}(\lambda).\]</span></p>
+<p><span class="math inline">\(R_{\text{surface}}\)</span> is the fraction reflected at each wavelength.</p>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaWxsdW1pbmFudCA9IHBsYW5jayh3YXZlbGVuZ3RocywgNTIwMClcbnJlZmxlY3RhbmNlID0gMC4wNiArIDAuODAgLyAoMSArIG5wLmV4cCgtKHdhdmVsZW5ndGhzIC0gNTg1KSAvIDEzKSlcbnJlY2VpdmVkID0gaWxsdW1pbmFudCAqIHJlZmxlY3RhbmNlXG5cblhZWl9UT19TUkdCID0gbnAuYXJyYXkoW1szLjI0MDYsIC0xLjUzNzIsIC0wLjQ5ODZdLFxuICAgICAgICAgICAgICAgICAgICAgICAgWy0wLjk2ODksIDEuODc1OCwgMC4wNDE1XSxcbiAgICAgICAgICAgICAgICAgICAgICAgIFswLjA1NTcsIC0wLjIwNDAsIDEuMDU3MF1dKVxuXG5kZWYgc3BlY3RydW1faGV4KHNwZWN0cnVtLCBkaXNwbGF5X2xldmVsKTpcbiAgICAjIFRoZSBjb2xvdXIgdGhpcyBzcGVjdHJ1bSB3b3VsZCBwcm9kdWNlIG9uIGEgc3RhbmRhcmQgZGlzcGxheS5cbiAgICAjIGRpc3BsYXlfbGV2ZWwgY29udHJvbHMgaG93IGxpZ2h0IHRoZSBpbGx1c3RyYXRpdmUgbGluZSBpcyBkcmF3bi5cbiAgICBzYW1wbGVkID0gbnAuaW50ZXJwKGNpZV93YXZlbGVuZ3Rocywgd2F2ZWxlbmd0aHMsIHNwZWN0cnVtKVxuICAgIHh5eiA9IHJlc3BvbnNlX21hdHJpeCBAIHNhbXBsZWRcbiAgICByZ2IgPSBucC5jbGlwKFhZWl9UT19TUkdCIEAgKHh5eiAvIHh5ei5tYXgoKSksIDAsIE5vbmUpXG4gICAgcmdiID0gKHJnYiAvIHJnYi5tYXgoKSkgKiBkaXNwbGF5X2xldmVsXG4gICAgcmdiID0gbnAud2hlcmUocmdiIDw9IDAuMDAzMTMwOCwgMTIuOTIgKiByZ2IsIDEuMDU1ICogcmdiKiooMSAvIDIuNCkgLSAwLjA1NSlcbiAgICByLCBnLCBiID0gKG5wLmNsaXAocmdiLCAwLCAxKSAqIDI1NSkuYXN0eXBlKGludClcbiAgICByZXR1cm4gZlwiI3tyOjAyeH17ZzowMnh9e2I6MDJ4fVwiXG5cbnNlcmllcyA9IHtcImlsbHVtaW5hdGlvblwiOiBpbGx1bWluYW50LFxuICAgICAgICAgIFwic3VyZmFjZSByZWZsZWN0YW5jZVwiOiByZWZsZWN0YW5jZSxcbiAgICAgICAgICBcInNwZWN0cnVtIHJlYWNoaW5nIHRoZSBleWVcIjogcmVjZWl2ZWR9XG5zaGFkZXMgPSBhbHQuU2NhbGUoZG9tYWluPWxpc3Qoc2VyaWVzKSxcbiAgICAgICAgICAgICAgICAgICByYW5nZT1bXCIjRjJCNzA1XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHNwZWN0cnVtX2hleChyZWZsZWN0YW5jZSwgMC45MiksXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHNwZWN0cnVtX2hleChyZWNlaXZlZCwgMC40MCldKVxucHJvZHVjdCA9IHRpZHkod2F2ZWxlbmd0aHMsIHNlcmllcylcblxucGxpbmUgPSBhbHQuQ2hhcnQocHJvZHVjdCkubWFya19saW5lKHN0cm9rZVdpZHRoPTIuOCkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9XCJ3YXZlbGVuZ3RoIChubSlcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzM4MCwgNzkwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJ2YWx1ZTpRXCIsIHRpdGxlPVwicmVsYXRpdmUgYW1vdW50XCIpLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcInNlcmllczpOXCIsIGxlZ2VuZD1Ob25lLCBzY2FsZT1zaGFkZXMpLFxuKVxucGVuZHMgPSBhbHQuQ2hhcnQocHJvZHVjdFtwcm9kdWN0W1wid2F2ZWxlbmd0aFwiXSA9PSA3ODBdKS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJsZWZ0XCIsIGR4PTYsIGZvbnRTaXplPTEyLCBmb250V2VpZ2h0PTYwMCkuZW5jb2RlKFxuICAgIHg9XCJ3YXZlbGVuZ3RoOlFcIiwgeT1cInZhbHVlOlFcIiwgdGV4dD1cInNlcmllczpOXCIsXG4gICAgY29sb3I9YWx0LkNvbG9yKFwic2VyaWVzOk5cIiwgbGVnZW5kPU5vbmUsIHNjYWxlPXNoYWRlcykpXG5cbnByb2R1Y3RfcGFuZWwgPSAocGxpbmUgKyBwZW5kcykucHJvcGVydGllcyhcbiAgICB3aWR0aD01MDAsIGhlaWdodD0zMDAsXG4gICAgdGl0bGU9XCJJbGx1bWluYXRpb24gdGltZXMgcmVmbGVjdGFuY2UgZ2l2ZXMgdGhlIHJlY2VpdmVkIHNwZWN0cnVtXCIpXG5cbmFsdC52Y29uY2F0KFxuICAgIHByb2R1Y3RfcGFuZWwsXG4gICAgc3BlY3RydW1fYmFuZCg1MDApLFxuICAgIHNwYWNpbmc9OSxcbikucmVzb2x2ZV9zY2FsZSh4PVwic2hhcmVkXCIpIn0=
+</script>
+</div>
+<div class="figure-caption">
+<p>Each line is drawn in the colour its spectrum would produce: the lamp a warm near-white, the surface a red, and the light it sends to the eye the same red made darker, because the surface absorbs most of the lamp’s light.</p>
+</div>
+</section>
+<section id="trichromacy" class="level2">
+<h2 class="anchored" data-anchor-id="trichromacy">2 · Trichromacy</h2>
+<p>The capacity to discriminate wavelengths from each other requires a comparison between multiple types of photoreceptors; a single cone cannot report which wavelength caused its response (the <a href="https://en.wikipedia.org/wiki/Principle_of_univariance">principle of univariance</a>). Human daylight colour vision depends on three cone classes: S, M and L. Their labels mean <strong>short-, middle- and long-wavelength sensitive</strong>.</p>
+<p>All three types of cone have broad, overlapping sensitivities. Two classes can respond strongly to the same wavelength. The response of cone class <span class="math inline">\(i\)</span> is approximately:</p>
+<p><span class="math display">\[q_i = \int P_{\text{eye}}(\lambda)\,s_i(\lambda)\,d\lambda,\]</span></p>
+<p>where <span class="math inline">\(P_{\text{eye}}\)</span> is the incoming spectrum and <span class="math inline">\(s_i\)</span> is that cone class’s sensitivity curve.</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGNvbmVfc2Vuc2l0aXZpdGllcyh3YXZlbGVuZ3Rocyk6XG4gICAgIyBTY2hlbWF0aWMgdGVhY2hpbmcgY3VydmVzLlxuICAgIHJldHVybiBucC5jb2x1bW5fc3RhY2soW1xuICAgICAgICBnYXVzc2lhbih3YXZlbGVuZ3RocywgNDQ1LCAzMiksXG4gICAgICAgIGdhdXNzaWFuKHdhdmVsZW5ndGhzLCA1MzUsIDQzKSxcbiAgICAgICAgZ2F1c3NpYW4od2F2ZWxlbmd0aHMsIDU2NSwgNDgpLFxuICAgIF0pXG5cbmNvbmVzID0gY29uZV9zZW5zaXRpdml0aWVzKHdhdmVsZW5ndGhzKVxuXG5DT05FX1JHQiA9IHtcIlNcIjogKDAuMzYsIDAuMjksIDAuODEpLCBcIk1cIjogKDAuMCwgMC42NiwgMC40NyksXG4gICAgICAgICAgICBcIkxcIjogKDAuODksIDAuMjksIDAuMjEpfVxuUEVBS1MgPSB7XCJTXCI6IDQ0NSwgXCJNXCI6IDUzNSwgXCJMXCI6IDU2NX1cblBFQUtfSFVFUyA9IHtcIlNcIjogXCIjMDAyOGZmXCIsIFwiTVwiOiBcIiM2M2ZmMDBcIiwgXCJMXCI6IFwiI2M4ZjAwMFwifVxuTEVUVEVSX0FUID0ge1wiU1wiOiA0MDAsIFwiTVwiOiA0ODAsIFwiTFwiOiA2NDB9XG5MRVRURVJfTlVER0UgPSB7XCJTXCI6ICgtMTIsIDAuMDkpLCBcIk1cIjogKC0xMSwgMC4wOSksIFwiTFwiOiAoMTAsIDAuMDQpfVxuXG5kZWYgY29uZV9pbWFnZShheCwgZmFjdG9ycywgeV9sYWJlbCwgdGl0bGUsIHNob3dfbm0sIG5vdGUpOlxuICAgIGN1cnZlcyA9IHtrOiBmYWN0b3JzW2tdICogY29uZXNbOiwgaV1cbiAgICAgICAgICAgICAgZm9yIGksIGsgaW4gZW51bWVyYXRlKFtcIlNcIiwgXCJNXCIsIFwiTFwiXSl9XG4gICAgIyBCdWlsZCB0aGUgZmlsbCBwaXhlbCBieSBwaXhlbDogZWFjaCBjb25lIGFkZHMgaXRzIGNvbG91ciB3aGVyZXZlclxuICAgICMgdGhlIHBpeGVsIHNpdHMgdW5kZXIgaXRzIGN1cnZlLCBzbyBvdmVybGFwcyBtaXggYXMgbGlnaHRzIG1peC5cbiAgICB5ID0gbnAubGluc3BhY2UoMCwgMS4xNCwgMzYwKVxuICAgIGltZyA9IG5wLnplcm9zKChsZW4oeSksIGxlbih3YXZlbGVuZ3RocyksIDMpKVxuICAgIGZvciBrLCBjdXJ2ZSBpbiBjdXJ2ZXMuaXRlbXMoKTpcbiAgICAgICAgdW5kZXIgPSB5WzosIE5vbmVdIDw9IGN1cnZlW05vbmUsIDpdXG4gICAgICAgIHN0cmVuZ3RoID0gMC4yNiArIDAuNjAgKiBjdXJ2ZSAvIGN1cnZlLm1heCgpXG4gICAgICAgIGltZyArPSB1bmRlcls6LCA6LCBOb25lXSAqIG5wLmFycmF5KENPTkVfUkdCW2tdKSAqIHN0cmVuZ3RoW05vbmUsIDosIE5vbmVdXG4gICAgYXguaW1zaG93KG5wLmNsaXAoaW1nLCAwLCAxKSwgb3JpZ2luPVwibG93ZXJcIiwgYXNwZWN0PVwiYXV0b1wiLFxuICAgICAgICAgICAgICBleHRlbnQ9WzM4MCwgNzgwLCAwLCAxLjE0XSwgaW50ZXJwb2xhdGlvbj1cImJpbGluZWFyXCIpXG4gICAgZm9yIGssIGN1cnZlIGluIGN1cnZlcy5pdGVtcygpOlxuICAgICAgICBjb2xvdXIgPSBcIiMlMDJ4JTAyeCUwMnhcIiAlIHR1cGxlKGludCgyNTUgKiB2KSBmb3IgdiBpbiBDT05FX1JHQltrXSlcbiAgICAgICAgYXgucGxvdCh3YXZlbGVuZ3RocywgY3VydmUsIGx3PTIuOCwgY29sb3I9Y29sb3VyKVxuICAgICAgICBkeCwgZHkgPSBMRVRURVJfTlVER0Vba11cbiAgICAgICAgYXgudGV4dChMRVRURVJfQVRba10gKyBkeCwgY3VydmVzW2tdW0xFVFRFUl9BVFtrXSAtIDM4MF0gKyBkeSxcbiAgICAgICAgICAgICAgICBrLCBjb2xvcj1jb2xvdXIsIGZvbnRzaXplPTE0LCBmb250d2VpZ2h0PVwiYm9sZFwiKVxuICAgIGZvciBrIGluIGN1cnZlczpcbiAgICAgICAgYXguc2NhdHRlcihbUEVBS1Nba11dLCBbZmFjdG9yc1trXV0sIHM9MTcwLCBjb2xvcj1QRUFLX0hVRVNba10sXG4gICAgICAgICAgICAgICAgICAgZWRnZWNvbG9yPVwiI2U4ZTJkNlwiLCBsaW5ld2lkdGg9MSwgem9yZGVyPTUpXG4gICAgICAgIGlmIHNob3dfbm06XG4gICAgICAgICAgICBheC50ZXh0KFBFQUtTW2tdLCBmYWN0b3JzW2tdICsgMC4wNTUsIGZcIntQRUFLU1trXX0gbm1cIixcbiAgICAgICAgICAgICAgICAgICAgY29sb3I9XCIjZThlMmQ2XCIsIGZvbnRzaXplPTEwLFxuICAgICAgICAgICAgICAgICAgICBoYT1cInJpZ2h0XCIgaWYgayA9PSBcIk1cIiBlbHNlIFwibGVmdFwiKVxuICAgIGF4LnRleHQoNzc2LCAwLjk3LCBub3RlLCBoYT1cInJpZ2h0XCIsIHZhPVwidG9wXCIsIGNvbG9yPVwiI2U4ZTJkNlwiLFxuICAgICAgICAgICAgZm9udHNpemU9MTAuNSwgbGluZXNwYWNpbmc9MS41KVxuICAgIGF4LnNldCh4bGltPSgzODAsIDc4MCksIHlsaW09KDAsIDEuMTQpLCB5bGFiZWw9eV9sYWJlbClcbiAgICBheC5zZXRfeHRpY2tzKHJhbmdlKDQwMCwgNzgxLCAyNSkpXG4gICAgaWYgdGl0bGU6XG4gICAgICAgIGF4LnNldF90aXRsZSh0aXRsZSwgbG9jPVwibGVmdFwiLCBmb250c2l6ZT0xMywgZm9udHdlaWdodD1cImJvbGRcIixcbiAgICAgICAgICAgICAgICAgICAgIGNvbG9yPVwiIzIzMjAyOFwiKVxuICAgIGF4LmdyaWQoY29sb3I9XCIjM2EzYTQyXCIsIGx3PTAuNSwgYWxwaGE9MC43KVxuICAgIGF4LnNldF9mYWNlY29sb3IoXCJibGFja1wiKVxuXG5maWcsICh0b3AsIGJvdHRvbSkgPSBwbHQuc3VicGxvdHMoMiwgMSwgZmlnc2l6ZT0oOS41LCA2LjYpLCBzaGFyZXg9VHJ1ZSlcbmZpZy5zZXRfZmFjZWNvbG9yKFwiI2ZhZjVlY1wiKVxuZmlnLnN1YnBsb3RzX2FkanVzdChoc3BhY2U9MC4xMilcbmNvbmVfaW1hZ2UodG9wLCB7XCJTXCI6IDEuMCwgXCJNXCI6IDEuMCwgXCJMXCI6IDEuMH0sXG4gICAgICAgICAgIFwicmVsYXRpdmUgc2Vuc2l0aXZpdHlcIixcbiAgICAgICAgICAgXCJDb25lIFNlbnNpdGl2aXRpZXNcIixcbiAgICAgICAgICAgc2hvd19ubT1UcnVlLFxuICAgICAgICAgICBub3RlPVwiRWFjaCBjdXJ2ZSBub3JtYWxpc2VkIHRvIGEgcGVhayBvZiAxLlxcblwiXG4gICAgICAgICAgICAgICAgXCJFYWNoIGRvdCBtYXJrcyB0aGUgc3BlY3RyYWwgY29sb3VyXFxuXCJcbiAgICAgICAgICAgICAgICBcImF0IHRoYXQgY29uZSdzIHBlYWsgKHRoZSBMIHBlYWtcXG5cIlxuICAgICAgICAgICAgICAgIFwiaXMgYSBsb25nIHdheSBmcm9tIHJlZCkuXCIpXG5jb25lX2ltYWdlKGJvdHRvbSwge1wiU1wiOiAwLjEsIFwiTVwiOiAwLjUsIFwiTFwiOiAxLjB9LFxuICAgICAgICAgICBcInNjYWxlZCBieSBjb25lIGFidW5kYW5jZVwiLFxuICAgICAgICAgICBOb25lLFxuICAgICAgICAgICBzaG93X25tPUZhbHNlLFxuICAgICAgICAgICBub3RlPVwiVGhlIEwsIE0gYW5kIFMgY29uZXMgYXJlIHByZXNlbnRcXG5cIlxuICAgICAgICAgICAgICAgIFwiaW4gYSByYXRpbyBvZiBhcHByb3hpbWF0ZWx5IDEwIDogNSA6IDEuXCIpXG5ib3R0b20uc2V0X3hsYWJlbChcIndhdmVsZW5ndGggKG5tKVwiLCBmb250c2l6ZT0xMy41KVxuXG5mcm9tIG1hdHBsb3RsaWIucGF0Y2hlcyBpbXBvcnQgQ29ubmVjdGlvblBhdGNoXG5ib3R0b21fZmFjdG9ycyA9IHtcIlNcIjogMC4xLCBcIk1cIjogMC41LCBcIkxcIjogMS4wfVxuZm9yIGssIHBlYWsgaW4gUEVBS1MuaXRlbXMoKTpcbiAgICBmaWcuYWRkX2FydGlzdChDb25uZWN0aW9uUGF0Y2goXG4gICAgICAgIHh5QT0ocGVhaywgMS4wKSwgY29vcmRzQT10b3AudHJhbnNEYXRhLFxuICAgICAgICB4eUI9KHBlYWssIGJvdHRvbV9mYWN0b3JzW2tdKSwgY29vcmRzQj1ib3R0b20udHJhbnNEYXRhLFxuICAgICAgICBjb2xvcj1QRUFLX0hVRVNba10sIGxpbmV3aWR0aD0yLCBhbHBoYT0wLjg1LCB6b3JkZXI9MSkpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="How common is trichromacy?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How common is trichromacy?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Early vertebrates had four cone classes, and many birds, reptiles and fish keep all four today. Early mammals, mostly nocturnal, lost two of them. Most mammals are still dichromats, including dogs, cats, and horses. Primates (including humans) are an exception, sharing a mutation that restored a third cone class. The fourth class in birds, reptiles and fish is sensitive into the ultraviolet. Many insects are trichromats, including honeybees, whose colour vision has driven the evolution of colourful flowers.</p>
+</div>
+</div>
+<p>The incoming spectrum is converted by photoreceptors into a tuple of three values corresponding to the S, M and L responses. These are recombined by retinal ganglion cells into three signals that travel to the brain: a <strong>luminance</strong> signal based on the combined response of L and M; and two <strong>opponent</strong> signals, L compared against M (red versus green) and S compared against L and M (blue versus yellow). Schematically,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{luminance-like} &amp;: \quad L+M \\
+\text{red-green-like} &amp;: \quad L-M \\
+\text{blue-yellow-like} &amp;: \quad S-(L+M)
+\end{aligned}
+\]</span></p>
+<p>This means that the brain’s perception of a colour is also a tuple of three values — luminance, red-green and blue-yellow — rather than S, M and L. Either tuple can be computed from the other, so both describe the same three-dimensional space. The figure below is built with the plotly library from the corner coordinates of the cube.</p>
+<!--
+The two words carry different weight. **Signals** is physical: neurons
+behind the retina add and subtract the cone outputs, and those sums and
+differences are what travels to the brain. **Recombined** is
+mathematical: a change of coordinates on the same three-dimensional
+space, three numbers in, three numbers out, the same point read against
+new axes. The rewiring pays because L and M respond almost alike, so
+their raw feeds are nearly redundant: L−M isolates the small difference
+that carries hue, while L+M carries the large shared part as brightness.
+Section 5 introduces a third set of axes over the same space.
+-->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>corners <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"black"</span>: (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="st">"red"</span>: (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="st">"green"</span>: (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"blue"</span>: (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="st">"yellow"</span>: (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="st">"cyan"</span>: (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"magenta"</span>: (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="st">"white"</span>: (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cube_edges <span class="op">=</span> [</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"black"</span>, <span class="st">"red"</span>), (<span class="st">"black"</span>, <span class="st">"green"</span>), (<span class="st">"black"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"red"</span>, <span class="st">"yellow"</span>), (<span class="st">"red"</span>, <span class="st">"magenta"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"green"</span>, <span class="st">"yellow"</span>), (<span class="st">"green"</span>, <span class="st">"cyan"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"blue"</span>, <span class="st">"cyan"</span>), (<span class="st">"blue"</span>, <span class="st">"magenta"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"yellow"</span>, <span class="st">"white"</span>), (<span class="st">"cyan"</span>, <span class="st">"white"</span>), (<span class="st">"magenta"</span>, <span class="st">"white"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a, b <span class="kw">in</span> cube_edges:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(gradient_line(a, b))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fig.add_trace(gradient_line(<span class="st">"black"</span>, <span class="st">"white"</span>))   <span class="co"># the luminance diagonal</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>fig.add_trace(gradient_line(<span class="st">"blue"</span>, <span class="st">"yellow"</span>))   <span class="co"># a cube diagonal</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>fig.add_trace(gradient_line(<span class="st">"red"</span>, <span class="st">"green"</span>))     <span class="co"># a face diagonal</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>fig.add_trace(markers(corners))         <span class="co"># eight labelled corners</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Every edge and diagonal interpolates between its endpoint colours.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe src="rgbcube.html" width="680" height="580" style="border: none;">
+</iframe>
+<p>This space wraps the two far ends of the spectrum, creating the colour “wheel”. As a combination of red and blue, <strong>purple</strong> corresponds to no wavelength, rather it corresponds to an <em>absence</em> of the middle wavelengths of light, when both extremes are still present.</p>
+<p>A colour’s position along the black-to-white diagonal axis is its luminance. Its angle around the axis of red, yellow, green and blue is its <strong>hue</strong>. Its distance out from the axis of greys is its <strong>saturation</strong>: the further from grey, the more vivid the colour. Greys on the axis have no hue at all and are called <strong>achromatic</strong>; everything off the axis is <strong>chromatic</strong> to some degree; monochromatic (spectral) hues are maximally saturated.</p>
+<p>Below is the same space in spherical coordinates, with a single colour picked out as an arrow from the origin. Drag the scene to rotate, and scroll or pinch to zoom.</p>
+<iframe src="colourcylinder.html" width="680" height="510" style="border: none; display: block; margin: 0 auto;">
+</iframe>
+<p>In this system, hue moves the point around the grey axis, luminance moves it between the lower and upper hemispheres, and saturation moves it away from the grey axis. The concept of a <em>colour sphere</em> was first introduced by the painter and theorist Philipp Runge in 1807.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Runge_Farbenkugel.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Philipp Otto Runge’s <em>Farbenkugel</em> (1810) places hues around the equator, white and black at opposite poles, and mixtures towards grey at the centre. The plate shows the sphere from both poles and in two cross-sections.</figcaption>
+</figure>
+</div>
+<p>The visual system also adapts to illumination, uses surrounding context, and compares signals across space and time. The same retinal input can contribute to different appearances in different situations. Consider the example below, where both centre squares below use the same grey colour pixels. If they appear to be different shades, it is because the surround changed the visual system’s comparison.</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHBhbmVsKGJhY2tncm91bmQpOlxuICAgIGEgPSBucC5mdWxsKCgzMDAsIDQ2MCwgMyksIGJhY2tncm91bmQsIGR0eXBlPW5wLnVpbnQ4KVxuICAgIGFbMTA1OjE5NSwgMTY1OjI5NV0gPSAxMjhcbiAgICByZXR1cm4gYVxuXG5maWcsIGF4ZXMgPSBwbHQuc3VicGxvdHMoMSwgMiwgZmlnc2l6ZT0oMTAsIDMuNikpXG5mb3IgYXgsIGJhY2tncm91bmQgaW4gemlwKGF4ZXMsICg2MCwgMjIwKSk6XG4gICAgYXguaW1zaG93KHBhbmVsKGJhY2tncm91bmQpKVxuICAgIGF4LmF4aXMoXCJvZmZcIilcbnBsdC5zdWJwbG90c19hZGp1c3Qod3NwYWNlPTAuMDQpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>This is important for visualisation since every colour is seen against neighbours, backgrounds and display conditions.</p>
+</section>
+<section id="luminance" class="level2">
+<h2 class="anchored" data-anchor-id="luminance">3 · Luminance</h2>
+<p><strong>Radiant flux</strong> is the optical power carried by radiation, measured in watts (W). Other radiometric quantities describe how that power is distributed:</p>
+<ul>
+<li><strong>Radiant intensity</strong> (W/sr): flux per unit solid angle.</li>
+<li><strong>Irradiance</strong> (W/m²): flux arriving per unit area.</li>
+<li><strong>Radiance</strong> (W/m²/sr): flux per unit projected source area and per unit solid angle in a specified direction.</li>
+<li><strong>Spectral radiance</strong> <span class="math inline">\(L_{e,\lambda}(\lambda)\)</span> (W/m²/sr/nm): radiance per unit wavelength interval.</li>
+</ul>
+<p>Spectral radiance gives the wavelength distribution of radiance. <strong>Brightness</strong>, by contrast, has no meter and no unit. It is the subjective counterpart of radiance: how much light an area <em>appears</em> to emit or reflect, affected by adaptation, surround, area and colour.</p>
+<p><strong>Luminance</strong> adjusts the objective spectral radiance measure according to the the standard <strong>photopic function</strong> <span class="math inline">\(V(\lambda)\)</span>, a curve that measures the apparent radiance of wavelengths for human observers in daylight conditions, based on measurements made in the 1910s and 1920s. The measurements were compiled by Gibson and Tyndall at the US National Bureau of Standards, and the curve became an international standard in 1924.</p>
+<p>The graph below shows <span class="math inline">\(V(\lambda)\)</span>: the contribution of each wavelength to luminance per unit of radiant power.</p>
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2llID0gcGQucmVhZF9jc3YoXG4gICAgb3Blbl91cmwoREFUQV9VUkwgKyBcIkNJRV94eXpfMTkzMV8yZGVnLmNzdlwiKSxcbiAgICBoZWFkZXI9Tm9uZSxcbiAgICBuYW1lcz1bXCJ3YXZlbGVuZ3RoXCIsIFwieGJhclwiLCBcInliYXJcIiwgXCJ6YmFyXCJdLFxuKS5xdWVyeShcIjM4MCA8PSB3YXZlbGVuZ3RoIDw9IDcwMFwiKS5jb3B5KClcbmNpZV93YXZlbGVuZ3RocyA9IGNpZVtcIndhdmVsZW5ndGhcIl0udG9fbnVtcHkoKVxuXG55YmFyID0gY2llW1wieWJhclwiXS50b19udW1weSgpXG5tYXJrcyA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJ3YXZlbGVuZ3RoXCI6IFs0NDUsIDU4MF0sXG4gICAgXCJ2YWx1ZVwiOiBbeWJhcltucC5hcmdtaW4obnAuYWJzKGNpZV93YXZlbGVuZ3RocyAtIDQ0NSkpXSxcbiAgICAgICAgICAgICAgeWJhcltucC5hcmdtaW4obnAuYWJzKGNpZV93YXZlbGVuZ3RocyAtIDU4MCkpXV0sXG4gICAgXCJsYWJlbFwiOiBbXCJibHVlIC8gaW5kaWdvLCA0NDUgbm1cIiwgXCJ5ZWxsb3csIDU4MCBubVwiXSxcbn0pXG5wcmludChmXCJsdW1pbmFuY2Utd2VpZ2h0aW5nIHJhdGlvLCA1ODAgbm0gdG8gNDQ1IG5tOiBcIlxuICAgICAgZlwie21hcmtzWyd2YWx1ZSddWzFdIC8gbWFya3NbJ3ZhbHVlJ11bMF06LjBmfSB0byAxXCIpXG5cbmRlZiB3YXZlbGVuZ3RoX2hleCh3bCk6XG4gICAgIyBBcHByb3hpbWF0ZSBkaXNwbGF5IGNvbG91ciBvZiBhIG1vbm9jaHJvbWF0aWMgbGlnaHQgKEJydXRvbikuXG4gICAgaWYgd2wgPCA0NDA6ICAgciwgZywgYiA9ICg0NDAgLSB3bCkgLyA2MCwgMC4wLCAxLjBcbiAgICBlbGlmIHdsIDwgNDkwOiByLCBnLCBiID0gMC4wLCAod2wgLSA0NDApIC8gNTAsIDEuMFxuICAgIGVsaWYgd2wgPCA1MTA6IHIsIGcsIGIgPSAwLjAsIDEuMCwgKDUxMCAtIHdsKSAvIDIwXG4gICAgZWxpZiB3bCA8IDU4MDogciwgZywgYiA9ICh3bCAtIDUxMCkgLyA3MCwgMS4wLCAwLjBcbiAgICBlbGlmIHdsIDwgNjQ1OiByLCBnLCBiID0gMS4wLCAoNjQ1IC0gd2wpIC8gNjUsIDAuMFxuICAgIGVsc2U6ICAgICAgICAgIHIsIGcsIGIgPSAxLjAsIDAuMCwgMC4wXG4gICAgaWYgd2wgPCA0MjA6ICAgZmFkZSA9IDAuMyArIDAuNyAqICh3bCAtIDM4MCkgLyA0MFxuICAgIGVsaWYgd2wgPiA2NDU6IGZhZGUgPSBtYXgoMC4wLCAwLjMgKyAwLjcgKiAoNzAwIC0gd2wpIC8gNTUpXG4gICAgZWxzZTogICAgICAgICAgZmFkZSA9IDEuMFxuICAgIHRvMjU1ID0gbGFtYmRhIHY6IGludCgyNTUgKiAoZmFkZSAqIHYpICoqIDAuOClcbiAgICByZXR1cm4gZlwiI3t0bzI1NShyKTowMnh9e3RvMjU1KGcpOjAyeH17dG8yNTUoYik6MDJ4fVwiXG5cbnNwZWN0cnVtX3N0b3BzID0gW1xuICAgIGFsdC5HcmFkaWVudFN0b3AoY29sb3I9d2F2ZWxlbmd0aF9oZXgod2wpLCBvZmZzZXQ9KHdsIC0gMzgwKSAvIDMyMClcbiAgICBmb3Igd2wgaW4gcmFuZ2UoMzgwLCA3MDEsIDUpXG5dXG5cbmx1bWlub3NpdHkgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKHtcbiAgICBcIndhdmVsZW5ndGhcIjogY2llX3dhdmVsZW5ndGhzLCBcInZhbHVlXCI6IHliYXIsXG59KSkubWFya19hcmVhKFxuICAgIGxpbmU9e1wic3Ryb2tlV2lkdGhcIjogMi41LCBcImNvbG9yXCI6IFwiIzIzMjAyOFwifSxcbiAgICBjb2xvcj1hbHQuR3JhZGllbnQoZ3JhZGllbnQ9XCJsaW5lYXJcIiwgeDE9MCwgeDI9MSwgeTE9MCwgeTI9MCxcbiAgICAgICAgICAgICAgICAgICAgICAgc3RvcHM9c3BlY3RydW1fc3RvcHMpLFxuKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIndhdmVsZW5ndGg6UVwiLCB0aXRsZT1cIndhdmVsZW5ndGggKG5tKVwiLFxuICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMzgwLCA3MDBdLCBuaWNlPUZhbHNlKSksXG4gICAgeT1hbHQuWShcInZhbHVlOlFcIiwgdGl0bGU9XCJyZWxhdGl2ZSBjb250cmlidXRpb24gdG8gbHVtaW5hbmNlIHBlciB3YXR0XCIpLFxuKVxuXG5ub3RlX2xpbmVzID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ3YXZlbGVuZ3RoXCI6IFs2NDVdLCBcInZhbHVlXCI6IFswLjgyXSxcbiAgICBcIndvcmRzXCI6IFtcIkVxdWFsIHJhZGlhbnQgcG93ZXIgY29udHJpYnV0ZXMgbW9zdFxcbnRvIGRheWxpZ2h0IGx1bWluYW5jZSBhdFwiXX0pXG4pLm1hcmtfdGV4dChhbGlnbj1cImNlbnRlclwiLCBmb250U2l6ZT0xMSwgY29sb3I9XCIjNGE0NjNjXCIsXG4gICAgICAgICAgICBsaW5lQnJlYWs9XCJcXG5cIiwgbGluZUhlaWdodD0xNSkuZW5jb2RlKFxuICAgIHg9XCJ3YXZlbGVuZ3RoOlFcIiwgeT1cInZhbHVlOlFcIiwgdGV4dD1cIndvcmRzOk5cIilcblxubm90ZV81NTVfYm94ID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XG4gICAgXCJ4MVwiOiBbNjI4XSwgXCJ4MlwiOiBbNjYyXSwgXCJ5MVwiOiBbMC42MjVdLCBcInkyXCI6IFswLjczNV0sXG59KSkubWFya19yZWN0KGNvbG9yPVwiIzAwMDAwMFwiLCBjb3JuZXJSYWRpdXM9MikuZW5jb2RlKFxuICAgIHg9XCJ4MTpRXCIsIHgyPVwieDI6UVwiLCB5PVwieTE6UVwiLCB5Mj1cInkyOlFcIilcblxubm90ZV81NTUgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKHtcIndhdmVsZW5ndGhcIjogWzY0NV0sIFwidmFsdWVcIjogWzAuNjhdLFxuICAgIFwid29yZHNcIjogW1wiNTU1IG5tXCJdfSlcbikubWFya190ZXh0KGFsaWduPVwiY2VudGVyXCIsIGZvbnRTaXplPTE0LCBmb250V2VpZ2h0PTcwMCxcbiAgICAgICAgICAgIGNvbG9yPXdhdmVsZW5ndGhfaGV4KDU1NSkpLmVuY29kZShcbiAgICB4PVwid2F2ZWxlbmd0aDpRXCIsIHk9XCJ2YWx1ZTpRXCIsIHRleHQ9XCJ3b3JkczpOXCIpXG5cbihsdW1pbm9zaXR5ICsgbm90ZV9saW5lcyArIG5vdGVfNTU1X2JveCArIG5vdGVfNTU1KS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTU2MCwgaGVpZ2h0PTI4MCxcbiAgICB0aXRsZT1cIlRoZSBwaG90b3BpYyBmdW5jdGlvbiBWKM67KVwiKSJ9
+</script>
+</div>
+<p>For a complete spectrum, apply that weighting at every wavelength and add the results:</p>
+<p><span class="math display">\[L_v=K_m\int L_{e,\lambda}(\lambda)V(\lambda)\,d\lambda,\]</span></p>
+<p>Here <span class="math inline">\(L_{e,\lambda}(\lambda)\)</span> is the spectral radiance, <span class="math inline">\(V(\lambda)\)</span> is the dimensionless wavelength weighting, <span class="math inline">\(d\lambda\)</span> means summing across wavelength bands, and <span class="math inline">\(K_m\approx683\ \mathrm{lm\,W^{-1}}\)</span> converts radiometric watts to the SI photometric scale. The result <span class="math inline">\(L_v\)</span> is reported in <strong>candela per square metre</strong> (<span class="math inline">\(\mathrm{cd\,m^{-2}}\)</span>), the unit used to specify display brightness.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Yellow is bright because it is luminant">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Yellow is bright because it is luminant
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(V(\lambda)\)</span> weights 580 nm <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#ffe000;border:1px solid #555;"></span> at about 0.87 and 445 nm <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#0028ff;border:1px solid #555;"></span> at about 0.03, so equal-power beams at those wavelengths contribute luminance in a ratio of about 29 to 1. On a display, full yellow <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#ffff00;border:1px solid #555;"></span> has higher luminance than red <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#ff0000;border:1px solid #555;"></span>, green <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#00ff00;border:1px solid #555;"></span>, blue <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#0000ff;border:1px solid #555;"></span>, cyan <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#00ffff;border:1px solid #555;"></span> or magenta <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#ff00ff;border:1px solid #555;"></span> because its red and green subpixels are both on; only white <span style="display:inline-block;width:0.7em;height:0.7em;border-radius:50%;background:#ffffff;border:1px solid #555;"></span>, with all three on, is higher. The L and M cones that perceive luminance are most sensitive to the highest-energy region of the spectrum of sunlight at the Earth’s surface.</p>
+</div>
+</div>
+<p>No hue has a fixed luminance, because luminance depends on radiant power as well as spectral composition. Among equal-power monochromatic lights, luminance per watt is greatest at <span style="color:#8cc700; font-weight:700">555 nm</span>, which looks yellow-green. Daylight determines the visual state being measured. The luminance signal sums the L and M responses, and their sensitivity curves, peaking near <span style="color:#93b200; font-weight:700">565</span> and <span style="color:#52b800; font-weight:700">535 nm</span>, overlap most strongly in between.</p>
+</section>
+<section id="metamerism" class="level2">
+<h2 class="anchored" data-anchor-id="metamerism">4 · Metamerism</h2>
+<p>The eye and brain reduce a light’s complete spectrum to three numbers. Two lights can therefore have different power at many wavelengths but still produce the same S, M and L totals. Under fixed viewing conditions they then match in colour. Such lights are called <strong>metamers</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="metamers-slider.webp" class="img-fluid figure-img" style="width:78.0%"></p>
+<figcaption>Two surfaces match under one illuminant but differ under another.</figcaption>
+</figure>
+</div>
+<p>A screen’s red-plus-green mixture and a monochromatic yellow light are a familiar example. Their spectra differ, but the mixture can be adjusted until both produce the same three cone responses.</p>
+<p>In the example below, a sampled spectrum contains 401 power values, one for each wavelength from 380 to 780 nm, but the cone model reduces those values to three sums. That leaves many ways to alter the spectrum without altering any of the three results.</p>
+<p>Write the three cone calculations as a matrix <span class="math inline">\(M\)</span>. We construct a non-zero spectral change <span class="math inline">\(d\)</span> for which</p>
+<p><span class="math display">\[Md=0.\]</span></p>
+<p>Starting from one spectrum <span class="math inline">\(p\)</span>, add and subtract that change:</p>
+<p><span class="math display">\[M(p+d)=Mp+Md=Mp, \qquad M(p-d)=Mp-Md=Mp.\]</span></p>
+<p>The two spectra differ, but their S, M and L responses are identical. The change is kept small enough that both spectra remain non-negative.</p>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBUaHJlZSByb3dzIChTLCBNIGFuZCBMKSBhcHBsaWVkIHRvIDQwMSB3YXZlbGVuZ3RoIHZhbHVlcy5cbmNvbmVfbWF0cml4ID0gY29uZXMuVFxuXG4jIEJlZ2luIHdpdGggYW4gYXJiaXRyYXJ5IHdhdnkgY2hhbmdlLCB0aGVuIHJlbW92ZSB0aGUgcGFydCB0aGF0IHdvdWxkXG4jIGFsdGVyIGFueSBvZiB0aGUgdGhyZWUgY29uZSB0b3RhbHMuIFRoZSByZW1haW5kZXIgc2F0aXNmaWVzIE0gZCA9IDAuXG5jYW5kaWRhdGUgPSAoXG4gICAgbnAuc2luKG5wLmxpbnNwYWNlKDAsIDEwICogbnAucGksIGxlbih3YXZlbGVuZ3RocykpKVxuICAgICsgMC4zNSAqIG5wLmNvcyhucC5saW5zcGFjZSgwLCAzICogbnAucGksIGxlbih3YXZlbGVuZ3RocykpKVxuKVxuaW52aXNpYmxlX2NoYW5nZSA9IGNhbmRpZGF0ZSAtIGNvbmVfbWF0cml4LlQgQCBucC5saW5hbGcuc29sdmUoXG4gICAgY29uZV9tYXRyaXggQCBjb25lX21hdHJpeC5ULFxuICAgIGNvbmVfbWF0cml4IEAgY2FuZGlkYXRlLFxuKVxuaW52aXNpYmxlX2NoYW5nZSAvPSBucC5tYXgobnAuYWJzKGludmlzaWJsZV9jaGFuZ2UpKVxuXG5zcGVjdHJ1bV9hID0gMC41NSArIDAuMjggKiBpbnZpc2libGVfY2hhbmdlXG5zcGVjdHJ1bV9iID0gMC41NSAtIDAuMjggKiBpbnZpc2libGVfY2hhbmdlXG5TTUxfYSA9IGNvbmVfbWF0cml4IEAgc3BlY3RydW1fYVxuU01MX2IgPSBjb25lX21hdHJpeCBAIHNwZWN0cnVtX2JcblxucmVzcG9uc2VzID0gcGQuRGF0YUZyYW1lKFxuICAgIHtcInNwZWN0cnVtIEFcIjogU01MX2EsIFwic3BlY3RydW0gQlwiOiBTTUxfYn0sXG4gICAgaW5kZXg9W1wiU1wiLCBcIk1cIiwgXCJMXCJdLFxuKVxucHJpbnQocmVzcG9uc2VzLnJvdW5kKDYpKVxucHJpbnQoXCJsYXJnZXN0IHJlc3BvbnNlIGRpZmZlcmVuY2U6XCIsXG4gICAgICBmXCJ7bnAubWF4KG5wLmFicyhTTUxfYSAtIFNNTF9iKSk6LjJlfVwiKVxuXG5tZXRhbWVycyA9IHRpZHkod2F2ZWxlbmd0aHMsXG4gICAgICAgICAgICAgICAge1wic3BlY3RydW0gQVwiOiBzcGVjdHJ1bV9hLCBcInNwZWN0cnVtIEJcIjogc3BlY3RydW1fYn0pXG5cbmFsdC5DaGFydChtZXRhbWVycykubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSwgc3Ryb2tlQ2FwPVwicm91bmRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPVwiIzQyNjlkMFwiKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcIndhdmVsZW5ndGg6UVwiLCB0aXRsZT1cIndhdmVsZW5ndGggKG5tKVwiLCBzY2FsZT1hbHQuU2NhbGUobmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJ2YWx1ZTpRXCIsIHRpdGxlPVwicmVsYXRpdmUgcG93ZXJcIiksXG4gICAgc3Ryb2tlRGFzaD1hbHQuU3Ryb2tlRGFzaChcbiAgICAgICAgXCJzZXJpZXM6TlwiLCB0aXRsZT1Ob25lLFxuICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVtcInNwZWN0cnVtIEFcIiwgXCJzcGVjdHJ1bSBCXCJdLFxuICAgICAgICAgICAgICAgICAgICAgICAgcmFuZ2U9W1sxLCAwXSwgWzEsIDVdXSksXG4gICAgKSxcbikucHJvcGVydGllcyh3aWR0aD01NjAsIGhlaWdodD0yNjAsXG4gICAgICAgICAgICAgdGl0bGU9XCJEaWZmZXJlbnQgc3BlY3RyYSwgaWRlbnRpY2FsIFMsIE0gYW5kIEwgcmVzcG9uc2VzXCIpIn0=
+</script>
+</div>
+<section id="colour-matching" class="level3">
+<h3 class="anchored" data-anchor-id="colour-matching">Colour matching</h3>
+<p>In a colour-matching experiment, an observer views a split field. One half contains a target light; the other contains a mixture of three primary lights. The observer adjusts the power of the primaries until the two halves match. The three recorded amounts specify the target relative to those primaries.</p>
+<p>The experiment can be reproduced on screen, with RGB channel values standing in for the three primary lamps. Overlapping lights <strong>add</strong>: red plus green looks yellow, green plus blue looks cyan, red plus blue looks magenta, and all three at full power look white. The circle on the left is a fixed target; the three lamps on the right are stacked almost on top of each other, so their combined light fills the centre and each lamp’s own strength shows only at the rim. Adjust the sliders until the centre matches the target:</p>
+<div class="colour-match-control">
+<div class="lights-demo">
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiUiA9IGFsdC5wYXJhbShuYW1lPVwiUlwiLCB2YWx1ZT0xMjgsXG4gICAgICAgICAgICAgIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UobWluPTAsIG1heD0yNTUsIHN0ZXA9MSwgbmFtZT1cIlIgXCIpKVxuRyA9IGFsdC5wYXJhbShuYW1lPVwiR1wiLCB2YWx1ZT0xMjgsXG4gICAgICAgICAgICAgIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UobWluPTAsIG1heD0yNTUsIHN0ZXA9MSwgbmFtZT1cIkcgXCIpKVxuQiA9IGFsdC5wYXJhbShuYW1lPVwiQlwiLCB2YWx1ZT0xMjgsXG4gICAgICAgICAgICAgIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UobWluPTAsIG1heD0yNTUsIHN0ZXA9MSwgbmFtZT1cIkIgXCIpKVxuXG5iYXNlID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ6XCI6IFswXX0pKVxuYmFja2Ryb3AgPSBiYXNlLm1hcmtfcmVjdCh4PTAsIHgyPTQ3MCwgeT0wLCB5Mj0yOTAsIGNvbG9yPVwiYmxhY2tcIilcblxudGFyZ2V0ID0gYmFzZS5tYXJrX3BvaW50KHNoYXBlPVwiY2lyY2xlXCIsIGZpbGxlZD1UcnVlLCBzaXplPTEyMDAwLFxuICAgICAgICAgICAgICAgICAgICAgICAgIG9wYWNpdHk9MSwgeD0xMTUsIHk9MTU1LFxuICAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPVwicmdiKDE5NiwgOTAsIDMyKVwiKVxuXG5kZWYgbGlnaHQocHgsIHB5LCBjaGFubmVsX2V4cHIpOlxuICAgICMgT25lIGNvbG91cmVkIGxhbXAuIGJsZW5kPVwic2NyZWVuXCIgbWFrZXMgb3ZlcmxhcHMgYWRkIGxpa2UgbGlnaHQuXG4gICAgcmV0dXJuIGJhc2UubWFya19wb2ludChzaGFwZT1cImNpcmNsZVwiLCBmaWxsZWQ9VHJ1ZSwgc2l6ZT0yMjAwMCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgIG9wYWNpdHk9MSwgYmxlbmQ9XCJzY3JlZW5cIiwgeD1weCwgeT1weSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPWFsdC5leHByKGNoYW5uZWxfZXhwcikpXG5cbmxpZ2h0X3IgPSBsaWdodCgzMzUsIDEzMiwgXCIncmdiKCcgKyBSICsgJywwLDApJ1wiKVxubGlnaHRfZyA9IGxpZ2h0KDMxOCwgMTY0LCBcIidyZ2IoMCwnICsgRyArICcsMCknXCIpXG5saWdodF9iID0gbGlnaHQoMzUyLCAxNjQsIFwiJ3JnYigwLDAsJyArIEIgKyAnKSdcIilcblxudGFncyA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwicHhcIjogWzMzNSwgMjQ2LCA0MjRdLCBcInB5XCI6IFszOCwgMjQwLCAyNDBdLFxuICAgIFwibGV0dGVyXCI6IFtcIlJcIiwgXCJHXCIsIFwiQlwiXX0pKS5tYXJrX3RleHQoXG4gICAgZm9udFNpemU9MTMsIGZvbnRXZWlnaHQ9NzAwLCBjb2xvcj1cIiM4YTg1NzhcIikuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJweDpRXCIsIGF4aXM9Tm9uZSwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgNDcwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJweTpRXCIsIGF4aXM9Tm9uZSwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMjkwLCAwXSwgbmljZT1GYWxzZSkpLFxuICAgIHRleHQ9XCJsZXR0ZXI6TlwiKVxuXG4oYmFja2Ryb3AgKyB0YXJnZXQgKyBsaWdodF9yICsgbGlnaHRfZyArIGxpZ2h0X2IgKyB0YWdzKS5hZGRfcGFyYW1zKFxuICAgIFIsIEcsIEIpLnByb3BlcnRpZXMod2lkdGg9NDcwLCBoZWlnaHQ9MjkwLFxuICAgIHRpdGxlPVwiTWF0Y2ggdGhlIGNlbnRyZSBvZiB0aGUgY2x1c3RlciB0byB0aGUgdGFyZ2V0IGNpcmNsZVwiKSJ9
+</script>
+</div>
+</div>
+</div>
+<div style="height: 1rem">
+
+</div>
+<p>William Wright and John Guild independently repeated this procedure around 1930. They presented one monochromatic target wavelength at a time, repeated the matches across the visible spectrum and combined the results from multiple observers. Each target wavelength produced three numbers: the amounts of the red, green and blue primaries needed for the match. Plotting those amounts against wavelength produced three RGB colour-matching functions.</p>
+<!-- The **2°** in the chart title is the visual angle of the matching field:
+the colour patch occupied a circle two degrees across as seen from the
+observer's eye. That is about 2 cm across at a viewing distance of 57 cm
+and mainly tests central, foveal vision. The CIE later introduced a
+10° standard observer for larger fields of view. -->
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWF0Y2hpbmcgPSB0aWR5KGNpZV93YXZlbGVuZ3Rocywge1xuICAgIFwieMyEXCI6IGNpZVtcInhiYXJcIl0udG9fbnVtcHkoKSxcbiAgICBcIsizXCI6IGNpZVtcInliYXJcIl0udG9fbnVtcHkoKSxcbiAgICBcInrMhFwiOiBjaWVbXCJ6YmFyXCJdLnRvX251bXB5KCksXG59KVxuXG5tYXRjaGluZ19wYW5lbCA9IGFsdC5DaGFydChtYXRjaGluZykubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9XCJ3YXZlbGVuZ3RoIChubSlcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzM4MCwgNzAwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJ2YWx1ZTpRXCIsIHRpdGxlPVwibWF0Y2hpbmcgZnVuY3Rpb25cIiksXG4gICAgY29sb3I9YWx0LkNvbG9yKFwic2VyaWVzOk5cIiwgdGl0bGU9Tm9uZSxcbiAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bXCJ4zIRcIiwgXCLIs1wiLCBcInrMhFwiXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJhbmdlPVtcIiNFNDRCMzVcIiwgXCIjMDBBODc4XCIsIFwiIzVCNEJDRVwiXSkpLFxuKS5wcm9wZXJ0aWVzKHdpZHRoPTU2MCwgaGVpZ2h0PTI4MCxcbiAgICAgICAgICAgICB0aXRsZT1cIk9mZmljaWFsIENJRSAxOTMxIDLCsCBjb2xvdXItbWF0Y2hpbmcgZnVuY3Rpb25zXCIpXG5cbmxvYmVfbm90ZSA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1wid2F2ZWxlbmd0aFwiOiBbNTY2XSwgXCJ2YWx1ZVwiOiBbMS43OF0sXG4gICAgXCJ3b3Jkc1wiOiBbXCJUaGUgcmVkLWxlYW5pbmcgcmVzcG9uc2UgcmlzZXMgYWdhaW5cXG5cIlxuICAgICAgICAgICAgICBcImluIHRoZSB2aW9sZXQsIHNvIHZpb2xldCBsb29rcyByZWRkaXNoXFxuXCJcbiAgICAgICAgICAgICAgXCJhbmQgaHVlIGNsb3NlcyBpbnRvIGEgY2lyY2xlLlwiXX0pXG4pLm1hcmtfdGV4dChhbGlnbj1cImxlZnRcIiwgZm9udFNpemU9MTEuNSwgY29sb3I9XCIjZTAwMGUwXCIsXG4gICAgICAgICAgICBsaW5lQnJlYWs9XCJcXG5cIiwgbGluZUhlaWdodD0xNSkuZW5jb2RlKFxuICAgIHg9XCJ3YXZlbGVuZ3RoOlFcIiwgeT1cInZhbHVlOlFcIiwgdGV4dD1cIndvcmRzOk5cIilcblxubG9iZV9hcnJvdyA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1xuICAgIFwid2F2ZWxlbmd0aFwiOiBbNTYwLCA0NTJdLCBcInZhbHVlXCI6IFsxLjUyLCAwLjQ0XX0pXG4pLm1hcmtfbGluZShjb2xvcj1cIiNlMDAwZTBcIiwgc3Ryb2tlV2lkdGg9MS4yKS5lbmNvZGUoXG4gICAgeD1cIndhdmVsZW5ndGg6UVwiLCB5PVwidmFsdWU6UVwiKVxubG9iZV9oZWFkID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ3YXZlbGVuZ3RoXCI6IFs0NTJdLCBcInZhbHVlXCI6IFswLjQ0XX0pXG4pLm1hcmtfcG9pbnQoc2hhcGU9XCJhcnJvd1wiLCBzaXplPTE0MCwgZmlsbGVkPVRydWUsIGNvbG9yPVwiI2UwMDBlMFwiLFxuICAgICAgICAgICAgIGFuZ2xlPTIyMikuZW5jb2RlKHg9XCJ3YXZlbGVuZ3RoOlFcIiwgeT1cInZhbHVlOlFcIilcblxuYWx0LnZjb25jYXQoXG4gICAgbWF0Y2hpbmdfcGFuZWwgKyBsb2JlX25vdGUgKyBsb2JlX2Fycm93ICsgbG9iZV9oZWFkLFxuICAgIHNwZWN0cnVtX2JhbmQoNTYwLCAzODAsIDcwMCksXG4gICAgc3BhY2luZz05LFxuKS5yZXNvbHZlX3NjYWxlKHg9XCJzaGFyZWRcIikifQ==
+</script>
+</div>
+<p>The <strong>three primary wavelengths</strong> had to be narrow, stable and reproducible. An electric discharge through mercury produces several strong spectral lines at fixed wavelengths. A filter or monochromator can isolate one of those lines as a nearly monochromatic beam. Mercury lamps therefore provided laboratories with bright reference wavelengths that could be reliably reproduced.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mercurylamp.jpg" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>A mercury discharge lamp.</figcaption>
+</figure>
+</div>
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWVyY3VyeSA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJ3YXZlbGVuZ3RoXCI6IFs0MDQuNjU2LCA0MzUuODMzLCA1NDYuMDc0LCA1NzYuOTYwLCA1NzkuMDY2XSxcbiAgICAjIFJlbGF0aXZlIGxpbmUgaW50ZW5zaXRpZXMgZnJvbSB0aGUgTklTVCBIYW5kYm9vayBvZiBCYXNpY1xuICAgICMgQXRvbWljIFNwZWN0cm9zY29waWMgRGF0YSwgbm9ybWFsaXNlZCB0byB0aGUgNDM1LjgzMyBubSBsaW5lLlxuICAgIFwiaW50ZW5zaXR5XCI6IFswLjQwLCAxLjAwLCAwLjUwLCAwLjA1LCAwLjA2XSxcbiAgICBcInByaW1hcnlcIjogW1wiXCIsIFwiYmx1ZSBwcmltYXJ5XCIsIFwiZ3JlZW4gcHJpbWFyeVwiLCBcIlwiLCBcIlwiXSxcbn0pXG5saW5lcyA9IGFsdC5DaGFydChtZXJjdXJ5KS5tYXJrX3J1bGUoc3Ryb2tlV2lkdGg9MywgY29sb3I9XCIjOGE4YThhXCIpLmVuY29kZShcbiAgICB4PWFsdC5YKFwid2F2ZWxlbmd0aDpRXCIsIHRpdGxlPVwid2F2ZWxlbmd0aCAobm0pXCIsXG4gICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVszODAsIDc4MF0sIG5pY2U9RmFsc2UpKSxcbiAgICB5PWFsdC5ZKFwiaW50ZW5zaXR5OlFcIiwgdGl0bGU9XCJyZWxhdGl2ZSBpbnRlbnNpdHlcIiksXG4pXG50YWdzID0gYWx0LkNoYXJ0KG1lcmN1cnlbbWVyY3VyeVtcInByaW1hcnlcIl0gIT0gXCJcIl0pLm1hcmtfdGV4dChcbiAgICBkeT0tMTAsIGZvbnRTaXplPTEyKS5lbmNvZGUoXG4gICAgeD1cIndhdmVsZW5ndGg6UVwiLCB5PVwiaW50ZW5zaXR5OlFcIiwgdGV4dD1cInByaW1hcnk6TlwiKVxuXG5tZXJjdXJ5X3BhbmVsID0gKGxpbmVzICsgdGFncykucHJvcGVydGllcyh3aWR0aD01NjAsIGhlaWdodD0yMjAsXG4gICAgdGl0bGU9XCJBIG1lcmN1cnkgbGFtcCBlbWl0cyBzZXZlcmFsIHZpc2libGUgbGluZXNcIilcblxuYWx0LnZjb25jYXQoXG4gICAgbWVyY3VyeV9wYW5lbCxcbiAgICBzcGVjdHJ1bV9iYW5kKDU2MCwgMzgwLCA3ODApLFxuICAgIHNwYWNpbmc9OSxcbikucmVzb2x2ZV9zY2FsZSh4PVwic2hhcmVkXCIpIn0=
+</script>
+</div>
+</section>
+<section id="the-international-commission-on-illumination" class="level3">
+<h3 class="anchored" data-anchor-id="the-international-commission-on-illumination">The International Commission on Illumination</h3>
+<p>The <strong>CIE</strong>, from its French name, Commission Internationale de l’Eclairage, was founded in 1913 as the international standards body for light and lighting. In 1924 it standardised the <span class="math inline">\(V(\lambda)\)</span> wavelength weighting used to place luminance measurements on a common basis. In 1931 it standardised colour matching, turning two sets of matching experiments, by William Wright and John Guild, into an agreed reference that any laboratory could reproduce.</p>
+<p>The CIE established a common RGB system with reference primaries at <span style="color:#3a2ee6; font-weight:700">435.8</span>, <span style="color:#52b800; font-weight:700">546.1</span> and <span style="color:#991111; font-weight:700">700.0 nm</span>. The 435.8 and 546.1 nm references were chosen because they are strong, reproducible mercury lines. The 700 nm reference was placed in the far red, where perceived hue changes very little with wavelength. The CIE then transformed RGB matching results into the mathematical coordinates <strong>X, Y and Z</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cie-logo.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>The CIE logo, carrying its name in English, French and German.</figcaption>
+</figure>
+</div>
+<!-- Wright and Guild used different experimental apparatus, so the CIE
+converted their results to a common RGB system with reference primaries
+at [435.8]{style="color:#3a2ee6; font-weight:700"},
+[546.1]{style="color:#52b800; font-weight:700"} and
+[700.0 nm]{style="color:#991111; font-weight:700"}. This was a mathematical change of basis,
+not another matching experiment. These were CIE reference values, not
+the physical primaries used by both experimenters. The 435.8 and
+546.1 nm references were chosen because they are strong, reproducible
+mercury lines. The 700 nm reference was placed in the far red, where
+perceived hue changes very little with wavelength. The CIE used the
+resulting matching functions to construct the standard system introduced
+in the next section. -->
+</section>
+</section>
+<section id="chromaticity" class="level2">
+<h2 class="anchored" data-anchor-id="chromaticity">5 · Chromaticity</h2>
+<p><strong>Chromaticity</strong> describes the relative balance among a light’s three colour-matching responses after their overall magnitude has been removed. Two lights have the same chromaticity when their three response values are in the same proportions, even if one has much greater luminance than the other.</p>
+<p>In the <strong>CIE XYZ (1931)</strong> system, <span class="math inline">\(Y\)</span> carries the standard photopic luminance quantity (<span class="math inline">\(\bar{y}\)</span> is exactly the luminosity function from section 3). <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> retain the other two independent dimensions needed for a colour match once <span class="math inline">\(Y\)</span> has been tied to luminance. <span class="math inline">\(\bar{x}(\lambda)\)</span> specifies how strongly each wavelength contributes to <span class="math inline">\(X\)</span>; <span class="math inline">\(\bar{z}(\lambda)\)</span> does the same for <span class="math inline">\(Z\)</span>. The point x = y = 1/3 is the <strong>equal-energy point</strong> a perfectly flat spectrum (from dim grey to pure white).</p>
+<p>For a spectrum <span class="math inline">\(P(\lambda)\)</span>:</p>
+<p><span class="math display">\[\color{#D62728}{X=\int P(\lambda)\bar{x}(\lambda)d\lambda},\quad
+\color{#009B77}{Y=\int P(\lambda)\bar{y}(\lambda)d\lambda},\quad
+\color{#173B7A}{Z=\int P(\lambda)\bar{z}(\lambda)d\lambda}.\]</span></p>
+<p>Chromaticity coordinates give the proportions:</p>
+<p><span class="math display">\[\color{#D62728}{x}=\frac{X}{X+Y+Z},\qquad
+\color{#009B77}{y}=\frac{Y}{X+Y+Z},\qquad
+\color{#173B7A}{z}=\frac{Z}{X+Y+Z}=\color{#173B7A}{1-x-y}.\]</span></p>
+<p>Only two coordinates are needed because the three proportions sum to one. Move your pointer across the upper chart below and watch the three matching values turn into the two coordinates: the vertical rule reads <span class="math inline">\(\bar{x}, \bar{y}, \bar{z}\)</span> off the official curves, and the readout divides each by their sum. This traces the <strong>spectral locus</strong> in <span class="math inline">\(xy\)</span> space, shown in the lower chart.</p>
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiTUZXID0gYWx0LnNlbGVjdGlvbl9wb2ludChmaWVsZHM9W1wid2F2ZWxlbmd0aFwiXSwgbmVhcmVzdD1UcnVlLFxuICAgICAgICAgICAgICAgICAgICAgICAgICBvbj1cInBvaW50ZXJtb3ZlXCIsIGVtcHR5PUZhbHNlLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZT1be1wid2F2ZWxlbmd0aFwiOiA1NTB9XSlcblxubWZfbG9uZyA9IHRpZHkoY2llX3dhdmVsZW5ndGhzLCB7XG4gICAgXCJ4zIRcIjogY2llX3h5els6LCAwXSwgXCJ5zIRcIjogY2llX3h5els6LCAxXSxcbiAgICBcInrMhFwiOiBjaWVfeHl6WzosIDJdfSlcbm1mX3dpZGUgPSBwZC5EYXRhRnJhbWUoe1wid2F2ZWxlbmd0aFwiOiBjaWVfd2F2ZWxlbmd0aHMsXG4gICAgICAgICAgICAgICAgICAgICAgICBcInhiYXJcIjogY2llX3h5els6LCAwXSwgXCJ5YmFyXCI6IGNpZV94eXpbOiwgMV0sXG4gICAgICAgICAgICAgICAgICAgICAgICBcInpiYXJcIjogY2llX3h5els6LCAyXX0pXG5tZl93aWRlW1widG90YWxcIl0gPSBtZl93aWRlW1tcInhiYXJcIiwgXCJ5YmFyXCIsIFwiemJhclwiXV0uc3VtKGF4aXM9MSlcbm1mX3dpZGVbXCJ4XCJdID0gbWZfd2lkZVtcInhiYXJcIl0gLyBtZl93aWRlW1widG90YWxcIl1cbm1mX3dpZGVbXCJ5XCJdID0gbWZfd2lkZVtcInliYXJcIl0gLyBtZl93aWRlW1widG90YWxcIl1cbm1mX3dpZGVbXCJjb2xvdXJcIl0gPSBbd2F2ZWxlbmd0aF9oZXgodykgZm9yIHcgaW4gbWZfd2lkZVtcIndhdmVsZW5ndGhcIl1dXG5cbk1YID0gYWx0LlgoXCJ3YXZlbGVuZ3RoOlFcIiwgdGl0bGU9XCJ3YXZlbGVuZ3RoIChubSlcIixcbiAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMzgwLCA3MDBdLCBuaWNlPUZhbHNlKSlcbm1mX2NvbG91ciA9IGFsdC5Db2xvcihcInNlcmllczpOXCIsIHRpdGxlPU5vbmUsXG4gICAgICAgICAgICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bXCJ4zIRcIiwgXCJ5zIRcIiwgXCJ6zIRcIl0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJhbmdlPVtcIiNFNDRCMzVcIiwgXCIjMDBBODc4XCIsIFwiIzVCNEJDRVwiXSkpXG5cbm1mX2N1cnZlcyA9IGFsdC5DaGFydChtZl9sb25nKS5tYXJrX2xpbmUoc3Ryb2tlV2lkdGg9Mi41KS5lbmNvZGUoXG4gICAgeD1NWCwgeT1hbHQuWShcInZhbHVlOlFcIiwgdGl0bGU9XCJtYXRjaGluZyBmdW5jdGlvblwiKSwgY29sb3I9bWZfY29sb3VyKVxubWZfcnVsZSA9IGFsdC5DaGFydChtZl93aWRlKS5tYXJrX3J1bGUoY29sb3I9XCIjOGE4NTc4XCIpLmVuY29kZSh4PU1YXG4gICAgKS50cmFuc2Zvcm1fZmlsdGVyKE1GVylcbm1mX2RvdHMgPSBhbHQuQ2hhcnQobWZfbG9uZykubWFya19wb2ludChzaXplPTkwLCBmaWxsZWQ9VHJ1ZSkuZW5jb2RlKFxuICAgIHg9TVgsIHk9XCJ2YWx1ZTpRXCIsIGNvbG9yPW1mX2NvbG91clxuICAgICkudHJhbnNmb3JtX2ZpbHRlcihNRlcpXG5cbnJlYWRvdXRfYmFzZSA9IGFsdC5DaGFydChtZl93aWRlKS50cmFuc2Zvcm1fZmlsdGVyKFxuICAgIE1GV1xuKS50cmFuc2Zvcm1fY2FsY3VsYXRlKHRvdGFsPVwiZGF0dW0ueGJhciArIGRhdHVtLnliYXIgKyBkYXR1bS56YmFyXCIpXG5iYXJzX3JlYWQgPSByZWFkb3V0X2Jhc2UudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICB3b3Jkcz0oXCIneMyEID0gJyArIGZvcm1hdChkYXR1bS54YmFyLCAnLjNmJykgKyBcIlxuICAgICAgICAgICBcIicgICAgecyEID0gJyArIGZvcm1hdChkYXR1bS55YmFyLCAnLjNmJykgKyBcIlxuICAgICAgICAgICBcIicgICAgesyEID0gJyArIGZvcm1hdChkYXR1bS56YmFyLCAnLjNmJylcIiksXG4pLm1hcmtfdGV4dCh4PTMzMCwgeT0xNCwgZm9udFNpemU9MTMsIGFsaWduPVwibGVmdFwiLFxuICAgICAgICAgICAgY29sb3I9XCIjNGE0NjNjXCIpLmVuY29kZSh0ZXh0PVwid29yZHM6TlwiKVxueHlfcmVhZCA9IHJlYWRvdXRfYmFzZS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIHdvcmRzPShcIid4ID0gJyArIGZvcm1hdChkYXR1bS54YmFyIC8gZGF0dW0udG90YWwsICcuM2YnKSArIFwiXG4gICAgICAgICAgIFwiJyAgICB5ID0gJyArIGZvcm1hdChkYXR1bS55YmFyIC8gZGF0dW0udG90YWwsICcuM2YnKVwiKSxcbikubWFya190ZXh0KHg9MzMwLCB5PTM2LCBmb250U2l6ZT0xMy41LCBhbGlnbj1cImxlZnRcIiwgZm9udFdlaWdodD1cImJvbGRcIixcbiAgICAgICAgICAgIGNvbG9yPVwiIzIzMjAyOFwiKS5lbmNvZGUodGV4dD1cIndvcmRzOk5cIilcblxubWZfaG92ZXIgPSBhbHQuQ2hhcnQobWZfd2lkZSkubWFya19wb2ludChvcGFjaXR5PTApLmVuY29kZSh4PU1YXG4gICAgKS5hZGRfcGFyYW1zKE1GVylcblxubWZfY2hhcnQgPSAobWZfY3VydmVzICsgbWZfaG92ZXIgKyBtZl9ydWxlICsgbWZfZG90cyArIGJhcnNfcmVhZFxuICAgICsgeHlfcmVhZCkucHJvcGVydGllcyh3aWR0aD01NjAsIGhlaWdodD0yODAsXG4gICAgdGl0bGU9XCJTcGVjdHJhbCBDaHJvbWF0aWNpdHlcIilcblxuTFggPSBhbHQuWChcIng6UVwiLCB0aXRsZT1cInhcIixcbiAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMC44XSwgbmljZT1GYWxzZSkpXG5MWSA9IGFsdC5ZKFwieTpRXCIsIHRpdGxlPVwieVwiLFxuICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVswLCAwLjldLCBuaWNlPUZhbHNlKSlcbmxvY3VzX3ZsaW5lID0gYWx0LkNoYXJ0KG1mX3dpZGUpLm1hcmtfcnVsZShzdHJva2VXaWR0aD0xLjIpLmVuY29kZShcbiAgICB4PUxYLCBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKVxuKS50cmFuc2Zvcm1fZmlsdGVyKE1GVylcbmxvY3VzX2hsaW5lID0gYWx0LkNoYXJ0KG1mX3dpZGUpLm1hcmtfcnVsZShzdHJva2VXaWR0aD0xLjIpLmVuY29kZShcbiAgICB5PUxZLCBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKVxuKS50cmFuc2Zvcm1fZmlsdGVyKE1GVylcbmxvY3VzX3BvaW50ID0gYWx0LkNoYXJ0KG1mX3dpZGUpLm1hcmtfcG9pbnQoXG4gICAgc2l6ZT0xNzAsIGZpbGxlZD1UcnVlXG4pLmVuY29kZShcbiAgICB4PUxYLCB5PUxZLCBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKVxuKS50cmFuc2Zvcm1fZmlsdGVyKE1GVylcbmxvY3VzX3dvcmRzID0gYWx0LkNoYXJ0KG1mX3dpZGUpLnRyYW5zZm9ybV9maWx0ZXIoTUZXKS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIHdvcmRzPVwiJygnICsgZm9ybWF0KGRhdHVtLngsICcuM2YnKSArICcsICcgKyBmb3JtYXQoZGF0dW0ueSwgJy4zZicpICsgJyknXCIpXG5sb2N1c19sYWJlbF9sID0gbG9jdXNfd29yZHMudHJhbnNmb3JtX2ZpbHRlcihcbiAgICBcImRhdHVtLnggPD0gMC41NVwiXG4pLm1hcmtfdGV4dChhbGlnbj1cImxlZnRcIiwgZHg9MTQsIGR5PS0xMiwgZm9udFNpemU9MTIuNSxcbiAgICAgICAgICAgIGNvbG9yPVwiIzIzMjAyOFwiKS5lbmNvZGUoeD1MWCwgeT1MWSwgdGV4dD1cIndvcmRzOk5cIilcbmxvY3VzX2xhYmVsX3IgPSBsb2N1c193b3Jkcy50cmFuc2Zvcm1fZmlsdGVyKFxuICAgIFwiZGF0dW0ueCA+IDAuNTVcIlxuKS5tYXJrX3RleHQoYWxpZ249XCJyaWdodFwiLCBkeD0tMTQsIGR5PS0xMiwgZm9udFNpemU9MTIuNSxcbiAgICAgICAgICAgIGNvbG9yPVwiIzIzMjAyOFwiKS5lbmNvZGUoeD1MWCwgeT1MWSwgdGV4dD1cIndvcmRzOk5cIilcbmxvY3VzX2NoYXJ0ID0gKGxvY3VzX3ZsaW5lICsgbG9jdXNfaGxpbmUgKyBsb2N1c19wb2ludFxuICAgICsgbG9jdXNfbGFiZWxfbCArIGxvY3VzX2xhYmVsX3IpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NTYwLCBoZWlnaHQ9MjgwLCB2aWV3PWFsdC5WaWV3QmFja2dyb3VuZChmaWxsPVwiI2ZmZmZmZlwiKVxuKVxuXG5hbHQudmNvbmNhdChcbiAgICBtZl9jaGFydCxcbiAgICBzcGVjdHJ1bV9iYW5kKDU2MCwgMzgwLCA3MDApLFxuICAgIGxvY3VzX2NoYXJ0LFxuICAgIHNwYWNpbmc9OSxcbikucmVzb2x2ZV9zY2FsZSh4PVwiaW5kZXBlbmRlbnRcIikifQ==
+</script>
+</div>
+<p>Below about 400 nm and above about 700 nm the matching functions fall to zero, so light there produces no colour response and has no chromaticity to plot. The ends also stop moving before they vanish: toward each end of the spectrum the three matching functions decay in nearly fixed proportion, so the ratios x and y stop changing and the last stretch of spectrum piles up at a single point.</p>
+<section id="colour-mixing" class="level3">
+<h3 class="anchored" data-anchor-id="colour-mixing">Colour mixing</h3>
+<p>Adding two lights adds their spectra. Because XYZ is linear, their XYZ values add too. After normalisation to xy, the mixture lies on the straight segment joining the two chromaticities, sliding along it as the relative amounts change: the chord between two lights is a gradient of every colour the pair can mix.</p>
+<!-- This is also why no light can lie outside the closed chromaticity
+boundary. Every real spectrum is a non-negative mixture of pure
+wavelengths, so its chromaticity is a weighted average of boundary
+points. A point outside would require negative amounts of light. -->
+<p>In the following figure, move the two wavelength sliders to select the component lights. Their points move along the spectral locus, and the chord shows the colours produced by mixing them in different proportions. Can you find the color produced at <span class="math inline">\((\frac{1}{3}, \frac{1}{3})\)</span>, the equal-energy point E?</p>
+<div class="spectral-mixture-control">
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibm9ybWFsaXNlZF94eXogPSBjaWVfeHl6IC8gY2llX3h5ei5zdW0oYXhpcz0xLCBrZWVwZGltcz1UcnVlKVxubGluZWFyX3JnYiA9IG5vcm1hbGlzZWRfeHl6IEAgWFlaX1RPX0xJTkVBUl9TUkdCLlRcblxuZW5kcG9pbnRfc291cmNlID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcIndhdmVsZW5ndGhcIjogY2llX3dhdmVsZW5ndGhzLFxuICAgIFwieFwiOiBub3JtYWxpc2VkX3h5els6LCAwXSxcbiAgICBcInlcIjogbm9ybWFsaXNlZF94eXpbOiwgMV0sXG4gICAgXCJjb2xvdXJcIjogW3dhdmVsZW5ndGhfaGV4KHcpIGZvciB3IGluIGNpZV93YXZlbGVuZ3Roc10sXG59KVxuZW5kcG9pbnRfMSA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJ3YXZlbGVuZ3RoXCI6IGNpZV93YXZlbGVuZ3RocyxcbiAgICBcIlgxXCI6IG5vcm1hbGlzZWRfeHl6WzosIDBdLCBcIlkxXCI6IG5vcm1hbGlzZWRfeHl6WzosIDFdLFxuICAgIFwiUjFcIjogbGluZWFyX3JnYls6LCAwXSwgXCJHMVwiOiBsaW5lYXJfcmdiWzosIDFdLFxuICAgIFwiQjFcIjogbGluZWFyX3JnYls6LCAyXSxcbn0pXG5lbmRwb2ludF8yID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcIndhdmVsZW5ndGhcIjogY2llX3dhdmVsZW5ndGhzLFxuICAgIFwiWDJcIjogbm9ybWFsaXNlZF94eXpbOiwgMF0sIFwiWTJcIjogbm9ybWFsaXNlZF94eXpbOiwgMV0sXG4gICAgXCJSMlwiOiBsaW5lYXJfcmdiWzosIDBdLCBcIkcyXCI6IGxpbmVhcl9yZ2JbOiwgMV0sXG4gICAgXCJCMlwiOiBsaW5lYXJfcmdiWzosIDJdLFxufSlcblxuVzEgPSBhbHQucGFyYW0obmFtZT1cIlcxXCIsIHZhbHVlPTQ2MCxcbiAgICBiaW5kPWFsdC5iaW5kaW5nX3JhbmdlKG1pbj0zODAsIG1heD03MDAsIHN0ZXA9MSwgbmFtZT1cImxpZ2h0IDEgKG5tKSBcIikpXG5XMiA9IGFsdC5wYXJhbShuYW1lPVwiVzJcIiwgdmFsdWU9NjEwLFxuICAgIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UobWluPTM4MCwgbWF4PTcwMCwgc3RlcD0xLCBuYW1lPVwibGlnaHQgMiAobm0pIFwiKSlcblxuZWRnZXMgPSBucC5saW5zcGFjZSgwLCAxLCA2MSlcbm1peHR1cmVfc3RlcHMgPSBwZC5EYXRhRnJhbWUoe1widFwiOiBlZGdlc1s6LTFdLCBcInQyXCI6IGVkZ2VzWzE6XX0pXG5cbm1peHR1cmVfc2VnbWVudHMgPSBhbHQuQ2hhcnQobWl4dHVyZV9zdGVwcykudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICB3MT1cIlcxXCIsIHcyPVwiVzJcIlxuKS50cmFuc2Zvcm1fbG9va3VwKFxuICAgIGxvb2t1cD1cIncxXCIsXG4gICAgZnJvbV89YWx0Lkxvb2t1cERhdGEoZW5kcG9pbnRfMSwgXCJ3YXZlbGVuZ3RoXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgW1wiWDFcIiwgXCJZMVwiLCBcIlIxXCIsIFwiRzFcIiwgXCJCMVwiXSlcbikudHJhbnNmb3JtX2xvb2t1cChcbiAgICBsb29rdXA9XCJ3MlwiLFxuICAgIGZyb21fPWFsdC5Mb29rdXBEYXRhKGVuZHBvaW50XzIsIFwid2F2ZWxlbmd0aFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgIFtcIlgyXCIsIFwiWTJcIiwgXCJSMlwiLCBcIkcyXCIsIFwiQjJcIl0pXG4pLnRyYW5zZm9ybV9jYWxjdWxhdGUoXG4gICAgeD1cIigxLWRhdHVtLnQpKmRhdHVtLlgxICsgZGF0dW0udCpkYXR1bS5YMlwiLFxuICAgIHk9XCIoMS1kYXR1bS50KSpkYXR1bS5ZMSArIGRhdHVtLnQqZGF0dW0uWTJcIixcbiAgICB4Mj1cIigxLWRhdHVtLnQyKSpkYXR1bS5YMSArIGRhdHVtLnQyKmRhdHVtLlgyXCIsXG4gICAgeTI9XCIoMS1kYXR1bS50MikqZGF0dW0uWTEgKyBkYXR1bS50MipkYXR1bS5ZMlwiLFxuICAgIHRtPVwiKGRhdHVtLnQgKyBkYXR1bS50MikvMlwiXG4pLnRyYW5zZm9ybV9jYWxjdWxhdGUoXG4gICAgcjA9XCIoMS1kYXR1bS50bSkqZGF0dW0uUjEgKyBkYXR1bS50bSpkYXR1bS5SMlwiLFxuICAgIGcwPVwiKDEtZGF0dW0udG0pKmRhdHVtLkcxICsgZGF0dW0udG0qZGF0dW0uRzJcIixcbiAgICBiMD1cIigxLWRhdHVtLnRtKSpkYXR1bS5CMSArIGRhdHVtLnRtKmRhdHVtLkIyXCJcbikudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICBycD1cIm1heChkYXR1bS5yMCwgMClcIixcbiAgICBncD1cIm1heChkYXR1bS5nMCwgMClcIixcbiAgICBicD1cIm1heChkYXR1bS5iMCwgMClcIlxuKS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIHBlYWs9XCJtYXgobWF4KGRhdHVtLnJwLCBkYXR1bS5ncCksIGRhdHVtLmJwKVwiXG4pLnRyYW5zZm9ybV9jYWxjdWxhdGUoXG4gICAgcm49XCJkYXR1bS5ycC9kYXR1bS5wZWFrXCIsXG4gICAgZ249XCJkYXR1bS5ncC9kYXR1bS5wZWFrXCIsXG4gICAgYm49XCJkYXR1bS5icC9kYXR1bS5wZWFrXCJcbikudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICByPVwiZGF0dW0ucm4gPD0gMC4wMDMxMzA4ID8gMTIuOTIqZGF0dW0ucm4gOiAxLjA1NSpwb3coZGF0dW0ucm4sIDEvMi40KS0wLjA1NVwiLFxuICAgIGc9XCJkYXR1bS5nbiA8PSAwLjAwMzEzMDggPyAxMi45MipkYXR1bS5nbiA6IDEuMDU1KnBvdyhkYXR1bS5nbiwgMS8yLjQpLTAuMDU1XCIsXG4gICAgYj1cImRhdHVtLmJuIDw9IDAuMDAzMTMwOCA/IDEyLjkyKmRhdHVtLmJuIDogMS4wNTUqcG93KGRhdHVtLmJuLCAxLzIuNCktMC4wNTVcIlxuKS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIGNvbG91cj0oXCIncmdiKCcgKyBmb3JtYXQoMjU1Km1heCgwLG1pbigxLGRhdHVtLnIpKSwgJy4wZicpICsgJywnICsgXCJcbiAgICAgICAgICAgIFwiZm9ybWF0KDI1NSptYXgoMCxtaW4oMSxkYXR1bS5nKSksICcuMGYnKSArICcsJyArIFwiXG4gICAgICAgICAgICBcImZvcm1hdCgyNTUqbWF4KDAsbWluKDEsZGF0dW0uYikpLCAnLjBmJykgKyAnKSdcIilcbikubWFya19ydWxlKHN0cm9rZVdpZHRoPTYpLmVuY29kZShcbiAgICB4PVgsIHk9WSwgeDI9XCJ4MjpRXCIsIHkyPVwieTI6UVwiLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImNvbG91cjpOXCIsIHNjYWxlPU5vbmUpXG4pXG5cbmxvY3VzX3NlZyA9IGVuZHBvaW50X3NvdXJjZS5jb3B5KClcbmxvY3VzX3NlZ1tcIngyXCJdID0gbG9jdXNfc2VnW1wieFwiXS5zaGlmdCgtMSlcbmxvY3VzX3NlZ1tcInkyXCJdID0gbG9jdXNfc2VnW1wieVwiXS5zaGlmdCgtMSlcbmxvY3VzX3NlZyA9IGxvY3VzX3NlZy5pbG9jWzotMV1cbmxvY3VzX2xpbmUgPSBhbHQuQ2hhcnQobG9jdXNfc2VnKS5tYXJrX3J1bGUoXG4gICAgc3Ryb2tlV2lkdGg9NCwgc3Ryb2tlQ2FwPVwicm91bmRcIlxuKS5lbmNvZGUoeD1YLCB5PVksIHgyPVwieDI6UVwiLCB5Mj1cInkyOlFcIixcbiAgICAgICAgIGNvbG9yPWFsdC5Db2xvcihcImNvbG91cjpOXCIsIHNjYWxlPU5vbmUpKVxuXG5zZWxlY3RlZCA9IGFsdC5DaGFydChlbmRwb2ludF9zb3VyY2UpLnRyYW5zZm9ybV9maWx0ZXIoXG4gICAgXCJkYXR1bS53YXZlbGVuZ3RoID09IFcxIHx8IGRhdHVtLndhdmVsZW5ndGggPT0gVzJcIlxuKVxuZW5kcG9pbnRfZG90cyA9IHNlbGVjdGVkLm1hcmtfcG9pbnQoXG4gICAgZmlsbGVkPVRydWUsIHNpemU9MTUwLCBzdHJva2U9XCIjMjMyMDI4XCIsIHN0cm9rZVdpZHRoPTFcbikuZW5jb2RlKHg9WCwgeT1ZLCBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKSlcbmVuZHBvaW50X2xhYmVscyA9IHNlbGVjdGVkLnRyYW5zZm9ybV9jYWxjdWxhdGUoXG4gICAgbGFiZWw9XCJmb3JtYXQoZGF0dW0ud2F2ZWxlbmd0aCwgJy4wZicpICsgJyBubSdcIlxuKS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJsZWZ0XCIsIGR4PTEwLCBkeT0tMTAsIGZvbnRTaXplPTExLCBjb2xvcj1cIiM0YTQ2M2NcIlxuKS5lbmNvZGUoeD1YLCB5PVksIHRleHQ9XCJsYWJlbDpOXCIpXG5cbihsb2N1c19saW5lICsgbWl4dHVyZV9zZWdtZW50cyArIGVuZHBvaW50X2RvdHMgKyBlbmRwb2ludF9sYWJlbHNcbikuYWRkX3BhcmFtcyhXMSwgVzIpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NjIwLCBoZWlnaHQ9MzYwLCBiYWNrZ3JvdW5kPVwiI2ZmZmZmZlwiLFxuICAgIHRpdGxlPVwiTWl4aW5nIEh1ZXNcIikifQ==
+</script>
+</div>
+</div>
+<p>A general spectrum is a non-negative mixture of wavelength components, so its chromaticity lies in the convex region bounded by the spectral locus and the straight <strong>line of purples</strong>. Purples are on that closure because they mix light from opposite ends of the visible spectrum and do not correspond to any particular wavelength.</p>
+</section>
+</section>
+<section id="gamut" class="level2">
+<h2 class="anchored" data-anchor-id="gamut">6 · Gamut</h2>
+<p>The matching functions from the original CIE XYZ system were based on three lamps with wavelengths <span style="color:#991111; font-weight:700">700 nm</span>, <span style="color:#52b800; font-weight:700">546 nm</span> and <span style="color:#3a2ee6; font-weight:700">436 nm</span>. The set of lights a group of lamps can produce has a simple shape on the chromaticity diagram. Two lamps mix along the straight chord between their two points, as in the previous figure. Three lamps fill the triangle whose corners are the three lamp points: every positive mixture lands inside it.</p>
+<p>The region a set of primaries can reach is called its <strong>gamut</strong>. Below is the gamut of the three experimental lamps, drawn inside the locus.</p>
+<div>
+<div id="pyodide-15" class="exercise-cell">
+
+</div>
+<script type="pyodide-15-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiaW1wb3J0IHpsaWIsIHN0cnVjdCwgYmFzZTY0XG5cbmRlZiBzaGFkZV9pbWFnZSh2eCwgdnksIFc9ODgwLCBIPTk5MCk6XG4gICAgIyBTbW9vdGggY29sb3VyIGZpbGwgb2YgdGhlIHBvbHlnb24gKHZ4LCB2eSkgb3ZlciB0aGUgcGxvdCBkb21haW5cbiAgICAjIHggMC4uMC44LCB5IDAuLjAuOSwgcmV0dXJuZWQgYXMgYSBQTkcgZGF0YSBVUkkgZm9yIG1hcmtfaW1hZ2UuXG4gICAgIyBUaGUgaW5zaWRlIG1hc2sgaXMgYnVpbHQgYnkgZXZlbi1vZGQgc2NhbmxpbmUgZmlsbGluZyBhdCBkb3VibGVcbiAgICAjIHJlc29sdXRpb24sIHRoZW4gYXZlcmFnZWQgZG93biBzbyB0aGUgZWRnZXMgY29tZSBvdXQgYW50aS1hbGlhc2VkLlxuICAgIHgwLCB4MSwgeTAsIHkxID0gMC4wLCAwLjgsIDAuMCwgMC45XG4gICAgc3MgPSAyXG4gICAgSEgsIFdXID0gSCAqIHNzLCBXICogc3NcbiAgICB5cyA9IHkxIC0gKG5wLmFyYW5nZShISCkgKyAwLjUpICogKHkxIC0geTApIC8gSEhcbiAgICBkeCA9ICh4MSAtIHgwKSAvIFdXXG4gICAgYWNjID0gbnAuemVyb3MoKEhILCBXVyArIDEpLCBkdHlwZT1ucC5pbnQxNilcbiAgICBuID0gbGVuKHZ4KVxuICAgIGogPSBuIC0gMVxuICAgIGZvciBpIGluIHJhbmdlKG4pOlxuICAgICAgICB5YSwgeWIgPSB2eVtpXSwgdnlbal1cbiAgICAgICAgaWYgeWEgIT0geWI6XG4gICAgICAgICAgICBsbywgaGkgPSAoeWEsIHliKSBpZiB5YSA8IHliIGVsc2UgKHliLCB5YSlcbiAgICAgICAgICAgIHJvd3MgPSBucC5ub256ZXJvKCh5cyA+IGxvKSAmICh5cyA8PSBoaSkpWzBdXG4gICAgICAgICAgICB0ID0gKHlzW3Jvd3NdIC0geWEpIC8gKHliIC0geWEpXG4gICAgICAgICAgICB4cyA9IHZ4W2ldICsgdCAqICh2eFtqXSAtIHZ4W2ldKVxuICAgICAgICAgICAgY29scyA9IG5wLmNsaXAobnAuZmxvb3IoKHhzIC0geDApIC8gZHggKyAwLjUpLmFzdHlwZShpbnQpLCAwLCBXVylcbiAgICAgICAgICAgIG5wLmFkZC5hdChhY2MsIChyb3dzLCBjb2xzKSwgMSlcbiAgICAgICAgaiA9IGlcbiAgICBpbnNpZGUgPSAobnAuY3Vtc3VtKGFjY1s6LCA6V1ddLCBheGlzPTEpICUgMikuYXN0eXBlKG5wLmZsb2F0MzIpXG4gICAgYWxwaGEgPSBpbnNpZGUucmVzaGFwZShILCBzcywgVywgc3MpLm1lYW4oYXhpcz0oMSwgMykpXG4gICAgYWxwaGE4ID0gbnAucmludCgyNTUgKiBhbHBoYSkuYXN0eXBlKG5wLnVpbnQ4KVxuXG4gICAgeGMgPSB4MCArIChucC5hcmFuZ2UoVykgKyAwLjUpICogKHgxIC0geDApIC8gV1xuICAgIHljID0geTEgLSAobnAuYXJhbmdlKEgpICsgMC41KSAqICh5MSAtIHkwKSAvIEhcbiAgICBneCwgZ3kgPSBucC5tZXNoZ3JpZCh4YywgeWMpXG4gICAgZ3lfc2FmZSA9IG5wLm1heGltdW0oZ3ksIDFlLTQpXG4gICAgeHl6ID0gbnAuc3RhY2soW2d4IC8gZ3lfc2FmZSwgbnAub25lc19saWtlKGd4KSxcbiAgICAgICAgICAgICAgICAgICAgKDEgLSBneCAtIGd5KSAvIGd5X3NhZmVdKVxuICAgIGxpbiA9IG5wLmNsaXAobnAuZWluc3VtKFwiaWosamh3LT5paHdcIiwgWFlaX1RPX0xJTkVBUl9TUkdCLCB4eXopLCAwLCBOb25lKVxuICAgIGxpbiA9IGxpbiAvIG5wLm1heGltdW0obGluLm1heChheGlzPTApLCAxZS05KVxuICAgIHNyZ2IgPSBucC53aGVyZShsaW4gPD0gMC4wMDMxMzA4LCAxMi45MiAqIGxpbixcbiAgICAgICAgICAgICAgICAgICAgMS4wNTUgKiBucC5wb3dlcihsaW4sIDEgLyAyLjQpIC0gMC4wNTUpXG4gICAgcmdiOCA9IG5wLnJpbnQoMjU1ICogbnAuY2xpcChzcmdiLCAwLCAxKSkuYXN0eXBlKG5wLnVpbnQ4KVxuXG4gICAgcmdiYSA9IG5wLnplcm9zKChILCBXLCA0KSwgZHR5cGU9bnAudWludDgpXG4gICAgcmdiYVsuLi4sIDBdLCByZ2JhWy4uLiwgMV0sIHJnYmFbLi4uLCAyXSA9IHJnYjhbMF0sIHJnYjhbMV0sIHJnYjhbMl1cbiAgICByZ2JhWy4uLiwgM10gPSBhbHBoYThcbiAgICByZ2JhW2FscGhhOCA9PSAwXSA9IDBcblxuICAgIHJhdyA9IGJcIlwiLmpvaW4oYlwiXFx4MDBcIiArIHJnYmFbcl0udG9ieXRlcygpIGZvciByIGluIHJhbmdlKEgpKVxuICAgIGRlZiBjaHVuayh0YWcsIGRhdGEpOlxuICAgICAgICBib2R5ID0gc3RydWN0LnBhY2soXCI+SVwiLCBsZW4oZGF0YSkpICsgdGFnICsgZGF0YVxuICAgICAgICByZXR1cm4gYm9keSArIHN0cnVjdC5wYWNrKFwiPklcIiwgemxpYi5jcmMzMih0YWcgKyBkYXRhKSAmIDB4RkZGRkZGRkYpXG4gICAgcG5nID0gKGJcIlxceDg5UE5HXFxyXFxuXFx4MWFcXG5cIlxuICAgICAgICAgICArIGNodW5rKGJcIklIRFJcIiwgc3RydWN0LnBhY2soXCI+SUlCQkJCQlwiLCBXLCBILCA4LCA2LCAwLCAwLCAwKSlcbiAgICAgICAgICAgKyBjaHVuayhiXCJJREFUXCIsIHpsaWIuY29tcHJlc3MocmF3LCA2KSlcbiAgICAgICAgICAgKyBjaHVuayhiXCJJRU5EXCIsIGJcIlwiKSlcbiAgICByZXR1cm4gXCJkYXRhOmltYWdlL3BuZztiYXNlNjQsXCIgKyBiYXNlNjQuYjY0ZW5jb2RlKHBuZykuZGVjb2RlKClcblxuZGVmIGRvbWFpbl9pbWFnZSh1cmksIHNpZGUpOlxuICAgICMgTGF5ZXIgdGhhdCBzdHJldGNoZXMgYSBzaGFkZV9pbWFnZSBQTkcgb3ZlciB0aGUgZnVsbCBwbG90IGRvbWFpbi5cbiAgICAjIHNpZGUgbXVzdCBlcXVhbCB0aGUgY2hhcnQncyB3aWR0aCBhbmQgaGVpZ2h0IGluIHBpeGVscy5cbiAgICByZXR1cm4gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ4XCI6IFswLjBdLCBcInlcIjogWzAuOV0sIFwidXJsXCI6IFt1cmldfSlcbiAgICApLm1hcmtfaW1hZ2Uod2lkdGg9c2lkZSwgaGVpZ2h0PXNpZGUsIGFsaWduPVwibGVmdFwiLCBiYXNlbGluZT1cInRvcFwiLFxuICAgICAgICAgICAgICAgICBhc3BlY3Q9RmFsc2UpLmVuY29kZShcbiAgICAgICAgeD1hbHQuWChcIng6UVwiLCBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVswLCAwLjhdLCBuaWNlPUZhbHNlKSxcbiAgICAgICAgICAgICAgICB0aXRsZT1cInhcIiksXG4gICAgICAgIHk9YWx0LlkoXCJ5OlFcIiwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMC45XSwgbmljZT1GYWxzZSksXG4gICAgICAgICAgICAgICAgdGl0bGU9XCJ5XCIpLFxuICAgICAgICB1cmw9XCJ1cmw6TlwiKVxuXG4jIFRoZSBjbG9zZWQgbG9jdXMgcG9seWdvbiwgdGhlIHRocmVlIFdyaWdodC1HdWlsZCBsYW1wcywgYW5kIHRoZVxuIyBmaW5pc2hlZCBjb2xvdXIgZmlsbHMuXG5sb2N1c19ib3VuZGFyeSA9IHBkLmNvbmNhdChbbG9jdXNfZGYsIGxvY3VzX2RmLmlsb2NbWzBdXV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICBpZ25vcmVfaW5kZXg9VHJ1ZSlcbmxhbXBfd2xzID0gWzcwMCwgNTQ2LCA0MzZdXG5sYW1wX3B0cyA9IG5wLmFycmF5KFtcbiAgICBjaWVfeHl6W25wLmFyZ21pbihucC5hYnMoY2llX3dhdmVsZW5ndGhzIC0gdykpXVs6Ml1cbiAgICAvIGNpZV94eXpbbnAuYXJnbWluKG5wLmFicyhjaWVfd2F2ZWxlbmd0aHMgLSB3KSldLnN1bSgpXG4gICAgZm9yIHcgaW4gbGFtcF93bHNdKVxubGFtcF9kZiA9IHBkLkRhdGFGcmFtZShsYW1wX3B0cywgY29sdW1ucz1bXCJ4XCIsIFwieVwiXSlcbmxhbXBfZGZbXCJ3YXZlbGVuZ3RoXCJdID0gbGFtcF93bHNcbmxhbXBfZGZbXCJjb2xvdXJcIl0gPSBbd2F2ZWxlbmd0aF9oZXgodykgZm9yIHcgaW4gbGFtcF93bHNdXG5cbmxvY3VzX2ltYWdlID0gc2hhZGVfaW1hZ2Uoc3BlY3RyYWxfeHlbOiwgMF0sIHNwZWN0cmFsX3h5WzosIDFdKVxudHJpX2ltYWdlID0gc2hhZGVfaW1hZ2UobGFtcF9wdHNbOiwgMF0sIGxhbXBfcHRzWzosIDFdKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-16" class="exercise-cell">
+
+</div>
+<script type="pyodide-16-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ3JleV9ibG9jayA9IGFsdC5DaGFydChsb2N1c19ib3VuZGFyeSkubWFya19saW5lKFxuICAgIGNvbG9yPVwiI2I5YjJhNFwiLCBzdHJva2VXaWR0aD0xLjUsIGZpbGw9XCIjZGNkNmM5XCJcbikuZW5jb2RlKHg9U1gsIHk9U1ksIG9yZGVyPWFsdC5PcmRlcihcImk6UVwiKSkudHJhbnNmb3JtX3dpbmRvdyhcbiAgICBpPVwicm93X251bWJlcigpXCIpXG5zaGFkZWRfdHJpID0gZG9tYWluX2ltYWdlKHRyaV9pbWFnZSwgNDQwKVxubGFtcF9kb3RzID0gYWx0LkNoYXJ0KGxhbXBfZGYpLm1hcmtfcG9pbnQoc2l6ZT0xNDAsIGZpbGxlZD1UcnVlKS5lbmNvZGUoXG4gICAgeD1TWCwgeT1TWSwgY29sb3I9YWx0LkNvbG9yKFwiY29sb3VyOk5cIiwgc2NhbGU9Tm9uZSkpXG5sYW1wX3RhZ3MgPSBhbHQuQ2hhcnQobGFtcF9kZikubWFya190ZXh0KGFsaWduPVwibGVmdFwiLCBkeD05LFxuICAgIGZvbnRTaXplPTExLCBjb2xvcj1cIiM0YTQ2M2NcIikuZW5jb2RlKHg9U1gsIHk9U1ksIHRleHQ9XCJ3YXZlbGVuZ3RoOlFcIilcblxuKGdyZXlfYmxvY2sgKyBzaGFkZWRfdHJpICsgbGFtcF9kb3RzICsgbGFtcF90YWdzKS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTQ0MCwgaGVpZ2h0PTQ0MCwgYmFja2dyb3VuZD1cIiNmZmZmZmZcIixcbiAgICB0aXRsZT1cIkdhbXV0IG9mIHRoZSB0aHJlZSBDSUUgWFlaIDE5MzEgbGFtcHNcIikifQ==
+</script>
+</div>
+<section id="negative-red" class="level3">
+<h3 class="anchored" data-anchor-id="negative-red">Negative Red</h3>
+<p>Targets in the blue-green range lie inside the locus but outside the lamp triangle, so no positive mixture of the three lamps reaches them. The experimenters’ solution to this problem was to move the red lamp across so it shines on the <em>target</em> half of the color-matching field, desaturating the target until the other two lamps could match it. The contribution of the moved lamp was then recorded as a negative amount. On the diagram, adding red to the target slides the target’s point along a straight line toward the red corner. Once the point crosses the green-blue edge, the remaining two lamps can reach it.</p>
+<p>The simulator below repeats the measurement for a 490 nm blue-green target, with the geometry in view. The three sliders are the red, green and blue lamps. On the black field, the top cluster is the target side and the bottom cluster is the lamp side, and overlapping lights add just as they did in the matching experiment above. Adjust the lamps until the difference readout drops below 0.05. The point on the diagram is the chromaticity of your current lamp mixture. Dragging the red slider below zero moves the red lamp across to the target side, where the point leaves the triangle to reach a target outside any positive mixture of the three lights.</p>
+<div class="matching-sim-control">
+<div>
+<div id="pyodide-17" class="exercise-cell">
+
+</div>
+<script type="pyodide-17-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGFtcF94eXogPSBDSUVfUkdCX00gICAgICAgICAgIyBjb2x1bW4gaiBob2xkcyBsYW1wIGoncyBYWVogcGVyIHVuaXQgc2V0dGluZ1xudGd0X3h5eiA9IE1BVENIX1NDQUxFICogY2llX3h5eltucC5hcmdtaW4obnAuYWJzKGNpZV93YXZlbGVuZ3RocyAtIDQ5MCkpXVxudGd0X2xpbiA9IFhZWl9UT19MSU5FQVJfU1JHQiBAIHRndF94eXpcbkRJU1BMQVlfU0NBTEUgPSAxIC8gdGd0X2xpbi5tYXgoKVxuQSA9IERJU1BMQVlfU0NBTEUgKiBYWVpfVE9fTElORUFSX1NSR0IgQCBsYW1wX3h5elxuXG50ZCA9IG5wLmNsaXAoRElTUExBWV9TQ0FMRSAqIHRndF9saW4sIDAsIDEpXG50Z3RfY29sb3VyID0gXCJyZ2Ioe30se30se30pXCIuZm9ybWF0KFxuICAgICpucC5yaW50KDI1NSAqIHRkICoqIDAuNDU0NSkuYXN0eXBlKGludCkpXG5cblJMID0gYWx0LnBhcmFtKG5hbWU9XCJSTFwiLCB2YWx1ZT0wLjAsXG4gICAgICAgICAgICAgICBiaW5kPWFsdC5iaW5kaW5nX3JhbmdlKG1pbj0tMC4zLCBtYXg9MSwgc3RlcD0wLjAwNSkpXG5HTCA9IGFsdC5wYXJhbShuYW1lPVwiR0xcIiwgdmFsdWU9MC4wLFxuICAgICAgICAgICAgICAgYmluZD1hbHQuYmluZGluZ19yYW5nZShtaW49MCwgbWF4PTEsIHN0ZXA9MC4wMDUpKVxuQkwgPSBhbHQucGFyYW0obmFtZT1cIkJMXCIsIHZhbHVlPTAuMCxcbiAgICAgICAgICAgICAgIGJpbmQ9YWx0LmJpbmRpbmdfcmFuZ2UobWluPTAsIG1heD0xLCBzdGVwPTAuMDA1KSlcblxuZGVmIGxhbXBfY29sKGosIHNldHRpbmcpOlxuICAgICMgRGlzcGxheWVkIGNvbG91ciBvZiBvbmUgbGFtcCBhdCB0aGUgZ2l2ZW4gc2V0dGluZyBleHByZXNzaW9uLlxuICAgIGNoYW5zID0gW2ZcInJvdW5kKHBvdyhjbGFtcCh7c2V0dGluZ30qe0FbaSwgal06LjRmfSwgMCwgMSksIDAuNDU0NSkqMjU1KVwiXG4gICAgICAgICAgICAgZm9yIGkgaW4gcmFuZ2UoMyldXG4gICAgcmV0dXJuIFwiJ3JnYignICsgXCIgKyBcIiArICcsJyArIFwiLmpvaW4oY2hhbnMpICsgXCIgKyAnKSdcIlxuXG5yZWRfbGFtcF9zaWRlID0gbGFtcF9jb2woMCwgXCJtYXgoUkwsMClcIilcbnJlZF90YXJnZXRfc2lkZSA9IGxhbXBfY29sKDAsIFwibWF4KC1STCwwKVwiKVxuZ3JlZW5fbGlnaHQgPSBsYW1wX2NvbCgxLCBcIkdMXCIpXG5ibHVlX2xpZ2h0ID0gbGFtcF9jb2woMiwgXCJCTFwiKVxuXG5kaWZmID0gXCIgKyBcIi5qb2luKFxuICAgIGZcImFicyh7dGd0X3h5eltqXTouNGZ9IC0gKFJMKntsYW1wX3h5eltqLCAwXTouNGZ9IFwiXG4gICAgZlwiKyBHTCp7bGFtcF94eXpbaiwgMV06LjRmfSArIEJMKntsYW1wX3h5eltqLCAyXTouNGZ9KSlcIlxuICAgIGZvciBqIGluIHJhbmdlKDMpKVxuXG5ncmV5X2Jsb2NrID0gYWx0LkNoYXJ0KGxvY3VzX2JvdW5kYXJ5KS5tYXJrX2xpbmUoXG4gICAgY29sb3I9XCIjYjliMmE0XCIsIHN0cm9rZVdpZHRoPTEuNSwgZmlsbD1cIiNkY2Q2YzlcIlxuKS5lbmNvZGUoeD1TWCwgeT1TWSwgb3JkZXI9YWx0Lk9yZGVyKFwiaTpRXCIpKS50cmFuc2Zvcm1fd2luZG93KFxuICAgIGk9XCJyb3dfbnVtYmVyKClcIilcbnNoYWRlZF90cmkgPSBkb21haW5faW1hZ2UodHJpX2ltYWdlLCA0MzApXG5sYW1wX2RvdHMgPSBhbHQuQ2hhcnQobGFtcF9kZikubWFya19wb2ludChzaXplPTE0MCwgZmlsbGVkPVRydWUpLmVuY29kZShcbiAgICB4PVNYLCB5PVNZLCBjb2xvcj1hbHQuQ29sb3IoXCJjb2xvdXI6TlwiLCBzY2FsZT1Ob25lKSlcbmxhbXBfdGFncyA9IGFsdC5DaGFydChsYW1wX2RmKS5tYXJrX3RleHQoYWxpZ249XCJsZWZ0XCIsIGR4PTksXG4gICAgZm9udFNpemU9MTEsIGNvbG9yPVwiIzRhNDYzY1wiKS5lbmNvZGUoeD1TWCwgeT1TWSwgdGV4dD1cIndhdmVsZW5ndGg6UVwiKVxuXG5NID0gbGFtcF94eXpcbm1peF9wb2ludCA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1wielwiOiBbMF19KSkudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICBtWD1mXCJSTCp7TVswLCAwXTouNGZ9ICsgR0wqe01bMCwgMV06LjRmfSArIEJMKntNWzAsIDJdOi40Zn1cIixcbiAgICBtWT1mXCJSTCp7TVsxLCAwXTouNGZ9ICsgR0wqe01bMSwgMV06LjRmfSArIEJMKntNWzEsIDJdOi40Zn1cIixcbiAgICBtWj1mXCJSTCp7TVsyLCAwXTouNGZ9ICsgR0wqe01bMiwgMV06LjRmfSArIEJMKntNWzIsIDJdOi40Zn1cIixcbikudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICB0b3Q9XCJkYXR1bS5tWCArIGRhdHVtLm1ZICsgZGF0dW0ubVpcIlxuKS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIHB4PVwiZGF0dW0udG90ID4gMC4wMiA/IGRhdHVtLm1YIC8gZGF0dW0udG90IDogMS8zXCIsXG4gICAgcHk9XCJkYXR1bS50b3QgPiAwLjAyID8gZGF0dW0ubVkgLyBkYXR1bS50b3QgOiAxLzNcIixcbiAgICB2aXM9XCJkYXR1bS50b3QgPiAwLjAyID8gMSA6IDBcIixcbikudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICBYcj1cImRhdHVtLnB4IC8gbWF4KGRhdHVtLnB5LCAwLjAwMDEpXCIsXG4gICAgWnI9XCIoMSAtIGRhdHVtLnB4IC0gZGF0dW0ucHkpIC8gbWF4KGRhdHVtLnB5LCAwLjAwMDEpXCIsXG4pLnRyYW5zZm9ybV9jYWxjdWxhdGUoXG4gICAgbHI9XCJtYXgoMy4yNDA2KmRhdHVtLlhyIC0gMS41MzcyIC0gMC40OTg2KmRhdHVtLlpyLCAwKVwiLFxuICAgIGxnPVwibWF4KC0wLjk2ODkqZGF0dW0uWHIgKyAxLjg3NTggKyAwLjA0MTUqZGF0dW0uWnIsIDApXCIsXG4gICAgbGI9XCJtYXgoMC4wNTU3KmRhdHVtLlhyIC0gMC4yMDQwICsgMS4wNTcwKmRhdHVtLlpyLCAwKVwiLFxuKS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIHBrPVwibWF4KG1heChkYXR1bS5sciwgZGF0dW0ubGcpLCBkYXR1bS5sYilcIixcbikudHJhbnNmb3JtX2NhbGN1bGF0ZShcbiAgICBjb2w9KFwiJ3JnYignICsgcm91bmQocG93KG1pbihkYXR1bS5sci9tYXgoZGF0dW0ucGssMWUtOSksMSksMC40NTQ1KSoyNTUpXCJcbiAgICAgICAgIFwiICsgJywnICsgcm91bmQocG93KG1pbihkYXR1bS5sZy9tYXgoZGF0dW0ucGssMWUtOSksMSksMC40NTQ1KSoyNTUpXCJcbiAgICAgICAgIFwiICsgJywnICsgcm91bmQocG93KG1pbihkYXR1bS5sYi9tYXgoZGF0dW0ucGssMWUtOSksMSksMC40NTQ1KSoyNTUpXCJcbiAgICAgICAgIFwiICsgJyknXCIpLFxuKS5tYXJrX3BvaW50KHNoYXBlPVwiY2lyY2xlXCIsIGZpbGxlZD1UcnVlLCBzaXplPTIzMCxcbiAgICAgICAgICAgICBzdHJva2U9XCIjZmZmZmZmXCIsIHN0cm9rZVdpZHRoPTEuNSkuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJweDpRXCIsIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzAsIDAuOF0sIG5pY2U9RmFsc2UpLCB0aXRsZT1cInhcIiksXG4gICAgeT1hbHQuWShcInB5OlFcIiwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMC45XSwgbmljZT1GYWxzZSksIHRpdGxlPVwieVwiKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJjb2w6TlwiLCBzY2FsZT1Ob25lKSxcbiAgICBvcGFjaXR5PWFsdC5PcGFjaXR5KFwidmlzOlFcIiwgc2NhbGU9Tm9uZSwgbGVnZW5kPU5vbmUpKVxuXG5wbGFuZSA9IChncmV5X2Jsb2NrICsgc2hhZGVkX3RyaSArIGxhbXBfZG90cyArIGxhbXBfdGFncyArIG1peF9wb2ludFxuICAgICkuYWRkX3BhcmFtcyhSTCwgR0wsIEJMKS5wcm9wZXJ0aWVzKHdpZHRoPTQzMCwgaGVpZ2h0PTQzMClcblxuYmFzZSA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoe1wielwiOiBbMF19KSlcblxuZGVmIGxpZ2h0KHB4LCBweSwgY29sb3VyX2V4cHIpOlxuICAgICMgYmxlbmQ9XCJzY3JlZW5cIiBtYWtlcyBvdmVybGFwcGluZyBsaWdodHMgYWRkLCBhcyBpbiB0aGUgZGVtbyBhYm92ZS5cbiAgICByZXR1cm4gYmFzZS5tYXJrX3BvaW50KHNoYXBlPVwiY2lyY2xlXCIsIGZpbGxlZD1UcnVlLCBzaXplPTk1MDAsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICBvcGFjaXR5PTEsIGJsZW5kPVwic2NyZWVuXCIsIHg9cHgsIHk9cHksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICBjb2xvcj1hbHQuZXhwcihjb2xvdXJfZXhwcikpXG5cbnN0YWdlX2JnID0gYmFzZS5tYXJrX3JlY3QoeD0wLCB4Mj0xOTAsIHk9MCwgeTI9NDMwLCBjb2xvcj1cImJsYWNrXCIpXG50Z3RfbGlnaHQgPSBiYXNlLm1hcmtfcG9pbnQoc2hhcGU9XCJjaXJjbGVcIiwgZmlsbGVkPVRydWUsIHNpemU9OTUwMCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBvcGFjaXR5PTEsIGJsZW5kPVwic2NyZWVuXCIsIHg9ODYsIHk9MTAzLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yPXRndF9jb2xvdXIpXG5tb3ZlZF9yZWQgPSBsaWdodCgxMDYsIDEyNCwgcmVkX3RhcmdldF9zaWRlKVxubGFtcF9yID0gbGlnaHQoOTUsIDI3MiwgcmVkX2xhbXBfc2lkZSlcbmxhbXBfZyA9IGxpZ2h0KDgxLCAzMDAsIGdyZWVuX2xpZ2h0KVxubGFtcF9iID0gbGlnaHQoMTA5LCAzMDAsIGJsdWVfbGlnaHQpXG5wYW5lbF90YWdzID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XG4gICAgXCJweFwiOiBbOTUsIDk1XSwgXCJweVwiOiBbMTg4LCAzNjhdLFxuICAgIFwid29yZHNcIjogW1widGFyZ2V0IHNpZGVcIiwgXCJsYW1wIHNpZGVcIl19KSkubWFya190ZXh0KFxuICAgIGZvbnRTaXplPTExLCBjb2xvcj1cIiM4YTg1NzhcIikuZW5jb2RlKFxuICAgIHg9YWx0LlgoXCJweDpRXCIsIGF4aXM9Tm9uZSwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bMCwgMTkwXSwgbmljZT1GYWxzZSkpLFxuICAgIHk9YWx0LlkoXCJweTpRXCIsIGF4aXM9Tm9uZSwgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bNDMwLCAwXSwgbmljZT1GYWxzZSkpLFxuICAgIHRleHQ9XCJ3b3JkczpOXCIpXG5yZWFkb3V0ID0gYmFzZS50cmFuc2Zvcm1fY2FsY3VsYXRlKFxuICAgIGRpZmY9ZGlmZixcbiAgICB3b3Jkcz1cIidkaWZmZXJlbmNlOiAnICsgZm9ybWF0KGRhdHVtLmRpZmYsICcuMmYnKVwiLFxuICAgIGluaz1cImRhdHVtLmRpZmYgPCAwLjA1ID8gJyM4ZmRjOGYnIDogJyNlOGUyZDYnXCIsXG4pLm1hcmtfdGV4dCh4PTk1LCB5PTQwOCwgZm9udFNpemU9MTIuNSkuZW5jb2RlKFxuICAgIHRleHQ9XCJ3b3JkczpOXCIsIGNvbG9yPWFsdC5Db2xvcihcImluazpOXCIsIHNjYWxlPU5vbmUpKVxuXG5saWdodHMgPSAoc3RhZ2VfYmcgKyB0Z3RfbGlnaHQgKyBtb3ZlZF9yZWQgKyBsYW1wX3IgKyBsYW1wX2cgKyBsYW1wX2JcbiAgICArIHBhbmVsX3RhZ3MgKyByZWFkb3V0KS5wcm9wZXJ0aWVzKHdpZHRoPTE5MCwgaGVpZ2h0PTQzMClcblxuYWx0Lmhjb25jYXQocGxhbmUsIGxpZ2h0cywgc3BhY2luZz0xMikucHJvcGVydGllcyhcbiAgICB0aXRsZT1cIlRoZSBjb2xvdXIgbWF0Y2hpbmcgZXhwZXJpbWVudCBvbiB0aGUgY2hyb21hdGljaXR5IGRpYWdyYW1cIikifQ==
+</script>
+</div>
+</div>
+<p>Observers repeated this measurement for every target across the spectrum. Plotting the three lamp settings against target wavelength gives the three RGB colour matching functions. The red curve dips below zero across the blue-green range: every point of that dip is a match that needed the red lamp moved to the target side.</p>
+<div>
+<div id="pyodide-18" class="exercise-cell">
+
+</div>
+<script type="pyodide-18-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGFtcF9uYW1lcyA9IFtcIjcwMCBubSBsYW1wXCIsIFwiNTQ2IG5tIGxhbXBcIiwgXCI0MzYgbm0gbGFtcFwiXVxubGFtcF9jb2xvdXJzID0gW1wiI2Q4MWIxYlwiLCBcIiMxZjlkM2FcIiwgXCIjMmI1MGQ4XCJdXG5jdXJ2ZV9kZiA9IHRpZHkoY2llX3dhdmVsZW5ndGhzLCBkaWN0KHppcChsYW1wX25hbWVzLCByZ2JfYmFyLlQpKSlcblxuWFMgPSBhbHQuWChcIndhdmVsZW5ndGg6UVwiLCB0aXRsZT1cIndhdmVsZW5ndGggKG5tKVwiLFxuICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPVszODAsIDcwMF0sIG5pY2U9RmFsc2UpKVxuemVyb19saW5lID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ2XCI6IFswXX0pKS5tYXJrX3J1bGUoXG4gICAgY29sb3I9XCIjYjliMmE0XCIpLmVuY29kZSh5PVwidjpRXCIpXG5jdXJ2ZV9saW5lcyA9IGFsdC5DaGFydChjdXJ2ZV9kZikubWFya19saW5lKHN0cm9rZVdpZHRoPTIpLmVuY29kZShcbiAgICB4PVhTLCB5PWFsdC5ZKFwidmFsdWU6UVwiLCB0aXRsZT1cImxhbXAgc2V0dGluZ1wiKSxcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJzZXJpZXM6TlwiLCB0aXRsZT1Ob25lLFxuICAgICAgICAgICAgICAgICAgICBzY2FsZT1hbHQuU2NhbGUoZG9tYWluPWxhbXBfbmFtZXMsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByYW5nZT1sYW1wX2NvbG91cnMpKSlcbmRpcF9ub3RlID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJ3YXZlbGVuZ3RoXCI6IFs1MTddLCBcInZhbHVlXCI6IFstMC4zNF0sXG4gICAgXCJ3b3Jkc1wiOiBbXCJuZWdhdGl2ZSByZWRcIl19KSkubWFya190ZXh0KGZvbnRTaXplPTEyLFxuICAgIGNvbG9yPVwiI2Q4MWIxYlwiKS5lbmNvZGUoeD1YUywgeT1cInZhbHVlOlFcIiwgdGV4dD1cIndvcmRzOk5cIilcblxucmdiX2NoYXJ0ID0gKHplcm9fbGluZSArIGN1cnZlX2xpbmVzICsgZGlwX25vdGUpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9NTYwLCBoZWlnaHQ9MzMwLFxuICAgIHRpdGxlPVwiVGhlIENJRSBSR0IgY29sb3VyIG1hdGNoaW5nIGZ1bmN0aW9uc1wiKVxuYWx0LnZjb25jYXQoXG4gICAgcmdiX2NoYXJ0LFxuICAgIHNwZWN0cnVtX2JhbmQoNTYwLCAzODAsIDcwMCksXG4gICAgc3BhY2luZz05LFxuKS5yZXNvbHZlX3NjYWxlKHg9XCJzaGFyZWRcIikifQ==
+</script>
+</div>
+</section>
+<section id="colour-displays" class="level3">
+<h3 class="anchored" data-anchor-id="colour-displays">Colour displays</h3>
+<p>The CIE XYZ system was the basis for the design of the first colour screens. A <strong>cathode ray tube</strong> fires three electron beams at a glass face coated with dots of three phosphors, materials that glow red, green and blue where the beams strike. <strong>sRGB</strong> (Hewlett-Packard and Microsoft, 1996) standardised the numbers that drive those three primaries. It fixes the three primary chromaticities and a white point, and stores each channel in one 8-bit byte, 0 to 255. Written in hexadecimal, the three bytes become the six-digit codes: <code style="color:#FF8000">rgb(255, 128, 0)</code> is <code style="color:#FF8000">#FF8000</code>. sRGB remains the standard for defining colour, although cathode ray tubes were soon superseded by LCD technology. Sixteen-colour screens go back to the CGA (Color Graphics Adapter) and EGA (Color Graphics Adapter) of the early 1980s; exact values still used on the web today come from the Windows VGA (Video Graphics Array) palette, adopted by HTML as its first named colours.</p>
+<div>
+<div id="pyodide-19" class="exercise-cell">
+
+</div>
+<script type="pyodide-19-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidmdhID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcIm5hbWVcIjogW1wiYmxhY2tcIiwgXCJtYXJvb25cIiwgXCJncmVlblwiLCBcIm9saXZlXCIsXG4gICAgICAgICAgICAgXCJuYXZ5XCIsIFwicHVycGxlXCIsIFwidGVhbFwiLCBcInNpbHZlclwiLFxuICAgICAgICAgICAgIFwiZ3JleVwiLCBcInJlZFwiLCBcImxpbWVcIiwgXCJ5ZWxsb3dcIixcbiAgICAgICAgICAgICBcImJsdWVcIiwgXCJmdWNoc2lhXCIsIFwiYXF1YVwiLCBcIndoaXRlXCJdLFxuICAgIFwiaGV4XCI6IFtcIiMwMDAwMDBcIiwgXCIjODAwMDAwXCIsIFwiIzAwODAwMFwiLCBcIiM4MDgwMDBcIixcbiAgICAgICAgICAgIFwiIzAwMDA4MFwiLCBcIiM4MDAwODBcIiwgXCIjMDA4MDgwXCIsIFwiI0MwQzBDMFwiLFxuICAgICAgICAgICAgXCIjODA4MDgwXCIsIFwiI0ZGMDAwMFwiLCBcIiMwMEZGMDBcIiwgXCIjRkZGRjAwXCIsXG4gICAgICAgICAgICBcIiMwMDAwRkZcIiwgXCIjRkYwMEZGXCIsIFwiIzAwRkZGRlwiLCBcIiNGRkZGRkZcIl0sXG59KVxudmdhW1wiY29sXCJdID0gdmdhLmluZGV4ICUgNFxudmdhW1wicm93XCJdID0gdmdhLmluZGV4IC8vIDRcbnZnYVtcImlua1wiXSA9IFtcbiAgICBcIiMyMzIwMjhcIiBpZiAwLjI5OSAqIGludChoWzE6M10sIDE2KSArIDAuNTg3ICogaW50KGhbMzo1XSwgMTYpXG4gICAgKyAwLjExNCAqIGludChoWzU6N10sIDE2KSA+IDE0MCBlbHNlIFwiI2Y1ZjJlYVwiXG4gICAgZm9yIGggaW4gdmdhW1wiaGV4XCJdXVxuXG5zd2F0Y2hlcyA9IGFsdC5DaGFydCh2Z2EpLm1hcmtfcmVjdChzdHJva2U9XCIjZmFmNWVjXCIsIHN0cm9rZVdpZHRoPTQpLmVuY29kZShcbiAgICB4PWFsdC5YKFwiY29sOk9cIiwgYXhpcz1Ob25lKSwgeT1hbHQuWShcInJvdzpPXCIsIGF4aXM9Tm9uZSksXG4gICAgY29sb3I9YWx0LkNvbG9yKFwiaGV4Ok5cIiwgc2NhbGU9Tm9uZSkpXG5jb2RlX3RleHQgPSBhbHQuQ2hhcnQodmdhKS5tYXJrX3RleHQoZm9udFNpemU9MTMsIGZvbnRXZWlnaHQ9NjAwLFxuICAgIGR5PTkpLmVuY29kZSh4PVwiY29sOk9cIiwgeT1cInJvdzpPXCIsIHRleHQ9XCJoZXg6TlwiLFxuICAgIGNvbG9yPWFsdC5Db2xvcihcImluazpOXCIsIHNjYWxlPU5vbmUpKVxubmFtZV90ZXh0ID0gYWx0LkNoYXJ0KHZnYSkubWFya190ZXh0KGZvbnRTaXplPTExLCBkeT0tMTEpLmVuY29kZShcbiAgICB4PVwiY29sOk9cIiwgeT1cInJvdzpPXCIsIHRleHQ9XCJuYW1lOk5cIixcbiAgICBjb2xvcj1hbHQuQ29sb3IoXCJpbms6TlwiLCBzY2FsZT1Ob25lKSlcblxuKHN3YXRjaGVzICsgY29kZV90ZXh0ICsgbmFtZV90ZXh0KS5wcm9wZXJ0aWVzKFxuICAgIHdpZHRoPTU2MCwgaGVpZ2h0PTMwMCxcbiAgICB0aXRsZT1cIlRoZSBzaXh0ZWVuIGJhc2ljIG5hbWVkIGNvbG91cnMgYXMgc1JHQiBoZXggY29kZXNcIikifQ==
+</script>
+</div>
+<p>The sRGB byte values are not proportional to light output. The eye is better at telling dark shades apart than bright ones, so sRGB assigns more of its 256 steps to the dark end. A pixel at 128 emits about a fifth as much light as one at 255. The function that converts between stored values and emitted light is called the <strong>display gamma</strong>. It is one scalar curve applied to each of the three channels separately. With <span class="math inline">\(c\)</span> the linear light in a channel, scaled to the range 0 to 1, the stored value is <span class="math inline">\(255\,f(c)\)</span>, rounded, where</p>
+<p><span class="math display">\[f(c)=\begin{cases}12.92\,c &amp; c\le 0.0031308,\\ 1.055\,c^{1/2.4}-0.055 &amp; c&gt;0.0031308.\end{cases}\]</span></p>
+<p>The short linear piece near zero exists because the power law alone has infinite slope at the origin; decoding inverts the same two pieces.</p>
+<div>
+<div id="pyodide-20" class="exercise-cell">
+
+</div>
+<script type="pyodide-20-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYyA9IG5wLmxpbnNwYWNlKDAsIDEsIDMwMClcbnN0b3JlZCA9IG5wLndoZXJlKGMgPD0gMC4wMDMxMzA4LFxuICAgICAgICAgICAgICAgICAgMTIuOTIgKiBjLCAxLjA1NSAqIGMgKiogKDEgLyAyLjQpIC0gMC4wNTUpXG5cbmRpYWcgPSBhbHQuQ2hhcnQocGQuRGF0YUZyYW1lKHtcImxpbmVhclwiOiBbMCwgMV0sIFwic3RvcmVkXCI6IFswLCAxXX0pXG4gICAgICAgICAgICAgICAgICkubWFya19saW5lKGNvbG9yPVwiI2I5YjJhNFwiLCBzdHJva2VEYXNoPVs1LCA0XSkuZW5jb2RlKFxuICAgIHg9XCJsaW5lYXI6UVwiLCB5PVwic3RvcmVkOlFcIilcbmN1cnZlID0gYWx0LkNoYXJ0KHBkLkRhdGFGcmFtZSh7XCJsaW5lYXJcIjogYywgXCJzdG9yZWRcIjogc3RvcmVkfSlcbiAgICAgICAgICAgICAgICAgICkubWFya19saW5lKHN0cm9rZVdpZHRoPTIuNSwgY29sb3I9XCIjMzg2MThjXCIpLmVuY29kZShcbiAgICB4PWFsdC5YKFwibGluZWFyOlFcIiwgdGl0bGU9XCJsaW5lYXIgbGlnaHQgaW4gdGhlIGNoYW5uZWxcIiksXG4gICAgeT1hbHQuWShcInN0b3JlZDpRXCIsIHRpdGxlPVwic3RvcmVkIHZhbHVlIChieXRlIC8gMjU1KVwiKSlcbnB0ID0gcGQuRGF0YUZyYW1lKHtcImxpbmVhclwiOiBbMC4yMTZdLCBcInN0b3JlZFwiOiBbMTI4IC8gMjU1XSxcbiAgICAgICAgICAgICAgICAgICBcInRcIjogW1wiYnl0ZSAxMjhcIl19KVxuZG90ID0gYWx0LkNoYXJ0KHB0KS5tYXJrX2NpcmNsZShcbiAgICBzaXplPTcwLCBjb2xvcj1cIiNFMDcwMDBcIiwgb3BhY2l0eT0xKS5lbmNvZGUoXG4gICAgeD1cImxpbmVhcjpRXCIsIHk9XCJzdG9yZWQ6UVwiKVxubGFiID0gYWx0LkNoYXJ0KHB0KS5tYXJrX3RleHQoXG4gICAgYWxpZ249XCJsZWZ0XCIsIGR4PTEwLCBkeT01LCBmb250U2l6ZT0xMiwgY29sb3I9XCIjRTA3MDAwXCIpLmVuY29kZShcbiAgICB4PVwibGluZWFyOlFcIiwgeT1cInN0b3JlZDpRXCIsIHRleHQ9XCJ0Ok5cIilcblxubWFpbiA9IGFsdC5sYXllcihkaWFnLCBjdXJ2ZSwgZG90LCBsYWIpLnByb3BlcnRpZXMoXG4gICAgd2lkdGg9MzgwLCBoZWlnaHQ9MzQwLCB0aXRsZT1cInRoZSBzUkdCIGdhbW1hIGZ1bmN0aW9uXCIpXG5cbiMgdGhlIGxpbmVhciBzZWdtZW50IGNvdmVycyBvbmx5IHRoZSBmaXJzdCAwLjMgcGVyY2VudCBvZiB0aGUgYXhpcyxcbiMgc28gaXQgbmVlZHMgaXRzIG93biB6b29tZWQgcGFuZWwgdG8gYmUgc2VlbiBhdCBhbGxcbmN6ID0gbnAubGluc3BhY2UoMCwgMC4wMDgsIDIwMClcbnRvZSA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJsaW5lYXJcIjogY3osXG4gICAgXCJzdG9yZWRcIjogbnAud2hlcmUoY3ogPD0gMC4wMDMxMzA4LFxuICAgICAgICAgICAgICAgICAgICAgICAxMi45MiAqIGN6LCAxLjA1NSAqIGN6ICoqICgxIC8gMi40KSAtIDAuMDU1KSxcbiAgICBcIm5haXZlXCI6IDEuMDU1ICogY3ogKiogKDEgLyAyLjQpIC0gMC4wNTUsXG59KVxuem9vbV9jdXJ2ZSA9IGFsdC5DaGFydCh0b2UpLm1hcmtfbGluZShcbiAgICBzdHJva2VXaWR0aD0yLjUsIGNvbG9yPVwiIzM4NjE4Y1wiKS5lbmNvZGUoXG4gICAgeD1hbHQuWChcImxpbmVhcjpRXCIsIHRpdGxlPVwibGluZWFyIGxpZ2h0LCB6b29tZWRcIixcbiAgICAgICAgICAgIHNjYWxlPWFsdC5TY2FsZShkb21haW49WzAsIDAuMDA4XSwgbmljZT1GYWxzZSksXG4gICAgICAgICAgICBheGlzPWFsdC5BeGlzKGZvcm1hdD1cIi4zZlwiLCB0aWNrQ291bnQ9MykpLFxuICAgIHk9YWx0LlkoXCJzdG9yZWQ6UVwiLCB0aXRsZT1Ob25lLFxuICAgICAgICAgICAgc2NhbGU9YWx0LlNjYWxlKGRvbWFpbj1bLTAuMDYsIDAuMV0sIG5pY2U9RmFsc2UpKSlcbnpvb21fbmFpdmUgPSBhbHQuQ2hhcnQodG9lKS5tYXJrX2xpbmUoXG4gICAgc3Ryb2tlV2lkdGg9MS41LCBjb2xvcj1cIiNiOWIyYTRcIiwgc3Ryb2tlRGFzaD1bNCwgM10pLmVuY29kZShcbiAgICB4PVwibGluZWFyOlFcIiwgeT1cIm5haXZlOlFcIilcbnN3aXRjaCA9IGFsdC5DaGFydChwZC5EYXRhRnJhbWUoXG4gICAge1wibGluZWFyXCI6IFswLjAwMzEzMDhdLCBcInN0b3JlZFwiOiBbMTIuOTIgKiAwLjAwMzEzMDhdfSlcbiAgICApLm1hcmtfY2lyY2xlKHNpemU9NTUsIGNvbG9yPVwiI0UwNzAwMFwiLCBvcGFjaXR5PTEpLmVuY29kZShcbiAgICB4PVwibGluZWFyOlFcIiwgeT1cInN0b3JlZDpRXCIpXG56b29tID0gYWx0LmxheWVyKHpvb21fbmFpdmUsIHpvb21fY3VydmUsIHN3aXRjaCkucHJvcGVydGllcyhcbiAgICB3aWR0aD0yMDAsIGhlaWdodD0zNDAsIHRpdGxlPVwidGhlIGxpbmVhciBzZWdtZW50LCBtYWduaWZpZWRcIilcblxuYWx0Lmhjb25jYXQobWFpbiwgem9vbSkifQ==
+</script>
+</div>
+<p>The sRGB standard prescribes a 2.4 exponent. The linear segment near zero causes the curve to more closely track an exponent of 2.2, which is why “gamma 2.2” is a number often quoted for ordinary screens, although this can vary.</p>
+<!-- All of these are
+gammas in the strict sense: a single exponent. High dynamic range
+video, which spans far brighter and darker levels than ordinary
+screens, uses a transfer function that is not a gamma at all: its PQ
+curve has no exponent, and is instead fitted to measurements of
+human contrast sensitivity, spending each code step on one
+just-noticeable difference in brightness. Whenever pixels are
+involved, some transfer curve is part of the format's definition;
+when that curve is a power law, it is called a gamma. -->
+</section>
+<section id="compare-gamuts" class="level3">
+<h3 class="anchored" data-anchor-id="compare-gamuts">Compare gamuts</h3>
+<p>Every screen technology places its primaries differently and covers a different triangle. Draw these gamuts to compare them against the spectral locus. <code>SCREEN_GAMUTS</code> in the cell below gives the (x, y) coordinates of the red, green and blue primaries of four standards. Draw the spectral locus, then add one triangle per standard with a legend naming it. Everything else you need has already appeared on this page.</p>
+<p>Remember that this page reaches you through your own monitor, so the most saturated colours here are themselves approximations!</p>
+<div>
+<div id="pyodide-21" class="exercise-cell">
+
+</div>
+<script type="pyodide-21-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiU0NSRUVOX0dBTVVUUyA9IHsgICAgICAgICAgICAgICAgICAgICMgIHJlZCAgICAgICAgZ3JlZW4gICAgICAgYmx1ZVxuICAgIFwic1JHQiAoc3RhbmRhcmQgbW9uaXRvcnMpXCI6ICBbKDAuNjQwLCAwLjMzMCksICgwLjMwMCwgMC42MDApLCAoMC4xNTAsIDAuMDYwKV0sXG4gICAgXCJEaXNwbGF5IFAzIChBcHBsZSBzY3JlZW5zKVwiOiBbKDAuNjgwLCAwLjMyMCksICgwLjI2NSwgMC42OTApLCAoMC4xNTAsIDAuMDYwKV0sXG4gICAgXCJBZG9iZSBSR0IgKHBob3RvIG1vbml0b3JzKVwiOiBbKDAuNjQwLCAwLjMzMCksICgwLjIxMCwgMC43MTApLCAoMC4xNTAsIDAuMDYwKV0sXG4gICAgXCJSZWMuMjAyMCAoVUhEIHRlbGV2aXNpb25zKVwiOiBbKDAuNzA4LCAwLjI5MiksICgwLjE3MCwgMC43OTcpLCAoMC4xMzEsIDAuMDQ2KV0sXG59XG5cbiMgWW91ciBjaGFydCBoZXJlLiJ9
+</script>
+</div>
+<p>When your chart shows all four labelled triangles over the filled locus, export it as an image: use the menu in the chart’s top right corner and choose Save as PNG, or take a screenshot of the chart. Submit the image through Canvas.</p>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">7 · Summary</h2>
+<p>Colour is a useful but conditional encoding channel.</p>
+<ul>
+<li><strong>Hue</strong> is effective for distinguishing a modest number of categories; it has no natural numerical order.</li>
+<li><strong>Lightness</strong> can carry order when it changes monotonically.</li>
+<li><strong>Chroma</strong> changes emphasis but supports only coarse comparisons.</li>
+<li>Equal steps in RGB or HSL are not equal perceptual steps.</li>
+<li>A palette must be tested against its actual background, at its actual mark size, and under relevant colour-vision differences.</li>
+<li>Important distinctions need a redundant cue such as position, direct labelling, shape or line style.</li>
+<li>A display’s three primaries reach only the triangle between them, its gamut; colours outside it can only be approximated.</li>
+</ul>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li>CIE, <a href="https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer">CIE 1931 2° colour-matching functions</a>, DOI <code>10.25039/CIE.DS.xvudnb9b</code>. The table is served with this page as <code>CIE_xyz_1931_2deg.csv</code>, unmodified.</li>
+<li>Kalloniatis and Luu, <a href="https://www.webvision.pitt.edu/book/part-viii-psychophysics-of-vision/color-perception/">Color Perception</a>, <em>Webvision</em>.</li>
+<li>NIST, <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=841491">CIE Fundamentals for Color Measurements</a>, for the Wright–Guild experiments, reference primaries and CIE 1931 transformation.</li>
+<li>NIST, <a href="https://physics.nist.gov/PhysRefData/Handbook/Tables/mercurytable2_a.htm">Strong Lines of Mercury</a>, for the wavelengths and relative intensities in the mercury spectrum.</li>
+<li>NIST, <a href="https://www.nist.gov/pml/sensor-science/optical-radiation/realization-candela">Realization of the Candela</a>, for the definition and experimental basis of <span class="math inline">\(V(\lambda)\)</span>.</li>
+<li>CIE, <a href="https://www.cie.co.at/eilvterm/17-21-050">Luminance</a>, for the definition of luminance as luminous intensity per projected area in a specified direction.</li>
+<li>CIE, <a href="https://cie.co.at/eilvterm/17-23-052">Chromaticity</a>, for the standard definition of chromaticity as a property of a colour stimulus.</li>
+<li>US Department of Energy, <a href="https://www.energy.gov/management/articles/practical-primer-led-technology">A Practical Primer to LED Technology</a>, for semiconductor band gaps and LED emission.</li>
+<li>Nobel Prize, <a href="https://www.nobelprize.org/uploads/2018/06/advanced-physicsprize2014.pdf">Efficient blue light-emitting diodes</a>, for the development of GaN-based blue LEDs and phosphor-converted white light.</li>
+<li>Hewlett-Packard and Microsoft, <a href="https://www.w3.org/Graphics/Color/sRGB">A Standard Default Color Space for the Internet—sRGB</a>, for the 1996 proposal, Rec. 709 primaries, D65 white point and CRT-based transfer curve.</li>
+<li>W3C, <a href="https://www.w3.org/TR/css-color-4/">CSS Color Module Level 4</a>, for the interpretation of RGB and hex notation as sRGB coordinates.</li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJwYW5kYXMiLCJtYXRwbG90bGliIiwiYWx0YWlyIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTIxIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIxLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE5IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE5LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTktY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE3IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE3LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTctY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE1IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il9weW9kaWRlX3ZhbHVlXzE1ID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE1LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMTUtY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUHl0aG9uIGNvZGVcbiAgY29uc3QgcmVzdWx0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKHtjb2RlOiBibG9jay5jb2RlLCBvcHRpb25zfSwge30pO1xuXG4gIC8vIEVhcmx5IHlpZWxkIHdoaWxlIHdlIHdhaXQgZm9yIHRoZSBmaXJzdCBldmFsdWF0aW9uIGFuZCByZW5kZXJcbiAgaWYgKG9wdGlvbnMub3V0cHV0ICYmICEoXCIxNVwiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjE1XCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xNCA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzE0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEzID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEyID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzExID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMCA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEwID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS05LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTgtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS04LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS01LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJfcHlvZGlkZV92YWx1ZV8zID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0zLWNvbnRlbnRzXCIsXG4gICAgZWNobzogdHJ1ZSxcbiAgICBvdXRwdXQ6IHRydWVcbiAgfSwgYmxvY2suYXR0cik7XG5cbiAgLy8gRXZhbHVhdGUgdGhlIHByb3ZpZGVkIFB5dGhvbiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHB5b2RpZGVPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiM1wiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjNcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il9weW9kaWRlX3ZhbHVlXzIgPSB7XG4gIGNvbnN0IHsgaGlnaGxpZ2h0UHl0aG9uLCBiNjREZWNvZGV9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXZhbHVhdGlvbiBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHtcbiAgICBpZDogXCJweW9kaWRlLTItY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUHl0aG9uIGNvZGVcbiAgY29uc3QgcmVzdWx0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKHtjb2RlOiBibG9jay5jb2RlLCBvcHRpb25zfSwge30pO1xuXG4gIC8vIEVhcmx5IHlpZWxkIHdoaWxlIHdlIHdhaXQgZm9yIHRoZSBmaXJzdCBldmFsdWF0aW9uIGFuZCByZW5kZXJcbiAgaWYgKG9wdGlvbnMub3V0cHV0ICYmICEoXCIyXCIgaW4gcHlvZGlkZU9qcy5yZW5kZXJlZE9qcykpIHtcbiAgICBjb25zdCBjb250YWluZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuICAgIGNvbnN0IHNwaW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuXG4gICAgaWYgKG9wdGlvbnMuZWNobykge1xuICAgICAgLy8gU2hvdyBvdXRwdXQgYXMgaGlnaGxpZ2h0ZWQgc291cmNlXG4gICAgICBjb25zdCBwcmVFbGVtID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInByZVwiKTtcbiAgICAgIGNvbnRhaW5lci5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGVcIjtcbiAgICAgIHByZUVsZW0uY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlIHB5dGhvblwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChoaWdobGlnaHRQeXRob24oYmxvY2suY29kZSkpO1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItZ3JvdyBzcGlubmVyLWdyb3ctc20gbS0yIHBvc2l0aW9uLWFic29sdXRlIHRvcC0wIGVuZC0wXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHByZUVsZW0pO1xuICAgIH0gZWxzZSB7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ib3JkZXIgc3Bpbm5lci1ib3JkZXItc21cIjtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICB9XG5cbiAgICB5aWVsZCBjb250YWluZXI7XG4gIH1cblxuICBweW9kaWRlT2pzLnJlbmRlcmVkT2pzW1wiMlwiXSA9IHRydWU7XG4gIHlpZWxkIGF3YWl0IHJlc3VsdDtcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyBQeW9kaWRlIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIGxldCBweW9kaWRlUHJvbWlzZSA9IChhc3luYyAoKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBQeW9kaWRlYDtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgc3RhcnRQeW9kaWRlV29ya2VyKGRhdGEub3B0aW9ucyk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6IG1pY3JvcGlwYDtcbiAgICBhd2FpdCBweW9kaWRlLmxvYWRQYWNrYWdlKFwibWljcm9waXBcIik7XG4gICAgY29uc3QgbWljcm9waXAgPSBhd2FpdCBweW9kaWRlLnB5aW1wb3J0KFwibWljcm9waXBcIik7XG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gbWljcm9waXAuaW5zdGFsbChwa2cpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuICAgIGF3YWl0IG1pY3JvcGlwLmRlc3Ryb3koKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHB5b2RpZGUuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgICBpZiAoZS5lcnJubyAhPT0gMjApIHtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgdHJ5IHtcbiAgICAgICAgcmV0dXJuIGF3YWl0IHB5b2RpZGUuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgUHlvZGlkZSBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBQeXRob24ocHlvZGlkZSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gcHlvZGlkZTtcbiAgfSkoKS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgc3RhdHVzVGV4dC5zdHlsZS5jb2xvciA9IFwidmFyKC0tZXhlcmNpc2UtZWRpdG9yLWhsLWVyLCAjQUQwMDAwKVwiO1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBlcnIubWVzc2FnZTtcbiAgICAvL2luZGljYXRvckNvbnRhaW5lci5xdWVyeVNlbGVjdG9yKFwiLnNwaW5uZXItZ3Jvd1wiKS5jbGFzc0xpc3QuYWRkKFwiZC1ub25lXCIpO1xuICAgIHRocm93IGVycjtcbiAgfSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBweW9kaWRlUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgUHlvZGlkZUV2YWx1YXRvcihweW9kaWRlLCBjb250ZXh0KTtcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBweW9kaWRlUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgICBwcm9jZXNzLFxuICB9O1xufVxuIn1dfQ==
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session2";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
