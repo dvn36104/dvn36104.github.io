@@ -33,6 +33,8 @@ Submit through [Canvas](https://canvas.uts.edu.au/courses/41964/assignments/2932
 
 ::: {.content-visible when-profile="instructor"}
 {{< include session2/_index-block.qmd >}}
+
+{{< include session3/_index-block.qmd >}}
 :::
 
 Session 1 is complete. Sessions 2 and 3 will appear here when they are released.

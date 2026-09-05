@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - data/
+    - "!/_site-instructor/"
   render:
     - "index.qmd"
     - "session1/*.qmd"

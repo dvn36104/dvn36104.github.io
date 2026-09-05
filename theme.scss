@@ -21,6 +21,12 @@ div.sourceCode, pre.sourceCode {
   border-radius: 6px;
 }
 
+// wide outputs (e.g. many-column DataFrames) scroll inside the cell
+// instead of stretching the whole page
+.cell-output, .exercise-cell-output {
+  overflow-x: auto;
+}
+
 .callout {
   background-color: #fffdf8;
 }
@@ -35,6 +41,7 @@ figcaption,
   font-size: 0.82rem;
   line-height: 1.35;
   margin-top: 0.4rem;
+  text-align: center;
 }
 
 // compact, consistent type in static Python blocks, live editors and text outputs
@@ -69,6 +76,38 @@ div.sourceCode pre.sourceCode > code.sourceCode {
   font-size: $cell-code-font-size !important;
 }
 
+// Altair charts inside a .slider-right block lay their slider controls
+// to the right of the plot instead of underneath (wrapping below again
+// on narrow screens).
+.slider-right .vega-embed {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.slider-right .vega-embed form.vega-bindings {
+  margin: 0;
+  min-width: 210px;
+}
+
+// breathing room between a .slider-right chart and the text below it
+.slider-right {
+  margin-bottom: 1.25rem;
+}
+
+// hide the vega-embed "..." export menu on all Altair charts
+.vega-embed details,
+.vega-embed summary,
+.vega-embed .vega-actions {
+  display: none !important;
+}
+
+// breathing room between every executed cell and the text below it
+.cell,
+.exercise-cell {
+  margin-bottom: 1.25rem;
+}
+
 // Short reference tables should use their natural width instead of spanning
 // the full reading column.
 .compact-table table {
@@ -76,4 +115,9 @@ div.sourceCode pre.sourceCode > code.sourceCode {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.compact-table table th,
+.compact-table table td {
+  padding: 0.3rem 1rem;
 }
