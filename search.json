@@ -382,7 +382,7 @@
     "href": "session2/part-b.html#find-your-own-pattern",
     "title": "Embeddings",
     "section": "5 · Find your own pattern",
-    "text": "5 · Find your own pattern\nThe cell below starts with past-tense pairs. Run it, then swap in at least four pairs of your own that share one different relation, and set relation to name it: your relation must appear in the chart title.\nThis GloVe page serves 358 words. To see what there is to choose from, print(\", \".join(vocab)) prints them all. Listing the closest neighbours of any word — nearest(vec(\"king\"), exclude={\"king\"}) — is a quick way to find the partner that completes a pair.\n\n\n\n\n\n\nWhen your chart shows your own pairs, with the arrows agreeing and your relation named in the title, export it as an image: use the menu in the chart’s top right corner and choose Save as PNG, or take a screenshot of the chart. Submit the image through Canvas."
+    "text": "5 · Find your own pattern\nThe cell below starts with past-tense pairs. Run it, then swap in at least three pairs of your own that share one different relation, and set relation to name it: your relation must appear in the chart title.\nThis GloVe page serves 358 words. To see what there is to choose from, print(\", \".join(vocab)) prints them all. Listing the closest neighbours of any word — nearest(vec(\"king\"), exclude={\"king\"}) — is a quick way to find the partner that completes a pair.\n\n\n\n\n\n\nWhen your chart shows your own pairs, with the arrows agreeing and your relation named in the title, export it as an image: use the menu in the chart’s top right corner and choose Save as PNG, or take a screenshot of the chart. Submit the image through Canvas."
   },
   {
     "objectID": "session2/part-b.html#transformers",

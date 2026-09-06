@@ -402,7 +402,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcGFpcnMifSwiY29k
 </section>
 <section id="find-your-own-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="find-your-own-pattern">5 · Find your own pattern</h2>
-<p>The cell below starts with past-tense pairs. Run it, then swap in at least four pairs of your own that share one different relation, and set <code>relation</code> to name it: your relation must appear in the chart title.</p>
+<p>The cell below starts with past-tense pairs. Run it, then <strong>swap in at least three pairs of your own</strong> that share one different relation, and set <code>relation</code> to name it: your relation must appear in the chart title.</p>
 <p>This GloVe page serves 358 words. To see what there is to choose from, <code>print(", ".join(vocab))</code> prints them all. Listing the closest neighbours of any word — <code>nearest(vec("king"), exclude={"king"})</code> — is a quick way to find the partner that completes a pair.</p>
 <div>
 <div id="pyodide-15" class="exercise-cell">
@@ -551,7 +551,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
