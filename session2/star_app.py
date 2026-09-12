@@ -114,7 +114,10 @@ def star_state(mass, age):
         R_show = 0.009
         L_show = R_show ** 2 * (T_show / SUN_T) ** 4
     elif phase == "supernova":
-        T_show, L_show, R_show = 8000.0, 5e9, None
+        # no luminosity: an explosion is an event, not an equilibrium state,
+        # and its ~5e9 suns would stretch an HR luminosity axis by four
+        # decades to hold one transient point
+        T_show, L_show, R_show = 8000.0, None, None
     elif phase == "neutron star":
         T_show, L_show, R_show = 1e6, None, 1.7e-5
     elif phase == "black hole":
