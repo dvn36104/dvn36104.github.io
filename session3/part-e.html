@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Streamlit 1 – 36104 · Data Visualisation and Narratives</title>
+<title>TeX and tikz – 36104 · Data Visualisation and Narratives</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,6 +114,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="_assets/lesson.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -174,15 +210,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#download-the-deck-and-source" id="toc-download-the-deck-and-source" class="nav-link active" data-scroll-target="#download-the-deck-and-source">Download the deck and source</a></li>
+  <li><a href="#install-tex-on-your-computer" id="toc-install-tex-on-your-computer" class="nav-link" data-scroll-target="#install-tex-on-your-computer">Install TeX on your computer</a></li>
+  <li><a href="#compile-and-view-the-slides" id="toc-compile-and-view-the-slides" class="nav-link" data-scroll-target="#compile-and-view-the-slides">Compile and view the slides</a></li>
+  <li><a href="#explore-the-related-visualisation" id="toc-explore-the-related-visualisation" class="nav-link" data-scroll-target="#explore-the-related-visualisation">Explore the related visualisation</a></li>
+  <li><a href="#host-your-pdf-on-github-pages" id="toc-host-your-pdf-on-github-pages" class="nav-link" data-scroll-target="#host-your-pdf-on-github-pages">Host your PDF on GitHub Pages</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Streamlit 1</h1>
+<h1 class="title">TeX and tikz</h1>
+<p class="subtitle lead">Session 3 · Part E</p>
 </div>
 
 
@@ -199,15 +246,95 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Build and deploy a small interactive data app with Streamlit, a Python framework that turns a plain Python script into a web app.</p>
-<p>Work through the official Streamlit tutorial: <a href="https://docs.streamlit.io/get-started/tutorials/create-an-app">Create an app</a>.</p>
+<p>The RITS consultation slides are made from a text file. LaTeX lays out the presentation, and TikZ draws the diagrams. In this activity, you will compile the supplied source on your computer, inspect the resulting slides, and host the PDF on GitHub Pages.</p>
+<section id="download-the-deck-and-source" class="level2">
+<h2 class="anchored" data-anchor-id="download-the-deck-and-source">Download the deck and source</h2>
+<ul>
+<li><a href="https://gerardjk.github.io/rits-consultation/">Open the hosted RITS consultation deck</a>.</li>
+<li><a href="_assets/rits-consultation-source.zip">Download the complete source ZIP</a> — start here to compile the deck. It includes the TeX file, fonts, figures, and a reference PDF.</li>
+<li><a href="_assets/rits-consultation/rits-consultation-deck.tex" download="rits-consultation-deck.tex">Download the TeX file on its own</a>.</li>
+<li><a href="_assets/rits-consultation/RITS_Consultation.pdf">Open the reference PDF</a>.</li>
+</ul>
+<p>The source is called <code>rits-consultation-deck.tex</code>; the supplied reference PDF is called <code>RITS_Consultation.pdf</code>. The TeX file needs the <code>fonts</code> and <code>figures</code> folders beside it, so download and extract the <strong>whole ZIP</strong> before compiling.</p>
+</section>
+<section id="install-tex-on-your-computer" class="level2">
+<h2 class="anchored" data-anchor-id="install-tex-on-your-computer">Install TeX on your computer</h2>
+<p>Choose the instructions for your operating system. These installations provide the tools that turn a <code>.tex</code> file into a PDF.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Computer</th>
+<th>What to install</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mac</strong></td>
+<td>Install the full <a href="https://tug.org/mactex/mactex-download.html">MacTeX</a> distribution. It includes <strong>TeXShop</strong>, an editor with a PDF preview.</td>
+</tr>
+<tr class="even">
+<td><strong>Windows</strong></td>
+<td>Install <a href="https://miktex.org/howto/install-miktex">MiKTeX</a>. Allow it to install missing packages when prompted. It includes the <strong>TeXworks</strong> editor.</td>
+</tr>
+<tr class="odd">
+<td><strong>Linux</strong></td>
+<td>Install <a href="https://tug.org/texlive/quickinstall.html">TeX Live</a> using the full installation. You can compile from a terminal using the command below.</td>
+</tr>
+</tbody>
+</table>
+<p>Allow time for the installation and its downloads. The deck’s fonts are already included in the ZIP; keep them in the supplied folder.</p>
+</section>
+<section id="compile-and-view-the-slides" class="level2">
+<h2 class="anchored" data-anchor-id="compile-and-view-the-slides">Compile and view the slides</h2>
 <ol type="1">
-<li>Install Streamlit on your own machine with <code>pip install streamlit</code>.</li>
-<li>Follow the tutorial from start to finish. You will load the Uber pickups dataset, cache the download, draw a histogram, put the pickups on a map, and add a slider and a checkbox.</li>
-<li>Deploy the finished app, as covered at the end of the tutorial. Deployment runs through Streamlit Community Cloud and needs your app in a public GitHub repository.</li>
+<li>Extract <code>rits-consultation-source.zip</code> and open the resulting <code>rits-consultation</code> folder.</li>
+<li>Open <code>rits-consultation-deck.tex</code> in TeXShop on Mac or TeXworks on Windows.</li>
+<li>In the editor’s typesetting menu, select <strong>XeLaTeX</strong>. This deck uses fonts that need that compiler; the usual pdfLaTeX setting will give a font error.</li>
+<li>Click <strong>Typeset</strong>. On Windows, accept MiKTeX’s requests to install any missing packages. Run <strong>Typeset</strong> a second time after the first run finishes so that references and navigation information are updated.</li>
+<li>Open <code>rits-consultation-deck.pdf</code> in the same folder. You should see the <strong>77-slide</strong> deck. Compare it with the supplied reference PDF.</li>
 </ol>
-<p>Open your deployed app in a private browser window to confirm it works for people who are not you.</p>
-<p>Submit the URL of your deployed app as a plain text file through Canvas.</p>
+<p>If you prefer a terminal, open one in the extracted folder and run these commands, waiting for each to finish:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xelatex</span> <span class="at">-halt-on-error</span> rits-consultation-deck.tex</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">xelatex</span> <span class="at">-halt-on-error</span> rits-consultation-deck.tex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If a font or image cannot be found, check that the ZIP is fully extracted and that <code>fonts</code> and <code>figures</code> are still beside the TeX file. If the terminal does not recognise <code>xelatex</code>, reopen it after installation or use the editor above.</p>
+<section id="find-a-diagram-in-the-source" class="level3">
+<h3 class="anchored" data-anchor-id="find-a-diagram-in-the-source">Find a diagram in the source</h3>
+<p>Choose a slide in the PDF and search for its title in the TeX file. For example, search for <strong>DvP/PvP lock and release</strong>. A Beamer <code>frame</code> describes a slide; a <code>tikzpicture</code> contains drawing instructions. Within a diagram, <code>\node</code> places text or a shape, and <code>\draw</code> draws lines or connections.</p>
+<p>Look back and forth between the source and the PDF. Identify the instructions for one label, one shape, and one connection. This is a way to begin reading a large source file without having to understand every command at once.</p>
+</section>
+</section>
+<section id="explore-the-related-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="explore-the-related-visualisation">Explore the related visualisation</h2>
+<p>Open <a href="https://www.rtgs.cash/">www.rtgs.cash</a>, the related RITS visualisation. It shows the RITS settlement engine and the Fast Settlement Service (FSS). Compare how the website and the slide deck represent the same subject: what is easier to understand from the diagram, and what needs the slides’ explanation?</p>
+</section>
+<section id="host-your-pdf-on-github-pages" class="level2">
+<h2 class="anchored" data-anchor-id="host-your-pdf-on-github-pages">Host your PDF on GitHub Pages</h2>
+<p>GitHub stores the files; GitHub Pages gives you a website address that other people can open. Use the PDF you just compiled for this exercise.</p>
+<ol type="1">
+<li>Sign in to <a href="https://github.com/">GitHub</a> and create a <strong>public</strong> repository called <code>tex-slides</code>. Turn on <strong>Add README</strong> when creating it.</li>
+<li>In that repository, choose <strong>Add file → Upload files</strong>. Upload <code>rits-consultation-deck.pdf</code> to the top level of the repository and commit the upload.</li>
+<li>Choose <strong>Add file → Create new file</strong>, name it <code>index.html</code>, and paste the following page. Commit the file.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!doctype</span> html<span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"en"</span><span class="dt">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"utf-8"</span><span class="dt">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1"</span><span class="dt">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>RITS consultation deck<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>RITS consultation deck<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Compiled from the source supplied for Session 3.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"rits-consultation-deck.pdf"</span><span class="dt">&gt;</span>Open the PDF slides<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>Open <strong>Settings → Pages</strong>. Under <strong>Build and deployment</strong>, set <strong>Source</strong> to <strong>Deploy from a branch</strong>. Select <strong>main</strong> and <strong>/(root)</strong>, then save.</li>
+<li>Wait for GitHub Pages to finish publishing. The Pages settings will show the website address, normally <code>https://YOUR-USERNAME.github.io/tex-slides/</code>.</li>
+<li>Open that address and click <strong>Open the PDF slides</strong>. Copy the address of the PDF, then test it in a private browser window.</li>
+</ol>
+<p>For help, use GitHub’s official guides to <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">creating a Pages site</a> and <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">choosing its publishing source</a>.</p>
+<p><strong>Submit the link to your hosted PDF</strong> as a plain text file through <a href="https://canvas.uts.edu.au/courses/41964/assignments/293957">Canvas</a>. Label it <strong>Part E · TeX and tikz</strong>. The link should open the slides directly.</p>
 
 
 <script type="ojs-module-contents">
@@ -224,6 +351,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -231,7 +359,7 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../session2";
+window._ojs.paths.runtimeToDoc = "../../session3";
 window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "..";
 window._ojs.selfContained = false;

@@ -210,27 +210,6 @@
     "text": "Sources\n\nKumar et al. (2022) TimeTree 5: an expanded resource for species divergence times, Molecular Biology and Evolution 39:msac174; timetree.org. Trees downloaded via “Build a Timetree” (group: Amniota at family rank; Eukaryota at class and phylum rank), Newick format, branch lengths in Myr; values unmodified.\nNames with suffixes (Cebidae-1, Cebidae-2) are TimeTree’s way of serving groups that its consensus does not recover as single clades: the name is split, the tree is left honest.\nTobias et al. (2022) AVONET and Myhrvold et al. (2015): the Part A datasets this page’s amniotes connect back to."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Asynchronous sessions",
-    "section": "",
-    "text": "This site hosts the asynchronous sessions for DVN36104.\nWork through the parts of each session in order.\nEvery code cell runs Python in your browser. Edit the code and press Run Code.\nWhere a page has an exercise, attempt it before using the hints. Check the solution only after making your own attempt.\nYour work here is not saved when you close the tab.\nSubmissions are due through Canvas by each part’s deadline. Late submissions attract penalties under the UTS late submission policy."
-  },
-  {
-    "objectID": "index.html#session-1",
-    "href": "index.html#session-1",
-    "title": "Asynchronous sessions",
-    "section": "Session 1",
-    "text": "Session 1\n\nPart A · Allometry\nPart B · The Tree of Life\nPart C · The Triangle of Everything\nPart D · The Periodic Spiral\nPart E · Codons\n\nSubmit through Canvas:\n\nPart A: the final chart of your amniote investigation, with panels at different levels of aggregation.\nPart B: your tree-of-life figure. The download cell at the end of the page saves it as a PNG.\nPart C: your Triangle of Everything chart.\nPart D: the alternative periodic-table design you found, different from the six shown on the page. Not the table you built.\nPart E: your codon chart."
-  },
-  {
-    "objectID": "index.html#session-2",
-    "href": "index.html#session-2",
-    "title": "Asynchronous sessions",
-    "section": "Session 2",
-    "text": "Session 2\n\nPart A · The Spectral Locus\nPart B · Embeddings\nPart C · Streamlit 1\nPart D · Stars\nPart E · Streamlit 2\n\nSubmit through Canvas:\n\nPart A: the image of your gamut-comparison chart: the four screen gamuts drawn over the filled spectral locus.\nPart B: the image of your pair-arrow chart from the “Find your own pattern” section, your relation named in the title.\nPart C: the URL of your deployed Streamlit app, as a plain text file.\nPart D: the URL of your deployed star app, as a plain text file.\nPart E: the URL of your deployed multipage app, as a plain text file.\n\nSessions 1 and 2 are complete. Session 3 will appear here when it is released."
-  },
-  {
     "objectID": "session1/part-a.html",
     "href": "session1/part-a.html",
     "title": "Allometry",
@@ -460,5 +439,75 @@
     "title": "Stars",
     "section": "Sources",
     "text": "Sources\n\nPlanck, M. (1900), on the law of energy distribution in the normal spectrum.\nCIE (2019), CIE 1931 colour-matching functions, 2 degree observer.\nBallesteros, F. (2012), New insights into black bodies, EPL 97, 34008: the empirical colour-to-temperature formula used to paint the HR diagram.\nPecaut, M. and Mamajek, E. (2013), Intrinsic Colors, Temperatures, and Bolometric Corrections of Pre-main-sequence Stars, ApJS 208, 9: the spectral-class boundary colours come from its companion table, A Modern Mean Dwarf Stellar Color and Effective Temperature Sequence, maintained online by Mamajek.\nCarroll, B. and Ostlie, D., An Introduction to Modern Astrophysics: the source of the scaling relations approximated here.\nHeger, A. and colleagues (2003), How Massive Single Stars End Their Life: the fate map by mass and metallicity that section 7 sketches.\nESA (1997), The Hipparcos Catalogue, served complete to magnitude 9.5 with positions, magnitudes and colours.\nAstronexus HYG database v4.1 (CC BY-SA 4.0), served as the 107,860 stars with measured distances, six columns each."
+  },
+  {
+    "objectID": "session3/part-e.html",
+    "href": "session3/part-e.html",
+    "title": "TeX and tikz",
+    "section": "",
+    "text": "The RITS consultation slides are made from a text file. LaTeX lays out the presentation, and TikZ draws the diagrams. In this activity, you will compile the supplied source on your computer, inspect the resulting slides, and host the PDF on GitHub Pages."
+  },
+  {
+    "objectID": "session3/part-e.html#download-the-deck-and-source",
+    "href": "session3/part-e.html#download-the-deck-and-source",
+    "title": "TeX and tikz",
+    "section": "Download the deck and source",
+    "text": "Download the deck and source\n\nOpen the hosted RITS consultation deck.\nDownload the complete source ZIP — start here to compile the deck. It includes the TeX file, fonts, figures, and a reference PDF.\nDownload the TeX file on its own.\nOpen the reference PDF.\n\nThe source is called rits-consultation-deck.tex; the supplied reference PDF is called RITS_Consultation.pdf. The TeX file needs the fonts and figures folders beside it, so download and extract the whole ZIP before compiling."
+  },
+  {
+    "objectID": "session3/part-e.html#install-tex-on-your-computer",
+    "href": "session3/part-e.html#install-tex-on-your-computer",
+    "title": "TeX and tikz",
+    "section": "Install TeX on your computer",
+    "text": "Install TeX on your computer\nChoose the instructions for your operating system. These installations provide the tools that turn a .tex file into a PDF.\n\n\n\nComputer\nWhat to install\n\n\n\n\nMac\nInstall the full MacTeX distribution. It includes TeXShop, an editor with a PDF preview.\n\n\nWindows\nInstall MiKTeX. Allow it to install missing packages when prompted. It includes the TeXworks editor.\n\n\nLinux\nInstall TeX Live using the full installation. You can compile from a terminal using the command below.\n\n\n\nAllow time for the installation and its downloads. The deck’s fonts are already included in the ZIP; keep them in the supplied folder."
+  },
+  {
+    "objectID": "session3/part-e.html#compile-and-view-the-slides",
+    "href": "session3/part-e.html#compile-and-view-the-slides",
+    "title": "TeX and tikz",
+    "section": "Compile and view the slides",
+    "text": "Compile and view the slides\n\nExtract rits-consultation-source.zip and open the resulting rits-consultation folder.\nOpen rits-consultation-deck.tex in TeXShop on Mac or TeXworks on Windows.\nIn the editor’s typesetting menu, select XeLaTeX. This deck uses fonts that need that compiler; the usual pdfLaTeX setting will give a font error.\nClick Typeset. On Windows, accept MiKTeX’s requests to install any missing packages. Run Typeset a second time after the first run finishes so that references and navigation information are updated.\nOpen rits-consultation-deck.pdf in the same folder. You should see the 77-slide deck. Compare it with the supplied reference PDF.\n\nIf you prefer a terminal, open one in the extracted folder and run these commands, waiting for each to finish:\nxelatex -halt-on-error rits-consultation-deck.tex\nxelatex -halt-on-error rits-consultation-deck.tex\nIf a font or image cannot be found, check that the ZIP is fully extracted and that fonts and figures are still beside the TeX file. If the terminal does not recognise xelatex, reopen it after installation or use the editor above.\n\nFind a diagram in the source\nChoose a slide in the PDF and search for its title in the TeX file. For example, search for DvP/PvP lock and release. A Beamer frame describes a slide; a tikzpicture contains drawing instructions. Within a diagram, \\node places text or a shape, and \\draw draws lines or connections.\nLook back and forth between the source and the PDF. Identify the instructions for one label, one shape, and one connection. This is a way to begin reading a large source file without having to understand every command at once."
+  },
+  {
+    "objectID": "session3/part-e.html#explore-the-related-visualisation",
+    "href": "session3/part-e.html#explore-the-related-visualisation",
+    "title": "TeX and tikz",
+    "section": "Explore the related visualisation",
+    "text": "Explore the related visualisation\nOpen www.rtgs.cash, the related RITS visualisation. It shows the RITS settlement engine and the Fast Settlement Service (FSS). Compare how the website and the slide deck represent the same subject: what is easier to understand from the diagram, and what needs the slides’ explanation?"
+  },
+  {
+    "objectID": "session3/part-e.html#host-your-pdf-on-github-pages",
+    "href": "session3/part-e.html#host-your-pdf-on-github-pages",
+    "title": "TeX and tikz",
+    "section": "Host your PDF on GitHub Pages",
+    "text": "Host your PDF on GitHub Pages\nGitHub stores the files; GitHub Pages gives you a website address that other people can open. Use the PDF you just compiled for this exercise.\n\nSign in to GitHub and create a public repository called tex-slides. Turn on Add README when creating it.\nIn that repository, choose Add file → Upload files. Upload rits-consultation-deck.pdf to the top level of the repository and commit the upload.\nChoose Add file → Create new file, name it index.html, and paste the following page. Commit the file.\n\n&lt;!doctype html&gt;\n&lt;html lang=\"en\"&gt;\n&lt;head&gt;\n  &lt;meta charset=\"utf-8\"&gt;\n  &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n  &lt;title&gt;RITS consultation deck&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;RITS consultation deck&lt;/h1&gt;\n  &lt;p&gt;Compiled from the source supplied for Session 3.&lt;/p&gt;\n  &lt;p&gt;&lt;a href=\"rits-consultation-deck.pdf\"&gt;Open the PDF slides&lt;/a&gt;&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n\nOpen Settings → Pages. Under Build and deployment, set Source to Deploy from a branch. Select main and /(root), then save.\nWait for GitHub Pages to finish publishing. The Pages settings will show the website address, normally https://YOUR-USERNAME.github.io/tex-slides/.\nOpen that address and click Open the PDF slides. Copy the address of the PDF, then test it in a private browser window.\n\nFor help, use GitHub’s official guides to creating a Pages site and choosing its publishing source.\nSubmit the link to your hosted PDF as a plain text file through Canvas. Label it Part E · TeX and tikz. The link should open the slides directly."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Asynchronous sessions",
+    "section": "",
+    "text": "This site hosts the asynchronous sessions for DVN36104.\nWork through the parts of each session in order.\nEvery code cell runs Python in your browser. Edit the code and press Run Code.\nWhere a page has an exercise, attempt it before using the hints. Check the solution only after making your own attempt.\nYour work here is not saved when you close the tab.\nSubmissions are due through Canvas by each part’s deadline. Late submissions attract penalties under the UTS late submission policy."
+  },
+  {
+    "objectID": "index.html#session-1",
+    "href": "index.html#session-1",
+    "title": "Asynchronous sessions",
+    "section": "Session 1",
+    "text": "Session 1\n\nPart A · Allometry\nPart B · The Tree of Life\nPart C · The Triangle of Everything\nPart D · The Periodic Spiral\nPart E · Codons\n\nSubmit through Canvas:\n\nPart A: the final chart of your amniote investigation, with panels at different levels of aggregation.\nPart B: your tree-of-life figure. The download cell at the end of the page saves it as a PNG.\nPart C: your Triangle of Everything chart.\nPart D: the alternative periodic-table design you found, different from the six shown on the page. Not the table you built.\nPart E: your codon chart."
+  },
+  {
+    "objectID": "index.html#session-2",
+    "href": "index.html#session-2",
+    "title": "Asynchronous sessions",
+    "section": "Session 2",
+    "text": "Session 2\n\nPart A · The Spectral Locus\nPart B · Embeddings\nPart C · Streamlit 1\nPart D · Stars\nPart E · Streamlit 2\n\nSubmit through Canvas:\n\nPart A: the image of your gamut-comparison chart: the four screen gamuts drawn over the filled spectral locus.\nPart B: the image of your pair-arrow chart from the “Find your own pattern” section, your relation named in the title.\nPart C: the URL of your deployed Streamlit app, as a plain text file.\nPart D: the URL of your deployed star app, as a plain text file.\nPart E: the URL of your deployed multipage app, as a plain text file."
+  },
+  {
+    "objectID": "index.html#session-3-1",
+    "href": "index.html#session-3-1",
+    "title": "Asynchronous sessions",
+    "section": "Session 3",
+    "text": "Session 3\n\nPart E · TeX and tikz\n\nDownload and compile the RITS slide deck, explore the related RITS visualisation, and host your compiled PDF on GitHub Pages. Submit the hosted PDF link as a labelled plain text file through Canvas.\nSessions 1 and 2 are complete. Part E of Session 3 is now available."
   }
 ]

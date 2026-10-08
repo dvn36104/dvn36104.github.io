@@ -152,6 +152,17 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 3</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-3">    
+        <li>
+    <a class="dropdown-item" href="./session3/part-e.html">
+ <span class="dropdown-text">Part E · TeX and tikz</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -170,6 +181,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#session-1" id="toc-session-1" class="nav-link active" data-scroll-target="#session-1">Session 1</a></li>
   <li><a href="#session-2" id="toc-session-2" class="nav-link" data-scroll-target="#session-2">Session 2</a></li>
+  <li><a href="#session-3-1" id="toc-session-3-1" class="nav-link" data-scroll-target="#session-3-1">Session 3</a></li>
   </ul>
 </nav>
     </div>
@@ -236,7 +248,14 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Part D</strong>: the URL of your deployed star app, as a plain text file.</li>
 <li><strong>Part E</strong>: the URL of your deployed multipage app, as a plain text file.</li>
 </ul>
-<p>Sessions 1 and 2 are complete. Session 3 will appear here when it is released.</p>
+</section>
+<section id="session-3-1" class="level2">
+<h2 class="anchored" data-anchor-id="session-3-1">Session 3</h2>
+<ul>
+<li><a href="./session3/part-e.html">Part E · TeX and tikz</a></li>
+</ul>
+<p>Download and compile the RITS slide deck, explore the related <a href="https://www.rtgs.cash/">RITS visualisation</a>, and host your compiled PDF on GitHub Pages. Submit the hosted PDF link as a labelled plain text file through <a href="https://canvas.uts.edu.au/courses/41964/assignments/293957">Canvas</a>.</p>
+<p>Sessions 1 and 2 are complete. Part E of Session 3 is now available.</p>
 
 
 <script type="ojs-module-contents">
@@ -340,7 +359,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/dvn36104\.github\.io\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
