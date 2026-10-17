@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Tree of Life – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 3</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-3">    
+        <li>
+    <a class="dropdown-item" href="../session3/part-a.html">
+ <span class="dropdown-text">Part A · Gold</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-b.html">
+ <span class="dropdown-text">Part B · Crypto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-c.html">
+ <span class="dropdown-text">Part C · Tableau 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-d.html">
+ <span class="dropdown-text">Part D · Tableau 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-e.html">
+ <span class="dropdown-text">Part E · TeX and tikz</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#a-tree-from-part-a" id="toc-a-tree-from-part-a" class="nav-link active" data-scroll-target="#a-tree-from-part-a">1 · A “tree” from Part A</a></li>
+  <li><a href="#phylogenetic-trees" id="toc-phylogenetic-trees" class="nav-link" data-scroll-target="#phylogenetic-trees">2 · Phylogenetic trees</a></li>
+  <li><a href="#drawing-dated-trees" id="toc-drawing-dated-trees" class="nav-link" data-scroll-target="#drawing-dated-trees">3 · Drawing dated trees</a></li>
+  <li><a href="#clades-and-common-ancestors" id="toc-clades-and-common-ancestors" class="nav-link" data-scroll-target="#clades-and-common-ancestors">4 · Clades and common ancestors</a></li>
+  <li><a href="#a-round-tree-of-life" id="toc-a-round-tree-of-life" class="nav-link" data-scroll-target="#a-round-tree-of-life">5 · A round tree of life</a></li>
+  <li><a href="#the-timetree-of-life" id="toc-the-timetree-of-life" class="nav-link" data-scroll-target="#the-timetree-of-life">6 · The timetree of life</a></li>
+  <li><a href="#final-task-design-your-own-tree-of-life" id="toc-final-task-design-your-own-tree-of-life" class="nav-link" data-scroll-target="#final-task-design-your-own-tree-of-life">Final task · Design your own tree of life</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#bonus" id="toc-bonus" class="nav-link" data-scroll-target="#bonus">Bonus</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Tree of Life</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHB5b2RpZGUuaHR0cCBpbXBvcnQgb3Blbl91cmxcblxuIyBEYXRhIGZpbGVzIGxpdmUgYmVzaWRlIHRoaXMgcGFnZTsgdGhlIFB5dGhvbiB3b3JrZXIgcnVucyBmcm9tIHNpdGVfbGlicy8uXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG5cbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgIFwiZmlndXJlLmZpZ3NpemVcIjogKDksIDUpLFxuICAgIFwiYXhlcy5zcGluZXMudG9wXCI6IEZhbHNlLFxuICAgIFwiYXhlcy5zcGluZXMucmlnaHRcIjogRmFsc2UsXG4gICAgXCJheGVzLmdyaWRcIjogVHJ1ZSxcbiAgICBcImdyaWQuYWxwaGFcIjogMC4yMixcbiAgICBcImZvbnQuc2l6ZVwiOiAxMSxcbn0pXG5wcmludChcIkVudmlyb25tZW50IHJlYWR5LlwiKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiIyBQcmUtYnVpbGQgZXZlcnkgbmFtZSB0aGUgcGFnZSB1c2VzLCBzbyBlYWNoIGNlbGwgd29ya3Mgbm8gbWF0dGVyIHdoaWNoXG4jIGNlbGxzIHdlcmUgcnVuIGJlZm9yZSBpdC4gVGhlIHZpc2libGUgY2VsbHMgcmUtZGVyaXZlIGFsbCBvZiB0aGlzLlxuY2xhc3MgTm9kZTpcbiAgICBkZWYgX19pbml0X18oc2VsZiwgbmFtZT1cIlwiLCBsZW5ndGg9MC4wKTpcbiAgICAgICAgc2VsZi5uYW1lID0gbmFtZVxuICAgICAgICBzZWxmLmxlbmd0aCA9IGxlbmd0aFxuICAgICAgICBzZWxmLmNoaWxkcmVuID0gW11cbiAgICAgICAgc2VsZi5wYXJlbnQgPSBOb25lXG4gICAgZGVmIGlzX2xlYWYoc2VsZik6XG4gICAgICAgIHJldHVybiBub3Qgc2VsZi5jaGlsZHJlblxuICAgIGRlZiBsZWF2ZXMoc2VsZik6XG4gICAgICAgIHJldHVybiBbc2VsZl0gaWYgc2VsZi5pc19sZWFmKCkgZWxzZSBbbCBmb3IgYyBpbiBzZWxmLmNoaWxkcmVuIGZvciBsIGluIGMubGVhdmVzKCldXG4gICAgZGVmIHdhbGsoc2VsZik6XG4gICAgICAgIHlpZWxkIHNlbGZcbiAgICAgICAgZm9yIGMgaW4gc2VsZi5jaGlsZHJlbjpcbiAgICAgICAgICAgIHlpZWxkIGZyb20gYy53YWxrKClcblxuZGVmIHBhcnNlX25ld2ljayh0ZXh0KTpcbiAgICBzID0gdGV4dC5zdHJpcCgpLnJzdHJpcChcIjtcIilcbiAgICBwb3MgPSAwXG4gICAgZGVmIHJlYWRfbGFiZWwoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIGlmIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdID09IFwiJ1wiOlxuICAgICAgICAgICAgZW5kID0gcy5pbmRleChcIidcIiwgcG9zICsgMSlcbiAgICAgICAgICAgIGxhYmVsLCBwb3NfID0gc1twb3MgKyAxOmVuZF0sIGVuZCArIDFcbiAgICAgICAgZWxzZTpcbiAgICAgICAgICAgIHN0YXJ0ID0gcG9zXG4gICAgICAgICAgICBwb3NfID0gcG9zXG4gICAgICAgICAgICB3aGlsZSBwb3NfIDwgbGVuKHMpIGFuZCBzW3Bvc19dIG5vdCBpbiBcIiwoKTo7XCI6XG4gICAgICAgICAgICAgICAgcG9zXyArPSAxXG4gICAgICAgICAgICBsYWJlbCA9IHNbc3RhcnQ6cG9zX11cbiAgICAgICAgcG9zID0gcG9zX1xuICAgICAgICByZXR1cm4gbGFiZWwuc3RyaXAoKVxuICAgIGRlZiByZWFkX2xlbmd0aCgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgaWYgcG9zIDwgbGVuKHMpIGFuZCBzW3Bvc10gPT0gXCI6XCI6XG4gICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTtcIjpcbiAgICAgICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgcmV0dXJuIGZsb2F0KHNbc3RhcnQ6cG9zXSlcbiAgICAgICAgcmV0dXJuIDAuMFxuICAgIGRlZiByZWFkX25vZGUoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIG5vZGUgPSBOb2RlKClcbiAgICAgICAgaWYgc1twb3NdID09IFwiKFwiOlxuICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIHdoaWxlIFRydWU6XG4gICAgICAgICAgICAgICAgY2hpbGQgPSByZWFkX25vZGUoKVxuICAgICAgICAgICAgICAgIGNoaWxkLnBhcmVudCA9IG5vZGVcbiAgICAgICAgICAgICAgICBub2RlLmNoaWxkcmVuLmFwcGVuZChjaGlsZClcbiAgICAgICAgICAgICAgICBpZiBzW3Bvc10gIT0gXCIsXCI6XG4gICAgICAgICAgICAgICAgICAgIGJyZWFrXG4gICAgICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgIG5vZGUubmFtZSA9IHJlYWRfbGFiZWwoKVxuICAgICAgICBub2RlLmxlbmd0aCA9IHJlYWRfbGVuZ3RoKClcbiAgICAgICAgcmV0dXJuIG5vZGVcbiAgICByZXR1cm4gcmVhZF9ub2RlKClcblxuZGVmIHNldF9kZXB0aHMocm9vdCk6XG4gICAgZm9yIG5vZGUgaW4gcm9vdC53YWxrKCk6XG4gICAgICAgIG5vZGUuZGVwdGggPSAobm9kZS5wYXJlbnQuZGVwdGggaWYgbm9kZS5wYXJlbnQgZWxzZSAwLjApICsgbm9kZS5sZW5ndGhcblxuZGVmIGxheW91dChyb290KTpcbiAgICBzZXRfZGVwdGhzKHJvb3QpXG4gICAgZm9yIGksIGxlYWYgaW4gZW51bWVyYXRlKHJvb3QubGVhdmVzKCkpOlxuICAgICAgICBsZWFmLnkgPSBmbG9hdChpKVxuICAgIGRlZiBwbGFjZShub2RlKTpcbiAgICAgICAgaWYgbm90IG5vZGUuaXNfbGVhZigpOlxuICAgICAgICAgICAgZm9yIGMgaW4gbm9kZS5jaGlsZHJlbjpcbiAgICAgICAgICAgICAgICBwbGFjZShjKVxuICAgICAgICAgICAgbm9kZS55ID0gc3VtKGMueSBmb3IgYyBpbiBub2RlLmNoaWxkcmVuKSAvIGxlbihub2RlLmNoaWxkcmVuKVxuICAgIHBsYWNlKHJvb3QpXG5cbmRlZiBkcmF3X3RyZWUocm9vdCwgYXgsIGNvbG9ycz1Ob25lLCBkZWZhdWx0PVwiIzU1NTU1NVwiLCBsdz0wLjgsXG4gICAgICAgICAgICAgIGxhYmVscz1GYWxzZSwgZm9udHNpemU9Nik6XG4gICAgbGF5b3V0KHJvb3QpXG4gICAgc2VncyA9IHt9XG4gICAgZGVmIGFkZChjb2wsIHgwLCB5MCwgeDEsIHkxKTpcbiAgICAgICAgeHMsIHlzID0gc2Vncy5zZXRkZWZhdWx0KGNvbCwgKFtdLCBbXSkpXG4gICAgICAgIHhzICs9IFt4MCwgeDEsIE5vbmVdOyB5cyArPSBbeTAsIHkxLCBOb25lXVxuICAgIGZvciBub2RlIGluIHJvb3Qud2FsaygpOlxuICAgICAgICBjb2wgPSAoY29sb3JzIG9yIHt9KS5nZXQoaWQobm9kZSksIGRlZmF1bHQpXG4gICAgICAgIGlmIG5vZGUucGFyZW50OlxuICAgICAgICAgICAgYWRkKGNvbCwgbm9kZS5wYXJlbnQuZGVwdGgsIG5vZGUueSwgbm9kZS5kZXB0aCwgbm9kZS55KVxuICAgICAgICBpZiBub3Qgbm9kZS5pc19sZWFmKCk6XG4gICAgICAgICAgICB5cyA9IFtjLnkgZm9yIGMgaW4gbm9kZS5jaGlsZHJlbl1cbiAgICAgICAgICAgIGFkZChjb2wsIG5vZGUuZGVwdGgsIG1pbih5cyksIG5vZGUuZGVwdGgsIG1heCh5cykpXG4gICAgZm9yIGNvbCwgKHhzLCB5cykgaW4gc2Vncy5pdGVtcygpOlxuICAgICAgICBheC5wbG90KHhzLCB5cywgY29sb3I9Y29sLCBsdz1sdywgc29saWRfY2Fwc3R5bGU9XCJyb3VuZFwiKVxuICAgIGlmIGxhYmVsczpcbiAgICAgICAgZm9yIGxlYWYgaW4gcm9vdC5sZWF2ZXMoKTpcbiAgICAgICAgICAgIGNvbCA9IChjb2xvcnMgb3Ige30pLmdldChpZChsZWFmKSwgXCIjMjIyMjIyXCIpXG4gICAgICAgICAgICBheC50ZXh0KGxlYWYuZGVwdGgsIGxlYWYueSwgXCIgXCIgKyBsZWFmLm5hbWUsIHZhPVwiY2VudGVyXCIsXG4gICAgICAgICAgICAgICAgICAgIGZvbnRzaXplPWZvbnRzaXplLCBjb2xvcj1jb2wpXG4gICAgYXguc2V0X3l0aWNrcyhbXSlcbiAgICBmb3Igc2lkZSBpbiAoXCJsZWZ0XCIsIFwidG9wXCIsIFwicmlnaHRcIik6XG4gICAgICAgIGF4LnNwaW5lc1tzaWRlXS5zZXRfdmlzaWJsZShGYWxzZSlcblxuZGVmIGRyYXdfcm91bmQocm9vdCwgYXgsIGNvbG9ycz1Ob25lLCBkZWZhdWx0PVwiIzU1NTU1NVwiLCBsdz0wLjcsXG4gICAgICAgICAgICAgICBsYWJlbHM9RmFsc2UsIGZvbnRzaXplPTUsIGdhcF9kZWc9MTApOlxuICAgIGxheW91dChyb290KVxuICAgIHRpcHMgPSByb290LmxlYXZlcygpXG4gICAgbWF4X2QgPSBtYXgodC5kZXB0aCBmb3IgdCBpbiB0aXBzKVxuICAgIHNwYW4gPSBucC5kZWcycmFkKDM2MCAtIGdhcF9kZWcpXG4gICAgYTAgPSBucC5kZWcycmFkKDkwICsgZ2FwX2RlZyAvIDIpXG4gICAgZGVmIGFuZyh5KTpcbiAgICAgICAgcmV0dXJuIGEwICsgc3BhbiAqIHkgLyBtYXgobGVuKHRpcHMpIC0gMSwgMSlcbiAgICBzZWdzID0ge31cbiAgICBkZWYgYWRkKGNvbCwgcHRzKTpcbiAgICAgICAgeHMsIHlzID0gc2Vncy5zZXRkZWZhdWx0KGNvbCwgKFtdLCBbXSkpXG4gICAgICAgIHhzICs9IFtwWzBdIGZvciBwIGluIHB0c10gKyBbTm9uZV07IHlzICs9IFtwWzFdIGZvciBwIGluIHB0c10gKyBbTm9uZV1cbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgY29sID0gKGNvbG9ycyBvciB7fSkuZ2V0KGlkKG5vZGUpLCBkZWZhdWx0KVxuICAgICAgICBpZiBub2RlLnBhcmVudDpcbiAgICAgICAgICAgIGFkZChjb2wsIFsoYW5nKG5vZGUueSksIG5vZGUucGFyZW50LmRlcHRoKSwgKGFuZyhub2RlLnkpLCBub2RlLmRlcHRoKV0pXG4gICAgICAgIGlmIG5vdCBub2RlLmlzX2xlYWYoKTpcbiAgICAgICAgICAgIHlzID0gc29ydGVkKGMueSBmb3IgYyBpbiBub2RlLmNoaWxkcmVuKVxuICAgICAgICAgICAgYXJjID0gbnAubGluc3BhY2UoYW5nKHlzWzBdKSwgYW5nKHlzWy0xXSksIDI0KVxuICAgICAgICAgICAgYWRkKGNvbCwgbGlzdCh6aXAoYXJjLCBucC5mdWxsKDI0LCBub2RlLmRlcHRoKSkpKVxuICAgIGZvciBjb2wsICh4cywgeXMpIGluIHNlZ3MuaXRlbXMoKTpcbiAgICAgICAgYXgucGxvdCh4cywgeXMsIGNvbG9yPWNvbCwgbHc9bHcsIHNvbGlkX2NhcHN0eWxlPVwicm91bmRcIilcbiAgICBpZiBsYWJlbHM6XG4gICAgICAgIGZvciB0IGluIHRpcHM6XG4gICAgICAgICAgICBhID0gYW5nKHQueSk7IGRlZyA9IG5wLnJhZDJkZWcoYSkgJSAzNjBcbiAgICAgICAgICAgIGZsaXAgPSA5MCA8IGRlZyA8IDI3MFxuICAgICAgICAgICAgYXgudGV4dChhLCBtYXhfZCAqIDEuMDIsIHQubmFtZSxcbiAgICAgICAgICAgICAgICAgICAgcm90YXRpb249KGRlZyArIDE4MCBpZiBmbGlwIGVsc2UgZGVnKSwgcm90YXRpb25fbW9kZT1cImFuY2hvclwiLFxuICAgICAgICAgICAgICAgICAgICBoYT1cInJpZ2h0XCIgaWYgZmxpcCBlbHNlIFwibGVmdFwiLCB2YT1cImNlbnRlclwiLCBmb250c2l6ZT1mb250c2l6ZSxcbiAgICAgICAgICAgICAgICAgICAgY29sb3I9KGNvbG9ycyBvciB7fSkuZ2V0KGlkKHQpLCBcIiMyMjIyMjJcIikpXG4gICAgYXguc2V0X3h0aWNrcyhbXSk7IGF4LnNldF95dGlja3MoW10pXG4gICAgYXguc3BpbmVzW1wicG9sYXJcIl0uc2V0X3Zpc2libGUoRmFsc2UpXG4gICAgYXguZ3JpZChGYWxzZSlcblxuZGVmIGNsYWRlKHJvb3QsIG5hbWVzKTpcbiAgICB3YW50ID0gc2V0KG5hbWVzKVxuICAgIGJlc3QgPSBOb25lXG4gICAgZm9yIG5vZGUgaW4gcm9vdC53YWxrKCk6XG4gICAgICAgIGhhdmUgPSB7bC5uYW1lIGZvciBsIGluIG5vZGUubGVhdmVzKCl9XG4gICAgICAgIGlmIHdhbnQgPD0gaGF2ZSBhbmQgKGJlc3QgaXMgTm9uZSBvciBsZW4oaGF2ZSkgPCBsZW4oYmVzdFswXSkpOlxuICAgICAgICAgICAgYmVzdCA9IChoYXZlLCBub2RlKVxuICAgIHJldHVybiBiZXN0WzFdIGlmIGJlc3QgZWxzZSBOb25lXG5cbmRlZiBwYWludChncm91cHMpOlxuICAgIGNvbG9ycyA9IHt9XG4gICAgZm9yIGNsLCBjb2wgaW4gZ3JvdXBzOlxuICAgICAgICBmb3Igbm9kZSBpbiBjbC53YWxrKCk6XG4gICAgICAgICAgICBjb2xvcnNbaWQobm9kZSldID0gY29sXG4gICAgcmV0dXJuIGNvbG9yc1xuXG5taW5pID0gcGFyc2VfbmV3aWNrKFwiKChIb21vOjYuNywgUGFuOjYuNyk6Mi4yLCBHb3JpbGxhOjguOSk7XCIpXG5zZXRfZGVwdGhzKG1pbmkpXG5cbmFtbmlvdGVzID0gcGFyc2VfbmV3aWNrKG9wZW5fdXJsKERBVEFfVVJMICsgXCJhbW5pb3Rlc19mYW1pbHkubndrXCIpLnJlYWQoKSlcbnNldF9kZXB0aHMoYW1uaW90ZXMpXG5yb290X2FnZSA9IG1heChsLmRlcHRoIGZvciBsIGluIGFtbmlvdGVzLmxlYXZlcygpKVxucHJpbWF0ZXMgPSBjbGFkZShhbW5pb3RlcywgW1wiSG9taW5pZGFlXCIsIFwiTGVtdXJpZGFlXCJdKVxuXG5hbW5pb3RlX3Jvd3MgPSBbbGluZS5zcGxpdChcIixcIikgZm9yIGxpbmUgaW5cbiAgICAgICAgICAgICAgICBvcGVuX3VybChEQVRBX1VSTCArIFwiYW1uaW90ZV9zcGVjaWVzLmNzdlwiKS5yZWFkKCkuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5wcmltYXRlX2ZhbWlsaWVzID0gc29ydGVkKHtyWzJdIGZvciByIGluIGFtbmlvdGVfcm93cyBpZiByWzFdID09IFwiUHJpbWF0ZXNcIn0pXG5cbnRheG9ub215ID0gTm9kZShcIkFtbmlvdGFcIilcbmluZGV4ID0ge31cbmZvciByIGluIGFtbmlvdGVfcm93czpcbiAgICBwYXJlbnQgPSB0YXhvbm9teVxuICAgIGZvciBuYW1lIGluIChyWzBdLCByWzFdLCByWzJdKTpcbiAgICAgICAga2V5ID0gKHBhcmVudC5uYW1lLCBuYW1lKVxuICAgICAgICBjaGlsZCA9IGluZGV4LmdldChrZXkpXG4gICAgICAgIGlmIGNoaWxkIGlzIE5vbmU6XG4gICAgICAgICAgICBjaGlsZCA9IE5vZGUobmFtZSwgbGVuZ3RoPTEuMClcbiAgICAgICAgICAgIGNoaWxkLnBhcmVudCA9IHBhcmVudFxuICAgICAgICAgICAgcGFyZW50LmNoaWxkcmVuLmFwcGVuZChjaGlsZClcbiAgICAgICAgICAgIGluZGV4W2tleV0gPSBjaGlsZFxuICAgICAgICBwYXJlbnQgPSBjaGlsZFxuZmFtcyA9IHRheG9ub215LmxlYXZlcygpXG5cbmV1ayA9IHBhcnNlX25ld2ljayhvcGVuX3VybChEQVRBX1VSTCArIFwiZXVrYXJ5b3Rlc19jbGFzcy5ud2tcIikucmVhZCgpKVxuc2V0X2RlcHRocyhldWspXG5ldWtfYWdlID0gbWF4KGwuZGVwdGggZm9yIGwgaW4gZXVrLmxlYXZlcygpKVxuc2lkZV9hLCBzaWRlX2IgPSBldWsuY2hpbGRyZW5cbmJsb2NrXzEsIGJsb2NrXzIgPSBzaWRlX2EuY2hpbGRyZW5cbmZ1bmdpID0gYmxvY2tfMVxuc21hbGxfMSwgcmVzdCA9IGJsb2NrXzIuY2hpbGRyZW5cbmFuaW1hbHMsIHNtYWxsXzIgPSByZXN0LmNoaWxkcmVuXG5wbGFudHMgPSBjbGFkZShldWssIFtcIk1hZ25vbGlvcHNpZGFcIiwgXCJDaGxvcm9waHljZWFlXCJdKVxuYmxvY2sgPSBwbGFudHNcbmNvbG9ycyA9IHBhaW50KFsoYW5pbWFscywgXCIjNDI2OWQwXCIpLCAoZnVuZ2ksIFwiI2U2Njg1MlwiKSwgKHBsYW50cywgXCIjMzBhOGIxXCIpXSlcblxucGh5bGEgPSBwYXJzZV9uZXdpY2sob3Blbl91cmwoREFUQV9VUkwgKyBcImV1a2FyeW90ZXNfcGh5bHVtLm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKHBoeWxhKVxucGh5bGFfYWdlID0gbWF4KGwuZGVwdGggZm9yIGwgaW4gcGh5bGEubGVhdmVzKCkpIn0=
+</script>
+</div>
+<section id="a-tree-from-part-a" class="level2">
+<h2 class="anchored" data-anchor-id="a-tree-from-part-a">1 · A “tree” from Part A</h2>
+<p>In Part A you worked with a <strong>table</strong> of amniotes: one row per species. This data is <strong>hierarchical</strong>: each species belongs to exactly one group, each group to exactly one larger group, and so on up to a single root. The taxonomy columns of Part A’s amniote table, where every species sits in a genus, every genus in a family, every family in an order, and every order in a class. This is the structure a <strong>tree</strong> draws: one parent per item, one root, with no cycles.</p>
+<p>Part A’s table contains a tree which can be built with a node structure layout that gives every node two coordinates (x is distance from the root; y spreads the tips one per row, with each ancestor centred on its children).</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2xhc3MgTm9kZTpcbiAgICBkZWYgX19pbml0X18oc2VsZiwgbmFtZT1cIlwiLCBsZW5ndGg9MC4wKTpcbiAgICAgICAgc2VsZi5uYW1lID0gbmFtZSAgICAgICAgICAjIHRheG9uIG5hbWUgKHRpcHMpIG9yIHN1cHBvcnQgbGFiZWwgKGludGVybmFsKVxuICAgICAgICBzZWxmLmxlbmd0aCA9IGxlbmd0aCAgICAgICMgYnJhbmNoIGxlbmd0aCB0byB0aGUgcGFyZW50LCBpbiBNeXIgaGVyZVxuICAgICAgICBzZWxmLmNoaWxkcmVuID0gW10gICAgICAgICMgZW1wdHkgbGlzdCA9IHRoaXMgbm9kZSBpcyBhIHRpcFxuICAgICAgICBzZWxmLnBhcmVudCA9IE5vbmVcblxuICAgIGRlZiBpc19sZWFmKHNlbGYpOlxuICAgICAgICByZXR1cm4gbm90IHNlbGYuY2hpbGRyZW5cblxuICAgIGRlZiBsZWF2ZXMoc2VsZik6XG4gICAgICAgIHJldHVybiBbc2VsZl0gaWYgc2VsZi5pc19sZWFmKCkgZWxzZSBbbCBmb3IgYyBpbiBzZWxmLmNoaWxkcmVuIGZvciBsIGluIGMubGVhdmVzKCldXG5cbiAgICBkZWYgd2FsayhzZWxmKTpcbiAgICAgICAgeWllbGQgc2VsZlxuICAgICAgICBmb3IgYyBpbiBzZWxmLmNoaWxkcmVuOlxuICAgICAgICAgICAgeWllbGQgZnJvbSBjLndhbGsoKVxuXG5cbmRlZiBzZXRfZGVwdGhzKHJvb3QpOlxuICAgIGZvciBub2RlIGluIHJvb3Qud2FsaygpOlxuICAgICAgICBub2RlLmRlcHRoID0gKG5vZGUucGFyZW50LmRlcHRoIGlmIG5vZGUucGFyZW50IGVsc2UgMC4wKSArIG5vZGUubGVuZ3RoXG5cblxuZGVmIGxheW91dChyb290KTpcbiAgICBzZXRfZGVwdGhzKHJvb3QpXG4gICAgZm9yIGksIGxlYWYgaW4gZW51bWVyYXRlKHJvb3QubGVhdmVzKCkpOlxuICAgICAgICBsZWFmLnkgPSBmbG9hdChpKVxuICAgIGRlZiBwbGFjZShub2RlKTpcbiAgICAgICAgaWYgbm90IG5vZGUuaXNfbGVhZigpOlxuICAgICAgICAgICAgZm9yIGMgaW4gbm9kZS5jaGlsZHJlbjpcbiAgICAgICAgICAgICAgICBwbGFjZShjKVxuICAgICAgICAgICAgbm9kZS55ID0gc3VtKGMueSBmb3IgYyBpbiBub2RlLmNoaWxkcmVuKSAvIGxlbihub2RlLmNoaWxkcmVuKVxuICAgIHBsYWNlKHJvb3QpXG5cblxuZGVmIGRyYXdfdHJlZShyb290LCBheCwgY29sb3JzPU5vbmUsIGRlZmF1bHQ9XCIjNTU1NTU1XCIsIGx3PTAuOCxcbiAgICAgICAgICAgICAgbGFiZWxzPUZhbHNlLCBmb250c2l6ZT02KTpcbiAgICBsYXlvdXQocm9vdClcbiAgICBzZWdzID0ge30gICAgICAgICAgICAgICAgICAgICAjIGNvbG91ciAtPiBvbmUgbG9uZyBicm9rZW4gbGluZVxuICAgIGRlZiBhZGQoY29sLCB4MCwgeTAsIHgxLCB5MSk6XG4gICAgICAgIHhzLCB5cyA9IHNlZ3Muc2V0ZGVmYXVsdChjb2wsIChbXSwgW10pKVxuICAgICAgICB4cyArPSBbeDAsIHgxLCBOb25lXTsgeXMgKz0gW3kwLCB5MSwgTm9uZV1cbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgY29sID0gKGNvbG9ycyBvciB7fSkuZ2V0KGlkKG5vZGUpLCBkZWZhdWx0KVxuICAgICAgICBpZiBub2RlLnBhcmVudDogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgaG9yaXpvbnRhbCBicmFuY2hcbiAgICAgICAgICAgIGFkZChjb2wsIG5vZGUucGFyZW50LmRlcHRoLCBub2RlLnksIG5vZGUuZGVwdGgsIG5vZGUueSlcbiAgICAgICAgaWYgbm90IG5vZGUuaXNfbGVhZigpOiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIHZlcnRpY2FsIGNvbm5lY3RvclxuICAgICAgICAgICAgeXMgPSBbYy55IGZvciBjIGluIG5vZGUuY2hpbGRyZW5dXG4gICAgICAgICAgICBhZGQoY29sLCBub2RlLmRlcHRoLCBtaW4oeXMpLCBub2RlLmRlcHRoLCBtYXgoeXMpKVxuICAgIGZvciBjb2wsICh4cywgeXMpIGluIHNlZ3MuaXRlbXMoKTpcbiAgICAgICAgYXgucGxvdCh4cywgeXMsIGNvbG9yPWNvbCwgbHc9bHcsIHNvbGlkX2NhcHN0eWxlPVwicm91bmRcIilcbiAgICBpZiBsYWJlbHM6XG4gICAgICAgIGZvciBsZWFmIGluIHJvb3QubGVhdmVzKCk6XG4gICAgICAgICAgICBjb2wgPSAoY29sb3JzIG9yIHt9KS5nZXQoaWQobGVhZiksIFwiIzIyMjIyMlwiKVxuICAgICAgICAgICAgYXgudGV4dChsZWFmLmRlcHRoLCBsZWFmLnksIFwiIFwiICsgbGVhZi5uYW1lLCB2YT1cImNlbnRlclwiLFxuICAgICAgICAgICAgICAgICAgICBmb250c2l6ZT1mb250c2l6ZSwgY29sb3I9Y29sKVxuICAgIGF4LnNldF95dGlja3MoW10pXG4gICAgZm9yIHNpZGUgaW4gKFwibGVmdFwiLCBcInRvcFwiLCBcInJpZ2h0XCIpOlxuICAgICAgICBheC5zcGluZXNbc2lkZV0uc2V0X3Zpc2libGUoRmFsc2UpIn0=
+</script>
+</div>
+<p>Now the tree itself. Walk the table’s rows and create a node the first time each class, order and family name appears:</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJhbW5pb3RlX3NwZWNpZXMuY3N2XCIpLnJlYWQoKVxucm93cyA9IFtsaW5lLnNwbGl0KFwiLFwiKSBmb3IgbGluZSBpbiB0ZXh0LnN0cmlwKCkuc3BsaXQoXCJcXG5cIilbMTpdXVxuXG50YXhvbm9teSA9IE5vZGUoXCJBbW5pb3RhXCIpXG5pbmRleCA9IHt9XG5mb3IgciBpbiByb3dzOlxuICAgIHBhcmVudCA9IHRheG9ub215XG4gICAgZm9yIG5hbWUgaW4gKHJbMF0sIHJbMV0sIHJbMl0pOiAgICAgICAgICAjIGNsYXNzID4gb3JkZXIgPiBmYW1pbHlcbiAgICAgICAga2V5ID0gKHBhcmVudC5uYW1lLCBuYW1lKVxuICAgICAgICBjaGlsZCA9IGluZGV4LmdldChrZXkpXG4gICAgICAgIGlmIGNoaWxkIGlzIE5vbmU6XG4gICAgICAgICAgICBjaGlsZCA9IE5vZGUobmFtZSwgbGVuZ3RoPTEuMClcbiAgICAgICAgICAgIGNoaWxkLnBhcmVudCA9IHBhcmVudFxuICAgICAgICAgICAgcGFyZW50LmNoaWxkcmVuLmFwcGVuZChjaGlsZClcbiAgICAgICAgICAgIGluZGV4W2tleV0gPSBjaGlsZFxuICAgICAgICBwYXJlbnQgPSBjaGlsZFxuXG5mYW1zID0gdGF4b25vbXkubGVhdmVzKClcbnByaW50KGZcIntsZW4oZmFtcyl9IGZhbWlsaWVzLCB7bGVuKGluZGV4KSAtIGxlbihmYW1zKX0gY2xhc3NlcyBhbmQgb3JkZXJzIGFib3ZlIHRoZW1cIikifQ==
+</script>
+</div>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IGxlbihmYW1zKSA9PSA0NjVcbmFzc2VydCBsZW4odGF4b25vbXkuY2hpbGRyZW4pID09IDNcbmFzc2VydCBzdW0obGVuKGMuY2hpbGRyZW4pIGZvciBjIGluIHRheG9ub215LmNoaWxkcmVuKSA9PSA3MlxucHJpbnQoXCLinJMgNDY1IGZhbWlsaWVzIGluIDcyIG9yZGVycyBpbiAzIGNsYXNzZXMsIGV4YWN0bHkgYXMgdGhlIGNvbHVtbnMgbmVzdFwiKSJ9
+</script>
+</div>
+<p>This first tree is a hierarchy, not a dated phylogeny. Put each taxonomic rank in its own categorical column and draw every node explicitly. The horizontal spacing separates ranks; it does not measure evolutionary distance or time.</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGF5b3V0KHRheG9ub215KVxuXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDksIDgpKVxuXG4jIEdpdmUgZWFjaCBjbGFzcyBvbmUgY29sb3VyLCB0aGVuIGNhcnJ5IHRoYXQgY29sb3VyIGRvd24gYWxsIGl0cyBicmFuY2hlcy5cbmNsYXNzX2NvbG91cnMgPSB7XG4gICAgXCJNYW1tYWxpYVwiOiBcIiMyNzY0QzdcIixcbiAgICBcIkF2ZXNcIjogXCIjRDg2QjE4XCIsXG4gICAgXCJSZXB0aWxpYVwiOiBcIiMxMjgwNkFcIixcbn1cbmNsYXNzX2xhYmVscyA9IHtcbiAgICBcIk1hbW1hbGlhXCI6IFwiTWFtbWFsaWEgKG1hbW1hbHMpXCIsXG4gICAgXCJBdmVzXCI6IFwiQXZlcyAoYmlyZHMpXCIsXG4gICAgXCJSZXB0aWxpYVwiOiBcIlJlcHRpbGlhIChyZXB0aWxlcylcIixcbn1cblxuZGVmIGNsYXNzX29mKG5vZGUpOlxuICAgIFwiXCJcIlJldHVybiB0aGUgY2xhc3MgaW1tZWRpYXRlbHkgYmVsb3cgdGhlIEFtbmlvdGEgcm9vdC5cIlwiXCJcbiAgICBicmFuY2ggPSBub2RlXG4gICAgd2hpbGUgYnJhbmNoLnBhcmVudCBpcyBub3QgTm9uZSBhbmQgYnJhbmNoLnBhcmVudCBpcyBub3QgdGF4b25vbXk6XG4gICAgICAgIGJyYW5jaCA9IGJyYW5jaC5wYXJlbnRcbiAgICByZXR1cm4gTm9uZSBpZiBicmFuY2ggaXMgdGF4b25vbXkgZWxzZSBicmFuY2gubmFtZVxuXG4jIEdyb3VwIHBhcmVudC1jaGlsZCBsaW5lcyBieSBjbGFzcyBzbyBhbGwgZGVzY2VuZGFudCBicmFuY2hlcyBpbmhlcml0IGNvbG91ci5cbmVkZ2VzID0ge25hbWU6IChbXSwgW10pIGZvciBuYW1lIGluIGNsYXNzX2NvbG91cnN9XG5mb3Igbm9kZSBpbiB0YXhvbm9teS53YWxrKCk6XG4gICAgaWYgbm9kZS5wYXJlbnQgaXMgbm90IE5vbmU6XG4gICAgICAgIGVkZ2VfeCwgZWRnZV95ID0gZWRnZXNbY2xhc3Nfb2Yobm9kZSldXG4gICAgICAgIGVkZ2VfeC5leHRlbmQoW25vZGUucGFyZW50LmRlcHRoLCBub2RlLmRlcHRoLCBOb25lXSlcbiAgICAgICAgZWRnZV95LmV4dGVuZChbbm9kZS5wYXJlbnQueSwgbm9kZS55LCBOb25lXSlcblxuZm9yIGNsYXNzX25hbWUsIChlZGdlX3gsIGVkZ2VfeSkgaW4gZWRnZXMuaXRlbXMoKTpcbiAgICBheC5wbG90KGVkZ2VfeCwgZWRnZV95LCBjb2xvcj1jbGFzc19jb2xvdXJzW2NsYXNzX25hbWVdLFxuICAgICAgICAgICAgbHc9MC41NSwgYWxwaGE9MC43NSwgem9yZGVyPTEpXG5cbiMgQSBwb2ludCBpcyBhIG5vZGUuIFBsb3QgZWFjaCByYW5rIHNlcGFyYXRlbHkgc28gdGhlIGhpZXJhcmNoeSBpcyB2aXNpYmxlLlxucmFua19zaXplcyA9IHswOiA4NSwgMTogNDIsIDI6IDE1LCAzOiA3fVxuZm9yIHJhbmssIHNpemUgaW4gcmFua19zaXplcy5pdGVtcygpOlxuICAgIG5vZGVzID0gW25vZGUgZm9yIG5vZGUgaW4gdGF4b25vbXkud2FsaygpIGlmIG5vZGUuZGVwdGggPT0gcmFua11cbiAgICBjb2xvdXJzID0gW1xuICAgICAgICBcIiMxZjNiNWRcIiBpZiBub2RlIGlzIHRheG9ub215IGVsc2UgY2xhc3NfY29sb3Vyc1tjbGFzc19vZihub2RlKV1cbiAgICAgICAgZm9yIG5vZGUgaW4gbm9kZXNcbiAgICBdXG4gICAgYXguc2NhdHRlcihcbiAgICAgICAgW25vZGUuZGVwdGggZm9yIG5vZGUgaW4gbm9kZXNdLFxuICAgICAgICBbbm9kZS55IGZvciBub2RlIGluIG5vZGVzXSxcbiAgICAgICAgcz1zaXplLFxuICAgICAgICBjb2xvcj1jb2xvdXJzLFxuICAgICAgICBlZGdlY29sb3JzPVwid2hpdGVcIiBpZiByYW5rIDwgMiBlbHNlIFwibm9uZVwiLFxuICAgICAgICBsaW5ld2lkdGhzPTAuNixcbiAgICAgICAgem9yZGVyPTMsXG4gICAgKVxuXG4jIExhYmVsIHRoZSBzaW5nbGUgcm9vdCBhbmQgdGhlIHRocmVlIGNsYXNzIG5vZGVzLlxuYXguYW5ub3RhdGUoXCJBbW5pb3RhXCIsICh0YXhvbm9teS5kZXB0aCwgdGF4b25vbXkueSksXG4gICAgICAgICAgICB4eXRleHQ9KC04LCAwKSwgdGV4dGNvb3Jkcz1cIm9mZnNldCBwb2ludHNcIixcbiAgICAgICAgICAgIGhhPVwicmlnaHRcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9OSwgZm9udHdlaWdodD1cImJvbGRcIilcbmZvciBjbGFzc19ub2RlIGluIHRheG9ub215LmNoaWxkcmVuOlxuICAgIGF4LmFubm90YXRlKGNsYXNzX2xhYmVsc1tjbGFzc19ub2RlLm5hbWVdLFxuICAgICAgICAgICAgICAgIChjbGFzc19ub2RlLmRlcHRoLCBjbGFzc19ub2RlLnkpLFxuICAgICAgICAgICAgICAgIHh5dGV4dD0oOSwgLTExKSwgdGV4dGNvb3Jkcz1cIm9mZnNldCBwb2ludHNcIixcbiAgICAgICAgICAgICAgICBoYT1cImxlZnRcIiwgdmE9XCJ0b3BcIiwgZm9udHNpemU9OCxcbiAgICAgICAgICAgICAgICBjb2xvcj1jbGFzc19jb2xvdXJzW2NsYXNzX25vZGUubmFtZV0sIGZvbnR3ZWlnaHQ9XCJib2xkXCIsXG4gICAgICAgICAgICAgICAgem9yZGVyPTUsXG4gICAgICAgICAgICAgICAgYmJveD1kaWN0KGJveHN0eWxlPVwicm91bmQscGFkPTAuMjJcIiwgZmFjZWNvbG9yPVwid2hpdGVcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgZWRnZWNvbG9yPVwibm9uZVwiLCBhbHBoYT0wLjk0KSlcblxuYXguc2V0X3h0aWNrcyhbMCwgMSwgMiwgM10pXG5heC5zZXRfeHRpY2tsYWJlbHMoW1wiUk9PVFxcbjEgbm9kZVwiLCBcIkNMQVNTXFxuMyBub2Rlc1wiLFxuICAgICAgICAgICAgICAgICAgICBcIk9SREVSXFxuNzIgbm9kZXNcIiwgXCJGQU1JTFlcXG40NjUgbm9kZXNcIl0pXG5heC54YXhpcy50aWNrX3RvcCgpXG5heC50aWNrX3BhcmFtcyhheGlzPVwieFwiLCBsZW5ndGg9MCwgcGFkPTkpXG5heC5zZXRfeGxpbSgtMC4yOCwgMy4wOClcbmF4LnNldF95bGltKC04LCBsZW4oZmFtcykgKyA3KVxuYXguaW52ZXJ0X3lheGlzKClcbmF4LnNldF95dGlja3MoW10pXG5heC5ncmlkKGF4aXM9XCJ4XCIsIGNvbG9yPVwiI2U4ZWJlZlwiLCBsaW5ld2lkdGg9MC44LCB6b3JkZXI9MClcbmZvciBzaWRlIGluIChcImxlZnRcIiwgXCJyaWdodFwiLCBcInRvcFwiLCBcImJvdHRvbVwiKTpcbiAgICBheC5zcGluZXNbc2lkZV0uc2V0X3Zpc2libGUoRmFsc2UpXG5heC5zZXRfdGl0bGUoXCJUaHJlZSBDbGFzc2VzIG9mIEFtbmlvdGUgRmFtaWxpZXNcIiwgcGFkPTQyKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>Each dot is now countable: one root, three classes, 72 orders and 465 families. A line means “belongs to”. Colour traces each of the three classes from its class node through all of its orders and families. The vertical ordering only keeps each parent near its children; it does not make neighbouring orders more closely related. The table records membership at four ranks, not evolutionary distances between the groups.</p>
+</section>
+<section id="phylogenetic-trees" class="level2">
+<h2 class="anchored" data-anchor-id="phylogenetic-trees">2 · Phylogenetic trees</h2>
+<p>The word <em>phylogenetic</em> comes from <em>phylogeny</em>: Greek <em>phylon</em> (a tribe, kind or lineage) and <em>-geneia</em> (origin). Ernst Haeckel coined the German word <em>Phylogenie</em> in 1866 for the evolutionary history of a group. A phylogenetic tree is therefore a diagram of a hypothesis about descent and shared origins.</p>
+<p>A phylogenetic tree has three kinds of parts:</p>
+<ul>
+<li><strong>Tips</strong> (leaves) are observed things: living species, families, classes.</li>
+<li><strong>Internal nodes</strong> are inferred ancestors: “these two lineages were once one population.” Each is a hypothesis.</li>
+<li><strong>Branch lengths</strong>, in the trees on this page, are <strong>time</strong>: a branch of length 6.7 means 6.7 million years of independent evolution.</li>
+</ul>
+<p>Haeckel introduces the tree metaphor in this 1866 genealogy of mammals: ancestry grows from a trunk and living groups occupy the outer branches. The form makes hierarchy immediately legible, but its branch lengths are not a measured time scale. Modern phylogenetic trees retain the branching structure while treating topology and branch length as claims supported by data.</p>
+<div id="fig-haeckel-mammals" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A black-and-white nineteenth-century genealogy of mammals drawn as a large branching tree, with Mammalia at the trunk and named mammal groups on the branches.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-haeckel-mammals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/haeckel-mammal-tree-1866.jpg" class="img-fluid figure-img" style="width:52.0%" alt="A black-and-white nineteenth-century genealogy of mammals drawn as a large branching tree, with Mammalia at the trunk and named mammal groups on the branches.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-haeckel-mammals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Ernst Haeckel’s 1866 <em>Stammbaum der Säugethiere mit Inbegriff des Menschen</em> (family tree of mammals, including humans). <a href="https://jhupress.wordpress.com/wp-content/uploads/2014/08/pg-110.jpg">Source image: Johns Hopkins University Press.</a>
+</figcaption>
+</figure>
+</div>
+<p>Branch length is estimated from genetics. DNA sequences for the same gene can be compared across many species. Mutations accumulate at a roughly steady rate, so differences in the sequences is proportional to the time since lineages separated, giving the <em>relative</em> ages. To turn relative ages into <em>absolute</em> ages (millions of years ago), the tree is calibrated against fossils whose age and position are known.</p>
+<p><a href="https://timetree.org">TimeTree</a> (Kumar et al.&nbsp;2022) provides data sets on relationships between species that invludes evolutionary dates, suitable for constructing a proper phylogenetic tree. TimeTree aggregates thousands of such published studies into consensus dated trees.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Tips</th>
+<th>What one tip is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>amniotes_family.nwk</code></td>
+<td>956</td>
+<td>one family of amniotes (mammals, birds, reptiles)</td>
+</tr>
+<tr class="even">
+<td><code>eukaryotes_class.nwk</code></td>
+<td>235</td>
+<td>one class of eukaryotes: animals, fungi, plants, protists</td>
+</tr>
+<tr class="odd">
+<td><code>eukaryotes_phylum.nwk</code></td>
+<td>66</td>
+<td>one phylum of eukaryotes</td>
+</tr>
+</tbody>
+</table>
+<p>Before we can draw a tree we need it as data. The standard format, <strong>Newick</strong>, writes a tree as nested parentheses: each pair of parentheses is one internal node (one ancestor), and <code>:number</code> after a name is the branch length.</p>
+<p>Here is one you can read by eye: humans, chimps and gorillas, with TimeTree’s ages in millions of years (Myr):</p>
+<pre><code>((Homo:6.7, Pan:6.7):2.2, Gorilla:8.9);</code></pre>
+<p>Read from the inside out: <code>Homo</code> and <code>Pan</code> each sit at the end of a 6.7-Myr branch from their shared ancestor, so the human–chimp split was 6.7 million years ago. That ancestor connects, 2.2 Myr further back, to the ancestor it shares with <code>Gorilla</code>: 6.7 + 2.2 = 8.9 Myr, exactly <code>Gorilla</code>’s own branch length.</p>
+<p>In a dated tree every tip is the same total distance from the root, because every living lineage has had the same amount of time.</p>
+<p>The format is recursive (a tree is a node whose children are trees), so the parser is recursive too, reusing the <code>Node</code> class from Section 1.</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHBhcnNlX25ld2ljayh0ZXh0KTpcbiAgICBzID0gdGV4dC5zdHJpcCgpLnJzdHJpcChcIjtcIilcbiAgICBwb3MgPSAwXG5cbiAgICBkZWYgcmVhZF9sYWJlbCgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgaWYgcG9zIDwgbGVuKHMpIGFuZCBzW3Bvc10gPT0gXCInXCI6ICAgICAgICAgICAgIyBxdW90ZWQgbGFiZWwsIGUuZy4gJzkwJ1xuICAgICAgICAgICAgZW5kID0gcy5pbmRleChcIidcIiwgcG9zICsgMSlcbiAgICAgICAgICAgIGxhYmVsLCBwb3MgPSBzW3BvcyArIDE6ZW5kXSwgZW5kICsgMVxuICAgICAgICBlbHNlOlxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTo7XCI6XG4gICAgICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIGxhYmVsID0gc1tzdGFydDpwb3NdXG4gICAgICAgIHJldHVybiBsYWJlbC5zdHJpcCgpXG5cbiAgICBkZWYgcmVhZF9sZW5ndGgoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIGlmIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdID09IFwiOlwiOiAgICAgICAgICAgICMgXCI6Ni43XCIgPSBicmFuY2ggbGVuZ3RoXG4gICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTtcIjpcbiAgICAgICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgcmV0dXJuIGZsb2F0KHNbc3RhcnQ6cG9zXSlcbiAgICAgICAgcmV0dXJuIDAuMFxuXG4gICAgZGVmIHJlYWRfbm9kZSgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgbm9kZSA9IE5vZGUoKVxuICAgICAgICBpZiBzW3Bvc10gPT0gXCIoXCI6ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiKFwiID0gYW5jZXN0b3I6IHJlY3Vyc2VcbiAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICB3aGlsZSBUcnVlOlxuICAgICAgICAgICAgICAgIGNoaWxkID0gcmVhZF9ub2RlKClcbiAgICAgICAgICAgICAgICBjaGlsZC5wYXJlbnQgPSBub2RlXG4gICAgICAgICAgICAgICAgbm9kZS5jaGlsZHJlbi5hcHBlbmQoY2hpbGQpXG4gICAgICAgICAgICAgICAgaWYgc1twb3NdICE9IFwiLFwiOlxuICAgICAgICAgICAgICAgICAgICBicmVha1xuICAgICAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICBwb3MgKz0gMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIGNvbnN1bWUgXCIpXCJcbiAgICAgICAgbm9kZS5uYW1lID0gcmVhZF9sYWJlbCgpXG4gICAgICAgIG5vZGUubGVuZ3RoID0gcmVhZF9sZW5ndGgoKVxuICAgICAgICByZXR1cm4gbm9kZVxuXG4gICAgcmV0dXJuIHJlYWRfbm9kZSgpXG5cblxubWluaSA9IHBhcnNlX25ld2ljayhcIigoSG9tbzo2LjcsIFBhbjo2LjcpOjIuMiwgR29yaWxsYTo4LjkpO1wiKVxucHJpbnQoXCJ0aXBzOlwiLCBbbC5uYW1lIGZvciBsIGluIG1pbmkubGVhdmVzKCldKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYXNzZXJ0IFtsLm5hbWUgZm9yIGwgaW4gbWluaS5sZWF2ZXMoKV0gPT0gW1wiSG9tb1wiLCBcIlBhblwiLCBcIkdvcmlsbGFcIl1cbmFzc2VydCBtaW5pLmNoaWxkcmVuWzBdLmNoaWxkcmVuWzBdLm5hbWUgPT0gXCJIb21vXCJcbmFzc2VydCBtaW5pLmNoaWxkcmVuWzBdLmNoaWxkcmVuWzBdLmxlbmd0aCA9PSA2LjdcbnByaW50KFwi4pyTIHBhcnNlciByZWFkcyB0aXBzLCBzdHJ1Y3R1cmUgYW5kIGJyYW5jaCBsZW5ndGhzIGNvcnJlY3RseVwiKSJ9
+</script>
+</div>
+</section>
+<section id="drawing-dated-trees" class="level2">
+<h2 class="anchored" data-anchor-id="drawing-dated-trees">3 · Drawing dated trees</h2>
+<p>The taxonomy tree’s x axis was rank. In a dated tree the branch lengths are millions of years, so the same <code>draw_tree</code> now puts <strong>time</strong> on the x axis.</p>
+<p>Draw the hominid mini-tree first:</p>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg3LCAyLjYpKVxuZHJhd190cmVlKG1pbmksIGF4LCBsYWJlbHM9VHJ1ZSwgZm9udHNpemU9MTEpXG5heC5tYXJnaW5zKHk9MC4xOClcbmF4LnNldF94bGFiZWwoXCJNeXIgc2luY2UgdGhlIHJvb3RcIilcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>Now a tree with every family of <strong>amniotes</strong>, the same group whose species table you cleaned in Part A.</p>
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYW1uaW90ZXMgPSBwYXJzZV9uZXdpY2sob3Blbl91cmwoREFUQV9VUkwgKyBcImFtbmlvdGVzX2ZhbWlseS5ud2tcIikucmVhZCgpKVxuc2V0X2RlcHRocyhhbW5pb3RlcylcbnJvb3RfYWdlID0gbWF4KGwuZGVwdGggZm9yIGwgaW4gYW1uaW90ZXMubGVhdmVzKCkpXG5wcmludChmXCJ7bGVuKGFtbmlvdGVzLmxlYXZlcygpKX0gZmFtaWxpZXMsIHJvb3Qge3Jvb3RfYWdlOi4xZn0gTXlyIGFnb1wiKSJ9
+</script>
+</div>
+<p>The mini-tree used <strong>Myr since the root</strong>, which matches the stored branch depths but is not the most natural way to read historical dates. For this larger tree, label the axis in <strong>millions of years ago</strong>: about 319 at the root, counting down to 0 at the living tips. Only the tick labels are reversed; the tree geometry and branch lengths do not change.</p>
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LCA3KSlcbmRyYXdfdHJlZShhbW5pb3RlcywgYXgsIGx3PTAuNClcblxubXlhX2xhYmVscyA9IFtyb3VuZChyb290X2FnZSksIDI1MCwgMjAwLCAxNTAsIDEwMCwgNTAsIDBdXG5kZXB0aF90aWNrcyA9IFswXSArIFtyb290X2FnZSAtIGFnZSBmb3IgYWdlIGluIG15YV9sYWJlbHNbMTpdXVxuYXguc2V0X3h0aWNrcyhkZXB0aF90aWNrcylcbmF4LnNldF94dGlja2xhYmVscyhteWFfbGFiZWxzKVxuYXguc2V0X3hsaW0oMCwgcm9vdF9hZ2UgKiAxLjAyKVxuYXguc2V0X3hsYWJlbChcIm1pbGxpb25zIG9mIHllYXJzIGFnb1wiKVxuYXguc2V0X3RpdGxlKGZcIntsZW4oYW1uaW90ZXMubGVhdmVzKCkpfSBBbW5pb3RlIEZhbWlsaWVzXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>No labels (at 956 tips they would be too many).</p>
+<p>The shape shows how every mammal, bird and reptile family trace back to <strong>one node</strong> ~319 Myr ago. The big early fork near the root is mammals splitting from the reptile-plus-bird lineage. Reading left to right now also reads as deep past to present: the numbers decrease from about 319 million years ago to 0, rather than increasing as distance from the root.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="A class is not necessarily a clade">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A class is not necessarily a clade
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Part A records <code>Aves</code> (birds) and <code>Reptilia</code> as separate classes. On the phylogenetic tree, however, birds descend from within the reptile lineage: birds are living dinosaurs and therefore part of the reptile <strong>clade</strong>. “Reptiles” with birds removed is not a complete clade because it leaves out some descendants of their common ancestor.</p>
+</div>
+</div>
+</section>
+<section id="clades-and-common-ancestors" class="level2">
+<h2 class="anchored" data-anchor-id="clades-and-common-ancestors">4 · Clades and common ancestors</h2>
+<p>A <strong>clade</strong> is an ancestor plus <em>all</em> of its descendants: a complete subtree, snapped off at one internal node. “Mammals” is a clade; “cold-blooded animals” is not, because their common ancestor also has warm-blooded descendants. Clades are groups that a tree can point at through the <strong>MRCA</strong>, the most recent common ancestor for a group of tips.</p>
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGNsYWRlKHJvb3QsIG5hbWVzKTpcbiAgICBcIlwiXCJTbWFsbGVzdCBjbGFkZSB3aG9zZSB0aXBzIGluY2x1ZGUgZXZlcnkgbmFtZSBpbiBgbmFtZXNgICh0aGVpciBNUkNBKS5cIlwiXCJcbiAgICB3YW50ID0gc2V0KG5hbWVzKVxuICAgIGJlc3QgPSBOb25lXG4gICAgZm9yIG5vZGUgaW4gcm9vdC53YWxrKCk6XG4gICAgICAgIGhhdmUgPSB7bC5uYW1lIGZvciBsIGluIG5vZGUubGVhdmVzKCl9XG4gICAgICAgIGlmIHdhbnQgPD0gaGF2ZSBhbmQgKGJlc3QgaXMgTm9uZSBvciBsZW4oaGF2ZSkgPCBsZW4oYmVzdFswXSkpOlxuICAgICAgICAgICAgYmVzdCA9IChoYXZlLCBub2RlKVxuICAgIHJldHVybiBiZXN0WzFdIGlmIGJlc3QgZWxzZSBOb25lXG5cblxucHJpbWF0ZXMgPSBjbGFkZShhbW5pb3RlcywgW1wiSG9taW5pZGFlXCIsIFwiTGVtdXJpZGFlXCJdKVxucHJpbnQoZlwie2xlbihwcmltYXRlcy5sZWF2ZXMoKSl9IGZhbWlsaWVzLCBjcm93biBhZ2UgXCJcbiAgICAgIGZcIntyb290X2FnZSAtIHByaW1hdGVzLmRlcHRoOi4xZn0gTXlyXCIpIn0=
+</script>
+</div>
+<p>The <code>clade</code> function returns the <em>smallest</em> branch containing both descendants. Hominidae and Lemuridae sit on opposite sides of the deepest split within Primates, so naming them recovers all 19 primate families, every one descended from the same ancestor ~74 Myr ago. Two families from the same side would return a smaller branch: Hominidae and Hylobatidae would give just the apes.</p>
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg4LjgsIDQuNikpXG5kcmF3X3RyZWUocHJpbWF0ZXMsIGF4LCBsYWJlbHM9VHJ1ZSwgZm9udHNpemU9OSwgZGVmYXVsdD1cIiM0MjY5ZDBcIilcbmF4Lm1hcmdpbnMoeD0wLjE2KVxuZm9yIGxhYmVsIGluIGF4LnRleHRzOlxuICAgIGlmIGxhYmVsLmdldF90ZXh0KCkuc3RyaXAoKSA9PSBcIkhvbWluaWRhZVwiOlxuICAgICAgICBsYWJlbC5zZXRfZm9udHdlaWdodChcImJvbGRcIilcbnRpY2tzID0gcmFuZ2UoMCwgODAsIDEwKVxuYXguc2V0X3h0aWNrcyhbcm9vdF9hZ2UgLSB0IGZvciB0IGluIHRpY2tzXSlcbmF4LnNldF94dGlja2xhYmVscyhbc3RyKHQpIGZvciB0IGluIHRpY2tzXSlcbmF4LnNldF94bGFiZWwoXCJNeXIgYWdvXCIpXG5heC5zZXRfdGl0bGUoXCJUaGUgMTkgUHJpbWF0ZSBGYW1pbGllc1wiKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p><code>Hominidae</code> (all great apes, including humans) is one twig among nineteen. <code>Paleopropithecidae</code>, the sloth lemurs, are <strong>extinct</strong>: humans reached Madagascar roughly two thousand years ago, and the last sloth lemurs disappeared around 500 years ago. A dated tree can carry recently-lost lineages alongside living ones, with nothing in the drawing itself marking them as extinct.</p>
+<section id="taxonomy-columns-versus-a-phylogeny" class="level3">
+<h3 class="anchored" data-anchor-id="taxonomy-columns-versus-a-phylogeny">Taxonomy columns versus a phylogeny</h3>
+<p>Section 1 built the tree encoded by Part A’s hierarchical columns. Now that we can obtain a dated clade, compare the two side-by-side:</p>
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJhbW5pb3RlX3NwZWNpZXMuY3N2XCIpLnJlYWQoKVxucm93cyA9IFtsaW5lLnNwbGl0KFwiLFwiKSBmb3IgbGluZSBpbiB0ZXh0LnN0cmlwKCkuc3BsaXQoXCJcXG5cIilbMTpdXVxucHJpbWF0ZV9mYW1pbGllcyA9IHNvcnRlZCh7clsyXSBmb3IgciBpbiByb3dzIGlmIHJbMV0gPT0gXCJQcmltYXRlc1wifSlcblxuc3RhciA9IE5vZGUoXCJQcmltYXRlc1wiKVxuZm9yIG5hbWUgaW4gcHJpbWF0ZV9mYW1pbGllczpcbiAgICB0aXAgPSBOb2RlKG5hbWUsIGxlbmd0aD0xLjApXG4gICAgdGlwLnBhcmVudCA9IHN0YXJcbiAgICBzdGFyLmNoaWxkcmVuLmFwcGVuZCh0aXApXG5cbmZpZywgYXhlcyA9IHBsdC5zdWJwbG90cygxLCAyLCBmaWdzaXplPSgxMCwgNS41KSlcbmRyYXdfdHJlZShzdGFyLCBheGVzWzBdLCBsYWJlbHM9VHJ1ZSwgZm9udHNpemU9OSlcbmF4ZXNbMF0uc2V0X3RpdGxlKGZcIlBhcnQgQSdzIHRheG9ub215OiB7bGVuKHByaW1hdGVfZmFtaWxpZXMpfSBmYW1pbGllcywgb25lIG5vZGVcIilcbmF4ZXNbMF0uc2V0X3h0aWNrcyhbXSlcbmRyYXdfdHJlZShwcmltYXRlcywgYXhlc1sxXSwgbGFiZWxzPVRydWUsIGZvbnRzaXplPTksIGRlZmF1bHQ9XCIjNDI2OWQwXCIpXG5heGVzWzFdLnNldF90aXRsZShcIlRpbWVUcmVlOiB0aGUgc2FtZSBjbGFkZSwgcmVzb2x2ZWQgYW5kIGRhdGVkXCIpXG50aWNrcyA9IHJhbmdlKDAsIDgwLCAyMClcbmF4ZXNbMV0uc2V0X3h0aWNrcyhbcm9vdF9hZ2UgLSB0IGZvciB0IGluIHRpY2tzXSlcbmF4ZXNbMV0uc2V0X3h0aWNrbGFiZWxzKFtzdHIodCkgZm9yIHQgaW4gdGlja3NdKVxuYXhlc1sxXS5zZXRfeGxhYmVsKFwiTXlyIGFnb1wiKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>The right tree makes claims that the left tree cannot make. For example, the claim that apes split from monkeys before either split from lemurs. Every split has a date.</p>
+<p>Compare the family names used by the two sources:</p>
+<div>
+<div id="pyodide-15" class="exercise-cell">
+
+</div>
+<script type="pyodide-15-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHJlXG5cbnRhYmxlX2ZhbWlsaWVzID0gc2V0KHByaW1hdGVfZmFtaWxpZXMpXG50cmVlX3RpcHMgPSBbbGVhZi5uYW1lIGZvciBsZWFmIGluIHByaW1hdGVzLmxlYXZlcygpXVxudHJlZV9mYW1pbGllcyA9IHtyZS5zdWIoclwiLVxcZCskXCIsIFwiXCIsIG5hbWUpIGZvciBuYW1lIGluIHRyZWVfdGlwc31cblxucHJpbnQoZlwibGlmZS1oaXN0b3J5IHRhYmxlOiB7bGVuKHRhYmxlX2ZhbWlsaWVzKX0gZmFtaWx5IG5hbWVzXCIpXG5wcmludChmXCJUaW1lVHJlZToge2xlbih0cmVlX3RpcHMpfSB0aXBzLCByZXByZXNlbnRpbmcgXCJcbiAgICAgIGZcIntsZW4odHJlZV9mYW1pbGllcyl9IGZhbWlseSBuYW1lc1wiKVxucHJpbnQoXCJvbmx5IGluIGxpZmUtaGlzdG9yeSB0YWJsZTpcIixcbiAgICAgIHNvcnRlZCh0YWJsZV9mYW1pbGllcyAtIHRyZWVfZmFtaWxpZXMpKVxucHJpbnQoXCJvbmx5IGluIFRpbWVUcmVlOlwiLFxuICAgICAgc29ydGVkKHRyZWVfZmFtaWxpZXMgLSB0YWJsZV9mYW1pbGllcykpIn0=
+</script>
+</div>
+<p>The life-history table uses <code>Indridae</code>; TimeTree uses <code>Indriidae</code>. They refer to the same living family. TimeTree also contains <code>Paleopropithecidae</code>, the extinct sloth lemurs, which are absent from the table of living species.</p>
+<p>TimeTree has 19 tips because <code>Cebidae</code>, <code>Indriidae</code> and <code>Lepilemuridae</code> each appear twice, with <code>-1</code> and <code>-2</code> suffixes. Removing those suffixes leaves 16 family names: the same 15 living families after correcting the spelling, plus <code>Paleopropithecidae</code>.</p>
+</section>
+<section id="seven-living-amniote-lineages" class="level3">
+<h3 class="anchored" data-anchor-id="seven-living-amniote-lineages">Seven living amniote lineages</h3>
+<p>The Rowe (2017) figure in Part A shows seven living amniote lineages: Monotremata, Marsupialia, Placentalia, Testudines, Lepidosauria, Crocodilia and Aves. We will colour the same seven groups on the 956-family tree loaded in Section 3.</p>
+<p>For groups recorded in the Part A table, collect their family names and pass them to <code>clade()</code>. The function returns the smallest clade containing those families. The table does not record Marsupialia or Placentalia as separate categories. In the tree, Mammalia splits into Monotremata and Theria, and Theria then splits into Marsupialia and Placentalia. Hominidae identifies the placental branch; the other branch is Marsupialia.</p>
+<div>
+<div id="pyodide-16" class="exercise-cell">
+
+</div>
+<script type="pyodide-16-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJhbW5pb3RlX3NwZWNpZXMuY3N2XCIpLnJlYWQoKVxucm93cyA9IFtsaW5lLnNwbGl0KFwiLFwiKSBmb3IgbGluZSBpbiB0ZXh0LnN0cmlwKCkuc3BsaXQoXCJcXG5cIilbMTpdXVxudGlwX25hbWVzID0ge2wubmFtZSBmb3IgbCBpbiBhbW5pb3Rlcy5sZWF2ZXMoKX1cblxuZGVmIGdyb3VwX2NsYWRlKGxldmVsLCBuYW1lKTpcbiAgICBcIlwiXCJNUkNBIG9mIGV2ZXJ5IHRyZWUgdGlwIHRoYXQgUGFydCBBJ3MgdGFibGUgcHV0cyBpbiB0aGUgZ3JvdXAuXCJcIlwiXG4gICAgY29sID0ge1wiY2xhc3NcIjogMCwgXCJvcmRlclwiOiAxfVtsZXZlbF1cbiAgICBmYW1zID0ge3JbMl0gZm9yIHIgaW4gcm93cyBpZiByW2NvbF0gPT0gbmFtZX1cbiAgICByZXR1cm4gY2xhZGUoYW1uaW90ZXMsIGZhbXMgJiB0aXBfbmFtZXMpXG5cbmF2ZXMgID0gZ3JvdXBfY2xhZGUoXCJjbGFzc1wiLCBcIkF2ZXNcIilcbnRlc3RzID0gZ3JvdXBfY2xhZGUoXCJvcmRlclwiLCBcIlRlc3R1ZGluZXNcIilcbmNyb2NzID0gZ3JvdXBfY2xhZGUoXCJvcmRlclwiLCBcIkNyb2NvZGlsaWFcIilcbmxlcGlkID0gZ3JvdXBfY2xhZGUoXCJvcmRlclwiLCBcIlNxdWFtYXRhXCIpICAgICAjIGluY2x1ZGVzIFNwaGVub2RvbnRpZGFlLCB0aGUgdHVhdGFyYVxubW9ubyAgPSBncm91cF9jbGFkZShcIm9yZGVyXCIsIFwiTW9ub3RyZW1hdGFcIilcblxubWFtICAgID0gZ3JvdXBfY2xhZGUoXCJjbGFzc1wiLCBcIk1hbW1hbGlhXCIpXG50aGVyaWEgPSBuZXh0KGMgZm9yIGMgaW4gbWFtLmNoaWxkcmVuIGlmIG1vbm8gbm90IGluIGxpc3QoYy53YWxrKCkpKVxuYSwgYiAgID0gdGhlcmlhLmNoaWxkcmVuICAgICAgICAgICAgICAgICAgICAgIyBNYXJzdXBpYWxpYSBhbmQgUGxhY2VudGFsaWFcbnBsYWMgICA9IGEgaWYgXCJIb21pbmlkYWVcIiBpbiB7bC5uYW1lIGZvciBsIGluIGEubGVhdmVzKCl9IGVsc2UgYlxubWFycyAgID0gYiBpZiBwbGFjIGlzIGEgZWxzZSBhXG5cbmxpbmVhZ2VzID0gWyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgbGlzdGVkIGJvdHRvbSB0byB0b3Agb24gdGhlIHRyZWVcbiAgICAobWFycywgIFwiTWFyc3VwaWFsaWFcIiwgIFwiI2I1NDQzY1wiKSxcbiAgICAocGxhYywgIFwiUGxhY2VudGFsaWFcIiwgIFwiIzk0NzVjZFwiKSxcbiAgICAobW9ubywgIFwiTW9ub3RyZW1hdGFcIiwgIFwiI2M5OGEwMFwiKSxcbiAgICAobGVwaWQsIFwiTGVwaWRvc2F1cmlhXCIsIFwiIzMwYThiMVwiKSxcbiAgICAoY3JvY3MsIFwiQ3JvY29kaWxpYVwiLCAgIFwiI2U2Njg1MlwiKSxcbiAgICAoYXZlcywgIFwiQXZlc1wiLCAgICAgICAgIFwiIzQyNjlkMFwiKSxcbiAgICAodGVzdHMsIFwiVGVzdHVkaW5lc1wiLCAgIFwiI2Q5Njg5NVwiKSxcbl1cblxubGluZWFnZV9jb2xvdXJzID0ge31cbmZvciBjbCwgbmFtZSwgY29sIGluIGxpbmVhZ2VzOlxuICAgIGZvciBub2RlIGluIGNsLndhbGsoKTpcbiAgICAgICAgbGluZWFnZV9jb2xvdXJzW2lkKG5vZGUpXSA9IGNvbFxuXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDksIDcpKVxuZHJhd190cmVlKGFtbmlvdGVzLCBheCwgY29sb3JzPWxpbmVhZ2VfY29sb3VycywgbHc9MC40KVxuXG5teWFfbGFiZWxzID0gW3JvdW5kKHJvb3RfYWdlKSwgMjUwLCAyMDAsIDE1MCwgMTAwLCA1MCwgMF1cbmF4LnNldF94dGlja3MoWzBdICsgW3Jvb3RfYWdlIC0gYWdlIGZvciBhZ2UgaW4gbXlhX2xhYmVsc1sxOl1dKVxuYXguc2V0X3h0aWNrbGFiZWxzKG15YV9sYWJlbHMpXG5heC5zZXRfeGxpbSgwLCByb290X2FnZSAqIDEuMDIpXG5heC5zZXRfeGxhYmVsKFwibWlsbGlvbnMgb2YgeWVhcnMgYWdvXCIpXG5heC5sZWdlbmQoaGFuZGxlcz1bcGx0LkxpbmUyRChbXSwgW10sIGNvbG9yPWNvbCwgbHc9Mi41LCBsYWJlbD1uYW1lKVxuICAgICAgICAgICAgICAgICAgIGZvciBfLCBuYW1lLCBjb2wgaW4gcmV2ZXJzZWQobGluZWFnZXMpXSxcbiAgICAgICAgICBsb2M9XCJ1cHBlciBsZWZ0XCIsIGZyYW1lb249RmFsc2UsIGZvbnRzaXplPTkpXG5heC5zZXRfdGl0bGUoXCJUaGUgc2V2ZW4gbGl2aW5nIGFtbmlvdGUgbGluZWFnZXNcIilcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>The seven clades tile the tree. Notice what is missing: there are no extinct amniote lineages here. TimeTree is built from DNA comparisons, so every branch must end in an organism somebody could sequence; a lineage with no living descendants leaves no tip to sample and vanishes from the tree entirely. The sloth lemurs got into the primate tree only because they died out ~500 years ago and left bones young enough for ancient-DNA work.</p>
+</section>
+<section id="sec-ex-carnivora" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ex-carnivora">Your turn: Cats and Dogs</h3>
+<p>Cats and dogs are both carnivorans. Extract the clade containing <strong>Canidae</strong> (dogs) and <strong>Felidae</strong> (cats), draw it with labels, and print how many families it holds and how long ago their common ancestor lived.</p>
+<script type="exercise-setup-ex_carnivora-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfY2Fybml2b3JhIiwic2V0dXAiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGpzXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gcHlvZGlkZS5odHRwIGltcG9ydCBvcGVuX3VybFxuXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG5cbmNsYXNzIE5vZGU6XG4gICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU9XCJcIiwgbGVuZ3RoPTAuMCk6XG4gICAgICAgIHNlbGYubmFtZSA9IG5hbWVcbiAgICAgICAgc2VsZi5sZW5ndGggPSBsZW5ndGhcbiAgICAgICAgc2VsZi5jaGlsZHJlbiA9IFtdXG4gICAgICAgIHNlbGYucGFyZW50ID0gTm9uZVxuICAgIGRlZiBpc19sZWFmKHNlbGYpOlxuICAgICAgICByZXR1cm4gbm90IHNlbGYuY2hpbGRyZW5cbiAgICBkZWYgbGVhdmVzKHNlbGYpOlxuICAgICAgICByZXR1cm4gW3NlbGZdIGlmIHNlbGYuaXNfbGVhZigpIGVsc2UgW2wgZm9yIGMgaW4gc2VsZi5jaGlsZHJlbiBmb3IgbCBpbiBjLmxlYXZlcygpXVxuICAgIGRlZiB3YWxrKHNlbGYpOlxuICAgICAgICB5aWVsZCBzZWxmXG4gICAgICAgIGZvciBjIGluIHNlbGYuY2hpbGRyZW46XG4gICAgICAgICAgICB5aWVsZCBmcm9tIGMud2FsaygpXG5cbmRlZiBwYXJzZV9uZXdpY2sodGV4dCk6XG4gICAgcyA9IHRleHQuc3RyaXAoKS5yc3RyaXAoXCI7XCIpXG4gICAgcG9zID0gMFxuICAgIGRlZiByZWFkX2xhYmVsKCk6XG4gICAgICAgIG5vbmxvY2FsIHBvc1xuICAgICAgICBpZiBwb3MgPCBsZW4ocykgYW5kIHNbcG9zXSA9PSBcIidcIjpcbiAgICAgICAgICAgIGVuZCA9IHMuaW5kZXgoXCInXCIsIHBvcyArIDEpXG4gICAgICAgICAgICBsYWJlbCwgcG9zID0gc1twb3MgKyAxOmVuZF0sIGVuZCArIDFcbiAgICAgICAgZWxzZTpcbiAgICAgICAgICAgIHN0YXJ0ID0gcG9zXG4gICAgICAgICAgICB3aGlsZSBwb3MgPCBsZW4ocykgYW5kIHNbcG9zXSBub3QgaW4gXCIsKCk6O1wiOlxuICAgICAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICBsYWJlbCA9IHNbc3RhcnQ6cG9zXVxuICAgICAgICByZXR1cm4gbGFiZWwuc3RyaXAoKVxuICAgIGRlZiByZWFkX2xlbmd0aCgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgaWYgcG9zIDwgbGVuKHMpIGFuZCBzW3Bvc10gPT0gXCI6XCI6XG4gICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTtcIjpcbiAgICAgICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgcmV0dXJuIGZsb2F0KHNbc3RhcnQ6cG9zXSlcbiAgICAgICAgcmV0dXJuIDAuMFxuICAgIGRlZiByZWFkX25vZGUoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIG5vZGUgPSBOb2RlKClcbiAgICAgICAgaWYgc1twb3NdID09IFwiKFwiOlxuICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIHdoaWxlIFRydWU6XG4gICAgICAgICAgICAgICAgY2hpbGQgPSByZWFkX25vZGUoKVxuICAgICAgICAgICAgICAgIGNoaWxkLnBhcmVudCA9IG5vZGVcbiAgICAgICAgICAgICAgICBub2RlLmNoaWxkcmVuLmFwcGVuZChjaGlsZClcbiAgICAgICAgICAgICAgICBpZiBzW3Bvc10gIT0gXCIsXCI6XG4gICAgICAgICAgICAgICAgICAgIGJyZWFrXG4gICAgICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgIG5vZGUubmFtZSA9IHJlYWRfbGFiZWwoKVxuICAgICAgICBub2RlLmxlbmd0aCA9IHJlYWRfbGVuZ3RoKClcbiAgICAgICAgcmV0dXJuIG5vZGVcbiAgICByZXR1cm4gcmVhZF9ub2RlKClcblxuZGVmIHNldF9kZXB0aHMocm9vdCk6XG4gICAgZm9yIG5vZGUgaW4gcm9vdC53YWxrKCk6XG4gICAgICAgIG5vZGUuZGVwdGggPSAobm9kZS5wYXJlbnQuZGVwdGggaWYgbm9kZS5wYXJlbnQgZWxzZSAwLjApICsgbm9kZS5sZW5ndGhcblxuZGVmIGxheW91dChyb290KTpcbiAgICBzZXRfZGVwdGhzKHJvb3QpXG4gICAgZm9yIGksIGxlYWYgaW4gZW51bWVyYXRlKHJvb3QubGVhdmVzKCkpOlxuICAgICAgICBsZWFmLnkgPSBmbG9hdChpKVxuICAgIGRlZiBwbGFjZShub2RlKTpcbiAgICAgICAgaWYgbm90IG5vZGUuaXNfbGVhZigpOlxuICAgICAgICAgICAgZm9yIGMgaW4gbm9kZS5jaGlsZHJlbjpcbiAgICAgICAgICAgICAgICBwbGFjZShjKVxuICAgICAgICAgICAgbm9kZS55ID0gc3VtKGMueSBmb3IgYyBpbiBub2RlLmNoaWxkcmVuKSAvIGxlbihub2RlLmNoaWxkcmVuKVxuICAgIHBsYWNlKHJvb3QpXG5cbmRlZiBkcmF3X3RyZWUocm9vdCwgYXgsIGNvbG9ycz1Ob25lLCBkZWZhdWx0PVwiIzU1NTU1NVwiLCBsdz0wLjgsXG4gICAgICAgICAgICAgIGxhYmVscz1GYWxzZSwgZm9udHNpemU9Nik6XG4gICAgbGF5b3V0KHJvb3QpXG4gICAgc2VncyA9IHt9XG4gICAgZGVmIGFkZChjb2wsIHgwLCB5MCwgeDEsIHkxKTpcbiAgICAgICAgeHMsIHlzID0gc2Vncy5zZXRkZWZhdWx0KGNvbCwgKFtdLCBbXSkpXG4gICAgICAgIHhzICs9IFt4MCwgeDEsIE5vbmVdOyB5cyArPSBbeTAsIHkxLCBOb25lXVxuICAgIGZvciBub2RlIGluIHJvb3Qud2FsaygpOlxuICAgICAgICBjb2wgPSAoY29sb3JzIG9yIHt9KS5nZXQoaWQobm9kZSksIGRlZmF1bHQpXG4gICAgICAgIGlmIG5vZGUucGFyZW50OlxuICAgICAgICAgICAgYWRkKGNvbCwgbm9kZS5wYXJlbnQuZGVwdGgsIG5vZGUueSwgbm9kZS5kZXB0aCwgbm9kZS55KVxuICAgICAgICBpZiBub3Qgbm9kZS5pc19sZWFmKCk6XG4gICAgICAgICAgICB5cyA9IFtjLnkgZm9yIGMgaW4gbm9kZS5jaGlsZHJlbl1cbiAgICAgICAgICAgIGFkZChjb2wsIG5vZGUuZGVwdGgsIG1pbih5cyksIG5vZGUuZGVwdGgsIG1heCh5cykpXG4gICAgZm9yIGNvbCwgKHhzLCB5cykgaW4gc2Vncy5pdGVtcygpOlxuICAgICAgICBheC5wbG90KHhzLCB5cywgY29sb3I9Y29sLCBsdz1sdywgc29saWRfY2Fwc3R5bGU9XCJyb3VuZFwiKVxuICAgIGlmIGxhYmVsczpcbiAgICAgICAgZm9yIGxlYWYgaW4gcm9vdC5sZWF2ZXMoKTpcbiAgICAgICAgICAgIGNvbCA9IChjb2xvcnMgb3Ige30pLmdldChpZChsZWFmKSwgXCIjMjIyMjIyXCIpXG4gICAgICAgICAgICBheC50ZXh0KGxlYWYuZGVwdGgsIGxlYWYueSwgXCIgXCIgKyBsZWFmLm5hbWUsIHZhPVwiY2VudGVyXCIsXG4gICAgICAgICAgICAgICAgICAgIGZvbnRzaXplPWZvbnRzaXplLCBjb2xvcj1jb2wpXG4gICAgYXguc2V0X3l0aWNrcyhbXSlcbiAgICBmb3Igc2lkZSBpbiAoXCJsZWZ0XCIsIFwidG9wXCIsIFwicmlnaHRcIik6XG4gICAgICAgIGF4LnNwaW5lc1tzaWRlXS5zZXRfdmlzaWJsZShGYWxzZSlcblxuZGVmIGNsYWRlKHJvb3QsIG5hbWVzKTpcbiAgICB3YW50ID0gc2V0KG5hbWVzKVxuICAgIGJlc3QgPSBOb25lXG4gICAgZm9yIG5vZGUgaW4gcm9vdC53YWxrKCk6XG4gICAgICAgIGhhdmUgPSB7bC5uYW1lIGZvciBsIGluIG5vZGUubGVhdmVzKCl9XG4gICAgICAgIGlmIHdhbnQgPD0gaGF2ZSBhbmQgKGJlc3QgaXMgTm9uZSBvciBsZW4oaGF2ZSkgPCBsZW4oYmVzdFswXSkpOlxuICAgICAgICAgICAgYmVzdCA9IChoYXZlLCBub2RlKVxuICAgIHJldHVybiBiZXN0WzFdIGlmIGJlc3QgZWxzZSBOb25lXG5cbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgIFwiYXhlcy5zcGluZXMudG9wXCI6IEZhbHNlLCBcImF4ZXMuc3BpbmVzLnJpZ2h0XCI6IEZhbHNlLFxuICAgIFwiYXhlcy5ncmlkXCI6IFRydWUsIFwiZ3JpZC5hbHBoYVwiOiAwLjIyLCBcImZvbnQuc2l6ZVwiOiAxMSxcbn0pXG5hbW5pb3RlcyA9IHBhcnNlX25ld2ljayhvcGVuX3VybChEQVRBX1VSTCArIFwiYW1uaW90ZXNfZmFtaWx5Lm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKGFtbmlvdGVzKVxucm9vdF9hZ2UgPSBtYXgobC5kZXB0aCBmb3IgbCBpbiBhbW5pb3Rlcy5sZWF2ZXMoKSkifQ==
+</script>
+<div>
+<div id="pyodide-18" class="exercise-cell">
+
+</div>
+<script type="pyodide-18-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfY2Fybml2b3JhIn0sImNvZGUiOiIjIGBhbW5pb3Rlc2AgaXMgbG9hZGVkICg5NTYgZmFtaWxpZXMpIGFuZCBgcm9vdF9hZ2VgIGlzIH4zMTkuXG4jIHBhcnNlX25ld2ljaywgY2xhZGUgYW5kIGRyYXdfdHJlZSBhcmUgYWxsIGRlZmluZWQuXG5cbmNhcm5pdm9yYSA9IF9fX19fX1xuXG5wcmludChmXCJ7bGVuKGNhcm5pdm9yYS5sZWF2ZXMoKSl9IGZhbWlsaWVzLCBjb21tb24gYW5jZXN0b3IgXCJcbiAgICAgIGZcIntyb290X2FnZSAtIGNhcm5pdm9yYS5kZXB0aDouMWZ9IE15ciBhZ29cIilcblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg4LCA0KSlcbl9fX19fX1xuYXguc2V0X3hsYWJlbChcIk15ciBzaW5jZSB0aGUgYW1uaW90ZSByb290XCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_carnivora">
+<p><strong>Hint 1</strong>: This is the primate example with two different anchor names: <code>clade(amniotes, ["Canidae", "Felidae"])</code>.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_carnivora">
+<p><strong>Hint 2</strong>: Draw with <code>draw_tree(carnivora, ax, labels=True, fontsize=9)</code>. You should see 16 families and an ancestor ~55 Myr back.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_carnivora">
+<p><strong>Fully worked solution:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>carnivora <span class="op">=</span> clade(amniotes, [<span class="st">"Canidae"</span>, <span class="st">"Felidae"</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(carnivora.leaves())<span class="sc">}</span><span class="ss"> families, common ancestor "</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"</span><span class="sc">{</span>root_age <span class="op">-</span> carnivora<span class="sc">.</span>depth<span class="sc">:.1f}</span><span class="ss"> Myr ago"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>draw_tree(carnivora, ax, labels<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Myr since the amniote root"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>16 families from one ancestor ~55 Myr ago. Cats’ closest relatives here are the civets, hyaenas and mongooses. Dogs sit on the other side of the very first split, nearer to bears and seals. “Cats and dogs” feel like a natural pair to us, but the clade says they have been separate lineages almost since the time of dinosaurs.</p>
+</div>
+</section>
+</section>
+<section id="a-round-tree-of-life" class="level2">
+<h2 class="anchored" data-anchor-id="a-round-tree-of-life">5 · A round tree of life</h2>
+<p>Rectangular layout runs out of room fast, as tips need vertical space. A classic fix is to bend the y-axis into a <strong>circle</strong>, with angle as tip position, and radius as time.</p>
+<div>
+<div id="pyodide-19" class="exercise-cell">
+
+</div>
+<script type="pyodide-19-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGRyYXdfcm91bmQocm9vdCwgYXgsIGNvbG9ycz1Ob25lLCBkZWZhdWx0PVwiIzU1NTU1NVwiLCBsdz0wLjcsXG4gICAgICAgICAgICAgICBsYWJlbHM9RmFsc2UsIGZvbnRzaXplPTUsIGdhcF9kZWc9MTApOlxuICAgIGxheW91dChyb290KVxuICAgIHRpcHMgPSByb290LmxlYXZlcygpXG4gICAgbWF4X2QgPSBtYXgodC5kZXB0aCBmb3IgdCBpbiB0aXBzKVxuICAgIHNwYW4gPSBucC5kZWcycmFkKDM2MCAtIGdhcF9kZWcpXG4gICAgYTAgPSBucC5kZWcycmFkKDkwICsgZ2FwX2RlZyAvIDIpICAgICAgICAgIyBsZWF2ZSB0aGUgZ2FwIGF0IHRoZSB0b3BcbiAgICBkZWYgYW5nKHkpOlxuICAgICAgICByZXR1cm4gYTAgKyBzcGFuICogeSAvIG1heChsZW4odGlwcykgLSAxLCAxKVxuICAgIHNlZ3MgPSB7fVxuICAgIGRlZiBhZGQoY29sLCBwdHMpOlxuICAgICAgICB4cywgeXMgPSBzZWdzLnNldGRlZmF1bHQoY29sLCAoW10sIFtdKSlcbiAgICAgICAgeHMgKz0gW3BbMF0gZm9yIHAgaW4gcHRzXSArIFtOb25lXTsgeXMgKz0gW3BbMV0gZm9yIHAgaW4gcHRzXSArIFtOb25lXVxuICAgIGZvciBub2RlIGluIHJvb3Qud2FsaygpOlxuICAgICAgICBjb2wgPSAoY29sb3JzIG9yIHt9KS5nZXQoaWQobm9kZSksIGRlZmF1bHQpXG4gICAgICAgIGlmIG5vZGUucGFyZW50OiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyByYWRpYWwgYnJhbmNoXG4gICAgICAgICAgICBhZGQoY29sLCBbKGFuZyhub2RlLnkpLCBub2RlLnBhcmVudC5kZXB0aCksIChhbmcobm9kZS55KSwgbm9kZS5kZXB0aCldKVxuICAgICAgICBpZiBub3Qgbm9kZS5pc19sZWFmKCk6ICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgY29ubmVjdGluZyBhcmNcbiAgICAgICAgICAgIHlzID0gc29ydGVkKGMueSBmb3IgYyBpbiBub2RlLmNoaWxkcmVuKVxuICAgICAgICAgICAgYXJjID0gbnAubGluc3BhY2UoYW5nKHlzWzBdKSwgYW5nKHlzWy0xXSksIDI0KVxuICAgICAgICAgICAgYWRkKGNvbCwgbGlzdCh6aXAoYXJjLCBucC5mdWxsKDI0LCBub2RlLmRlcHRoKSkpKVxuICAgIGZvciBjb2wsICh4cywgeXMpIGluIHNlZ3MuaXRlbXMoKTpcbiAgICAgICAgYXgucGxvdCh4cywgeXMsIGNvbG9yPWNvbCwgbHc9bHcsIHNvbGlkX2NhcHN0eWxlPVwicm91bmRcIilcbiAgICBpZiBsYWJlbHM6XG4gICAgICAgIGZvciB0IGluIHRpcHM6XG4gICAgICAgICAgICBhID0gYW5nKHQueSk7IGRlZyA9IG5wLnJhZDJkZWcoYSkgJSAzNjBcbiAgICAgICAgICAgIGZsaXAgPSA5MCA8IGRlZyA8IDI3MCAgICAgICAgICAgICAgICAgIyBrZWVwIGxlZnQtc2lkZSBsYWJlbHMgcmVhZGFibGVcbiAgICAgICAgICAgIGF4LnRleHQoYSwgbWF4X2QgKiAxLjAyLCB0Lm5hbWUsXG4gICAgICAgICAgICAgICAgICAgIHJvdGF0aW9uPShkZWcgKyAxODAgaWYgZmxpcCBlbHNlIGRlZyksIHJvdGF0aW9uX21vZGU9XCJhbmNob3JcIixcbiAgICAgICAgICAgICAgICAgICAgaGE9XCJyaWdodFwiIGlmIGZsaXAgZWxzZSBcImxlZnRcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9Zm9udHNpemUsXG4gICAgICAgICAgICAgICAgICAgIGNvbG9yPShjb2xvcnMgb3Ige30pLmdldChpZCh0KSwgXCIjMjIyMjIyXCIpKVxuICAgIGF4LnNldF94dGlja3MoW10pOyBheC5zZXRfeXRpY2tzKFtdKVxuICAgIGF4LnNwaW5lc1tcInBvbGFyXCJdLnNldF92aXNpYmxlKEZhbHNlKVxuICAgIGF4LmdyaWQoRmFsc2UpXG5cblxuZGVmIHBhaW50KGdyb3Vwcyk6XG4gICAgXCJcIlwiZ3JvdXBzOiBsaXN0IG9mIChjbGFkZV9yb290LCBjb2xvdXIpLiBSZXR1cm5zIHtpZChub2RlKTogY29sb3VyfS5cIlwiXCJcbiAgICBjb2xvcnMgPSB7fVxuICAgIGZvciBjbCwgY29sIGluIGdyb3VwczpcbiAgICAgICAgZm9yIG5vZGUgaW4gY2wud2FsaygpOlxuICAgICAgICAgICAgY29sb3JzW2lkKG5vZGUpXSA9IGNvbFxuICAgIHJldHVybiBjb2xvcnNcblxuXG5ldWsgPSBwYXJzZV9uZXdpY2sob3Blbl91cmwoREFUQV9VUkwgKyBcImV1a2FyeW90ZXNfY2xhc3MubndrXCIpLnJlYWQoKSlcbnNldF9kZXB0aHMoZXVrKVxuZXVrX2FnZSA9IG1heChsLmRlcHRoIGZvciBsIGluIGV1ay5sZWF2ZXMoKSlcbnByaW50KGZcIntsZW4oZXVrLmxlYXZlcygpKX0gY2xhc3NlcyBvZiBldWthcnlvdGVzLCByb290IHtldWtfYWdlOi4wZn0gTXlyIGFnb1wiKSJ9
+</script>
+</div>
+<p>Draw the whole tree first, with no colouring:</p>
+<div>
+<div id="pyodide-20" class="exercise-cell">
+
+</div>
+<script type="pyodide-20-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnID0gcGx0LmZpZ3VyZShmaWdzaXplPSg5LjUsIDkuNSkpXG5heCA9IGZpZy5hZGRfc3VicGxvdChwcm9qZWN0aW9uPVwicG9sYXJcIilcbmRyYXdfcm91bmQoZXVrLCBheCwgbGFiZWxzPVRydWUsIGZvbnRzaXplPTQuNSlcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>Most of the 235 class names around the rim are unfamiliar, but some are not. <code>Mammalia</code>, <code>Aves</code> and <code>Insecta</code> sit near the sponge classes. <code>Magnoliopsida</code> (the flowering plants) and <code>Chlorophyceae</code> (the green algae) are in a different part of the circle. <code>Agaricomycetes</code> (the mushrooms) is somewhere else again.</p>
+<section id="finding-animals-fungi-and-plants" class="level3">
+<h3 class="anchored" data-anchor-id="finding-animals-fungi-and-plants">Finding animals, fungi and plants</h3>
+<p>The three kingdoms are clades somewhere on this tree, but nothing in the file marks where. We can find them by starting at the root and taking one split at a time. <code>paint()</code> colours a node and everything below it, so each split can be shown as two colours:</p>
+<div>
+<div id="pyodide-21" class="exercise-cell">
+
+</div>
+<script type="pyodide-21-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2lkZV9hLCBzaWRlX2IgPSBldWsuY2hpbGRyZW5cbnByaW50KGxlbihzaWRlX2EubGVhdmVzKCkpLCBcImNsYXNzZXMgfFwiLCBsZW4oc2lkZV9iLmxlYXZlcygpKSwgXCJjbGFzc2VzXCIpXG5cbmZpZyA9IHBsdC5maWd1cmUoZmlnc2l6ZT0oOS41LCA5LjUpKVxuYXggPSBmaWcuYWRkX3N1YnBsb3QocHJvamVjdGlvbj1cInBvbGFyXCIpXG5kcmF3X3JvdW5kKGV1aywgYXgsIGNvbG9ycz1wYWludChbKHNpZGVfYSwgXCIjYzk4YTAwXCIpLCAoc2lkZV9iLCBcIiM5NDc1Y2RcIildKSxcbiAgICAgICAgICAgbGFiZWxzPVRydWUsIGZvbnRzaXplPTQuNSlcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>Read the labels. The ochre side has <code>Mammalia</code>, <code>Aves</code>, <code>Insecta</code> and the sponges, and it also has <code>Agaricomycetes</code> and <code>Saccharomycetes</code>, the mushrooms and the yeasts. The purple side has the flowering plants, the conifers, the green algae and the diatoms. So the first split in the tree already says something that was not known before DNA sequencing: fungi sit on the animal side, not the plant side.</p>
+<p>Split the ochre side once more:</p>
+<div>
+<div id="pyodide-22" class="exercise-cell">
+
+</div>
+<script type="pyodide-22-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYmxvY2tfMSwgYmxvY2tfMiA9IHNpZGVfYS5jaGlsZHJlblxucHJpbnQobGVuKGJsb2NrXzEubGVhdmVzKCkpLCBcImFuZFwiLCBsZW4oYmxvY2tfMi5sZWF2ZXMoKSksIFwiY2xhc3Nlc1wiKVxucHJpbnQoXCJibG9jayAxIGV4YW1wbGVzOlwiLCBzb3J0ZWQobC5uYW1lIGZvciBsIGluIGJsb2NrXzEubGVhdmVzKCkpWzo0XSkifQ==
+</script>
+</div>
+<p>Every one of the 46 names in the first block ends in <code>-mycetes</code>. That block is the fungi. The other 83 classes are the animals plus a few single-celled classes, which the next two splits separate out:</p>
+<div>
+<div id="pyodide-23" class="exercise-cell">
+
+</div>
+<script type="pyodide-23-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnVuZ2kgPSBibG9ja18xXG5cbnNtYWxsXzEsIHJlc3QgPSBibG9ja18yLmNoaWxkcmVuXG5hbmltYWxzLCBzbWFsbF8yID0gcmVzdC5jaGlsZHJlblxucHJpbnQoXCJzcGxpdCBvZmY6XCIsIFtsLm5hbWUgZm9yIGwgaW4gc21hbGxfMS5sZWF2ZXMoKV0sXG4gICAgICBcInRoZW5cIiwgW2wubmFtZSBmb3IgbCBpbiBzbWFsbF8yLmxlYXZlcygpXSlcbnByaW50KGxlbihhbmltYWxzLmxlYXZlcygpKSwgXCJjbGFzc2VzIHJlbWFpbjogdGhlIGFuaW1hbHMsIHNwb25nZXMgdG8gbWFtbWFsc1wiKSJ9
+</script>
+</div>
+<p><code>Choanoflagellata</code>, the last class to separate before the animals, are single-celled filter feeders. They are the closest living relatives of all animals.</p>
+<p>To isolate the plant kingdom on the other side, we need to define what living things are counted as plants. We will use two anchors that everyone counts as plants: the green algae (<code>Chlorophyceae</code>) and the flowering plants (<code>Magnoliopsida</code>). The plant kingdom is then the smallest clade that contains both. Follow the child that contains <code>Magnoliopsida</code>, printing the names that drop off, and stop when the next split would separate the two anchors:</p>
+<div>
+<div id="pyodide-24" class="exercise-cell">
+
+</div>
+<script type="pyodide-24-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIHNpZGVfd2l0aChub2RlLCBuYW1lKTpcbiAgICBmb3IgYyBpbiBub2RlLmNoaWxkcmVuOlxuICAgICAgICBpZiBuYW1lIGluIHtsLm5hbWUgZm9yIGwgaW4gYy5sZWF2ZXMoKX06XG4gICAgICAgICAgICByZXR1cm4gY1xuXG5ibG9jaywgc3RlcCA9IHNpZGVfYiwgMFxud2hpbGUgVHJ1ZTpcbiAgICBueHQgPSBzaWRlX3dpdGgoYmxvY2ssIFwiTWFnbm9saW9wc2lkYVwiKVxuICAgIGlmIFwiQ2hsb3JvcGh5Y2VhZVwiIG5vdCBpbiB7bC5uYW1lIGZvciBsIGluIG54dC5sZWF2ZXMoKX06XG4gICAgICAgIGJyZWFrXG4gICAgc3RlcCArPSAxXG4gICAgZHJvcHBlZCA9IHNvcnRlZCh7bC5uYW1lIGZvciBsIGluIGJsb2NrLmxlYXZlcygpfSAtXG4gICAgICAgICAgICAgICAgICAgICB7bC5uYW1lIGZvciBsIGluIG54dC5sZWF2ZXMoKX0pXG4gICAgaWYgbGVuKGRyb3BwZWQpIDw9IDg6XG4gICAgICAgIHByaW50KGZcInN0ZXAge3N0ZXB9OiBkcm9wcyB7JywgJy5qb2luKGRyb3BwZWQpfVwiKVxuICAgIGVsc2U6XG4gICAgICAgIHByaW50KGZcInN0ZXAge3N0ZXB9OiBkcm9wcyB7bGVuKGRyb3BwZWQpfSBjbGFzc2VzLCBcIlxuICAgICAgICAgICAgICBmXCJlLmcuIHsnLCAnLmpvaW4oZHJvcHBlZFs6M10pfVwiKVxuICAgIHByaW50KGZcIiAgICAgICAge2xlbihueHQubGVhdmVzKCkpfSBjbGFzc2VzIHJlbWFpblwiKVxuICAgIGJsb2NrID0gbnh0XG5wbGFudHMgPSBibG9jayJ9
+</script>
+</div>
+<p>The loop stops by itself: one more split would put <code>Chlorophyceae</code> and <code>Magnoliopsida</code> on different sides, so the final 32-class block is the smallest clade holding both anchors.</p>
+<p>Look the dropped names up as they appear. Steps one and three shed amoebae and then a 51-class block that holds the diatoms and the ciliates; step two sheds the euglenids and step four the glaucophytes. Step five shows the biggest consequence of our definition: eight classes leave at once, and the names identify them. <code>Rhodellophyceae</code> carries the Greek <em>rhodon</em>, red, the same root as Rhodophyta, and <code>Bangiophyceae</code> and <code>Florideophyceae</code> are the two large classes of red algae. Red algae are not plants under our definition. Neither are the cryptophytes dropped at step six, a single-celled group that this tree places between the red algae and the green plants. Widen the definition to include the red algae, and both would be inside.</p>
+<p>Now colour the three kingdoms on one figure.</p>
+<p>The colouring works in two steps. <code>paint()</code> takes a list of (clade, colour) pairs. It walks each clade from its top node down through every descendant and records the colour in a dictionary keyed by the node’s <code>id()</code>. <code>draw_round()</code> then draws every branch of the tree and looks each node up in that dictionary. The node’s colour is used for its radial line and for the arc that joins its children. Any node not in the dictionary gets the <code>default</code> colour, grey here, which is how everything outside the three kingdoms stays grey.</p>
+<p>The legend is built by hand. The tree is drawn as bare line segments, not labelled data series, so matplotlib has nothing to put in a legend on its own. Each <code>Line2D</code> is a stand-in: a short coloured line that exists only to appear in the legend next to its label.</p>
+<div>
+<div id="pyodide-25" class="exercise-cell">
+
+</div>
+<script type="pyodide-25-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29sb3JzID0gcGFpbnQoWyhhbmltYWxzLCBcIiM0MjY5ZDBcIiksIChmdW5naSwgXCIjZTY2ODUyXCIpLCAocGxhbnRzLCBcIiMzMGE4YjFcIildKVxuXG5maWcgPSBwbHQuZmlndXJlKGZpZ3NpemU9KDEwLjUsIDEwLjUpKVxuYXggPSBmaWcuYWRkX3N1YnBsb3QocHJvamVjdGlvbj1cInBvbGFyXCIpXG5kcmF3X3JvdW5kKGV1aywgYXgsIGNvbG9ycz1jb2xvcnMsIGRlZmF1bHQ9XCIjOWE5YTlhXCIsIGxhYmVscz1UcnVlLCBmb250c2l6ZT00LjUpXG5cbmZyb20gbWF0cGxvdGxpYi5saW5lcyBpbXBvcnQgTGluZTJEXG5heC5sZWdlbmQoaGFuZGxlcz1bXG4gICAgTGluZTJEKFtdLCBbXSwgY29sb3I9XCIjNDI2OWQwXCIsIGx3PTIuNSwgbGFiZWw9ZlwiQW5pbWFscyAoe2xlbihhbmltYWxzLmxlYXZlcygpKX0pXCIpLFxuICAgIExpbmUyRChbXSwgW10sIGNvbG9yPVwiI2U2Njg1MlwiLCBsdz0yLjUsIGxhYmVsPWZcIkZ1bmdpICh7bGVuKGZ1bmdpLmxlYXZlcygpKX0pXCIpLFxuICAgIExpbmUyRChbXSwgW10sIGNvbG9yPVwiIzMwYThiMVwiLCBsdz0yLjUsIGxhYmVsPWZcIkdyZWVuIHBsYW50cyAoe2xlbihwbGFudHMubGVhdmVzKCkpfSlcIiksXG4gICAgTGluZTJEKFtdLCBbXSwgY29sb3I9XCIjOWE5YTlhXCIsIGx3PTIuNSwgbGFiZWw9XCJPdGhlciBldWthcnlvdGVzXCIpLFxuXSwgbG9jPVwidXBwZXIgbGVmdFwiLCBiYm94X3RvX2FuY2hvcj0oLTAuMDUsIDEuMDUpLCBmcmFtZW9uPUZhbHNlLCBmb250c2l6ZT05KVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>All animals (sponges to humans) are one blue sector. All of <code>Mammalia</code> is a single tick mark.</p>
+</section>
+</section>
+<section id="the-timetree-of-life" class="level2">
+<h2 class="anchored" data-anchor-id="the-timetree-of-life">6 · The timetree of life</h2>
+<p>The round tree is for shape; a <strong>timetree</strong> puts the ages back on a readable axis. We use the phylum-level file (66 tips) and relabel the x-axis to run backwards from today, with a few reference events (the Cambrian explosion, the end-Permian extinction event and the end-Cretaceous extinction event that killed the dinosaurs):</p>
+<div>
+<div id="pyodide-26" class="exercise-cell">
+
+</div>
+<script type="pyodide-26-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicGh5bGEgPSBwYXJzZV9uZXdpY2sob3Blbl91cmwoREFUQV9VUkwgKyBcImV1a2FyeW90ZXNfcGh5bHVtLm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKHBoeWxhKVxucGh5bGFfYWdlID0gbWF4KGwuZGVwdGggZm9yIGwgaW4gcGh5bGEubGVhdmVzKCkpXG5uID0gbGVuKHBoeWxhLmxlYXZlcygpKVxuXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDksIDEwKSlcbmRyYXdfdHJlZShwaHlsYSwgYXgsIGxhYmVscz1UcnVlLCBmb250c2l6ZT03KVxubXlhID0gbnAuYXJyYXkoWzE1MDAsIDEyNTAsIDEwMDAsIDc1MCwgNTAwLCAyNTAsIDBdKVxuYXguc2V0X3h0aWNrcyhwaHlsYV9hZ2UgLSBteWEpXG5heC5zZXRfeHRpY2tsYWJlbHMobXlhKVxuYXguc2V0X3hsYWJlbChcIm1pbGxpb25zIG9mIHllYXJzIGFnb1wiKVxuZm9yIGVkZ2UsIGxhYiBpbiBbKDUzOSwgXCJDYW1icmlhbiBiZWdpbnNcIiksICgyNTIsIFwiZW5kLVBlcm1pYW4gZXh0aW5jdGlvblwiKSxcbiAgICAgICAgICAgICAgICAgICg2NiwgXCJlbmQtQ3JldGFjZW91cyBleHRpbmN0aW9uXCIpXTpcbiAgICBheC5heHZsaW5lKHBoeWxhX2FnZSAtIGVkZ2UsIGNvbG9yPVwiI2JiYmJiYlwiLCBsdz0wLjcsIHpvcmRlcj0wKVxuICAgIGF4LnRleHQocGh5bGFfYWdlIC0gZWRnZSwgbiAtIDAuNSwgXCIgXCIgKyBsYWIsIGZvbnRzaXplPTcsIGNvbG9yPVwiIzc3Nzc3N1wiLFxuICAgICAgICAgICAgcm90YXRpb249OTAsIGhhPVwicmlnaHRcIiwgdmE9XCJ0b3BcIilcbmF4LnNldF94bGltKDAsIHBoeWxhX2FnZSAqIDEuMzApXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>Almost every animal phylum was already a separate lineage before the Cambrian began (the famous “Cambrian explosion” shows up here as a dense burst of splits just <em>before</em> the boundary). No branch ends at either extinction line: at phylum level, every lineage on this chart survived both of the worst catastrophes in the fossil record.</p>
+<p>Because branch lengths are time, “when did X and Y split?” is the root’s age minus the depth of the two tips’ MRCA:</p>
+<div>
+<div id="pyodide-27" class="exercise-cell">
+
+</div>
+<script type="pyodide-27-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQoZlwiY2hvcmRhdGVzIHZzIGFydGhyb3BvZHMgKHVzIHZzIGluc2VjdHMpOiBcIlxuICAgICAgZlwie3BoeWxhX2FnZSAtIGNsYWRlKHBoeWxhLCBbJ0Nob3JkYXRhJywgJ0FydGhyb3BvZGEnXSkuZGVwdGg6LjBmfSBNeWFcIilcbnByaW50KGZcImFuaW1hbHMgdnMgZnVuZ2k6ICBcIlxuICAgICAgZlwie2V1a19hZ2UgLSBjbGFkZShldWssIFsnTWFtbWFsaWEnLCAnQWdhcmljb215Y2V0ZXMnXSkuZGVwdGg6LjBmfSBNeWFcIilcbnByaW50KGZcImFuaW1hbHMgdnMgY2hvYW5vZmxhZ2VsbGF0ZXM6IFwiXG4gICAgICBmXCJ7ZXVrX2FnZSAtIGNsYWRlKGV1aywgWydNYW1tYWxpYScsICdDaG9hbm9mbGFnZWxsYXRhJ10pLmRlcHRoOi4wZn0gTXlhXCIpXG5wcmludChmXCJhbmltYWxzIHZzIHBsYW50czoge2V1a19hZ2U6LjBmfSBNeWFcIikifQ==
+</script>
+</div>
+<p>The animals-versus-plants line needs no <code>clade()</code> call: that split is the deepest one in this file, so the MRCA is the root itself and the divergence is just the root’s age. And note it is older than the animal-fungus split (1,275 Mya): fungi are our closer cousins.</p>
+<p>Single-celled flagellates that strain bacteria out of water, the <strong>choanoflagellates</strong>, split from us ~894 Mya; they are the closest living relatives of all animals.</p>
+</section>
+<section id="final-task-design-your-own-tree-of-life" class="level2">
+<h2 class="anchored" data-anchor-id="final-task-design-your-own-tree-of-life">Final task · Design your own tree of life</h2>
+<p>The final task has two stages. First compare the same evolutionary event across two TimeTree files. Then use one of the eukaryote files to design and save your own tree-of-life visualisation.</p>
+<section id="compare-the-two-trees" class="level3">
+<h3 class="anchored" data-anchor-id="compare-the-two-trees">1 · Compare the two trees</h3>
+<p>The amniote family tree put the amniote root at <strong>319 Myr</strong>. The eukaryote class tree is a completely different file, built from a different set of studies at a different taxonomic rank, but it contains <code>Mammalia</code> and <code>Aves</code> as tips. Write a <code>divergence(root, a, b)</code> helper and use it to date the mammal–bird split in <em>this</em> tree, then compare.</p>
+<script type="exercise-setup-ex_split-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQiLCJzZXR1cCI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQganNcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5cbkRBVEFfVVJMID0ganMubG9jYXRpb24uaHJlZi5zcGxpdChcInNpdGVfbGlicy9cIilbMF0gKyBcImRhdGEvXCJcblxuY2xhc3MgTm9kZTpcbiAgICBkZWYgX19pbml0X18oc2VsZiwgbmFtZT1cIlwiLCBsZW5ndGg9MC4wKTpcbiAgICAgICAgc2VsZi5uYW1lID0gbmFtZVxuICAgICAgICBzZWxmLmxlbmd0aCA9IGxlbmd0aFxuICAgICAgICBzZWxmLmNoaWxkcmVuID0gW11cbiAgICAgICAgc2VsZi5wYXJlbnQgPSBOb25lXG4gICAgZGVmIGlzX2xlYWYoc2VsZik6XG4gICAgICAgIHJldHVybiBub3Qgc2VsZi5jaGlsZHJlblxuICAgIGRlZiBsZWF2ZXMoc2VsZik6XG4gICAgICAgIHJldHVybiBbc2VsZl0gaWYgc2VsZi5pc19sZWFmKCkgZWxzZSBbbCBmb3IgYyBpbiBzZWxmLmNoaWxkcmVuIGZvciBsIGluIGMubGVhdmVzKCldXG4gICAgZGVmIHdhbGsoc2VsZik6XG4gICAgICAgIHlpZWxkIHNlbGZcbiAgICAgICAgZm9yIGMgaW4gc2VsZi5jaGlsZHJlbjpcbiAgICAgICAgICAgIHlpZWxkIGZyb20gYy53YWxrKClcblxuZGVmIHBhcnNlX25ld2ljayh0ZXh0KTpcbiAgICBzID0gdGV4dC5zdHJpcCgpLnJzdHJpcChcIjtcIilcbiAgICBwb3MgPSAwXG4gICAgZGVmIHJlYWRfbGFiZWwoKTpcbiAgICAgICAgbm9ubG9jYWwgcG9zXG4gICAgICAgIGlmIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdID09IFwiJ1wiOlxuICAgICAgICAgICAgZW5kID0gcy5pbmRleChcIidcIiwgcG9zICsgMSlcbiAgICAgICAgICAgIGxhYmVsLCBwb3MgPSBzW3BvcyArIDE6ZW5kXSwgZW5kICsgMVxuICAgICAgICBlbHNlOlxuICAgICAgICAgICAgc3RhcnQgPSBwb3NcbiAgICAgICAgICAgIHdoaWxlIHBvcyA8IGxlbihzKSBhbmQgc1twb3NdIG5vdCBpbiBcIiwoKTo7XCI6XG4gICAgICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgICAgIGxhYmVsID0gc1tzdGFydDpwb3NdXG4gICAgICAgIHJldHVybiBsYWJlbC5zdHJpcCgpXG4gICAgZGVmIHJlYWRfbGVuZ3RoKCk6XG4gICAgICAgIG5vbmxvY2FsIHBvc1xuICAgICAgICBpZiBwb3MgPCBsZW4ocykgYW5kIHNbcG9zXSA9PSBcIjpcIjpcbiAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICBzdGFydCA9IHBvc1xuICAgICAgICAgICAgd2hpbGUgcG9zIDwgbGVuKHMpIGFuZCBzW3Bvc10gbm90IGluIFwiLCgpO1wiOlxuICAgICAgICAgICAgICAgIHBvcyArPSAxXG4gICAgICAgICAgICByZXR1cm4gZmxvYXQoc1tzdGFydDpwb3NdKVxuICAgICAgICByZXR1cm4gMC4wXG4gICAgZGVmIHJlYWRfbm9kZSgpOlxuICAgICAgICBub25sb2NhbCBwb3NcbiAgICAgICAgbm9kZSA9IE5vZGUoKVxuICAgICAgICBpZiBzW3Bvc10gPT0gXCIoXCI6XG4gICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgd2hpbGUgVHJ1ZTpcbiAgICAgICAgICAgICAgICBjaGlsZCA9IHJlYWRfbm9kZSgpXG4gICAgICAgICAgICAgICAgY2hpbGQucGFyZW50ID0gbm9kZVxuICAgICAgICAgICAgICAgIG5vZGUuY2hpbGRyZW4uYXBwZW5kKGNoaWxkKVxuICAgICAgICAgICAgICAgIGlmIHNbcG9zXSAhPSBcIixcIjpcbiAgICAgICAgICAgICAgICAgICAgYnJlYWtcbiAgICAgICAgICAgICAgICBwb3MgKz0gMVxuICAgICAgICAgICAgcG9zICs9IDFcbiAgICAgICAgbm9kZS5uYW1lID0gcmVhZF9sYWJlbCgpXG4gICAgICAgIG5vZGUubGVuZ3RoID0gcmVhZF9sZW5ndGgoKVxuICAgICAgICByZXR1cm4gbm9kZVxuICAgIHJldHVybiByZWFkX25vZGUoKVxuXG5kZWYgc2V0X2RlcHRocyhyb290KTpcbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgbm9kZS5kZXB0aCA9IChub2RlLnBhcmVudC5kZXB0aCBpZiBub2RlLnBhcmVudCBlbHNlIDAuMCkgKyBub2RlLmxlbmd0aFxuXG5kZWYgY2xhZGUocm9vdCwgbmFtZXMpOlxuICAgIHdhbnQgPSBzZXQobmFtZXMpXG4gICAgYmVzdCA9IE5vbmVcbiAgICBmb3Igbm9kZSBpbiByb290LndhbGsoKTpcbiAgICAgICAgaGF2ZSA9IHtsLm5hbWUgZm9yIGwgaW4gbm9kZS5sZWF2ZXMoKX1cbiAgICAgICAgaWYgd2FudCA8PSBoYXZlIGFuZCAoYmVzdCBpcyBOb25lIG9yIGxlbihoYXZlKSA8IGxlbihiZXN0WzBdKSk6XG4gICAgICAgICAgICBiZXN0ID0gKGhhdmUsIG5vZGUpXG4gICAgcmV0dXJuIGJlc3RbMV0gaWYgYmVzdCBlbHNlIE5vbmVcblxuZXVrID0gcGFyc2VfbmV3aWNrKG9wZW5fdXJsKERBVEFfVVJMICsgXCJldWthcnlvdGVzX2NsYXNzLm53a1wiKS5yZWFkKCkpXG5zZXRfZGVwdGhzKGV1aykifQ==
+</script>
+<div>
+<div id="pyodide-29" class="exercise-cell">
+
+</div>
+<script type="pyodide-29-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3BsaXQifSwiY29kZSI6IiMgYGV1a2AgaXMgbG9hZGVkICgyMzUgY2xhc3NlcykgYW5kIHBhcnNlX25ld2ljaywgc2V0X2RlcHRocywgY2xhZGUgYXJlIGRlZmluZWQuXG4jIFRoZSBhbW5pb3RlIGZhbWlseSB0cmVlLCBmcm9tIGl0cyBvd24gZmlsZSwgcHV0IHRoZSBhbW5pb3RlIHJvb3QgYXQgMzE5LjAgTXlyLlxuIyAxLiBXcml0ZSBkaXZlcmdlbmNlKHJvb3QsIGEsIGIpOiBNeXIgYWdvIHRoYXQgdGhlIGxpbmVhZ2VzIG9mIGEgYW5kIGIgc3BsaXQuXG4jIDIuIFVzZSBpdCB0byBkYXRlIHRoZSBNYW1tYWxpYS1BdmVzIHNwbGl0IGluIFRISVMgdHJlZSwgYW5kIGNvbXBhcmUuXG5cbmRlZiBkaXZlcmdlbmNlKHJvb3QsIGEsIGIpOlxuICAgIF9fX19fX1xuXG5zcGxpdCA9IGRpdmVyZ2VuY2UoZXVrLCBcIk1hbW1hbGlhXCIsIFwiQXZlc1wiKVxucHJpbnQoZlwiTWFtbWFsaWEtQXZlcyBzcGxpdCBpbiB0aGUgZXVrYXJ5b3RlIGNsYXNzIHRyZWU6IHtzcGxpdDouMWZ9IE15YVwiKVxucHJpbnQoZlwiQW1uaW90ZSByb290IGluIHRoZSBmYW1pbHktbGV2ZWwgZmlsZTogICAgICAgICAgIDMxOS4wIE15YVwiKSJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_split">
+<p><strong>Hint 1</strong>: The split date of two tips is the age of their most recent common ancestor, and you already have a helper on this page that finds that node from two names. What it stores is measured <em>from the root</em>, and you want years <em>before today</em>.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_split">
+<p><strong>Hint 2</strong>: In a dated tree, every living tip is the same total distance from the root, so the root’s age is the depth of any tip (safest: the maximum leaf depth). Age and depth run in opposite directions.</p>
+</div>
+<p><strong>Question.</strong> The two printed dates should agree <em>exactly</em>. Consider, why is the mammal–bird split the very same event as the amniote root?</p>
+</section>
+<section id="design-the-visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="design-the-visualisation">2 · Design the visualisation</h3>
+<p>Before drawing, look at how other designers handle a tree too large for a conventional diagram:</p>
+<ul>
+<li>explore the zoomable, fractal layout in the <a href="https://www.onezoom.org/">OneZoom Tree of Life Explorer</a>;</li>
+<li>inspect how evidence and taxonomic uncertainty are shown in the <a href="https://tree.opentreeoflife.org/opentree">Open Tree of Life browser</a>;</li>
+<li>compare rectangular, circular, radial and annotated examples in the <a href="https://itol.embl.de/gallery.cgi">Interactive Tree of Life gallery</a>.</li>
+</ul>
+<p>For each site, note what one tip represents, whether branch length encodes time, how labels appear as the tree grows, what colour encodes, and what interaction contributes. Identify one design decision that helps the reader and one that would not work in a static course figure.</p>
+<p>Now make your own <strong>eukaryote tree of life</strong> using either <code>eukaryotes_class.nwk</code> (235 class-level tips) or <code>eukaryotes_phylum.nwk</code> (66 phylum-level tips). Adapt the rectangular, circular or time-axis code from this page, or devise another node-link layout. Do not call the result a tree of <em>all</em> life: these files contain Eukaryota, not Bacteria or Archaea.</p>
+<ul>
+<li>make the root, tips and branching structure readable;</li>
+<li>state what one tip represents and report the number of tips;</li>
+<li>say whether branch length means time and give its unit;</li>
+<li>use colour only for named clades or another stated variable;</li>
+<li>explain any labels, taxa or detail you omit;</li>
+<li>include a title, caption, TimeTree source, and a note naming one online design that influenced your choices.</li>
+</ul>
+<div>
+<div id="pyodide-30" class="exercise-cell">
+
+</div>
+<script type="pyodide-30-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBCdWlsZCB5b3VyIGZpbmFsIHRyZWUgaGVyZS4gTGVhdmUgdGhlIGNvbXBsZXRlZCBNYXRwbG90bGliIGZpZ3VyZSBpbiBgZmlnYC4ifQ==
+</script>
+</div>
+<p><strong>Save your final tree-of-life visualisation.</strong> After the figure is complete, run this cell to download a 300 dpi PNG from the browser:</p>
+<div>
+<div id="pyodide-31" class="exercise-cell">
+
+</div>
+<script type="pyodide-31-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGJhc2U2NFxuZnJvbSBpbyBpbXBvcnQgQnl0ZXNJT1xuXG5kZWYgZG93bmxvYWRfZmlndXJlKGZpZywgZmlsZW5hbWU9XCJldWthcnlvdGUtdHJlZS1vZi1saWZlLnBuZ1wiKTpcbiAgICBidWZmZXIgPSBCeXRlc0lPKClcbiAgICBmaWcuc2F2ZWZpZyhidWZmZXIsIGZvcm1hdD1cInBuZ1wiLCBkcGk9MzAwLFxuICAgICAgICAgICAgICAgIGJib3hfaW5jaGVzPVwidGlnaHRcIiwgZmFjZWNvbG9yPVwid2hpdGVcIilcbiAgICBlbmNvZGVkID0gYmFzZTY0LmI2NGVuY29kZShidWZmZXIuZ2V0dmFsdWUoKSkuZGVjb2RlKFwiYXNjaWlcIilcbiAgICBsaW5rID0ganMuZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImFcIilcbiAgICBsaW5rLmhyZWYgPSBcImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxcIiArIGVuY29kZWRcbiAgICBsaW5rLmRvd25sb2FkID0gZmlsZW5hbWVcbiAgICBqcy5kb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGxpbmspXG4gICAgbGluay5jbGljaygpXG4gICAgbGluay5yZW1vdmUoKVxuXG5kb3dubG9hZF9maWd1cmUoZmlnKSJ9
+</script>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>When reading or constructing a phylogeny visualisation:</p>
+<ul>
+<li><strong>Only the nodes and branch lengths carry information.</strong> The vertical order of tips is arbitrary: every internal node can be flipped. Humans are not “at the end” of the tree, because every living thing is exactly the same distance from the root.</li>
+<li><strong>The level of aggregation is part of the claim</strong>. At phylum level no lineage dies in the great extinctions.</li>
+<li><strong>Every internal node is an inference</strong>. Some are genuinely contested: e.g.&nbsp;whether sponges or comb jellies split from the rest of the animals first.</li>
+</ul>
+</section>
+<section id="bonus" class="level2">
+<h2 class="anchored" data-anchor-id="bonus">Bonus</h2>
+<p>Read Long et al.&nbsp;(2025), <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12119326/"><em>Earliest amniote tracks recalibrate the timeline of tetrapod evolution</em></a>. Dates on a phylogenetic tree are estimates: fossils help to date its branches, and new fossil evidence can revise those dates. The tracks described in this paper push the likely origin of crown-group amniotes back by at least 35–40 million years.</p>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li>Kumar et al.&nbsp;(2022) <em>TimeTree 5: an expanded resource for species divergence times</em>, Molecular Biology and Evolution 39:msac174; <a href="https://timetree.org">timetree.org</a>. Trees downloaded via “Build a Timetree” (group: Amniota at family rank; Eukaryota at class and phylum rank), Newick format, branch lengths in Myr; values unmodified.</li>
+<li>Names with suffixes (<code>Cebidae-1</code>, <code>Cebidae-2</code>) are TimeTree’s way of serving groups that its consensus does not recover as single clades: the name is split, the tree is left honest.</li>
+<li>Tobias et al.&nbsp;(2022) AVONET and Myhrvold et al.&nbsp;(2015): the Part A datasets this page’s amniotes connect back to.</li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJtYXRwbG90bGliIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTMxIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMxLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMzEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8zMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMzAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMzAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8zMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMzAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTI5IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTI5LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMjktY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8yOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjksIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzI5ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8yOS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI3ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI3LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI3LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI2ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI2LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI2LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI1ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI1LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI1LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI0ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI0LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI0LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIzID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIzLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIzLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIyID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIyLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIxID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIxLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIxLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIwID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIwLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjAgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIwLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE5ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xOS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTE5LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE5LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE4ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTE4LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE4LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xOCA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTguZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xNiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzE2ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xNiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xNSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzE1ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xNSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xNCA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzE0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEzID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEyID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzExID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMCA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xMC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEwID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS05LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTgtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS04LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS01LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJfcHlvZGlkZV92YWx1ZV8yID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0yLWNvbnRlbnRzXCIsXG4gICAgZWNobzogdHJ1ZSxcbiAgICBvdXRwdXQ6IHRydWVcbiAgfSwgYmxvY2suYXR0cik7XG5cbiAgLy8gRXZhbHVhdGUgdGhlIHByb3ZpZGVkIFB5dGhvbiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHB5b2RpZGVPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMlwiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjJcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il9weW9kaWRlX3ZhbHVlXzEgPSB7XG4gIGNvbnN0IHsgaGlnaGxpZ2h0UHl0aG9uLCBiNjREZWNvZGV9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXZhbHVhdGlvbiBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHtcbiAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUHl0aG9uIGNvZGVcbiAgY29uc3QgcmVzdWx0ID0gcHlvZGlkZU9qcy5wcm9jZXNzKHtjb2RlOiBibG9jay5jb2RlLCBvcHRpb25zfSwge30pO1xuXG4gIC8vIEVhcmx5IHlpZWxkIHdoaWxlIHdlIHdhaXQgZm9yIHRoZSBmaXJzdCBldmFsdWF0aW9uIGFuZCByZW5kZXJcbiAgaWYgKG9wdGlvbnMub3V0cHV0ICYmICEoXCIxXCIgaW4gcHlvZGlkZU9qcy5yZW5kZXJlZE9qcykpIHtcbiAgICBjb25zdCBjb250YWluZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuICAgIGNvbnN0IHNwaW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuXG4gICAgaWYgKG9wdGlvbnMuZWNobykge1xuICAgICAgLy8gU2hvdyBvdXRwdXQgYXMgaGlnaGxpZ2h0ZWQgc291cmNlXG4gICAgICBjb25zdCBwcmVFbGVtID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInByZVwiKTtcbiAgICAgIGNvbnRhaW5lci5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGVcIjtcbiAgICAgIHByZUVsZW0uY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlIHB5dGhvblwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChoaWdobGlnaHRQeXRob24oYmxvY2suY29kZSkpO1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItZ3JvdyBzcGlubmVyLWdyb3ctc20gbS0yIHBvc2l0aW9uLWFic29sdXRlIHRvcC0wIGVuZC0wXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHByZUVsZW0pO1xuICAgIH0gZWxzZSB7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ib3JkZXIgc3Bpbm5lci1ib3JkZXItc21cIjtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICB9XG5cbiAgICB5aWVsZCBjb250YWluZXI7XG4gIH1cblxuICBweW9kaWRlT2pzLnJlbmRlcmVkT2pzW1wiMVwiXSA9IHRydWU7XG4gIHlpZWxkIGF3YWl0IHJlc3VsdDtcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session1";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

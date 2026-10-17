@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Gold – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="_assets/lesson.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 3</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-3">    
+        <li>
+    <a class="dropdown-item" href="../session3/part-a.html">
+ <span class="dropdown-text">Part A · Gold</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-b.html">
+ <span class="dropdown-text">Part B · Crypto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-c.html">
+ <span class="dropdown-text">Part C · Tableau 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-d.html">
+ <span class="dropdown-text">Part D · Tableau 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-e.html">
+ <span class="dropdown-text">Part E · TeX and tikz</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#design-decisions" id="toc-design-decisions" class="nav-link active" data-scroll-target="#design-decisions">1 · Design decisions</a></li>
+  <li><a href="#from-sources-to-screen" id="toc-from-sources-to-screen" class="nav-link" data-scroll-target="#from-sources-to-screen">2 · From sources to screen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Gold</h1>
+<p class="subtitle lead">Session 3 · Part A</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The downloadable dashboard and the screenshots below use sample data for practice.</p>
+</div>
+</div>
+<p>This walkthrough follows the decisions behind a gold dashboard: what questions it should answer, which charts to use, how to arrange them and where interaction helps. In section 2, we look at how those decisions become a working Streamlit app. You will then adapt the dashboard in a direction of your own choosing.</p>
+<section id="design-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="design-decisions">1 · Design decisions</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_assets/streamlit-dashboard.png" class="img-fluid figure-img" alt="The gold Streamlit dashboard, with summary numbers, Declared and Inferred tabs, a price chart, fund holdings and a country ranking."></p>
+<figcaption>The Streamlit dashboard used in this activity. Summary numbers sit above a large price chart, with related charts below.</figcaption>
+</figure>
+</div>
+<section id="decide-what-the-dashboard-is-for" class="level3">
+<h3 class="anchored" data-anchor-id="decide-what-the-dashboard-is-for">Decide what the dashboard is for</h3>
+<p>A price chart shows whether gold became more or less expensive. It leaves other questions open: who is buying, who is selling, and where is gold moving? The dashboard brings several views together so a reader can investigate those questions.</p>
+<p>For example, someone might see a rising price and then look at the holdings chart to see whether investment funds also hold more gold. The two charts give context to each other. They do not, by themselves, explain what caused the price to rise.</p>
+<p>The starting point is therefore a set of questions:</p>
+<ul>
+<li>What has happened to the price?</li>
+<li>How much gold do the investment funds hold?</li>
+<li>Which countries have been buying or selling?</li>
+<li>How do reported purchases compare with an estimate?</li>
+<li>Where is gold being sent?</li>
+</ul>
+<p>These questions give each chart a job. They also help decide what deserves space on the opening screen.</p>
+</section>
+<section id="match-the-chart-to-the-question" class="level3">
+<h3 class="anchored" data-anchor-id="match-the-chart-to-the-question">Match the chart to the question</h3>
+<p>The dashboard uses different visual forms because the comparisons differ.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What the reader wants to see</th>
+<th>Chart in the dashboard</th>
+<th>Why it suits the question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Price changes over time</td>
+<td>A line chart</td>
+<td>The path makes rises, falls and turning points visible.</td>
+</tr>
+<tr class="even">
+<td>Changes in fund holdings</td>
+<td>A line chart</td>
+<td>The reader can follow the amount of gold held over time.</td>
+</tr>
+<tr class="odd">
+<td>Purchases and sales by country</td>
+<td>Horizontal bars</td>
+<td>Length and ordering make countries easy to compare.</td>
+</tr>
+<tr class="even">
+<td>Reported purchases beside an estimate</td>
+<td>Bars and a dashed line</td>
+<td>The two kinds of figures remain distinguishable.</td>
+</tr>
+<tr class="odd">
+<td>Exports to different destinations</td>
+<td>Stacked areas</td>
+<td>The chart shows both the total and how destinations contribute to it.</td>
+</tr>
+</tbody>
+</table>
+<p>The country bars combine the most recent 12 months into one number per country. That makes a useful ranking, but hides when the buying or selling happened. A monthly chart answers a different question. A dashboard can offer both: a ranking for comparison and a more detailed view for a country of interest.</p>
+<p><strong>Consider:</strong> if you wanted to find a sudden change in one country’s activity, which view would you use? If you wanted to compare all countries quickly, which would you use?</p>
+</section>
+<section id="give-the-page-a-clear-order" class="level3">
+<h3 class="anchored" data-anchor-id="give-the-page-a-clear-order">Give the page a clear order</h3>
+<p>The opening screen has three levels. The summary strip gives a quick reading of selected numbers. The large price chart gives the main subject the most space. The smaller charts below provide related information.</p>
+<p>This is a choice about emphasis. Making every chart equally large would give them equal prominence, but it would also make the reader decide where to begin. Putting related charts beside one another encourages comparison.</p>
+<p>The two tabs, <strong>Declared</strong> and <strong>Inferred</strong>, group related charts. The first contains price, fund holdings and country comparisons; the second contains the estimated-demand comparison and exports. Tabs keep the page shorter, although the reader must switch between them to see everything.</p>
+<section id="a-different-layout-makes-a-different-comparison-easier" class="level4">
+<h4 class="anchored" data-anchor-id="a-different-layout-makes-a-different-comparison-easier">A different layout makes a different comparison easier</h4>
+<p>An earlier revision placed five charts in a single column:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_assets/shared-timeline-sample-2026-09-21.png" class="img-fluid figure-img" alt="Five charts stacked vertically, with matching date positions and vertical event lines."></p>
+<figcaption>A saved layout from 21 September 2026, using sample data. The charts share the same dates from left to right.</figcaption>
+</figure>
+</div>
+<p>With this arrangement, the same month is directly above or below itself in every chart. It is easier to see whether changes happened around the same time. The cost is that each chart gets less height.</p>
+<p>Neither arrangement serves every purpose. The larger price chart helps someone concentrate on price. The stacked layout helps someone compare timing across several measures. Choose the layout for the comparison you want to support.</p>
+</section>
+</section>
+<section id="make-the-comparisons-clear" class="level3">
+<h3 class="anchored" data-anchor-id="make-the-comparisons-clear">Make the comparisons clear</h3>
+<p>The app reuses colours for the same countries. This helps the reader recognise a country when moving from one chart to another. Solid and dashed lines separate reported and estimated figures, so colour is not the only clue.</p>
+<p>Labels also need to say what a number means. Gold held on a particular date is an amount owned. Gold bought during a month is activity over a period. Both can be measured in tonnes, but they answer different questions. A title such as “Monthly purchases and sales” makes that distinction clearer.</p>
+<p>Dates matter too. A latest-price number and a quarterly estimate may refer to different periods. Put that information near the chart so the reader can see what is being compared. If a value is missing, leave it missing: showing zero would suggest that nothing was held or bought.</p>
+<p>The supplied values are practice data. When adapting the app, keep that clear. If you use real data, identify its source and the dates it describes. A polished chart should help someone understand the evidence behind it.</p>
+</section>
+<section id="use-interaction-to-answer-a-useful-question" class="level3">
+<h3 class="anchored" data-anchor-id="use-interaction-to-answer-a-useful-question">Use interaction to answer a useful question</h3>
+<p>The original app already lets the reader hover for values, open <strong>12-month detail per bank</strong>, and switch optional comparison lines on or off. These controls provide more detail without putting everything on screen at once.</p>
+<p>A country selector would offer another useful route: first compare countries in the ranking, then choose one and inspect its monthly activity. Section 2 shows how to add that view using data already supplied with the app.</p>
+<p>As you look through the dashboard, choose a question you would like your own version to make easier to answer. That will give your adaptation a purpose.</p>
+<p>Continue to <a href="#from-sources-to-screen">section 2 — From sources to screen</a>.</p>
+</section>
+</section>
+<section id="from-sources-to-screen" class="level2">
+<h2 class="anchored" data-anchor-id="from-sources-to-screen">2 · From sources to screen</h2>
+<p><a href="#design-decisions">Section 1</a> explained the questions and design choices. Here we follow how the app reads its data, draws its charts and arranges them on the page. Then we add a country selector that lets a reader explore one country’s activity.</p>
+<p>The examples below refer to the downloadable Streamlit app. Work in the files on your computer as you did in Session 2.</p>
+<section id="open-the-working-dashboard" class="level3">
+<h3 class="anchored" data-anchor-id="open-the-working-dashboard">Open the working dashboard</h3>
+<p><a href="_assets/gold-dashboard-streamlit.zip">Download the Streamlit dashboard ZIP</a> and extract it. Open the extracted <code>gold_dashboard</code> folder in your code editor.</p>
+<p>Use your Python setup from <a href="../session2/part-c.html">Streamlit 1</a>. Open a terminal in the <code>gold_dashboard</code> folder and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> streamlit run app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dashboard opens in your browser. If it does not open automatically, use the <strong>Local URL</strong> printed in the terminal. The sample data are included in the ZIP.</p>
+<p>Explore both tabs. Hover over the charts, open <strong>12-month detail per bank</strong>, and try <strong>show mine replenishment</strong> in the <strong>Inferred</strong> tab. Think about what each interaction lets you see that the opening screen does not.</p>
+</section>
+<section id="follow-the-data-into-the-app" class="level3">
+<h3 class="anchored" data-anchor-id="follow-the-data-into-the-app">Follow the data into the app</h3>
+<p>The main work happens in <code>app.py</code>. It reads tables from <code>data/</code>, makes charts from those tables, and places the charts in the dashboard. <code>design.py</code> holds shared choices such as country colours.</p>
+<p>Three Python packages do most of the work: <strong>pandas</strong> reads and organises the tables, <strong>Plotly</strong> draws the charts, and <strong>Streamlit</strong> puts the charts and controls on the page.</p>
+<p>The data are divided into five CSV files. A CSV is a table saved as a text file; you can also open it in a spreadsheet.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it contains</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>price.csv</code></td>
+<td>Dates, gold prices and values used for the comparison line</td>
+</tr>
+<tr class="even">
+<td><code>etf.csv</code></td>
+<td>Dates and the amount of gold held by the two investment funds</td>
+</tr>
+<tr class="odd">
+<td><code>declared.csv</code></td>
+<td>Monthly purchases and sales for each country</td>
+</tr>
+<tr class="even">
+<td><code>gap.csv</code></td>
+<td>Quarterly reported purchases and estimated purchases</td>
+</tr>
+<tr class="odd">
+<td><code>swiss.csv</code></td>
+<td>Monthly exports to different destinations</td>
+</tr>
+</tbody>
+</table>
+<p>Open <code>declared.csv</code>. Its three columns are <code>date</code>, <code>country</code> and <code>net_purchases_t</code>. Each row describes one country in one month. The last column is measured in tonnes: a positive number means net buying and a negative number means net selling.</p>
+<p>In <code>app.py</code>, this line loads that table:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>declared <span class="op">=</span> load(<span class="st">"declared"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The app’s <code>load()</code> function reads the matching CSV. After that line runs, <code>declared</code> is the table the charts can use. The other CSVs are loaded in the same way.</p>
+</section>
+<section id="turn-a-table-into-a-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="turn-a-table-into-a-comparison">Turn a table into a comparison</h3>
+<p>The country ranking uses a summary of <code>declared.csv</code>. The app keeps the most recent 12 months, adds the monthly amounts for each country, and orders the country totals. It then draws one horizontal bar per country.</p>
+<p>This changes what the reader can find out. The original table contains the month-by-month detail. The ranking makes it easier to compare countries over the whole period. The <strong>12-month detail per bank</strong> display lets the reader look behind that summary.</p>
+<p>The same pattern appears elsewhere: choose the relevant rows, decide whether to show individual values or a summary, then choose the chart. Before changing a chart, check which of those decisions you want to change.</p>
+<p>For example, replacing a ranking with monthly bars would make timing easier to see, but would make the overall country comparison harder. Keeping the ranking and adding a country selector gives the reader both routes.</p>
+</section>
+<section id="put-the-charts-together" class="level3">
+<h3 class="anchored" data-anchor-id="put-the-charts-together">Put the charts together</h3>
+<p>Streamlit places content on the page as it runs through <code>app.py</code>. The supplied app creates the two tabs with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tabD, tabI <span class="op">=</span> st.tabs([<span class="st">"Declared"</span>, <span class="st">"Inferred"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Charts inside <code>with tabD:</code> appear in <strong>Declared</strong>. Charts inside <code>with tabI:</code> appear in <strong>Inferred</strong>. The indented lines under each statement belong to that tab.</p>
+<p>Within <strong>Declared</strong>, the price chart appears first. The next two charts are placed beside each other using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>left, right <span class="op">=</span> st.columns([<span class="dv">3</span>, <span class="dv">2</span>], gap<span class="op">=</span><span class="st">"large"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The numbers give the left chart three shares of the available width and the right chart two. The sections beginning <code>with left:</code> and <code>with right:</code> put content in those columns. This is how the layout decision from section 1 becomes part of the app.</p>
+<p>When adapting the dashboard, you can change this arrangement to suit your questions: give an important chart more space, put related views together, or move detailed material into a separate tab.</p>
+</section>
+<section id="add-a-way-to-explore-one-country" class="level3">
+<h3 class="anchored" data-anchor-id="add-a-way-to-explore-one-country">Add a way to explore one country</h3>
+<p>The existing ranking compares all countries. Let’s add a view where the reader chooses one country and sees its monthly purchases and sales.</p>
+<p>Add the following block at the end of <code>app.py</code>. It uses the table and the <strong>Declared</strong> tab that the app has already created.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tabD:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">"Explore one country"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    country <span class="op">=</span> st.selectbox(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Choose a country"</span>, <span class="bu">sorted</span>(declared[<span class="st">"country"</span>].unique())</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    country_data <span class="op">=</span> declared[declared[<span class="st">"country"</span>] <span class="op">==</span> country]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        country_data, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"net_purchases_t"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"Month"</span>, <span class="st">"net_purchases_t"</span>: <span class="st">"Tonnes"</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">: monthly purchases and sales (sample data)"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    st.plotly_chart(fig, use_container_width<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The block does four things:</p>
+<ol type="1">
+<li>Builds a dropdown list from the country names in the table.</li>
+<li>Keeps the rows for the country the reader chooses.</li>
+<li>Draws a bar for each month’s value, with dates along the bottom and tonnes up the side.</li>
+<li>Displays the chart in the <strong>Declared</strong> tab.</li>
+</ol>
+<p>Save the file and rerun the app. Scroll down in <strong>Declared</strong> to find the new view. Try <strong>China</strong>, then <strong>Russia</strong>. Check that the title and bars change with your selection. Bars above zero show net buying; bars below zero show net selling in these sample data.</p>
+<p>Now compare this view with the country ranking. The ranking answers “who bought or sold more over the last year?” The new view answers “when did this country buy or sell?” It displays all the months in the supplied table, so its time span is longer than the ranking’s. That difference should be clear to the reader.</p>
+<p>This is one possible extension. You could instead add a date control, compare two countries, reorganise the views, or use another dataset. Choose something that helps answer the question you identified in section 1.</p>
+</section>
+<section id="final-exercise-adapt-and-host-your-dashboard" class="level3">
+<h3 class="anchored" data-anchor-id="final-exercise-adapt-and-host-your-dashboard">Final exercise · Adapt and host your dashboard</h3>
+<p>You are encouraged to adapt the dashboard however you like. You could focus on a different question, change how comparisons work, add a view or use another dataset. Keep sample data labelled as sample data.</p>
+<p>When you are happy with your version, put it online using Streamlit Community Cloud, as you did in Session 2:</p>
+<ol type="1">
+<li>Upload the contents of your <code>gold_dashboard</code> folder to a public GitHub repository. Put <code>app.py</code>, <code>design.py</code>, <code>requirements.txt</code> and the <code>data/</code> folder at the top of the repository.</li>
+<li>Open <a href="https://share.streamlit.io/">Streamlit Community Cloud</a>, choose <strong>Create app</strong>, select your repository and branch, and choose <code>app.py</code> as the file to run. Deploy the app.</li>
+<li>Open its link in a private browser window to check that someone else can use it without signing in.</li>
+</ol>
+<p>If you need a reminder, use the <a href="https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy">Streamlit deployment guide</a>.</p>
+<p><strong>Submit the link to your hosted dashboard</strong> as a plain text file through <a href="https://canvas.uts.edu.au/courses/41964/assignments/293957">Canvas</a>. The link will look like <code>https://your-app-name.streamlit.app/</code>.</p>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session3";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

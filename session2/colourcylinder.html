@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+  body { margin: 0; background: #faf5ec;
+         font-family: "Source Sans Pro", -apple-system, sans-serif; }
+  #controls { display: flex; justify-content: center; gap: 26px;
+              align-items: center; padding: 0 0 4px 0;
+              position: relative; z-index: 2; }
+  #plot { margin-top: 0; position: relative; z-index: 1; }
+  .ctl { display: flex; flex-direction: column; align-items: center;
+         font-size: 12.5px; color: #4a463c; }
+  .ctl input[type="range"] {
+    width: 130px;
+    height: 18px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    accent-color: var(--slider-colour, #d66a2c);
+  }
+  .ctl input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border: 1px solid #625e56;
+    border-radius: 999px;
+    background: var(--slider-colour, #d66a2c);
+  }
+  .ctl input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #4a463c;
+    border-radius: 50%;
+    background: var(--slider-colour, #d66a2c);
+  }
+  .ctl input[type="range"]::-moz-range-track {
+    height: 5px;
+    border: 1px solid #625e56;
+    border-radius: 999px;
+    background: var(--slider-colour, #d66a2c);
+  }
+  .ctl input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #4a463c;
+    border-radius: 50%;
+    background: var(--slider-colour, #d66a2c);
+  }
+</style>
+</head>
+<body>
+<div id="plot"></div>
+<div id="controls">
+  <div class="ctl"><label>hue <span id="hv">30</span>&deg;</label>
+    <input id="h" type="range" min="0" max="360" step="1" value="30"></div>
+  <div class="ctl"><label>saturation <span id="sv">0.85</span></label>
+    <input id="s" type="range" min="0" max="1" step="0.01" value="0.85"></div>
+  <div class="ctl"><label>luminance <span id="lv">0.55</span></label>
+    <input id="l" type="range" min="0" max="1" step="0.01" value="0.55"></div>
+</div>
+<script>
+const axisT = Array.from({length: 25}, (_, i) => -1 + 2 * i / 24);
+const ring = Array.from({length: 73}, (_, i) => i * 5);
+const graticule = [];
+
+for (const latitude of [-60, -30, 30, 60]) {
+  const phi = latitude * Math.PI / 180;
+  const lightness = 50 * (Math.sin(phi) + 1);
+  graticule.push({
+    type: "scatter3d", mode: "lines",
+    x: ring.map(a => Math.cos(phi) * Math.cos(a * Math.PI / 180)),
+    y: ring.map(a => Math.cos(phi) * Math.sin(a * Math.PI / 180)),
+    z: ring.map(() => Math.sin(phi)),
+    line: {
+      color: ring.map(a => a / 360),
+      colorscale: ring.map(a =>
+        [a / 360, `hsl(${a},100%,${lightness}%)`]),
+      width: 3
+    },
+    hoverinfo: "skip", showlegend: false
+  });
+}
+
+const meridianPhi = Array.from({length: 49}, (_, i) =>
+  -Math.PI / 2 + Math.PI * i / 48);
+for (const longitude of [0, 45, 90, 135, 180, 225, 270, 315]) {
+  const theta = longitude * Math.PI / 180;
+  const meridianScale = meridianPhi.map((p, i) => [
+    i / (meridianPhi.length - 1),
+    `hsl(${longitude},100%,${50 * (Math.sin(p) + 1)}%)`
+  ]);
+  graticule.push({
+    type: "scatter3d", mode: "lines",
+    x: meridianPhi.map(p => Math.cos(p) * Math.cos(theta)),
+    y: meridianPhi.map(p => Math.cos(p) * Math.sin(theta)),
+    z: meridianPhi.map(p => Math.sin(p)),
+    line: {
+      color: meridianPhi.map((_, i) => i / (meridianPhi.length - 1)),
+      colorscale: meridianScale,
+      width: 3
+    },
+    hoverinfo: "skip", showlegend: false
+  });
+}
+
+const fixedTraces = [
+  ...graticule,
+  { // polar axis: black south pole to white north pole
+    type: "scatter3d", mode: "lines",
+    x: axisT.map(() => 0), y: axisT.map(() => 0), z: axisT,
+    line: {color: axisT, colorscale: [[0, "#000"], [1, "#fff"]], width: 10},
+    hoverinfo: "skip", showlegend: false
+  },
+  { // hue ring around the equator
+    type: "scatter3d", mode: "lines",
+    x: ring.map(a => Math.cos(a * Math.PI / 180)),
+    y: ring.map(a => Math.sin(a * Math.PI / 180)),
+    z: ring.map(() => 0),
+    line: {color: ring.map(a => a / 360),
+           colorscale: ring.map(a => [a / 360, `hsl(${a},100%,50%)`]),
+           width: 8},
+    hoverinfo: "skip", showlegend: false
+  }
+];
+
+function arrowTraces(h, s, l) {
+  const az = h * Math.PI / 180;
+  const z = 2 * l - 1;
+  const availableRadius = Math.sqrt(Math.max(0, 1 - z * z));
+  const radius = s * availableRadius;
+  const x = radius * Math.cos(az),
+        y = radius * Math.sin(az);
+  const col = `hsl(${h}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+  const arrowT = Array.from({length: 25}, (_, i) => i / 24);
+  return [
+    {type: "scatter3d", mode: "lines",
+     x: arrowT.map(t => t * x), y: arrowT.map(t => t * y),
+     z: arrowT.map(t => t * z),
+     line: {color: arrowT, colorscale: [[0, "#808080"], [1, col]], width: 9},
+     hoverinfo: "skip", showlegend: false},
+    {type: "cone", x: [x], y: [y], z: [z], u: [x * 0.25], v: [y * 0.25],
+     w: [z * 0.25], anchor: "tip", sizemode: "absolute", sizeref: 0.14,
+     colorscale: [[0, col], [1, col]], showscale: false,
+     hoverinfo: "skip"},
+    {type: "scatter3d", mode: "markers", x: [x], y: [y], z: [z],
+     marker: {size: 6, color: col, line: {color: "#555", width: 1}},
+     hoverinfo: "skip", showlegend: false}
+  ];
+}
+
+const layout = {
+  width: 660, height: 445, paper_bgcolor: "#faf5ec",
+  margin: {l: 10, r: 10, t: 34, b: 0}, showlegend: false,
+  uirevision: "polar-colour-space",
+  title: {text: "Polar Coordinate Color Space",
+          font: {size: 17, color: "#232028"},
+          x: 0.5, xanchor: "center", y: 0.98},
+  scene: {
+    xaxis: {visible: false, range: [-1.2, 1.2]},
+    yaxis: {visible: false, range: [-1.2, 1.2]},
+    zaxis: {visible: false, range: [-1.2, 1.2]},
+    aspectratio: {x: 1, y: 1, z: 1},
+    camera: {eye: {x: 1.08, y: -0.93, z: 0.34}}
+  }
+};
+const config = {displayModeBar: false, scrollZoom: true, responsive: true};
+
+function current() {
+  return [parseFloat(document.getElementById("h").value),
+          parseFloat(document.getElementById("s").value),
+          parseFloat(document.getElementById("l").value)];
+}
+
+function redraw() {
+  const [h, s, l] = current();
+  const col = `hsl(${h}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+  document.getElementById("hv").textContent = h;
+  document.getElementById("sv").textContent = s.toFixed(2);
+  document.getElementById("lv").textContent = l.toFixed(2);
+  for (const id of ["h", "s", "l"]) {
+    document.getElementById(id).style.setProperty("--slider-colour", col);
+  }
+  Plotly.react("plot", fixedTraces.concat(arrowTraces(h, s, l)),
+               layout, config);
+}
+
+for (const id of ["h", "s", "l"]) {
+  document.getElementById(id).addEventListener("input", redraw);
+}
+redraw();
+</script>
+</body>
+</html>

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Periodic Spiral – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 3</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-3">    
+        <li>
+    <a class="dropdown-item" href="../session3/part-a.html">
+ <span class="dropdown-text">Part A · Gold</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-b.html">
+ <span class="dropdown-text">Part B · Crypto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-c.html">
+ <span class="dropdown-text">Part C · Tableau 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-d.html">
+ <span class="dropdown-text">Part D · Tableau 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-e.html">
+ <span class="dropdown-text">Part E · TeX and tikz</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#atoms-and-electron-shells" id="toc-atoms-and-electron-shells" class="nav-link active" data-scroll-target="#atoms-and-electron-shells">1 · Atoms and electron shells</a></li>
+  <li><a href="#periodicity" id="toc-periodicity" class="nav-link" data-scroll-target="#periodicity">2 · Periodicity</a></li>
+  <li><a href="#alternative-designs" id="toc-alternative-designs" class="nav-link" data-scroll-target="#alternative-designs">3 · Alternative designs</a></li>
+  <li><a href="#build-the-spiral" id="toc-build-the-spiral" class="nav-link" data-scroll-target="#build-the-spiral">4 · Build the spiral</a></li>
+  <li><a href="#build-the-canonical-table" id="toc-build-the-canonical-table" class="nav-link" data-scroll-target="#build-the-canonical-table">5 · Build the canonical table</a></li>
+  <li><a href="#why-this-became-the-standard-table" id="toc-why-this-became-the-standard-table" class="nav-link" data-scroll-target="#why-this-became-the-standard-table">6 · Why this became the standard table</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Periodic Spiral</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The periodic table is one of the most successful data visualisations ever made, displayed on millions of classroom walls around the world.</p>
+<p>Its underlying data is essentially just a <strong>one-dimensional list</strong>: the elements sorted by atomic number, 1 to 118.</p>
+<p>Turning this list into a “table” involves a <em>layout choice</em>. Although one version has become canonical over the past 150 years, there are many alternative possible designs. What makes this version special?</p>
+<!--
+
+In this part you will: build the physics that makes the list periodic,
+look at real alternative designs (and pick a favourite), construct a
+**periodic spiral** yourself, and then construct the canonical table,
+and ask, as designers, why it became *the* one. -->
+<p>All code runs in your browser. The first cell may take a few seconds while Python loads.</p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBqc1xuaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHB5b2RpZGUuaHR0cCBpbXBvcnQgb3Blbl91cmxcblxuIyBEYXRhIGZpbGVzIGxpdmUgYmVzaWRlIHRoaXMgcGFnZTsgdGhlIFB5dGhvbiB3b3JrZXIgcnVucyBmcm9tIHNpdGVfbGlicy8uXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG5cbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgIFwiZmlndXJlLmZpZ3NpemVcIjogKDksIDUpLFxuICAgIFwiYXhlcy5zcGluZXMudG9wXCI6IEZhbHNlLFxuICAgIFwiYXhlcy5zcGluZXMucmlnaHRcIjogRmFsc2UsXG4gICAgXCJheGVzLmdyaWRcIjogVHJ1ZSxcbiAgICBcImdyaWQuYWxwaGFcIjogMC4yMixcbiAgICBcImZvbnQuc2l6ZVwiOiAxMSxcbn0pXG5wcmludChcIkVudmlyb25tZW50IHJlYWR5LlwiKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsIm91dHB1dCI6ZmFsc2V9LCJjb2RlIjoiIyBQcmUtYnVpbGQgZXZlcnkgbmFtZSB0aGUgcGFnZSB1c2VzLCBzbyBlYWNoIGNlbGwgd29ya3Mgbm8gbWF0dGVyIHdoaWNoXG4jIGNlbGxzIHdlcmUgcnVuIGJlZm9yZSBpdC4gVGhlIHZpc2libGUgY2VsbHMgcmUtZGVyaXZlIGFsbCBvZiB0aGlzLlxudGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgICA9IFtpbnQoclswXSkgZm9yIHIgaW4gcm93c11cbnN5bWJvbCAgID0gW3JbMV0gZm9yIHIgaW4gcm93c11cbm5hbWUgICAgID0gW3JbMl0gZm9yIHIgaW4gcm93c11cbnBlcmlvZCAgID0gW2ludChyWzNdKSBmb3IgciBpbiByb3dzXVxuZ3JvdXAgICAgPSBbaW50KGZsb2F0KHJbNF0pKSBpZiByWzRdIGVsc2UgTm9uZSBmb3IgciBpbiByb3dzXVxuYmxvY2sgICAgPSBbcls1XSBmb3IgciBpbiByb3dzXVxuY2F0ZWdvcnkgPSBbcls2XSBmb3IgciBpbiByb3dzXVxucmFkaXVzICAgPSBbZmxvYXQocls3XSkgaWYgcls3XSBlbHNlIE5vbmUgZm9yIHIgaW4gcm93c11cblxuc3Vic2hlbGxzID0gc29ydGVkKCgobiwgbCkgZm9yIG4gaW4gcmFuZ2UoMSwgOCkgZm9yIGwgaW4gcmFuZ2UobikpLFxuICAgICAgICAgICAgICAgICAgIGtleT1sYW1iZGEgdDogKHRbMF0gKyB0WzFdLCB0WzBdKSlcbkxfTkFNRVMgPSBcInNwZGZcIlxuXG5kZWYgY29uZmlndXJhdGlvbih6KTpcbiAgICBjb25mLCBsZWZ0ID0gW10sIHpcbiAgICBmb3IgbiwgbCBpbiBzdWJzaGVsbHM6XG4gICAgICAgIGlmIGxlZnQgPT0gMDpcbiAgICAgICAgICAgIGJyZWFrXG4gICAgICAgIHRha2UgPSBtaW4obGVmdCwgMiAqICgyICogbCArIDEpKVxuICAgICAgICBjb25mLmFwcGVuZCgobiwgbCwgdGFrZSkpXG4gICAgICAgIGxlZnQgLT0gdGFrZVxuICAgIHJldHVybiBjb25mXG5cbmRlZiBzaGVsbHMoeik6XG4gICAgb3V0ID0ge31cbiAgICBmb3IgbiwgbCwgZSBpbiBjb25maWd1cmF0aW9uKHopOlxuICAgICAgICBvdXRbbl0gPSBvdXQuZ2V0KG4sIDApICsgZVxuICAgIHJldHVybiBvdXRcblxuZGVmIHZhbGVuY2Uoeik6XG4gICAgc2ggPSBzaGVsbHMoeilcbiAgICByZXR1cm4gc2hbbWF4KHNoKV1cblxuUEVSSU9EX0xFTiA9IHsxOiAyLCAyOiA4LCAzOiA4LCA0OiAxOCwgNTogMTgsIDY6IDMyLCA3OiAzMn1cbmJsb2NrX2NvbG91cnMgPSB7XCJzXCI6IFwiIzQyNjlkMFwiLCBcInBcIjogXCIjMzBhOGIxXCIsIFwiZFwiOiBcIiNjOThhMDBcIiwgXCJmXCI6IFwiIzk0NzVjZFwifVxuXG5kZWYgc3BpcmFsX2Nvb3JkcyhpKTpcbiAgICBwID0gcGVyaW9kW2ldXG4gICAgc3RhcnQgPSBzdW0oUEVSSU9EX0xFTltxXSBmb3IgcSBpbiByYW5nZSgxLCBwKSlcbiAgICBmcmFjID0gKFpbaV0gLSBzdGFydCkgLyBQRVJJT0RfTEVOW3BdXG4gICAgcmV0dXJuIDIgKiBucC5waSAqIGZyYWMsIChwIC0gMSkgKyBmcmFjIn0=
+</script>
+</div>
+<section id="atoms-and-electron-shells" class="level2">
+<h2 class="anchored" data-anchor-id="atoms-and-electron-shells">1 · Atoms and electron shells</h2>
+<p>An element is defined by one number: <strong>Z</strong>, the count of protons in the nucleus (e.g.&nbsp;carbon is “element six”).</p>
+<p>A neutral atom carries Z electrons. These electrons stack into <strong>shells</strong> around the nucleus that hold at most <span class="math inline">\(2n^2\)</span> electrons: 2, 8, 18, 32.</p>
+<p>Chemical behaviour is governed mainly by the <strong>valence electrons</strong>: electrons in the outermost shell and, for transition metals, electrons in a nearby incompletely filled d sub-shell. Similar valence arrangements tend to produce similar chemistry.</p>
+<p>The data for this page is one row per element: number, symbol, name, and a few other element properties.</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgICA9IFtpbnQoclswXSkgZm9yIHIgaW4gcm93c11cbnN5bWJvbCAgID0gW3JbMV0gZm9yIHIgaW4gcm93c11cbm5hbWUgICAgID0gW3JbMl0gZm9yIHIgaW4gcm93c11cbnBlcmlvZCAgID0gW2ludChyWzNdKSBmb3IgciBpbiByb3dzXVxuZ3JvdXAgICAgPSBbaW50KGZsb2F0KHJbNF0pKSBpZiByWzRdIGVsc2UgTm9uZSBmb3IgciBpbiByb3dzXVxuYmxvY2sgICAgPSBbcls1XSBmb3IgciBpbiByb3dzXVxuY2F0ZWdvcnkgPSBbcls2XSBmb3IgciBpbiByb3dzXVxucmFkaXVzICAgPSBbZmxvYXQocls3XSkgaWYgcls3XSBlbHNlIE5vbmUgZm9yIHIgaW4gcm93c11cblxucHJpbnQoZlwie2xlbihaKX0gZWxlbWVudHMsIHtuYW1lWzBdfSB0byB7bmFtZVstMV19XCIpIn0=
+</script>
+</div>
+<section id="shells-sub-shells-and-orbitals" class="level3">
+<h3 class="anchored" data-anchor-id="shells-sub-shells-and-orbitals">Shells, sub-shells and orbitals</h3>
+<p>A shell is split into <strong>sub-shells</strong>, and a sub-shell is split into <strong>orbitals</strong>. These represent electron states allowed by quantum mechanics.</p>
+<p>Within shell <span class="math inline">\(n\)</span>, the sub-shell quantum number <span class="math inline">\(l\)</span> can take the values from 0 to <span class="math inline">\(n-1\)</span>. The traditional labels <code>s</code>, <code>p</code>, <code>d</code> and <code>f</code> mean <span class="math inline">\(l=0,1,2,3\)</span>. A sub-shell has <span class="math inline">\(2l+1\)</span> orbitals (so s has 1, p has 3, d has 5, f has 7), and the Pauli exclusion principle permits two electrons of opposite spin in each orbital, giving sub-shell capacities of 2, 6, 10 and 14 electrons.</p>
+<p>The first shell contains only a 1s sub-shell. The second contains 2s and 2p; the third contains 3s, 3p and 3d; and the fourth adds 4f. In notation such as <span class="math inline">\(3p^5\)</span>, the <code>3</code> names the shell, <code>p</code> names the sub-shell, and the superscript means that five electrons occupy it (the letters are traditional names from spectroscopy).</p>
+<p>Shells fill in a fixed order (the <em>aufbau</em> order). Carefully review how the functions translate an atomic number into a sub-shell configuration and then totals for each shell. We will compare lithium, carbon, neon and sodium: the beginning, middle and end of the second shell, followed by the first electron in the third shell.</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic3Vic2hlbGxzID0gc29ydGVkKCgobiwgbCkgZm9yIG4gaW4gcmFuZ2UoMSwgOCkgZm9yIGwgaW4gcmFuZ2UobikpLFxuICAgICAgICAgICAgICAgICAgIGtleT1sYW1iZGEgdDogKHRbMF0gKyB0WzFdLCB0WzBdKSlcbkxfTkFNRVMgPSBcInNwZGZcIlxuXG5kZWYgY29uZmlndXJhdGlvbih6KTpcbiAgICBcIlwiXCJJZGVhbGlzZWQgc2hlbGwgZmlsbGluZzogbGlzdCBvZiAobiwgbCwgZWxlY3Ryb25zKS5cIlwiXCJcbiAgICBjb25mLCBsZWZ0ID0gW10sIHpcbiAgICBmb3IgbiwgbCBpbiBzdWJzaGVsbHM6XG4gICAgICAgIGlmIGxlZnQgPT0gMDpcbiAgICAgICAgICAgIGJyZWFrXG4gICAgICAgIHRha2UgPSBtaW4obGVmdCwgMiAqICgyICogbCArIDEpKSAgICMgc3ViLXNoZWxsIGNhcGFjaXR5IDIoMmwrMSlcbiAgICAgICAgY29uZi5hcHBlbmQoKG4sIGwsIHRha2UpKVxuICAgICAgICBsZWZ0IC09IHRha2VcbiAgICByZXR1cm4gY29uZlxuXG5kZWYgc2hlbGxzKHopOlxuICAgIFwiXCJcIkVsZWN0cm9ucyBwZXIgc2hlbGwgbnVtYmVyIG4uXCJcIlwiXG4gICAgb3V0ID0ge31cbiAgICBmb3IgbiwgbCwgZSBpbiBjb25maWd1cmF0aW9uKHopOlxuICAgICAgICBvdXRbbl0gPSBvdXQuZ2V0KG4sIDApICsgZVxuICAgIHJldHVybiBvdXRcblxuZGVmIHZhbGVuY2Uoeik6XG4gICAgXCJcIlwiRWxlY3Ryb25zIGluIHRoZSBvdXRlcm1vc3Qgc2hlbGwuXCJcIlwiXG4gICAgc2ggPSBzaGVsbHMoeilcbiAgICByZXR1cm4gc2hbbWF4KHNoKV1cblxuRVhBTVBMRV9aID0gWzMsIDYsIDEwLCAxMV1cblxuZm9yIHogaW4gRVhBTVBMRV9aOlxuICAgIHN1YnNoZWxsX3RleHQgPSBcIiBcIi5qb2luKFxuICAgICAgICBmXCJ7bn17TF9OQU1FU1tsXX17ZX1cIiBmb3IgbiwgbCwgZSBpbiBjb25maWd1cmF0aW9uKHopXG4gICAgKVxuICAgIHNoZWxsX3RleHQgPSBcIiwgXCIuam9pbihzdHIoZSkgZm9yIGUgaW4gc2hlbGxzKHopLnZhbHVlcygpKVxuICAgIHByaW50KFxuICAgICAgICBmXCJ7bmFtZVt6IC0gMV06PDd9ICh7c3ltYm9sW3ogLSAxXX0sIFo9e3o6PjJ9KTogXCJcbiAgICAgICAgZlwie3N1YnNoZWxsX3RleHQ6PDE3fSBzaGVsbHMge3NoZWxsX3RleHR9XCJcbiAgICApIn0=
+</script>
+</div>
+<p>Draw all four with the same function and the same spatial scale:</p>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiRVhBTVBMRV9aID0gWzMsIDYsIDEwLCAxMV1cblxuZGVmIGRyYXdfc2hlbGxfZGlhZ3JhbShheCwgeiwgbGltaXQ9My41NSk6XG4gICAgY291bnRzID0gc2hlbGxzKHopXG4gICAgYXguc2V0X2FzcGVjdChcImVxdWFsXCIpXG4gICAgYXguYXhpcyhcIm9mZlwiKVxuICAgIGF4LnNldF94bGltKC1saW1pdCwgbGltaXQpXG4gICAgYXguc2V0X3lsaW0oLWxpbWl0LCBsaW1pdClcblxuICAgIGF4LnNjYXR0ZXIoWzBdLCBbMF0sIHM9MjMwLCBjb2xvcj1cIiMxNzE3MTdcIiwgem9yZGVyPTMpXG4gICAgYXguYW5ub3RhdGUoXG4gICAgICAgIHN5bWJvbFt6IC0gMV0sICgwLCAwKSwgY29sb3I9XCJ3aGl0ZVwiLFxuICAgICAgICBoYT1cImNlbnRlclwiLCB2YT1cImNlbnRlclwiLCBmb250c2l6ZT04LCBmb250d2VpZ2h0PVwiYm9sZFwiLCB6b3JkZXI9NCxcbiAgICApXG5cbiAgICBmb3IgbiwgY291bnQgaW4gY291bnRzLml0ZW1zKCk6XG4gICAgICAgIGF4LmFkZF9wYXRjaChcbiAgICAgICAgICAgIHBsdC5DaXJjbGUoKDAsIDApLCBuLCBmaWxsPUZhbHNlLCBjb2xvcj1cIiNiN2JjYzVcIiwgbHc9MS4yKVxuICAgICAgICApXG4gICAgICAgIGFuZ2xlcyA9IG5wLmxpbnNwYWNlKDAsIDIgKiBucC5waSwgY291bnQsIGVuZHBvaW50PUZhbHNlKSArIG5wLnBpIC8gMlxuICAgICAgICBheC5zY2F0dGVyKFxuICAgICAgICAgICAgbiAqIG5wLmNvcyhhbmdsZXMpLCBuICogbnAuc2luKGFuZ2xlcyksXG4gICAgICAgICAgICBzPTQ1LCBjb2xvcj1cIiM0MjY5ZDBcIiwgZWRnZWNvbG9yPVwid2hpdGVcIiwgbGluZXdpZHRoPTAuNSxcbiAgICAgICAgICAgIHpvcmRlcj0zLFxuICAgICAgICApXG5cbiAgICBzaGVsbF90ZXh0ID0gXCIsIFwiLmpvaW4oc3RyKGUpIGZvciBlIGluIGNvdW50cy52YWx1ZXMoKSlcbiAgICBheC5zZXRfdGl0bGUoXG4gICAgICAgIGZcIntuYW1lW3ogLSAxXX0gKHtzeW1ib2xbeiAtIDFdfSwgWj17en0pXFxue3NoZWxsX3RleHR9XCIsXG4gICAgICAgIGZvbnRzaXplPTExLCBwYWQ9NyxcbiAgICApXG5cbmZpZywgYXhlcyA9IHBsdC5zdWJwbG90cygyLCAyLCBmaWdzaXplPSg3LjUsIDcuNSkpXG5mb3IgYXgsIHogaW4gemlwKGF4ZXMucmF2ZWwoKSwgRVhBTVBMRV9aKTpcbiAgICBkcmF3X3NoZWxsX2RpYWdyYW0oYXgsIHopXG5cbmZpZy5zdXB0aXRsZShcIkhvdyBhbiBvdXRlciBzaGVsbCBmaWxscywgY2xvc2VzIGFuZCBzdGFydHMgYWdhaW5cIiwgZm9udHNpemU9MTUpXG5wbHQudGlnaHRfbGF5b3V0KHJlY3Q9WzAsIDAsIDEsIDAuOTZdKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+</section>
+</section>
+<section id="periodicity" class="level2">
+<h2 class="anchored" data-anchor-id="periodicity">2 · Periodicity</h2>
+<p>As Z is increased, the outer shell fills, closes, and starts again:</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoienogPSBsaXN0KHJhbmdlKDEsIDExOSkpXG52diA9IFt2YWxlbmNlKHopIGZvciB6IGluIHp6XVxubm9ibGUgID0gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NiwgMTE4KVxuYWxrYWxpID0gKDMsIDExLCAxOSwgMzcsIDU1LCA4NylcblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDQuNCkpXG5heC5wbG90KHp6LCB2diwgXCItXCIsIGNvbG9yPVwiI2JiYmJiYlwiLCBsdz0xKVxuYXguc2NhdHRlcih6eiwgdnYsIHM9MTYsIGNvbG9yPVwiIzQyNjlkMFwiLCB6b3JkZXI9MylcbmF4LnNjYXR0ZXIobm9ibGUsIFt2YWxlbmNlKHopIGZvciB6IGluIG5vYmxlXSwgcz01NSwgY29sb3I9XCIjZTY2ODUyXCIsIHpvcmRlcj00KVxuYXguc2NhdHRlcihhbGthbGksIFt2YWxlbmNlKHopIGZvciB6IGluIGFsa2FsaV0sIHM9NTUsIGNvbG9yPVwiIzMwYThiMVwiLCB6b3JkZXI9NClcbmZvciB6IGluIG5vYmxlOlxuICAgIGF4LmFubm90YXRlKHN5bWJvbFt6IC0gMV0sICh6LCB2YWxlbmNlKHopKSwgdGV4dGNvb3Jkcz1cIm9mZnNldCBwb2ludHNcIixcbiAgICAgICAgICAgICAgICB4eXRleHQ9KDAsIDcpLCBoYT1cImNlbnRlclwiLCBmb250c2l6ZT05LCBjb2xvcj1cIiNlNjY4NTJcIilcbmZvciB6IGluIGFsa2FsaTpcbiAgICBheC5hbm5vdGF0ZShzeW1ib2xbeiAtIDFdLCAoeiwgdmFsZW5jZSh6KSksIHRleHRjb29yZHM9XCJvZmZzZXQgcG9pbnRzXCIsXG4gICAgICAgICAgICAgICAgeHl0ZXh0PSgwLCAtMTQpLCBoYT1cImNlbnRlclwiLCBmb250c2l6ZT05LCBjb2xvcj1cIiMzMGE4YjFcIilcbmF4LnNldF95bGltKC0xLjIsIDkuMilcbmF4LnNldF94bGFiZWwoXCJhdG9taWMgbnVtYmVyIFpcIilcbmF4LnNldF95bGFiZWwoXCJlbGVjdHJvbnMgaW4gb3V0ZXJtb3N0IHNoZWxsXCIpXG5heC5zZXRfdGl0bGUoXCJFbGVjdHJvbnMgaW4gdGhlIG91dGVybW9zdCBzaGVsbCBmb3IgYWxsIDExOCBlbGVtZW50c1wiKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>Closed shells (red, 8 outer electrons except helium’s 2) and fresh starts (teal, 1 outer electron) recur all the way to Z = 118. The long flat stretches at 2 between the teeth are the transition metals and the lanthanide and actinide series, where electrons fill inner subshells while the outermost shell holds steady. The sequence closes a shell and begins again. This “sawtooth” is the periodic law.</p>
+<section id="eighteen-groups" class="level3">
+<h3 class="anchored" data-anchor-id="eighteen-groups">Eighteen Groups</h3>
+<p>The sawtooth “teeth” have lengths 2, 8, 8, 18, 18, 32 and 32. Look closely at period 4, the first long one, to see where the standard table’s famous 18 columns come from. After argon closes period 3, the next electrons are added in three consecutive runs:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>elements</th>
+<th>sub-shell being filled</th>
+<th style="text-align: right;">number of available electron places</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>potassium–calcium</td>
+<td>4s</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>scandium–zinc</td>
+<td>3d</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td>gallium–krypton</td>
+<td>4p</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+<p>Period 4 therefore contains <span class="math inline">\(2 + 10 + 6 = 18\)</span> elements. Draw that sequence as one row:</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicnVuX2NvbG91cnMgPSB7XCJzXCI6IFwiIzQyNjlkMFwiLCBcImRcIjogXCIjYzk4YTAwXCIsIFwicFwiOiBcIiMzMGE4YjFcIn1cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSgxMSwgMi4yKSlcbmZvciBwb3NpdGlvbiwgaSBpbiBlbnVtZXJhdGUocmFuZ2UoMTgsIDM2KSwgc3RhcnQ9MSk6XG4gICAga2luZCA9IGJsb2NrW2ldXG4gICAgYXguYWRkX3BhdGNoKHBsdC5SZWN0YW5nbGUoXG4gICAgICAgIChwb3NpdGlvbiAtIDAuNDYsIC0wLjQ2KSwgMC45MiwgMC45MixcbiAgICAgICAgZmFjZWNvbG9yPXJ1bl9jb2xvdXJzW2tpbmRdLCBlZGdlY29sb3I9XCJ3aGl0ZVwiLCBsdz0xLFxuICAgICkpXG4gICAgYXgudGV4dChwb3NpdGlvbiwgMCwgc3ltYm9sW2ldLCBoYT1cImNlbnRlclwiLCB2YT1cImNlbnRlclwiLFxuICAgICAgICAgICAgY29sb3I9XCJ3aGl0ZVwiLCBmb250c2l6ZT0xMCwgZm9udHdlaWdodD1cImJvbGRcIilcblxuZm9yIHN0YXJ0LCBlbmQsIGxhYmVsIGluIFsoMSwgMiwgXCI0czogMlwiKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgKDMsIDEyLCBcIjNkOiAxMFwiKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgKDEzLCAxOCwgXCI0cDogNlwiKV06XG4gICAgYXgucGxvdChbc3RhcnQsIGVuZF0sIFswLjcyLCAwLjcyXSwgY29sb3I9XCIjMzMzMzMzXCIsIGx3PTEuNClcbiAgICBheC50ZXh0KChzdGFydCArIGVuZCkgLyAyLCAwLjkyLCBsYWJlbCwgaGE9XCJjZW50ZXJcIiwgdmE9XCJib3R0b21cIixcbiAgICAgICAgICAgIGZvbnRzaXplPTEwKVxuXG5heC5zZXRfeGxpbSgwLjMsIDE4LjcpOyBheC5zZXRfeWxpbSgtMC43LCAxLjI1KVxuYXguc2V0X2FzcGVjdChcImVxdWFsXCIpOyBheC5heGlzKFwib2ZmXCIpXG5heC5zZXRfdGl0bGUoXCJQZXJpb2QgNCBoYXMgMTggcG9zaXRpb25zOiAyICsgMTAgKyA2XCIsIHBhZD0xNClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>When the standard table stacks each period as a row, these runs become the <strong>blocks</strong>.</p>
+<p>The two elements of the s run form a two-column s-block.</p>
+<p>The ten elements of the d run a ten-column d-block, and the six of the p run a six-column p-block.</p>
+<p>The columns then form <span class="math inline">\(2 + 10 + 6 = 18\)</span> vertical <strong>groups</strong>, numbered 1–2 (s), 3–12 (d) and 13–18 (p).</p>
+<p>The table has 18 groups essentially because period four establishes 18 recurring positions.</p>
+<p>The numbers 1–18 are the standardised group labels. Six numbered groups also have IUPAC-approved collective names that chemists commonly use:</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">group</th>
+<th>IUPAC-approved collective name</th>
+<th>examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td>alkali metals</td>
+<td>lithium, sodium, potassium</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td>alkaline earth metals</td>
+<td>beryllium, magnesium, calcium</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td>pnictogens</td>
+<td>nitrogen, phosphorus, arsenic</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td>chalcogens</td>
+<td>oxygen, sulfur, selenium</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td>halogens</td>
+<td>fluorine, chlorine, bromine</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td>noble gases</td>
+<td>helium, neon, argon</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The other columns do not have IUPAC-approved collective names. They can be described using their first element (e.g.&nbsp;<em>the titanium group</em> for group 4, <em>the boron group</em> for group 13 and <em>the carbon group</em> for group 14). These are descriptive labels rather than standardised categories.</p>
+<p>Hydrogen sits in group 1 by electron configuration, but it is not an alkali metal. The <strong>lanthanoids</strong> and <strong>actinoids</strong> are also IUPAC-approved collective names, but those two sequences are not numbered groups (see below).</p>
+</section>
+<section id="sec-ex-radius" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ex-radius">Size of atoms</h3>
+<p>The data column <code>radius</code> holds each element’s covalent radius in picometres. Plot radius against Z for all 118 elements, joined by a faint line, and highlight the <strong>alkali metals</strong> (Z = 3, 11, 19, 37, 55, 87) in one colour and the <strong>noble gases</strong> (Z = 2, 10, 18, 36, 54, 86) in another.</p>
+<p>What does the pattern do at each shell closure?</p>
+<script type="exercise-setup-ex_radius-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIiwic2V0dXAiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGpzXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gcHlvZGlkZS5odHRwIGltcG9ydCBvcGVuX3VybFxuREFUQV9VUkwgPSBqcy5sb2NhdGlvbi5ocmVmLnNwbGl0KFwic2l0ZV9saWJzL1wiKVswXSArIFwiZGF0YS9cIlxudGV4dCA9IG9wZW5fdXJsKERBVEFfVVJMICsgXCJlbGVtZW50cy5jc3ZcIikucmVhZCgpXG5yb3dzID0gW2xpbmUuc3BsaXQoXCIsXCIpIGZvciBsaW5lIGluIHRleHQuc3RyaXAoKS5zcGxpdChcIlxcblwiKVsxOl1dXG5aICAgICAgPSBbaW50KHJbMF0pIGZvciByIGluIHJvd3NdXG5zeW1ib2wgPSBbclsxXSBmb3IgciBpbiByb3dzXVxucmFkaXVzID0gW2Zsb2F0KHJbN10pIGlmIHJbN10gZWxzZSBOb25lIGZvciByIGluIHJvd3NdXG5wbHQucmNQYXJhbXMudXBkYXRlKHtcbiAgICBcImF4ZXMuc3BpbmVzLnRvcFwiOiBGYWxzZSwgXCJheGVzLnNwaW5lcy5yaWdodFwiOiBGYWxzZSxcbiAgICBcImF4ZXMuZ3JpZFwiOiBUcnVlLCBcImdyaWQuYWxwaGFcIjogMC4yMiwgXCJmb250LnNpemVcIjogMTEsXG59KSJ9
+</script>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcmFkaXVzIn0sImNvZGUiOiIjIGBaYCwgYHN5bWJvbGAgYW5kIGByYWRpdXNgIGFyZSBsb2FkZWQgZm9yIGFsbCAxMTggZWxlbWVudHMuXG5BTEtBTEkgPSAoMywgMTEsIDE5LCAzNywgNTUsIDg3KVxuTk9CTEUgID0gKDIsIDEwLCAxOCwgMzYsIDU0LCA4NilcblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDQuNikpXG5fX19fX19cblxuYXguc2V0X3hsYWJlbChcImF0b21pYyBudW1iZXIgWlwiKVxuYXguc2V0X3lsYWJlbChcImNvdmFsZW50IHJhZGl1cyAocG0pXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
+<p><strong>Hint 1.</strong> Three layers: a faint <code>ax.plot(Z, radius, ...)</code> line, an <code>ax.scatter</code> of all the points, then two more scatters for the highlighted sets. <code>radius[z - 1]</code> is the radius of element <code>z</code>.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_radius">
+<p><strong>Hint 2.</strong> For the highlights, loop <code>for z in ALKALI: ax.scatter([z], [radius[z - 1]], ...)</code>, and add <code>ax.annotate(symbol[z - 1], ...)</code> if you want labels.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_radius">
+<p><strong>Fully worked solution:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ALKALI <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">19</span>, <span class="dv">37</span>, <span class="dv">55</span>, <span class="dv">87</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>NOBLE  <span class="op">=</span> (<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">18</span>, <span class="dv">36</span>, <span class="dv">54</span>, <span class="dv">86</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">9.5</span>, <span class="fl">4.6</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ax.plot(Z, radius, <span class="st">"-"</span>, color<span class="op">=</span><span class="st">"#cccccc"</span>, lw<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(Z, radius, s<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">"#666666"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> ALKALI:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter([z], [radius[z <span class="op">-</span> <span class="dv">1</span>]], s<span class="op">=</span><span class="dv">55</span>, color<span class="op">=</span><span class="st">"#4269d0"</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">" "</span> <span class="op">+</span> symbol[z <span class="op">-</span> <span class="dv">1</span>], (z, radius[z <span class="op">-</span> <span class="dv">1</span>]), fontsize<span class="op">=</span><span class="dv">9</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">"#4269d0"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> NOBLE:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ax.scatter([z], [radius[z <span class="op">-</span> <span class="dv">1</span>]], s<span class="op">=</span><span class="dv">55</span>, color<span class="op">=</span><span class="st">"#e66852"</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"atomic number Z"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"covalent radius (pm)"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Atomic size is periodic: peaks at the alkali metals"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Across each period atoms <em>shrink</em> (the growing nuclear charge pulls the same shell tighter). At each new shell the size <em>jumps</em>: argon is 96 pm, and one proton later potassium is 196 pm. The sawtooth pattern is the same cycle Lothar Meyer plotted as atomic volume in 1870.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/lothar-meyer-atomic-volume.webp" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Lothar Meyer’s 1870 atomic-volume curve, showing the periodic rise and fall of atomic volume.</figcaption>
+</figure>
+</div>
+</section>
+<section id="lanthanoids-and-actinoids" class="level3">
+<h3 class="anchored" data-anchor-id="lanthanoids-and-actinoids">Lanthanoids and Actinoids</h3>
+<p>Return to the graph of electrons in the outermost shell. Its early teeth are short, but the later teeth contain long, flat stretches at two outer-shell electrons. Atomic number is still increasing along those stretches: the added electrons are entering an inner d or f sub-shell, so the count in the outermost shell does not change.</p>
+<p>The sub-shell capacities explain the three different period lengths:</p>
+<ul>
+<li>Periods 2 and 3 fill an s run and a p run: <span class="math inline">\(2 + 6 = 8\)</span> elements.</li>
+<li>Periods 4 and 5 insert a d-filling run between them: <span class="math inline">\(2 + 10 + 6 = 18\)</span> elements.</li>
+<li>Periods 6 and 7 also insert an f-filling run: <span class="math inline">\(2 + 14 + 10 + 6 = 32\)</span> elements.</li>
+</ul>
+<p>Those 10- and 14-element insertions are the long, flat parts of the graph. They also create the central design problem faced by every periodic-table layout: later cycles contain many more elements than the early cycles. In periods 6 and 7, after the first two s-filling positions, electrons begin filling an f sub-shell before the d- and p-filling runs resume.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/long-form-periodic-table.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Long-form periodic table, with periods 6 and 7 shown as continuous 32-element rows.</figcaption>
+</figure>
+</div>
+<p>A fully expanded table can show each period as one continuous 32-position row. The familiar compact table instead keeps its main grid 18 columns wide, It removes the f-filling sequence from between the first two columns and the d-block and prints that continuation underneath (Lanthanides and Actinides).</p>
+<p>A continuous spiral cannot remove the 14 inserted positions: its path must pass through them. A simple spiral can squeeze more elements around the same turn, but then equivalent groups no longer line up from one turn to the next. A spiral that preserves that alignment must give the extra path somewhere to go.</p>
+<p>The familiar gap between beryllium (element 4) and boron (element 5) is another consequence of the same unequal period lengths. Periods 2 and 3 contain no d-filling run, so the compact table leaves empty layout space between their s- and p-filling elements.</p>
+</section>
+</section>
+<section id="alternative-designs" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-designs">3 · Alternative designs</h2>
+<p>If the data is a cycle, should its picture be a <em>grid</em>, or should it spiral round and round? Chemists have proposed various layouts. Compare these six alternative designs.</p>
+<p>As you compare them, track what each design does with the longer d- and f-filling runs visible in the outer-electron graph. An element’s <strong>block</strong> (s, p, d or f) names the kind of sub-shell receiving its distinguishing electron. In the standard layout, the s-block occupies columns 1 and 2, the d-block occupies columns 3–12, the p-block occupies columns 13–18, and the f-block is displayed in the two detached continuation rows.</p>
+<p><strong>Mendeleev’s own table (1869).</strong> Periods run <em>down</em> the columns. Groups run across the rows, transposed from the modern convention. Gaps are deliberately left for elements Mendeleev predicted must exist (gallium, scandium, germanium).</p>
+<p><em>Blocks</em> are not represented as the table predates the discovery of the electron by nearly three decades. Rows collect elements by valence and chemical similarity, which mixes the future blocks together: boron and aluminium (p-block) share their row with the predicted eka-boron, which turned out to be scandium (d-block).</p>
+<!-- The
+blocks are present only as strain: the doubled cell Ni=Co, the question
+marks, and the handful of awkward rare earths (Ce, La, Di) that would
+one day become the f-block. "Di", didymium, was later found to be two
+elements, praseodymium and neodymium. -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/mendeleev-1869.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+<p><strong>Benfey’s spiral (1964).</strong> The list winds continuously outward from hydrogen.</p>
+<p><em>Blocks</em> are represented by topology. The s- and p-blocks stay on the compact central winding, where the groups line up as rays. The d-block leaves the spiral after the alkaline earths as a bulging peninsula labelled “transition metals”; the f-block is a second, farther-out peninsula. The design even reserves an empty third arm, the “superactinides”, for a predicted g-block that no synthesised element has yet reached.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/benfey-spiral.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+<p><strong>Janet’s left-step table (1928).</strong> Rows end where shells <em>actually</em> close in the aufbau order, so the blocks form perfect staircase steps.</p>
+<p><em>Blocks</em> are the layout’s organising principle. The table is exactly four contiguous rectangles, f (14 columns), d (10), p (6) and s (2), placed left to right in that order; the column brackets in the image label them directly. Each row is one step of the aufbau order and always ends in the s rectangle. No other design, the standard table included, renders each block as a single perfect rectangle.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/janet-left-step.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+<p><strong>A circular table.</strong> Periodicity explicitly represented with concentric rings.</p>
+<p><em>Blocks</em> are not encoded. Rings are periods, and colour repeats the ring, so block membership must be inferred from angular position exactly as it is inferred from column position in the standard table. The d-block elements are simply the extra sectors that widen rings four to seven. The one block the design does make visible is the f-block, represented in detached arcs outside the circle, the same move as the standard table’s footnote rows.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/circular-table.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p><strong>Jeff Moran’s hexagonal spiral (1999).</strong> Hydrogen sits at the centre rather than at one end of a row. The connected hexagons make the sequence continuous, while colour, outlines and annotations expose blocks, metal categories, diagonal relationships and oxidation states.</p>
+<p><em>Blocks</em> are a dedicated visual channel. The spiral scatters each block across the plane, so position cannot carry the information; instead each hexagon’s <em>outline colour</em> encodes its block (the legend’s “s bloc”, “p bloc”, “d bloc”, “f bloc”), while the <em>fill</em> colour independently encodes metal category.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/jeff-moran-periodic-table.png" class="img-fluid figure-img" style="width:82.0%"></p>
+<figcaption>Jeff Moran’s hexagonal periodic table. <a href="https://labnews.co.uk/alternative-periodic-tables/">Source: <em>Laboratory News</em>, “Alternative periodic tables”.</a></figcaption>
+</figure>
+</div>
+<p><strong>James Franklin Hyde’s curled-ribbon table (1975).</strong> Hyde was an organosilicon chemist, and his arrangement gives carbon and silicon the centre of the composition. A continuous ribbon curls around them, replacing the standard table’s separated rows with one connected path.</p>
+<p><em>Blocks</em> are separate whorls of the one ribbon, each labelled with its electron configuration. The s- and p-block elements spiral around the carbon-silicon centre; the d-block is the entire left lobe of the figure-eight; the f-block is the detached double loop at the top.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/hyde-curled-ribbon-periodic-table.svg" class="img-fluid figure-img" style="width:88.0%"></p>
+<figcaption>James Franklin Hyde’s curled-ribbon periodic table, reproduced by Rezmason. <a href="https://commons.wikimedia.org/wiki/File:The_chemical_elements_and_their_periodic_relationships.svg">Source and licence: Wikimedia Commons, CC BY-SA 4.0.</a></figcaption>
+</figure>
+</div>
+<p>What are their advantages and disadvantages? Which version do you prefer, and why?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Find another periodic ‘table’">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Find another periodic ‘table’
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look beyond these six examples and find at least one other periodic table design. Consider what the layout makes easier to see and what it makes harder to see. Be precise about what position, shape, colour and any third spatial dimension encode.</p>
+</div>
+</div>
+</section>
+<section id="build-the-spiral" class="level2">
+<h2 class="anchored" data-anchor-id="build-the-spiral">4 · Build the spiral</h2>
+<p>The spiral’s claim is that the element list is a <strong>cycle with no breaks</strong>.</p>
+<p>Giving every period one full turn, an element’s angle is its <em>fraction of the way through its period</em>, and its radius grows steadily outward.</p>
+<p>So sodium, the 1st of 8 elements in period 3, sits at <span class="math inline">\(\tfrac{1}{8}\)</span> of a turn (45°).</p>
+<p>Potassium, the 1st of 18 in period 4, sits at <span class="math inline">\(\tfrac{1}{18}\)</span> of a turn (20°): same group, different angle.</p>
+<p>Only the <em>end</em> of a period means the same thing in every period, so shell closures should align. We can colour by <strong>block</strong> (which kind of sub-shell is filling) to see four “districts” of elements:</p>
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiUEVSSU9EX0xFTiA9IHsxOiAyLCAyOiA4LCAzOiA4LCA0OiAxOCwgNTogMTgsIDY6IDMyLCA3OiAzMn1cbmJsb2NrX2NvbG91cnMgPSB7XCJzXCI6IFwiIzQyNjlkMFwiLCBcInBcIjogXCIjMzBhOGIxXCIsIFwiZFwiOiBcIiNjOThhMDBcIiwgXCJmXCI6IFwiIzk0NzVjZFwifVxuXG5kZWYgc3BpcmFsX2Nvb3JkcyhpKTpcbiAgICBcIlwiXCJBbmdsZSBhbmQgcmFkaXVzIGZvciBlbGVtZW50IGluZGV4IGkuIE9uZSBmdWxsIHR1cm4gcGVyIHBlcmlvZC5cIlwiXCJcbiAgICBwID0gcGVyaW9kW2ldXG4gICAgc3RhcnQgPSBzdW0oUEVSSU9EX0xFTltxXSBmb3IgcSBpbiByYW5nZSgxLCBwKSkgICAjIGxhc3QgWiBiZWZvcmUgcGVyaW9kIHBcbiAgICBmcmFjID0gKFpbaV0gLSBzdGFydCkgLyBQRVJJT0RfTEVOW3BdICAgICAgICAgICAgICMgMCDihpIgMSBhY3Jvc3MgdGhlIHBlcmlvZFxuICAgIHJldHVybiAyICogbnAucGkgKiBmcmFjLCAocCAtIDEpICsgZnJhY1xuXG5maWcgPSBwbHQuZmlndXJlKGZpZ3NpemU9KDkuNSwgOS41KSlcbmF4ID0gZmlnLmFkZF9zdWJwbG90KHByb2plY3Rpb249XCJwb2xhclwiKVxudGhldGFzLCBycyA9IHppcCgqKHNwaXJhbF9jb29yZHMoaSkgZm9yIGkgaW4gcmFuZ2UoMTE4KSkpXG5heC5wbG90KHRoZXRhcywgcnMsIGNvbG9yPVwiI2RkZGRkZFwiLCBsdz0wLjcsIHpvcmRlcj0xKVxuZm9yIGkgaW4gcmFuZ2UoMTE4KTpcbiAgICBlZGdlID0gXCIjZDYyNzI4XCIgaWYgZ3JvdXBbaV0gPT0gMTggZWxzZSBcIm5vbmVcIlxuICAgIGF4LnNjYXR0ZXIodGhldGFzW2ldLCByc1tpXSwgcz0zMDAsIGNvbG9yPWJsb2NrX2NvbG91cnNbYmxvY2tbaV1dLFxuICAgICAgICAgICAgICAgZWRnZWNvbG9yPWVkZ2UsIGxpbmV3aWR0aD0yLCB6b3JkZXI9MylcbiAgICBheC5hbm5vdGF0ZShzeW1ib2xbaV0sICh0aGV0YXNbaV0sIHJzW2ldKSwgZm9udHNpemU9OCwgaGE9XCJjZW50ZXJcIixcbiAgICAgICAgICAgICAgICB2YT1cImNlbnRlclwiLCBjb2xvcj1cIndoaXRlXCIsIHpvcmRlcj00KVxuYXguc2V0X3h0aWNrcyhbXSk7IGF4LnNldF95dGlja3MoW10pXG5heC5zcGluZXNbXCJwb2xhclwiXS5zZXRfdmlzaWJsZShGYWxzZSlcbmZyb20gbWF0cGxvdGxpYi5saW5lcyBpbXBvcnQgTGluZTJEXG5oYW5kbGVzID0gW0xpbmUyRChbXSwgW10sIG1hcmtlcj1cIm9cIiwgbHM9XCJcIiwgY29sb3I9YywgbWFya2Vyc2l6ZT0xMSxcbiAgICAgICAgICAgICAgICAgIGxhYmVsPWZcIntifS1ibG9ja1wiKVxuICAgICAgICAgICBmb3IgYiwgYyBpbiBibG9ja19jb2xvdXJzLml0ZW1zKCldXG5oYW5kbGVzLmFwcGVuZChMaW5lMkQoW10sIFtdLCBtYXJrZXI9XCJvXCIsIGxzPVwiXCIsIG1hcmtlcmZhY2Vjb2xvcj1cIm5vbmVcIixcbiAgICAgICAgICAgICAgICAgICAgICBtYXJrZXJlZGdlY29sb3I9XCIjZDYyNzI4XCIsIG1hcmtlcmVkZ2V3aWR0aD0yLFxuICAgICAgICAgICAgICAgICAgICAgIG1hcmtlcnNpemU9MTEsIGxhYmVsPVwiZ3JvdXAgMThcIikpXG5heC5sZWdlbmQoaGFuZGxlcz1oYW5kbGVzLCBsb2M9XCJ1cHBlciBsZWZ0XCIsIGJib3hfdG9fYW5jaG9yPSgtMC4xLCAxLjA1KSxcbiAgICAgICAgICBmcmFtZW9uPUZhbHNlLCBmb250c2l6ZT0xMClcbmF4LnNldF90aXRsZShcIlRoZSBwZXJpb2RpYyBzcGlyYWxcIiwgZm9udHNpemU9MTcpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>The sequence is unbroken, the blocks appear as coloured arcs, and every shell closure lands at the same angle, so the noble gases (Group 18) line up on a single ray.</p>
+<p>However, as the sodium and potassium angles showed, no other group lines up. This is a weakness. Chemists constantly reason “down a group”, and the spiral makes that vertical scan impossible.</p>
+<p>A smooth spiral cannot avoid this: a turn must hold 2, 8, 18 or 32 elements, so groups will be misaligned unless corrections to the angles are made.</p>
+<p>To make that correction, give each of the 18 numbered groups one fixed angle. The elements in the two detached sequences have no group number in our data, so squeeze each 15-element sequence into the small angular sector between groups 2 and 3. Keep the same radial progression as before:</p>
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnJvbSBtYXRwbG90bGliLmxpbmVzIGltcG9ydCBMaW5lMkRcblxuZGVmIGFsaWduZWRfc3BpcmFsX2Nvb3JkcyhpKTpcbiAgICBcIlwiXCJGaXhlZCBncm91cCBhbmdsZXM7IHVubnVtYmVyZWQgZi1ibG9jayByb3dzIHNxdWVlemVkIGludG8gb25lIHNlY3Rvci5cIlwiXCJcbiAgICBwID0gcGVyaW9kW2ldXG4gICAgc3RhcnQgPSBzdW0oUEVSSU9EX0xFTltxXSBmb3IgcSBpbiByYW5nZSgxLCBwKSlcbiAgICBmcmFjID0gKFpbaV0gLSBzdGFydCkgLyBQRVJJT0RfTEVOW3BdXG5cbiAgICBpZiBncm91cFtpXSBpcyBub3QgTm9uZTpcbiAgICAgICAgYW5ndWxhcl9wb3NpdGlvbiA9IGdyb3VwW2ldXG4gICAgZWxpZiA1NyA8PSBaW2ldIDw9IDcxOiAgICAgICAgICAjIExh4oCTTHU6IDE1IGRpc3BsYXllZCBlbGVtZW50c1xuICAgICAgICByYW5rID0gWltpXSAtIDU3XG4gICAgICAgIGFuZ3VsYXJfcG9zaXRpb24gPSAyICsgKHJhbmsgKyAxKSAvIDE1XG4gICAgZWxzZTogICAgICAgICAgICAgICAgICAgICAgICAgICAjIEFj4oCTTHI6IDE1IGRpc3BsYXllZCBlbGVtZW50c1xuICAgICAgICByYW5rID0gWltpXSAtIDg5XG4gICAgICAgIGFuZ3VsYXJfcG9zaXRpb24gPSAyICsgKHJhbmsgKyAxKSAvIDE1XG5cbiAgICB0aGV0YSA9IDIgKiBucC5waSAqIGFuZ3VsYXJfcG9zaXRpb24gLyAxOFxuICAgIHJhZGl1c19vdXQgPSAocCAtIDEpICsgZnJhY1xuICAgIHJldHVybiB0aGV0YSwgcmFkaXVzX291dFxuXG5maWcgPSBwbHQuZmlndXJlKGZpZ3NpemU9KDkuNSwgOS41KSlcbmF4ID0gZmlnLmFkZF9zdWJwbG90KHByb2plY3Rpb249XCJwb2xhclwiKVxuYWxpZ25lZCA9IFthbGlnbmVkX3NwaXJhbF9jb29yZHMoaSkgZm9yIGkgaW4gcmFuZ2UoMTE4KV1cbmFsaWduZWRfdGhldGEsIGFsaWduZWRfcmFkaXVzID0gemlwKCphbGlnbmVkKVxuXG4jIEdpdmUgZXZlcnkgbnVtYmVyZWQgZ3JvdXAgYSBmaXhlZCBndWlkZSByYXkgYW5kIGxhYmVsIGl0IG91dHNpZGUgdGhlIHNwaXJhbC5cbm91dGVyX2dyb3VwX3JhZGl1cyA9IDcuNDVcbmZvciBnIGluIHJhbmdlKDEsIDE5KTpcbiAgICBncm91cF90aGV0YSA9IDIgKiBucC5waSAqIGcgLyAxOFxuICAgIGF4LnBsb3QoW2dyb3VwX3RoZXRhLCBncm91cF90aGV0YV0sIFswLjM1LCA3LjE1XSxcbiAgICAgICAgICAgIGNvbG9yPVwiI2Q4ZDNjYVwiLCBsdz0wLjgsIHpvcmRlcj0wKVxuICAgIGF4LnRleHQoZ3JvdXBfdGhldGEsIG91dGVyX2dyb3VwX3JhZGl1cywgc3RyKGcpLFxuICAgICAgICAgICAgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9OSwgZm9udHdlaWdodD1cImJvbGRcIixcbiAgICAgICAgICAgIGNvbG9yPVwiIzU1NTU1NVwiLCBjbGlwX29uPUZhbHNlKVxuXG5heC5wbG90KGFsaWduZWRfdGhldGEsIGFsaWduZWRfcmFkaXVzLCBjb2xvcj1cIiNkZGRkZGRcIiwgbHc9MC43LCB6b3JkZXI9MSlcbmZvciBpIGluIHJhbmdlKDExOCk6XG4gICAgZWRnZSA9IFwiI2Q2MjcyOFwiIGlmIGdyb3VwW2ldID09IDE4IGVsc2UgXCJub25lXCJcbiAgICBheC5zY2F0dGVyKGFsaWduZWRfdGhldGFbaV0sIGFsaWduZWRfcmFkaXVzW2ldLCBzPTMwMCxcbiAgICAgICAgICAgICAgIGNvbG9yPWJsb2NrX2NvbG91cnNbYmxvY2tbaV1dLCBlZGdlY29sb3I9ZWRnZSxcbiAgICAgICAgICAgICAgIGxpbmV3aWR0aD0yLCB6b3JkZXI9MylcbiAgICBheC5hbm5vdGF0ZShzeW1ib2xbaV0sIChhbGlnbmVkX3RoZXRhW2ldLCBhbGlnbmVkX3JhZGl1c1tpXSksXG4gICAgICAgICAgICAgICAgZm9udHNpemU9OCwgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIixcbiAgICAgICAgICAgICAgICBjb2xvcj1cIndoaXRlXCIsIHpvcmRlcj00KVxuXG5heC5zZXRfeHRpY2tzKFtdKTsgYXguc2V0X3l0aWNrcyhbXSlcbmF4LnNldF95bGltKDAsIDcuNzUpXG5heC5zcGluZXNbXCJwb2xhclwiXS5zZXRfdmlzaWJsZShGYWxzZSlcbmhhbmRsZXMgPSBbTGluZTJEKFtdLCBbXSwgbWFya2VyPVwib1wiLCBscz1cIlwiLCBjb2xvcj1jLCBtYXJrZXJzaXplPTExLFxuICAgICAgICAgICAgICAgICAgbGFiZWw9Zlwie2J9LWJsb2NrXCIpXG4gICAgICAgICAgIGZvciBiLCBjIGluIGJsb2NrX2NvbG91cnMuaXRlbXMoKV1cbmhhbmRsZXMuYXBwZW5kKExpbmUyRChbXSwgW10sIG1hcmtlcj1cIm9cIiwgbHM9XCJcIiwgbWFya2VyZmFjZWNvbG9yPVwibm9uZVwiLFxuICAgICAgICAgICAgICAgICAgICAgIG1hcmtlcmVkZ2Vjb2xvcj1cIiNkNjI3MjhcIiwgbWFya2VyZWRnZXdpZHRoPTIsXG4gICAgICAgICAgICAgICAgICAgICAgbWFya2Vyc2l6ZT0xMSwgbGFiZWw9XCJncm91cCAxOFwiKSlcbmF4LmxlZ2VuZChoYW5kbGVzPWhhbmRsZXMsIGxvYz1cInVwcGVyIGNlbnRlclwiLCBiYm94X3RvX2FuY2hvcj0oMC41LCAtMC4wNiksXG4gICAgICAgICAgbmNvbD01LCBmcmFtZW9uPUZhbHNlLCBmb250c2l6ZT0xMClcbmF4LnNldF90aXRsZShcIkdyb3VwLUFsaWduZWQgUGVyaW9kIFNwaXJhbFwiLCBmb250c2l6ZT0xNylcbmZpZy5zdWJwbG90c19hZGp1c3QodG9wPTAuOTIsIGJvdHRvbT0wLjEyKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>Lithium, sodium and potassium now lie on one ray, as do the other numbered groups. The groups are aligned, but at the cost of the shorter periods leaving large empty angular gaps, while the lanthanides and actinides are compressed into a narrow wedge.</p>
+<p>This is why other spiral designs introduce bulges (or “peninsulas”) for these elements. Can you think of other ways that this problem could be addressed?</p>
+</section>
+<section id="build-the-canonical-table" class="level2">
+<h2 class="anchored" data-anchor-id="build-the-canonical-table">5 · Build the canonical table</h2>
+<p>Start again with the elements as a one-dimensional sequence. Cut the sequence after every closed shell. Each resulting segment is a <strong>period</strong>, and the periods contain 2, 8, 8, 18, 18, 32 and 32 elements. Place each period on a new row. The remaining design decision is where each element should sit horizontally.</p>
+<p>The standard table shifts the shorter rows sideways so recurring valence configurations and chemical behaviour line up vertically: <strong>rows are periods and columns are groups</strong>.</p>
+<p>The <code>group</code> field in our data records those conventional horizontal positions. Use it to place the first 18 elements:</p>
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg5LjUsIDIuNikpXG5mb3IgaSBpbiByYW5nZSgxOCk6XG4gICAgeCwgeSA9IGdyb3VwW2ldLCAtcGVyaW9kW2ldXG4gICAgYXguYWRkX3BhdGNoKHBsdC5SZWN0YW5nbGUoKHggLSAwLjQ1LCB5IC0gMC40NSksIDAuOSwgMC45LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhY2Vjb2xvcj1cIiNlZWYxZjZcIiwgZWRnZWNvbG9yPVwiIzg4ODg4OFwiKSlcbiAgICBheC50ZXh0KHgsIHksIHN5bWJvbFtpXSwgaGE9XCJjZW50ZXJcIiwgdmE9XCJjZW50ZXJcIiwgZm9udHNpemU9MTEpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0zLjgsIC0wLjIpXG5heC5zZXRfYXNwZWN0KFwiZXF1YWxcIik7IGF4LmF4aXMoXCJvZmZcIilcbmF4LnNldF90aXRsZShcIlBlcmlvZHMgYXMgcm93cywgZ3JvdXBzIGFzIGNvbHVtbnMsIGFuZCBhIGdhcCBhcHBlYXJzXCIpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>The first period has two elements; the second and third have eight each. The chart nevertheless reserves 18 horizontal positions, because (as Section 2 showed), period 4’s three filling runs (4s, 3d, 4p) establish 18 recurring positions. So lithium, sodium and potassium all begin an s sub-shell and align in group 1, while boron, aluminium and gallium begin a p sub-shell and align in group 13. Periods 2 and 3 contain no d-filling run, which is why beryllium sits in position 2 and boron in position 13. Positions 3–12 between them stay empty; this gap is the space reserved for the d-block.</p>
+<section id="sec-ex-table" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ex-table">Create the standard periodic table from the data</h3>
+<p>Build the full canonical table, all 118 elements. You have <code>Z</code>, <code>symbol</code>, <code>period</code>, <code>group</code> and <code>category</code> (plus <code>cat_colours</code>, the conventional colour for each category). The table will include:</p>
+<ol type="1">
+<li><strong>Main grid:</strong> elements with a <code>group</code> go at column <code>group</code>, row <code>period</code>, exactly like the 18-element version.</li>
+<li><strong>The f-block:</strong> the lanthanides (Z 57–71) and actinides (Z 89–103) have <code>group = None</code>. The canonical design exiles them to two <strong>footnote rows</strong> below the table. Place them there (15 per row) and choose the rows’ vertical position yourself.</li>
+</ol>
+<p>Colour every cell by its category, put the symbol (and, if you like, Z) in each cell, and add a legend.</p>
+<script type="exercise-setup-ex_table-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUiLCJzZXR1cCI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQganNcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBweW9kaWRlLmh0dHAgaW1wb3J0IG9wZW5fdXJsXG5EQVRBX1VSTCA9IGpzLmxvY2F0aW9uLmhyZWYuc3BsaXQoXCJzaXRlX2xpYnMvXCIpWzBdICsgXCJkYXRhL1wiXG50ZXh0ID0gb3Blbl91cmwoREFUQV9VUkwgKyBcImVsZW1lbnRzLmNzdlwiKS5yZWFkKClcbnJvd3MgPSBbbGluZS5zcGxpdChcIixcIikgZm9yIGxpbmUgaW4gdGV4dC5zdHJpcCgpLnNwbGl0KFwiXFxuXCIpWzE6XV1cblogICAgICAgID0gW2ludChyWzBdKSBmb3IgciBpbiByb3dzXVxuc3ltYm9sICAgPSBbclsxXSBmb3IgciBpbiByb3dzXVxucGVyaW9kICAgPSBbaW50KHJbM10pIGZvciByIGluIHJvd3NdXG5ncm91cCAgICA9IFtpbnQoZmxvYXQocls0XSkpIGlmIHJbNF0gZWxzZSBOb25lIGZvciByIGluIHJvd3NdXG5jYXRlZ29yeSA9IFtyWzZdIGZvciByIGluIHJvd3NdXG5jYXRfY29sb3VycyA9IHtcbiAgICBcIkFsa2FsaSBtZXRhbHNcIjogXCIjZmY2NjY2XCIsIFwiQWxrYWxpbmUgZWFydGggbWV0YWxzXCI6IFwiI2ZmZGVhZFwiLFxuICAgIFwiVHJhbnNpdGlvbiBtZXRhbHNcIjogXCIjZmZjMGMwXCIsIFwiUG9zdC10cmFuc2l0aW9uIG1ldGFsc1wiOiBcIiNjY2NjY2NcIixcbiAgICBcIk1ldGFsbG9pZHNcIjogXCIjY2NjYzk5XCIsIFwiTm9ubWV0YWxzXCI6IFwiI2EwZmZhMFwiLCBcIkhhbG9nZW5zXCI6IFwiI2ZmZmY5OVwiLFxuICAgIFwiTm9ibGUgZ2FzZXNcIjogXCIjYzBmZmZmXCIsIFwiTGFudGhhbmlkZXNcIjogXCIjZmZiZmZmXCIsIFwiQWN0aW5pZGVzXCI6IFwiI2ZmOTljY1wiLFxufVxucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XCJmb250LnNpemVcIjogMTF9KSJ9
+</script>
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfdGFibGUifSwiY29kZSI6IiMgWiwgc3ltYm9sLCBwZXJpb2QsIGdyb3VwLCBjYXRlZ29yeSBhbmQgY2F0X2NvbG91cnMgYXJlIGxvYWRlZC5cbiMgV3JpdGUgY2VsbF9wb3NpdGlvbihpKSAtPiAoeCwgeSksIHRoZW4gZHJhdyBhbGwgMTE4IGNlbGxzLlxuXG5kZWYgY2VsbF9wb3NpdGlvbihpKTpcbiAgICBfX19fX19cblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSgxMiwgNy4yKSlcbmZvciBpIGluIHJhbmdlKDExOCk6XG4gICAgeCwgeSA9IGNlbGxfcG9zaXRpb24oaSlcbiAgICBheC5hZGRfcGF0Y2gocGx0LlJlY3RhbmdsZSgoeCAtIDAuNDcsIC15IC0gMC40NyksIDAuOTQsIDAuOTQsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFjZWNvbG9yPWNhdF9jb2xvdXJzW2NhdGVnb3J5W2ldXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlZGdlY29sb3I9XCIjNzc3Nzc3XCIsIGx3PTAuNikpXG4gICAgYXgudGV4dCh4LCAteSwgc3ltYm9sW2ldLCBoYT1cImNlbnRlclwiLCB2YT1cImNlbnRlclwiLCBmb250c2l6ZT04LjUpXG5heC5zZXRfeGxpbSgwLCAxOSk7IGF4LnNldF95bGltKC0xMSwgMClcbmF4LnNldF9hc3BlY3QoXCJlcXVhbFwiKTsgYXguYXhpcyhcIm9mZlwiKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
+<p><strong>Hint 1.</strong> <code>cell_position</code> has three cases: a real <code>group</code> (use it with <code>period</code> directly), a lanthanide (57 ≤ Z ≤ 71), and an actinide. The footnote rows need y values <em>below</em> row 7; leave a blank row as a visual separator.</p>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_table">
+<p><strong>Hint 2.</strong> Within a footnote row the column should step with Z: something of the shape <code>constant + (Z[i] - 57)</code> spreads the fifteen lanthanides across fifteen consecutive columns. Pick the constant so they sit roughly under the middle of the table.</p>
+</div>
+<p><strong>Review.</strong> Compare your result next to any printed periodic table: you should count <strong>18 columns</strong>, <strong>7 main rows</strong>, and <strong>two footnote rows of 15</strong>; hydrogen alone at top-left, helium at top-right above the noble-gas column, and the colour regions forming solid blocks.</p>
+<p>You do not need to submit your period table; instead submit the alternative design (different from the six included here) that you found for Section 3.</p>
+</section>
+</section>
+<section id="why-this-became-the-standard-table" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-became-the-standard-table">6 · Why this became the standard table</h2>
+<p>The canonical table has become favored over the spiral designs for a few reasons:</p>
+<ul>
+<li><strong>It aligns the most-used comparison.</strong> Chemists constantly reason “down a group”: same outer shell, similar reaction behaviour. The grid makes that a straight vertical scan.</li>
+<li><strong>It is rectangular.</strong> It fits pages, posters, screens and blackboards; every cell has room for symbol, number, and mass. Most spiral designs cramp inner turns and waste space on outer turns.</li>
+<li><strong>Gaps are informative.</strong> Empty grid cells can be used to make legible predictions.</li>
+<li><strong>Familiarity.</strong> After a century on every classroom wall, the standard layout is the one everyone can already recognise.</li>
+</ul>
+<p>Just because this visualisation of the elements “won” does not mean it is “true”. Different representations show some relationships while hiding others. Every layout is an argument about what matters, and opinions on the what makes one version the “best” version continue to differ.</p>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li><code>elements.csv</code> is generated from the <a href="https://mendeleev.readthedocs.io/">mendeleev</a> Python package (v1.2): IUPAC groups and periods, Pyykkö covalent radii (all 118 elements, one consistent convention), Pauling electronegativities. The f-block rows carry no group number, following the common 18-column convention.</li>
+<li>The <code>configuration()</code> function implements the idealised Madelung (aufbau) rule and ignores the ~20 real-world exceptions (Cr, Cu, Nb, …); none of them change where any element sits in the table.</li>
+<li>Images, all from Wikimedia Commons: Mendeleev’s 1869 table (redrawn by NikNaks, public domain); Benfey-style element spiral by DePiep (CC BY-SA 3.0); left-step table by Sandbh (CC BY-SA 4.0); circular table by Cbuckley (CC BY 3.0); and James Franklin Hyde’s curled-ribbon table, reproduced by Rezmason (CC BY-SA 4.0). Jeff Moran’s hexagonal table is credited to Moran and sourced from <em>Laboratory News</em>.</li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJtYXRwbG90bGliIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTE0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTQtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTQsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzE0ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xNC5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEyID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEyLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTExLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEwID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEwLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTAgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEwLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtOS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTktY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV85ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl85LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja185ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV85LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMiA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMi1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjJcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIyXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJfcHlvZGlkZV92YWx1ZV8xID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFB5dGhvbiwgYjY0RGVjb2RlfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0xLWNvbnRlbnRzXCIsXG4gICAgZWNobzogdHJ1ZSxcbiAgICBvdXRwdXQ6IHRydWVcbiAgfSwgYmxvY2suYXR0cik7XG5cbiAgLy8gRXZhbHVhdGUgdGhlIHByb3ZpZGVkIFB5dGhvbiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHB5b2RpZGVPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMVwiIGluIHB5b2RpZGVPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSBweXRob25cIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoaGlnaGxpZ2h0UHl0aG9uKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgcHlvZGlkZU9qcy5yZW5kZXJlZE9qc1tcIjFcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session1";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

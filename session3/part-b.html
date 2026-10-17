@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Crypto – 36104 · Data Visualisation and Narratives</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-506bdfa03b25343d1e229e8367d8f8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="_assets/lesson.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">36104 · Data Visualisation and Narratives</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 1</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-1">    
+        <li>
+    <a class="dropdown-item" href="../session1/part-a.html">
+ <span class="dropdown-text">Part A · Allometry</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-b.html">
+ <span class="dropdown-text">Part B · The Tree of Life</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-c.html">
+ <span class="dropdown-text">Part C · The Triangle of Everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-d.html">
+ <span class="dropdown-text">Part D · The Periodic Spiral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session1/part-e.html">
+ <span class="dropdown-text">Part E · Codons</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 2</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-2">    
+        <li>
+    <a class="dropdown-item" href="../session2/part-a.html">
+ <span class="dropdown-text">Part A · The Spectral Locus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-b.html">
+ <span class="dropdown-text">Part B · Embeddings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-c.html">
+ <span class="dropdown-text">Part C · Streamlit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-d.html">
+ <span class="dropdown-text">Part D · Stars</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session2/part-e.html">
+ <span class="dropdown-text">Part E · Streamlit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-session-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Session 3</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-session-3">    
+        <li>
+    <a class="dropdown-item" href="../session3/part-a.html">
+ <span class="dropdown-text">Part A · Gold</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-b.html">
+ <span class="dropdown-text">Part B · Crypto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-c.html">
+ <span class="dropdown-text">Part C · Tableau 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-d.html">
+ <span class="dropdown-text">Part D · Tableau 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../session3/part-e.html">
+ <span class="dropdown-text">Part E · TeX and tikz</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#set-up-the-project" id="toc-set-up-the-project" class="nav-link active" data-scroll-target="#set-up-the-project">1 · Set up the project</a></li>
+  <li><a href="#see-how-the-pieces-fit-together" id="toc-see-how-the-pieces-fit-together" class="nav-link" data-scroll-target="#see-how-the-pieces-fit-together">2 · See how the pieces fit together</a></li>
+  <li><a href="#start-with-the-data" id="toc-start-with-the-data" class="nav-link" data-scroll-target="#start-with-the-data">3 · Start with the data</a></li>
+  <li><a href="#put-changing-data-into-react" id="toc-put-changing-data-into-react" class="nav-link" data-scroll-target="#put-changing-data-into-react">4 · Put changing data into React</a></li>
+  <li><a href="#make-a-chart-from-the-series" id="toc-make-a-chart-from-the-series" class="nav-link" data-scroll-target="#make-a-chart-from-the-series">5 · Make a chart from the series</a></li>
+  <li><a href="#make-the-panels-fit-the-charts" id="toc-make-the-panels-fit-the-charts" class="nav-link" data-scroll-target="#make-the-panels-fit-the-charts">6 · Make the panels fit the charts</a></li>
+  <li><a href="#add-a-time-window-selector" id="toc-add-a-time-window-selector" class="nav-link" data-scroll-target="#add-a-time-window-selector">7 · Add a time-window selector</a></li>
+  <li><a href="#develop-your-version" id="toc-develop-your-version" class="nav-link" data-scroll-target="#develop-your-version">8 · Develop your version</a></li>
+  <li><a href="#if-something-does-not-start" id="toc-if-something-does-not-start" class="nav-link" data-scroll-target="#if-something-does-not-start">If something does not start</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Crypto</h1>
+<p class="subtitle lead">Session 3 · Part B</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This activity runs on your computer and uses live public market data from Binance.</p>
+</div>
+</div>
+<p>In Part A, Streamlit put Python charts on a web page. Here we use Python to collect data and JavaScript to build the interface. You will run a working crypto dashboard, follow how it is made, and add a control to choose the time window in a chart.</p>
+<p>The supplied project gives you a working starting point. Make one change at a time and check its effect in the browser.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_assets/crypto-dashboard.png" class="img-fluid figure-img" alt="Six cryptocurrency price charts with horizontal time labels, price axes and panels fitted to the charts."></p>
+<figcaption>The crypto dashboard, with one large chart and five smaller charts. Each panel shows its time window and latest price.</figcaption>
+</figure>
+</div>
+<section id="set-up-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-the-project">1 · Set up the project</h2>
+<p><a href="_assets/crypto-dashboard.zip">Download the crypto dashboard ZIP</a> and extract it. Open the extracted <code>binance_live_charts</code> folder in your code editor.</p>
+<p>You need <strong>Python 3.12</strong> and <strong>Node.js 24 LTS</strong> for the setup below. Node.js includes <strong>npm</strong>, which installs the JavaScript packages. Use the <a href="https://nodejs.org/en/download">Node.js download page</a> if you have not installed it before. Check your Python installation from the earlier Streamlit activity; Python installers are available from <a href="https://www.python.org/downloads/">python.org</a>.</p>
+<p>You do <strong>not</strong> need a Binance account, API key or trading account. Binance’s <a href="https://developers.binance.com/en/docs/products/spot/faqs/market_data_only">public market data endpoints</a> provide the price history and live updates used here without authentication. You do need an internet connection that can reach Binance.</p>
+<p>Open two terminal tabs in the <code>binance_live_charts</code> folder. Both processes must remain running while you use the dashboard.</p>
+<section id="terminal-1-start-python" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-1-start-python">Terminal 1 · Start Python</h3>
+<p>The following commands create a separate Python environment, install the two required packages and start the data server.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">macOS / Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Windows</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3.12</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/python</span> backend/server.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If your Python 3.12 installation uses the command <code>python3</code>, use that for the first line. Check with <code>python3 --version</code>.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>py <span class="op">-</span><span class="dv">3.12</span> <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>m pip install <span class="op">-</span>r requirements<span class="op">.</span><span class="fu">txt</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> backend\server<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Leave this terminal open. It should report <code>WebSocket server started on ws://localhost:8000</code>.</p>
+</section>
+<section id="terminal-2-start-react" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-2-start-react">Terminal 2 · Start React</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> frontend</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ci</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>npm ci</code> installs the package versions recorded in the supplied lock file. It is needed on the first run; you can use just <code>npm start</code> on later runs.</p>
+<p>Open <a href="http://localhost:3000" class="uri">http://localhost:3000</a> if it does not open automatically. Allow about a minute for the history to load. The charts appear progressively; live updates begin after the initial downloads finish. Keep this browser tab open as you work on the files.</p>
+<p><strong>Check:</strong> you should see BTCUSDT, ETHUSDT, BNBUSDT, XRPUSDT, ADAUSDT and DOGEUSDT. Hover over a chart to inspect values. Watch how the time windows and the coin in the large panel change automatically.</p>
+<p>To stop the app, press <strong>Ctrl+C</strong> in each terminal. On a later run, start the Python server and run <code>npm start</code> in <code>frontend</code> again; you do not need to recreate the environment or reinstall the packages.</p>
+</section>
+</section>
+<section id="see-how-the-pieces-fit-together" class="level2">
+<h2 class="anchored" data-anchor-id="see-how-the-pieces-fit-together">2 · See how the pieces fit together</h2>
+<p>The dashboard has three main steps:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Binance public market data] --&gt;|History and live updates| B[Python data server]
+    B --&gt;|WebSocket messages| C[React charts in the browser]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The Python server asks Binance for earlier prices, then listens for updates. A <strong>WebSocket</strong> keeps a connection open so new values can arrive without the browser repeatedly reloading the page. React stores those values and redraws the relevant parts of the interface.</p>
+<p>The two Python packages are <code>aiohttp</code>, for the history requests, and <code>websockets</code>, for the continuing connections. In the browser, <strong>React</strong> manages the interface and <strong>Recharts</strong> draws the charts. npm installs the JavaScript packages declared in <code>frontend/package.json</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What you make or change there</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>backend/server.py</code></td>
+<td>Requests price history, listens to Binance and sends data to the browser.</td>
+</tr>
+<tr class="even">
+<td><code>frontend/src/config/config.json</code></td>
+<td>Chooses currencies, colours, time windows and rotation timings.</td>
+</tr>
+<tr class="odd">
+<td><code>frontend/src/App.js</code></td>
+<td>Receives the data and arranges the six chart panels.</td>
+</tr>
+<tr class="even">
+<td><code>frontend/src/ChartPanel.js</code></td>
+<td>Builds one chart, including its axes, tooltip and time window.</td>
+</tr>
+<tr class="odd">
+<td><code>frontend/src/App.css</code></td>
+<td>Sizes the panels and controls how the layout adapts to screen width.</td>
+</tr>
+<tr class="even">
+<td><code>frontend/src/Tickers.js</code></td>
+<td>Builds the moving strips above and below the charts.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="start-with-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-data">3 · Start with the data</h2>
+<p><code>BTCUSDT</code> is a trading pair: the price of one bitcoin measured in USDT. The other pairs also use USDT. Keep that unit in mind when reading the prices.</p>
+<p>The data come in time intervals. Each interval contains an opening price, a high, a low, a closing or latest price, and a traded volume. These records are often called <strong>candles</strong>, even when we display them as lines.</p>
+<p>The interval is different from the total span shown by a chart:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Configuration key</th>
+<th>One record covers</th>
+<th>Window shown in the supplied app</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>1s</code></td>
+<td>One second</td>
+<td>Thirty Minutes</td>
+</tr>
+<tr class="even">
+<td><code>1m</code></td>
+<td>One minute</td>
+<td>Three Hours</td>
+</tr>
+<tr class="odd">
+<td><code>5m</code></td>
+<td>Five minutes</td>
+<td>Three Days</td>
+</tr>
+<tr class="even">
+<td><code>30m</code></td>
+<td>Thirty minutes</td>
+<td>Three Weeks</td>
+</tr>
+<tr class="odd">
+<td><code>4h</code></td>
+<td>Four hours</td>
+<td>Three Months</td>
+</tr>
+<tr class="even">
+<td><code>1d</code></td>
+<td>One day</td>
+<td>Three Years</td>
+</tr>
+</tbody>
+</table>
+<p>Open this <a href="https://api.binance.com/api/v3/klines?symbol=BTCUSDT&amp;interval=1m&amp;limit=2">example history request</a> in another browser tab. It requests two one-minute records for BTCUSDT. The response is JSON: text containing arrays of values. The values will depend on when you make the request.</p>
+<p>In <code>backend/server.py</code>, find the block beginning <code>transformed_data =</code>. The server turns each Binance record into named fields:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"time"</span>: entry[<span class="dv">6</span>],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"open"</span>: <span class="bu">float</span>(entry[<span class="dv">1</span>]),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"high"</span>: <span class="bu">float</span>(entry[<span class="dv">2</span>]),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"low"</span>: <span class="bu">float</span>(entry[<span class="dv">3</span>]),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"price"</span>: <span class="bu">float</span>(entry[<span class="dv">4</span>]),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"volume"</span>: <span class="bu">float</span>(entry[<span class="dv">5</span>]),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>time</code> is the interval’s closing timestamp, in milliseconds. <code>float()</code> converts price text into numbers that a chart can use. The most recent interval can still be in progress, so its latest price, high and low can change.</p>
+<p>The server sends messages labelled <code>historical</code> for the initial series and <code>update</code> for incoming changes. Each message also identifies the currency and interval, so the browser knows which series it belongs to.</p>
+</section>
+<section id="put-changing-data-into-react" class="level2">
+<h2 class="anchored" data-anchor-id="put-changing-data-into-react">4 · Put changing data into React</h2>
+<p>Open <code>frontend/src/App.js</code>. This line opens the connection to your Python server:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(<span class="st">'ws://localhost:8000'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>localhost</code> means your own computer. The browser receives each message in the <code>socket.onmessage</code> function. <code>JSON.parse(event.data)</code> turns the message text into a JavaScript object.</p>
+<p>Near the top of <code>App</code>, find:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>data</code> holds the current series. <code>setData</code> changes that stored value and tells React to update the display. This stored information is called <strong>state</strong>. See React’s explanation of <a href="https://react.dev/learn/state-a-components-memory">state</a> if this is new to you.</p>
+<p>Follow the two branches in <code>socket.onmessage</code>. A <code>historical</code> message supplies the starting series. An <code>update</code> message replaces a record with the same timestamp, or adds a new record when the next interval starts. Replacing the current record matters: otherwise every update would become an extra point for the same time.</p>
+<p>Further down, <code>App</code> uses <code>ChartPanel</code> repeatedly, passing each instance a currency and its data. A <strong>component</strong> is a reusable piece of interface: one chart definition can make all six panels. React’s <a href="https://react.dev/learn/your-first-component">component introduction</a> explains this pattern.</p>
+</section>
+<section id="make-a-chart-from-the-series" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-chart-from-the-series">5 · Make a chart from the series</h2>
+<p>Open <code>frontend/src/ChartPanel.js</code>. <code>currentInterval</code> chooses the series to use. The <code>chartData</code> block orders the points by time and maps <code>price</code> to a field called <code>close</code> for the chart.</p>
+<p>Inside <code>LineChart</code>, find the three <code>Line</code> elements. Their <code>dataKey</code> values choose the values to draw:</p>
+<ul>
+<li><code>high</code> and <code>low</code> make the two faint lines.</li>
+<li><code>close</code> makes the stronger line.</li>
+</ul>
+<p><code>XAxis</code> uses <code>time</code>; <code>YAxis</code> uses the price values. <code>Tooltip</code> supplies the details that appear when you hover. These are components from <a href="https://recharts.github.io/en-US/api/LineChart/">Recharts</a>.</p>
+<p>The horizontal axis places a small number of labels at time boundaries. The price axis uses enough decimal places to distinguish nearby values. This is especially useful for a currency whose price is below one USDT.</p>
+<p>Each panel adjusts its own price scale. A steep-looking line in one panel does not necessarily mean a larger price change than a gentler line in another. Check the axes and time windows before comparing the shapes.</p>
+<p><strong>Try a chart change:</strong> change <code>strokeWidth={isLarge ? 1.5 : 1}</code> on the <code>close</code> line to <code>strokeWidth={2}</code>. Save the file and look at the browser. Compare the visibility of the main line with the faint high and low lines.</p>
+</section>
+<section id="make-the-panels-fit-the-charts" class="level2">
+<h2 class="anchored" data-anchor-id="make-the-panels-fit-the-charts">6 · Make the panels fit the charts</h2>
+<p>Open <code>frontend/src/App.css</code>. <code>.chart-grid</code> creates the columns. <code>.large-chart</code> spans two columns and two rows on a wide screen; the other panels occupy one cell each.</p>
+<p>Inside each panel, flex layout gives the title and time-window row the space they need, then gives the chart the remaining height. <code>ResponsiveContainer</code> in <code>ChartPanel.js</code> follows that available size. This avoids a small, fixed-height chart sitting inside a much taller white panel.</p>
+<p>Media queries change the arrangement when the screen becomes narrower. Resize the browser and watch the columns change.</p>
+<p><strong>Try a layout change:</strong> find <code>.small-chart</code> and change <code>aspect-ratio: 3 / 2</code> to <code>aspect-ratio: 4 / 3</code>. The smaller panels become taller. Compare the readability of the lines and axes at both settings, then choose the proportions you prefer.</p>
+<p>You can also change one colour in <code>frontend/src/config/config.json</code>. Keep the JSON punctuation intact: keys and colour values use double quotes, and entries are separated by commas. React reloads after a saved edit. If you change the currencies or history lengths, restart the Python server as well; it reads the configuration when it starts.</p>
+</section>
+<section id="add-a-time-window-selector" class="level2">
+<h2 class="anchored" data-anchor-id="add-a-time-window-selector">7 · Add a time-window selector</h2>
+<p>The supplied charts cycle through time windows automatically. That helps someone watching the dashboard, but makes it harder to stay with a comparison. Let’s let the reader choose a window and keep it on screen.</p>
+<p>Make a spare copy of <code>ChartPanel.js</code> before starting. You will make three changes in that file and one small CSS addition.</p>
+<section id="remember-whether-the-time-window-is-automatic" class="level3">
+<h3 class="anchored" data-anchor-id="remember-whether-the-time-window-is-automatic">Remember whether the time window is automatic</h3>
+<p>Immediately after the line that creates <code>currentInterval</code>, add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [autoTime<span class="op">,</span> setAutoTime] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="stop-the-timer-after-a-manual-choice" class="level3">
+<h3 class="anchored" data-anchor-id="stop-the-timer-after-a-manual-choice">Stop the timer after a manual choice</h3>
+<p>Find the effect under the comment <code>// Hook to switch intervals at random intervals</code>. In that effect, replace:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="op">!</span>dataLoaded) <span class="cf">return</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="op">!</span>dataLoaded <span class="op">||</span> <span class="op">!</span>autoTime) <span class="cf">return</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At the end of that same effect, change its dependency list from <code>[order, dataLoaded]</code> to <code>[order, dataLoaded, autoTime]</code>.</p>
+<p>The effect already clears its old timer when it reruns. Including <code>autoTime</code> means a manual choice also stops that timer.</p>
+</section>
+<section id="replace-the-time-window-label-with-a-dropdown" class="level3">
+<h3 class="anchored" data-anchor-id="replace-the-time-window-label-with-a-dropdown">Replace the time-window label with a dropdown</h3>
+<p>Find <code>const headerContent = (</code>. Inside it, replace the <strong>first</strong> <code>&lt;span&gt;...&lt;/span&gt;</code> block—the one containing <code>{frequencies[currentInterval].display}</code>—with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode jsx code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;select</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">className</span><span class="op">=</span><span class="st">"time-window-select"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">aria-label</span><span class="op">=</span><span class="va">{</span><span class="vs">`</span><span class="sc">${</span>symbol<span class="sc">}</span><span class="vs">: time window`</span><span class="va">}</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">value</span><span class="op">=</span><span class="va">{</span>currentInterval<span class="va">}</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span><span class="bu">event</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setAutoTime</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setCurrentInterval</span>(<span class="bu">event</span><span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  }<span class="va">}</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">{</span>order<span class="op">.</span><span class="fu">map</span>(interval <span class="kw">=&gt;</span> (</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;option</span> <span class="ot">key</span><span class="op">=</span><span class="va">{</span>interval<span class="va">}</span> <span class="ot">value</span><span class="op">=</span><span class="va">{</span>interval<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      <span class="va">{</span>frequencies[interval]<span class="op">.</span><span class="at">display</span><span class="va">}</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/option&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ))<span class="va">}</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/select&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Keep the second span: it displays the latest price.</p>
+<p><code>order.map(...)</code> makes one option for each configured interval. Choosing an option changes <code>currentInterval</code> and turns off automatic switching for that chart component. The incoming market data keep updating.</p>
+<p>Add this to the end of <code>App.css</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.time-window-select</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span><span class="ch">:</span> <span class="dv">60</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">min-width</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">px</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font</span><span class="ch">:</span> <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check your change:</strong> choose <strong>Three Days</strong> in the large panel. Wait at least 15 seconds. It should stay on that time window while the data continue to update. The currency in the large panel will still rotate; that is a separate timer in <code>App.js</code>. Refreshing the page starts automatic time switching again.</p>
+</section>
+</section>
+<section id="develop-your-version" class="level2">
+<h2 class="anchored" data-anchor-id="develop-your-version">8 · Develop your version</h2>
+<p>Choose another change that helps a reader answer a question. For example:</p>
+<ul>
+<li>Add a way to pause the currency rotation as well as the time-window rotation.</li>
+<li>Put all panels on the same time window for a more direct comparison.</li>
+<li>Change the grid so all six currencies have equal prominence.</li>
+<li>Add a percentage-change view and explain the starting value it uses.</li>
+</ul>
+<p>Keep a screenshot of your modified dashboard, your changed files, and a short explanation of what your change makes easier to see. Check the result at a wide and a narrow browser width.</p>
+<p>This activity runs locally. Sharing a <code>localhost</code> link will not let someone else use your app. Putting this version online would require a host for the Python service as well as the React frontend, and a public WebSocket address.</p>
+</section>
+<section id="if-something-does-not-start" class="level2">
+<h2 class="anchored" data-anchor-id="if-something-does-not-start">If something does not start</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What you see</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>npm</code> is not recognised</td>
+<td>Install Node.js, then reopen the terminal.</td>
+</tr>
+<tr class="even">
+<td>Python cannot find <code>aiohttp</code> or <code>websockets</code></td>
+<td>Use the <code>.venv</code> Python command shown above for both installation and starting the server.</td>
+</tr>
+<tr class="odd">
+<td><code>WebSocket: disconnected</code></td>
+<td>Keep the Python server running in Terminal 1 on port 8000.</td>
+</tr>
+<tr class="even">
+<td>A chart stays on <code>Loading...</code></td>
+<td>Allow the initial downloads to finish. Check Terminal 1 for a Binance request error; restore the connection, then refresh the browser. An API key is not required.</td>
+</tr>
+<tr class="odd">
+<td>A port is already in use</td>
+<td>Stop the earlier copy of this app with Ctrl+C, then start it again.</td>
+</tr>
+<tr class="even">
+<td>A saved edit causes a red error screen</td>
+<td>Read the file and line number in Terminal 2; check brackets, commas and quotation marks around your edit.</td>
+</tr>
+</tbody>
+</table>
+<p>Continue to <a href="../session3/part-c.html">Part C · Tableau 1</a>.</p>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../session3";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
