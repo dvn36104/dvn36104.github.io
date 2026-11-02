@@ -347,7 +347,7 @@
     "href": "index.html#session-3-1",
     "title": "Asynchronous sessions",
     "section": "Session 3",
-    "text": "Session 3\n\nPart A · Gold\nPart B · Crypto\nPart C · Tableau 1\nPart D · Tableau 2\nPart E · TeX and tikz\n\nIn Part E, download and compile the RITS slide deck, explore the related RITS visualisation, and host your compiled PDF on GitHub Pages. Submit the hosted PDF link as a labelled plain text file through Canvas.\nSessions 1 and 2 are complete. All five parts of Session 3 are now available."
+    "text": "Session 3\n\nPart A · Gold\nPart B · Cryptocurrency\nPart C · Tableau 1\nPart D · Tableau 2\nPart E · TeX and tikz\n\nSubmit through Canvas:\n\nPart A: the link to your hosted gold dashboard, as a plain text file.\nPart B: a screenshot of your modified cryptocurrency dashboard, your changed files, and a short explanation of what your change makes easier to see.\nPart C: the Tableau Public link to your completed tutorial work, as a plain text file labelled Part C · Tableau 1.\nPart D: the Tableau Public link to your recreated assignment dashboard or section, as a plain text file labelled Part D · Tableau 2. Include a brief note on what you recreated and changed.\nPart E: the direct link to your compiled RITS slide deck PDF hosted on GitHub Pages, as a plain text file labelled Part E · TeX and tikz.\n\nSessions 1 and 2 are complete. All five parts of Session 3 are now available."
   },
   {
     "objectID": "session1/part-b.html",
@@ -562,70 +562,70 @@
   {
     "objectID": "session3/part-b.html",
     "href": "session3/part-b.html",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "",
     "text": "Note\n\n\n\nThis activity runs on your computer and uses live public market data from Binance.\nIn Part A, Streamlit put Python charts on a web page. Here we use Python to collect data and JavaScript to build the interface. You will run a working crypto dashboard, follow how it is made, and add a control to choose the time window in a chart.\nThe supplied project gives you a working starting point. Make one change at a time and check its effect in the browser."
   },
   {
     "objectID": "session3/part-b.html#set-up-the-project",
     "href": "session3/part-b.html#set-up-the-project",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "1 · Set up the project",
     "text": "1 · Set up the project\nDownload the crypto dashboard ZIP and extract it. Open the extracted binance_live_charts folder in your code editor.\nYou need Python 3.12 and Node.js 24 LTS for the setup below. Node.js includes npm, which installs the JavaScript packages. Use the Node.js download page if you have not installed it before. Check your Python installation from the earlier Streamlit activity; Python installers are available from python.org.\nYou do not need a Binance account, API key or trading account. Binance’s public market data endpoints provide the price history and live updates used here without authentication. You do need an internet connection that can reach Binance.\nOpen two terminal tabs in the binance_live_charts folder. Both processes must remain running while you use the dashboard.\n\nTerminal 1 · Start Python\nThe following commands create a separate Python environment, install the two required packages and start the data server.\n\nmacOS / LinuxWindows\n\n\npython3.12 -m venv .venv\n.venv/bin/python -m pip install -r requirements.txt\n.venv/bin/python backend/server.py\nIf your Python 3.12 installation uses the command python3, use that for the first line. Check with python3 --version.\n\n\npy -3.12 -m venv .venv\n.venv\\Scripts\\python.exe -m pip install -r requirements.txt\n.venv\\Scripts\\python.exe backend\\server.py\n\n\n\nLeave this terminal open. It should report WebSocket server started on ws://localhost:8000.\n\n\nTerminal 2 · Start React\ncd frontend\nnpm ci\nnpm start\nnpm ci installs the package versions recorded in the supplied lock file. It is needed on the first run; you can use just npm start on later runs.\nOpen http://localhost:3000 if it does not open automatically. Allow about a minute for the history to load. The charts appear progressively; live updates begin after the initial downloads finish. Keep this browser tab open as you work on the files.\nCheck: you should see BTCUSDT, ETHUSDT, BNBUSDT, XRPUSDT, ADAUSDT and DOGEUSDT. Hover over a chart to inspect values. Watch how the time windows and the coin in the large panel change automatically.\nTo stop the app, press Ctrl+C in each terminal. On a later run, start the Python server and run npm start in frontend again; you do not need to recreate the environment or reinstall the packages."
   },
   {
     "objectID": "session3/part-b.html#see-how-the-pieces-fit-together",
     "href": "session3/part-b.html#see-how-the-pieces-fit-together",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "2 · See how the pieces fit together",
     "text": "2 · See how the pieces fit together\nThe dashboard has three main steps:\n\n\n\n\n\nflowchart LR\n    A[Binance public market data] --&gt;|History and live updates| B[Python data server]\n    B --&gt;|WebSocket messages| C[React charts in the browser]\n\n\n\n\n\n\nThe Python server asks Binance for earlier prices, then listens for updates. A WebSocket keeps a connection open so new values can arrive without the browser repeatedly reloading the page. React stores those values and redraws the relevant parts of the interface.\nThe two Python packages are aiohttp, for the history requests, and websockets, for the continuing connections. In the browser, React manages the interface and Recharts draws the charts. npm installs the JavaScript packages declared in frontend/package.json.\n\n\n\n\n\n\n\nFile\nWhat you make or change there\n\n\n\n\nbackend/server.py\nRequests price history, listens to Binance and sends data to the browser.\n\n\nfrontend/src/config/config.json\nChooses currencies, colours, time windows and rotation timings.\n\n\nfrontend/src/App.js\nReceives the data and arranges the six chart panels.\n\n\nfrontend/src/ChartPanel.js\nBuilds one chart, including its axes, tooltip and time window.\n\n\nfrontend/src/App.css\nSizes the panels and controls how the layout adapts to screen width.\n\n\nfrontend/src/Tickers.js\nBuilds the moving strips above and below the charts."
   },
   {
     "objectID": "session3/part-b.html#start-with-the-data",
     "href": "session3/part-b.html#start-with-the-data",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "3 · Start with the data",
     "text": "3 · Start with the data\nBTCUSDT is a trading pair: the price of one bitcoin measured in USDT. The other pairs also use USDT. Keep that unit in mind when reading the prices.\nThe data come in time intervals. Each interval contains an opening price, a high, a low, a closing or latest price, and a traded volume. These records are often called candles, even when we display them as lines.\nThe interval is different from the total span shown by a chart:\n\n\n\n\n\n\n\n\nConfiguration key\nOne record covers\nWindow shown in the supplied app\n\n\n\n\n1s\nOne second\nThirty Minutes\n\n\n1m\nOne minute\nThree Hours\n\n\n5m\nFive minutes\nThree Days\n\n\n30m\nThirty minutes\nThree Weeks\n\n\n4h\nFour hours\nThree Months\n\n\n1d\nOne day\nThree Years\n\n\n\nOpen this example history request in another browser tab. It requests two one-minute records for BTCUSDT. The response is JSON: text containing arrays of values. The values will depend on when you make the request.\nIn backend/server.py, find the block beginning transformed_data =. The server turns each Binance record into named fields:\n{\n    \"time\": entry[6],\n    \"open\": float(entry[1]),\n    \"high\": float(entry[2]),\n    \"low\": float(entry[3]),\n    \"price\": float(entry[4]),\n    \"volume\": float(entry[5]),\n}\ntime is the interval’s closing timestamp, in milliseconds. float() converts price text into numbers that a chart can use. The most recent interval can still be in progress, so its latest price, high and low can change.\nThe server sends messages labelled historical for the initial series and update for incoming changes. Each message also identifies the currency and interval, so the browser knows which series it belongs to."
   },
   {
     "objectID": "session3/part-b.html#put-changing-data-into-react",
     "href": "session3/part-b.html#put-changing-data-into-react",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "4 · Put changing data into React",
     "text": "4 · Put changing data into React\nOpen frontend/src/App.js. This line opens the connection to your Python server:\nsocket = new WebSocket('ws://localhost:8000');\nlocalhost means your own computer. The browser receives each message in the socket.onmessage function. JSON.parse(event.data) turns the message text into a JavaScript object.\nNear the top of App, find:\nconst [data, setData] = useState(null);\ndata holds the current series. setData changes that stored value and tells React to update the display. This stored information is called state. See React’s explanation of state if this is new to you.\nFollow the two branches in socket.onmessage. A historical message supplies the starting series. An update message replaces a record with the same timestamp, or adds a new record when the next interval starts. Replacing the current record matters: otherwise every update would become an extra point for the same time.\nFurther down, App uses ChartPanel repeatedly, passing each instance a currency and its data. A component is a reusable piece of interface: one chart definition can make all six panels. React’s component introduction explains this pattern."
   },
   {
     "objectID": "session3/part-b.html#make-a-chart-from-the-series",
     "href": "session3/part-b.html#make-a-chart-from-the-series",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "5 · Make a chart from the series",
     "text": "5 · Make a chart from the series\nOpen frontend/src/ChartPanel.js. currentInterval chooses the series to use. The chartData block orders the points by time and maps price to a field called close for the chart.\nInside LineChart, find the three Line elements. Their dataKey values choose the values to draw:\n\nhigh and low make the two faint lines.\nclose makes the stronger line.\n\nXAxis uses time; YAxis uses the price values. Tooltip supplies the details that appear when you hover. These are components from Recharts.\nThe horizontal axis places a small number of labels at time boundaries. The price axis uses enough decimal places to distinguish nearby values. This is especially useful for a currency whose price is below one USDT.\nEach panel adjusts its own price scale. A steep-looking line in one panel does not necessarily mean a larger price change than a gentler line in another. Check the axes and time windows before comparing the shapes.\nTry a chart change: change strokeWidth={isLarge ? 1.5 : 1} on the close line to strokeWidth={2}. Save the file and look at the browser. Compare the visibility of the main line with the faint high and low lines."
   },
   {
     "objectID": "session3/part-b.html#make-the-panels-fit-the-charts",
     "href": "session3/part-b.html#make-the-panels-fit-the-charts",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "6 · Make the panels fit the charts",
     "text": "6 · Make the panels fit the charts\nOpen frontend/src/App.css. .chart-grid creates the columns. .large-chart spans two columns and two rows on a wide screen; the other panels occupy one cell each.\nInside each panel, flex layout gives the title and time-window row the space they need, then gives the chart the remaining height. ResponsiveContainer in ChartPanel.js follows that available size. This avoids a small, fixed-height chart sitting inside a much taller white panel.\nMedia queries change the arrangement when the screen becomes narrower. Resize the browser and watch the columns change.\nTry a layout change: find .small-chart and change aspect-ratio: 3 / 2 to aspect-ratio: 4 / 3. The smaller panels become taller. Compare the readability of the lines and axes at both settings, then choose the proportions you prefer.\nYou can also change one colour in frontend/src/config/config.json. Keep the JSON punctuation intact: keys and colour values use double quotes, and entries are separated by commas. React reloads after a saved edit. If you change the currencies or history lengths, restart the Python server as well; it reads the configuration when it starts."
   },
   {
     "objectID": "session3/part-b.html#add-a-time-window-selector",
     "href": "session3/part-b.html#add-a-time-window-selector",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "7 · Add a time-window selector",
     "text": "7 · Add a time-window selector\nThe supplied charts cycle through time windows automatically. That helps someone watching the dashboard, but makes it harder to stay with a comparison. Let’s let the reader choose a window and keep it on screen.\nMake a spare copy of ChartPanel.js before starting. You will make three changes in that file and one small CSS addition.\n\nRemember whether the time window is automatic\nImmediately after the line that creates currentInterval, add:\nconst [autoTime, setAutoTime] = useState(true);\n\n\nStop the timer after a manual choice\nFind the effect under the comment // Hook to switch intervals at random intervals. In that effect, replace:\nif (!dataLoaded) return;\nwith:\nif (!dataLoaded || !autoTime) return;\nAt the end of that same effect, change its dependency list from [order, dataLoaded] to [order, dataLoaded, autoTime].\nThe effect already clears its old timer when it reruns. Including autoTime means a manual choice also stops that timer.\n\n\nReplace the time-window label with a dropdown\nFind const headerContent = (. Inside it, replace the first &lt;span&gt;...&lt;/span&gt; block—the one containing {frequencies[currentInterval].display}—with:\n&lt;select\n  className=\"time-window-select\"\n  aria-label={`${symbol}: time window`}\n  value={currentInterval}\n  onChange={event =&gt; {\n    setAutoTime(false);\n    setCurrentInterval(event.target.value);\n  }}\n&gt;\n  {order.map(interval =&gt; (\n    &lt;option key={interval} value={interval}&gt;\n      {frequencies[interval].display}\n    &lt;/option&gt;\n  ))}\n&lt;/select&gt;\nKeep the second span: it displays the latest price.\norder.map(...) makes one option for each configured interval. Choosing an option changes currentInterval and turns off automatic switching for that chart component. The incoming market data keep updating.\nAdd this to the end of App.css:\n.time-window-select {\n  max-width: 60%;\n  min-width: 0;\n  padding: 2px 4px;\n  font: inherit;\n}\nCheck your change: choose Three Days in the large panel. Wait at least 15 seconds. It should stay on that time window while the data continue to update. The currency in the large panel will still rotate; that is a separate timer in App.js. Refreshing the page starts automatic time switching again."
   },
   {
     "objectID": "session3/part-b.html#develop-your-version",
     "href": "session3/part-b.html#develop-your-version",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "8 · Develop your version",
     "text": "8 · Develop your version\nChoose another change that helps a reader answer a question. For example:\n\nAdd a way to pause the currency rotation as well as the time-window rotation.\nPut all panels on the same time window for a more direct comparison.\nChange the grid so all six currencies have equal prominence.\nAdd a percentage-change view and explain the starting value it uses.\n\nKeep a screenshot of your modified dashboard, your changed files, and a short explanation of what your change makes easier to see. Check the result at a wide and a narrow browser width.\nThis activity runs locally. Sharing a localhost link will not let someone else use your app. Putting this version online would require a host for the Python service as well as the React frontend, and a public WebSocket address."
   },
   {
     "objectID": "session3/part-b.html#if-something-does-not-start",
     "href": "session3/part-b.html#if-something-does-not-start",
-    "title": "Crypto",
+    "title": "Cryptocurrency",
     "section": "If something does not start",
     "text": "If something does not start\n\n\n\n\n\n\n\nWhat you see\nWhat to check\n\n\n\n\nnpm is not recognised\nInstall Node.js, then reopen the terminal.\n\n\nPython cannot find aiohttp or websockets\nUse the .venv Python command shown above for both installation and starting the server.\n\n\nWebSocket: disconnected\nKeep the Python server running in Terminal 1 on port 8000.\n\n\nA chart stays on Loading...\nAllow the initial downloads to finish. Check Terminal 1 for a Binance request error; restore the connection, then refresh the browser. An API key is not required.\n\n\nA port is already in use\nStop the earlier copy of this app with Ctrl+C, then start it again.\n\n\nA saved edit causes a red error screen\nRead the file and line number in Terminal 2; check brackets, commas and quotation marks around your edit.\n\n\n\nContinue to Part C · Tableau 1."
   },
